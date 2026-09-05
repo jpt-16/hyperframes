@@ -1,0 +1,13 @@
+# Dependencies (gsap is pinned in package.json; vendor/ is committed so the
+# composition renders from a fresh clone without an install)
+node_modules/
+
+# Personal source footage — deliberately not committed to this public repo.
+# The composition expects base_round1.mp4 at the project root; regenerate or
+# drop your own file in and update the src on #a-roll / #a-roll-audio.
+*.mp4
+*.mov
+!vendor/*.js
+
+# Review artifacts — these are frames of the speaker's face
+snapshots/
