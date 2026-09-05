@@ -24,8 +24,11 @@ colour alone.
 
 ## Assets
 
-- base_round1.mp4 — the base layer. Five round-1 talking-head clips concatenated
-  in chronological order (IMG_1369, 1371, 1375, 1394, 1397), 25.57s total.
+- base_round1.mp4 — the base layer. Five round-1 talking-head clips
+  concatenated in NARRATIVE order (IMG_1369, 1371, 1375, 1397, 1394),
+  25.57s total. Note 1394 is the CTA and plays last even though it was
+  recorded before 1397: chronological order buried the call to action in
+  the middle, which is the ordering bug the user caught.
   Native 1080x1920 portrait, tone-mapped from HLG HDR to Rec.709 SDR.
   Video and audio both play unmodified; graphics layer on top.
 
@@ -45,8 +48,11 @@ colour alone.
 - OPEN: user's spec describes ONE continuous clip at [PATH_TO_MY_VIDEO.mp4],
   a placeholder. Built against the round-1 concatenation as the stand-in;
   swapping the source is a one-line change to the <video>/<audio> src.
-- Beat 4 was specced 0:21-0:28 but the base runs 25.57s, so it is clamped to
-  21.0-25.57 (4.57s). Extending needs round-2 footage.
+- Beat 4 (badge) runs 20.0-22.35, moved earlier than the specced 0:21-0:28 so
+  it clears before the CTA clip at 22.35s and the closing beat plays with no
+  overlay on it.
+- The CTA clip (22.35-25.55) deliberately carries no graphics — its copy is
+  unknown without a transcript, so inventing an end card would be guesswork.
 - Round 2 footage is still pending.
 - Transcription is impossible in this environment: huggingface.co,
   openaipublic.azureedge.net and alphacephei.com are all 403 by egress policy,

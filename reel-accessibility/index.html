@@ -469,10 +469,11 @@
         </div>
       </div>
 
-      <!-- Beat 4 — 0:21-end badge stamp.
+      <!-- Beat 4 — 0:20-0:22.35 badge stamp. Ends before the CTA clip at
+           22.35s so the closing beat plays with no overlay on it.
            ASSUMPTION: the user's brief was truncated at "TESTED TO WCA".
            badge-main below is the single string to correct. -->
-      <div id="badge" class="overlay clip" data-start="21" data-duration="4.57" data-track-index="5">
+      <div id="badge" class="overlay clip" data-start="20" data-duration="2.35" data-track-index="5">
         <div id="badge-inner">
           <div class="badge-top">Tested to</div>
           <div class="badge-rule"></div>
@@ -565,8 +566,10 @@
         "#badge-inner",
         { opacity: 0, scale: 1.55, rotation: -26 },
         { opacity: 1, scale: 1, rotation: -8, duration: 0.32, ease: "back.out(1.7)" },
-        21.05,
+        20.05,
       );
+      /* Clear the stamp before the CTA so the call to action is unobstructed. */
+      tl.to("#badge-inner", { opacity: 0, duration: 0.25, ease: "power2.in" }, 22.05);
 
       window.__timelines["main"] = tl;
     </script>
