@@ -80,14 +80,16 @@
       .list-label { color: #fff; font-family: Inter, "Liberation Sans", sans-serif; font-weight: 700;
         font-size: 43px; line-height: 1.14; letter-spacing: -.6px; }
 
-      /* ---- End card — built from his own closing line ------------------ */
-      #endcard-inner { position: absolute; left: 90px; right: 90px; top: 700px;
-        background: rgba(9,11,15,.92); border: 6px solid #ff5a1f; border-radius: 34px;
-        padding: 48px 44px; text-align: center; }
-      #endcard-inner .ec-top { color: #ff5a1f; font-size: 40px; font-weight: 900;
-        letter-spacing: 6px; text-transform: uppercase; }
-      #endcard-inner .ec-main { color: #fff; font-size: 82px; font-weight: 900;
-        line-height: .98; letter-spacing: -2px; text-transform: uppercase; margin-top: 18px; }
+      /* ---- End card — the real product, not a description of it -------- */
+      /* Border and pill take the product's own violet rather than the reel's
+         orange: this beat is the page, so it should read as the page. */
+      #endcard-inner { position: absolute; left: 50%; margin-left: -335px; top: 250px;
+        width: 670px; }
+      #endcard-inner .ec-pill { display: block; margin: 0 auto 22px; width: fit-content;
+        background: #a78bfa; color: #14101f; font-size: 34px; font-weight: 900;
+        letter-spacing: 5px; text-transform: uppercase; padding: 14px 30px; border-radius: 14px; }
+      #endcard-inner .ec-shot { display: block; width: 670px; border-radius: 26px;
+        border: 5px solid #a78bfa; box-shadow: 0 30px 80px rgba(0,0,0,.7); }
     </style>
   </head>
   <body>
@@ -123,10 +125,10 @@
         data-start="20.16" data-duration="0.72" data-track-index="5" data-volume="0.34"></audio>
 
       <audio id="sfx-riser-end" src=".media/audio/sfx/sfx_001.mp3"
-        data-start="22.4" data-media-start="9.15" data-duration="0.88"
+        data-start="21.9" data-media-start="9.53" data-duration="0.5"
         data-track-index="3" data-volume="0.38"></audio>
       <audio id="sfx-impact-end" src=".media/audio/sfx/sfx_002.mp3"
-        data-start="23.28" data-duration="2.11" data-track-index="3" data-volume="0.48"></audio>
+        data-start="22.4" data-duration="2.11" data-track-index="3" data-volume="0.48"></audio>
 
 
       <!-- Auto captions, timed to the audio. Suppressed 13.8-22.4s, where the
@@ -205,10 +207,11 @@
       </div>
 
       <!-- End card — his actual closing line, not an invention -->
-      <div id="endcard" class="overlay clip" data-start="23.28" data-duration="2.29" data-track-index="5">
+      <div id="endcard" class="overlay clip" data-start="22.4" data-duration="3.17" data-track-index="8">
         <div id="endcard-inner">
-          <div class="ec-top">Link in bio</div>
-          <div class="ec-main">Website health report</div>
+          <span class="ec-pill">Link in bio</span>
+          <img class="ec-shot" src="assets/website-health-report.jpg"
+            alt="Website Health Report — free instant check for local service businesses" />
         </div>
       </div>
 
@@ -251,14 +254,17 @@
       tl.set("#list-card", { opacity: 0 }, 22.4);
 
       /* End card lands on "the links in my bio". */
-      tl.fromTo("#endcard-inner", { opacity: 0, scale: .9, y: 24 },
-        { opacity: 1, scale: 1, y: 0, duration: .3, ease: "back.out(1.8)" }, 23.3);
+      /* Lands on "check your own website" (22.40) rather than the later
+         "health report" mention — the page's own button says Check My
+         Website, and it buys the product 3.1s on screen instead of 2.3s. */
+      tl.fromTo("#endcard-inner", { opacity: 0, scale: .9, y: 30 },
+        { opacity: 1, scale: 1, y: 0, duration: .32, ease: "back.out(1.7)" }, 22.42);
 
       /* Risers are spliced mid-build, so their first sample is already loud.
          Fade each in to avoid a click. Tween targets match the clip's
          data-volume baseline — a tween replaces that baseline, not scales it. */
       tl.fromTo("#sfx-riser-list", { volume: 0 }, { volume: 0.4, duration: 0.3, ease: "power1.in" }, 11.8);
-      tl.fromTo("#sfx-riser-end", { volume: 0 }, { volume: 0.38, duration: 0.18, ease: "power1.in" }, 22.4);
+      tl.fromTo("#sfx-riser-end", { volume: 0 }, { volume: 0.38, duration: 0.18, ease: "power1.in" }, 21.9);
 
       window.__timelines["main"] = tl;
     </script>
