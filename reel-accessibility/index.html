@@ -119,12 +119,15 @@
       <audio id="sfx-impact-list" src=".media/audio/sfx/sfx_003.mp3"
         data-start="14.0" data-duration="2.59" data-track-index="3" data-volume="0.5"></audio>
 
-      <audio id="sfx-tick-2" src=".media/audio/sfx/sfx_004.mp3"
-        data-start="15.84" data-duration="0.72" data-track-index="5" data-volume="0.85"></audio>
-      <audio id="sfx-tick-3" src=".media/audio/sfx/sfx_004.mp3"
-        data-start="17.44" data-duration="0.72" data-track-index="5" data-volume="0.85"></audio>
-      <audio id="sfx-tick-4" src=".media/audio/sfx/sfx_004.mp3"
-        data-start="20.16" data-duration="0.72" data-track-index="5" data-volume="0.85"></audio>
+      <!-- Ticks use sparkle, not pop: pop measured -27.4 dB brightness (its
+           energy is low-mid, exactly where the voice is loudest), so it stayed
+           buried even at 0.85. sparkle carries real content above 3 kHz. -->
+      <audio id="sfx-tick-2" src=".media/audio/sfx/sfx_005.mp3"
+        data-start="15.84" data-duration="0.6" data-track-index="5" data-volume="0.45"></audio>
+      <audio id="sfx-tick-3" src=".media/audio/sfx/sfx_005.mp3"
+        data-start="17.44" data-duration="0.6" data-track-index="5" data-volume="0.45"></audio>
+      <audio id="sfx-tick-4" src=".media/audio/sfx/sfx_005.mp3"
+        data-start="20.16" data-duration="0.6" data-track-index="5" data-volume="0.45"></audio>
 
       <audio id="sfx-riser-end" src=".media/audio/sfx/sfx_001.mp3"
         data-start="19.2" data-duration="3.4"
