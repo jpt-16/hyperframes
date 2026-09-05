@@ -104,29 +104,31 @@
         data-track-index="2" data-volume="1"></audio>
 
       <!-- SFX. Every hit is timed off transcript.json, not eyeballed.
-           The riser is a 10s cinematic build; its ledger says to start it
-           10s before the climax, but that would sit under half the dialogue
-           in a 25s reel, so data-media-start uses its tail as a short swell
-           and the peak still lands on the beat. -->
+           The riser file is nominally 10s but its audio is only 0-4.5s:
+           it builds from 0.5s, PEAKS AT ~3.2s, decays by 4.5s, then 5.5s of
+           silence. Its ledger says "peak at the end, trigger at climax-10.03s"
+           — that is wrong for this file and puts the silence on the beat.
+           Each riser therefore starts (beat - 3.2s) and plays from the top,
+           which also means it begins in near-silence and needs no fade. -->
       <audio id="sfx-hook-impact" src=".media/audio/sfx/sfx_002.mp3"
         data-start="0" data-duration="2.11" data-track-index="3" data-volume="0.45"></audio>
 
       <audio id="sfx-riser-list" src=".media/audio/sfx/sfx_001.mp3"
-        data-start="11.8" data-media-start="7.83" data-duration="2.2"
-        data-track-index="3" data-volume="0.4"></audio>
+        data-start="10.8" data-duration="3.4"
+        data-track-index="3" data-volume="0.45"></audio>
       <audio id="sfx-impact-list" src=".media/audio/sfx/sfx_003.mp3"
         data-start="14.0" data-duration="2.59" data-track-index="3" data-volume="0.5"></audio>
 
       <audio id="sfx-tick-2" src=".media/audio/sfx/sfx_004.mp3"
-        data-start="15.84" data-duration="0.72" data-track-index="5" data-volume="0.34"></audio>
+        data-start="15.84" data-duration="0.72" data-track-index="5" data-volume="0.85"></audio>
       <audio id="sfx-tick-3" src=".media/audio/sfx/sfx_004.mp3"
-        data-start="17.44" data-duration="0.72" data-track-index="5" data-volume="0.34"></audio>
+        data-start="17.44" data-duration="0.72" data-track-index="5" data-volume="0.85"></audio>
       <audio id="sfx-tick-4" src=".media/audio/sfx/sfx_004.mp3"
-        data-start="20.16" data-duration="0.72" data-track-index="5" data-volume="0.34"></audio>
+        data-start="20.16" data-duration="0.72" data-track-index="5" data-volume="0.85"></audio>
 
       <audio id="sfx-riser-end" src=".media/audio/sfx/sfx_001.mp3"
-        data-start="21.9" data-media-start="9.53" data-duration="0.5"
-        data-track-index="3" data-volume="0.38"></audio>
+        data-start="19.2" data-duration="3.4"
+        data-track-index="3" data-volume="0.42"></audio>
       <audio id="sfx-impact-end" src=".media/audio/sfx/sfx_002.mp3"
         data-start="22.4" data-duration="2.11" data-track-index="3" data-volume="0.48"></audio>
 
@@ -263,8 +265,6 @@
       /* Risers are spliced mid-build, so their first sample is already loud.
          Fade each in to avoid a click. Tween targets match the clip's
          data-volume baseline — a tween replaces that baseline, not scales it. */
-      tl.fromTo("#sfx-riser-list", { volume: 0 }, { volume: 0.4, duration: 0.3, ease: "power1.in" }, 11.8);
-      tl.fromTo("#sfx-riser-end", { volume: 0 }, { volume: 0.38, duration: 0.18, ease: "power1.in" }, 21.9);
 
       window.__timelines["main"] = tl;
     </script>
