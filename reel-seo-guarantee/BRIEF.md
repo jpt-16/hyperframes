@@ -7,7 +7,7 @@ destination: instagram-reels
 aspect: 1080x1920
 language: en
 audience: small business owners buying SEO
-length: 43s
+length: 39s
 angle: myth-bust
 ---
 
@@ -19,8 +19,10 @@ with one deliberately quiet sincere beat before the CTA.
 
 ## Assets
 
-- transcript.json — 137 words with onsets. Source of truth for EVERY cue;
-  the spec asked for delivery-synced timing, not timecode guesses.
+- transcript.json — 137 words with onsets, re-derived AFTER the pause cut.
+  Source of truth for every cue.
+- cues.json / anchors.json — the 32 caption cues and the anchor times every
+  beat is pinned to.
 - base_seo.mp4 — three clips normalised to -14 LUFS (two-pass loudnorm,
   linear) and tone-mapped HLG->Rec.709, concatenated in narrative order:
   d45aeb06 (0-19.6) -> 3b8682e9 (19.6-29.7) -> f0e9b4fc (29.7-43.0).
@@ -34,6 +36,17 @@ with one deliberately quiet sincere beat before the CTA.
 ## Customizations
 
 - Cue sheet supplied verbatim by the user; every cue anchored to a word onset.
+- REVISED: the five bold text overlays were replaced by 32 word-timed auto
+  captions, and 4.07s of pauses were cut from the base (43.04s -> 38.90s).
+  The spec's original "no auto-generated captions" line is superseded.
+- Captions are suppressed under the quote card and the checklist, where the
+  card already carries the same words.
+- Captions DO run through the sincere beat. The brief's "no text overlays"
+  there meant no punchy cues; captions are a continuous accessibility layer,
+  and dropping them would leave the most important 6.5s uncaptioned. The beat
+  still carries no SFX and no cards.
+- The pause before the sincere beat is trimmed to 0.35s rather than the 0.12s
+  used elsewhere: that silence is doing real work.
 - Checklist reuses the ADA reel's card component (dark semi-transparent card,
   white text, tick rows that open one at a time).
 
@@ -53,7 +66,10 @@ with one deliberately quiet sincere beat before the CTA.
   "Red flags"        -> not said; final impact + card clear at 33.2, after
                         "in a week" and before the quiet beat
   "is selling you a lie" -> not said; quiet beat runs to "happen in a week"
-- COPY MISMATCH: the CTA overlay says "QUESTIONS? LINK IN BIO" as specified,
-  but he actually says "DM me if you have any questions." On-screen and spoken
-  instructions disagree. User's call.
+- RESOLVED: the "QUESTIONS? LINK IN BIO" overlay is gone with the other bold
+  text beats, so the on-screen/spoken conflict with "DM me if you have any
+  questions" no longer exists. Captions now show what he actually says.
+- ASR CORRECTION: Parakeet heard the opening "Someone" as "No one", which
+  inverts the argument. Cue 1 is hand-corrected in cues.json. Any re-run of
+  the caption generator must re-apply it.
 - Quiet beat 33.4-41.0 carries no overlay and no SFX, as specified.
