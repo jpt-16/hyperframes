@@ -101,6 +101,34 @@
       <audio id="a-roll-audio" src="base_round1.mp4" data-start="0" data-duration="25.57"
         data-track-index="2" data-volume="1"></audio>
 
+      <!-- SFX. Every hit is timed off transcript.json, not eyeballed.
+           The riser is a 10s cinematic build; its ledger says to start it
+           10s before the climax, but that would sit under half the dialogue
+           in a 25s reel, so data-media-start uses its tail as a short swell
+           and the peak still lands on the beat. -->
+      <audio id="sfx-hook-impact" src=".media/audio/sfx/sfx_002.mp3"
+        data-start="0" data-duration="2.11" data-track-index="3" data-volume="0.45"></audio>
+
+      <audio id="sfx-riser-list" src=".media/audio/sfx/sfx_001.mp3"
+        data-start="11.8" data-media-start="7.83" data-duration="2.2"
+        data-track-index="3" data-volume="0.4"></audio>
+      <audio id="sfx-impact-list" src=".media/audio/sfx/sfx_003.mp3"
+        data-start="14.0" data-duration="2.59" data-track-index="3" data-volume="0.5"></audio>
+
+      <audio id="sfx-tick-2" src=".media/audio/sfx/sfx_004.mp3"
+        data-start="15.84" data-duration="0.72" data-track-index="5" data-volume="0.34"></audio>
+      <audio id="sfx-tick-3" src=".media/audio/sfx/sfx_004.mp3"
+        data-start="17.44" data-duration="0.72" data-track-index="5" data-volume="0.34"></audio>
+      <audio id="sfx-tick-4" src=".media/audio/sfx/sfx_004.mp3"
+        data-start="20.16" data-duration="0.72" data-track-index="5" data-volume="0.34"></audio>
+
+      <audio id="sfx-riser-end" src=".media/audio/sfx/sfx_001.mp3"
+        data-start="22.4" data-media-start="9.15" data-duration="0.88"
+        data-track-index="3" data-volume="0.38"></audio>
+      <audio id="sfx-impact-end" src=".media/audio/sfx/sfx_002.mp3"
+        data-start="23.28" data-duration="2.11" data-track-index="3" data-volume="0.48"></audio>
+
+
       <!-- Auto captions, timed to the audio. Suppressed 13.8-22.4s, where the
            checklist card already spells out the same four items. -->
       <div class="overlay">
@@ -225,6 +253,12 @@
       /* End card lands on "the links in my bio". */
       tl.fromTo("#endcard-inner", { opacity: 0, scale: .9, y: 24 },
         { opacity: 1, scale: 1, y: 0, duration: .3, ease: "back.out(1.8)" }, 23.3);
+
+      /* Risers are spliced mid-build, so their first sample is already loud.
+         Fade each in to avoid a click. Tween targets match the clip's
+         data-volume baseline — a tween replaces that baseline, not scales it. */
+      tl.fromTo("#sfx-riser-list", { volume: 0 }, { volume: 0.4, duration: 0.3, ease: "power1.in" }, 11.8);
+      tl.fromTo("#sfx-riser-end", { volume: 0 }, { volume: 0.38, duration: 0.18, ease: "power1.in" }, 22.4);
 
       window.__timelines["main"] = tl;
     </script>
