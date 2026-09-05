@@ -9,5 +9,9 @@ node_modules/
 *.mov
 !vendor/*.js
 
+# Render output and its working scratch — regenerable from source, and the
+# MP4 carries the speaker's footage
+renders/
+
 # Review artifacts — these are frames of the speaker's face
 snapshots/
