@@ -133,6 +133,144 @@
         letter-spacing: -0.6px;
       }
 
+
+      /* ---- B-roll: browser mock showing each failure ------------------- */
+      #broll-card {
+        position: absolute;
+        left: 70px;
+        right: 70px;
+        top: 280px;
+        height: 720px;
+        background: #ffffff;
+        border-radius: 26px;
+        overflow: hidden;
+        box-shadow: 0 26px 70px rgba(0, 0, 0, 0.55);
+      }
+      .chrome {
+        height: 68px;
+        background: #eceef1;
+        border-bottom: 2px solid #dcdfe4;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 0 24px;
+      }
+      .chrome .dot {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #c6cad1;
+      }
+      .chrome .url {
+        flex: 1;
+        margin-left: 12px;
+        height: 40px;
+        border-radius: 20px;
+        background: #ffffff;
+        border: 2px solid #dcdfe4;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        color: #555f6d;
+        font-size: 26px;
+        font-weight: 600;
+      }
+      .state {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 68px;
+        height: 652px;
+        padding: 40px 44px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 26px;
+      }
+      .flag {
+        align-self: flex-start;
+        background: #ff5a1f;
+        color: #ffffff;
+        font-weight: 900;
+        font-size: 30px;
+        letter-spacing: 1px;
+        padding: 12px 22px;
+        border-radius: 12px;
+        text-transform: uppercase;
+      }
+      .mono {
+        font-family: monospace;
+        font-size: 34px;
+        color: #14181e;
+        background: #f3f4f6;
+        border: 2px solid #dcdfe4;
+        border-radius: 12px;
+        padding: 20px 24px;
+      }
+      .imgbox {
+        height: 210px;
+        border: 5px dashed #ff5a1f;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        background: #faf1ee;
+        color: #8a3d22;
+        font-size: 30px;
+        font-weight: 700;
+      }
+      .field {
+        height: 82px;
+        border: 5px dashed #ff5a1f;
+        border-radius: 12px;
+        background: #faf1ee;
+      }
+      .chips {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+      }
+      .chip {
+        width: 120px;
+        height: 120px;
+        border-radius: 16px;
+        border: 3px solid #dcdfe4;
+      }
+      .ratio {
+        color: #14181e;
+        font-size: 84px;
+        font-weight: 900;
+        letter-spacing: -2px;
+      }
+      .verdict {
+        color: #14181e;
+        font-size: 34px;
+        font-weight: 800;
+      }
+      .btnrow {
+        display: flex;
+        gap: 20px;
+      }
+      .fakebtn {
+        flex: 1;
+        height: 92px;
+        border-radius: 14px;
+        background: #14181e;
+        color: #ffffff;
+        font-size: 30px;
+        font-weight: 800;
+        display: grid;
+        place-items: center;
+      }
+      .keycap {
+        align-self: flex-start;
+        border: 4px solid #14181e;
+        border-radius: 12px;
+        padding: 12px 26px;
+        font-size: 32px;
+        font-weight: 900;
+        color: #14181e;
+      }
+
       /* ---- Beat 4: badge stamp ---------------------------------------- */
       #badge-inner {
         position: absolute;
@@ -283,6 +421,54 @@
         </div>
       </div>
 
+
+      <!-- B-roll — 0:09.4-0:19.8 browser mock, one state per checklist item.
+           Sits above the checklist card; the two never overlap vertically. -->
+      <div id="broll" class="overlay clip" data-start="9.4" data-duration="10.4" data-track-index="6">
+        <div id="broll-card">
+          <div class="chrome">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="url">yourbusiness.com</div>
+          </div>
+
+          <div class="state" id="state-1">
+            <div class="flag">Missing alt text</div>
+            <div class="imgbox">image &mdash; no description</div>
+            <div class="mono">&lt;img src="storefront.jpg"&gt;</div>
+          </div>
+
+          <div class="state" id="state-2">
+            <div class="flag">No form labels</div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="mono">&lt;input type="email"&gt;</div>
+          </div>
+
+          <div class="state" id="state-3">
+            <div class="flag">Low contrast</div>
+            <div class="chips">
+              <div class="chip" style="background: #9aa3ad"></div>
+              <div class="chip" style="background: #ffffff"></div>
+              <div class="ratio">2.1:1</div>
+            </div>
+            <div class="verdict">Fails AA &mdash; 4.5:1 required</div>
+          </div>
+
+          <div class="state" id="state-4">
+            <div class="flag">No keyboard focus</div>
+            <div class="btnrow">
+              <div class="fakebtn">Shop</div>
+              <div class="fakebtn">Cart</div>
+              <div class="fakebtn">Checkout</div>
+            </div>
+            <div class="keycap">Tab &rarr;</div>
+            <div class="verdict">Focus ring never appears</div>
+          </div>
+        </div>
+      </div>
+
       <!-- Beat 4 — 0:21-end badge stamp.
            ASSUMPTION: the user's brief was truncated at "TESTED TO WCA".
            badge-main below is the single string to correct. -->
@@ -344,6 +530,35 @@
       });
 
       tl.to("#list-card", { opacity: 0, duration: 0.35, ease: "power2.in" }, 19.5);
+
+
+      /* B-roll — card in, then states cross-fade on the same cadence as the
+         checklist rows they explain. */
+      tl.fromTo(
+        "#broll-card",
+        { opacity: 0, y: 30, scale: 0.97 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "power3.out" },
+        9.4,
+      );
+
+      const stateAt = [9.6, 12.0, 14.4, 16.8];
+      stateAt.forEach((t, i) => {
+        const n = i + 1;
+        tl.fromTo(
+          "#state-" + n,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.25, ease: "power2.out" },
+          t,
+        );
+        /* Clear the outgoing state fully before the next arrives — a true
+           cross-fade dissolves two full panels through each other, which
+           reads muddy at this size and overlaps their text. */
+        if (n < 4) {
+          tl.to("#state-" + n, { opacity: 0, duration: 0.22, ease: "power2.in" }, stateAt[n] - 0.22);
+        }
+      });
+
+      tl.to("#broll-card", { opacity: 0, duration: 0.35, ease: "power2.in" }, 19.4);
 
       /* Beat 4 — rubber-stamp slam. */
       tl.fromTo(
