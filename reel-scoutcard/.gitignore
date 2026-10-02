@@ -1,0 +1,7 @@
+
+# Personal footage and renders never go in this repo
+*.mp4
+*.mov
+renders/
+snapshots/
+node_modules/

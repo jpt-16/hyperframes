@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>ScoutCard AI Reel</title>
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      * { margin:0; padding:0; box-sizing:border-box; }
+      html, body { margin:0; width:1080px; height:1920px; overflow:hidden; background:#000; }
+      body { font-family: Inter, "Liberation Sans", sans-serif; }
+      #root { position:relative; width:1080px; height:1920px; overflow:hidden; background:#000; }
+      #cam, #broll-wrap { position:absolute; inset:0; overflow:hidden; transform-origin:50% 38%; }
+      #broll-wrap { z-index:5; }
+      .overlay { position:absolute; inset:0; z-index:10; pointer-events:none; }
+
+      /* Captions sit on a backing plate so contrast never depends on the frame. */
+      .cue { position:absolute; left:60px; right:60px; bottom:300px; z-index:30;
+        display:flex; justify-content:center; }
+      .cue > span { background:rgba(9,11,15,.82); border-radius:18px; padding:16px 26px;
+        color:#fff; font-weight:900; text-transform:uppercase; text-align:center; text-wrap:balance;
+        font-size:60px; line-height:1.05; letter-spacing:-1.2px; }
+
+      /* House card: ScoutCard's own dark + orange. */
+      .card { position:absolute; left:64px; right:64px; bottom:560px;
+        background:rgba(11,13,17,.9); border:3px solid rgba(255,255,255,.14);
+        border-radius:30px; padding:30px 34px; }
+      .kicker { color:#f47b2c; font-weight:900; font-size:28px; letter-spacing:5px; text-transform:uppercase; }
+
+      #hook-in { position:absolute; left:50px; right:50px; bottom:560px; text-align:center;
+        color:#fff; font-weight:900; text-transform:uppercase; font-size:118px; line-height:.94;
+        letter-spacing:-3px; text-wrap:balance;
+        text-shadow:-5px -5px 0 #000,5px -5px 0 #000,-5px 5px 0 #000,5px 5px 0 #000,0 -6px 0 #000,0 6px 0 #000,-6px 0 0 #000,6px 0 0 #000,0 14px 40px rgba(0,0,0,.8); }
+      #hook-in .o { color:#f47b2c; }
+
+      #curve-card svg { display:block; width:100%; height:auto; margin-top:10px; }
+      .clabel { font: 900 32px Inter, sans-serif; letter-spacing:.5px; }
+
+      .row { height:0; overflow:hidden; display:flex; align-items:center; gap:22px; }
+      .row .dot { flex:0 0 22px; width:22px; height:22px; border-radius:50%; background:#f47b2c; }
+      .row .rtxt { color:#fff; font-weight:800; font-size:44px; letter-spacing:-.6px; text-transform:uppercase; }
+
+      #logo-in { position:absolute; left:50%; top:820px; width:780px; margin-left:-390px; }
+      #logo-in img { display:block; width:780px; border-radius:24px; box-shadow:0 30px 80px rgba(0,0,0,.8); }
+
+      /* Dropped-features card */
+      .chip { position:relative; display:inline-block; margin:14px 14px 0 0; padding:14px 26px;
+        border-radius:16px; background:#1b1f27; border:3px solid #39404d; color:#fff;
+        font-weight:900; font-size:40px; letter-spacing:.5px; }
+      .strike { position:absolute; left:-8px; right:-8px; top:50%; height:7px; margin-top:-3px;
+        background:#ff3b30; border-radius:4px; transform-origin:0 50%; }
+      .note { color:#aab3c2; font-weight:700; font-size:30px; margin-top:12px; }
+      #field { display:block; width:100%; height:auto; margin-top:16px; border-radius:16px; }
+      #verdict { color:#ff3b30; font-weight:900; font-size:52px; margin-top:12px; letter-spacing:1px; }
+
+      #stamp-in { position:absolute; left:50%; bottom:600px; margin-left:-410px; width:820px;
+        padding:34px 20px; border:10px solid #f47b2c; border-radius:26px; background:rgba(11,13,17,.92);
+        text-align:center; color:#fff; font-weight:900; font-size:104px; line-height:.95;
+        letter-spacing:-3px; text-transform:uppercase; }
+      #stamp-in .k { display:block; color:#f47b2c; font-size:36px; letter-spacing:6px; margin-bottom:12px; }
+
+      #end-in { position:absolute; left:64px; right:64px; top:300px; text-align:center;
+        background:rgba(11,13,17,.93); border:4px solid #f47b2c; border-radius:34px; padding:44px 36px; }
+      #end-in img { display:block; width:100%; border-radius:16px; }
+      #end-in .tag { color:#d6dae2; font-weight:700; font-size:38px; margin-top:26px; }
+      #end-in .cta { color:#f47b2c; font-weight:900; font-size:72px; letter-spacing:-1px; margin-top:16px; text-transform:uppercase; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="94.5" data-width="1080" data-height="1920">
+      <!-- Base: six clips normalised to -14 LUFS, tone-mapped from HLG,
+           concatenated in narrative order, 3.85s of pauses cut, re-normalised.
+           Every cue below is a word onset from transcript.json. #cam is a plain
+           wrapper so punch-ins scale the picture, never the timed clip. -->
+      <div id="cam">
+        <video id="a-roll" class="clip" src="base_tight.mp4" muted playsinline data-start="0" data-duration="94.5"
+          data-track-index="0" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover"></video>
+      </div>
+      <audio id="a-roll-audio" src="base_tight.mp4" data-start="0" data-duration="94.5" data-track-index="2" data-volume="1"></audio>
+
+      <!-- Real ScoutCard AI screen recording: status bar cropped, slowed
+           10.35s -> 17.0s so the headlines are readable. -->
+      <div id="broll-wrap">
+        <video id="broll" class="clip" src="assets/scoutcard-broll.mp4" muted playsinline data-start="29.2" data-duration="17.0"
+          data-track-index="3" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover"></video>
+      </div>
+
+      <div id="hook" class="overlay clip" data-start="3.5" data-duration="1.8" data-track-index="4">
+        <div id="hook-in">Not everything is <span class="o">as it seems</span></div>
+      </div>
+
+      <div id="curve-wrap" class="overlay clip" data-start="5.36" data-duration="22.1" data-track-index="5">
+        <div id="curve-card" class="card">
+          <div class="kicker">Every founder&rsquo;s curve</div>
+          <svg viewBox="0 0 940 330" aria-hidden="true">
+            <line x1="0" y1="190" x2="940" y2="190" stroke="#2a2f39" stroke-width="3" stroke-dasharray="8 10"/>
+            <polyline id="curve" points="30,190 150,160 270,125 390,65 500,90 610,170 700,282 810,160 910,68" fill="none" stroke="#f47b2c" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"
+              stroke-dasharray="1075.5" stroke-dashoffset="1075.5"/>
+            <circle id="nd-1" cx="150" cy="160" r="11" fill="#fff" stroke="#0b0d11" stroke-width="4"/><circle id="nd-2" cx="270" cy="125" r="11" fill="#fff" stroke="#0b0d11" stroke-width="4"/><circle id="nd-3" cx="390" cy="65" r="11" fill="#fff" stroke="#0b0d11" stroke-width="4"/><circle id="nd-4" cx="500" cy="90" r="11" fill="#fff" stroke="#0b0d11" stroke-width="4"/><circle id="nd-5" cx="610" cy="170" r="11" fill="#fff" stroke="#0b0d11" stroke-width="4"/><circle id="nd-6" cx="700" cy="282" r="11" fill="#ff4d2e" stroke="#0b0d11" stroke-width="4"/><circle id="nd-7" cx="810" cy="160" r="11" fill="#fff" stroke="#0b0d11" stroke-width="4"/><circle id="nd-8" cx="910" cy="68" r="11" fill="#f47b2c" stroke="#0b0d11" stroke-width="4"/>
+            <text id="lb-1" x="150" y="134" text-anchor="middle" fill="#fff" class="clabel">IDEA</text><text id="lb-2" x="270" y="99" text-anchor="middle" fill="#fff" class="clabel">VALUE</text><text id="lb-3" x="390" y="39" text-anchor="middle" fill="#fff" class="clabel">$$$</text><text id="lb-4" x="500" y="64" text-anchor="middle" fill="#fff" class="clabel">START</text><text id="lb-5" x="610" y="144" text-anchor="middle" fill="#fff" class="clabel">PROBLEMS</text><text id="lb-6" x="676" y="294" text-anchor="end" fill="#ff4d2e" class="clabel">THE HOLE</text><text id="lb-7" x="810" y="134" text-anchor="middle" fill="#fff" class="clabel">CLIMB OUT</text><text id="lb-8" x="922" y="42" text-anchor="end" fill="#f47b2c" class="clabel">PERSEVERANCE</text>
+          </svg>
+        </div>
+      </div>
+
+      <div id="logo" class="overlay clip" data-start="28.4" data-duration="0.85" data-track-index="6">
+        <div id="logo-in"><img src="assets/scoutcard-logo.png" alt="ScoutCard AI" /></div>
+      </div>
+
+      <div id="flow" class="overlay clip" data-start="37.3" data-duration="8.85" data-track-index="7">
+        <div id="flow-card" class="card">
+          <div class="kicker">How it works</div>
+          <div class="row" id="fr-1"><span class="dot"></span><span class="rtxt">Hudl export in</span></div>
+          <div class="row" id="fr-2"><span class="dot"></span><span class="rtxt">Scout cards. Instantly.</span></div>
+          <div class="row" id="fr-3"><span class="dot"></span><span class="rtxt">AI checks every card</span></div>
+        </div>
+      </div>
+
+      <div id="drop" class="overlay clip" data-start="47.4" data-duration="20.0" data-track-index="8">
+        <div id="drop-card" class="card">
+          <div class="kicker">What I almost built</div>
+          <div>
+            <span class="chip" id="chip-film">AI FILM<span class="strike" id="st-1"></span></span>
+            <span class="chip" id="chip-cv">CV TRACKING<span class="strike" id="st-2"></span></span>
+          </div>
+          <div class="note" id="note-hudl">Hudl may already have this.</div>
+          <div id="field-wrap" style="height:0; overflow:hidden">
+          <svg id="field" viewBox="0 0 940 260" aria-hidden="true">
+            <rect width="940" height="260" fill="#1d5a2c"/>
+            <line x1="70" y1="0" x2="70" y2="260" stroke="#ffffff" stroke-opacity=".35" stroke-width="3"/><line x1="170" y1="0" x2="170" y2="260" stroke="#ffffff" stroke-opacity=".35" stroke-width="3"/><line x1="270" y1="0" x2="270" y2="260" stroke="#ffffff" stroke-opacity=".35" stroke-width="3"/><line x1="370" y1="0" x2="370" y2="260" stroke="#ffffff" stroke-opacity=".35" stroke-width="3"/><line x1="470" y1="0" x2="470" y2="260" stroke="#ffffff" stroke-opacity=".35" stroke-width="3"/><line x1="570" y1="0" x2="570" y2="260" stroke="#ffffff" stroke-opacity=".35" stroke-width="3"/><line x1="670" y1="0" x2="670" y2="260" stroke="#ffffff" stroke-opacity=".35" stroke-width="3"/><line x1="770" y1="0" x2="770" y2="260" stroke="#ffffff" stroke-opacity=".35" stroke-width="3"/><line x1="870" y1="0" x2="870" y2="260" stroke="#ffffff" stroke-opacity=".35" stroke-width="3"/>
+            <g id="pl-1"><rect x="-26" y="-26" width="52" height="52" fill="none" stroke="#7cf" stroke-width="3"/><circle r="11" fill="#fff"/><text y="-36" text-anchor="middle" fill="#7cf" style="font:800 20px Inter,sans-serif">x,y</text></g><g id="pl-2"><rect x="-26" y="-26" width="52" height="52" fill="none" stroke="#7cf" stroke-width="3"/><circle r="11" fill="#fff"/><text y="-36" text-anchor="middle" fill="#7cf" style="font:800 20px Inter,sans-serif">x,y</text></g><g id="pl-3"><rect x="-26" y="-26" width="52" height="52" fill="none" stroke="#7cf" stroke-width="3"/><circle r="11" fill="#fff"/><text y="-36" text-anchor="middle" fill="#7cf" style="font:800 20px Inter,sans-serif">x,y</text></g><g id="pl-4"><rect x="-26" y="-26" width="52" height="52" fill="none" stroke="#7cf" stroke-width="3"/><circle r="11" fill="#fff"/><text y="-36" text-anchor="middle" fill="#7cf" style="font:800 20px Inter,sans-serif">x,y</text></g>
+          </svg>
+          </div>
+          <div id="verdict-wrap" style="height:0; overflow:hidden"><div id="verdict">UNREALISTIC. UNNECESSARY.</div></div>
+        </div>
+      </div>
+
+      <div id="stamp" class="overlay clip" data-start="67.6" data-duration="2.0" data-track-index="9">
+        <div id="stamp-in"><span class="k">So I&rsquo;m focusing on</span>One product.</div>
+      </div>
+
+      <div id="sum" class="overlay clip" data-start="69.7" data-duration="7.6" data-track-index="10">
+        <div id="sum-card" class="card">
+          <div class="kicker">To sum it up</div>
+          <div class="row" id="sr-1"><span class="dot"></span><span class="rtxt">A real problem</span></div>
+          <div class="row" id="sr-2"><span class="dot"></span><span class="rtxt">That adds value</span></div>
+          <div class="row" id="sr-3"><span class="dot"></span><span class="rtxt">For HS football coaches</span></div>
+        </div>
+      </div>
+
+      <div id="next" class="overlay clip" data-start="77.44" data-duration="11.8" data-track-index="11">
+        <div id="next-card" class="card">
+          <div class="kicker">Coming next</div>
+          <div class="row" id="nx-1"><span class="dot"></span><span class="rtxt">More ScoutCard AI videos</span></div>
+          <div class="row" id="nx-2"><span class="dot"></span><span class="rtxt">Stay tuned</span></div>
+          <div class="row" id="nx-3"><span class="dot"></span><span class="rtxt">+ A players version</span></div>
+        </div>
+      </div>
+
+      <div id="end" class="overlay clip" data-start="89.44" data-duration="5.06" data-track-index="12">
+        <div id="end-in">
+          <img src="assets/scoutcard-logo-end.png" alt="ScoutCard AI" />
+          <div class="tag">Built for high school football staffs.</div>
+          <div class="cta">Stay tuned</div>
+        </div>
+      </div>
+
+      <!-- Captions -->
+      <div id="cue-1" class="cue clip" data-start="0.0" data-duration="0.99" data-track-index="1"><span>The biggest realization</span></div>
+      <div id="cue-2" class="cue clip" data-start="1.04" data-duration="0.59" data-track-index="1"><span>that came to my</span></div>
+      <div id="cue-3" class="cue clip" data-start="1.68" data-duration="0.83" data-track-index="1"><span>mind when starting a</span></div>
+      <div id="cue-4" class="cue clip" data-start="2.56" data-duration="0.91" data-track-index="1"><span>business was that</span></div>
+      <div id="cue-5" class="cue clip" data-start="5.36" data-duration="0.99" data-track-index="1"><span>Every entrepreneur has</span></div>
+      <div id="cue-6" class="cue clip" data-start="6.4" data-duration="0.91" data-track-index="1"><span>a similar sequence of</span></div>
+      <div id="cue-7" class="cue clip" data-start="7.36" data-duration="0.35" data-track-index="1"><span>events.</span></div>
+      <div id="cue-8" class="cue clip" data-start="7.76" data-duration="1.11" data-track-index="1"><span>They find an idea,</span></div>
+      <div id="cue-9" class="cue clip" data-start="8.96" data-duration="1.07" data-track-index="1"><span>they see the value</span></div>
+      <div id="cue-10" class="cue clip" data-start="10.08" data-duration="0.35" data-track-index="1"><span>in it,</span></div>
+      <div id="cue-11" class="cue clip" data-start="10.48" data-duration="0.51" data-track-index="1"><span>then they say,</span></div>
+      <div id="cue-12" class="cue clip" data-start="11.04" data-duration="0.2" data-track-index="1"><span>oh,</span></div>
+      <div id="cue-13" class="cue clip" data-start="11.28" data-duration="0.59" data-track-index="1"><span>I can make a</span></div>
+      <div id="cue-14" class="cue clip" data-start="11.92" data-duration="0.75" data-track-index="1"><span>lot of money doing</span></div>
+      <div id="cue-15" class="cue clip" data-start="12.72" data-duration="0.51" data-track-index="1"><span>this.</span></div>
+      <div id="cue-16" class="cue clip" data-start="13.28" data-duration="0.75" data-track-index="1"><span>They start it,</span></div>
+      <div id="cue-17" class="cue clip" data-start="14.08" data-duration="0.91" data-track-index="1"><span>they realize there's</span></div>
+      <div id="cue-18" class="cue clip" data-start="15.04" data-duration="0.67" data-track-index="1"><span>a lot of problems</span></div>
+      <div id="cue-19" class="cue clip" data-start="15.76" data-duration="0.43" data-track-index="1"><span>you're going to have</span></div>
+      <div id="cue-20" class="cue clip" data-start="16.24" data-duration="0.63" data-track-index="1"><span>to overcome,</span></div>
+      <div id="cue-21" class="cue clip" data-start="17.28" data-duration="0.75" data-track-index="1"><span>and they might fall</span></div>
+      <div id="cue-22" class="cue clip" data-start="18.08" data-duration="0.83" data-track-index="1"><span>into a hole,</span></div>
+      <div id="cue-23" class="cue clip" data-start="18.96" data-duration="0.75" data-track-index="1"><span>and they climb back</span></div>
+      <div id="cue-24" class="cue clip" data-start="19.76" data-duration="0.87" data-track-index="1"><span>up the hole.</span></div>
+      <div id="cue-25" class="cue clip" data-start="20.72" data-duration="0.75" data-track-index="1"><span>Whether they climb up</span></div>
+      <div id="cue-26" class="cue clip" data-start="21.52" data-duration="1.23" data-track-index="1"><span>the hole depends entirely</span></div>
+      <div id="cue-27" class="cue clip" data-start="22.8" data-duration="1.03" data-track-index="1"><span>on their perseverance</span></div>
+      <div id="cue-28" class="cue clip" data-start="24.0" data-duration="1.47" data-track-index="1"><span>and adversity and coming</span></div>
+      <div id="cue-29" class="cue clip" data-start="25.52" data-duration="0.91" data-track-index="1"><span>up with new ways</span></div>
+      <div id="cue-30" class="cue clip" data-start="26.48" data-duration="1.27" data-track-index="1"><span>to solve the problems.</span></div>
+      <div id="cue-31" class="cue clip" data-start="27.92" data-duration="0.43" data-track-index="1"><span>For example,</span></div>
+      <div id="cue-32" class="cue clip" data-start="28.4" data-duration="1.15" data-track-index="1"><span>scout card AI.</span></div>
+      <div id="cue-33" class="cue clip" data-start="29.6" data-duration="1.31" data-track-index="1"><span>I'm building this to</span></div>
+      <div id="cue-34" class="cue clip" data-start="30.96" data-duration="1.07" data-track-index="1"><span>sell and have high</span></div>
+      <div id="cue-35" class="cue clip" data-start="32.08" data-duration="1.07" data-track-index="1"><span>school football coaches</span></div>
+      <div id="cue-36" class="cue clip" data-start="33.2" data-duration="0.55" data-track-index="1"><span>use,</span></div>
+      <div id="cue-37" class="cue clip" data-start="34.0" data-duration="1.63" data-track-index="1"><span>which uses AI to</span></div>
+      <div id="cue-38" class="cue clip" data-start="35.68" data-duration="2.31" data-track-index="1"><span>overview a Hudl spreadsheet</span></div>
+      <div id="cue-39" class="cue clip" data-start="38.16" data-duration="0.91" data-track-index="1"><span>upload of the plays</span></div>
+      <div id="cue-40" class="cue clip" data-start="39.12" data-duration="1.27" data-track-index="1"><span>from Hudl Assist.</span></div>
+      <div id="cue-41" class="cue clip" data-start="40.56" data-duration="0.91" data-track-index="1"><span>It converts them into</span></div>
+      <div id="cue-42" class="cue clip" data-start="41.52" data-duration="1.43" data-track-index="1"><span>scout cards instantly,</span></div>
+      <div id="cue-43" class="cue clip" data-start="43.36" data-duration="0.99" data-track-index="1"><span>and the AI will</span></div>
+      <div id="cue-44" class="cue clip" data-start="44.4" data-duration="0.67" data-track-index="1"><span>review it to make</span></div>
+      <div id="cue-45" class="cue clip" data-start="45.12" data-duration="1.15" data-track-index="1"><span>sure everything's correct.</span></div>
+      <div id="cue-46" class="cue clip" data-start="46.32" data-duration="0.2" data-track-index="1"><span>Now,</span></div>
+      <div id="cue-47" class="cue clip" data-start="46.56" data-duration="0.51" data-track-index="1"><span>I was trying to</span></div>
+      <div id="cue-48" class="cue clip" data-start="47.12" data-duration="1.15" data-track-index="1"><span>implement AI film and</span></div>
+      <div id="cue-49" class="cue clip" data-start="48.32" data-duration="0.2" data-track-index="1"><span>stuff,</span></div>
+      <div id="cue-50" class="cue clip" data-start="48.56" data-duration="1.07" data-track-index="1"><span>but I realized it's</span></div>
+      <div id="cue-51" class="cue clip" data-start="49.68" data-duration="0.75" data-track-index="1"><span>probably not worth it</span></div>
+      <div id="cue-52" class="cue clip" data-start="50.48" data-duration="0.59" data-track-index="1"><span>for us all because</span></div>
+      <div id="cue-53" class="cue clip" data-start="51.12" data-duration="1.23" data-track-index="1"><span>Hudl might have a</span></div>
+      <div id="cue-54" class="cue clip" data-start="52.4" data-duration="0.95" data-track-index="1"><span>similar feature.</span></div>
+      <div id="cue-55" class="cue clip" data-start="53.84" data-duration="1.95" data-track-index="1"><span>And the computer vision</span></div>
+      <div id="cue-56" class="cue clip" data-start="55.84" data-duration="0.55" data-track-index="1"><span>tracking</span></div>
+      <div id="cue-57" class="cue clip" data-start="56.88" data-duration="1.39" data-track-index="1"><span>and object tracking,</span></div>
+      <div id="cue-58" class="cue clip" data-start="58.32" data-duration="0.59" data-track-index="1"><span>which is like where</span></div>
+      <div id="cue-59" class="cue clip" data-start="58.96" data-duration="0.99" data-track-index="1"><span>it takes the X</span></div>
+      <div id="cue-60" class="cue clip" data-start="60.0" data-duration="0.83" data-track-index="1"><span>and Y's of these</span></div>
+      <div id="cue-61" class="cue clip" data-start="60.88" data-duration="1.79" data-track-index="1"><span>objects and tracks them</span></div>
+      <div id="cue-62" class="cue clip" data-start="62.72" data-duration="0.99" data-track-index="1"><span>across the field,</span></div>
+      <div id="cue-63" class="cue clip" data-start="63.76" data-duration="1.43" data-track-index="1"><span>it's like unrealistic</span></div>
+      <div id="cue-64" class="cue clip" data-start="65.52" data-duration="0.95" data-track-index="1"><span>and probably unnecessary.</span></div>
+      <div id="cue-65" class="cue clip" data-start="66.56" data-duration="0.51" data-track-index="1"><span>So that's why I'm</span></div>
+      <div id="cue-66" class="cue clip" data-start="67.12" data-duration="1.07" data-track-index="1"><span>focusing on one product</span></div>
+      <div id="cue-67" class="cue clip" data-start="68.24" data-duration="0.51" data-track-index="1"><span>right now.</span></div>
+      <div id="cue-68" class="cue clip" data-start="68.8" data-duration="0.59" data-track-index="1"><span>To sum it all</span></div>
+      <div id="cue-69" class="cue clip" data-start="69.44" data-duration="0.2" data-track-index="1"><span>up,</span></div>
+      <div id="cue-70" class="cue clip" data-start="69.68" data-duration="1.15" data-track-index="1"><span>I found a problem</span></div>
+      <div id="cue-71" class="cue clip" data-start="70.88" data-duration="1.27" data-track-index="1"><span>that could add value</span></div>
+      <div id="cue-72" class="cue clip" data-start="72.32" data-duration="0.99" data-track-index="1"><span>specifically to the high</span></div>
+      <div id="cue-73" class="cue clip" data-start="73.36" data-duration="0.99" data-track-index="1"><span>school football coaches</span></div>
+      <div id="cue-74" class="cue clip" data-start="74.4" data-duration="1.15" data-track-index="1"><span>and making their time</span></div>
+      <div id="cue-75" class="cue clip" data-start="75.6" data-duration="1.23" data-track-index="1"><span>spent more easy.</span></div>
+      <div id="cue-76" class="cue clip" data-start="76.88" data-duration="0.51" data-track-index="1"><span>There's going to be</span></div>
+      <div id="cue-77" class="cue clip" data-start="77.44" data-duration="1.39" data-track-index="1"><span>more videos on scout</span></div>
+      <div id="cue-78" class="cue clip" data-start="78.88" data-duration="1.07" data-track-index="1"><span>card AI coming in</span></div>
+      <div id="cue-79" class="cue clip" data-start="80.0" data-duration="0.59" data-track-index="1"><span>the future.</span></div>
+      <div id="cue-80" class="cue clip" data-start="80.64" data-duration="0.59" data-track-index="1"><span>So if you're a</span></div>
+      <div id="cue-81" class="cue clip" data-start="81.28" data-duration="0.59" data-track-index="1"><span>football player,</span></div>
+      <div id="cue-82" class="cue clip" data-start="81.92" data-duration="0.75" data-track-index="1"><span>just stay tuned.</span></div>
+      <div id="cue-83" class="cue clip" data-start="82.72" data-duration="0.59" data-track-index="1"><span>This is going to</span></div>
+      <div id="cue-84" class="cue clip" data-start="83.36" data-duration="0.43" data-track-index="1"><span>be epic.</span></div>
+      <div id="cue-85" class="cue clip" data-start="83.84" data-duration="0.67" data-track-index="1"><span>And I'm also going</span></div>
+      <div id="cue-86" class="cue clip" data-start="84.56" data-duration="0.83" data-track-index="1"><span>to make a players</span></div>
+      <div id="cue-87" class="cue clip" data-start="85.44" data-duration="0.99" data-track-index="1"><span>version for you too.</span></div>
+      <div id="cue-88" class="cue clip" data-start="86.48" data-duration="1.23" data-track-index="1"><span>So you can hopefully</span></div>
+      <div id="cue-89" class="cue clip" data-start="87.76" data-duration="0.75" data-track-index="1"><span>be able to study</span></div>
+      <div id="cue-90" class="cue clip" data-start="88.56" data-duration="0.59" data-track-index="1"><span>your players.</span></div>
+      <div id="cue-91" class="cue clip" data-start="89.2" data-duration="1.23" data-track-index="1"><span>But Hudl might already</span></div>
+      <div id="cue-92" class="cue clip" data-start="90.48" data-duration="1.23" data-track-index="1"><span>have this to double</span></div>
+      <div id="cue-93" class="cue clip" data-start="91.76" data-duration="0.51" data-track-index="1"><span>check.</span></div>
+      <div id="cue-94" class="cue clip" data-start="92.32" data-duration="0.83" data-track-index="1"><span>So I can also</span></div>
+      <div id="cue-95" class="cue clip" data-start="93.2" data-duration="1.19" data-track-index="1"><span>help you with that.</span></div>
+
+      <!-- SFX: bundled media-use library. Overlapping hits sit on separate
+           lanes so the deliberate layering never reads as a collision. -->
+      <audio id="sx-riser-hook" src=".media/audio/sfx/riser-short.mp3" data-start="2.32" data-duration="1.4" data-track-index="20" data-volume="0.45"></audio>
+      <audio id="sx-hook" src=".media/audio/sfx/sfx_001.mp3" data-start="3.52" data-duration="2.11" data-track-index="21" data-volume="0.55"></audio>
+      <audio id="sx-n1" src=".media/audio/sfx/tick-1.mp3" data-start="8.32" data-duration="0.8" data-track-index="22" data-volume="0.35"></audio>
+      <audio id="sx-n2" src=".media/audio/sfx/tick-2.mp3" data-start="9.68" data-duration="0.7" data-track-index="22" data-volume="0.35"></audio>
+      <audio id="sx-n3" src=".media/audio/sfx/tick-3.mp3" data-start="12.16" data-duration="0.6" data-track-index="22" data-volume="0.35"></audio>
+      <audio id="sx-hole" src=".media/audio/sfx/sfx_002.mp3" data-start="18.4" data-duration="2.0" data-track-index="21" data-volume="0.5"></audio>
+      <audio id="sx-climb" src=".media/audio/sfx/sfx_004.mp3" data-start="19.28" data-duration="0.6" data-track-index="22" data-volume="0.5"></audio>
+      <audio id="sx-pers" src=".media/audio/sfx/tick-3.mp3" data-start="23.28" data-duration="0.6" data-track-index="23" data-volume="0.4"></audio>
+      <audio id="sx-logo" src=".media/audio/sfx/sfx_004.mp3" data-start="28.4" data-duration="0.6" data-track-index="22" data-volume="0.45"></audio>
+      <audio id="sx-broll" src=".media/audio/sfx/sfx_003.mp3" data-start="29.2" data-media-start="2.1" data-duration="1.6" data-track-index="21" data-volume="0.5"></audio>
+      <audio id="sx-f1" src=".media/audio/sfx/tick-1.mp3" data-start="37.44" data-duration="0.8" data-track-index="22" data-volume="0.4"></audio>
+      <audio id="sx-f2" src=".media/audio/sfx/tick-2.mp3" data-start="40.72" data-duration="0.7" data-track-index="22" data-volume="0.4"></audio>
+      <audio id="sx-f3" src=".media/audio/sfx/tick-3.mp3" data-start="43.6" data-duration="0.6" data-track-index="22" data-volume="0.4"></audio>
+      <audio id="sx-back" src=".media/audio/sfx/sfx_001.mp3" data-start="46.2" data-duration="2.0" data-track-index="21" data-volume="0.4"></audio>
+      <audio id="sx-c1" src=".media/audio/sfx/tick-1.mp3" data-start="47.52" data-duration="0.8" data-track-index="22" data-volume="0.35"></audio>
+      <audio id="sx-c2" src=".media/audio/sfx/tick-2.mp3" data-start="54.8" data-duration="0.7" data-track-index="22" data-volume="0.35"></audio>
+      <audio id="sx-strike" src=".media/audio/sfx/sfx_005.mp3" data-start="64.64" data-duration="0.9" data-track-index="23" data-volume="0.4"></audio>
+      <audio id="sx-stamp" src=".media/audio/sfx/sfx_001.mp3" data-start="67.6" data-duration="2.0" data-track-index="21" data-volume="0.55"></audio>
+      <audio id="sx-s1" src=".media/audio/sfx/tick-1.mp3" data-start="69.84" data-duration="0.8" data-track-index="22" data-volume="0.35"></audio>
+      <audio id="sx-s2" src=".media/audio/sfx/tick-2.mp3" data-start="71.36" data-duration="0.7" data-track-index="22" data-volume="0.35"></audio>
+      <audio id="sx-s3" src=".media/audio/sfx/tick-3.mp3" data-start="73.2" data-duration="0.6" data-track-index="22" data-volume="0.35"></audio>
+      <audio id="sx-next" src=".media/audio/sfx/sfx_004.mp3" data-start="77.44" data-duration="0.6" data-track-index="22" data-volume="0.45"></audio>
+      <audio id="sx-epic" src=".media/audio/sfx/sfx_002.mp3" data-start="83.44" data-duration="2.0" data-track-index="21" data-volume="0.45"></audio>
+      <audio id="sx-riser-end" src=".media/audio/sfx/riser-short.mp3" data-start="88.24" data-duration="1.4" data-track-index="20" data-volume="0.4"></audio>
+      <audio id="sx-end" src=".media/audio/sfx/sfx_001.mp3" data-start="89.44" data-duration="2.11" data-track-index="21" data-volume="0.5"></audio>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const card = (sel, t0, t1) => {
+        tl.fromTo(sel, { opacity:0, y:40 }, { opacity:1, y:0, duration:.28, ease:"power3.out" }, t0);
+      };
+      const rows = (pre, times) => times.forEach((t, i) =>
+        tl.fromTo("#" + pre + "-" + (i + 1), { height:0, opacity:0 },
+          { height:72, opacity:1, duration:.24, ease:"power3.out" }, t));
+      const punch = (t, hold) => {
+        tl.to("#cam", { scale:1.12, duration:.16, ease:"power3.out" }, t);
+        tl.to("#cam", { scale:1, duration:.25, ease:"power2.inOut" }, t + hold);
+      };
+
+      tl.set("#cam", { scale:1 }, 0);
+
+      /* Hook: slam + punch-in on "not everything is as it seems". */
+      tl.fromTo("#hook-in", { opacity:0, scale:1.35 }, { opacity:1, scale:1, duration:.16, ease:"power4.out" }, 3.52);
+      punch(3.52, 1.6);
+
+      /* Founder curve: draws itself as he narrates, dives on "hole". */
+      card("#curve-card", 5.36, 27.46);
+      tl.to("#curve",{strokeDashoffset:951.8,duration:0.60,ease:"power1.inOut"},7.72);
+      tl.fromTo("#nd-1",{scale:0},{scale:1,duration:.22,ease:"back.out(3)",svgOrigin:"150 160"},8.32);
+      tl.fromTo("#lb-1",{opacity:0,y:10},{opacity:1,y:0,duration:.2,ease:"power2.out"},8.32);
+      tl.to("#curve",{strokeDashoffset:826.8,duration:0.60,ease:"power1.inOut"},9.08);
+      tl.fromTo("#nd-2",{scale:0},{scale:1,duration:.22,ease:"back.out(3)",svgOrigin:"270 125"},9.68);
+      tl.fromTo("#lb-2",{opacity:0,y:10},{opacity:1,y:0,duration:.2,ease:"power2.out"},9.68);
+      tl.to("#curve",{strokeDashoffset:692.7,duration:0.60,ease:"power1.inOut"},11.56);
+      tl.fromTo("#nd-3",{scale:0},{scale:1,duration:.22,ease:"back.out(3)",svgOrigin:"390 65"},12.16);
+      tl.fromTo("#lb-3",{opacity:0,y:10},{opacity:1,y:0,duration:.2,ease:"power2.out"},12.16);
+      tl.to("#curve",{strokeDashoffset:579.8,duration:0.60,ease:"power1.inOut"},12.84);
+      tl.fromTo("#nd-4",{scale:0},{scale:1,duration:.22,ease:"back.out(3)",svgOrigin:"500 90"},13.44);
+      tl.fromTo("#lb-4",{opacity:0,y:10},{opacity:1,y:0,duration:.2,ease:"power2.out"},13.44);
+      tl.to("#curve",{strokeDashoffset:443.8,duration:0.60,ease:"power1.inOut"},14.76);
+      tl.fromTo("#nd-5",{scale:0},{scale:1,duration:.22,ease:"back.out(3)",svgOrigin:"610 170"},15.36);
+      tl.fromTo("#lb-5",{opacity:0,y:10},{opacity:1,y:0,duration:.2,ease:"power2.out"},15.36);
+      tl.to("#curve",{strokeDashoffset:300.2,duration:0.30,ease:"power1.inOut"},18.10);
+      tl.fromTo("#nd-6",{scale:0},{scale:1,duration:.22,ease:"back.out(3)",svgOrigin:"700 282"},18.40);
+      tl.fromTo("#lb-6",{opacity:0,y:10},{opacity:1,y:0,duration:.2,ease:"power2.out"},18.40);
+      tl.to("#curve",{strokeDashoffset:135.9,duration:0.92,ease:"power1.inOut"},19.28);
+      tl.fromTo("#nd-7",{scale:0},{scale:1,duration:.22,ease:"back.out(3)",svgOrigin:"810 160"},20.20);
+      tl.fromTo("#lb-7",{opacity:0,y:10},{opacity:1,y:0,duration:.2,ease:"power2.out"},20.20);
+      tl.to("#curve",{strokeDashoffset:0.0,duration:0.60,ease:"power1.inOut"},22.68);
+      tl.fromTo("#nd-8",{scale:0},{scale:1,duration:.22,ease:"back.out(3)",svgOrigin:"910 68"},23.28);
+      tl.fromTo("#lb-8",{opacity:0,y:10},{opacity:1,y:0,duration:.2,ease:"power2.out"},23.28);
+
+      /* Logo sting, then the real product. */
+      tl.fromTo("#logo-in", { opacity:0, scale:.8 }, { opacity:1, scale:1, duration:.2, ease:"back.out(2)" }, 28.4);
+      tl.fromTo("#broll-wrap", { scale:1.14 }, { scale:1, duration:.35, ease:"power3.out" }, 29.2);
+      tl.to("#broll-wrap", { scale:1.05, duration:16.5, ease:"none" }, 29.55);
+      card("#flow-card", 37.3, 46.15);
+      rows("fr", [37.44, 40.72, 43.6]);
+
+      /* Dropped features: tracking dots move, then get struck out. */
+      card("#drop-card", 47.4, 67.4);
+      tl.fromTo("#chip-film", { opacity:0, scale:.8 }, { opacity:1, scale:1, duration:.2, ease:"back.out(2.5)" }, 47.52);
+      tl.fromTo("#note-hudl", { opacity:0 }, { opacity:1, duration:.2 }, 52.4);
+      tl.fromTo("#chip-cv", { opacity:0, scale:.8 }, { opacity:1, scale:1, duration:.2, ease:"back.out(2.5)" }, 54.8);
+      tl.fromTo("#field-wrap", { height:0 }, { height:262, duration:.32, ease:"power3.out" }, 54.8);
+      const P = [[120,55,560,60],[220,110,700,105],[90,165,780,160],[300,220,860,215]];  /* separate lanes: labels never cross */
+      P.forEach((p, i) => tl.fromTo("#pl-" + (i + 1), { x:p[0], y:p[1] },
+        { x:p[2], y:p[3], duration:9.64, ease:"sine.inOut" }, 54.8));
+      tl.fromTo("#st-1", { scaleX:0 }, { scaleX:1, duration:.18, ease:"power3.out" }, 64.64);
+      tl.fromTo("#st-2", { scaleX:0 }, { scaleX:1, duration:.18, ease:"power3.out" }, 64.76);
+      tl.fromTo("#verdict-wrap", { height:0 }, { height:76, duration:.18, ease:"power3.out" }, 64.74);
+      tl.fromTo("#verdict", { opacity:0, scale:.9 }, { opacity:1, scale:1, duration:.18, ease:"back.out(2)" }, 64.74);
+
+      /* Decision stamp + punch-in. */
+      tl.fromTo("#stamp-in", { opacity:0, scale:1.5, rotation:-12 }, { opacity:1, scale:1, rotation:-4, duration:.22, ease:"back.out(1.8)" }, 67.6);
+      punch(67.6, 1.0);
+
+      card("#sum-card", 69.7, 77.3);
+      rows("sr", [69.84, 71.36, 73.2]);
+
+      card("#next-card", 77.44, 89.24);
+      rows("nx", [77.44, 82.08, 84.96]);
+      punch(83.44, 0.9);
+
+      tl.fromTo("#end-in", { opacity:0, scale:.9 }, { opacity:1, scale:1, duration:.3, ease:"back.out(1.6)" }, 89.44);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
