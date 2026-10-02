@@ -21,9 +21,15 @@ from a real screen recording.
 ## Assets
 
 - base_tight.mp4 — six clips (IMG_1778, 1781, 1784, 1785, 1789, 1795),
-  normalised to -14 LUFS and tone-mapped HLG->Rec.709, concatenated in
-  narrative order (filename order, verified against content), 3.85s of pauses
-  cut, re-normalised.
+  tone-mapped HLG->Rec.709, concatenated in narrative order (filename order,
+  verified against content), 10 pause cuts. Video and audio are cut on the
+  SAME frame-snapped boundaries, so both streams are exactly 94.500s.
+- Voice chain (rebuilt after the user heard "broken speaker" distortion),
+  from the ORIGINAL uploads: adeclip (the phone clipped some peaks: raw true
+  peak up to +1.28 dBTP) -> highpass 75 Hz -> per-clip placement by
+  cross-correlation (worst sync error 5.5 ms) -> 5 ms fades at every cut ->
+  compressor 3:1 -> plain gain to -14 LUFS -> ONE 4x-oversampled limiter at
+  -1.5 dBTP, which shaves <1 dB. Result: -14.00 LUFS, -1.51 dBTP.
 - transcript.json / anchors.json / cues.json — 320 words with onsets; every
   graphic and SFX hit is pinned to an anchor word. "Huddle" corrected to
   "Hudl" throughout (ASR mishears the platform name).
@@ -35,6 +41,16 @@ from a real screen recording.
 - build.py — generates index.html from the transcript. Edit it, not the HTML.
 
 ## Notes
+
+- DO NOT use loudnorm to process audio in this project (measuring is fine).
+  With linear=true it silently falls back to dynamic mode whenever the target
+  is unreachable by plain gain — it did for all six clips here, and that
+  gain-riding limiter is what caused the distortion. Verify any loudnorm pass
+  reports normalization_type "linear".
+- DO NOT cut with select/aselect: aselect quantises to ~21 ms codec frames
+  and select to 33 ms video frames independently, so the streams drift (it
+  reached ~200 ms of lip-sync error before this was fixed). Use frame-snapped
+  trim/atrim on identical boundaries.
 
 - Brand palette taken from the product (dark + #f47b2c orange).
 - Graphics live in the lower-middle band so his face stays mostly clear;
