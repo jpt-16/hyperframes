@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Control the Controllables</title>
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      * { margin:0; padding:0; box-sizing:border-box; }
+      html, body { margin:0; width:1080px; height:1920px; overflow:hidden; background:#000; }
+      body { font-family: Inter, "Liberation Sans", sans-serif; }
+      #root { position:relative; width:1080px; height:1920px; overflow:hidden; background:#000; }
+      #cam { position:absolute; inset:0; overflow:hidden; transform-origin:50% 36%; }
+      /* Understated captions: sentence case, warm off-white, a soft plate only
+         as strong as legibility needs. */
+      .cue { position:absolute; left:90px; right:90px; bottom:320px; z-index:20;
+        display:flex; justify-content:center; }
+      .cue > span { background:rgba(12,12,14,.5); border-radius:12px; padding:10px 20px;
+        color:#f4f1ea; font-weight:600; font-size:44px; line-height:1.22; letter-spacing:-.2px;
+        text-align:center; text-wrap:balance; }
+      #title { position:absolute; inset:0; z-index:20; }
+      #title-in { position:absolute; left:90px; right:90px; bottom:320px; text-align:center; }
+      #title-in span { display:inline-block; background:rgba(12,12,14,.5); border-radius:12px;
+        padding:14px 26px; color:#f4f1ea; font-weight:600; font-size:58px; letter-spacing:-.6px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="71.134" data-width="1080" data-height="1920">
+      <!-- Six clips, tone-mapped, joined with their natural pauses intact: only
+           one pause over 0.9s existed and it was shortened, not removed. Video
+           and audio were cut on identical frame boundaries. Voice: declip,
+           75 Hz highpass, gentle 2:1, plain gain, one oversampled limiter that
+           is idle 99.9% of the time. -16 LUFS. -->
+      <div id="cam">
+        <video id="a-roll" class="clip" src="base.mp4" muted playsinline data-start="0" data-duration="71.134"
+          data-track-index="0" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover"></video>
+      </div>
+      <audio id="a-roll-audio" src="base.mp4" data-start="0" data-duration="71.134" data-track-index="2" data-volume="1"></audio>
+
+      <div id="title" class="clip" data-start="0.0" data-duration="2.25" data-track-index="3">
+        <div id="title-in"><span>Control the controllables.</span></div>
+      </div>
+
+      <div id="cue-1" class="cue clip" data-start="2.32" data-duration="1.56" data-track-index="1"><span>This is the most important lesson that</span></div>
+      <div id="cue-2" class="cue clip" data-start="3.92" data-duration="2.28" data-track-index="1"><span>I've learned throughout my entire life</span></div>
+      <div id="cue-3" class="cue clip" data-start="6.24" data-duration="1.88" data-track-index="1"><span>playing sports and it's going to carry</span></div>
+      <div id="cue-4" class="cue clip" data-start="8.16" data-duration="1.56" data-track-index="1"><span>with me throughout the rest of my</span></div>
+      <div id="cue-5" class="cue clip" data-start="9.76" data-duration="1.24" data-track-index="1"><span>life. Playing football,</span></div>
+      <div id="cue-6" class="cue clip" data-start="11.04" data-duration="1.32" data-track-index="1"><span>baseball, whatever sport,</span></div>
+      <div id="cue-7" class="cue clip" data-start="12.4" data-duration="2.44" data-track-index="1"><span>and you put your best effort and</span></div>
+      <div id="cue-8" class="cue clip" data-start="14.88" data-duration="1.72" data-track-index="1"><span>do everything you can do to be</span></div>
+      <div id="cue-9" class="cue clip" data-start="16.64" data-duration="2.52" data-track-index="1"><span>successful and somehow something doesn't</span></div>
+      <div id="cue-10" class="cue clip" data-start="19.2" data-duration="1.4" data-track-index="1"><span>go your way and something that's out</span></div>
+      <div id="cue-11" class="cue clip" data-start="20.64" data-duration="1.08" data-track-index="1"><span>of your control.</span></div>
+      <div id="cue-12" class="cue clip" data-start="21.76" data-duration="2.36" data-track-index="1"><span>This applies directly in business too.</span></div>
+      <div id="cue-13" class="cue clip" data-start="24.16" data-duration="1.0" data-track-index="1"><span>If I'm being honest right now,</span></div>
+      <div id="cue-14" class="cue clip" data-start="25.2" data-duration="1.88" data-track-index="1"><span>I could be doing much more to</span></div>
+      <div id="cue-15" class="cue clip" data-start="27.12" data-duration="2.2" data-track-index="1"><span>attempt to find leads to convert to</span></div>
+      <div id="cue-16" class="cue clip" data-start="29.36" data-duration="2.44" data-track-index="1"><span>clients for my business or just overall</span></div>
+      <div id="cue-17" class="cue clip" data-start="31.84" data-duration="0.92" data-track-index="1"><span>build a better brand.</span></div>
+      <div id="cue-18" class="cue clip" data-start="32.8" data-duration="1.64" data-track-index="1"><span>Like I could be focusing more time</span></div>
+      <div id="cue-19" class="cue clip" data-start="34.48" data-duration="0.84" data-track-index="1"><span>on content stuff.</span></div>
+      <div id="cue-20" class="cue clip" data-start="35.36" data-duration="1.64" data-track-index="1"><span>And that's just directly corollary</span></div>
+      <div id="cue-21" class="cue clip" data-start="37.04" data-duration="1.64" data-track-index="1"><span>to controlling your controllables.</span></div>
+      <div id="cue-22" class="cue clip" data-start="38.72" data-duration="1.48" data-track-index="1"><span>Cause if you control everything you</span></div>
+      <div id="cue-23" class="cue clip" data-start="40.24" data-duration="1.88" data-track-index="1"><span>control, that's the best way you're</span></div>
+      <div id="cue-24" class="cue clip" data-start="42.16" data-duration="1.24" data-track-index="1"><span>going to be successful.</span></div>
+      <div id="cue-25" class="cue clip" data-start="43.44" data-duration="0.92" data-track-index="1"><span>It would be one thing if I</span></div>
+      <div id="cue-26" class="cue clip" data-start="44.4" data-duration="1.48" data-track-index="1"><span>was doing everything I could to find</span></div>
+      <div id="cue-27" class="cue clip" data-start="45.92" data-duration="2.52" data-track-index="1"><span>leads and it just wasn't working.</span></div>
+      <div id="cue-28" class="cue clip" data-start="48.48" data-duration="1.48" data-track-index="1"><span>I was trying to find alternatives.</span></div>
+      <div id="cue-29" class="cue clip" data-start="50.0" data-duration="0.84" data-track-index="1"><span>It still wasn't working.</span></div>
+      <div id="cue-30" class="cue clip" data-start="50.88" data-duration="1.0" data-track-index="1"><span>I just had to keep going.</span></div>
+      <div id="cue-31" class="cue clip" data-start="51.92" data-duration="1.8" data-track-index="1"><span>You know, I think I'm doing like</span></div>
+      <div id="cue-32" class="cue clip" data-start="53.76" data-duration="1.32" data-track-index="1"><span>an okay job right now,</span></div>
+      <div id="cue-33" class="cue clip" data-start="55.12" data-duration="1.4" data-track-index="1"><span>but I could be doing better.</span></div>
+      <div id="cue-34" class="cue clip" data-start="56.56" data-duration="2.12" data-track-index="1"><span>And I think the most important way</span></div>
+      <div id="cue-35" class="cue clip" data-start="58.72" data-duration="1.4" data-track-index="1"><span>it's going to happen is through just</span></div>
+      <div id="cue-36" class="cue clip" data-start="60.16" data-duration="1.96" data-track-index="1"><span>this content creation and making more</span></div>
+      <div id="cue-37" class="cue clip" data-start="62.16" data-duration="0.85" data-track-index="1"><span>videos</span></div>
+      <div id="cue-38" class="cue clip" data-start="63.6" data-duration="1.48" data-track-index="1"><span>to get more credibility,</span></div>
+      <div id="cue-39" class="cue clip" data-start="65.12" data-duration="1.0" data-track-index="1"><span>my name out there,</span></div>
+      <div id="cue-40" class="cue clip" data-start="66.16" data-duration="2.6" data-track-index="1"><span>so people will hear about me more.</span></div>
+      <div id="cue-41" class="cue clip" data-start="68.8" data-duration="2.294" data-track-index="1"><span>Follow for more daily content and be great.</span></div>
+
+      <!-- Three accents for three structural shifts, nothing else. All
+           synthesised for this piece; none come from a stock library. -->
+      <audio id="sx-open" src="assets/sfx/boom.wav" data-start="0.2" data-duration="3.4" data-track-index="10" data-volume="0.5"></audio>
+      <audio id="sx-swell" src="assets/sfx/crackle.wav" data-start="21.347" data-duration="2.62" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sx-turn" src="assets/sfx/thud.wav" data-start="23.967" data-duration="1.6" data-track-index="12" data-volume="0.45"></audio>
+      <audio id="sx-close" src="assets/sfx/boom.wav" data-start="68.534" data-duration="2.6" data-track-index="10" data-volume="0.32"></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.set("#cam", { scale:1 }, 0);
+      /* Title settles in rather than popping. */
+      tl.fromTo("#title-in", { opacity:0, y:14 }, { opacity:1, y:0, duration:.55, ease:"power2.out" }, 0.22);
+      /* The only camera move: a slow push across the confession, reset by the cut. */
+      tl.to("#cam", { scale:1.05, duration:19.4, ease:"sine.inOut" }, 23.967);
+      tl.set("#cam", { scale:1 }, 43.367);
+      /* Let the closing boom fade with the picture instead of being cut off. */
+      tl.fromTo("#sx-close", { volume:0.32 }, { volume:0, duration:.55, ease:"power1.in" }, 70.534);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
