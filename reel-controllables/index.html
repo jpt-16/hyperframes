@@ -18,10 +18,118 @@
       .cue > span { background:rgba(12,12,14,.5); border-radius:12px; padding:10px 20px;
         color:#f4f1ea; font-weight:600; font-size:44px; line-height:1.22; letter-spacing:-.2px;
         text-align:center; text-wrap:balance; }
+      @font-face { font-family:"Caveat"; src:url("assets/fonts/Caveat-700-latin.woff2") format("woff2");
+        font-weight:700; font-display:block; }
+      /* ---- hw-callout-circle ----------------------------------------------
+         The full callout anatomy: wobbled ellipse outline draws around a
+         target, optional scribble fill sketches in, a curved connector leads
+         to a handwritten label that POPS in with momentum — the drawn shapes
+         absorb the arrival with a volume-preserving contact squash (g21).
+         Ships the full family runtime it needs (hw-boil + boil poses +
+         stroke matrix + springEase) — copy the helpers once per host.
+         WRAPPER RULES: boil owns x/y/rotation of .hw-co-boil; the squash
+         deforms .hw-co-deform (outline + scribble only); the label rides
+         the uniform-scale .hw-co-pop OUTSIDE the deform — non-uniform
+         scale never reaches glyphs. One timeline has ONE onUpdate
+         (everything registers through hwOnUpdate). */
+      .hw-callout {
+        position: absolute;
+        pointer-events: none;
+      }
+      .hw-callout .hw-co-boil,
+      .hw-callout .hw-co-deform,
+      .hw-callout .hw-co-conn-layer,
+      .hw-callout .hw-co-pop {
+        position: absolute;
+        inset: 0;
+      }
+      .hw-callout .hw-co-pop {
+        opacity: 0;
+      }
+      .hw-callout svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .hw-callout path {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .hw-callout .hw-co-outline {
+        stroke: var(--hw-co-ink, var(--hw-ink, #f4f2ec));
+        stroke-width: var(--hw-co-w, 6);
+      }
+      .hw-callout .hw-co-scribble {
+        /* Warm marker accent to match hw-frame / hw-title / hw-underline; the
+           previous blue read as a default UI colour. Lighter weight and alpha
+           so the hatch sits behind the labelled subject instead of over it. */
+        stroke: var(--hw-co-accent, var(--hw-accent, #ffb020));
+        stroke-width: 3;
+        opacity: 0.42;
+      }
+      .hw-callout .hw-co-connector {
+        stroke: var(--hw-co-ink, var(--hw-ink, #f4f2ec));
+        stroke-width: 4;
+      }
+      .hw-callout .hw-co-label {
+        position: absolute;
+        font-family: var(--hw-font-print, "Caveat", cursive);
+        font-weight: 700;
+        font-size: 54px;
+        color: var(--hw-co-ink, var(--hw-ink, #f4f2ec));
+        white-space: nowrap;
+        text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+      }
+/* ---- hw-underline ------------------------------------------------
+         Squiggle underline / strikethrough / bracket marks that draw on.
+         Size the wrapper over the text they annotate. Requires the hw-boil
+         helpers in the host. */
+      .hw-mark {
+        position: absolute;
+        pointer-events: none;
+      }
+      .hw-mark svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .hw-mark path {
+        fill: none;
+        stroke: var(--hw-mark-color, var(--hw-accent-warm, #ffb020));
+        stroke-width: var(--hw-mark-w, 7);
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      /* Hand-drawn layer: Caveat + wobbled strokes, warm off-white ink; one
+         marker-orange accent, reserved for the single check that pays off. */
+      .hand { font-family:"Caveat", cursive; font-weight:700; color:#f4f2ec;
+        text-shadow:0 2px 3px rgba(0,0,0,.85), 0 0 16px rgba(0,0,0,.6); }
       #title { position:absolute; inset:0; z-index:20; }
-      #title-in { position:absolute; left:90px; right:90px; bottom:320px; text-align:center; }
-      #title-in span { display:inline-block; background:rgba(12,12,14,.5); border-radius:12px;
-        padding:14px 26px; color:#f4f1ea; font-weight:600; font-size:58px; letter-spacing:-.6px; }
+      #title-in { position:absolute; left:60px; right:60px; bottom:300px; text-align:center; font-size:92px; line-height:1; }
+      #title-in .w { position:relative; display:inline-block; }
+      #title-mark { position:absolute; left:-6px; right:-6px; bottom:-20px; height:34px; }
+      .ovl { position:absolute; inset:0; z-index:15; pointer-events:none; }
+      .colabel { position:absolute; text-align:center; white-space:nowrap; }
+      /* The face sits low in these clips, so the hand-drawn layer lives in the
+         clear band above the eyes (wall / ceiling / hair), on a feathered dark
+         patch so off-white ink reads over a bright wall. Feathered, not a card. */
+      .band { position:absolute; left:20px; right:20px; top:150px; height:470px; }
+      .patch { position:absolute; left:-60px; right:-60px; top:-70px; bottom:-70px;
+        background:radial-gradient(ellipse at 50% 50%, rgba(14,12,10,.5) 0%, rgba(14,12,10,.36) 40%, rgba(14,12,10,.12) 64%, rgba(14,12,10,0) 82%);
+        filter:blur(26px); }
+      #rows { position:absolute; left:230px; top:60px; width:640px; }
+      .lrow { position:relative; height:80px; }
+      .lbox { position:absolute; left:0; top:12px; width:52px; height:52px; }
+      .lbox svg, .lcheck svg { width:100%; height:100%; overflow:visible; }
+      .lbox path, .lcheck path { fill:none; stroke-linecap:round; stroke-linejoin:round; }
+      .lbox path { stroke:#f4f2ec; stroke-width:5; }
+      .lcheck { position:absolute; left:-4px; top:0; width:70px; height:66px; }
+      .lcheck path { stroke:#ffb020; stroke-width:9; }
+      /* padding keeps Caveat's overhanging strokes inside the write-on mask */
+      .ltxt { position:absolute; left:74px; top:0; font-size:56px; line-height:76px; white-space:nowrap; padding:0 18px 0 4px; }
+      .colabel { padding:0 14px; }
+      #title-mark path { stroke:#f4f2ec !important; }
     </style>
   </head>
   <body>
@@ -38,7 +146,28 @@
       <audio id="a-roll-audio" src="base.mp4" data-start="0" data-duration="71.134" data-track-index="2" data-volume="1"></audio>
 
       <div id="title" class="clip" data-start="0.0" data-duration="2.25" data-track-index="3">
-        <div id="title-in"><span>Control the controllables.</span></div>
+        <div id="title-in" class="hand">Control the <span class="w">controllables.<span class="hw-mark" id="title-mark"><svg viewBox="0 0 420 34" preserveAspectRatio="none"><path vector-effect="non-scaling-stroke"></path></svg></span></span></div>
+      </div>
+
+      <!-- Circle of control, drawn as he describes it. -->
+      <div id="circle" class="ovl clip" data-start="13.5" data-duration="10.45" data-track-index="4">
+        <div class="band"><div class="patch"></div></div>
+        <div class="hw-callout" id="co-in" style="left:375px; top:335px; width:330px; height:170px"><div class="hw-co-boil"><div class="hw-co-deform"><svg viewBox="0 0 330 170"><path class="hw-co-scribble"></path><path class="hw-co-outline"></path></svg></div><svg class="hw-co-conn-layer" viewBox="0 0 330 170"><path class="hw-co-connector"></path></svg><div class="hw-co-pop"><div class="hw-co-label" data-layout-allow-overflow></div></div></div></div>
+        <div class="colabel hand" id="co-in-txt" style="left:375px; top:378px; width:330px; font-size:54px;">your effort</div>
+        <div class="hw-callout" id="co-out" style="left:170px; top:200px; width:740px; height:420px"><div class="hw-co-boil"><div class="hw-co-deform"><svg viewBox="0 0 740 420"><path class="hw-co-scribble"></path><path class="hw-co-outline"></path></svg></div><svg class="hw-co-conn-layer" viewBox="0 0 740 420"><path class="hw-co-connector"></path></svg><div class="hw-co-pop"><div class="hw-co-label" data-layout-allow-overflow></div></div></div></div>
+        <div class="colabel hand" id="co-out-txt" style="left:170px; top:598px; width:740px; font-size:48px;">out of your control</div>
+      </div>
+
+      <!-- What he admits he could be doing: boxes stay empty until the payoff. -->
+      <div id="listwrap" class="ovl clip" data-start="27.5" data-duration="38.4" data-track-index="5">
+        <div id="list" class="band"><div class="patch"></div>
+          <div id="rows">
+          <div class="lrow" id="row0"><div class="lbox hw-mark" id="box0"><svg viewBox="0 0 52 52"><path></path></svg></div><div class="ltxt hand" id="txt0">find leads</div></div>
+          <div class="lrow" id="row1"><div class="lbox hw-mark" id="box1"><svg viewBox="0 0 52 52"><path></path></svg></div><div class="ltxt hand" id="txt1">convert clients</div></div>
+          <div class="lrow" id="row2"><div class="lbox hw-mark" id="box2"><svg viewBox="0 0 52 52"><path></path></svg></div><div class="ltxt hand" id="txt2">build a better brand</div></div>
+          <div class="lrow" id="row3"><div class="lbox hw-mark" id="box3"><svg viewBox="0 0 52 52"><path></path></svg></div><div class="lcheck hw-mark" id="chk3"><svg viewBox="0 0 70 66"><path></path></svg></div><div class="ltxt hand" id="txt3">more content</div></div>
+          </div>
+        </div>
       </div>
 
       <div id="cue-1" class="cue clip" data-start="2.32" data-duration="1.56" data-track-index="1"><span>This is the most important lesson that</span></div>
@@ -85,21 +214,61 @@
 
       <!-- Three accents for three structural shifts, nothing else. All
            synthesised for this piece; none come from a stock library. -->
-      <audio id="sx-open" src="assets/sfx/boom.wav" data-start="0.2" data-duration="3.4" data-track-index="10" data-volume="0.5"></audio>
-      <audio id="sx-swell" src="assets/sfx/crackle.wav" data-start="21.347" data-duration="2.62" data-track-index="11" data-volume="0.4"></audio>
-      <audio id="sx-turn" src="assets/sfx/thud.wav" data-start="23.967" data-duration="1.6" data-track-index="12" data-volume="0.45"></audio>
-      <audio id="sx-close" src="assets/sfx/boom.wav" data-start="68.534" data-duration="2.6" data-track-index="10" data-volume="0.32"></audio>
+      <audio id="sx-open" src="assets/sfx/boom.wav" data-start="0.2" data-duration="3.4" data-track-index="10" data-volume="0.13"></audio>
+      <audio id="sx-swell" src="assets/sfx/crackle.wav" data-start="21.347" data-duration="2.62" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sx-turn" src="assets/sfx/thud.wav" data-start="23.967" data-duration="1.6" data-track-index="12" data-volume="0.35"></audio>
+      <audio id="sx-close" src="assets/sfx/boom.wav" data-start="68.534" data-duration="2.6" data-track-index="10" data-volume="0.085"></audio>
     </div>
+    <script src="hw-helpers.js"></script>
     <script>
       const tl = gsap.timeline({ paused: true });
       tl.set("#cam", { scale:1 }, 0);
-      /* Title settles in rather than popping. */
-      tl.fromTo("#title-in", { opacity:0, y:14 }, { opacity:1, y:0, duration:.55, ease:"power2.out" }, 0.22);
+      const wob = (n, seed, a) => window.hwHash(n, seed) * a;
+      /* Title: handwritten, settles in; the underline draws itself under
+         "controllables" as he lands the word. */
+      document.querySelector("#title-mark path").setAttribute("d", window.hwMarkPath(420, 34, "underline", 3));
+      tl.fromTo("#title-in", { opacity:0, y:12 }, { opacity:1, y:0, duration:.55, ease:"power2.out" }, 0.22);
+      window.hwMarkOn(tl, "#title-mark", 1.25, 0.6);
+      window.hwBoil(tl, "#title-in", { amp:1.2, rot:0.35, frameDrop:3, seed:3 });
+
+      /* Circle of control */
+      ["#co-in", "#co-out"].forEach((id, k) => window.hwCalloutBuild(id, { scribble:false, connector:false,
+        seed:5 + k, label:"", labelAt:"below", strokeType:"soft", boil:"calm" }));
+      window.hwCalloutOn(tl, "#co-in", 13.6);
+      tl.fromTo("#co-in-txt", { opacity:0, clipPath:"inset(0 100% 0 0)" }, { opacity:1, clipPath:"inset(0 0% 0 0)", duration:.5, ease:"power1.inOut" }, 13.85);
+      window.hwCalloutOn(tl, "#co-out", 20.4);
+      tl.fromTo("#co-out-txt", { opacity:0, clipPath:"inset(0 100% 0 0)" }, { opacity:1, clipPath:"inset(0 0% 0 0)", duration:.6, ease:"power1.inOut" }, 20.7);
+      tl.to("#circle", { opacity:0, duration:.4, ease:"power2.in" }, 23.45);
+
+      /* The list: each box is drawn, then its words are written, on the word. */
+      const boxPath = (seed) => {
+        const p = [[4,5],[48,3],[50,47],[3,49]].map((q, i) => [q[0] + wob(i*3+1, seed, 2.2), q[1] + wob(i*3+2, seed, 2.2)]);
+        return "M" + p[0] + " L" + p[1] + " L" + p[2] + " L" + p[3] + " Z";
+      };
+      [27.76,28.72,31.84,34.64].forEach((t, i) => {
+        document.querySelector("#box" + i + " path").setAttribute("d", boxPath(11 + i));
+        tl.set("#row" + i, { opacity:0 }, 0);
+        tl.set("#row" + i, { opacity:1 }, t - 0.05);
+        window.hwMarkOn(tl, "#box" + i, t - 0.05, 0.35);
+        tl.fromTo("#txt" + i, { clipPath:"inset(0 100% 0 0)" }, { clipPath:"inset(0 0% 0 0)", duration:.55, ease:"power1.inOut" }, t + 0.15);
+      });
+      document.querySelector("#chk3 path").setAttribute("d",
+        "M" + [8 + wob(1,9,2), 34 + wob(2,9,2)] + " Q" + [20, 52] + " " + [27 + wob(3,9,2), 58] + " Q" + [40, 30] + " " + [66 + wob(4,9,2), 4 + wob(5,9,2)]);
+      tl.set("#chk3", { opacity:0 }, 0);
+      window.hwBoil(tl, "#rows", { amp:1.1, rot:0.3, frameDrop:3, seed:7 });
+      tl.set("#list", { opacity:1 }, 0);
+      tl.to("#list", { opacity:0, duration:.35, ease:"power2.in" }, 42.917);
+      /* Payoff: the list comes back on "content creation" and the content box
+         finally gets its check on "videos". */
+      tl.fromTo("#list", { opacity:0 }, { opacity:1, duration:.45, ease:"power2.out", immediateRender:false }, 60.45);
+      tl.set("#chk3", { opacity:1 }, 62.16);
+      window.hwMarkOn(tl, "#chk3", 62.16, 0.45);
+      tl.to("#list", { opacity:0, duration:.45, ease:"power2.in" }, 65.16);
       /* The only camera move: a slow push across the confession, reset by the cut. */
       tl.to("#cam", { scale:1.05, duration:19.4, ease:"sine.inOut" }, 23.967);
       tl.set("#cam", { scale:1 }, 43.367);
       /* Let the closing boom fade with the picture instead of being cut off. */
-      tl.fromTo("#sx-close", { volume:0.32 }, { volume:0, duration:.55, ease:"power1.in" }, 70.534);
+      tl.fromTo("#sx-close", { volume:0.085 }, { volume:0, duration:.55, ease:"power1.in" }, 70.534);
       window.__timelines["main"] = tl;
     </script>
   </body>
