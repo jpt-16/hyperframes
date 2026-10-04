@@ -40,6 +40,7 @@ ROWS="\n".join(f'          <div class="lrow" id="row{i}"><div class="lbox hw-mar
                 + (f'<div class="lcheck hw-mark" id="chk{i}"><svg viewBox="0 0 70 66"><path></path></svg></div>' if i==3 else "")
                 + f'<div class="ltxt hand" id="txt{i}">{t}</div></div>' for i,(t,_) in enumerate(ITEMS))
 VID=next(w["start"] for w in W if w["text"].lower().startswith("videos"))
+BR_IN, BR_OUT = round(187/30,4), round(372/30,4)
 TAPS="\n".join(f'      <audio id="pn-tap{i}" src="assets/sfx/pen/tap{i}.wav" data-start="{round(t-0.05,3)}" data-duration="0.22" data-track-index="15" data-volume="0.6"></audio>' for i,(_,t) in enumerate(ITEMS))
 CC=next(w["start"] for w in W if w["text"].lower().startswith("creation"))
 html=f'''<!doctype html>
@@ -55,6 +56,9 @@ html=f'''<!doctype html>
       body {{ font-family: Inter, "Liberation Sans", sans-serif; }}
       #root {{ position:relative; width:1080px; height:1920px; overflow:hidden; background:#000; }}
       #cam {{ position:absolute; inset:0; overflow:hidden; transform-origin:50% 36%; }}
+      #broll {{ position:absolute; inset:0; overflow:hidden; z-index:5; background:#111; }}
+      #batter {{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+                 object-position:46% 50%; transform-origin:52% 34%; }}
       /* Understated captions: sentence case, warm off-white, a soft plate only
          as strong as legibility needs. */
       .cue {{ position:absolute; left:90px; right:90px; bottom:320px; z-index:20;
@@ -107,6 +111,11 @@ html=f'''<!doctype html>
         <video id="a-roll" class="clip" src="base.mp4" muted playsinline data-start="0" data-duration="{END}"
           data-track-index="0" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover"></video>
       </div>
+      <!-- Real b-roll, his own photo: hard cut in on "playing sports", out
+           on "and you put your best effort", so the effort line lands on his face. -->
+      <div id="broll" class="clip" data-start="{BR_IN}" data-duration="{round(BR_OUT-BR_IN,4)}" data-track-index="6">
+        <img id="batter" data-layout-allow-overflow src="assets/broll/batter.jpg" alt="">
+      </div>
       <audio id="a-roll-audio" src="base.mp4" data-start="0" data-duration="{END}" data-track-index="2" data-volume="1"></audio>
 
       <div id="title" class="clip" data-start="{TITLE[0]}" data-duration="{TITLE[1]}" data-track-index="3">
@@ -155,6 +164,8 @@ html=f'''<!doctype html>
     <script>
       const tl = gsap.timeline({{ paused: true }});
       tl.set("#cam", {{ scale:1 }}, 0);
+      /* B-roll still: one slow push toward his hands and helmet, no fades. */
+      tl.fromTo("#batter", {{ scale:1.0 }}, {{ scale:1.07, duration:{round(BR_OUT-BR_IN,4)}, ease:"none" }}, {BR_IN});
       const wob = (n, seed, a) => window.hwHash(n, seed) * a;
       /* Title: handwritten, settles in; the underline draws itself under
          "controllables" as he lands the word. */
