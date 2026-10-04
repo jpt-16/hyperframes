@@ -56,9 +56,16 @@ html=f'''<!doctype html>
       body {{ font-family: Inter, "Liberation Sans", sans-serif; }}
       #root {{ position:relative; width:1080px; height:1920px; overflow:hidden; background:#000; }}
       #cam {{ position:absolute; inset:0; overflow:hidden; transform-origin:50% 36%; }}
-      #broll {{ position:absolute; inset:0; overflow:hidden; z-index:5; background:#111; }}
+      /* B-roll as a small print, not a full-frame cut: upper right, where the
+         shot is wall and hair, clear of eyes, mouth and captions. */
+      #broll {{ position:absolute; inset:0; z-index:12; pointer-events:none; }}
+      #print {{ position:absolute; left:592px; top:120px; width:420px; height:600px;
+                background:#f6f3ec; padding:14px; box-sizing:border-box; border-radius:3px;
+                box-shadow:0 18px 40px rgba(0,0,0,.38), 0 3px 8px rgba(0,0,0,.25);
+                transform-origin:50% 60%; }}
+      #print .ph {{ position:relative; width:100%; height:100%; overflow:hidden; }}
       #batter {{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-                 object-position:46% 50%; transform-origin:52% 34%; }}
+                 object-position:50% 40%; transform-origin:52% 32%; }}
       /* Understated captions: sentence case, warm off-white, a soft plate only
          as strong as legibility needs. */
       .cue {{ position:absolute; left:90px; right:90px; bottom:320px; z-index:20;
@@ -111,10 +118,10 @@ html=f'''<!doctype html>
         <video id="a-roll" class="clip" src="base.mp4" muted playsinline data-start="0" data-duration="{END}"
           data-track-index="0" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover"></video>
       </div>
-      <!-- Real b-roll, his own photo: hard cut in on "playing sports", out
-           on "and you put your best effort", so the effort line lands on his face. -->
+      <!-- Real b-roll, his own photo, as a print that pops up on "playing
+           sports" and pops away before "best effort", so the circle has the frame. -->
       <div id="broll" class="clip" data-start="{BR_IN}" data-duration="{round(BR_OUT-BR_IN,4)}" data-track-index="6">
-        <img id="batter" data-layout-allow-overflow src="assets/broll/batter.jpg" alt="">
+        <div id="print"><div class="ph"><img id="batter" data-layout-allow-overflow src="assets/broll/batter.jpg" alt=""></div></div>
       </div>
       <audio id="a-roll-audio" src="base.mp4" data-start="0" data-duration="{END}" data-track-index="2" data-volume="1"></audio>
 
@@ -156,6 +163,8 @@ html=f'''<!doctype html>
       <audio id="pn-circle-out" src="assets/sfx/pen/stroke_07.wav" data-start="20.4" data-duration="0.78" data-track-index="13" data-volume="0.4"></audio>
       <audio id="pn-write-out" src="assets/sfx/pen/write_06.wav" data-start="20.7" data-duration="0.6" data-track-index="14" data-volume="0.25"></audio>
 {TAPS}
+      <audio id="pp-in" src="assets/sfx/pop_in.wav" data-start="{BR_IN}" data-duration="0.16" data-track-index="18" data-volume="0.5"></audio>
+      <audio id="pp-out" src="assets/sfx/pop_out.wav" data-start="{round(BR_OUT-0.2,4)}" data-duration="0.16" data-track-index="18" data-volume="0.35"></audio>
       <audio id="pn-rustle" src="assets/sfx/pen/rustle.wav" data-start="{round(CC-0.35,3)}" data-duration="0.55" data-track-index="16" data-volume="0.3"></audio>
       <audio id="pn-check" src="assets/sfx/pen/check.wav" data-start="{round(VID,3)}" data-duration="0.45" data-track-index="17" data-volume="0.55"></audio>
       <audio id="sx-close" src="assets/sfx/boom.wav" data-start="{CUT26}" data-duration="{round(END-CUT26,3)}" data-track-index="10" data-volume="0.085"></audio>
@@ -164,8 +173,14 @@ html=f'''<!doctype html>
     <script>
       const tl = gsap.timeline({{ paused: true }});
       tl.set("#cam", {{ scale:1 }}, 0);
-      /* B-roll still: one slow push toward his hands and helmet, no fades. */
-      tl.fromTo("#batter", {{ scale:1.0 }}, {{ scale:1.07, duration:{round(BR_OUT-BR_IN,4)}, ease:"none" }}, {BR_IN});
+      /* The print pops in with a small overshoot and settles at a slight tilt,
+         drifts a few pixels while it is up, then pops away. The photo inside
+         creeps toward his hands and helmet. */
+      tl.fromTo("#print", {{ scale:0.35, rotation:-9, opacity:0 }},
+        {{ scale:1, rotation:4, opacity:1, duration:0.42, ease:"back.out(2)" }}, {BR_IN});
+      tl.to("#print", {{ y:-10, rotation:3, duration:{round(BR_OUT-BR_IN-0.7,4)}, ease:"sine.inOut" }}, {round(BR_IN+0.42,4)});
+      tl.fromTo("#batter", {{ scale:1.0 }}, {{ scale:1.06, duration:{round(BR_OUT-BR_IN,4)}, ease:"none" }}, {BR_IN});
+      tl.to("#print", {{ scale:0.6, rotation:9, opacity:0, duration:0.24, ease:"back.in(1.6)" }}, {round(BR_OUT-0.26,4)});
       const wob = (n, seed, a) => window.hwHash(n, seed) * a;
       /* Title: handwritten, settles in; the underline draws itself under
          "controllables" as he lands the word. */
