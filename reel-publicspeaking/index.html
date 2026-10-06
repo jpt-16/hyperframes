@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family:"Bricolage"; src:url("assets/fonts/BricolageGrotesque-var-latin.woff2") format("woff2");
+                   font-weight:200 800; font-display:block; }
+      * { margin:0; padding:0; box-sizing:border-box; }
+      html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
+      #root { position:relative; width:1080px; height:1920px; overflow:hidden; background:#000; }
+
+      /* Captions: one short phrase at a time on the shirt, under the chin.
+         Bold grotesk in sentence case; the word being spoken gets a warm
+         marker block, so the line reads at a glance on a light grey shirt. */
+      .cap { position:absolute; left:64px; right:64px; bottom:500px; z-index:30; text-align:center;
+              font-family:"Bricolage", sans-serif; font-weight:760; font-size:70px; line-height:1.16;
+              letter-spacing:-0.015em; color:#fffaf1; font-optical-sizing:auto; }
+      .cap .line { display:inline-block; }
+      .w { display:inline-block; padding:0.02em 0.11em 0.07em; margin:0 -0.05em; border-radius:0.22em;
+            -webkit-text-stroke:9px rgba(18,14,10,.92); paint-order:stroke fill;
+            text-shadow:0 6px 22px rgba(0,0,0,.4); }
+
+      /* The thesis word, set once and only once. */
+      #conf { position:absolute; left:0; right:0; top:1290px; z-index:31; text-align:center;
+               font-family:"Bricolage", sans-serif; font-weight:800; font-size:150px; letter-spacing:-0.035em;
+               color:#ffd447; text-shadow:0 4px 6px rgba(0,0,0,.35), 0 14px 46px rgba(0,0,0,.5); }
+
+      /* Stage light: the room drops away around him, warm-dark, soft-edged. */
+      .spot { position:absolute; inset:0; z-index:20; pointer-events:none; }
+      .spot .dark { position:absolute; inset:0;
+        background:radial-gradient(ellipse 560px 700px at 50% 42%, rgba(6,5,4,0) 0%, rgba(6,5,4,0) 46%,
+                   rgba(6,5,4,.55) 74%, rgba(6,5,4,.86) 100%); }
+      #spot2 .dark { background:radial-gradient(ellipse 600px 760px at 50% 42%, rgba(8,6,4,0) 0%, rgba(8,6,4,0) 50%,
+                   rgba(8,6,4,.45) 76%, rgba(8,6,4,.78) 100%); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="63.7333" data-width="1080" data-height="1920">
+      <!-- Five takes in story order (1842 hook, 1863 fear, 1853 confidence,
+           1866 the stakes, 1861 the turn + recommendation). 1856 was a rougher
+           take of the 1866 point and is left out. Only two pauses were
+           shortened (1.10s -> 0.45s, 0.95s -> 0.5s); every other breath stays.
+           Picture and sound cut on identical frame boundaries. Voice: declip,
+           75 Hz highpass, 2:1 compressor, a fast 4:1 peak stage, one
+           oversampled limiter. -16 LUFS. -->
+      <video id="a-roll" class="clip" src="base.mp4" muted playsinline data-start="0" data-duration="63.7333"
+        data-track-index="0" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover"></video>
+      <audio id="a-roll-audio" src="base.mp4" data-start="0" data-duration="63.7333" data-track-index="2" data-volume="1"></audio>
+
+      <div id="spot1" class="spot clip" data-start="9.997" data-duration="6.503" data-track-index="3">
+        <div class="dark"></div>
+      </div>
+      <div id="spot2" class="spot clip" data-start="61.19" data-duration="2.543" data-track-index="3">
+        <div class="dark"></div>
+      </div>
+
+      <div id="cap-0" class="cap clip" data-start="0.12" data-duration="0.719" data-track-index="1"><span class="line"><span class="w" id="c0w0">The</span> <span class="w" id="c0w1">best</span> <span class="w" id="c0w2">decisions</span></span></div>
+      <div id="cap-1" class="cap clip" data-start="0.84" data-duration="1.039" data-track-index="1"><span class="line"><span class="w" id="c1w0">I&#x27;ve</span> <span class="w" id="c1w1">ever</span> <span class="w" id="c1w2">made</span></span></div>
+      <div id="cap-2" class="cap clip" data-start="1.88" data-duration="1.439" data-track-index="1"><span class="line"><span class="w" id="c2w0">is</span> <span class="w" id="c2w1">taking</span> <span class="w" id="c2w2">a</span> <span class="w" id="c2w3">public</span></span></div>
+      <div id="cap-3" class="cap clip" data-start="3.32" data-duration="0.939" data-track-index="1"><span class="line"><span class="w" id="c3w0">speaking</span> <span class="w" id="c3w1">class</span></span></div>
+      <div id="cap-4" class="cap clip" data-start="4.26" data-duration="0.686" data-track-index="1"><span class="line"><span class="w" id="c4w0">Studies</span> <span class="w" id="c4w1">show</span></span></div>
+      <div id="cap-5" class="cap clip" data-start="4.947" data-duration="0.959" data-track-index="1"><span class="line"><span class="w" id="c5w0">that</span> <span class="w" id="c5w1">public</span> <span class="w" id="c5w2">speaking</span></span></div>
+      <div id="cap-6" class="cap clip" data-start="5.907" data-duration="0.879" data-track-index="1"><span class="line"><span class="w" id="c6w0">consistently</span> <span class="w" id="c6w1">ranks</span></span></div>
+      <div id="cap-7" class="cap clip" data-start="6.787" data-duration="0.879" data-track-index="1"><span class="line"><span class="w" id="c7w0">on</span> <span class="w" id="c7w1">the</span> <span class="w" id="c7w2">top</span> <span class="w" id="c7w3">of</span> <span class="w" id="c7w4">what</span></span></div>
+      <div id="cap-8" class="cap clip" data-start="7.667" data-duration="1.119" data-track-index="1"><span class="line"><span class="w" id="c8w0">people</span> <span class="w" id="c8w1">fear</span> <span class="w" id="c8w2">to</span> <span class="w" id="c8w3">do</span></span></div>
+      <div id="cap-9" class="cap clip" data-start="8.787" data-duration="0.399" data-track-index="1"><span class="line"><span class="w" id="c9w0">Why?</span></span></div>
+      <div id="cap-10" class="cap clip" data-start="9.187" data-duration="0.479" data-track-index="1"><span class="line"><span class="w" id="c10w0">Because</span> <span class="w" id="c10w1">they&#x27;re</span></span></div>
+      <div id="cap-11" class="cap clip" data-start="9.667" data-duration="0.959" data-track-index="1"><span class="line"><span class="w" id="c11w0">under</span> <span class="w" id="c11w1">the</span> <span class="w" id="c11w2">spotlight</span></span></div>
+      <div id="cap-12" class="cap clip" data-start="10.627" data-duration="1.279" data-track-index="1"><span class="line"><span class="w" id="c12w0">all</span> <span class="w" id="c12w1">eyes</span> <span class="w" id="c12w2">are</span> <span class="w" id="c12w3">on</span> <span class="w" id="c12w4">them</span></span></div>
+      <div id="cap-13" class="cap clip" data-start="11.907" data-duration="1.205" data-track-index="1"><span class="line"><span class="w" id="c13w0">and</span> <span class="w" id="c13w1">they</span> <span class="w" id="c13w2">can&#x27;t</span></span></div>
+      <div id="cap-14" class="cap clip" data-start="13.113" data-duration="1.34" data-track-index="1"><span class="line"><span class="w" id="c14w0">communicate</span> <span class="w" id="c14w1">effectively</span></span></div>
+      <div id="cap-15" class="cap clip" data-start="14.473" data-duration="0.639" data-track-index="1"><span class="line"><span class="w" id="c15w0">when</span> <span class="w" id="c15w1">they</span></span></div>
+      <div id="cap-16" class="cap clip" data-start="15.113" data-duration="0.799" data-track-index="1"><span class="line"><span class="w" id="c16w0">have</span> <span class="w" id="c16w1">the</span> <span class="w" id="c16w2">pressure</span></span></div>
+      <div id="cap-17" class="cap clip" data-start="15.913" data-duration="0.546" data-track-index="1"><span class="line"><span class="w" id="c17w0">on</span> <span class="w" id="c17w1">them</span></span></div>
+      <div id="cap-18" class="cap clip" data-start="16.46" data-duration="0.806" data-track-index="1"><span class="line"><span class="w" id="c18w0">Public</span> <span class="w" id="c18w1">speaking</span></span></div>
+      <div id="cap-19" class="cap clip" data-start="17.267" data-duration="0.799" data-track-index="1"><span class="line"><span class="w" id="c19w0">teaches</span> <span class="w" id="c19w1">effective</span></span></div>
+      <div id="cap-20" class="cap clip" data-start="18.067" data-duration="0.799" data-track-index="1"><span class="line"><span class="w" id="c20w0">communication</span></span></div>
+      <div id="cap-21" class="cap clip" data-start="18.867" data-duration="0.799" data-track-index="1"><span class="line"><span class="w" id="c21w0">but</span> <span class="w" id="c21w1">it</span> <span class="w" id="c21w2">also</span></span></div>
+      <div id="cap-22" class="cap clip" data-start="19.667" data-duration="1.279" data-track-index="1"><span class="line"><span class="w" id="c22w0">teaches</span> <span class="w" id="c22w1">confidence</span></span></div>
+      <div id="cap-23" class="cap clip" data-start="20.947" data-duration="0.719" data-track-index="1"><span class="line"><span class="w" id="c23w0">which</span> <span class="w" id="c23w1">is</span> <span class="w" id="c23w2">something</span></span></div>
+      <div id="cap-24" class="cap clip" data-start="21.667" data-duration="1.199" data-track-index="1"><span class="line"><span class="w" id="c24w0">you</span> <span class="w" id="c24w1">need</span></span></div>
+      <div id="cap-25" class="cap clip" data-start="22.867" data-duration="1.439" data-track-index="1"><span class="line"><span class="w" id="c25w0">even</span> <span class="w" id="c25w1">if</span> <span class="w" id="c25w2">you</span> <span class="w" id="c25w3">aren&#x27;t</span></span></div>
+      <div id="cap-26" class="cap clip" data-start="24.307" data-duration="1.1" data-track-index="1"><span class="line"><span class="w" id="c26w0">actually</span> <span class="w" id="c26w1">confident</span></span></div>
+      <div id="cap-27" class="cap clip" data-start="25.427" data-duration="1.225" data-track-index="1"><span class="line"><span class="w" id="c27w0">You</span> <span class="w" id="c27w1">have</span> <span class="w" id="c27w2">to</span> <span class="w" id="c27w3">show</span> <span class="w" id="c27w4">it</span></span></div>
+      <div id="cap-28" class="cap clip" data-start="26.653" data-duration="0.879" data-track-index="1"><span class="line"><span class="w" id="c28w0">A</span> <span class="w" id="c28w1">meeting</span> <span class="w" id="c28w2">and</span> <span class="w" id="c28w3">I&#x27;m</span> <span class="w" id="c28w4">selling</span></span></div>
+      <div id="cap-29" class="cap clip" data-start="27.533" data-duration="1.359" data-track-index="1"><span class="line"><span class="w" id="c29w0">to</span> <span class="w" id="c29w1">a</span> <span class="w" id="c29w2">business</span> <span class="w" id="c29w3">owner</span></span></div>
+      <div id="cap-30" class="cap clip" data-start="28.893" data-duration="1.359" data-track-index="1"><span class="line"><span class="w" id="c30w0">or</span> <span class="w" id="c30w1">a</span> <span class="w" id="c30w2">corporation</span></span></div>
+      <div id="cap-31" class="cap clip" data-start="30.253" data-duration="1.039" data-track-index="1"><span class="line"><span class="w" id="c31w0">or</span> <span class="w" id="c31w1">whatever</span> <span class="w" id="c31w2">the</span> <span class="w" id="c31w3">case</span></span></div>
+      <div id="cap-32" class="cap clip" data-start="31.293" data-duration="1.133" data-track-index="1"><span class="line"><span class="w" id="c32w0">may</span> <span class="w" id="c32w1">be</span> <span class="w" id="c32w2">and</span> <span class="w" id="c32w3">I</span> <span class="w" id="c32w4">don&#x27;t</span></span></div>
+      <div id="cap-33" class="cap clip" data-start="32.427" data-duration="1.5" data-track-index="1"><span class="line"><span class="w" id="c33w0">display</span> <span class="w" id="c33w1">that</span> <span class="w" id="c33w2">confidence</span></span></div>
+      <div id="cap-34" class="cap clip" data-start="34.187" data-duration="0.879" data-track-index="1"><span class="line"><span class="w" id="c34w0">they</span> <span class="w" id="c34w1">aren&#x27;t</span> <span class="w" id="c34w2">going</span> <span class="w" id="c34w3">to</span> <span class="w" id="c34w4">want</span></span></div>
+      <div id="cap-35" class="cap clip" data-start="35.067" data-duration="0.639" data-track-index="1"><span class="line"><span class="w" id="c35w0">to</span> <span class="w" id="c35w1">go</span> <span class="w" id="c35w2">through</span></span></div>
+      <div id="cap-36" class="cap clip" data-start="35.707" data-duration="1.5" data-track-index="1"><span class="line"><span class="w" id="c36w0">with</span> <span class="w" id="c36w1">the</span> <span class="w" id="c36w2">investment</span></span></div>
+      <div id="cap-37" class="cap clip" data-start="37.307" data-duration="0.719" data-track-index="1"><span class="line"><span class="w" id="c37w0">and</span> <span class="w" id="c37w1">I&#x27;m</span> <span class="w" id="c37w2">not</span> <span class="w" id="c37w3">going</span></span></div>
+      <div id="cap-38" class="cap clip" data-start="38.027" data-duration="0.639" data-track-index="1"><span class="line"><span class="w" id="c38w0">to</span> <span class="w" id="c38w1">make</span> <span class="w" id="c38w2">any</span> <span class="w" id="c38w3">money</span></span></div>
+      <div id="cap-39" class="cap clip" data-start="38.667" data-duration="1.039" data-track-index="1"><span class="line"><span class="w" id="c39w0">my</span> <span class="w" id="c39w1">business</span> <span class="w" id="c39w2">will</span> <span class="w" id="c39w3">fail</span></span></div>
+      <div id="cap-40" class="cap clip" data-start="39.707" data-duration="0.719" data-track-index="1"><span class="line"><span class="w" id="c40w0">So</span> <span class="w" id="c40w1">that&#x27;s</span> <span class="w" id="c40w2">the</span> <span class="w" id="c40w3">whole</span></span></div>
+      <div id="cap-41" class="cap clip" data-start="40.427" data-duration="0.559" data-track-index="1"><span class="line"><span class="w" id="c41w0">point</span> <span class="w" id="c41w1">in</span> <span class="w" id="c41w2">public</span></span></div>
+      <div id="cap-42" class="cap clip" data-start="40.987" data-duration="0.399" data-track-index="1"><span class="line"><span class="w" id="c42w0">speaking</span></span></div>
+      <div id="cap-43" class="cap clip" data-start="41.387" data-duration="0.66" data-track-index="1"><span class="line"><span class="w" id="c43w0">it&#x27;s</span> <span class="w" id="c43w1">having</span></span></div>
+      <div id="cap-44" class="cap clip" data-start="42.927" data-duration="0.572" data-track-index="1"><span class="line"><span class="w" id="c44w0">I</span> <span class="w" id="c44w1">still</span> <span class="w" id="c44w2">get</span></span></div>
+      <div id="cap-45" class="cap clip" data-start="43.5" data-duration="0.799" data-track-index="1"><span class="line"><span class="w" id="c45w0">nervous</span> <span class="w" id="c45w1">when</span> <span class="w" id="c45w2">I</span> <span class="w" id="c45w3">do</span></span></div>
+      <div id="cap-46" class="cap clip" data-start="44.3" data-duration="0.479" data-track-index="1"><span class="line"><span class="w" id="c46w0">public</span> <span class="w" id="c46w1">speaking</span></span></div>
+      <div id="cap-47" class="cap clip" data-start="44.78" data-duration="0.879" data-track-index="1"><span class="line"><span class="w" id="c47w0">but</span> <span class="w" id="c47w1">it&#x27;s</span> <span class="w" id="c47w2">not</span> <span class="w" id="c47w3">as</span> <span class="w" id="c47w4">much</span></span></div>
+      <div id="cap-48" class="cap clip" data-start="45.66" data-duration="0.479" data-track-index="1"><span class="line"><span class="w" id="c48w0">and</span> <span class="w" id="c48w1">I&#x27;ve</span> <span class="w" id="c48w2">been</span></span></div>
+      <div id="cap-49" class="cap clip" data-start="46.14" data-duration="0.879" data-track-index="1"><span class="line"><span class="w" id="c49w0">more</span> <span class="w" id="c49w1">relaxed</span></span></div>
+      <div id="cap-50" class="cap clip" data-start="47.02" data-duration="1.119" data-track-index="1"><span class="line"><span class="w" id="c50w0">And</span> <span class="w" id="c50w1">eventually</span></span></div>
+      <div id="cap-51" class="cap clip" data-start="48.14" data-duration="1.439" data-track-index="1"><span class="line"><span class="w" id="c51w0">when</span> <span class="w" id="c51w1">I</span> <span class="w" id="c51w2">have</span> <span class="w" id="c51w3">to</span> <span class="w" id="c51w4">go</span></span></div>
+      <div id="cap-52" class="cap clip" data-start="49.58" data-duration="0.86" data-track-index="1"><span class="line"><span class="w" id="c52w0">present</span></span></div>
+      <div id="cap-53" class="cap clip" data-start="50.46" data-duration="1.039" data-track-index="1"><span class="line"><span class="w" id="c53w0">something</span> <span class="w" id="c53w1">that</span> <span class="w" id="c53w2">I&#x27;m</span> <span class="w" id="c53w3">doing</span></span></div>
+      <div id="cap-54" class="cap clip" data-start="51.5" data-duration="0.559" data-track-index="1"><span class="line"><span class="w" id="c54w0">I&#x27;m</span> <span class="w" id="c54w1">going</span> <span class="w" id="c54w2">to</span> <span class="w" id="c54w3">have</span> <span class="w" id="c54w4">to</span></span></div>
+      <div id="cap-55" class="cap clip" data-start="52.06" data-duration="1.039" data-track-index="1"><span class="line"><span class="w" id="c55w0">be</span> <span class="w" id="c55w1">able</span> <span class="w" id="c55w2">to</span> <span class="w" id="c55w3">communicate</span></span></div>
+      <div id="cap-56" class="cap clip" data-start="53.1" data-duration="0.719" data-track-index="1"><span class="line"><span class="w" id="c56w0">it</span> <span class="w" id="c56w1">effectively</span></span></div>
+      <div id="cap-57" class="cap clip" data-start="53.82" data-duration="0.479" data-track-index="1"><span class="line"><span class="w" id="c57w0">And</span> <span class="w" id="c57w1">this</span> <span class="w" id="c57w2">class</span></span></div>
+      <div id="cap-58" class="cap clip" data-start="54.3" data-duration="1.039" data-track-index="1"><span class="line"><span class="w" id="c58w0">is</span> <span class="w" id="c58w1">perfect</span> <span class="w" id="c58w2">for</span> <span class="w" id="c58w3">it</span></span></div>
+      <div id="cap-59" class="cap clip" data-start="55.34" data-duration="0.799" data-track-index="1"><span class="line"><span class="w" id="c59w0">So</span> <span class="w" id="c59w1">to</span> <span class="w" id="c59w2">all</span></span></div>
+      <div id="cap-60" class="cap clip" data-start="56.14" data-duration="0.879" data-track-index="1"><span class="line"><span class="w" id="c60w0">of</span> <span class="w" id="c60w1">you</span> <span class="w" id="c60w2">guys</span> <span class="w" id="c60w3">out</span> <span class="w" id="c60w4">there</span></span></div>
+      <div id="cap-61" class="cap clip" data-start="57.02" data-duration="0.639" data-track-index="1"><span class="line"><span class="w" id="c61w0">I</span> <span class="w" id="c61w1">recommend</span></span></div>
+      <div id="cap-62" class="cap clip" data-start="57.66" data-duration="0.959" data-track-index="1"><span class="line"><span class="w" id="c62w0">that</span> <span class="w" id="c62w1">you</span> <span class="w" id="c62w2">do</span> <span class="w" id="c62w3">some</span> <span class="w" id="c62w4">sort</span></span></div>
+      <div id="cap-63" class="cap clip" data-start="58.62" data-duration="0.799" data-track-index="1"><span class="line"><span class="w" id="c63w0">of</span> <span class="w" id="c63w1">public</span> <span class="w" id="c63w2">speaking</span></span></div>
+      <div id="cap-64" class="cap clip" data-start="59.42" data-duration="0.799" data-track-index="1"><span class="line"><span class="w" id="c64w0">and</span> <span class="w" id="c64w1">get</span> <span class="w" id="c64w2">your</span> <span class="w" id="c64w3">way</span></span></div>
+      <div id="cap-65" class="cap clip" data-start="60.22" data-duration="1.519" data-track-index="1"><span class="line"><span class="w" id="c65w0">to</span> <span class="w" id="c65w1">get</span> <span class="w" id="c65w2">in</span> <span class="w" id="c65w3">the</span> <span class="w" id="c65w4">spotlight</span></span></div>
+      <div id="cap-66" class="cap clip" data-start="61.74" data-duration="0.639" data-track-index="1"><span class="line"><span class="w" id="c66w0">because</span> <span class="w" id="c66w1">it&#x27;s</span> <span class="w" id="c66w2">only</span></span></div>
+      <div id="cap-67" class="cap clip" data-start="62.38" data-duration="0.399" data-track-index="1"><span class="line"><span class="w" id="c67w0">going</span> <span class="w" id="c67w1">to</span> <span class="w" id="c67w2">help</span></span></div>
+      <div id="cap-68" class="cap clip" data-start="62.78" data-duration="0.952" data-track-index="1"><span class="line"><span class="w" id="c68w0">you</span> <span class="w" id="c68w1">in</span> <span class="w" id="c68w2">the</span> <span class="w" id="c68w3">future</span></span></div>
+
+      <div id="conf" class="clip" data-start="42.037" data-duration="0.93" data-track-index="4">confidence.</div>
+
+      <!-- Sound: two stage-light throws and one soft pop. Nothing else. -->
+      <audio id="sx-light1" src="assets/sfx/stagelight.wav" data-start="9.997" data-duration="1.1" data-track-index="10" data-volume="0.32"></audio>
+      <audio id="sx-pop" src="assets/sfx/pop_in.wav" data-start="42.037" data-duration="0.16" data-track-index="11" data-volume="0.45"></audio>
+      <audio id="sx-light2" src="assets/sfx/stagelight.wav" data-start="61.19" data-duration="1.1" data-track-index="10" data-volume="0.32"></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const SHADOW = "0 6px 22px rgba(0,0,0,.4)", STROKE = "9px rgba(18,14,10,.92)";
+      /* Active word: marker block on, tiny settle; off when the next word starts. */
+      function hi(sel, on, off) {
+        tl.set(sel, { backgroundColor:"rgba(255,212,71,1)", color:"#17130d", textShadow:"none", webkitTextStroke:"0px rgba(18,14,10,0)" }, on);
+        tl.fromTo(sel, { scale:1.06 }, { scale:1, duration:0.14, ease:"power2.out" }, on);
+        if (off !== undefined) tl.set(sel, { backgroundColor:"rgba(255,212,71,0)", color:"#fffaf1", textShadow:SHADOW, webkitTextStroke:STROKE }, off);
+      }
+      tl.fromTo("#cap-0 .line", {y:16, opacity:0}, {y:0, opacity:1, duration:0.16, ease:"power2.out"}, 0.12);
+      hi("#c0w0", 0.16, 0.24);
+      hi("#c0w1", 0.24, 0.48);
+      hi("#c0w2", 0.48);
+      tl.fromTo("#cap-1 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 0.84);
+      hi("#c1w0", 0.88, 1.2);
+      hi("#c1w1", 1.2, 1.6);
+      hi("#c1w2", 1.6);
+      tl.fromTo("#cap-2 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 1.88);
+      hi("#c2w0", 1.92, 2.24);
+      hi("#c2w1", 2.24, 2.72);
+      hi("#c2w2", 2.72, 2.96);
+      hi("#c2w3", 2.96);
+      tl.fromTo("#cap-3 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 3.32);
+      hi("#c3w0", 3.36, 3.84);
+      hi("#c3w1", 3.84);
+      tl.fromTo("#cap-4 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 4.26);
+      hi("#c4w0", 4.3, 4.747);
+      hi("#c4w1", 4.747);
+      tl.fromTo("#cap-5 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 4.947);
+      hi("#c5w0", 4.987, 5.147);
+      hi("#c5w1", 5.147, 5.467);
+      hi("#c5w2", 5.467);
+      tl.fromTo("#cap-6 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 5.907);
+      hi("#c6w0", 5.947, 6.427);
+      hi("#c6w1", 6.427);
+      tl.fromTo("#cap-7 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 6.787);
+      hi("#c7w0", 6.827, 6.907);
+      hi("#c7w1", 6.907, 7.067);
+      hi("#c7w2", 7.067, 7.307);
+      hi("#c7w3", 7.307, 7.467);
+      hi("#c7w4", 7.467);
+      tl.fromTo("#cap-8 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 7.667);
+      hi("#c8w0", 7.707, 8.107);
+      hi("#c8w1", 8.107, 8.507);
+      hi("#c8w2", 8.507, 8.587);
+      hi("#c8w3", 8.587);
+      tl.fromTo("#cap-9 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 8.787);
+      hi("#c9w0", 8.827);
+      tl.fromTo("#cap-10 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 9.187);
+      hi("#c10w0", 9.227, 9.467);
+      hi("#c10w1", 9.467);
+      tl.fromTo("#cap-11 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 9.667);
+      hi("#c11w0", 9.707, 9.947);
+      hi("#c11w1", 9.947, 10.027);
+      hi("#c11w2", 10.027);
+      tl.fromTo("#cap-12 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 10.627);
+      hi("#c12w0", 10.667, 10.827);
+      hi("#c12w1", 10.827, 11.067);
+      hi("#c12w2", 11.067, 11.307);
+      hi("#c12w3", 11.307, 11.467);
+      hi("#c12w4", 11.467);
+      tl.fromTo("#cap-13 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 11.907);
+      hi("#c13w0", 11.947, 12.267);
+      hi("#c13w1", 12.267, 12.593);
+      hi("#c13w2", 12.593);
+      tl.fromTo("#cap-14 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 13.113);
+      hi("#c14w0", 13.153, 13.633);
+      hi("#c14w1", 13.633);
+      tl.fromTo("#cap-15 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 14.473);
+      hi("#c15w0", 14.513, 14.753);
+      hi("#c15w1", 14.753);
+      tl.fromTo("#cap-16 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 15.113);
+      hi("#c16w0", 15.153, 15.313);
+      hi("#c16w1", 15.313, 15.473);
+      hi("#c16w2", 15.473);
+      tl.fromTo("#cap-17 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 15.913);
+      hi("#c17w0", 15.953, 16.113);
+      hi("#c17w1", 16.113);
+      tl.fromTo("#cap-18 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 16.46);
+      hi("#c18w0", 16.5, 16.907);
+      hi("#c18w1", 16.907);
+      tl.fromTo("#cap-19 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 17.267);
+      hi("#c19w0", 17.307, 17.627);
+      hi("#c19w1", 17.627);
+      tl.fromTo("#cap-20 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 18.067);
+      hi("#c20w0", 18.107);
+      tl.fromTo("#cap-21 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 18.867);
+      hi("#c21w0", 18.907, 19.227);
+      hi("#c21w1", 19.227, 19.467);
+      hi("#c21w2", 19.467);
+      tl.fromTo("#cap-22 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 19.667);
+      hi("#c22w0", 19.707, 20.187);
+      hi("#c22w1", 20.187);
+      tl.fromTo("#cap-23 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 20.947);
+      hi("#c23w0", 20.987, 21.227);
+      hi("#c23w1", 21.227, 21.387);
+      hi("#c23w2", 21.387);
+      tl.fromTo("#cap-24 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 21.667);
+      hi("#c24w0", 21.707, 22.107);
+      hi("#c24w1", 22.107);
+      tl.fromTo("#cap-25 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 22.867);
+      hi("#c25w0", 22.907, 23.387);
+      hi("#c25w1", 23.387, 23.627);
+      hi("#c25w2", 23.627, 23.947);
+      hi("#c25w3", 23.947);
+      tl.fromTo("#cap-26 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 24.307);
+      hi("#c26w0", 24.347, 24.587);
+      hi("#c26w1", 24.587);
+      tl.fromTo("#cap-27 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 25.427);
+      hi("#c27w0", 25.467, 25.627);
+      hi("#c27w1", 25.627, 25.787);
+      hi("#c27w2", 25.787, 25.947);
+      hi("#c27w3", 25.947, 26.107);
+      hi("#c27w4", 26.107);
+      tl.fromTo("#cap-28 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 26.653);
+      hi("#c28w0", 26.693, 26.773);
+      hi("#c28w1", 26.773, 27.013);
+      hi("#c28w2", 27.013, 27.093);
+      hi("#c28w3", 27.093, 27.253);
+      hi("#c28w4", 27.253);
+      tl.fromTo("#cap-29 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 27.533);
+      hi("#c29w0", 27.573, 27.733);
+      hi("#c29w1", 27.733, 27.893);
+      hi("#c29w2", 27.893, 28.373);
+      hi("#c29w3", 28.373);
+      tl.fromTo("#cap-30 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 28.893);
+      hi("#c30w0", 28.933, 29.253);
+      hi("#c30w1", 29.253, 29.573);
+      hi("#c30w2", 29.573);
+      tl.fromTo("#cap-31 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 30.253);
+      hi("#c31w0", 30.293, 30.453);
+      hi("#c31w1", 30.453, 30.773);
+      hi("#c31w2", 30.773, 30.933);
+      hi("#c31w3", 30.933);
+      tl.fromTo("#cap-32 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 31.293);
+      hi("#c32w0", 31.333, 31.653);
+      hi("#c32w1", 31.653, 31.987);
+      hi("#c32w2", 31.987, 32.147);
+      hi("#c32w3", 32.147, 32.227);
+      hi("#c32w4", 32.227);
+      tl.fromTo("#cap-33 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 32.427);
+      hi("#c33w0", 32.467, 32.867);
+      hi("#c33w1", 32.867, 33.107);
+      hi("#c33w2", 33.107);
+      tl.fromTo("#cap-34 .line", {y:16, opacity:0}, {y:0, opacity:1, duration:0.16, ease:"power2.out"}, 34.187);
+      hi("#c34w0", 34.227, 34.467);
+      hi("#c34w1", 34.467, 34.787);
+      hi("#c34w2", 34.787, 34.867);
+      hi("#c34w3", 34.867, 34.947);
+      hi("#c34w4", 34.947);
+      tl.fromTo("#cap-35 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 35.067);
+      hi("#c35w0", 35.107, 35.267);
+      hi("#c35w1", 35.267, 35.427);
+      hi("#c35w2", 35.427);
+      tl.fromTo("#cap-36 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 35.707);
+      hi("#c36w0", 35.747, 36.067);
+      hi("#c36w1", 36.067, 36.387);
+      hi("#c36w2", 36.387);
+      tl.fromTo("#cap-37 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 37.307);
+      hi("#c37w0", 37.347, 37.507);
+      hi("#c37w1", 37.507, 37.827);
+      hi("#c37w2", 37.827, 37.987);
+      hi("#c37w3", 37.987);
+      tl.fromTo("#cap-38 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 38.027);
+      hi("#c38w0", 38.067, 38.147);
+      hi("#c38w1", 38.147, 38.307);
+      hi("#c38w2", 38.307, 38.387);
+      hi("#c38w3", 38.387);
+      tl.fromTo("#cap-39 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 38.667);
+      hi("#c39w0", 38.707, 38.867);
+      hi("#c39w1", 38.867, 39.187);
+      hi("#c39w2", 39.187, 39.347);
+      hi("#c39w3", 39.347);
+      tl.fromTo("#cap-40 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 39.707);
+      hi("#c40w0", 39.747, 39.907);
+      hi("#c40w1", 39.907, 40.147);
+      hi("#c40w2", 40.147, 40.227);
+      hi("#c40w3", 40.227);
+      tl.fromTo("#cap-41 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 40.427);
+      hi("#c41w0", 40.467, 40.627);
+      hi("#c41w1", 40.627, 40.787);
+      hi("#c41w2", 40.787);
+      tl.fromTo("#cap-42 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 40.987);
+      hi("#c42w0", 41.027);
+      tl.fromTo("#cap-43 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 41.387);
+      hi("#c43w0", 41.427, 41.667);
+      hi("#c43w1", 41.667);
+      tl.fromTo("#cap-44 .line", {y:16, opacity:0}, {y:0, opacity:1, duration:0.16, ease:"power2.out"}, 42.927);
+      hi("#c44w0", 42.967, 43.22);
+      hi("#c44w1", 43.22, 43.38);
+      hi("#c44w2", 43.38);
+      tl.fromTo("#cap-45 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 43.5);
+      hi("#c45w0", 43.54, 43.94);
+      hi("#c45w1", 43.94, 44.1);
+      hi("#c45w2", 44.1, 44.18);
+      hi("#c45w3", 44.18);
+      tl.fromTo("#cap-46 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 44.3);
+      hi("#c46w0", 44.34, 44.58);
+      hi("#c46w1", 44.58);
+      tl.fromTo("#cap-47 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 44.78);
+      hi("#c47w0", 44.82, 44.98);
+      hi("#c47w1", 44.98, 45.14);
+      hi("#c47w2", 45.14, 45.3);
+      hi("#c47w3", 45.3, 45.46);
+      hi("#c47w4", 45.46);
+      tl.fromTo("#cap-48 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 45.66);
+      hi("#c48w0", 45.7, 45.78);
+      hi("#c48w1", 45.78, 46.02);
+      hi("#c48w2", 46.02);
+      tl.fromTo("#cap-49 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 46.14);
+      hi("#c49w0", 46.18, 46.34);
+      hi("#c49w1", 46.34);
+      tl.fromTo("#cap-50 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 47.02);
+      hi("#c50w0", 47.06, 47.38);
+      hi("#c50w1", 47.38);
+      tl.fromTo("#cap-51 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 48.14);
+      hi("#c51w0", 48.18, 48.34);
+      hi("#c51w1", 48.34, 48.5);
+      hi("#c51w2", 48.5, 48.74);
+      hi("#c51w3", 48.74, 49.06);
+      hi("#c51w4", 49.06);
+      tl.fromTo("#cap-52 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 49.58);
+      hi("#c52w0", 49.62);
+      tl.fromTo("#cap-53 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 50.46);
+      hi("#c53w0", 50.5, 50.82);
+      hi("#c53w1", 50.82, 50.98);
+      hi("#c53w2", 50.98, 51.22);
+      hi("#c53w3", 51.22);
+      tl.fromTo("#cap-54 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 51.5);
+      hi("#c54w0", 51.54, 51.7);
+      hi("#c54w1", 51.7, 51.78);
+      hi("#c54w2", 51.78, 51.86);
+      hi("#c54w3", 51.86, 52.02);
+      hi("#c54w4", 52.02);
+      tl.fromTo("#cap-55 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 52.06);
+      hi("#c55w0", 52.1, 52.18);
+      hi("#c55w1", 52.18, 52.34);
+      hi("#c55w2", 52.34, 52.58);
+      hi("#c55w3", 52.58);
+      tl.fromTo("#cap-56 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 53.1);
+      hi("#c56w0", 53.14, 53.3);
+      hi("#c56w1", 53.3);
+      tl.fromTo("#cap-57 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 53.82);
+      hi("#c57w0", 53.86, 54.02);
+      hi("#c57w1", 54.02, 54.1);
+      hi("#c57w2", 54.1);
+      tl.fromTo("#cap-58 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 54.3);
+      hi("#c58w0", 54.34, 54.58);
+      hi("#c58w1", 54.58, 54.9);
+      hi("#c58w2", 54.9, 55.06);
+      hi("#c58w3", 55.06);
+      tl.fromTo("#cap-59 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 55.34);
+      hi("#c59w0", 55.38, 55.7);
+      hi("#c59w1", 55.7, 55.94);
+      hi("#c59w2", 55.94);
+      tl.fromTo("#cap-60 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 56.14);
+      hi("#c60w0", 56.18, 56.26);
+      hi("#c60w1", 56.26, 56.42);
+      hi("#c60w2", 56.42, 56.58);
+      hi("#c60w3", 56.58, 56.74);
+      hi("#c60w4", 56.74);
+      tl.fromTo("#cap-61 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 57.02);
+      hi("#c61w0", 57.06, 57.14);
+      hi("#c61w1", 57.14);
+      tl.fromTo("#cap-62 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 57.66);
+      hi("#c62w0", 57.7, 57.94);
+      hi("#c62w1", 57.94, 58.1);
+      hi("#c62w2", 58.1, 58.26);
+      hi("#c62w3", 58.26, 58.5);
+      hi("#c62w4", 58.5);
+      tl.fromTo("#cap-63 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 58.62);
+      hi("#c63w0", 58.66, 58.74);
+      hi("#c63w1", 58.74, 59.06);
+      hi("#c63w2", 59.06);
+      tl.fromTo("#cap-64 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 59.42);
+      hi("#c64w0", 59.46, 59.62);
+      hi("#c64w1", 59.62, 59.86);
+      hi("#c64w2", 59.86, 60.02);
+      hi("#c64w3", 60.02);
+      tl.fromTo("#cap-65 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 60.22);
+      hi("#c65w0", 60.26, 60.5);
+      hi("#c65w1", 60.5, 60.82);
+      hi("#c65w2", 60.82, 61.06);
+      hi("#c65w3", 61.06, 61.22);
+      hi("#c65w4", 61.22);
+      tl.fromTo("#cap-66 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 61.74);
+      hi("#c66w0", 61.78, 62.02);
+      hi("#c66w1", 62.02, 62.26);
+      hi("#c66w2", 62.26);
+      tl.fromTo("#cap-67 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 62.38);
+      hi("#c67w0", 62.42, 62.58);
+      hi("#c67w1", 62.58, 62.66);
+      hi("#c67w2", 62.66);
+      tl.fromTo("#cap-68 .line", {y:6}, {y:0, duration:0.12, ease:"power2.out"}, 62.78);
+      hi("#c68w0", 62.82, 62.98);
+      hi("#c68w1", 62.98, 63.06);
+      hi("#c68w2", 63.06, 63.14);
+      hi("#c68w3", 63.14);
+
+      /* Stage light: a quick filament stutter, then it holds. Off on the cut. */
+      function light(id, t) {
+        tl.set(id, { opacity:0 }, 0);
+        tl.to(id, { opacity:0.6, duration:0.04, ease:"none" }, t);
+        tl.to(id, { opacity:0.25, duration:0.05, ease:"none" }, t + 0.05);
+        tl.to(id, { opacity:1, duration:0.32, ease:"power2.out" }, t + 0.11);
+      }
+      light("#spot1", 9.997);
+      light("#spot2", 61.19);
+
+      tl.fromTo("#conf", { scale:0.86, opacity:0 }, { scale:1, opacity:1, duration:0.24, ease:"back.out(1.7)" }, 42.037);
+      tl.to("#conf", { opacity:0, duration:0.1, ease:"none" }, 42.867);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

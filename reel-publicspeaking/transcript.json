@@ -1,0 +1,1107 @@
+[
+{
+"text": "the",
+"start": 0.16,
+"end": 0.24
+},
+{
+"text": "best",
+"start": 0.24,
+"end": 0.48
+},
+{
+"text": "decisions",
+"start": 0.48,
+"end": 0.88
+},
+{
+"text": "I've",
+"start": 0.88,
+"end": 1.2
+},
+{
+"text": "ever",
+"start": 1.2,
+"end": 1.6
+},
+{
+"text": "made",
+"start": 1.6,
+"end": 1.92
+},
+{
+"text": "is",
+"start": 1.92,
+"end": 2.24
+},
+{
+"text": "taking",
+"start": 2.24,
+"end": 2.72
+},
+{
+"text": "a",
+"start": 2.72,
+"end": 2.96
+},
+{
+"text": "public",
+"start": 2.96,
+"end": 3.36
+},
+{
+"text": "speaking",
+"start": 3.36,
+"end": 3.84
+},
+{
+"text": "class.",
+"start": 3.84,
+"end": 4.3
+},
+{
+"text": "Studies",
+"start": 4.3,
+"end": 4.747
+},
+{
+"text": "show",
+"start": 4.747,
+"end": 4.987
+},
+{
+"text": "that",
+"start": 4.987,
+"end": 5.147
+},
+{
+"text": "public",
+"start": 5.147,
+"end": 5.467
+},
+{
+"text": "speaking",
+"start": 5.467,
+"end": 5.947
+},
+{
+"text": "consistently",
+"start": 5.947,
+"end": 6.427
+},
+{
+"text": "ranks",
+"start": 6.427,
+"end": 6.827
+},
+{
+"text": "on",
+"start": 6.827,
+"end": 6.907
+},
+{
+"text": "the",
+"start": 6.907,
+"end": 7.067
+},
+{
+"text": "top",
+"start": 7.067,
+"end": 7.307
+},
+{
+"text": "of",
+"start": 7.307,
+"end": 7.467
+},
+{
+"text": "what",
+"start": 7.467,
+"end": 7.707
+},
+{
+"text": "people",
+"start": 7.707,
+"end": 8.107
+},
+{
+"text": "fear",
+"start": 8.107,
+"end": 8.507
+},
+{
+"text": "to",
+"start": 8.507,
+"end": 8.587
+},
+{
+"text": "do.",
+"start": 8.587,
+"end": 8.827
+},
+{
+"text": "Why?",
+"start": 8.827,
+"end": 9.227
+},
+{
+"text": "Because",
+"start": 9.227,
+"end": 9.467
+},
+{
+"text": "they're",
+"start": 9.467,
+"end": 9.707
+},
+{
+"text": "under",
+"start": 9.707,
+"end": 9.947
+},
+{
+"text": "the",
+"start": 9.947,
+"end": 10.027
+},
+{
+"text": "spotlight,",
+"start": 10.027,
+"end": 10.627
+},
+{
+"text": "all",
+"start": 10.667,
+"end": 10.827
+},
+{
+"text": "eyes",
+"start": 10.827,
+"end": 11.067
+},
+{
+"text": "are",
+"start": 11.067,
+"end": 11.307
+},
+{
+"text": "on",
+"start": 11.307,
+"end": 11.467
+},
+{
+"text": "them",
+"start": 11.467,
+"end": 11.947
+},
+{
+"text": "and",
+"start": 11.947,
+"end": 12.267
+},
+{
+"text": "they",
+"start": 12.267,
+"end": 12.567
+},
+{
+"text": "can't",
+"start": 12.593,
+"end": 13.153
+},
+{
+"text": "communicate",
+"start": 13.153,
+"end": 13.633
+},
+{
+"text": "effectively",
+"start": 13.633,
+"end": 14.233
+},
+{
+"text": "when",
+"start": 14.513,
+"end": 14.753
+},
+{
+"text": "they",
+"start": 14.753,
+"end": 15.153
+},
+{
+"text": "have",
+"start": 15.153,
+"end": 15.313
+},
+{
+"text": "the",
+"start": 15.313,
+"end": 15.473
+},
+{
+"text": "pressure",
+"start": 15.473,
+"end": 15.953
+},
+{
+"text": "on",
+"start": 15.953,
+"end": 16.113
+},
+{
+"text": "them.",
+"start": 16.113,
+"end": 16.5
+},
+{
+"text": "Public",
+"start": 16.5,
+"end": 16.907
+},
+{
+"text": "speaking",
+"start": 16.907,
+"end": 17.307
+},
+{
+"text": "teaches",
+"start": 17.307,
+"end": 17.627
+},
+{
+"text": "effective",
+"start": 17.627,
+"end": 18.107
+},
+{
+"text": "communication,",
+"start": 18.107,
+"end": 18.707
+},
+{
+"text": "but",
+"start": 18.907,
+"end": 19.227
+},
+{
+"text": "it",
+"start": 19.227,
+"end": 19.467
+},
+{
+"text": "also",
+"start": 19.467,
+"end": 19.707
+},
+{
+"text": "teaches",
+"start": 19.707,
+"end": 20.187
+},
+{
+"text": "confidence,",
+"start": 20.187,
+"end": 20.787
+},
+{
+"text": "which",
+"start": 20.987,
+"end": 21.227
+},
+{
+"text": "is",
+"start": 21.227,
+"end": 21.387
+},
+{
+"text": "something",
+"start": 21.387,
+"end": 21.707
+},
+{
+"text": "you",
+"start": 21.707,
+"end": 22.107
+},
+{
+"text": "need",
+"start": 22.107,
+"end": 22.707
+},
+{
+"text": "even",
+"start": 22.907,
+"end": 23.387
+},
+{
+"text": "if",
+"start": 23.387,
+"end": 23.627
+},
+{
+"text": "you",
+"start": 23.627,
+"end": 23.947
+},
+{
+"text": "aren't",
+"start": 23.947,
+"end": 24.347
+},
+{
+"text": "actually",
+"start": 24.347,
+"end": 24.587
+},
+{
+"text": "confident.",
+"start": 24.587,
+"end": 25.187
+},
+{
+"text": "You",
+"start": 25.467,
+"end": 25.627
+},
+{
+"text": "have",
+"start": 25.627,
+"end": 25.787
+},
+{
+"text": "to",
+"start": 25.787,
+"end": 25.947
+},
+{
+"text": "show",
+"start": 25.947,
+"end": 26.107
+},
+{
+"text": "it.",
+"start": 26.107,
+"end": 26.533
+},
+{
+"text": "A",
+"start": 26.693,
+"end": 26.773
+},
+{
+"text": "meeting",
+"start": 26.773,
+"end": 27.013
+},
+{
+"text": "and",
+"start": 27.013,
+"end": 27.093
+},
+{
+"text": "I'm",
+"start": 27.093,
+"end": 27.253
+},
+{
+"text": "selling",
+"start": 27.253,
+"end": 27.573
+},
+{
+"text": "to",
+"start": 27.573,
+"end": 27.733
+},
+{
+"text": "a",
+"start": 27.733,
+"end": 27.893
+},
+{
+"text": "business",
+"start": 27.893,
+"end": 28.373
+},
+{
+"text": "owner",
+"start": 28.373,
+"end": 28.933
+},
+{
+"text": "or",
+"start": 28.933,
+"end": 29.253
+},
+{
+"text": "a",
+"start": 29.253,
+"end": 29.573
+},
+{
+"text": "corporation",
+"start": 29.573,
+"end": 30.173
+},
+{
+"text": "or",
+"start": 30.293,
+"end": 30.453
+},
+{
+"text": "whatever",
+"start": 30.453,
+"end": 30.773
+},
+{
+"text": "the",
+"start": 30.773,
+"end": 30.933
+},
+{
+"text": "case",
+"start": 30.933,
+"end": 31.333
+},
+{
+"text": "may",
+"start": 31.333,
+"end": 31.653
+},
+{
+"text": "be,",
+"start": 31.653,
+"end": 31.933
+},
+{
+"text": "and",
+"start": 31.987,
+"end": 32.147
+},
+{
+"text": "I",
+"start": 32.147,
+"end": 32.227
+},
+{
+"text": "don't",
+"start": 32.227,
+"end": 32.467
+},
+{
+"text": "display",
+"start": 32.467,
+"end": 32.867
+},
+{
+"text": "that",
+"start": 32.867,
+"end": 33.107
+},
+{
+"text": "confidence,",
+"start": 33.107,
+"end": 33.707
+},
+{
+"text": "they",
+"start": 34.227,
+"end": 34.467
+},
+{
+"text": "aren't",
+"start": 34.467,
+"end": 34.787
+},
+{
+"text": "going",
+"start": 34.787,
+"end": 34.867
+},
+{
+"text": "to",
+"start": 34.867,
+"end": 34.947
+},
+{
+"text": "want",
+"start": 34.947,
+"end": 35.107
+},
+{
+"text": "to",
+"start": 35.107,
+"end": 35.267
+},
+{
+"text": "go",
+"start": 35.267,
+"end": 35.427
+},
+{
+"text": "through",
+"start": 35.427,
+"end": 35.747
+},
+{
+"text": "with",
+"start": 35.747,
+"end": 36.067
+},
+{
+"text": "the",
+"start": 36.067,
+"end": 36.387
+},
+{
+"text": "investment",
+"start": 36.387,
+"end": 36.987
+},
+{
+"text": "and",
+"start": 37.347,
+"end": 37.507
+},
+{
+"text": "I'm",
+"start": 37.507,
+"end": 37.827
+},
+{
+"text": "not",
+"start": 37.827,
+"end": 37.987
+},
+{
+"text": "going",
+"start": 37.987,
+"end": 38.067
+},
+{
+"text": "to",
+"start": 38.067,
+"end": 38.147
+},
+{
+"text": "make",
+"start": 38.147,
+"end": 38.307
+},
+{
+"text": "any",
+"start": 38.307,
+"end": 38.387
+},
+{
+"text": "money,",
+"start": 38.387,
+"end": 38.707
+},
+{
+"text": "my",
+"start": 38.707,
+"end": 38.867
+},
+{
+"text": "business",
+"start": 38.867,
+"end": 39.187
+},
+{
+"text": "will",
+"start": 39.187,
+"end": 39.347
+},
+{
+"text": "fail.",
+"start": 39.347,
+"end": 39.747
+},
+{
+"text": "So",
+"start": 39.747,
+"end": 39.907
+},
+{
+"text": "that's",
+"start": 39.907,
+"end": 40.147
+},
+{
+"text": "the",
+"start": 40.147,
+"end": 40.227
+},
+{
+"text": "whole",
+"start": 40.227,
+"end": 40.467
+},
+{
+"text": "point",
+"start": 40.467,
+"end": 40.627
+},
+{
+"text": "in",
+"start": 40.627,
+"end": 40.787
+},
+{
+"text": "public",
+"start": 40.787,
+"end": 41.027
+},
+{
+"text": "speaking:",
+"start": 41.027,
+"end": 41.427
+},
+{
+"text": "it's",
+"start": 41.427,
+"end": 41.667
+},
+{
+"text": "having",
+"start": 41.667,
+"end": 42.067
+},
+{
+"text": "confidence.",
+"start": 42.067,
+"end": 42.567
+},
+{
+"text": "I",
+"start": 42.967,
+"end": 43.22
+},
+{
+"text": "still",
+"start": 43.22,
+"end": 43.38
+},
+{
+"text": "get",
+"start": 43.38,
+"end": 43.54
+},
+{
+"text": "nervous",
+"start": 43.54,
+"end": 43.94
+},
+{
+"text": "when",
+"start": 43.94,
+"end": 44.1
+},
+{
+"text": "I",
+"start": 44.1,
+"end": 44.18
+},
+{
+"text": "do",
+"start": 44.18,
+"end": 44.34
+},
+{
+"text": "public",
+"start": 44.34,
+"end": 44.58
+},
+{
+"text": "speaking,",
+"start": 44.58,
+"end": 44.82
+},
+{
+"text": "but",
+"start": 44.82,
+"end": 44.98
+},
+{
+"text": "it's",
+"start": 44.98,
+"end": 45.14
+},
+{
+"text": "not",
+"start": 45.14,
+"end": 45.3
+},
+{
+"text": "as",
+"start": 45.3,
+"end": 45.46
+},
+{
+"text": "much,",
+"start": 45.46,
+"end": 45.7
+},
+{
+"text": "and",
+"start": 45.7,
+"end": 45.78
+},
+{
+"text": "I've",
+"start": 45.78,
+"end": 46.02
+},
+{
+"text": "been",
+"start": 46.02,
+"end": 46.18
+},
+{
+"text": "more",
+"start": 46.18,
+"end": 46.34
+},
+{
+"text": "relaxed.",
+"start": 46.34,
+"end": 46.94
+},
+{
+"text": "And",
+"start": 47.06,
+"end": 47.38
+},
+{
+"text": "eventually,",
+"start": 47.38,
+"end": 47.98
+},
+{
+"text": "when",
+"start": 48.18,
+"end": 48.34
+},
+{
+"text": "I",
+"start": 48.34,
+"end": 48.5
+},
+{
+"text": "have",
+"start": 48.5,
+"end": 48.74
+},
+{
+"text": "to",
+"start": 48.74,
+"end": 49.06
+},
+{
+"text": "go",
+"start": 49.06,
+"end": 49.62
+},
+{
+"text": "present",
+"start": 49.62,
+"end": 50.22
+},
+{
+"text": "something",
+"start": 50.5,
+"end": 50.82
+},
+{
+"text": "that",
+"start": 50.82,
+"end": 50.98
+},
+{
+"text": "I'm",
+"start": 50.98,
+"end": 51.22
+},
+{
+"text": "doing,",
+"start": 51.22,
+"end": 51.54
+},
+{
+"text": "I'm",
+"start": 51.54,
+"end": 51.7
+},
+{
+"text": "going",
+"start": 51.7,
+"end": 51.78
+},
+{
+"text": "to",
+"start": 51.78,
+"end": 51.86
+},
+{
+"text": "have",
+"start": 51.86,
+"end": 52.02
+},
+{
+"text": "to",
+"start": 52.02,
+"end": 52.1
+},
+{
+"text": "be",
+"start": 52.1,
+"end": 52.18
+},
+{
+"text": "able",
+"start": 52.18,
+"end": 52.34
+},
+{
+"text": "to",
+"start": 52.34,
+"end": 52.58
+},
+{
+"text": "communicate",
+"start": 52.58,
+"end": 53.14
+},
+{
+"text": "it",
+"start": 53.14,
+"end": 53.3
+},
+{
+"text": "effectively.",
+"start": 53.3,
+"end": 53.86
+},
+{
+"text": "And",
+"start": 53.86,
+"end": 54.02
+},
+{
+"text": "this",
+"start": 54.02,
+"end": 54.1
+},
+{
+"text": "class",
+"start": 54.1,
+"end": 54.34
+},
+{
+"text": "is",
+"start": 54.34,
+"end": 54.58
+},
+{
+"text": "perfect",
+"start": 54.58,
+"end": 54.9
+},
+{
+"text": "for",
+"start": 54.9,
+"end": 55.06
+},
+{
+"text": "it.",
+"start": 55.06,
+"end": 55.38
+},
+{
+"text": "So,",
+"start": 55.38,
+"end": 55.7
+},
+{
+"text": "to",
+"start": 55.7,
+"end": 55.94
+},
+{
+"text": "all",
+"start": 55.94,
+"end": 56.18
+},
+{
+"text": "of",
+"start": 56.18,
+"end": 56.26
+},
+{
+"text": "you",
+"start": 56.26,
+"end": 56.42
+},
+{
+"text": "guys",
+"start": 56.42,
+"end": 56.58
+},
+{
+"text": "out",
+"start": 56.58,
+"end": 56.74
+},
+{
+"text": "there,",
+"start": 56.74,
+"end": 57.06
+},
+{
+"text": "I",
+"start": 57.06,
+"end": 57.14
+},
+{
+"text": "recommend",
+"start": 57.14,
+"end": 57.7
+},
+{
+"text": "that",
+"start": 57.7,
+"end": 57.94
+},
+{
+"text": "you",
+"start": 57.94,
+"end": 58.1
+},
+{
+"text": "do",
+"start": 58.1,
+"end": 58.26
+},
+{
+"text": "some",
+"start": 58.26,
+"end": 58.5
+},
+{
+"text": "sort",
+"start": 58.5,
+"end": 58.66
+},
+{
+"text": "of",
+"start": 58.66,
+"end": 58.74
+},
+{
+"text": "public",
+"start": 58.74,
+"end": 59.06
+},
+{
+"text": "speaking",
+"start": 59.06,
+"end": 59.46
+},
+{
+"text": "and",
+"start": 59.46,
+"end": 59.62
+},
+{
+"text": "get",
+"start": 59.62,
+"end": 59.86
+},
+{
+"text": "your",
+"start": 59.86,
+"end": 60.02
+},
+{
+"text": "way",
+"start": 60.02,
+"end": 60.26
+},
+{
+"text": "to",
+"start": 60.26,
+"end": 60.5
+},
+{
+"text": "get",
+"start": 60.5,
+"end": 60.82
+},
+{
+"text": "in",
+"start": 60.82,
+"end": 61.06
+},
+{
+"text": "the",
+"start": 61.06,
+"end": 61.22
+},
+{
+"text": "spotlight",
+"start": 61.22,
+"end": 61.78
+},
+{
+"text": "because",
+"start": 61.78,
+"end": 62.02
+},
+{
+"text": "it's",
+"start": 62.02,
+"end": 62.26
+},
+{
+"text": "only",
+"start": 62.26,
+"end": 62.42
+},
+{
+"text": "going",
+"start": 62.42,
+"end": 62.58
+},
+{
+"text": "to",
+"start": 62.58,
+"end": 62.66
+},
+{
+"text": "help",
+"start": 62.66,
+"end": 62.82
+},
+{
+"text": "you",
+"start": 62.82,
+"end": 62.98
+},
+{
+"text": "in",
+"start": 62.98,
+"end": 63.06
+},
+{
+"text": "the",
+"start": 63.06,
+"end": 63.14
+},
+{
+"text": "future.",
+"start": 63.14,
+"end": 63.64
+}
+]
