@@ -5,3 +5,7 @@
 renders/
 snapshots/
 node_modules/
+assets/reveal/media/
+.media/
+.reveal-workspace/
+.hyperframes/

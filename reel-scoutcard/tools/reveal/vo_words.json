@@ -1,0 +1,168 @@
+{
+"vo1": [
+{
+"text": "Introducing",
+"start": 0.0,
+"end": 0.88
+},
+{
+"text": "Scout",
+"start": 0.88,
+"end": 1.44
+},
+{
+"text": "Card",
+"start": 1.44,
+"end": 1.76
+},
+{
+"text": "AI.",
+"start": 1.76,
+"end": 2.26
+}
+],
+"vo2": [
+{
+"text": "We're",
+"start": 0.0,
+"end": 0.32
+},
+{
+"text": "working",
+"start": 0.32,
+"end": 0.56
+},
+{
+"text": "on",
+"start": 0.56,
+"end": 0.72
+},
+{
+"text": "a",
+"start": 0.72,
+"end": 0.8
+},
+{
+"text": "way",
+"start": 0.8,
+"end": 0.96
+},
+{
+"text": "to",
+"start": 0.96,
+"end": 1.04
+},
+{
+"text": "turn",
+"start": 1.04,
+"end": 1.28
+},
+{
+"text": "football",
+"start": 1.28,
+"end": 1.84
+},
+{
+"text": "film",
+"start": 1.84,
+"end": 2.24
+},
+{
+"text": "into",
+"start": 2.24,
+"end": 2.48
+},
+{
+"text": "scouting",
+"start": 2.48,
+"end": 2.96
+},
+{
+"text": "cards,",
+"start": 2.96,
+"end": 3.68
+},
+{
+"text": "helping",
+"start": 3.68,
+"end": 4.08
+},
+{
+"text": "coaches",
+"start": 4.08,
+"end": 4.48
+},
+{
+"text": "streamline",
+"start": 4.48,
+"end": 5.04
+},
+{
+"text": "the",
+"start": 5.04,
+"end": 5.2
+},
+{
+"text": "way",
+"start": 5.2,
+"end": 5.36
+},
+{
+"text": "they",
+"start": 5.36,
+"end": 5.52
+},
+{
+"text": "prepare",
+"start": 5.52,
+"end": 5.92
+},
+{
+"text": "for",
+"start": 5.92,
+"end": 6.16
+},
+{
+"text": "opponents.",
+"start": 6.16,
+"end": 6.66
+}
+],
+"vo3": [
+{
+"text": "Still",
+"start": 0.16,
+"end": 0.4
+},
+{
+"text": "building.",
+"start": 0.4,
+"end": 0.96
+},
+{
+"text": "This",
+"start": 0.96,
+"end": 1.12
+},
+{
+"text": "is",
+"start": 1.12,
+"end": 1.28
+},
+{
+"text": "just",
+"start": 1.28,
+"end": 1.52
+},
+{
+"text": "the",
+"start": 1.52,
+"end": 1.6
+},
+{
+"text": "beginning.",
+"start": 1.6,
+"end": 2.1
+}
+]
+}

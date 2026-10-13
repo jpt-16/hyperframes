@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="UTF-8" /><title>reveal-s3</title></head>
+  <body>
+    <template>
+      <style>
+      @font-face { font-family:"Barlow Condensed"; font-weight:700; font-display:block; src:url("assets/reveal/fonts/BarlowCondensed-700-latin.woff2") format("woff2"); }
+      @font-face { font-family:"Barlow Condensed"; font-weight:800; font-display:block; src:url("assets/reveal/fonts/BarlowCondensed-800-latin.woff2") format("woff2"); }
+      @font-face { font-family:"Inter"; font-weight:400; font-display:block; src:url("assets/reveal/fonts/Inter-400-latin.woff2") format("woff2"); }
+      @font-face { font-family:"Inter"; font-weight:600; font-display:block; src:url("assets/reveal/fonts/Inter-600-latin.woff2") format("woff2"); }
+      @font-face { font-family:"Inter"; font-weight:700; font-display:block; src:url("assets/reveal/fonts/Inter-700-latin.woff2") format("woff2"); }
+      #root { position:absolute; inset:0; overflow:hidden; color:#F4F5F7; font-family:"Inter", sans-serif; }
+
+      #root { background:#060708; }
+      .panel { position:absolute; overflow:hidden; border-radius:18px; background:#000;
+                box-shadow:0 0 0 1px rgba(255,255,255,.08), 0 40px 90px rgba(0,0,0,.55); }
+      .panel video, .panel img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+      .film { left:0px; top:687px; width:1080px; height:547px; border-radius:0; box-shadow:none; }
+      .film::after { content:""; position:absolute; inset:0; pointer-events:none;
+                      background:linear-gradient(180deg, rgba(6,7,8,.55), rgba(6,7,8,0) 18%, rgba(6,7,8,0) 82%, rgba(6,7,8,.55)); }
+      .card { left:40px; top:565px; width:1000px; height:791px; }
+      .list { left:240px; top:616px; width:600px; height:739px; }
+      .label { position:absolute; left:80px; right:80px; top:334px; text-align:center;
+                font-family:"Barlow Condensed", sans-serif; font-weight:800; font-size:104px; line-height:1; letter-spacing:.01em; }
+      .label .rule { display:block; width:56px; height:4px; margin:22px auto 0; background:#1E57E6; transform-origin:50% 50%; }
+      .tag { position:absolute; font-family:"Inter", sans-serif; font-weight:600; font-size:22px; letter-spacing:.16em;
+              color:#9AA3AE; padding:9px 14px 8px; border:1px solid rgba(154,163,174,.35); border-radius:8px;
+              background:rgba(6,7,8,.6); }
+      .tag i { display:inline-block; width:8px; height:8px; border-radius:50%; background:#1E57E6; margin-right:10px; vertical-align:1px; }
+      #s3-card, #s3-list, #s3-flip, #s3-tag-c, #s3-tag-l, #s3-tag-f, .label { opacity:0; }
+      </style>
+      <div id="root" data-composition-id="reveal-s3" data-width="1080" data-height="1920" data-duration="8.0">
+        <div id="s3-film" class="panel film"><video id="s3-film-v" src="assets/reveal/media/film.mp4" muted playsinline data-layout-allow-overflow
+             data-start="0.0" data-duration="2.75" data-media-start="3.0"></video></div>
+        <div id="s3-card" class="panel card"><video id="s3-card-v" src="assets/reveal/media/ui_card01.mp4" muted playsinline data-layout-allow-overflow
+             data-start="2.35" data-duration="1.7" data-media-start="0"></video></div>
+        <div id="s3-list" class="panel list"><video id="s3-list-v" src="assets/reveal/media/ui_list.mp4" muted playsinline data-layout-allow-overflow
+             data-start="3.95" data-duration="2.6" data-media-start="0"></video></div>
+        <div id="s3-flip" class="panel card"><video id="s3-flip-v" src="assets/reveal/media/ui_flip.mp4" muted playsinline data-layout-allow-overflow
+             data-start="6.45" data-duration="1.55" data-media-start="0"></video></div>
+        <div id="s3-tag-c" class="tag" style="left:40px; top:503px;"><i></i>PROTOTYPE · DEMO DATA</div>
+        <div id="s3-tag-l" class="tag" style="left:240px; top:554px;"><i></i>PROTOTYPE · DEMO DATA</div>
+        <div id="s3-tag-f" class="tag" style="left:40px; top:503px;"><i></i>PROTOTYPE · DEMO DATA</div>
+        <div id="s3-l0" class="label">FOOTBALL FILM<span class="rule"></span></div>
+        <div id="s3-l1" class="label">SCOUTING CARDS<span class="rule"></span></div>
+        <div id="s3-l2" class="label">BUILT FOR COACHES<span class="rule"></span></div>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+
+          // film keeps the push it had in the reveal, so the scene change is invisible
+          tl.fromTo("#s3-film-v", { scale:1.035 }, { scale:1.075, duration:2.45, ease:"none" }, 0);
+          // film -> card: rack-focus blur-cut on a shared centre line
+          tl.to("#s3-film", { filter:"blur(18px)", scale:1.06, opacity:0, duration:0.26, ease:"power2.in" }, 2.25);
+          tl.fromTo("#s3-card", { opacity:0, scale:0.94, filter:"blur(18px)" }, { opacity:1, scale:1, filter:"blur(0px)", duration:0.42, ease:"power3.out" }, 2.39);
+          tl.fromTo("#s3-card-v", { scale:1.0 }, { scale:1.06, duration:1.6, ease:"none" }, 2.45);
+          tl.fromTo("#s3-tag-c", { opacity:0, y:8 }, { opacity:1, y:0, duration:0.3, ease:"power2.out" }, 2.7);
+          // card -> list: both travel up, velocity-matched (out on power4.in, in on power4.out)
+          tl.to(["#s3-card", "#s3-tag-c"], { y:-230, opacity:0, duration:0.22, ease:"power4.in" }, 3.83);
+          tl.fromTo("#s3-list", { opacity:0, y:230 }, { opacity:1, y:0, duration:0.36, ease:"power4.out" }, 4.05);
+          tl.fromTo("#s3-tag-l", { opacity:0, y:230 }, { opacity:1, y:0, duration:0.36, ease:"power4.out" }, 4.09);
+          tl.fromTo("#s3-list-v", { scale:1.0, y:0 }, { scale:1.05, y:-14, duration:2.5, ease:"none" }, 4.05);
+          // list -> live card taps: same direction of travel
+          tl.to(["#s3-list", "#s3-tag-l"], { y:-230, opacity:0, duration:0.22, ease:"power4.in" }, 6.33);
+          tl.fromTo("#s3-flip", { opacity:0, y:230 }, { opacity:1, y:0, duration:0.36, ease:"power4.out" }, 6.55);
+          tl.fromTo("#s3-tag-f", { opacity:0, y:230 }, { opacity:1, y:0, duration:0.36, ease:"power4.out" }, 6.59);
+          tl.fromTo("#s3-l0", { opacity:0, y:30, filter:"blur(8px)" }, { opacity:1, y:0, filter:"blur(0px)", duration:0.42, ease:"power3.out" }, 1.28);
+          tl.fromTo("#s3-l0 .rule", { scaleX:0 }, { scaleX:1, duration:0.4, ease:"power3.inOut" }, 1.43);
+          tl.to("#s3-l0", { opacity:0, y:-22, filter:"blur(6px)", duration:0.2, ease:"power2.in" }, 2.2);
+          tl.fromTo("#s3-l1", { opacity:0, y:30, filter:"blur(8px)" }, { opacity:1, y:0, filter:"blur(0px)", duration:0.42, ease:"power3.out" }, 2.52);
+          tl.fromTo("#s3-l1 .rule", { scaleX:0 }, { scaleX:1, duration:0.4, ease:"power3.inOut" }, 2.67);
+          tl.to("#s3-l1", { opacity:0, y:-22, filter:"blur(6px)", duration:0.2, ease:"power2.in" }, 3.8);
+          tl.fromTo("#s3-l2", { opacity:0, y:30, filter:"blur(8px)" }, { opacity:1, y:0, filter:"blur(0px)", duration:0.42, ease:"power3.out" }, 4.12);
+          tl.fromTo("#s3-l2 .rule", { scaleX:0 }, { scaleX:1, duration:0.4, ease:"power3.inOut" }, 4.27);
+          tl.to("#s3-l2", { opacity:0, y:-22, filter:"blur(6px)", duration:0.2, ease:"power2.in" }, 6.25);
+          window.__timelines["reveal-s3"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

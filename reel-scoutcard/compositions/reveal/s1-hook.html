@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="UTF-8" /><title>reveal-s1</title></head>
+  <body>
+    <template>
+      <style>
+      @font-face { font-family:"Barlow Condensed"; font-weight:700; font-display:block; src:url("assets/reveal/fonts/BarlowCondensed-700-latin.woff2") format("woff2"); }
+      @font-face { font-family:"Barlow Condensed"; font-weight:800; font-display:block; src:url("assets/reveal/fonts/BarlowCondensed-800-latin.woff2") format("woff2"); }
+      @font-face { font-family:"Inter"; font-weight:400; font-display:block; src:url("assets/reveal/fonts/Inter-400-latin.woff2") format("woff2"); }
+      @font-face { font-family:"Inter"; font-weight:600; font-display:block; src:url("assets/reveal/fonts/Inter-600-latin.woff2") format("woff2"); }
+      @font-face { font-family:"Inter"; font-weight:700; font-display:block; src:url("assets/reveal/fonts/Inter-700-latin.woff2") format("woff2"); }
+      #root { position:absolute; inset:0; overflow:hidden; color:#F4F5F7; font-family:"Inter", sans-serif; }
+
+      #root { background:#060708; }
+      .stack { position:absolute; left:80px; right:80px; top:0; bottom:0; display:flex; flex-direction:column; justify-content:center; text-align:center;
+               font-family:"Barlow Condensed", sans-serif; font-weight:800; text-transform:uppercase; }
+      #s1-a { font-size:150px; line-height:.92; letter-spacing:.005em; }
+      #s1-b { font-size:168px; line-height:.9; letter-spacing:.005em; opacity:0; }
+      .ln { display:block; white-space:nowrap; }
+      .m { display:inline-block; overflow:hidden; vertical-align:top; padding:0 .04em .06em; margin:0 -.02em; }
+      .w, .w2 { display:inline-block; }
+      .q { color:#5B8CFF; }
+      #s1-dots span { opacity:0; }
+      #s1-flash { position:absolute; inset:0; background:#fff; opacity:0; }
+      </style>
+      <div id="root" data-composition-id="reveal-s1" data-width="1080" data-height="1920" data-duration="3.0">
+        <div id="s1-a" class="stack"><div class="ln"><span class="m"><span class="w">WHAT</span></span> <span class="m"><span class="w">IF</span></span> <span class="m"><span class="w">FILM</span></span></div>
+<div class="ln"><span class="m"><span class="w">COULD</span></span><span id="s1-dots"><span>.</span><span>.</span><span>.</span></span></div></div>
+        <div id="s1-b" class="stack"><div class="ln"><span class="m"><span class="w2">BUILD</span></span> <span class="m"><span class="w2">YOUR</span></span></div>
+<div class="ln"><span class="m"><span class="w2">SCOUT</span></span> <span class="m"><span class="w2">CARDS</span></span><span class="m"><span class="w2 q">?</span></span></div></div>
+        <div id="s1-flash"></div>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+
+          // beat 1: words rise out of their masks, then the ellipsis types itself
+          tl.fromTo("#s1-a .w", { yPercent:105 }, { yPercent:0, duration:0.55, ease:"power4.out", stagger:0.08 }, 0.3);
+          tl.to("#s1-dots span", { opacity:1, duration:0.01, stagger:0.14 }, 0.78);
+          tl.to("#s1-a", { y:-36, opacity:0, filter:"blur(10px)", duration:0.16, ease:"power2.in" }, 1.24);
+          // beat 2: lands harder - out of focus and oversized, snapping into place
+          tl.fromTo("#s1-b", { opacity:0, scale:1.32, filter:"blur(16px)" },
+                             { opacity:1, scale:1, filter:"blur(0px)", duration:0.42, ease:"expo.out" }, 1.52);
+          tl.fromTo("#s1-b .w2", { yPercent:60 }, { yPercent:0, duration:0.38, ease:"expo.out", stagger:0.04 }, 1.52);
+          // tension: a slow push that rides the riser
+          tl.to("#s1-b", { scale:1.07, duration:0.97, ease:"power1.in" }, 1.94);
+          // two restrained glitch frames just before the hit
+          [2.84, 2.91].forEach((t, i) => {
+            tl.set("#s1-b", { x: i ? -7 : 9, textShadow: i ? "6px 0 0 rgba(91,140,255,.55)" : "-8px 0 0 rgba(91,140,255,.55)" }, t);
+            tl.set("#s1-b", { x:0, textShadow:"none" }, t + 1/30);
+          });
+          tl.to("#s1-b", { scale:1.16, opacity:0, duration:0.08, ease:"power2.in" }, 2.92);
+
+          window.__timelines["reveal-s1"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
