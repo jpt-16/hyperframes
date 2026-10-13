@@ -75,6 +75,19 @@ To use exact-script lines, record them and replace `assets/reveal/media/vo1-3.wa
   downbeat at 17.0 and the chord rings out to silence by 19.9 s.
 - The bed ducks ~9 dB under the voice via a `data-automation` volume lane.
 - Quiet whooshes on the three UI handoffs only.
+- **A `data-automation` volume lane is absolute and replaces `data-volume`.**
+  `build_reveal.py` scales every lane by the track's CONFIG level, so change
+  levels in CONFIG, not in the HTML attribute.
+- Delivery master: plain gain to -16 LUFS + one 4x-oversampled limiter. It only
+  touches the 1.5 s thump, the 3.0 s impact and the 17.0 s hit (no added
+  high-frequency content); the voice passes untouched. Result -16.5 LUFS, -1.5 dBTP.
+
+```bash
+ffmpeg -i renders/scoutcard-reveal.mp4 -c:v libx264 -preset slow -crf 17 -maxrate 9M -bufsize 18M -pix_fmt yuv420p \
+  -af "volume=6.9dB,aresample=192000,alimiter=limit=0.84:attack=4:release=80:level=disabled,aresample=48000" \
+  -c:a aac -b:a 256k -ar 48000 -movflags +faststart renders/scoutcard-reveal-web.mp4
+```
+(Re-measure the gain with `loudnorm=print_format=json` if the mix changes: gain = -16 - input_i.)
 
 ## Missing / yours to provide
 

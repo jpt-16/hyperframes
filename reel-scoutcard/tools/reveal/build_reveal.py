@@ -40,13 +40,13 @@ CONFIG = {
     "subtitles": True,
     # ---------------------------------------------------------------- audio (0..1 volumes)
     "vo": {"vo1": 3.40, "vo2": 6.10, "vo3": 14.35, "volume": 1.0},
-    "music": {"start": 3.0, "volume": 0.50, "duck_to": 0.36, "duck_down": 0.15, "duck_up": 0.35},
+    "music": {"start": 3.0, "volume": 0.50, "duck_to": 0.36, "duck_down": 0.15, "duck_up": 0.35, "breath": 0.62},
     "sfx": [  # (id, file, start, duration, volume, media_start)
         ("sx-rumble", "assets/reveal/sfx/rumble.wav",        0.00, 3.30, 0.85, 0),
-        ("sx-riser",  "assets/reveal/sfx/riser.mp3",         0.30, 2.70, 0.30, 0),
+        ("sx-riser",  "assets/reveal/sfx/riser.mp3",         0.30, 2.70, 0.22, 0),
         ("sx-thump1", "assets/reveal/sfx/thump-1.wav",       0.30, 0.90, 0.40, 0),
         ("sx-thump2", "assets/reveal/sfx/thump-2.wav",       1.52, 0.90, 0.55, 0),
-        ("sx-impact", "assets/reveal/sfx/impact-bass-1.mp3", 3.00, 2.10, 0.62, 0),
+        ("sx-impact", "assets/reveal/sfx/impact-bass-1.mp3", 3.00, 2.10, 0.60, 0),
         ("sx-swish1", "assets/reveal/sfx/whoosh-short.mp3",  8.36, 0.57, 0.22, 0),
         ("sx-swish2", "assets/reveal/sfx/whoosh-short.mp3",  9.97, 0.57, 0.18, 0),
         ("sx-swish3", "assets/reveal/sfx/whoosh-short.mp3", 12.47, 0.57, 0.15, 0),
@@ -119,13 +119,11 @@ s1_css = f"""
       .m {{ display:inline-block; overflow:hidden; vertical-align:top; padding:0 .04em .06em; margin:0 -.02em; }}
       .w, .w2 {{ display:inline-block; }}
       .q {{ color:{COL['blue_text']}; }}
-      #s1-dots span {{ opacity:0; }}
-      #s1-flash {{ position:absolute; inset:0; background:#fff; opacity:0; }}"""
+      #s1-dots span {{ opacity:0; }}"""
 line1_html = words([s1["line1"][0]], "w") + f'\n<div class="ln"><span class="m"><span class="w">COULD</span></span><span id="s1-dots"><span>.</span><span>.</span><span>.</span></span></div>'
 line2_html = words(l2, "w2").replace("CARDS</span></span></div>", 'CARDS</span></span><span class="m"><span class="w2 q">?</span></span></div>')
 s1_body = f"""        <div id="s1-a" class="stack">{line1_html}</div>
-        <div id="s1-b" class="stack">{line2_html}</div>
-        <div id="s1-flash"></div>"""
+        <div id="s1-b" class="stack">{line2_html}</div>"""
 a_in, a_out, b_in = s1["line1_in"], s1["line1_out"], s1["line2_in"]
 g1, g2 = s1["glitch"]
 s1_js = f"""
@@ -309,16 +307,27 @@ for a_, b_ in spans[1:]:
     if a_ - merged[-1][1] < 0.9: merged[-1][1] = b_          # short gaps stay ducked (no pumping)
     else: merged.append([a_, b_])
 pts = [{"t": 0, "v": 1}]
-for a_, b_ in merged:
-    pts += [{"t": r(a_ - ms - m["duck_down"]), "v": 1}, {"t": r(a_ - ms), "v": m["duck_to"]},
-            {"t": r(b_ - ms), "v": m["duck_to"]}, {"t": r(b_ - ms + m["duck_up"]), "v": 1}]
+for n_, (a_, b_) in enumerate(merged):
+    nxt_ = merged[n_ + 1][0] if n_ + 1 < len(merged) else None
+    up = m["breath"] if nxt_ is not None and nxt_ - b_ < 2.0 else 1      # a breath between lines, not a swell
+    pre = pts[-1]["v"]
+    pts += [{"t": r(a_ - ms - m["duck_down"]), "v": pre}, {"t": r(a_ - ms), "v": m["duck_to"]},
+            {"t": r(b_ - ms), "v": m["duck_to"]}, {"t": r(b_ - ms + m["duck_up"]), "v": up}]
+# NB: a volume lane is absolute and replaces data-volume, so scale it by the track level here.
+pts = [{**p_, "v": r(p_["v"] * m["volume"])} for p_ in pts]
 auto = json.dumps({"version": 1, "lanes": [{"target": "volume", "points": pts}]}).replace('"', "&quot;")
 
 sfx_html = "\n".join(
     f'      <audio id="{i}" src="{f}" data-start="{s}" data-duration="{d}" data-media-start="{ms_}" data-track-index="{12 + n}" data-volume="{v}"></audio>'
     for n, (i, f, s, d, v, ms_) in enumerate(C["sfx"]))
-riser_auto = json.dumps({"version": 1, "lanes": [{"target": "volume", "points": [{"t": 0, "v": 1}, {"t": 2.62, "v": 1}, {"t": 2.70, "v": 0}]}]}).replace('"', "&quot;")
+SFX_VOL = {i: v for (i, f, s_, d, v, ms_) in C["sfx"]}
+def lane(pid, pts_):   # absolute volume lane = shape x the track's CONFIG level
+    return json.dumps({"version": 1, "lanes": [{"target": "volume", "points": [{**p_, "v": r(p_["v"] * SFX_VOL[pid])} for p_ in pts_]}]}).replace('"', "&quot;")
+riser_auto = lane("sx-riser", [{"t": 0, "v": 1}, {"t": 2.62, "v": 1}, {"t": 2.70, "v": 0}])
 sfx_html = sfx_html.replace('id="sx-riser"', f'id="sx-riser" data-automation="{riser_auto}"')
+# the bundled impact sustains for ~2 s; keep its hit, then get out of the voice's way
+impact_auto = lane("sx-impact", [{"t": 0, "v": 1}, {"t": 0.18, "v": 0.7}, {"t": 0.42, "v": 0.16, "curve": -0.3}, {"t": 1.4, "v": 0.05}, {"t": 2.0, "v": 0}])
+sfx_html = sfx_html.replace('id="sx-impact"', f'id="sx-impact" data-automation="{impact_auto}"')
 
 root = f"""<!doctype html>
 <html lang="en">
