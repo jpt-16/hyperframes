@@ -31,7 +31,7 @@ Graphics live in the band above his eyes (y 150-650) on a soft dark fade; his fa
 hook "AI systems" → quote form fills + submits → request sits unanswered, timer races
 to hours → AI takes over (long riser + land) and asks vehicle / service / availability
 → lead organized + sent to owner → inbox of auto-replies incl. one while closed →
-JT Builds Co. → "Own a business?" + comment SYSTEM + DM.
+JT Builds Co. lockup styled after his logo (charcoal tile, his JT mark, BUILDS white / CO. grey) → "Own a business?" + comment SYSTEM + DM.
 
 ## Notes
 - Names, vehicles and the phone number (555) in the demo UI are illustrative.

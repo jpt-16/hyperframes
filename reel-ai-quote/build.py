@@ -51,7 +51,7 @@ T = dict(
     lead=W("organize"), sent=W("owner", 2), follow=W("follow"),
     inbox=W("inquiry"), busy2=W("busy", 2), closed=W("business", 2), late=W("business", 2) + 0.24,
     panel_out=W("that's") - 0.12,
-    kicker=W("system", 2), brand=W("jt"), tag1=W("real"), tag2=W("real", 2), brand_out=33.25,
+    kicker=W("system", 2), brand=W("jt"), co=W("co"), tag1=W("real"), tag2=W("real", 2), brand_out=33.25,
     ask=W("systems", 2), comment=W("comment"), typed=W("system", 3), post=W("below"), dm=W("dm"),
 )
 print({k: r(v) for k, v in T.items()})
@@ -108,6 +108,7 @@ html_out = f"""<!doctype html>
       @font-face {{ font-family:"Inter"; font-weight:400; font-display:block; src:url("assets/fonts/Inter-400-latin.woff2") format("woff2"); }}
       @font-face {{ font-family:"Inter"; font-weight:600; font-display:block; src:url("assets/fonts/Inter-600-latin.woff2") format("woff2"); }}
       @font-face {{ font-family:"Inter"; font-weight:700; font-display:block; src:url("assets/fonts/Inter-700-latin.woff2") format("woff2"); }}
+      @font-face {{ font-family:"Montserrat"; font-weight:100 900; font-display:block; src:url("assets/fonts/Montserrat-var-latin.woff2") format("woff2"); }}
       @font-face {{ font-family:"Fraunces"; font-weight:400 900; font-display:block; src:url("assets/fonts/Fraunces-var-latin.woff2") format("woff2"); }}
       * {{ margin:0; padding:0; box-sizing:border-box; }}
       html, body {{ width:1080px; height:1920px; overflow:hidden; background:#000; }}
@@ -200,12 +201,19 @@ html_out = f"""<!doctype html>
                       background:#1E1B3A; color:#C9C2FF; opacity:0; white-space:nowrap; }}
 
       /* brand */
-      #b-kick {{ position:absolute; left:0; right:0; top:214px; text-align:center; font-size:25px; font-weight:600; letter-spacing:.32em; color:{MUTED}; opacity:0; }}
-      #b-word {{ position:absolute; left:0; right:0; top:262px; text-align:center; font-family:"Fraunces", serif; font-weight:800; font-size:132px;
-                 line-height:1; letter-spacing:-.02em; font-variation-settings:"opsz" 144; }}
-      #b-word .lt {{ display:inline-block; opacity:0; }}
-      #b-word .dot {{ color:{PINK}; }}
-      #b-tag {{ position:absolute; left:0; right:0; top:432px; text-align:center; font-size:38px; font-weight:600; color:#E4E4E7; }}
+      /* brand: built to look like his logo - charcoal square, white JT mark, BUILDS white / CO. grey */
+      #b-tile {{ position:absolute; left:230px; top:158px; width:620px; height:480px; border-radius:36px;
+                 background:rgba(32,30,29,.97); box-shadow:0 30px 80px rgba(0,0,0,.45); opacity:0; }}
+      #b-kick {{ position:absolute; left:0; right:0; top:38px; text-align:center; font-family:"Montserrat", sans-serif;
+                 font-weight:700; font-size:23px; letter-spacing:.32em; color:#A09D9B; opacity:0; }}
+      #b-mark {{ position:absolute; left:50%; top:84px; width:250px; height:211px; margin-left:-125px; }}
+      #b-mark img {{ width:100%; height:100%; display:block; }}
+      #b-word {{ position:absolute; left:0; right:0; top:318px; text-align:center; font-family:"Montserrat", sans-serif;
+                 font-weight:800; font-size:60px; line-height:1; letter-spacing:.035em; white-space:nowrap; }}
+      #b-word .m {{ display:inline-block; overflow:hidden; vertical-align:top; padding-bottom:.06em; }}
+      #b-word .lt {{ display:inline-block; color:#FFFFFF; }}
+      #b-word .co {{ display:inline-block; color:#A09D9B; margin-left:.28em; opacity:0; }}
+      #b-tag {{ position:absolute; left:0; right:0; top:410px; text-align:center; font-size:29px; font-weight:600; color:#D4D4D8; }}
       #b-tag span {{ display:inline-block; opacity:0; }}
 
       /* cta */
@@ -280,9 +288,12 @@ html_out = f"""<!doctype html>
       </div>
 
       <div id="brand" class="layer clip" data-start="{r(T['kicker'] - 0.1)}" data-duration="{r(T['brand_out'] - T['kicker'] + 0.5)}" data-track-index="5">
-        <div id="b-kick">AI SYSTEMS BY</div>
-        <div id="b-word">{"".join(f'<span class="lt">{esc(c) if c != " " else "&nbsp;"}</span>' for c in "JT Builds Co")}<span class="lt dot">.</span></div>
-        <div id="b-tag"><span id="t1">Real problems.</span> <span id="t2">Real businesses.</span></div>
+        <div id="b-tile">
+          <div id="b-kick">AI SYSTEMS BY</div>
+          <div id="b-mark"><img src="assets/brand/jt-mark.png" alt="JT Builds Co. mark"></div>
+          <div id="b-word"><span class="m">{"".join(f'<span class="lt">{c}</span>' for c in "BUILDS")}</span><span class="co">CO.</span></div>
+          <div id="b-tag"><span id="t1">Real problems.</span> <span id="t2">Real businesses.</span></div>
+        </div>
       </div>
 
       <div id="cta" class="layer clip" data-start="{r(T['ask'] - 0.1)}" data-duration="{r(END - T['ask'] + 0.1)}" data-track-index="6">
@@ -393,11 +404,14 @@ a(f'tl.to("#panel", {{ opacity:0, scale:0.93, y:-24, filter:"blur(8px)", duratio
 
 # brand
 k = T["kicker"]; b = T["brand"]
-a(f'tl.fromTo("#b-kick", {{ opacity:0, y:10 }}, {{ opacity:1, y:0, duration:0.4, ease:"power2.out" }}, {r(k)});')
-a(f'tl.fromTo("#b-word .lt", {{ opacity:0, yPercent:40, filter:"blur(8px)" }}, {{ opacity:1, yPercent:0, filter:"blur(0px)", duration:0.5, ease:"expo.out", stagger:0.035 }}, {r(b)});')
+a(f'tl.fromTo("#b-tile", {{ opacity:0, scale:0.92, filter:"blur(10px)" }}, {{ opacity:1, scale:1, filter:"blur(0px)", duration:0.55, ease:"expo.out" }}, {r(k)});')
+a(f'tl.fromTo("#b-kick", {{ opacity:0, y:8 }}, {{ opacity:1, y:0, duration:0.4, ease:"power2.out" }}, {r(k + 0.15)});')
+a(f'tl.fromTo("#b-mark img", {{ clipPath:"inset(100% 0% 0% 0%)", y:18 }}, {{ clipPath:"inset(0% 0% 0% 0%)", y:0, duration:0.55, ease:"power3.out" }}, {r(b)});')
+a(f'tl.fromTo("#b-word .lt", {{ yPercent:105 }}, {{ yPercent:0, duration:0.5, ease:"power4.out", stagger:0.045 }}, {r(b + 0.12)});')
+a(f'tl.fromTo("#b-word .co", {{ opacity:0, x:-14 }}, {{ opacity:1, x:0, duration:0.4, ease:"power3.out" }}, {r(T["co"])});')
 a(f'tl.fromTo("#t1", {{ opacity:0, y:12 }}, {{ opacity:1, y:0, duration:0.4, ease:"power2.out" }}, {r(T["tag1"])});')
 a(f'tl.fromTo("#t2", {{ opacity:0, y:12 }}, {{ opacity:1, y:0, duration:0.4, ease:"power2.out" }}, {r(T["tag2"])});')
-a(f'tl.to("#brand", {{ opacity:0, y:-20, filter:"blur(8px)", duration:0.3, ease:"power2.in" }}, {r(T["brand_out"])});')
+a(f'tl.to("#b-tile", {{ opacity:0, scale:0.95, filter:"blur(8px)", duration:0.3, ease:"power2.in" }}, {r(T["brand_out"])});')
 
 # cta
 a(f'tl.fromTo("#c-ask", {{ opacity:0, y:24, filter:"blur(8px)" }}, {{ opacity:1, y:0, filter:"blur(0px)", duration:0.5, ease:"expo.out" }}, {r(T["ask"])});')
