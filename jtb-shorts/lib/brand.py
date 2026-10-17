@@ -37,7 +37,7 @@ html, body {{ width:1080px; height:1920px; overflow:hidden; background:{C['bg']}
 .eyebrow.bad i {{ background:{C['bad']}; }} .eyebrow.good i {{ background:{C['good']}; }}
 .head {{ position:absolute; left:70px; right:70px; top:262px; }}
 .head h2 {{ font-family:"Montserrat", sans-serif; font-weight:800; font-size:70px; line-height:1.04; letter-spacing:-.015em; margin-top:16px; text-wrap:balance; }}
-.head h2 em {{ font-style:normal; color:{C['accent']}; }}
+.head h2 em {{ font-style:normal; color:{C['accent']}; white-space:nowrap; }}
 .chip {{ position:absolute; display:flex; align-items:center; gap:14px; padding:18px 26px; border-radius:22px; white-space:nowrap;
          background:rgba(28,26,25,.94); border:1px solid {C['line']}; box-shadow:0 20px 50px rgba(0,0,0,.45);
          font-weight:700; font-size:34px; color:{C['white']}; opacity:0; z-index:20; }}

@@ -53,7 +53,7 @@ SCENE_CSS = f"""
 .lk-word .co {{ display:inline-block; color:{C['grey']}; margin-left:.28em; opacity:0; }}
 .cta-h {{ position:absolute; left:{SAFE['left']}px; right:{SAFE['left']}px; top:790px; text-align:center; font-family:"Montserrat", sans-serif;
           font-weight:800; line-height:1.06; letter-spacing:-.018em; color:{C['white']}; text-wrap:balance; }}
-.cta-h em {{ font-style:normal; color:{C['accent']}; }}
+.cta-h em {{ font-style:normal; color:{C['accent']}; white-space:nowrap; }}
 .cta-row {{ position:absolute; left:0; right:0; display:flex; justify-content:center; }}
 .cta-pill {{ display:inline-flex; align-items:center; gap:16px; padding:28px 46px; border-radius:999px; background:{C['accent']}; color:{C['accent_ink']};
              font-family:"Montserrat", sans-serif; font-weight:800; font-size:40px; letter-spacing:-.005em; white-space:nowrap; opacity:0;
