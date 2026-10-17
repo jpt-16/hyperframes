@@ -51,14 +51,13 @@ SCENE_CSS = f"""
 .lk-word .m {{ display:inline-block; overflow:hidden; vertical-align:top; padding-bottom:.06em; }}
 .lk-word .lt {{ display:inline-block; color:#FFFFFF; }}
 .lk-word .co {{ display:inline-block; color:{C['grey']}; margin-left:.28em; opacity:0; }}
-.cta-h {{ position:absolute; left:{SAFE['left']}px; right:{SAFE['left']}px; top:790px; text-align:center; font-family:"Montserrat", sans-serif;
-          font-weight:800; line-height:1.06; letter-spacing:-.018em; color:{C['white']}; text-wrap:balance; }}
+.cta-stack {{ position:absolute; left:{SAFE['left']}px; right:{SAFE['left']}px; top:790px; display:flex; flex-direction:column; align-items:center; gap:58px; }}
+.cta-h {{ text-align:center; font-family:"Montserrat", sans-serif; font-weight:800; line-height:1.06; letter-spacing:-.018em; color:{C['white']}; text-wrap:balance; }}
 .cta-h em {{ font-style:normal; color:{C['accent']}; white-space:nowrap; }}
-.cta-row {{ position:absolute; left:0; right:0; display:flex; justify-content:center; }}
 .cta-pill {{ display:inline-flex; align-items:center; gap:16px; padding:28px 46px; border-radius:999px; background:{C['accent']}; color:{C['accent_ink']};
              font-family:"Montserrat", sans-serif; font-weight:800; font-size:40px; letter-spacing:-.005em; white-space:nowrap; opacity:0;
              box-shadow:0 20px 60px rgba(255,181,71,.25); }}
-.cta-sub {{ position:absolute; left:110px; right:110px; text-align:center; font-size:29px; line-height:1.4; font-weight:600; color:{C['grey']}; opacity:0; text-wrap:balance; }}
+.cta-sub {{ max-width:860px; margin-top:-14px; text-align:center; font-size:29px; line-height:1.4; font-weight:600; color:{C['grey']}; opacity:0; text-wrap:balance; }}
 """
 
 def fit(text, sizes):
@@ -169,14 +168,14 @@ def cta(c, t0, spec):
     """End card: the JT Builds Co. lockup, the ask, an action pill, a short sub line (disclaimers go here)."""
     h = spec["headline"]; size = fit(h, [(30, 76), (44, 68), (999, 60)])
     sub = spec.get("sub", "")
-    pill_top = 790 + int(size * 1.06 * (1 if len(plain(h)) <= 24 else 2)) + 70
     letters = "".join(f'<span class="lt">{ch}</span>' for ch in "BUILDS")
     c.clip("cta", t0 - 0.12, c.D, f"""<div class="cta-bg" id="cta-bg"></div>
         <div class="lk" id="lk"><div class="lk-mark" id="lk-mark"><img src="assets/jt-mark.png" alt="JT Builds Co. mark"></div>
           <div class="lk-word"><span class="m">{letters}</span><span class="co" id="lk-co">CO.</span></div></div>
-        <h2 class="cta-h" style="font-size:{size}px"><span class="mask"><span class="in" id="cta-h">{rich(h)}</span></span></h2>
-        <div class="cta-row" style="top:{pill_top}px"><div class="cta-pill" id="cta-pill">{rich(spec["action"])} {icon("arrow", 36, C["accent_ink"], 3)}</div></div>
-        <div class="cta-sub" id="cta-sub" style="top:{pill_top + 150}px">{rich(sub)}</div>""")
+        <div class="cta-stack">
+          <h2 class="cta-h" style="font-size:{size}px"><span class="mask"><span class="in" id="cta-h">{rich(h)}</span></span></h2>
+          <div class="cta-pill" id="cta-pill">{rich(spec["action"])} {icon("arrow", 36, C["accent_ink"], 3)}</div>
+          <div class="cta-sub" id="cta-sub">{rich(sub)}</div></div>""")
     c.ft("#cta", o(opacity=0), o(opacity=1, duration=0.3, ease="power1.out"), t0 - 0.12)
     c.ft("#lk", o(opacity=0, scale=0.9, filter="blur(10px)"), o(opacity=1, scale=1, filter="blur(0px)", duration=0.6, ease="expo.out"), t0)
     c.ft("#lk-mark img", o(clipPath="inset(100% 0% 0% 0%)", y=14), o(clipPath="inset(0% 0% 0% 0%)", y=0, duration=0.55, ease="power3.out"), t0 + 0.08)
