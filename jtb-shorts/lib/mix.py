@@ -16,7 +16,8 @@ LEVEL_DB = {"popup": -7.0, "bubble": -9.0, "land": -3.0, "riser-s": -9.0, "riser
 BED_DB = -2.0
 KEY_DB = -12.0
 TARGET_LUFS = -14.0
-CEILING = 0.84          # limiter ceiling (linear), about -1.5 dBFS
+CEILING = 0.78          # limiter ceiling (linear), about -2.2 dBFS: AAC encoding adds overshoot and the renderer
+                        # pulls the whole track down 1.5 dB if the encoded file passes -1 dBTP
 
 def read(path):
     w = wave.open(path); n = w.getnframes(); ch = w.getnchannels(); sw = w.getsampwidth()

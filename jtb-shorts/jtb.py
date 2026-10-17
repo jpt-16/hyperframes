@@ -129,6 +129,8 @@ def render(spec, niche, draft=False):
                                capture_output=True, text=True).stdout)
     size = os.path.getsize(mp4) / 1e6
     print(f"  -> {os.path.relpath(mp4, HERE)}  {dur:.2f}s  {size:.1f} MB  {I} LUFS  {tp} dBTP")
+    if abs(I - rep["master"]["lufs"]) > 0.5:
+        sys.exit(f"{spec['slug']}: rendered audio is {I} LUFS but the master was {rep['master']['lufs']} (the renderer changed the gain)")
     return mp4
 
 def main(argv):
