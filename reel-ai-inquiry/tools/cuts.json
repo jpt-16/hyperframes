@@ -1,0 +1,7 @@
+{
+  "_why": "Source-time ranges removed from his video (frame-snapped, all inside measured silence). The [23.700, 24.300] cut also removes the filler 'Basically,'. Edit, then re-run tools/cut_base.py and build.py.",
+  "remove": [[3.467, 3.600], [9.300, 9.600], [14.333, 14.600], [22.133, 22.333],
+             [23.267, 23.533], [23.700, 24.300], [27.733, 27.867], [31.267, 31.533],
+             [36.067, 36.433], [38.400, 38.600]],
+  "end": 43.0
+}

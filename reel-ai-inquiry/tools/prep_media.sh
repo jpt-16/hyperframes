@@ -7,7 +7,7 @@ TH="$1"; DEMO="$2"; mkdir -p media
 X264="-c:v libx264 -preset slow -crf 15 -g 15 -keyint_min 15 -sc_threshold 0 -pix_fmt yuv420p -colorspace bt709 -color_primaries bt709 -color_trc bt709"
 
 # Talking head: same picture, keyframe every half second so seeks are instant; audio untouched.
-ffmpeg -v error -y -i "$TH" -vf "fps=30" $X264 -c:a copy -movflags +faststart media/base.mp4
+ffmpeg -v error -y -i "$TH" -vf "fps=30" $X264 -c:a copy -movflags +faststart media/base_src.mp4   # un-cut reference; tools/cut_base.py makes media/base.mp4
 
 # Demo: full frame kept at 2160 px wide so the composition can zoom into crops and stay sharp.
 # Each segment is retimed so the demo moment lands on the line that describes it.

@@ -4,7 +4,7 @@ flow: companion
 message: "Your next customer could be lost before you read their message - an AI system replies, collects, organizes"
 destination: instagram-reels
 aspect: 1080x1920
-length: 43.2s
+length: 40.3s
 ---
 
 ## Intent
@@ -12,8 +12,12 @@ Engaging captions, motion graphics and B-roll so the reel isn't a talking head
 throughout; risers/impacts on every graphic that lands.
 
 ## Build
-- `tools/prep_media.sh <talking-head> <demo>` -> media/ (gitignored): seek-friendly
-  base, three retimed demo segments at 2160 px, one website still.
+- `tools/prep_media.sh <talking-head> <demo>` -> media/ (gitignored): three retimed
+  demo segments at 2160 px, one website still, un-cut reference copy.
+- `python3 tools/cut_base.py <talking-head>` -> media/base.mp4 with the pauses and
+  the filler "Basically," removed (tools/cuts.json: 10 ranges, 2.73 s, all inside
+  measured silence, picture and sound cut on the same frames). build.py maps every
+  original-clock time onto the cut clock, so the cut list can be edited freely.
 - `python3 build.py` -> index.html. Beats pinned to words in tools/words.json.
 - `python3 tools/sfx_levels.py` -> offline check of each sound's lift over the voice.
 

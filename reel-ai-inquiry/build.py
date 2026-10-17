@@ -12,8 +12,20 @@ the "owner is busy" card as a full-screen cutaway on "working on a car".
 """
 import json, html, re, os
 
-WORDS = json.load(open("tools/words.json"))
-END = 43.14
+# Pauses and the filler "Basically," are cut out of his video (tools/cuts.json -> tools/cut_base.py).
+# All timing below is authored on the ORIGINAL clock and mapped onto the cut one here.
+CUTS = json.load(open("tools/cuts.json"))
+def remap(t):
+    """Original-video time -> cut-video time (a time inside a removed range lands on the cut)."""
+    out = t
+    for a, b in CUTS["remove"]:
+        if t >= b: out -= b - a
+        elif t > a: out -= t - a
+    return round(out, 3)
+removed = lambda t: any(a <= t < b for a, b in CUTS["remove"])
+WORDS = [{**w, "start": remap(w["start"]), "end": remap(w["end"])}
+         for w in json.load(open("tools/words.json")) if not removed(w["start"])]
+END = remap(CUTS["end"])
 r = lambda x: round(x, 3)
 esc = html.escape
 
@@ -44,18 +56,18 @@ def icon(name, size=28, color="currentColor", sw=2.2):
             f'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{p}</svg>')
 
 # ------------------------------------------------------------------ beats
-SPLIT0, SPLIT1 = 23.867, 37.233            # his own split-screen demo section (measured)
+SPLIT0, SPLIT1 = remap(23.867), remap(37.233)   # his own split-screen demo section (measured on the original)
 T = dict(
     note=W("customer"), unread=W("read"), note_out=W("message") + 0.35,
-    inbox=W("too") - 0.05, lose=W("lose"), respond=W("respond"), fast=W("fast"), inbox_out=9.40,
+    inbox=W("too") - 0.05, lose=W("lose"), respond=W("respond"), fast=W("fast"), inbox_out=remap(9.40),
     busy=W("example"), car=W("car"), req=W("requests"), site=W("quote"),
     sys=W("so") - 0.02, ai=W("ai"), s1=W("responds"), s2=W("collects"), s3=W("organizes"), auto=W("automatically"),
-    sys_out=21.85, how=W("here's"), how_out=SPLIT0,
+    sys_out=remap(21.85), how=W("here's"), how_out=SPLIT0,
     submit=W("submits"), vehicle=W("vehicle"), service=W("service"), ai2=W("ai", 2), gen=W("generates"),
     whole=W("whole"), autom2=W("automatically", 2), manual=W("enter"),
     comment=W("comment"), typed=W("system", 2), reach=W("reach"),
 )
-assert T["note"] < 1 and abs(T["typed"] - 39.12) < 0.01, T
+assert T["note"] < 1, T
 
 # ------------------------------------------------------------------ captions (2-4 word phrases)
 WEAK = {"a", "an", "the", "to", "of", "on", "in", "and", "or", "that", "their", "your", "for", "with", "be", "you", "i",
@@ -106,12 +118,16 @@ PANEL_W, PANEL_H = 1080, 624
 def view(rx, ry, rw):
     s = PANEL_W / rw
     return dict(x=r(-rx * s), y=r(-ry * s), scale=r(s))
-DEMO = [  # id, file, start, end, [(t_rel, view)]
+MEDIA_LEN = {"demo-form": 3.967, "demo-ai": 3.700, "demo-saved": 5.900}
+DEMO = [  # id, file, start, end, [(t_rel, view)]  (t_rel in slot seconds; 2.32 below is media time, scaled by the rate)
     ("dA", "demo-form", SPLIT0, T["ai2"] - 0.16, [(0, view(20, 525, 1120)), (T["vehicle"] - SPLIT0 - 0.15, view(40, 700, 800))]),
     ("dB", "demo-ai", T["ai2"] - 0.16, T["whole"] - 0.02, [(0, view(1170, 140, 980)), (T["gen"] - (T["ai2"] - 0.16), view(1170, 372, 980))]),
     ("dC", "demo-saved", T["whole"] - 0.02, SPLIT1, [(0, view(0, 180, 1300)), (T["autom2"] - T["whole"], view(1180, 640, 1000)),
-                                                    (2.32, view(0, 82, 1400)), (T["manual"] - T["whole"], view(1200, 440, 960))]),
+                                                    ("m2.32", view(0, 82, 1400)), (T["manual"] - T["whole"], view(1200, 440, 960))]),
 ]
+RATE = {i: round(MEDIA_LEN[f] / (b - a), 4) for i, f, a, b, _ in DEMO}
+DEMO = [(i, f, a, b, sorted([(float(t[1:]) / RATE[i] if isinstance(t, str) else t, v) for t, v in views], key=lambda x: x[0]))
+        for i, f, a, b, views in DEMO]
 STEPS = [(T["submit"], "1", "Request submitted"), (T["ai2"], "2", "AI writes a personal reply"), (T["whole"], "3", "Saved for follow-up")]
 
 BROLL = os.path.exists("media/broll-detailing.mp4")
@@ -124,7 +140,7 @@ rows_html = "\n".join(
     f'<span class="ago">{esc(a)} ago</span><span class="lost">No reply</span></div>' for i, (n, w, a) in enumerate(inbox_rows))
 demo_html = "\n".join(
     f'<video id="{i}" class="dv" src="media/{f}.mp4" muted playsinline data-layout-allow-overflow data-start="{r(a)}" '
-    f'data-duration="{r(b - a)}" data-media-start="0"></video>' for i, f, a, b, _ in DEMO)
+    f'data-duration="{r(b - a)}" data-media-start="0" data-playback-rate="{RATE[i]}"></video>' for i, f, a, b, _ in DEMO)
 steps_html = "\n".join(f'<div class="step" id="st{n}"><i></i>Step {n} · {esc(t)}</div>' for _, n, t in STEPS)
 sys_rows = [("chat", "Responds instantly", "Every inquiry gets a personal reply", "s1"),
             ("form", "Collects their info", "Vehicle, service, preferred date", "s2"),
@@ -382,7 +398,9 @@ a(f'tl.fromTo("#how .t span", {{ opacity:0, scale:1.6, filter:"blur(14px)" }}, {
 a(f'tl.to("#how .t", {{ scale:1.08, duration:{r(T["how_out"] - hw - 0.4)}, ease:"none" }}, {r(hw + 0.4)});')
 
 # 6 demo panel
-a(f'tl.fromTo("#dp", {{ clipPath:"inset(0% 0% 100% 0%)" }}, {{ clipPath:"inset(0% 0% 0% 0%)", duration:0.38, ease:"power3.out" }}, {SPLIT0});')
+# hard cut in and out on his own split-screen frames, so his low-res strip never shows through
+a(f'tl.set("#dp", {{ clipPath:"inset(0% 0% 0% 0%)" }}, {SPLIT0});')
+a(f'tl.fromTo("#dp .dv", {{ filter:"brightness(1.6)" }}, {{ filter:"brightness(1)", duration:0.3, ease:"power2.out", immediateRender:false }}, {SPLIT0});')
 for i, f, s0, s1, views in DEMO:
     v0 = views[0][1]
     a(f'tl.set("#{i}", {{ x:{v0["x"]}, y:{v0["y"]}, scale:{v0["scale"]} }}, 0);')
@@ -394,7 +412,7 @@ for k, (t, n, _) in enumerate(STEPS):
     a(f'tl.fromTo("#st{n}", {{ opacity:0, x:-24 }}, {{ opacity:1, x:0, duration:0.32, ease:"back.out(1.8)" }}, {r(t)});')
     if k + 1 < len(STEPS):
         a(f'tl.to("#st{n}", {{ opacity:0, duration:0.15 }}, {r(STEPS[k + 1][0] - 0.12)});')
-a(f'tl.to("#dp", {{ clipPath:"inset(0% 0% 100% 0%)", duration:0.3, ease:"power3.in" }}, {r(SPLIT1 - 0.3)});')
+a(f'tl.set("#dp", {{ clipPath:"inset(0% 0% 100% 0%)" }}, {SPLIT1});')
 a(f'tl.to("#st{STEPS[-1][1]}", {{ opacity:0, x:-24, duration:0.2, ease:"power2.in" }}, {r(SPLIT1 - 0.3)});')
 
 # 7 CTA
