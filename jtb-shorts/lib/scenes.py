@@ -36,6 +36,27 @@ SCENE_CSS = f"""
 .chip .tx {{ display:flex; flex-direction:column; line-height:1.12; }}
 .chip .tx small {{ font-weight:600; font-size:25px; color:{C['grey']}; margin-top:6px; white-space:nowrap; }}
 
+/* camera: the device lives inside #cam; punch-ins scale it about the canvas origin */
+#cam {{ position:absolute; inset:0; transform-origin:0 0; }}
+.scrim {{ position:absolute; left:0; right:0; top:0; height:560px; opacity:0;
+          background:linear-gradient(180deg, {C['bg']} 0px, {C['bg']} 455px, rgba(18,17,16,0) 530px); }}
+
+/* callout: one big readable card at a time, low on the frame */
+.callout {{ position:absolute; left:{SAFE['left']}px; right:{SAFE['left']}px; display:flex; justify-content:center; }}
+.callout .cb {{ display:inline-flex; align-items:center; gap:20px; padding:22px 34px 22px 22px; border-radius:28px; opacity:0;
+               background:rgba(24,22,21,.97); border:1px solid rgba(255,255,255,.1); box-shadow:0 24px 60px rgba(0,0,0,.55); }}
+.callout .ic {{ width:64px; height:64px; border-radius:19px; display:flex; align-items:center; justify-content:center; flex:none; }}
+.callout.good .ic {{ background:rgba(61,214,140,.16); }} .callout.bad .ic {{ background:rgba(255,97,97,.16); }} .callout.acc .ic {{ background:rgba(255,181,71,.16); }}
+.callout.mute .ic {{ background:rgba(160,157,155,.16); }}
+.callout .tx {{ display:flex; flex-direction:column; }}
+.callout b {{ font-family:"Montserrat", sans-serif; font-weight:800; font-size:40px; line-height:1.1; color:{C['white']}; letter-spacing:-.01em; }}
+.callout b em {{ font-style:normal; color:{C['accent']}; }}
+.callout small {{ font-size:28px; font-weight:600; color:{C['grey']}; margin-top:6px; line-height:1.25; }}
+
+/* big step numeral behind the device */
+.num {{ position:absolute; right:30px; top:430px; font-family:"Montserrat", sans-serif; font-weight:800; font-size:560px; line-height:1;
+        color:rgba(255,181,71,.07); letter-spacing:-.04em; }}
+
 /* brand bar */
 #brandbar {{ opacity:0; }}
 
@@ -86,13 +107,13 @@ def hook(c, h, t1):
     c.clip("hook", 0, t1 + 0.4, f"""<div class="hk" id="hk" style="top:{top}px">
         <div class="eyebrow" id="hk-eb"><i></i>{esc(h.get("eyebrow", "WEBSITE TIP").upper())}</div>
         <h1 style="font-size:{size}px">{lines_html(lines, accent)}</h1></div>""")
-    c.ft("#hk h1 .in", o(yPercent=112), o(yPercent=0, duration=0.55, ease="power4.out", stagger=0.1), 0.0)
-    c.ft("#hk .u", o(scaleX=0, transformOrigin="0% 50%"), o(scaleX=1, duration=0.5, ease="power3.inOut"), 0.42 + 0.1 * accent[0])
+    c.ft("#hk h1 .in", o(yPercent=112), o(yPercent=0, duration=0.5, ease="power4.out", stagger=0.08), 0.0)
+    c.ft("#hk .u", o(scaleX=0, transformOrigin="0% 50%"), o(scaleX=1, duration=0.5, ease="power3.inOut"), 0.36 + 0.08 * accent[0])
     c.ft("#hk", o(scale=1), o(scale=1.035, duration=t1, ease="none"), 0.0)
-    c.to("#hk h1 .in", o(yPercent=-112, duration=0.32, ease="power3.in", stagger=0.04), t1 - 0.3)
+    c.to("#hk h1 .in", o(yPercent=-112, duration=0.3, ease="power3.in", stagger=0.035), t1 - 0.3)
     c.to("#hk-eb", o(opacity=0, duration=0.2, ease="power1.in"), t1 - 0.3)
     c.cue("land", 0.0, -1.0)
-    c.cue("popup", 0.42 + 0.1 * accent[0], -5.0)
+    c.cue("popup", 0.36 + 0.08 * accent[0], -5.0)
     c.cue("whoosh", t1 - 0.05, -3.0)
 
 # ----------------------------------------------------------------- section heading
@@ -142,16 +163,16 @@ def wipe_in(c, sid, t, dur=0.75, sound=True):
 def scroll(c, sid, t, y, dur=1.6, ease="power2.inOut"):
     c.to(f"#{sid}-scr", o(y=y, duration=dur, ease=ease), t)
 
-def typing(text, t0, cps=19):
+def typing(text, t0, cps=19, pid="q"):
     """-> (html spans, end time, char times). Characters show one by one; c.key() clicks are added by the caller."""
     times = [t0 + i / cps for i in range(len(text))]
-    spans = "".join(f'<span class="ch" id="q{i}">{esc(ch)}</span>' for i, ch in enumerate(text))
+    spans = "".join(f'<span class="ch" id="{pid}{i}">{esc(ch)}</span>' for i, ch in enumerate(text))
     return spans, (times[-1] if times else t0) + 1 / cps, times
 
-def type_into(c, text, t0, cps=19):
-    _, end, times = typing(text, t0, cps)
+def type_into(c, text, t0, cps=19, pid="q"):
+    _, end, times = typing(text, t0, cps, pid)
     for i, t in enumerate(times):
-        c.set(f"#q{i}", o(display="inline"), t)
+        c.set(f"#{pid}{i}", o(display="inline"), t)
         if text[i] != " ": c.key(t, -1.5 if i % 3 else 0.0)
         else: c.key(t, -6.0)
     return end
@@ -186,5 +207,64 @@ def cta(c, t0, spec):
     c.ft("#cta-sub", o(opacity=0, y=10), o(opacity=1, y=0, duration=0.5, ease="power2.out"), t0 + 0.95)
     c.to("#cta-pill", o(scale=1.045, duration=0.32, ease="sine.inOut", yoyo=True, repeat=1), t0 + 1.7)
     c.cue("riser-m", t0, -2.5)
-    c.cue("land", t0, -6.0)            # the bed already lands a kick + boom here
+    c.cue("land", t0, -6.0 if c.music else -1.5)   # with music, the bed lands its own kick + boom here
     c.cue("popup", t0 + 0.7, -4.0)
+
+# ----------------------------------------------------------------- camera
+from mocks import PHONE, MOBILE_SCALE
+
+def _phone_pt(M, el, scroll, anchor, phone_xy):
+    m = M[el]
+    if m is None: raise SystemExit(f"camera target #{el} not found on the page")
+    sy = scroll(M) if callable(scroll) else scroll
+    lx = m["x"] + m["w"] / 2
+    ly = m["y"] + sy + (m["h"] / 2 if anchor == "center" else 0)
+    px, py = phone_xy
+    return px + PHONE["pad"] + lx * MOBILE_SCALE, py + PHONE["pad"] + ly * MOBILE_SCALE
+
+def cam_to(c, t, dur, el, S=1.6, cy=1010, scroll=0, anchor="center", ease="power3.inOut", phone_xy=(PHONE["x"], PHONE["y"])):
+    """Punch in on a page element: scale the device by S and put the element's centre at (540, cy)."""
+    c.need(el)
+    def f(M):
+        px, py = _phone_pt(M, el, scroll, anchor, phone_xy)
+        c.to("#cam", o(x=540 - S * px, y=cy - S * py, scale=S, duration=dur, ease=ease), t)
+    c.later(f)
+    c.to(".scrim", o(opacity=1, duration=0.18, ease="power1.out"), t - 0.06)   # lead the camera so nothing ghosts under the heading
+
+def cam_home(c, t, dur=0.7, ease="power3.inOut"):
+    c.to("#cam", o(x=0, y=0, scale=1, duration=dur, ease=ease), t)
+    c.to(".scrim", o(opacity=0, duration=dur), t + dur * 0.4)
+
+def scroll_to(c, t, dur, sid, el, top=110, ease="power3.inOut"):
+    """Scroll a screen so el sits `top` page-px below the screen top. Returns the scroll as f(M) for cam_to."""
+    c.need(el)
+    sy = lambda M: min(0.0, -(M[el]["y"] - top))
+    c.later(lambda M: c.to(f"#{sid}-scr", o(y=sy(M), duration=dur, ease=ease), t))
+    return sy
+
+def tap(c, px, t, el, scroll=0, sound=True, press=True):
+    """A finger tap on a page element: touch ring at its centre, the element dips, a soft click."""
+    c.need(el)
+    def f(M):
+        m = M[el]; sy = scroll(M) if callable(scroll) else scroll
+        x, y = m["x"] + m["w"] / 2, m["y"] + m["h"] / 2 + sy
+        c.set(f"#{px}tap", o(left=x, top=y), t - 0.3)
+        c.ft(f"#{px}tap", o(opacity=0, scale=1.5), o(opacity=1, scale=0.8, duration=0.2, ease="power2.out", immediateRender=False), t - 0.18)
+        c.to(f"#{px}tap", o(opacity=0, scale=1.3, duration=0.28, ease="power2.out"), t + 0.05)
+    c.later(f)
+    if press: c.to(f"#{el}", o(scale=0.95, duration=0.09, yoyo=True, repeat=1, ease="power1.inOut"), t - 0.02)
+    if sound: c.cue("tap", t - 0.02, 0.0)
+
+def callout(c, cid, t0, t1, text, kind="acc", sub=None, ic=None, y=1330, sfx=True):
+    name, col = {"good": ("check", C["good"]), "bad": ("x", C["bad"]), "acc": ("spark", C["accent"]), "mute": ("x", C["grey"])}[kind]
+    subh = f"<small>{rich(sub)}</small>" if sub else ""
+    c.clip(cid + "-l", t0 - 0.05, t1 + 0.3, f"""<div class="callout {kind}" style="top:{y}px"><div class="cb" id="{cid}">
+        <span class="ic">{icon(ic or name, 34, col, 2.6)}</span><span class="tx"><b>{rich(text)}</b>{subh}</span></div></div>""", cls="layer", style="z-index:36")
+    c.ft(f"#{cid}", o(opacity=0, y=34, scale=0.9), o(opacity=1, y=0, scale=1, duration=0.48, ease="back.out(1.6)", immediateRender=False), t0)
+    c.to(f"#{cid}", o(opacity=0, y=-12, scale=0.97, duration=0.24, ease="power2.in"), t1)
+    if sfx: c.cue("popup", t0, -6.0)
+
+def numeral(c, cid, t0, t1, n):
+    c.clip(cid, t0 - 0.05, t1 + 0.3, f'<div class="num" id="{cid}-n" data-layout-ignore>{n}</div>', cls="layer", style="z-index:5")
+    c.ft(f"#{cid}-n", o(opacity=0, x=60), o(opacity=1, x=0, duration=0.6, ease="power3.out"), t0)
+    c.to(f"#{cid}-n", o(opacity=0, x=-40, duration=0.3, ease="power2.in"), t1)

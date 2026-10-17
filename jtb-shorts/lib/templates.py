@@ -1,165 +1,229 @@
-"""The four video templates. Each one has:
+"""The video templates. Each one has:
 
     SEGMENTS(spec) -> [(name, seconds), ...]   body scenes after the hook (CTA not included)
     build(c, spec, niche, T)                     T = {name: start time}, plus T["cta"]
 
-Times are snapped to the music's beat grid before build() sees them, so every
-scene change lands on a beat. Copy comes from the spec; anything left out falls
-back to the defaults below, which are written to be accurate (no ranking or
-results promises).
+Scene starts are snapped to a grid (the beat with music, quarter seconds without).
+Copy comes from the spec; anything left out falls back to the defaults below,
+which are written to be accurate (no ranking or results promises).
+
+Pacing rules these follow: one idea per beat, one callout on screen at a time,
+the camera punches in on the part of the phone that the beat is about (sized to
+read on a phone), and nothing sits still for more than about a second.
 """
 from comp import o, R
-from scenes import (hook, head, chip, ring, wipe_in, scroll, brandbar, cta, type_into, typing)
-from mocks import (phone, browser, site_mobile, site_desktop, site_old, screen_slow, screen_wall, serp, gbp, dashboard,
-                   domain, PHONE, BROWSER)
+from scenes import (hook, head, chip, ring, wipe_in, scroll, brandbar, cta, type_into, typing,
+                    cam_to, cam_home, scroll_to, tap, callout, numeral)
+from mocks import phone, browser, site_desktop, site_old, screen_slow, screen_wall, dashboard, domain, PHONE, BROWSER
+from sites import site_mobile, serp, gbp
 
-HOOK = 2.3          # hook length before snapping
-CTA_LEN = 3.4
+HOOK = 2.0          # hook length before snapping
+CTA_LEN = 3.0
 
-# ----------------------------------------------------------------- device motion
-SIDE_LEFT = 470     # phone beside a chip column (phone scaled SIDE_SCALE)
-SIDE_SCALE = 0.86
-CHIP_X = 60
-CHIP_Y = (640, 795, 950)
+# ----------------------------------------------------------------- the stage: device inside the camera, scrim over it
+def stage(c, t1, device_html, z=10):
+    c.clip("dev", 0, t1, f'<div id="cam">{device_html}</div>', cls="layer", style=f"z-index:{z}")
+    c.clip("scrim-l", 1.0, t1, '<div class="scrim"></div>', cls="layer", style="z-index:25")
 
-def device_in(c, sel, t_land, scale=1.0, push_until=None):
-    """Rises under the hook from frame 0, then lands as the first body scene starts, then a slow push-in."""
+def device_in(c, sel, t_land, scale=1.0):
+    """Rises under the hook from frame 0, then lands as the first body scene starts."""
     c.ft(sel, o(y=1180, rotationX=26, transformPerspective=1800, scale=scale, opacity=1),
          o(y=780, rotationX=22, duration=t_land - 0.32, ease="power2.out"), 0.0)
-    c.to(sel, o(y=0, rotationX=0, duration=0.95, ease="expo.out"), t_land - 0.3)
-    if push_until:
-        c.to(sel, o(scale=scale * 1.025, duration=push_until - t_land - 0.65, ease="none"), t_land + 0.65)
+    c.to(sel, o(y=0, rotationX=0, duration=0.85, ease="expo.out"), t_land - 0.3)
 
 def device_clip(c, cid, t1, inner):
     c.clip(cid, 0, t1, inner, cls="layer", style="z-index:10")
 
-def lead_in_riser(c, t):
-    c.cue("riser-m", t, -4.0)
+def opening(c, s, t_land, z):
+    hook(c, s["hook"], t_land)
+    brandbar(c, t_land, z)
+    c.cue("riser-m", t_land, -4.0)
 
-# ================================================================= 1. website redesign
+# ================================================================= 1. website redesign (before -> after -> booking)
 def redesign_segments(s):
-    seg = [("before", 3.9), ("after", 4.8)]
-    if s.get("dashboard"): seg.append(("dash", 3.4))
+    seg = [("before", 3.0), ("after", 3.2 if s.get("booking") else 4.2)]
+    if s.get("booking"): seg.append(("book", 3.6))
     return seg
 
 def redesign(c, s, n, T):
-    b, a, d, z = T["before"], T["after"], T.get("dash"), T["cta"]
-    phone_out = d or z
-    screens = [("s-old", site_old(n, "mobile"), ""), ("s-new", site_mobile(n, px="n-"), "wipe")]
-    device_clip(c, "dev", phone_out + 0.6, phone("ph", screens, f"left:{SIDE_LEFT}px"))
-    device_in(c, "#ph", b, SIDE_SCALE, phone_out)
-    hook(c, s["hook"], b)
-    brandbar(c, b, z)
-    lead_in_riser(c, b)
+    b, a, k, z = T["before"], T["after"], T.get("book"), T["cta"]
+    screens = [("s-old", site_old(n, "mobile"), ""), ("s-new", site_mobile(n, px="n-", booking=bool(s.get("booking"))), "wipe")]
+    stage(c, z + 0.3, phone("ph", screens))
+    device_in(c, "#ph", b)
+    opening(c, s, b, z)
 
     B = s["before"]
     head(c, "hb", b, a, B.get("eyebrow", "Before"), B["head"], "bad")
-    c.to("#s-old-scr", o(scale=2.1, transformOrigin="16% 20%", duration=1.0, ease="power3.inOut"), b + 0.8)
-    c.to("#s-old-scr", o(scale=1, duration=0.8, ease="power3.inOut"), b + 2.6)
-    for i, p in enumerate(B["problems"][:3]):
-        chip(c, f"cb{i}", b + 0.85 + 0.55 * i, a - 0.2, p, "bad", x=CHIP_X, y=CHIP_Y[i])
+    c.to("#s-old-scr", o(scale=2.2, transformOrigin="14% 18%", duration=0.8, ease="power3.inOut"), b + 0.35)
+    c.to("#s-old-scr", o(scale=1, duration=0.6, ease="power3.inOut"), a - 0.75)
+    probs = B["problems"][:2]
+    for i, p in enumerate(probs):
+        t0 = b + 0.6 + i * 1.15
+        callout(c, f"cb{i}", t0, (t0 + 1.05) if i < len(probs) - 1 else a - 0.12, p, "bad")
 
-    A = s["after"]
-    head(c, "ha", a, d or z, A.get("eyebrow", "After"), A["head"], "good")
+    A = s["after"]; end_after = k or z
+    head(c, "ha", a, end_after, A.get("eyebrow", "After"), A["head"], "good")
     wipe_in(c, "s-new", a - 0.15)
-    rings = ["n-ring-h1", "n-ring-btns", "n-ring-rev"]
-    slots = [a + 0.75, a + 1.35, a + 3.2]
-    for i, f in enumerate(A["fixes"][:3]):
-        text, rid = (f["text"], "n-ring-" + f["ring"]) if isinstance(f, dict) else (f, rings[i])
-        t_end = (d or z) - 0.2
-        chip(c, f"ca{i}", slots[i], t_end, text, "good", x=CHIP_X, y=CHIP_Y[i])
-        ring(c, rid, slots[i] + 0.05, slots[i + 1] - 0.1 if i < 2 else t_end)
-    scroll(c, "s-new", a + 2.0, -370, 1.3)
+    fixes = [f if isinstance(f, dict) else {"text": f} for f in A["fixes"]]
+    # fix 1: what you do, up top
+    cam_to(c, a + 0.35, 0.6, "n-h1", 1.3, cy=950)
+    ring(c, "n-ring-h1", a + 0.5, a + 1.45)
+    callout(c, "ca0", a + 0.5, a + 1.45, fixes[0]["text"], "good", fixes[0].get("sub"))
+    # fix 2: the primary action
+    cam_to(c, a + 1.45, 0.55, "n-sm-btns", 1.45, cy=930)
+    ring(c, "n-ring-btns", a + 1.6, end_after - 0.1)
+    callout(c, "ca1", a + 1.6, (a + 2.8) if not k else end_after - 0.1, fixes[1]["text"], "good", fixes[1].get("sub"))
+    if not k and len(fixes) > 2:      # no booking beat: show the reviews instead
+        sy = scroll_to(c, a + 2.7, 0.7, "s-new", "n-sm-rev", top=330)
+        cam_to(c, a + 2.7, 0.7, "n-sm-rev", 1.35, cy=930, scroll=sy)
+        ring(c, "n-ring-rev", a + 3.2, z - 0.15)
+        callout(c, "ca2", a + 3.2, z - 0.15, fixes[2]["text"], "good", fixes[2].get("sub"))
 
-    if d:
-        D_ = s["dashboard"]
-        c.to("#ph", o(x=420, opacity=0, scale=0.7, duration=0.55, ease="power3.in"), d - 0.45)
-        head(c, "hd", d, z, D_.get("eyebrow", "After launch"), D_["head"], "")
-        c.clip("dash", d - 0.4, z + 0.3, browser("br", "dashboard." + domain(n), [("b-dash", dashboard(n), "")]), cls="layer", style="z-index:12")
-        c.ft("#br", o(opacity=0, y=200, rotationX=18, transformPerspective=1800), o(opacity=1, y=0, rotationX=0, duration=0.9, ease="expo.out"), d - 0.2)
-        c.cue("riser-s", d - 0.05, -4.0); c.cue("whoosh", d - 0.25, -6.0)
-        for i, v in enumerate(D_.get("values", [48, 31, 22])):
-            t = d + 0.45 + 0.18 * i
-            c.line(f'(() => {{ const el = document.getElementById("db-v{i}"); const p = {{ v: 0 }}; '
-                   f'tl.to(p, {{ v: {int(v)}, duration: 1.2, ease: "power2.out", onUpdate: () => {{ el.textContent = Math.round(p.v); }} }}, {t:.3f}); }})();')
-            c.cue("bubble", t, -8.0)
-        c.clip("dash-note", d + 0.3, z, '<div class="note" id="dash-note" style="left:70px;width:auto;right:70px;top:1310px;text-align:center">Example dashboard. Illustrative numbers, not real client results.</div>', cls="layer", style="z-index:35")
-        c.ft("#dash-note", o(opacity=0), o(opacity=1, duration=0.4), d + 0.6)
-        c.ft("#db-line", o(strokeDashoffset=1), o(strokeDashoffset=0, duration=1.5, ease="power2.inOut"), d + 0.5)
-        c.to("#br", o(scale=1.02, duration=z - d, ease="none"), d + 0.7)
+    if k:   # booking: tap the button, the sheet comes up, pick a time, confirmed
+        K = s["booking"]
+        head(c, "hk2", k, z, K.get("eyebrow", "Booking"), K["head"], "good")
+        tap(c, "n-", k + 0.15, "n-sm-cta")
+        c.ft("#n-bk", o(yPercent=104), o(yPercent=0, duration=0.55, ease="power3.out"), k + 0.3)
+        c.cue("whoosh", k + 0.45, -9.0)
+        cam_to(c, k + 0.3, 0.7, "n-bk-slots", 1.42, cy=930)
+        tap(c, "n-", k + 1.05, "n-bk-s2")
+        c.to("#n-bk-s2", o(backgroundColor=n["colors"]["primary"], color="#ffffff", borderColor=n["colors"]["primary"], duration=0.12), k + 1.05)
+        tap(c, "n-", k + 1.6, "n-bk-go")
+        c.ft("#n-bk-done", o(opacity=0), o(opacity=1, duration=0.3, ease="power2.out"), k + 1.72)
+        c.ft("#n-bk-done .ok", o(scale=0.4), o(scale=1, duration=0.5, ease="back.out(2.2)"), k + 1.72)
+        c.cue("bubble", k + 1.72, -3.0); c.cue("popup", k + 1.8, -5.0)
+        callout(c, "cbk", k + 2.0, z - 0.12, K["callout"], "good", K.get("sub"), ic="cal", sfx=False)
     cta(c, z, s["cta"])
 
-# ================================================================= 2. local SEO tips
-FACTORS = [("Relevance", "Do you match the search?", "search"), ("Distance", "How close you are", "pin"),
-           ("Prominence", "Reviews, links, reputation", "star")]
+# ================================================================= 2. local SEO: the three local factors
+FACTORS = [
+    dict(name="Relevance", head="*Relevance*: do you match the search?", callout="Match your category + services", sub="List exactly what you do"),
+    dict(name="Distance", head="*Distance*: how close you are.", callout="You can't control this one", sub="It depends on where they're searching", kind="mute", ic="lock"),
+    dict(name="Prominence", head="*Prominence*: how well-known you are.", callout="Reviews, links, mentions", sub="Built over time, not bought", ic="star"),
+]
 
 def local_seo_segments(s):
-    tips = len(s["profile"]["tips"][:3])
-    return [("search", 5.7), ("profile", 1.4 + 1.1 * tips)]
+    return [("search", 2.6), ("f0", 2.5), ("f1", 2.5), ("f2", 2.6)]
 
 def local_seo(c, s, n, T):
-    q, p, z = T["search"], T["profile"], T["cta"]
+    q, z = T["search"], T["cta"]
     query = s.get("query", n["query"])
     spans, _, _ = typing(query, 0)
-    sp = serp(n).replace('<span id="sp-q"></span>', f'<span id="sp-q">{spans}</span>')
-    screens = [("s-serp", sp, ""), ("s-gbp", gbp(n), "wipe")]
-    device_clip(c, "dev", z + 0.4, phone("ph", screens, f"left:{SIDE_LEFT}px"))
-    device_in(c, "#ph", q, SIDE_SCALE, z)
-    hook(c, s["hook"], q)
-    brandbar(c, q, z)
-    lead_in_riser(c, q)
+    stage(c, z + 0.3, phone("ph", [("s-serp", serp(n, spans), "")]))
+    device_in(c, "#ph", q)
+    opening(c, s, q, z)
 
     S = s["search"]
-    head(c, "hs", q, p, S.get("eyebrow", "Local SEO"), S["head"])
-    c.ft("#sp-caret", o(opacity=1), o(opacity=0, duration=0.22, ease="steps(1)", repeat=3, yoyo=True), q - 0.4)
-    te = type_into(c, query, q + 0.45)
-    c.ft("#sp-map", o(opacity=0, y=14), o(opacity=1, y=0, duration=0.45, ease="power2.out"), te + 0.12)
-    c.ft("#s-serp .pinw", o(opacity=0, y=-26), o(opacity=1, y=0, duration=0.45, ease="back.out(2)", stagger=0.12), te + 0.3)
-    for i in range(3): c.cue("bubble", te + 0.3 + 0.12 * i, -4.0)
-    c.ft("#s-serp .sp-row", o(opacity=0, y=16), o(opacity=1, y=0, duration=0.4, ease="power2.out", stagger=0.1), te + 0.22)
-    c.ft("#s-serp .sp-org", o(opacity=0), o(opacity=1, duration=0.4), te + 0.5)
-    c.ft("#sp-caret", o(opacity=1), o(opacity=0, duration=0.15), te + 0.1)
-    ring(c, "ring-sp-mine", te + 0.75, p - 0.2)
-    factors = S.get("factors", FACTORS)
-    for i, (t, sub, ic) in enumerate(factors[:3]):
-        chip(c, f"cf{i}", te + 0.95 + 0.42 * i, p - 0.2, t, "acc", x=CHIP_X, y=CHIP_Y[i], sub=sub, ic=ic)
-    if S.get("note"):
-        c.clip("note", te + 1.9, p + 0.2, f'<div class="note" id="note">{S["note"]}</div>', cls="layer", style="z-index:35")
-        c.ft("#note", o(opacity=0), o(opacity=1, duration=0.4), te + 2.0)
-        c.to("#note", o(opacity=0, duration=0.2), p - 0.2)
+    head(c, "hs", q, T["f0"], S.get("eyebrow", "Local SEO"), S["head"])
+    c.ft("#sp-caret", o(opacity=1), o(opacity=0, duration=0.18, ease="steps(1)", repeat=3, yoyo=True), q - 0.4)
+    cam_to(c, q + 0.05, 0.55, "sp-bar", 1.45, cy=820)
+    te = type_into(c, query, q + 0.35, cps=24)
+    cam_home(c, te + 0.05, 0.6)
+    c.ft("#sp-map", o(opacity=0, y=14), o(opacity=1, y=0, duration=0.45, ease="power2.out"), te + 0.1)
+    c.ft("#s-serp .pinw", o(opacity=0, y=-26), o(opacity=1, y=0, duration=0.45, ease="back.out(2)", stagger=0.1), te + 0.25)
+    for i in range(3): c.cue("bubble", te + 0.25 + 0.1 * i, -4.0)
+    c.ft("#sp-you", o(opacity=0, scale=0.3), o(opacity=1, scale=1, duration=0.4, ease="back.out(2)"), te + 0.5)
+    c.ft("#s-serp .sp-row", o(opacity=0, y=16), o(opacity=1, y=0, duration=0.4, ease="power2.out", stagger=0.08), te + 0.2)
+    c.ft("#sp-places", o(opacity=0), o(opacity=1, duration=0.35), te + 0.15)
+    c.to("#sp-caret", o(opacity=0, duration=0.15), te + 0.1)
 
-    P = s["profile"]
-    head(c, "hp", p, z, P.get("eyebrow", "What you control"), P["head"], "good")
-    wipe_in(c, "s-gbp", p - 0.15)
-    tips = P["tips"][:3]
-    for i, tip in enumerate(tips):
-        t0 = p + 0.8 + 1.1 * i
-        chip(c, f"ct{i}", t0, z - 0.2, tip["text"], "good", x=CHIP_X, y=CHIP_Y[i], sub=tip.get("sub"))
-        ring(c, "ring-gb-" + tip["section"], t0 + 0.05, (p + 0.8 + 1.1 * (i + 1) - 0.1) if i < len(tips) - 1 else z - 0.2)
-        if tip["section"] in ("reviews", "posts"): scroll(c, "s-gbp", t0 - 0.35, -70, 0.7)
+    F = [dict(d, **u) for d, u in zip(FACTORS, s.get("factors", [{}, {}, {}]))]
+    keys = ["f0", "f1", "f2"]
+    for i, f in enumerate(F):
+        t0 = T[keys[i]]; t1 = T[keys[i + 1]] if i < 2 else z
+        numeral(c, f"nm{i}", t0, t1 - 0.1, i + 1)
+        head(c, f"hf{i}", t0, t1, f.get("eyebrow", f"Factor {i + 1} of 3"), f["head"], "")
+        callout(c, f"cf{i}", t0 + 0.85, t1 - 0.12, f["callout"], f.get("kind", "acc"), f.get("sub"), ic=f.get("ic"))
+    # relevance: your listing, with the words that match the search marked
+    t0 = T["f0"]
+    cam_to(c, t0 - 0.05, 0.65, "sp-r1", 1.6, cy=960)
+    ring(c, "ring-sp-mine", t0 + 0.35, T["f1"] - 0.2)
+    c.ft("#sp-cat1 .mk", o(scaleX=0), o(scaleX=1, duration=0.35, ease="power2.out"), t0 + 0.5)
+    c.ft("#sp-svc1 .mk", o(scaleX=0), o(scaleX=1, duration=0.45, ease="power2.out"), t0 + 0.7)
+    c.cue("popup", t0 + 0.5, -10.0)
+    # distance: the map, rings out from the searcher, the miles on each pin
+    t0 = T["f1"]
+    cam_to(c, t0 - 0.05, 0.65, "sp-map", 1.5, cy=930)
+    for i in range(3):
+        c.ft(f"#sp-ring{i}", o(opacity=0, attr=R("{ r: 0 }")), o(opacity=0.9, attr=R(f"{{ r: {36 + 52 * i} }}"), duration=0.7, ease="power2.out"), t0 + 0.35 + 0.12 * i)
+    c.ft("#s-serp .dtag", o(opacity=0, y=6), o(opacity=1, y=0, duration=0.3, ease="back.out(2)", stagger=0.15), t0 + 0.6)
+    for i in range(3): c.cue("bubble", t0 + 0.6 + 0.15 * i, -6.0)
+    # prominence: the ratings and review counts, side by side
+    t0 = T["f2"]
+    cam_to(c, t0 - 0.05, 0.65, "sp-r1", 1.5, cy=930)
+    c.to("#s-serp .sp-rt", o(backgroundColor="rgba(255,181,71,0.55)", boxShadow="0 0 0 2px rgba(232,140,20,0.9)", duration=0.3, stagger=0.14), t0 + 0.45)
+    c.cue("popup", t0 + 0.45, -10.0)
     cta(c, z, s["cta"])
 
-# ================================================================= 3. website mistakes (conversions)
+# ================================================================= 3. Business Profile tips
+TIPS = [
+    dict(eyebrow="Tip 1 of 3", head="Post *real* project photos.", callout="Your work, not stock photos", sub="Recent jobs, with a short caption", ic="camera"),
+    dict(eyebrow="Tip 2 of 3", head="*Reply* to every review.", callout="The good ones and the bad ones", sub="Short, specific, by name", ic="reply",
+         reply="Thanks Dana! The new patio turned out great. Enjoy it!"),
+    dict(eyebrow="Tip 3 of 3", head="Keep your info *up to date*.", callout="Hours, holidays, service area", sub="Update it when anything changes", ic="clock"),
+]
+
+def gbp_tips_segments(s):
+    return [("t0", 3.1), ("t1", 3.5), ("t2", 3.1)]
+
+def gbp_tips(c, s, n, T):
+    z = T["cta"]
+    P = [dict(d, **u) for d, u in zip(TIPS, s.get("tips", [{}, {}, {}]))]
+    reply = P[1]["reply"]
+    spans, _, _ = typing(reply, 0, pid="rq")
+    stage(c, z + 0.3, phone("ph", [("s-gbp", gbp(n, spans), "")]))
+    device_in(c, "#ph", T["t0"])
+    opening(c, s, T["t0"], z)
+    keys = ["t0", "t1", "t2"]
+    for i, p in enumerate(P):
+        t0 = T[keys[i]]; t1 = T[keys[i + 1]] if i < 2 else z
+        numeral(c, f"nm{i}", t0, t1 - 0.1, i + 1)
+        head(c, f"ht{i}", t0, t1, p["eyebrow"], p["head"], "good")
+        callout(c, f"ct{i}", t0 + (1.25 if i else 1.2), t1 - 0.12, p["callout"], "good", p.get("sub"), ic=p.get("ic"))
+    # 1. photos: real jobs land in the grid one by one
+    t0 = T["t0"]
+    sy = scroll_to(c, t0 - 0.1, 0.6, "s-gbp", "gb-photos", top=96)
+    cam_to(c, t0 - 0.05, 0.65, "gb-photos", 1.5, cy=900, scroll=sy)
+    c.ft("#s-gbp .gb-ph", o(opacity=0, scale=0.7), o(opacity=1, scale=1, duration=0.42, ease="back.out(1.8)", stagger=0.16), t0 + 0.45)
+    for i in range(4): c.cue("bubble", t0 + 0.45 + 0.16 * i, -6.0)
+    # 2. reviews: the owner's reply types itself out
+    t0 = T["t1"]
+    sy = scroll_to(c, t0 - 0.1, 0.6, "s-gbp", "gb-reviews", top=96)
+    cam_to(c, t0 - 0.05, 0.65, "gb-reviews", 1.6, cy=880, scroll=sy)
+    c.ft("#gb-reply", o(opacity=0, y=10), o(opacity=1, y=0, duration=0.35, ease="power2.out"), t0 + 0.4)
+    type_into(c, reply, t0 + 0.6, cps=30, pid="rq")
+    # 3. info: hours corrected, holiday hours added, marked updated
+    t0 = T["t2"]
+    sy = scroll_to(c, t0 - 0.1, 0.6, "s-gbp", "gb-info", top=96)
+    cam_to(c, t0 - 0.05, 0.65, "gb-info", 1.6, cy=880, scroll=sy)
+    c.ft("#gb-strike", o(scaleX=0), o(scaleX=1, duration=0.3, ease="power2.out"), t0 + 0.5)
+    c.ft("#gb-hrs-new", o(opacity=0, y=8), o(opacity=1, y=0, duration=0.35, ease="power2.out"), t0 + 0.7)
+    c.ft("#gb-hol", o(opacity=0, x=-10), o(opacity=1, x=0, duration=0.35, ease="power2.out"), t0 + 0.95)
+    c.ft("#gb-upd", o(opacity=0, scale=0.6), o(opacity=1, scale=1, duration=0.4, ease="back.out(2)"), t0 + 1.15)
+    c.cue("popup", t0 + 0.7, -9.0); c.cue("bubble", t0 + 1.15, -4.0)
+    cta(c, z, s["cta"])
+
+# ================================================================= 4. website mistakes (conversions)
 def _sm(**kw): return lambda n, px: site_mobile(n, px=px, **kw)
 MISTAKES = {
-    "hidden-phone":    dict(bad=_sm(buttons=False, callbar=False), good=_sm(), ring="ring-bar", scroll_bad=-420,
-                            mistake="Your phone number is *buried*.", fix="Tap-to-call on *every* screen."),
-    "no-cta":          dict(bad=_sm(buttons=False, callbar=False), good=_sm(), ring="ring-btns", scroll_bad=-160,
-                            mistake="No clear *next step*.", fix="One obvious button: *Get a quote*."),
-    "slow":            dict(bad=lambda n, px: screen_slow(px), good=_sm(), ring="ring-h1", slow=True,
-                            mistake="It takes *forever* to load.", fix="Compress images. *Cut the bloat.*"),
-    "not-mobile":      dict(bad=lambda n, px: site_old(n, "mobile"), good=_sm(), ring="ring-h1", pinch=True,
-                            mistake="Not built for *phones*.", fix="Design for the *thumb* first."),
-    "no-reviews":      dict(bad=_sm(reviews=False), good=_sm(), ring="ring-rev", scroll_bad=-360, scroll_good=-360,
-                            mistake="No *proof* you're any good.", fix="Put real *reviews* up front."),
-    "generic-heading": dict(bad=_sm(hero_title="Welcome to our website!"), good=_sm(), ring="ring-h1", bad_ring="ring-h1",
-                            mistake="“Welcome to our *website*.”", fix="Say *what* you do and *where*."),
-    "wall-of-text":    dict(bad=lambda n, px: screen_wall(n), good=_sm(), ring="ring-h1", scroll_bad=-240,
-                            mistake="A wall of *text*.", fix="Short lines. *Clear sections.*"),
+    "hidden-phone":    dict(bad=_sm(buttons=False, callbar=False), good=_sm(), target="sm-bar", ring="ring-bar", scroll_bad=-420, cy=1060,
+                            mistake="Your phone number is *buried*.", fix="Tap-to-call on *every* screen.", why="A call button always in reach"),
+    "no-cta":          dict(bad=_sm(buttons=False, callbar=False), good=_sm(), target="sm-btns", ring="ring-btns", scroll_bad=-160,
+                            mistake="No clear *next step*.", fix="One obvious button up top.", why="Tell them exactly what to do"),
+    "slow":            dict(bad=lambda n, px: screen_slow(px), good=_sm(), target="h1", ring="ring-h1", slow=True, bad_len=1.0,
+                            mistake="It takes *forever* to load.", fix="Compress images. *Cut the bloat.*", why="Light pages load faster"),
+    "not-mobile":      dict(bad=lambda n, px: site_old(n, "mobile"), good=_sm(), target="h1", ring="ring-h1", pinch=True,
+                            mistake="Not built for *phones*.", fix="Design for the *thumb* first.", why="Readable without zooming"),
+    "no-reviews":      dict(bad=_sm(reviews=False), good=_sm(), target="sm-rev", ring="ring-rev", scroll_bad=-300, scroll_good=True,
+                            mistake="No *proof* you're any good.", fix="Put real *reviews* up front.", why="Proof right where they decide"),
+    "generic-heading": dict(bad=_sm(hero_title="Welcome to our website!"), good=_sm(), target="h1", ring="ring-h1", bad_ring="ring-h1",
+                            mistake="“Welcome to our *website*.”", fix="Say *what* you do and *where*.", why="Clear in three seconds"),
+    "wall-of-text":    dict(bad=lambda n, px: screen_wall(n), good=_sm(), target="h1", ring="ring-h1", scroll_bad=-240,
+                            mistake="A wall of *text*.", fix="Short lines. *Clear sections.*", why="Easy to scan on a phone"),
 }
 
 def mistakes_segments(s):
-    return [(f"m{k}", 3.95) for k in range(len(s["items"][:3]))]
+    return [(f"m{k}", 1.95 + MISTAKES[it["type"]].get("bad_len", 1.3)) for k, it in enumerate(s["items"][:3])]
 
 def mistakes(c, s, n, T):
     items = s["items"][:3]; z = T["cta"]; K = len(items)
@@ -168,30 +232,36 @@ def mistakes(c, s, n, T):
         M = MISTAKES[it["type"]]
         screens.append((f"s{k}b", M["bad"](n, f"b{k}-"), "bad" + (" wipe" if k else "")))
         screens.append((f"s{k}g", M["good"](n, f"g{k}-"), "wipe"))
-    device_clip(c, "dev", z + 0.4, phone("ph", screens))
+    stage(c, z + 0.3, phone("ph", screens))
     first = T["m0"]
-    device_in(c, "#ph", first, 1.0, z)
-    hook(c, s["hook"], first)
-    brandbar(c, first, z)
-    lead_in_riser(c, first)
+    device_in(c, "#ph", first)
+    opening(c, s, first, z)
     for k, it in enumerate(items):
         M = MISTAKES[it["type"]]
         a = T[f"m{k}"]; nxt = T[f"m{k + 1}"] if k + 1 < K else z
-        f = a + (nxt - a) * 0.46
-        if k: wipe_in(c, f"s{k}b", a - 0.15)
+        f = a + M.get("bad_len", 1.3)
+        numeral(c, f"nm{k}", a, nxt - 0.1, k + 1)
+        if k:
+            cam_home(c, a - 0.4, 0.45)
+            wipe_in(c, f"s{k}b", a - 0.15)
         head(c, f"hb{k}", a, f, it.get("eyebrow", f"Mistake {k + 1} of {K}"), it.get("mistake", M["mistake"]), "bad")
-        head(c, f"hg{k}", f, nxt, "The fix", it.get("fix", M["fix"]), "good")
-        if M.get("scroll_bad"): scroll(c, f"s{k}b", a + 0.3, M["scroll_bad"], f - a - 0.4, "power1.inOut")
+        head(c, f"hg{k}", f, nxt, it.get("fix_eyebrow", f"Fix {k + 1}"), it.get("fix", M["fix"]), "good")
+        if M.get("scroll_bad"): scroll(c, f"s{k}b", a + 0.2, M["scroll_bad"], f - a - 0.25, "power1.inOut")
         if M.get("slow"):
-            c.ft(f"#b{k}-ss-fill", o(width="5%"), o(width="36%", duration=f - a, ease="power1.out"), a)
-            c.ft(f"#b{k}-ss-spin", o(rotation=0), o(rotation=360 * 3, duration=f - a + 0.3, ease="none"), a)
+            c.ft(f"#b{k}-ss-fill", o(width="5%"), o(width="38%", duration=f - a, ease="power1.out"), a)
+            c.ft(f"#b{k}-ss-spin", o(rotation=0), o(rotation=360 * 2, duration=f - a + 0.2, ease="none"), a)
         if M.get("pinch"):
-            c.to(f"#s{k}b-scr", o(scale=2.1, transformOrigin="16% 20%", duration=0.9, ease="power3.inOut"), a + 0.4)
-        if M.get("bad_ring"): ring(c, f"b{k}-{M['bad_ring']}", a + 0.5, f - 0.1)
-        if M.get("scroll_good"): c.set(f"#s{k}g-scr", o(y=M["scroll_good"]), a)
+            c.to(f"#s{k}b-scr", o(scale=2.1, transformOrigin="16% 20%", duration=0.7, ease="power3.inOut"), a + 0.25)
+        if M.get("bad_ring"): ring(c, f"b{k}-{M['bad_ring']}", a + 0.35, f - 0.1)
+        sy = 0
+        if M.get("scroll_good"):
+            sy = lambda Mm, el=f"g{k}-{M['target']}": min(0.0, -(Mm[el]["y"] - 300))
+            c.need(f"g{k}-{M['target']}")
+            c.later(lambda Mm, k=k, sy=sy: c.set(f"#s{k}g-scr", o(y=sy(Mm)), f - 0.15))
         wipe_in(c, f"s{k}g", f - 0.12)
-        c.cue("popup", f + 0.5, -6.0)
-        ring(c, f"g{k}-{M['ring']}", f + 0.5, nxt - 0.25)
+        cam_to(c, f + 0.3, 0.6, f"g{k}-{M['target']}", 1.45, cy=M.get("cy", 960), scroll=sy)
+        ring(c, f"g{k}-{M['ring']}", f + 0.55, nxt - 0.2)
+        callout(c, f"cw{k}", f + 0.6, nxt - 0.15, it.get("why", M["why"]), "good")
     cta(c, z, s["cta"])
 
 # ================================================================= 4. before / after transformation
@@ -208,10 +278,10 @@ def before_after(c, s, n, T):
         <div id="ba-h" style="left:{BROWSER['x'] - 2}px;top:{BA_TOP + BROWSER['bar']}px;height:{bh}px"><i></i><span>{"‹ ›"}</span></div>
         <div class="ba-tag old" id="tag-old" style="right:{1080 - BROWSER['x'] - BROWSER['w'] + 24}px;top:{BA_TOP + BROWSER['h'] - 76}px">BEFORE</div>
         <div class="ba-tag new" id="tag-new" style="left:{BROWSER['x'] + 24}px;top:{BA_TOP + BROWSER['h'] - 76}px">AFTER</div>""")
-    device_in(c, "#br", rv, 1.0, z)
+    device_in(c, "#br", rv)
     hook(c, s["hook"], rv)
     brandbar(c, rv, z)
-    lead_in_riser(c, rv)
+    c.cue("riser-m", rv, -4.0)
 
     sw0, sw1 = rv + 1.35, rv + 2.85
     head(c, "hb", rv, sw1 + 0.05, s.get("before_eyebrow", "Before"), s["before_head"], "bad")
@@ -245,7 +315,7 @@ BA_CSS = f"""
            opacity:0; box-shadow:0 10px 24px rgba(0,0,0,.3); }}
 .ba-tag.old {{ background:#1C1A19; color:#FF8A8A; }}
 .ba-tag.new {{ background:#1C1A19; color:#7BE7B0; }}
-.note {{ position:absolute; left:{CHIP_X}px; width:420px; top:1110px; font-size:23px; line-height:1.4; color:#8A8580; opacity:0; }}
+.note {{ position:absolute; left:60px; width:420px; top:1110px; font-size:23px; line-height:1.4; color:#8A8580; opacity:0; }}
 .bad .ring {{ border-color:#FF6161; box-shadow:0 0 0 7px rgba(255,97,97,.2), 0 0 34px rgba(255,97,97,.3); }}
 """
 
@@ -254,4 +324,5 @@ TEMPLATES = {
     "local-seo":    (local_seo_segments, local_seo),
     "mistakes":     (mistakes_segments, mistakes),
     "before-after": (before_after_segments, before_after),
+    "gbp-tips":     (gbp_tips_segments, gbp_tips),
 }

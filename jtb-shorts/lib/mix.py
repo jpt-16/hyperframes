@@ -2,6 +2,10 @@
 
 mix():    music bed + every sound cue (+ a synthesised click per typed character)
 master(): gain to the loudness target, then a 4x-oversampled peak limiter.
+          With music off, the gain is still worked out on the full mix (bed + sounds),
+          then applied to the sounds alone: the effects keep exactly the level they
+          were designed to sit at under a -14 LUFS track, so a song added later in an
+          editor at normal loudness lands in the right balance.
           loudnorm is only ever used to MEASURE. The limiter's workload is
           reported so a hot mix is visible instead of silently squashed.
 """
@@ -12,7 +16,7 @@ from sfx import key_click
 
 # where a cue's time sits inside each file: risers top out on the cue, whooshes peak on it
 ANCHOR = {"riser-s": "end", "riser-m": "end", "riser-l": "end", "whoosh": "peak"}
-LEVEL_DB = {"popup": -7.0, "bubble": -9.0, "land": -3.0, "riser-s": -9.0, "riser-m": -8.0, "riser-l": -9.0, "whoosh": -8.0}
+LEVEL_DB = {"tap": -10.0, "popup": -7.0, "bubble": -9.0, "land": -3.0, "riser-s": -9.0, "riser-m": -8.0, "riser-l": -9.0, "whoosh": -8.0}
 BED_DB = -2.0
 KEY_DB = -12.0
 TARGET_LUFS = -14.0
@@ -29,7 +33,11 @@ def read(path):
 
 def db(g): return 10 ** (g / 20)
 
-def mix(out_path, D, bed_path, cues, keys, sfx_dir):
+def _raw_write(path, st):
+    w = wave.open(path, "wb"); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
+    w.writeframes((np.clip(st, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
+
+def mix(out_path, D, bed_path, cues, keys, sfx_dir, fx_path=None):
     L = int(round(D * SR))
     bed = read(bed_path)[:L]
     buf = np.zeros((L, 2)); buf[: len(bed)] = bed * db(BED_DB)
@@ -51,7 +59,9 @@ def mix(out_path, D, bed_path, cues, keys, sfx_dir):
         x = key_click(int(t * 1000)); i = int(round(t * SR)); j = min(L, i + len(x))
         if j > i: fx[i:j] += x[: j - i] * db(KEY_DB + gdb)
     out = buf + fx
-    write(out_path, out, -1.0)
+    k = db(-1.0) / (np.max(np.abs(out)) + 1e-12)          # one scale for both files keeps them comparable
+    _raw_write(out_path, out * k)
+    if fx_path: _raw_write(fx_path, fx * k)
     return audibility(buf, fx, report)
 
 def audibility(bed, fx, report):
@@ -71,7 +81,10 @@ def measure(path, pre=""):
     j = json.loads(err[err.rindex("{"): err.rindex("}") + 1])
     return float(j["input_i"]), float(j["input_tp"])
 
-def master(pre_path, out_path, target=TARGET_LUFS):
+def master(pre_path, out_path, target=TARGET_LUFS, fx_path=None):
+    """fx_path: master the full mix to find the gain, then ship the sounds-only file at that same gain."""
+    full_out = out_path + ".full.wav" if fx_path else out_path
+    out_path, final = full_out, out_path
     I0, _ = measure(pre_path)
     g = target - I0
     for _ in range(4):
@@ -81,6 +94,13 @@ def master(pre_path, out_path, target=TARGET_LUFS):
         I, tp = measure(out_path)
         if abs(I - target) <= 0.3: break
         g += target - I
+    fx_stats = None
+    if fx_path:
+        af = f"volume={g:.2f}dB,aresample=192000,alimiter=limit={CEILING}:attack=4:release=80:level=disabled,aresample=48000"
+        subprocess.run(["ffmpeg", "-hide_banner", "-v", "error", "-y", "-i", fx_path, "-af", af, "-ac", "2", "-ar", "48000",
+                        "-c:a", "pcm_s16le", final], check=True)
+        os.remove(out_path); out_path = final
+        fx_stats = measure(final)
     fixes = codec_safe(out_path)
     # limiter workload: how much of the programme sits above the ceiling before limiting (4x oversampled)
     x = read(pre_path).mean(1) * db(g)
@@ -88,7 +108,8 @@ def master(pre_path, out_path, target=TARGET_LUFS):
     blk = int(0.01 * SR * 4); nb = len(up) // blk
     peaks = up[: nb * blk].reshape(nb, blk).max(1)
     over = peaks > CEILING
-    return dict(lufs=round(I, 1), true_peak=round(tp, 1), aac_dips=fixes, gain_db=round(g, 1),
+    if fx_stats: I, tp = fx_stats
+    return dict(lufs=round(I, 1), true_peak=round(tp, 1), aac_dips=fixes, gain_db=round(g, 1), music=fx_path is None,
                 limited_pct=round(100 * over.mean(), 1),
                 max_reduction_db=round(max(0.0, 20 * np.log10(peaks.max() / CEILING)), 1))
 

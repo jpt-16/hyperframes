@@ -36,6 +36,17 @@ class Comp:
         self.D = duration; self.fps = fps
         self.html, self.css, self.js, self.cues, self.keys = [], [], [], [], []
         self.track = 0
+        self.needs, self.deferred = set(), []      # layout measurement: ids to measure, tweens that need the numbers
+        self.music = False
+
+    def need(self, *ids): self.needs.update(ids)
+    def later(self, fn):
+        """fn(M) runs after the page is laid out and measured; M[id] = {x, y, w, h} in the element's own page
+        pixels (inside its device viewport, unscrolled). Used to aim the camera and scroll pages exactly."""
+        self.deferred.append(fn)
+    def resolve(self, M):
+        for fn in self.deferred: fn(M)
+        self.deferred = []
 
     def clip(self, cid, t0, t1, inner, cls="scene", style=""):
         t0 = max(0.0, t0); t1 = min(self.D, t1); self.track += 1
@@ -56,7 +67,7 @@ class Comp:
         """One synthesised key click (typing)."""
         if 0 <= t < self.D: self.keys.append((r(t), db))
 
-    def page(self, css, title):
+    def page(self, css, title, script=True):
         D = r(self.D)
         js = "\n".join("      " + l for l in self.js)
         body = "\n".join("      " + h for h in self.html)
@@ -76,7 +87,7 @@ class Comp:
       <div id="vignette"></div>
       <audio id="mix" src="assets/mix.wav" data-start="0" data-duration="{D}" data-track-index="0" data-volume="1"></audio>
     </div>
-    <script>
+    {"<script>" if script else "<script type='text/x-disabled'>"}
       window.__timelines = window.__timelines || {{}};
       const tl = gsap.timeline({{ paused: true }});
 {js}

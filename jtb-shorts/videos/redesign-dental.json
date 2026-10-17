@@ -4,9 +4,10 @@
   "style": "glow",
   "hook": { "eyebrow": "Website redesign", "lines": ["New patients", "judge your", "website first."], "accent": [2] },
   "before": { "head": "Built in 2011. *It shows.*",
-              "problems": ["Pinch-to-read text", "No way to book", "Looks out of date"] },
+              "problems": ["Pinch-to-read text", "No way to book online"] },
   "after":  { "head": "Clear, calm and *easy to book*.",
-              "fixes": [ {"text": "Who it's for, up top", "ring": "h1"}, {"text": "Book + call buttons", "ring": "btns"}, {"text": "Real patient reviews", "ring": "rev"} ] },
-  "dashboard": { "head": "Then *track* what it brings in.", "values": [36, 24, 19] },
-  "cta": { "headline": "Is your site *helping or hurting*?", "action": "DM me “SITE”", "sub": "JT Builds Co · websites for local businesses" }
+              "fixes": [ {"text": "Who it's for, up top", "sub": "Family dentist in {city}"},
+                         {"text": "Book online in one tap", "sub": "With a call button right below"} ] },
+  "booking": { "head": "Booked in *three taps*.", "callout": "No phone tag", "sub": "Patients book any time of day" },
+  "cta": { "headline": "Is your site *helping or hurting*?", "action": "DM ‘SITE’", "sub": "JT Builds Co · websites for local businesses" }
 }

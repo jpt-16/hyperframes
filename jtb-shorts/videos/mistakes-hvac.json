@@ -4,5 +4,5 @@
   "style": "pulse",
   "hook": { "eyebrow": "Website mistakes", "lines": ["3 mistakes", "costing you", "service calls."], "accent": [2] },
   "items": [ {"type": "hidden-phone"}, {"type": "slow"}, {"type": "no-reviews"} ],
-  "cta": { "headline": "Want me to check *your site*?", "action": "DM me “CHECK”", "sub": "JT Builds Co · websites for local businesses" }
+  "cta": { "headline": "Want me to check *your site*?", "action": "DM ‘CHECK’", "sub": "JT Builds Co · websites for local businesses" }
 }

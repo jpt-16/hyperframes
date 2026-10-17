@@ -18,34 +18,38 @@ Requirements: Python 3 with numpy and scipy, ffmpeg, and Node (for `npx hyperfra
 ## What every video has
 
 - **Hook (0–2.3 s):** big kinetic type. The eyebrow is on screen from frame 0 and the full hook is readable by about 0.5 s. A device rises underneath it, then lands as the first scene starts.
-- **Body:** cinematic device mockups showing example business sites, a simulated local search page, a business profile and a dashboard. Pop-up chips, highlight rings, light-sweep screen wipes and a JT Builds Co. brand bar.
+- **Body:** a phone mockup inside a camera. The camera punches in on whatever the beat is about (the map, the call button, the booking sheet), so the screen content reads at phone size. Positions come from the real page layout, measured in Chromium at build time.
+  - One large callout card at a time, highlight rings, taps, light-sweep screen wipes and a big step numeral (1/2/3) behind the phone.
+  - A JT Builds Co. brand bar sits at the top.
+  - The example sites have photo-style hero scenes per business type (`lib/art.py`), ratings, hours and real-world microcopy.
 - **CTA (last ~3.4 s):** the JT Builds Co. lockup (charcoal tile, JT mark, **BUILDS** white, **CO.** grey), the ask, an amber action pill and a sub line for disclaimers.
-- **Sound:** an original music bed written per video at its exact length. Scene changes and the CTA land on the beat, with a drop before the CTA and a chord on it.
-  - Risers into big entrances, pops on chips, whooshes on transitions and a low hit on the hook.
+- **Sound:** **no music by default**, so you can add one consistent track to the whole series in CapCut. Exports carry sound effects only:
+  - Risers into big entrances, pops on callouts, whooshes on transitions, taps and a low hit on the hook and end card.
   - A synthesised key click for every typed character.
-  - Mastered to −14 LUFS with a −1.5 dBTP ceiling. The build reports how hard the limiter worked.
+  - The effects keep the level they were designed at under a −14 LUFS song (about −22 LUFS on their own), so a normally loud track drops in balanced.
+  - Set `"music": true` in a spec to bring back the built-in original bed. Scene changes then snap to its beat and the mix is mastered to −14 LUFS.
 
 ## Templates
 
 | template | scenes | spec fields |
 |---|---|---|
-| `redesign` | before (old site, pinch-zoom, problem chips) → after (light-sweep to new site, fix chips + rings) → optional dashboard | `before{head, problems[3]}`, `after{head, fixes[3]}`, `dashboard{head, values[3]}` (optional) |
-| `local-seo` | search typed → map pack + results, Google's 3 local factors → business profile with 3 tips highlighted | `search{head, note, factors?}`, `profile{head, tips[3]{text, sub, section}}`, `query?` |
-| `mistakes` | 3 × (mistake screen → fix screen with highlight) | `items[3]{type, mistake?, fix?}` |
+| `redesign` | before (old site, pinch-zoom, problems) → after (light-sweep to the new site, fixes with punch-ins) → optional booking (tap, pick a time, confirmed) | `before{head, problems[2]}`, `after{head, fixes[2-3]{text, sub}}`, `booking?{head, callout, sub}` |
+| `local-seo` | search typed → results → one beat per Google local factor: relevance (your listing, matching words marked), distance (rings from the searcher, "you can't control this"), prominence (ratings + review counts) | `search{head}`, `factors?[3]{head, callout, sub}`, `query?` |
+| `gbp-tips` | three Business Profile improvements, each shown happening: real job photos land, the owner's reply types out, hours get corrected and marked updated | `tips?[3]{eyebrow, head, callout, sub, reply}` |
+| `mistakes` | 3 × (numbered mistake → fix, punched in on what changed) | `items[3]{type, mistake?, fix?, why?}` |
 | `before-after` | old desktop site → slider wipe to new → phone version + change chips | `before_head`, `after_head`, `changes[3]` |
 
 All templates take:
 
 - `hook{eyebrow, lines[], accent[]}`. Lines are explicit; keep each one to 18 characters or fewer.
 - `cta{headline, action, sub}`.
-- `style`: `drive` (118 bpm), `glow` (100 bpm) or `pulse` (124 bpm).
+- `music` (default `false`). With music on, `style` picks the bed: `drive` (118 bpm), `glow` (100 bpm) or `pulse` (124 bpm).
 - `seed` (optional).
 
 In any text, `*word*` turns that word amber and `\n` breaks the line. `{business} {short} {label} {city} {query} {category}` are filled in from the niche.
 
 - **Mistake types** (`items[].type`): `hidden-phone`, `no-cta`, `slow`, `not-mobile`, `no-reviews`, `generic-heading`, `wall-of-text`. Each comes with default copy, a bad screen, a fixed screen and a highlight.
-- **Profile sections** (`tips[].section`): `category`, `website`, `nap`, `hours`, `photos`, `reviews`, `posts`.
-- **Fix rings** (`fixes[].ring` in redesign): `h1`, `btns`, `rev`, `bar`.
+- **Using your own work:** to show real sites instead of the examples, put screenshots in `brand/photos/` and swap the `scene()` art in `lib/sites.py` for an `<img>`. The layouts don't care which they get.
 
 ## Niches
 
@@ -87,9 +91,12 @@ Device screens are marked `data-layout-ignore` because they are set dressing. Ev
 jtb.py              CLI: spec -> out/<slug>/ (HyperFrames project) -> check -> renders/<slug>.mp4
 videos/*.json       one spec per video (8 examples)
 niches.json         example businesses
-lib/templates.py    the four templates
-lib/scenes.py       hook, headings, chips, rings, wipes, typing, brand bar, CTA
-lib/mocks.py        device frames, example sites, search page, business profile, dashboard
+lib/templates.py    the templates
+lib/scenes.py       hook, headings, callouts, rings, wipes, typing, taps, camera, brand bar, CTA
+lib/sites.py        the example mobile site, booking sheet, local results page, Business Profile
+lib/art.py          photo-style hero scenes per business type (inline SVG)
+lib/mocks.py        device frames, old-site / desktop / slow-page mockups, dashboard
+lib/measure.js      build-time layout measurement the camera aims with
 lib/brand.py        colours, fonts, base CSS, icons
 lib/comp.py         composition builder (clips, GSAP lines, sound cues -> index.html)
 lib/audio.py        music bed + whoosh synthesis

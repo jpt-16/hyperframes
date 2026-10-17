@@ -76,6 +76,9 @@ def icon(name, size=32, color="currentColor", sw=2.2):
         "img":   '<rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 16l4.5-4.5 4 4 3-3L20 17"/><circle cx="15.5" cy="9.5" r="1.4"/>',
         "user":  '<circle cx="12" cy="8.5" r="3.6"/><path d="M5 20a7 7 0 0 1 14 0"/>',
         "arrow": '<path d="M5 12h14M13 6l6 6-6 6"/>',
+        "lock":  '<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/>',
+        "cal":   '<rect x="4" y="5.5" width="16" height="15" rx="2"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/>',
+        "reply": '<path d="M10 8 5 12.5l5 4.5"/><path d="M5.5 12.5H14a5 5 0 0 1 5 5V19"/>',
     }[name]
     fill = "none"
     if name == "star": fill = color

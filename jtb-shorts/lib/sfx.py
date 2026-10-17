@@ -70,6 +70,14 @@ def key_click(seed):
     pan = g.uniform(-0.25, 0.25)
     return np.stack([x * (1 - pan), x * (1 + pan)], 1) * 0.5
 
+def tap():
+    """A finger tap on glass: a short soft tick with a little body. Quieter and duller than a key."""
+    g = np.random.default_rng(77); t = T(0.08)
+    tick = _bp(g.standard_normal(len(t)), 1800, 5200) * np.exp(-t / 0.004)
+    body = np.sin(2 * np.pi * 260 * t) * np.exp(-t / 0.018) * 0.6
+    x = (tick + body) * np.minimum(1, t / 0.0005)
+    return space(np.stack([x, x], 1), 0.25, 0.08)
+
 if __name__ == "__main__":
     out = os.path.join(os.path.dirname(__file__), "..", "brand", "sfx")
     write(f"{out}/popup.wav", popup(), -3.0)
@@ -78,5 +86,6 @@ if __name__ == "__main__":
     write(f"{out}/riser-l.wav", riser(1.25, 350, 9000, (110, 660)), -3.0)
     write(f"{out}/bubble.wav", bubble(), -3.0)
     write(f"{out}/land.wav", land(), -3.0)
+    write(f"{out}/tap.wav", tap(), -3.0)
     make_whoosh(f"{out}/whoosh.wav")
     print("brand/sfx rebuilt")

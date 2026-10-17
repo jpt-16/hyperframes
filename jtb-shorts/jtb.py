@@ -19,6 +19,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "lib"))
 from brand import BASE_CSS
 from mocks import MOCK_CSS
+from sites import SITES_CSS
 from scenes import SCENE_CSS, TYPING_CSS
 from templates import TEMPLATES, HOOK, CTA_LEN, BA_CSS
 from comp import Comp, plain
@@ -27,7 +28,8 @@ from mix import mix, master, measure
 from copylint import lint
 
 HF = ["npx", "--yes", "hyperframes@0.8.154"]
-NICHES = {k: v for k, v in json.load(open(os.path.join(HERE, "niches.json"))).items() if not k.startswith("_")}
+NODE_PATH = subprocess.run(["npm", "root", "-g"], capture_output=True, text=True).stdout.strip()
+NICHES = {k: dict(v, _key=k) for k, v in json.load(open(os.path.join(HERE, "niches.json"))).items() if not k.startswith("_")}
 FPS = 30
 
 def fill(x, n):
@@ -45,9 +47,8 @@ def load(path, niche=None, slug=None):
     if s["niche"] not in NICHES: sys.exit(f"unknown niche {s['niche']!r}; have {', '.join(NICHES)}")
     return fill(s, NICHES[s["niche"]]), NICHES[s["niche"]]
 
-def schedule(segments, bpm):
-    """Scene starts on the beat grid: hook at 0, then each scene, then the CTA."""
-    beat = 60 / bpm
+def schedule(segments, beat):
+    """Scene starts on a grid (the music's beat, or quarter seconds with no music): hook at 0, each scene, then the CTA."""
     def snap(t, min_t):
         k = round(t / beat)
         while k * beat < min_t: k += 1
@@ -67,10 +68,11 @@ def build(spec, niche, quiet=False):
         sys.exit(f"{slug}: copy lint failed. Reword, or list the rule in \"_allow\" if the claim is genuinely true and sourced.")
     segs_fn, build_fn = TEMPLATES[spec["template"]]
     style = spec.get("style", "drive")
-    T = schedule(segs_fn(spec), STYLES[style]["bpm"])
+    music = spec.get("music", False)          # default: no music; add one track to the whole series in your editor
+    T = schedule(segs_fn(spec), 60 / STYLES[style]["bpm"] if music else 0.25)
     D = round((T["cta"] + CTA_LEN) * FPS) / FPS
     if not 10 <= D <= 20.5: print(f"  note: {slug} runs {D:.1f}s (target 10-20 s)")
-    c = Comp(D, FPS)
+    c = Comp(D, FPS); c.music = music
     build_fn(c, spec, niche, T)
 
     if os.path.isdir(out): shutil.rmtree(out)
@@ -78,8 +80,16 @@ def build(spec, niche, quiet=False):
     shutil.copytree(os.path.join(HERE, "brand", "fonts"), os.path.join(out, "assets", "fonts"))
     shutil.copy(os.path.join(HERE, "brand", "jt-mark.png"), os.path.join(out, "assets", "jt-mark.png"))
     shutil.copy(os.path.join(HERE, "brand", "gsap.min.js"), os.path.join(out, "assets", "gsap.min.js"))
-    css = "\n".join([BASE_CSS, MOCK_CSS, SCENE_CSS, BA_CSS, TYPING_CSS])
-    open(os.path.join(out, "index.html"), "w").write(c.page(css, f"JT Builds Co · {plain(' '.join(spec['hook']['lines']))}"))
+    css = "\n".join([BASE_CSS, MOCK_CSS, SITES_CSS, SCENE_CSS, BA_CSS, TYPING_CSS])
+    title = f"JT Builds Co · {plain(' '.join(spec['hook']['lines']))}"
+    if c.needs:      # lay the page out once (timeline off, fonts loaded) and measure what the camera aims at
+        mpath = os.path.join(out, ".measure.html")
+        open(mpath, "w").write(c.page(css, title, script=False))
+        r = subprocess.run(["node", os.path.join(HERE, "lib", "measure.js"), mpath, json.dumps(sorted(c.needs))],
+                           capture_output=True, text=True, env=dict(os.environ, NODE_PATH=NODE_PATH))
+        if r.returncode: sys.exit("layout measurement failed:\n" + r.stderr[-2000:])
+        c.resolve(json.loads(r.stdout)); os.remove(mpath)
+    open(os.path.join(out, "index.html"), "w").write(c.page(css, title))
     json.dump({"name": slug, "private": True, "type": "module",
                "scripts": {k: " ".join(HF + [v]) for k, v in dict(dev="preview", check="check", render="render").items()}},
               open(os.path.join(out, "package.json"), "w"), indent=2)
@@ -88,10 +98,12 @@ def build(spec, niche, quiet=False):
     json.dump({"id": slug, "name": slug, "createdAt": "2026-10-17T00:00:00.000Z"}, open(os.path.join(out, "meta.json"), "w"), indent=2)
 
     tmp = os.path.join(out, ".audio"); os.makedirs(tmp)
+    # with music off the bed is still built, as the level reference the sounds are balanced against (it is not exported)
     cta_g = make_bed(os.path.join(tmp, "bed.wav"), D, T["cta"], style, spec.get("seed", 7))
-    assert abs(cta_g - T["cta"]) < 1e-3, (cta_g, T["cta"])
-    aud = mix(os.path.join(tmp, "pre.wav"), D, os.path.join(tmp, "bed.wav"), c.cues, c.keys, os.path.join(HERE, "brand", "sfx"))
-    m = master(os.path.join(tmp, "pre.wav"), os.path.join(out, "assets", "mix.wav"))
+    if music: assert abs(cta_g - T["cta"]) < 1e-3, (cta_g, T["cta"])
+    fx = os.path.join(tmp, "fx.wav") if not music else None
+    aud = mix(os.path.join(tmp, "pre.wav"), D, os.path.join(tmp, "bed.wav"), c.cues, c.keys, os.path.join(HERE, "brand", "sfx"), fx)
+    m = master(os.path.join(tmp, "pre.wav"), os.path.join(out, "assets", "mix.wav"), fx_path=fx)
     shutil.rmtree(tmp)
     quiet_cues = [a for a in aud if a[2] < -8]
     report = dict(slug=slug, template=spec["template"], niche=spec["niche"], style=style, duration=D,
@@ -99,12 +111,12 @@ def build(spec, niche, quiet=False):
                   quiet_cues=quiet_cues)
     json.dump(report, open(os.path.join(out, "build.json"), "w"), indent=2)
     if not quiet:
-        print(f"  {slug}: {D:.2f}s, {spec['template']} / {spec['niche']} / {style} {STYLES[style]['bpm']} bpm, "
+        print(f"  {slug}: {D:.2f}s, {spec['template']} / {spec['niche']} / {'music ' + style if music else 'no music (sound effects only)'}, "
               f"{len(c.cues)} sounds + {len(c.keys)} key clicks")
         print(f"  scenes: " + ", ".join(f"{k} {v:.2f}" for k, v in T.items()))
-        print(f"  master: {m['lufs']} LUFS, true peak {m['true_peak']} dBTP, gain {m['gain_db']:+} dB, "
+        print(f"  {'master' if music else 'sound effects'}: {m['lufs']} LUFS, true peak {m['true_peak']} dBTP, gain {m['gain_db']:+} dB, "
               f"limiter active {m['limited_pct']}% of the time (max {m['max_reduction_db']} dB)")
-        if quiet_cues: print("  quiet sounds (vs music, 1.5-8 kHz):", quiet_cues)
+        if quiet_cues and music: print("  quiet sounds (vs music, 1.5-8 kHz):", quiet_cues)
     return out, report
 
 def run(cmd, **kw):

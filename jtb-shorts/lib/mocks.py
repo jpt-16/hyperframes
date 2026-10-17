@@ -8,6 +8,7 @@ No search-engine logos are reproduced; the search page is a generic layout.
 """
 import html
 from brand import icon, C
+from art import scene
 
 esc = html.escape
 PHONE = dict(x=280, y=500, w=520, h=1040, pad=14)          # outer frame in the 1080x1920 canvas
@@ -31,7 +32,7 @@ def _screen(kind, sid, h, cls):
 def phone(pid, screens, style=""):
     """screens: list of (screen_id, inner_html, extra_class). Each gets #{sid}-scr (scroll) and #{sid}-sweep (light pass)."""
     inner = "".join(_screen("pscreen", sid, h, cls) for sid, h, cls in screens)
-    return (f'<div class="phone" id="{pid}" style="left:{PHONE["x"]}px;top:{PHONE["y"]}px;width:{PHONE["w"]}px;height:{PHONE["h"]}px;{style}">'
+    return (f'<div class="phone" id="{pid}" data-layout-allow-overflow style="left:{PHONE["x"]}px;top:{PHONE["y"]}px;width:{PHONE["w"]}px;height:{PHONE["h"]}px;{style}">'
             f'<div class="pglass">{inner}</div><div class="notch"></div></div>')
 
 def browser(bid, url, screens, style=""):
@@ -46,27 +47,6 @@ def domain(n): return n["short"].lower().replace(" ", "") + ".com"
 # px prefixes every id so the same site can appear on several screens of one video.
 RING = '<i class="ring" id="{}"></i>'
 
-def site_mobile(n, px="", hero_title=None, buttons=True, callbar=True, reviews=True):
-    """A modern mobile site for the niche. Flags switch parts off to illustrate mistakes.
-    Ring ids: {px}ring-h1, {px}ring-btns, {px}ring-rev, {px}ring-bar."""
-    h1 = esc(hero_title or n["headline"])
-    btns = (f'<div class="sm-btns hl">{RING.format(px + "ring-btns")}<span class="sm-cta">Get a free quote {icon("arrow", 18, "#fff", 2.6)}</span>'
-            f'<span class="sm-call">{icon("phone", 18, "var(--p)", 2.4)} Call now</span></div>') if buttons else ''
-    svc = "".join(f'<div class="sm-svc"><span>{icon(n["icon"], 22, "var(--p)")}</span><b>{esc(s)}</b><em>›</em></div>' for s in n["services"])
-    rev = (f'<div class="sm-rev hl" id="{px}sm-rev">{RING.format(px + "ring-rev")}<div class="st">' + icon("star", 18, "#F5B301") * 5 +
-           '<b>4.9</b></div><p>“Booked in a minute, showed up on time. Will use again.”</p><small>Google review</small></div>') if reviews else ""
-    bar = (f'<div class="sm-bar hl" id="{px}sm-bar" style="{niche_vars(n)}">{RING.format(px + "ring-bar")}{icon("phone", 20, "#fff", 2.4)} Call {esc(n["phone"])}</div>') if callbar else ""
-    badges = "".join(f'<span>{icon("check", 14, "var(--p)", 3)} {esc(b)}</span>' for b in n["badges"])
-    return f"""<div class="sm" style="{niche_vars(n)}">
-  <div class="sm-nav"><span class="sm-logo"><i>{icon(n["icon"], 18, "#fff")}</i>{esc(n["short"])}</span>{icon("menu", 24, "var(--ink)")}</div>
-  <div class="sm-hero"><div class="sm-kick">{esc(n["city"])} · {esc(n["label"])}</div><h1 class="hl">{RING.format(px + "ring-h1")}{h1}</h1><p>{esc(n["sub"])}</p>{btns}
-    <div class="sm-badges">{badges}</div></div>
-  <div class="sm-art"><div class="blob b1"></div><div class="blob b2"></div><span class="big">{icon(n["icon"], 96, "#fff", 1.6)}</span></div>
-  <div class="sm-sec"><h3>Services</h3>{svc}</div>
-  {rev}
-  <div class="sm-foot">{esc(n["business"])} · {esc(n["city"])} · {esc(n["phone"])}</div>
-</div>{FIXED}{bar}"""
-
 def site_desktop(n):
     svc = "".join(f'<div class="sd-card"><span>{icon(n["icon"], 30, "var(--p)")}</span><b>{esc(s)}</b><p>Clear scope, clear quote, on your schedule.</p></div>' for s in n["services"])
     return f"""<div class="sd" style="{niche_vars(n)}">
@@ -75,7 +55,7 @@ def site_desktop(n):
   <div class="sd-hero"><div class="sd-l"><div class="sd-kick">{esc(n["city"])} · {esc(n["label"])}</div><h1>{esc(n["headline"])}</h1><p>{esc(n["sub"])}</p>
     <div class="sd-btns"><span class="sd-b1">Get a free quote {icon("arrow", 22, "#fff", 2.6)}</span><span class="sd-b2">{icon("phone", 22, "var(--p)", 2.4)} {esc(n["phone"])}</span></div>
     <div class="sd-trust">{icon("star", 20, "#F5B301") * 5}<span>4.9 from local customers</span></div></div>
-    <div class="sd-r"><div class="blob b1"></div><div class="blob b2"></div><span class="big">{icon(n["icon"], 150, "#fff", 1.5)}</span>
+    <div class="sd-r"><div class="sd-photo">{scene(n["_key"], "desk")}</div>
       <div class="sd-float f1">{icon("check", 20, "var(--p)", 3)} {esc(n["badges"][0])}</div><div class="sd-float f2">{icon("check", 20, "var(--p)", 3)} {esc(n["badges"][1])}</div></div></div>
   <div class="sd-svc">{svc}</div>
 </div>"""
@@ -104,47 +84,6 @@ def screen_wall(n):
          "we are proud of. Whether you are a new customer or have worked with us before, we are committed to providing service that exceeds "
          "expectations each and every time. If you would like to learn more about what we do, please continue reading below. ")
     return f'<div class="sw" style="{niche_vars(n)}"><div class="sm-nav"><span class="sm-logo"><i>{icon(n["icon"], 18, "#fff")}</i>{esc(n["short"])}</span>{icon("menu", 24, "var(--ink)")}</div><h2>About our company</h2><p>{t}</p><p>{t}</p></div>'
-
-# ----------------------------------------------------------------- search page + business profile
-def serp(n):
-    """Generic local results page. ids: sp-q (query text), sp-caret, sp-map, sp-p0..2 (pins), sp-r0..2 (rows), ring-sp-mine."""
-    names = [n["competitors"][0], n["business"], n["competitors"][1]]
-    rows = ""
-    for i, nm in enumerate(names):
-        mine = nm == n["business"]
-        rows += (f'<div class="sp-row{" mine hl" if mine else ""}" id="sp-r{i}">{RING.format("ring-sp-mine") if mine else ""}<div><b>{esc(nm)}</b>'
-                 f'<div class="sp-rt"><em>{["4.7", "4.9", "4.6"][i]}</em>{icon("star", 14, "#F5B301") * 5}<span>({[86, 41, 129][i]})</span></div>'
-                 f'<small>{esc(n["category"])} · {["0.8", "1.4", "2.1"][i]} mi</small><small class="op">Open · Closes 6 PM</small></div>'
-                 f'<div class="sp-acts"><span>{icon("globe", 18, "#1A73E8")}</span><span>{icon("dir", 18, "#1A73E8")}</span></div></div>')
-    pins = "".join(f'<span class="pinw p{i + 1}" id="sp-p{i}"><span class="pin{" mine" if i == 1 else ""}">{icon("pin", 26, "#fff", 2)}</span></span>' for i in range(3))
-    return f"""<div class="sp">
-  <div class="sp-search">{icon("search", 22, "#5F6368")}<span id="sp-q"></span><i id="sp-caret"></i></div>
-  <div class="sp-tabs"><b>All</b><span>Maps</span><span>Images</span><span>News</span></div>
-  <div class="sp-map" id="sp-map"><svg viewBox="0 0 390 200" preserveAspectRatio="none"><path d="M0 140 C90 120 140 160 230 120 S330 80 390 96" stroke="#fff" stroke-width="10" fill="none" opacity=".9"/>
-      <path d="M120 0 C130 70 100 120 150 200" stroke="#fff" stroke-width="7" fill="none" opacity=".8"/><path d="M300 0 L270 200" stroke="#FCE8B2" stroke-width="9" fill="none"/></svg>{pins}</div>
-  <div class="sp-list">{rows}</div>
-  <div class="sp-org"><small>{domain(n)}</small><b>{esc(n['business'])} · {esc(n['label'].capitalize())} in {esc(n['city'])}</b><p>{esc(n['sub'])}</p></div>
-</div>"""
-
-GBP_SECTIONS = ("category", "website", "nap", "hours", "photos", "reviews", "posts")
-
-def gbp(n):
-    """Generic business profile. Each section has id gb-<name> and a highlight ring ring-gb-<name> (GBP_SECTIONS)."""
-    photos = "".join(f'<i class="ph{k}"></i>' for k in range(4))
-    R = lambda k: RING.format("ring-gb-" + k)
-    return f"""<div class="gb" style="{niche_vars(n)}">
-  <div class="gb-cover"><div class="blob b1"></div><span class="big">{icon(n["icon"], 64, "#fff", 1.6)}</span></div>
-  <div class="gb-head hl" id="gb-category">{R("category")}<h3>{esc(n['business'])}</h3>
-    <div class="gb-rt"><b>4.9</b>{icon("star", 15, "#F5B301") * 5}<span>(86)</span></div><small>{esc(n['category'])} in {esc(n['city'])}</small></div>
-  <div class="gb-acts hl" id="gb-website">{R("website")}<span>{icon("phone", 22, "#1A73E8")}<em>Call</em></span><span>{icon("dir", 22, "#1A73E8")}<em>Directions</em></span>
-    <span>{icon("globe", 22, "#1A73E8")}<em>Website</em></span><span>{icon("msg", 22, "#1A73E8")}<em>Message</em></span></div>
-  <div class="gb-sec hl" id="gb-nap">{R("nap")}<div>{icon("pin", 20, "#5F6368")}<span>210 Main St, {esc(n['city'])}</span></div><div>{icon("phone", 20, "#5F6368")}<span>{esc(n['phone'])}</span></div></div>
-  <div class="gb-sec hl" id="gb-hours">{R("hours")}<div>{icon("clock", 20, "#5F6368")}<span><b class="open">Open</b> · Closes 6 PM</span></div></div>
-  <div class="gb-sec hl" id="gb-photos">{R("photos")}<h4>Photos</h4><div class="gb-ph">{photos}</div></div>
-  <div class="gb-sec hl" id="gb-reviews">{R("reviews")}<h4>Reviews</h4><div class="gb-rev"><b>Sam R.</b>{icon("star", 14, "#F5B301") * 5}<p>Easy to book and great work.</p>
-    <div class="gb-reply"><b>Response from the owner</b><p>Thanks Sam, see you next time!</p></div></div></div>
-  <div class="gb-sec hl" id="gb-posts">{R("posts")}<h4>Updates</h4><p>Openings available this week. Book online.</p></div>
-</div>"""
 
 def dashboard(n):
     """Leads dashboard. Always labelled as illustrative. ids: db-v0..2 (numbers), db-line (pathLength=1)."""
@@ -184,39 +123,6 @@ MOCK_CSS = f"""
 .ring {{ position:absolute; left:-8px; right:-8px; top:-8px; bottom:-8px; border-radius:18px; border:3px solid {C['accent']}; z-index:3;
          box-shadow:0 0 0 7px rgba(255,181,71,.22), 0 0 34px rgba(255,181,71,.35); opacity:0; pointer-events:none; }}
 
-/* modern mobile site */
-.sm {{ font-family:"Inter", sans-serif; color:var(--ink); background:#fff; padding-bottom:90px; }}
-.sm-nav {{ height:100px; padding:44px 22px 0; display:flex; align-items:center; justify-content:space-between; }}
-.sm-logo {{ display:flex; align-items:center; gap:9px; font-weight:700; font-size:19px; }}
-.sm-logo i {{ width:32px; height:32px; border-radius:9px; background:var(--p); display:flex; align-items:center; justify-content:center; }}
-.sm-hero {{ padding:22px 22px 0; }}
-.sm-kick {{ display:inline-block; font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--p);
-            background:color-mix(in srgb, var(--p) 10%, #fff); padding:7px 11px; border-radius:999px; }}
-.sm-hero h1 {{ font-family:"Montserrat", sans-serif; font-weight:800; font-size:38px; line-height:1.05; letter-spacing:-.02em; margin:16px 0 12px; }}
-.sm-hero p {{ font-size:16px; line-height:1.45; color:#4B5563; }}
-.sm-btns {{ display:flex; flex-direction:column; gap:10px; margin-top:20px; }}
-.sm-cta {{ height:54px; border-radius:14px; background:var(--p); color:#fff; font-weight:700; font-size:17px; display:flex; align-items:center; justify-content:center; gap:8px; }}
-.sm-call {{ height:50px; border-radius:14px; border:2px solid color-mix(in srgb, var(--p) 30%, #fff); color:var(--p); font-weight:700; font-size:16px;
-            display:flex; align-items:center; justify-content:center; gap:8px; }}
-.sm-badges {{ display:flex; gap:14px; margin-top:16px; font-size:13px; font-weight:600; color:#374151; }}
-.sm-badges span {{ display:flex; align-items:center; gap:5px; }}
-.sm-art {{ position:relative; height:210px; margin:22px; border-radius:22px; overflow:hidden;
-           background:linear-gradient(135deg, var(--p), color-mix(in srgb, var(--p) 55%, var(--a))); }}
-.sm-art .b1 {{ width:220px; height:220px; right:-50px; top:-60px; background:color-mix(in srgb, var(--a) 70%, transparent); opacity:.6; }}
-.sm-art .b2 {{ width:160px; height:160px; left:-40px; bottom:-60px; background:rgba(255,255,255,.18); }}
-.sm-art .big {{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); opacity:.95; }}
-.sm-sec {{ padding:4px 22px; }}
-.sm-sec h3 {{ font-family:"Montserrat", sans-serif; font-weight:800; font-size:22px; margin-bottom:10px; }}
-.sm-svc {{ display:flex; align-items:center; gap:12px; height:62px; border-bottom:1px solid #EEF0F3; }}
-.sm-svc span {{ width:40px; height:40px; border-radius:11px; background:color-mix(in srgb, var(--p) 10%, #fff); display:flex; align-items:center; justify-content:center; }}
-.sm-svc b {{ flex:1; font-size:16px; }} .sm-svc em {{ font-style:normal; color:#9CA3AF; font-size:22px; }}
-.sm-rev {{ margin:18px 22px; padding:18px; border-radius:16px; background:#F7F7F8; }}
-.sm-rev .st {{ display:flex; align-items:center; gap:2px; }} .sm-rev .st b {{ margin-left:8px; font-size:15px; }} .sm-rev p {{ font-size:15px; margin:8px 0 6px; line-height:1.4; }} .sm-rev small {{ color:#6B7280; font-size:12px; }}
-.sm-foot {{ padding:18px 22px; font-size:11px; color:#9CA3AF; }}
-.sm-bar, .sm-bar.hl {{ position:absolute; left:14px; right:14px; top:{int(1012 / MOBILE_SCALE) - 74}px; height:58px; border-radius:16px; background:var(--p);
-           color:#fff; font-weight:700; font-size:17px; display:flex; align-items:center; justify-content:center; gap:10px;
-           box-shadow:0 10px 30px rgba(0,0,0,.25); }}
-
 /* modern desktop site */
 .sd {{ font-family:"Inter", sans-serif; color:var(--ink); background:#fff; height:{int((BROWSER['h'] - BROWSER['bar']) / DESK_SCALE)}px; overflow:hidden; }}
 .sd-nav {{ height:84px; padding:0 56px; display:flex; align-items:center; gap:40px; border-bottom:1px solid #F0F1F3; }}
@@ -237,7 +143,7 @@ MOCK_CSS = f"""
 .sd-r {{ position:relative; width:480px; height:420px; border-radius:30px; overflow:hidden; background:linear-gradient(135deg, var(--p), color-mix(in srgb, var(--p) 55%, var(--a))); }}
 .sd-r .b1 {{ width:320px; height:320px; right:-80px; top:-90px; background:color-mix(in srgb, var(--a) 70%, transparent); opacity:.6; }}
 .sd-r .b2 {{ width:220px; height:220px; left:-60px; bottom:-80px; background:rgba(255,255,255,.18); }}
-.sd-r .big {{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); }}
+.sd-photo {{ position:absolute; inset:0; }}
 .sd-float {{ position:absolute; display:flex; align-items:center; gap:8px; background:#fff; border-radius:14px; padding:12px 16px; font-weight:700; font-size:16px;
              box-shadow:0 12px 30px rgba(0,0,0,.18); }}
 .sd-float.f1 {{ left:24px; bottom:30px; }} .sd-float.f2 {{ right:24px; top:28px; }}
@@ -271,54 +177,12 @@ MOCK_CSS = f"""
 .ss-bar {{ width:220px; height:6px; border-radius:3px; background:#E5E7EB; overflow:hidden; }}
 .ss-bar i {{ display:block; height:100%; width:5%; background:#9CA3AF; }}
 .ss-t {{ font-size:15px; color:#9CA3AF; }}
+.sw .sm-nav {{ height:96px; padding:44px 16px 0; display:flex; align-items:center; justify-content:space-between; }}
+.sw .sm-logo {{ display:flex; align-items:center; gap:9px; font-weight:700; font-size:19px; }}
+.sw .sm-logo i {{ width:32px; height:32px; border-radius:9px; background:var(--p); display:flex; align-items:center; justify-content:center; }}
 .sw {{ font-family:"Inter", sans-serif; color:#4B5563; background:#fff; }}
 .sw h2 {{ font-size:20px; color:#111827; padding:16px 22px 6px; }}
 .sw p {{ font-size:13px; line-height:1.55; padding:6px 22px; color:#6B7280; }}
-
-/* simulated local search page (generic, no logos) */
-.sp {{ font-family:"Inter", sans-serif; background:#fff; color:#202124; padding-top:56px; }}
-.sp-search {{ margin:0 16px; height:52px; border-radius:26px; box-shadow:0 1px 6px rgba(32,33,36,.28); display:flex; align-items:center; gap:12px; padding:0 18px; font-size:17px; }}
-#sp-caret {{ width:2px; height:22px; background:#1A73E8; margin-left:-10px; }}
-.sp-tabs {{ display:flex; gap:22px; padding:16px 22px 0; font-size:14px; color:#5F6368; border-bottom:1px solid #EBEBEB; }}
-.sp-tabs b {{ color:#1A73E8; padding-bottom:10px; border-bottom:3px solid #1A73E8; font-weight:600; }}
-.sp-map {{ position:relative; height:200px; margin:14px 16px 6px; border-radius:16px; overflow:hidden; background:#E8EEE3; }}
-.sp-map svg {{ position:absolute; inset:0; width:100%; height:100%; }}
-.sp-map .pinw {{ position:absolute; width:38px; height:38px; }}
-.sp-map .pin {{ position:absolute; inset:0; border-radius:50% 50% 50% 0; transform:rotate(-45deg); background:#EA4335;
-                display:flex; align-items:center; justify-content:center; box-shadow:0 4px 10px rgba(0,0,0,.25); }}
-.sp-map .pin svg {{ transform:rotate(45deg); }}
-.sp-map .pin.mine {{ background:#1A73E8; }}
-.sp-map .p1 {{ left:70px; top:50px; }} .sp-map .p2 {{ left:190px; top:96px; }} .sp-map .p3 {{ left:300px; top:40px; }}
-.sp-row {{ position:relative; display:flex; justify-content:space-between; padding:14px 18px; border-bottom:1px solid #EFEFEF; }}
-.sp-row b {{ font-size:17px; color:#1A0DAB; font-weight:600; }}
-.sp-row.mine {{ background:#F1F6FE; }}
-.sp-rt {{ display:flex; align-items:center; gap:1px; margin:4px 0 2px; }} .sp-rt em {{ font-style:normal; font-size:13px; color:#70757A; margin-right:4px; }} .sp-rt span {{ font-size:13px; color:#70757A; margin-left:4px; }}
-.sp-row small {{ display:block; font-size:13px; color:#70757A; }} .sp-row small.op {{ color:#188038; }}
-.sp-acts {{ display:flex; flex-direction:column; gap:10px; }}
-.sp-acts span {{ width:38px; height:38px; border-radius:50%; border:1px solid #DADCE0; display:flex; align-items:center; justify-content:center; }}
-.sp-org {{ padding:16px 18px; }} .sp-org small {{ font-size:13px; color:#4D5156; }} .sp-org b {{ display:block; font-size:18px; color:#1A0DAB; font-weight:500; margin:4px 0; }}
-.sp-org p {{ font-size:14px; color:#4D5156; line-height:1.4; }}
-
-/* business profile */
-.gb {{ font-family:"Inter", sans-serif; background:#fff; color:#202124; }}
-.gb-cover {{ position:relative; height:170px; overflow:hidden; background:linear-gradient(135deg, var(--p), color-mix(in srgb, var(--p) 55%, var(--a))); }}
-.gb-cover .b1 {{ width:220px; height:220px; right:-50px; top:-70px; background:color-mix(in srgb, var(--a) 70%, transparent); opacity:.6; }}
-.gb-cover .big {{ position:absolute; left:50%; top:58%; transform:translate(-50%,-50%); }}
-.gb-head {{ padding:16px 20px 12px; }} .gb-head h3 {{ font-size:23px; font-weight:600; }}
-.gb-rt {{ display:flex; align-items:center; gap:2px; margin:6px 0; font-size:15px; }} .gb-rt b {{ margin-right:4px; }} .gb-rt span {{ color:#70757A; margin-left:4px; }}
-.gb-head small {{ font-size:14px; color:#70757A; }}
-.gb-acts {{ display:flex; justify-content:space-around; padding:12px 8px; border-top:1px solid #EFEFEF; border-bottom:1px solid #EFEFEF; }}
-.gb-acts span {{ display:flex; flex-direction:column; align-items:center; gap:4px; }} .gb-acts em {{ font-style:normal; font-size:12px; color:#1A73E8; font-weight:600; }}
-.gb-sec {{ padding:12px 20px; border-bottom:1px solid #F1F1F1; font-size:14px; }}
-.gb-sec > div {{ display:flex; align-items:center; gap:12px; padding:4px 0; }}
-.gb-sec h4 {{ font-size:16px; font-weight:600; margin-bottom:8px; }}
-.gb-sec .open {{ color:#188038; }}
-.gb-ph {{ display:flex; gap:6px; }} .gb-ph i {{ width:82px; height:82px; border-radius:10px; }}
-.gb-ph .ph0 {{ background:linear-gradient(135deg, var(--p), var(--a)); }} .gb-ph .ph1 {{ background:linear-gradient(135deg, #374151, var(--p)); }}
-.gb-ph .ph2 {{ background:linear-gradient(135deg, var(--a), #F3F4F6); }} .gb-ph .ph3 {{ background:linear-gradient(135deg, #111827, #6B7280); }}
-.gb-sec > .gb-rev {{ display:block; }} .gb-rev b {{ font-size:14px; margin-right:6px; }} .gb-rev p {{ margin:4px 0; }}
-.gb-reply {{ margin-top:6px; padding:8px 12px; border-radius:10px; background:#F1F3F4; }} .gb-reply b {{ font-size:12px; color:#5F6368; }}
-.hl {{ position:relative; }}
 
 /* dashboard */
 .db {{ display:flex; font-family:"Inter", sans-serif; background:#F7F7F8; color:#111827; height:{int((BROWSER['h'] - BROWSER['bar']) / DESK_SCALE)}px; }}

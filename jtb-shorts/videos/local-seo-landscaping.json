@@ -1,13 +1,8 @@
 {
-  "template": "local-seo",
+  "template": "gbp-tips",
   "niche": "landscaping",
   "style": "drive",
-  "hook": { "eyebrow": "Local SEO tip", "lines": ["3 free fixes", "for your", "Google profile."], "accent": [0] },
-  "search": { "head": "First, how Google picks the *map results*:",
-              "note": "Source: Google Business Profile Help, “Tips to improve your local ranking”." },
-  "profile": { "head": "Now fix *these three*:",
-               "tips": [ {"text": "Add real job photos", "sub": "Recent work, not stock", "section": "photos"},
-                         {"text": "Reply to every review", "sub": "Good and bad", "section": "reviews"},
-                         {"text": "Post updates", "sub": "Offers, openings, projects", "section": "posts"} ] },
-  "cta": { "headline": "Want a hand with *yours*?", "action": "DM me “MAPS”", "sub": "Results vary and no one can guarantee rankings. These are Google's own recommendations." }
+  "hook": { "eyebrow": "Google Business Profile", "lines": ["3 free fixes", "for your", "Google profile."], "accent": [0] },
+  "cta": { "headline": "Want a hand with *yours*?", "action": "DM ‘MAPS’",
+           "sub": "Results vary and no one can guarantee rankings. These are Google's own recommendations." }
 }
