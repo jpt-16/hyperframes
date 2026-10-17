@@ -5,7 +5,7 @@ master(): gain to the loudness target, then a 4x-oversampled peak limiter.
           loudnorm is only ever used to MEASURE. The limiter's workload is
           reported so a hot mix is visible instead of silently squashed.
 """
-import json, subprocess, wave, numpy as np
+import json, os, subprocess, wave, numpy as np
 from scipy.signal import resample_poly, butter, sosfilt
 from audio import SR, write
 from sfx import key_click
@@ -16,6 +16,7 @@ LEVEL_DB = {"popup": -7.0, "bubble": -9.0, "land": -3.0, "riser-s": -9.0, "riser
 BED_DB = -2.0
 KEY_DB = -12.0
 TARGET_LUFS = -14.0
+AAC_MAX_TP = -1.3       # the renderer turns the WHOLE track down 1.5 dB if its AAC encode passes -1 dBTP
 CEILING = 0.78          # limiter ceiling (linear), about -2.2 dBFS: AAC encoding adds overshoot and the renderer
                         # pulls the whole track down 1.5 dB if the encoded file passes -1 dBTP
 
@@ -80,12 +81,47 @@ def master(pre_path, out_path, target=TARGET_LUFS):
         I, tp = measure(out_path)
         if abs(I - target) <= 0.3: break
         g += target - I
+    fixes = codec_safe(out_path)
     # limiter workload: how much of the programme sits above the ceiling before limiting (4x oversampled)
     x = read(pre_path).mean(1) * db(g)
     up = np.abs(resample_poly(x, 4, 1))
     blk = int(0.01 * SR * 4); nb = len(up) // blk
     peaks = up[: nb * blk].reshape(nb, blk).max(1)
     over = peaks > CEILING
-    return dict(lufs=round(I, 1), true_peak=round(tp, 1), gain_db=round(g, 1),
+    return dict(lufs=round(I, 1), true_peak=round(tp, 1), aac_dips=fixes, gain_db=round(g, 1),
                 limited_pct=round(100 * over.mean(), 1),
                 max_reduction_db=round(max(0.0, 20 * np.log10(peaks.max() / CEILING)), 1))
+
+def _decode(path):
+    raw = subprocess.run(["ffmpeg", "-v", "error", "-i", path, "-ac", "2", "-ar", str(SR), "-f", "f32le", "-"], capture_output=True).stdout
+    return np.frombuffer(raw, np.float32).reshape(-1, 2).astype(np.float64)
+
+def codec_safe(path, rounds=4):
+    """AAC can overshoot a sharp transient by 2-3 dB in a single frame. Encode a test AAC, find any 10 ms window
+    over AAC_MAX_TP, and dip just that spot (20 ms ramps) by the overshoot, so the renderer never turns the whole track down.
+    Returns [(time, dB), ...] of the dips made."""
+    dips = []
+    for _ in range(rounds):
+        tmp = path + ".test.m4a"
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", path, "-c:a", "aac", "-b:a", "192k", tmp], check=True)
+        y = _decode(tmp); os.remove(tmp)
+        x = read(path); n = min(len(x), len(y))
+        up = np.abs(resample_poly(y[:n], 4, 1, axis=0)).max(1)
+        blk = int(0.01 * SR); nb = n // blk
+        pk = up[: nb * blk * 4].reshape(nb, blk * 4).max(1)
+        over = np.where(20 * np.log10(pk + 1e-12) > AAC_MAX_TP)[0]
+        if not len(over): break
+        g = np.ones(len(x)); ramp = int(0.02 * SR)
+        for k in over:
+            cut = AAC_MAX_TP - 20 * np.log10(pk[k]) - 0.3
+            a, b = k * blk, (k + 1) * blk
+            env = np.ones(len(x))
+            env[a:b] = db(cut)
+            lo = max(0, a - ramp); env[lo:a] = np.linspace(1, db(cut), a - lo)
+            hi = min(len(x), b + ramp); env[b:hi] = np.linspace(db(cut), 1, hi - b)
+            g = np.minimum(g, env)
+            dips.append((round(k * 0.01, 2), round(cut, 1)))
+        st = x * g[:, None]
+        w = wave.open(path, "wb"); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
+        w.writeframes((np.clip(st, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
+    return dips
