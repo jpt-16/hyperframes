@@ -1,0 +1,8 @@
+{
+  "template": "mistakes",
+  "niche": "auto-detailing",
+  "style": "glow",
+  "hook": { "eyebrow": "Conversion tips", "lines": ["People visit.", "Nobody books.", "Here's why."], "accent": [1] },
+  "items": [ {"type": "generic-heading"}, {"type": "no-cta"}, {"type": "not-mobile"} ],
+  "cta": { "headline": "Turn visits into *bookings*.", "action": "DM me “BOOK”", "sub": "JT Builds Co · websites for local businesses" }
+}

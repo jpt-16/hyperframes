@@ -1,0 +1,10 @@
+{
+  "template": "before-after",
+  "niche": "landscaping",
+  "style": "glow",
+  "hook": { "eyebrow": "Before / after", "lines": ["Same business.", "New website."], "accent": [1] },
+  "before_head": "Their old site: *2011 called*.",
+  "after_head": "Their new one: *clear and modern*.",
+  "changes": ["Clear headline + city", "Quote button up top", "Built for phones too"],
+  "cta": { "headline": "Want a *glow-up* like this?", "action": "DM me “SITE”", "sub": "Example business shown. JT Builds Co · websites for local businesses" }
+}

@@ -1,0 +1,53 @@
+{
+  "_note": "Fictional example businesses used inside mockups. Names, phone numbers (555) and cities are placeholders, not real companies. Add a niche by copying one block.",
+  "auto-detailing": {
+    "label": "auto detailing", "business": "Northline Auto Detail", "short": "Northline", "city": "Springfield",
+    "query": "car detailing near me", "category": "Car detailing service", "icon": "car",
+    "headline": "Showroom shine. We come to you.", "sub": "Mobile detailing for busy drivers, booked in under a minute.",
+    "services": ["Full interior + exterior", "Ceramic coating", "Paint correction"],
+    "badges": ["Mobile service", "Fully insured"],
+    "competitors": ["Crystal Clear Auto Spa", "Precision Shine Co."],
+    "colors": {"primary": "#1D4ED8", "accent": "#22D3EE", "ink": "#0B1220"},
+    "phone": "(555) 014-2290"
+  },
+  "landscaping": {
+    "label": "landscaping", "business": "Fieldstone Landscapes", "short": "Fieldstone", "city": "Springfield",
+    "query": "landscaper near me", "category": "Landscaper", "icon": "leaf",
+    "headline": "Yards worth coming home to.", "sub": "Design, installs and weekly care across Springfield.",
+    "services": ["Lawn care plans", "Patios + hardscapes", "Seasonal cleanups"],
+    "badges": ["Free estimates", "Licensed + insured"],
+    "competitors": ["Green Acre Lawn Co.", "Oakline Outdoor"],
+    "colors": {"primary": "#15803D", "accent": "#A3E635", "ink": "#0B1A10"},
+    "phone": "(555) 016-4410"
+  },
+  "plumbing": {
+    "label": "plumbing", "business": "Rapid Flow Plumbing", "short": "Rapid Flow", "city": "Springfield",
+    "query": "plumber near me", "category": "Plumber", "icon": "wrench",
+    "headline": "Leak? Clog? Fixed today.", "sub": "Licensed plumbers with upfront quotes and same-day slots.",
+    "services": ["Emergency repairs", "Water heaters", "Drain cleaning"],
+    "badges": ["24/7 emergency line", "Upfront quotes"],
+    "competitors": ["Blue Pipe Plumbing", "Summit Plumbing Pros"],
+    "colors": {"primary": "#0F3D91", "accent": "#F97316", "ink": "#0A1328"},
+    "phone": "(555) 019-7721"
+  },
+  "dental": {
+    "label": "dental", "business": "Brightside Family Dental", "short": "Brightside", "city": "Springfield",
+    "query": "dentist near me", "category": "Dentist", "icon": "tooth",
+    "headline": "Gentle dentistry for the whole family.", "sub": "New patients welcome. Book online in a few taps.",
+    "services": ["Cleanings + exams", "Whitening", "Emergency visits"],
+    "badges": ["New patients welcome", "Evening hours"],
+    "competitors": ["Maple Street Dental", "Clearview Smiles"],
+    "colors": {"primary": "#0E7490", "accent": "#5EEAD4", "ink": "#06181C"},
+    "phone": "(555) 012-3354"
+  },
+  "hvac": {
+    "label": "HVAC", "business": "Comfort Peak Heating & Air", "short": "Comfort Peak", "city": "Springfield",
+    "query": "ac repair near me", "category": "HVAC contractor", "icon": "snow",
+    "headline": "Cool house. Fast.", "sub": "AC and furnace repair with clear pricing before we start.",
+    "services": ["AC repair", "Furnace tune-ups", "New system installs"],
+    "badges": ["Same-day service", "Financing options"],
+    "competitors": ["Arctic Air Services", "Heritage Heating Co."],
+    "colors": {"primary": "#1E40AF", "accent": "#F59E0B", "ink": "#0B1430"},
+    "phone": "(555) 018-6602"
+  }
+}

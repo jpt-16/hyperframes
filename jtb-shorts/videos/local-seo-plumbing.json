@@ -1,0 +1,13 @@
+{
+  "template": "local-seo",
+  "niche": "plumbing",
+  "style": "pulse",
+  "hook": { "eyebrow": "Local SEO", "lines": ["Why do they", "show up on", "the map", "and you don't?"], "accent": [3] },
+  "search": { "head": "Google says local results weigh *3 things*.",
+              "note": "Source: Google Business Profile Help, “Tips to improve your local ranking”." },
+  "profile": { "head": "The parts *you* control:",
+               "tips": [ {"text": "Pick the right category", "sub": "Your main service, exactly", "section": "category"},
+                         {"text": "Keep hours current", "sub": "Holidays included", "section": "hours"},
+                         {"text": "Get + reply to reviews", "sub": "Ask every happy customer", "section": "reviews"} ] },
+  "cta": { "headline": "Want your profile *set up right*?", "action": "DM me “MAPS”", "sub": "No one can guarantee rankings. These steps help Google understand your business." }
+}

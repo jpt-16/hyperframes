@@ -1,0 +1,10 @@
+{
+  "template": "before-after",
+  "niche": "plumbing",
+  "style": "drive",
+  "hook": { "eyebrow": "Website redesign", "lines": ["Watch this", "plumbing site", "get rebuilt."], "accent": [2] },
+  "before_head": "Before: a wall of *text*.",
+  "after_head": "After: *one clear next step*.",
+  "changes": ["Says what + where", "Phone number visible", "One obvious button"],
+  "cta": { "headline": "Is your site *due for one*?", "action": "DM me “SITE”", "sub": "Example business shown. JT Builds Co · websites for local businesses" }
+}

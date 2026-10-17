@@ -1,0 +1,11 @@
+{
+  "template": "redesign",
+  "niche": "auto-detailing",
+  "style": "drive",
+  "hook": { "eyebrow": "Website redesign", "lines": ["Your work is", "spotless.", "Your website", "isn't."], "accent": [3] },
+  "before": { "head": "Fine on a laptop. *Lost on a phone.*",
+              "problems": ["Tiny, unreadable text", "No clear button", "Number hard to find"] },
+  "after":  { "head": "Built for the *thumb*.",
+              "fixes": [ {"text": "Says what you do", "ring": "h1"}, {"text": "Quote + call buttons", "ring": "btns"}, {"text": "Reviews up front", "ring": "rev"} ] },
+  "cta": { "headline": "Want a site that *works on phones*?", "action": "DM me “SITE”", "sub": "JT Builds Co · websites for local businesses" }
+}
