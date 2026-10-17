@@ -1,0 +1,7 @@
+assets/photos/
+assets/mix.wav
+renders/
+snaps/
+.hyperframes/
+__pycache__/
+index.html
