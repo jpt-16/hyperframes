@@ -2,11 +2,10 @@
 
     python3 tools/beat.py        # writes assets/beat.wav
 
-120 BPM in F minor, so one beat = 0.5 s and every picture cut lands on the grid:
-0-2     in hot: kick, 808, clap, hats from the first frame
-2-4     the push-in: drums filtered down, 16th hats, a snare roll that speeds up, a breath of silence at 3.875
-4-9     the drop: full kit, 808 line, minor stabs
-9-11    the end card: the same groove, then one last hit that rings out by 11.5
+120 BPM in F minor, so one beat = 0.5 s and every picture cut lands on the grid. No gaps, no slow build:
+0-2     in hot: kick, 808, clap, hats from the first frame, a snare fill into 2.0
+2-9.5   the drop at the first cut: full kit, 808 line, minor stabs
+9.5     one last hit that rings out by 10.0
 """
 import os, sys
 import numpy as np
@@ -14,7 +13,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "..", "jtb-shorts", "lib"))
 from audio import SR, T, hz, write, _f, _reverb, _place
 
-BPM = 120; B = 60 / BPM; D = 11.5
+BPM = 120; B = 60 / BPM; D = 10.0; DROP = 2.0; LAST = 9.5
 rng = np.random.default_rng(1)
 
 def kick():
@@ -60,36 +59,22 @@ def build():
     BASS = ["F1", None, None, "F1", None, None, "Ab1", "C2"]          # one bar of eighths
     for bar in range(6):
         t0 = bar * 4 * B
-        build_bar = 2.0 <= t0 < 4.0
         for e in range(8):                                             # eighth-note grid
             t = t0 + e * B / 2
-            if t >= 11.0: break
-            if build_bar:
-                continue
+            if t >= LAST: break
             if e in (0, 3) or (e == 5 and bar % 2): _place(drums, K, t, 1.0)
             if e in (2, 6): _place(drums, C, t, 0.8, 0.0)
             _place(drums, H if e % 2 else HO if e == 7 else H, t, 0.55 if e % 2 else 0.4, 0.35)
-            if BASS[e] and t < 11.0: _place(low, bass808(hz(BASS[e]), 0.48 if e == 7 else 0.7), t, 0.9)
-            if t >= 4.0 and e in (0, 3):                               # minor stabs only after the drop
+            if BASS[e]: _place(low, bass808(hz(BASS[e]), 0.48 if e == 7 else 0.7), t, 0.9)
+            if t >= DROP and e in (0, 3):                              # minor stabs from the drop
                 _place(music, stab(["F3", "Ab3", "C4"] if e == 0 else ["Eb3", "G3", "Bb3"]), t, 0.8, -0.25)
-    # 2-4: the build. filtered kick on the beat, 16th hats, a roll that doubles up, then a 1/8 breath before the drop
-    for k in range(4):
-        _place(drums, K, 2.0 + k * B, 0.55)
-    for k in range(16):
-        _place(drums, H, 2.0 + k * B / 4, 0.25 + 0.25 * k / 16, 0.35)
-    t, step = 3.0, B / 2
-    while t < 3.875 - 1e-6:
-        _place(drums, S, t, 0.35 + 0.5 * (t - 3.0) / 0.875, 0.1)
-        if t >= 3.5: step = B / 8
-        elif t >= 3.25: step = B / 4
-        t += step
-    # the final hit at 11.0: kick + 808 + stab, left to ring out
-    _place(drums, K, 11.0, 1.1); _place(low, bass808(hz("F1"), 0.5), 11.0, 0.9); _place(music, stab(["F3", "Ab3", "C4", "F4"], 0.5), 11.0, 0.9)
-    # the 2-4 section sits under a low-pass that opens as it builds
-    seg = slice(int(2.0 * SR), int(3.875 * SR))
-    drums[seg] = _f(drums[seg], "low", 3800)
-    drums[int(3.875 * SR): int(4.0 * SR)] *= 0.0
-    low[int(3.875 * SR): int(4.0 * SR)] *= 0.0
+        if t0 >= DROP:                                                 # 16th hats once the cuts start
+            for k in range(16):
+                if t0 + k * B / 4 < LAST and k % 2: _place(drums, H, t0 + k * B / 4, 0.22, -0.35)
+    t = 1.5                                                            # a short snare fill into the drop
+    while t < DROP - 1e-6:
+        _place(drums, S, t, 0.35 + 0.4 * (t - 1.5) / 0.5, 0.1); t += B / 4
+    _place(drums, K, LAST, 1.1); _place(low, bass808(hz("F1"), 0.5), LAST, 0.9); _place(music, stab(["F3", "Ab3", "C4", "F4"], 0.5), LAST, 0.9)
     music = _reverb(music, rng, 1.4, 5000, 0.3)
     mix = drums * 0.9 + low * 0.85 + music * 0.6
     fade = np.clip((D - np.arange(L) / SR) / 0.12, 0, 1)

@@ -1,20 +1,21 @@
-"""Panda Sports Collectibles: signed + framed Ja'Marr Chase jersey reel (1080x1920, 11.5 s).
+"""Panda Sports Collectibles: signed + framed Ja'Marr Chase jersey reel (1080x1920, 10 s).
 
     python3 tools/beat.py && python3 build.py
     npx --yes hyperframes@0.8.154 check .
-    npx --yes hyperframes@0.8.154 render . -o renders/panda-chase-reel.mp4 -q delivery
+    npx --yes hyperframes@0.8.154 render . -o renders/panda-chase-reel-v2.mp4 -q delivery
     # the same picture with sound effects only, for laying a trending sound in Instagram:
-    ffmpeg -i renders/panda-chase-reel.mp4 -i assets/mix-fx.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 192k -shortest renders/panda-chase-reel-fx.mp4
+    ffmpeg -i renders/panda-chase-reel-v2.mp4 -i assets/mix-fx.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 192k -shortest -movflags +faststart renders/panda-chase-reel-v2-fx.mp4
 
 Everything on screen is the owner's one photo (assets/photos/chase-framed.jpg): every shot is a crop of it
 with camera moves (scale and position only). Nothing in the photo is retouched, redrawn or generated.
 The backdrop behind the pulled-back shots is the same photo, blurred and dimmed.
 
-0.0-2.0   the jersey fills the frame, hook "JA'MARR CHASE FANS 👀" (native caption style: reads as a post, not an ad)
-2.0-4.0   a smooth push-in onto the number and the autograph
-4.0-7.0   close-ups cut on the beat: autograph, nameplate, sleeve stripes, frame corner, autograph + sticker
-7.0-9.0   pull back to the whole framed piece: SIGNED. FRAMED. READY TO DISPLAY.
-9.0-11.5  Panda Sports Collectibles logo, "Own a piece of football history", pandasportsmemorabilia.com
+0.0-2.0   the whole framed jersey from frame one under "WOULD YOU PUT THIS IN YOUR COLLECTION?", a fast push,
+          then a cut to the autograph
+2.0-5.0   beat-synced cuts (every 0.5 s), each showing something new: full jersey, nameplate, autograph end + sticker,
+          sleeve stripes, frame corner, the whole autograph
+5.0-6.5   pull back to the whole framed piece: SIGNED. FRAMED. READY TO DISPLAY.
+6.5-10.0  Panda logo, OWN A PIECE OF FOOTBALL HISTORY, pandasportsmemorabilia.com (the site holds 3.25 s)
 No prices, discounts, scarcity or authentication claims.
 """
 import os, sys, wave
@@ -25,7 +26,7 @@ from comp import Comp, o, esc
 from mix import read, master, ANCHOR
 from audio import SR
 
-D, FPS = 11.5, 30
+D, FPS = 10.0, 30
 G = "#00C820"                      # Panda green, sampled from the logo
 PW, PH = 2377, 1956                # the photo
 c = Comp(D, FPS)
@@ -46,45 +47,49 @@ c.clip("bgl", 0, D, f'<img id="bg" src="assets/photos/bg.jpg" alt="">', cls="lay
 c.clip("caml", 0, D, f'<img id="ph" data-layout-allow-overflow src="assets/photos/chase-framed.jpg" alt="Signed and framed Ja\'Marr Chase #1 jersey">',
        cls="layer", style="z-index:2")
 
-# ----------------------------------------------------------------- 0-2 hook: the jersey fills the frame
-shot(0.0, 2.0, (1190, 985, 1000), (1190, 1000, 930), ease="none")
-c.clip("hook", 0, 2.0, '<div class="hook"><span>JA’MARR CHASE FANS 👀</span></div>', cls="layer", style="z-index:20")
+# ----------------------------------------------------------------- 0-2 hook: the whole framed jersey, a fast push, then the autograph
+c.set("#ph", o(**FIT), 0.0)
+c.to("#ph", o(**cam(1190, 1060, 1500), duration=1.0, ease="power2.in"), 0.0)        # subtle, fast push-in
+shot(1.0, 2.0, (1205, 1215, 420), (1205, 1330, 370))                               # cut: the autograph (curiosity)
+c.clip("hook", 0, 2.0, '<div class="hook"><div>WOULD YOU PUT THIS</div><div>IN YOUR <em>COLLECTION?</em></div></div>',
+       cls="layer", style="z-index:20")
+c.clip("hook-sh", 0, 2.0, '<i class="topshade"></i>', cls="layer", style="z-index:19")
 
-# ----------------------------------------------------------------- 2-4 smooth push onto the number + autograph
-c.to("#ph", o(**cam(1205, 1265, 520), duration=1.85, ease="power3.inOut"), 2.0)
+# ----------------------------------------------------------------- 2-5.5 beat-synced cuts: every shot shows something new
+CUTS = [
+    ((1190, 990, 1000), (1190, 1005, 940)),     # 2.0 the full jersey
+    ((1010, 690, 560), (1350, 690, 530)),       # 2.5 CHASE nameplate, tracking across
+    ((1205, 1470, 360), (1205, 1430, 330)),     # 3.0 the end of the autograph and its sticker
+    ((1950, 470, 440), (1995, 520, 390)),       # 3.5 sleeve stripes
+    ((330, 570, 640), (305, 540, 590)),         # 4.0 frame corner: black frame, deep white mat
+    ((1205, 1270, 600), (1205, 1270, 540)),     # 4.5 the whole autograph on the number
+]
+for k, (a_, b_) in enumerate(CUTS):
+    shot(2.0 + 0.5 * k, 2.5 + 0.5 * k, a_, b_)
 
-# ----------------------------------------------------------------- 4-7 close-ups, one per beat
-shot(4.0, 5.0, (1205, 1150, 360), (1205, 1400, 330))                 # the autograph, tilting down it
-shot(5.0, 5.5, (1010, 690, 560), (1350, 690, 530))                   # CHASE nameplate, tracking across
-shot(5.5, 6.0, (1950, 470, 440), (1995, 520, 390))                   # sleeve stripes
-shot(6.0, 6.5, (330, 570, 640), (305, 540, 590))                     # frame corner: black frame, deep white mat
-shot(6.5, 7.0, (1205, 1330, 470), (1205, 1300, 410))                 # back to the autograph and its sticker
-
-# ----------------------------------------------------------------- 7-9 pull back to the whole framed piece
-c.to("#ph", o(**FIT, duration=0.62, ease="power3.inOut"), 7.0)
-c.clip("rev", 7.0, 9.0, '<div class="rv"><div class="l1"><span id="w1">SIGNED.</span> <span id="w2">FRAMED.</span></div>'
+# ----------------------------------------------------------------- 5.0-6.5 pull back to the whole framed piece
+c.to("#ph", o(**FIT, duration=0.5, ease="power3.inOut"), 5)
+c.clip("rev", 5, 6.5, '<div class="rv"><div class="l1"><span id="w1">SIGNED.</span> <span id="w2">FRAMED.</span></div>'
        '<div class="l2" id="w3">READY TO DISPLAY.</div></div>', cls="layer", style="z-index:20")
-for wid, t in [("#w1", 7.6), ("#w2", 8.0), ("#w3", 8.4)]:
-    c.set(wid, o(opacity=0), 7.0)
-    c.ft(wid, o(opacity=1, scale=1.12), o(scale=1, duration=0.22, ease="power3.out", immediateRender=False), t)
-c.clip("sw", 7.55, 8.4, '<i class="sweep" id="sweep"></i>', cls="layer", style="z-index:3")
-c.ft("#sweep", o(xPercent=-120), o(xPercent=120, duration=0.8, ease="power2.inOut"), 7.58)
-c.to("#ph", o(**cam(PW / 2, PH / 2 + (960 - 900) / (1080 / PW / 1.025), PW / 1.025), duration=2.3, ease="none"), 7.65)
+for wid, t in [("#w1", 5.5), ("#w2", 5.75), ("#w3", 6)]:
+    c.set(wid, o(opacity=0), 5)
+    c.ft(wid, o(opacity=1, scale=1.12), o(scale=1, duration=0.2, ease="power3.out", immediateRender=False), t)
+c.to("#ph", o(**cam(PW / 2, PH / 2 + (960 - 900) / (1080 / PW / 1.02), PW / 1.02), duration=0.95, ease="none"), 5.55)
 
-# ----------------------------------------------------------------- 9-11.5 brand, line, site
-c.clip("end", 9.0, D, '<img class="logo" id="logo" src="assets/photos/logo-badge.png" alt="Panda Sports Collectibles">'
-       '<div class="tag" id="tag">OWN A PIECE OF FOOTBALL HISTORY</div>'
+# ----------------------------------------------------------------- 6.5-10 end: brand, one line, the site (on screen 3.25 s)
+c.to("#ph", o(opacity=0, duration=0.3, ease="power1.inOut"), 6.4)                    # the photo melts into its blurred backdrop
+c.clip("end", 6.4, D, '<img class="logo" id="logo" src="assets/photos/logo-badge.png" alt="Panda Sports Collectibles">'
+       '<div class="tag" id="tag">OWN A PIECE OF<br>FOOTBALL HISTORY</div>'
        '<div class="url" id="url">pandasportsmemorabilia.com</div>', cls="layer", style="z-index:20")
-c.ft("#logo", o(opacity=0, scale=1.08), o(opacity=1, scale=1, duration=0.3, ease="power3.out"), 9.0)
-c.set("#tag", o(opacity=0), 9.0); c.ft("#tag", o(opacity=1, y=16), o(y=0, duration=0.25, ease="power3.out", immediateRender=False), 9.5)
-c.set("#url", o(opacity=0), 9.0); c.ft("#url", o(opacity=1, scale=1.08), o(scale=1, duration=0.25, ease="power3.out", immediateRender=False), 10.0)
+c.ft("#logo", o(opacity=0, scale=0.94), o(opacity=1, scale=1, duration=0.35, ease="power3.out"), 6.45)
+c.ft("#tag", o(opacity=0, y=24), o(opacity=1, y=0, duration=0.3, ease="power3.out"), 6.5)
+c.ft("#url", o(opacity=0, y=24), o(opacity=1, y=0, duration=0.3, ease="power3.out"), 6.75)
 
 # ----------------------------------------------------------------- sound: the beat + hits on the picture's moments
-for name, t, gdb in [("impact", 0.0, -8), ("riser-l", 3.875, -6), ("whoosh", 2.25, -12),
-                     ("impact", 4.0, -3), ("hit", 4.0, -6),
-                     ("tick", 5.0, -6), ("tick", 5.5, -6), ("tick", 6.0, -6), ("tick", 6.5, -6),
-                     ("whoosh", 7.25, -8), ("hit", 7.6, -8), ("hit", 8.0, -8), ("hit", 8.4, -6),
-                     ("impact", 9.0, -4), ("tick", 10.0, -8)]:
+for name, t, gdb in [("impact", 0.0, -8), ("hit", 1.0, -7), ("impact", 2.0, -5),
+                     *[("tick", 2.5 + 0.5 * k, -8) for k in range(5)],
+                     ("whoosh", 5.25, -9), ("hit", 5.5, -9), ("hit", 5.75, -9), ("hit", 6, -7),
+                     ("impact", 6.5, -5), ("tick", 6.75, -9)]:
     c.cue(name, t, gdb)
 
 def mixdown():
@@ -122,25 +127,25 @@ html, body {{ width:1080px; height:1920px; overflow:hidden; background:#050505; 
 #vignette {{ position:absolute; inset:0; pointer-events:none; z-index:10;
              background:radial-gradient(ellipse 95% 75% at 50% 50%, rgba(0,0,0,0) 60%, rgba(0,0,0,.38) 100%); }}
 
-/* native caption style: the hook reads like a post, not an ad */
-.hook {{ position:absolute; left:0; right:0; top:300px; display:flex; justify-content:center; }}
-.hook span {{ display:inline-block; padding:16px 28px 18px; border-radius:16px; background:#fff; color:#0A0A0A;
-              font-family:"Inter", sans-serif; font-weight:800; font-size:70px; letter-spacing:-.01em; line-height:1.1; white-space:nowrap;
-              box-shadow:0 8px 30px rgba(0,0,0,.25); }}
+/* hook: big, bold, two lines above the framed piece */
+.hook {{ position:absolute; left:30px; right:30px; top:176px; text-align:center; font-family:"Anton", sans-serif; font-size:104px; line-height:1.02;
+         letter-spacing:.005em; color:#fff; text-shadow:0 4px 0 rgba(0,0,0,.35), 0 10px 40px rgba(0,0,0,.6); }}
+.hook em {{ font-style:normal; color:{G}; }}
+.topshade {{ position:absolute; left:0; right:0; top:0; height:620px; background:linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.35) 55%, rgba(0,0,0,0) 100%); }}
 
 .rv {{ position:absolute; left:40px; right:40px; top:150px; text-align:center; font-family:"Anton", sans-serif; color:#fff;
        text-shadow:0 6px 30px rgba(0,0,0,.55); }}
 .rv .l1 {{ font-size:138px; line-height:1.0; letter-spacing:.01em; }}
 .rv .l1 span {{ display:inline-block; }}
 .rv .l2 {{ font-size:96px; line-height:1.05; color:{G}; margin-top:8px; letter-spacing:.02em; }}
-.sweep {{ position:absolute; left:0; top:{900 - 445}px; width:1080px; height:890px; mix-blend-mode:screen; opacity:.5;
-          background:linear-gradient(105deg, rgba(255,255,255,0) 35%, rgba(255,255,255,.22) 50%, rgba(255,255,255,0) 65%); }}
 
-.logo {{ position:absolute; left:{540 - 230}px; top:78px; width:460px; height:auto; mix-blend-mode:screen; }}
-.tag {{ position:absolute; left:40px; right:40px; top:1374px; text-align:center; font-family:"Barlow Condensed", sans-serif; font-weight:800;
-        font-size:70px; letter-spacing:.03em; color:#fff; line-height:1; }}
-.url {{ position:absolute; left:0; right:0; top:1462px; margin:0 auto; width:max-content; padding:16px 34px 18px; border-radius:999px;
-        background:{G}; color:#031003; font-family:"Barlow Condensed", sans-serif; font-weight:800; font-size:54px; letter-spacing:.02em; line-height:1; }}
+.logo {{ position:absolute; left:{540 - 270}px; top:300px; width:540px; height:auto; mix-blend-mode:screen;
+         -webkit-mask-image:linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%), linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+         -webkit-mask-composite:source-in; mask-composite:intersect; }}
+.tag {{ position:absolute; left:40px; right:40px; top:790px; text-align:center; font-family:"Anton", sans-serif; font-size:118px; line-height:1.04;
+        letter-spacing:.01em; color:#fff; text-shadow:0 8px 34px rgba(0,0,0,.55); }}
+.url {{ position:absolute; left:0; right:0; top:1100px; margin:0 auto; width:max-content; padding:24px 44px 26px; border-radius:999px;
+        background:{G}; color:#031003; font-family:"Barlow Condensed", sans-serif; font-weight:800; font-size:68px; letter-spacing:.02em; line-height:1; }}
 """
 
 if __name__ == "__main__":
