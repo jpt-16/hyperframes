@@ -154,7 +154,11 @@
       "Free consult",
       "Same-day slots"
     ],
-    "hours": "Open · Closes 7 PM"
+    "hours": "Open · Closes 7 PM",
+    "seg": [
+      "New patient",
+      "Returning"
+    ]
   },
   "hvac": {
     "label": "HVAC",

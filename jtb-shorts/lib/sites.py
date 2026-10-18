@@ -58,7 +58,7 @@ def booking_sheet(n, px=""):
     s = "".join(f'<span class="bk-slot" id="{px}bk-s{i}">{t}</span>' for i, t in enumerate(slots))
     return f"""<div class="bk" id="{px}bk" style="{niche_vars(n)}"><i class="bk-grab"></i>
   <div class="bk-h"><b>{esc(n["cta_label"])}</b><small>{esc(n["business"])}</small></div>
-  <div class="bk-seg"><b>New patient</b><span>Returning</span></div>
+  <div class="bk-seg"><b>{esc(n.get("seg", ["New customer", "Returning"])[0])}</b><span>{esc(n.get("seg", ["New customer", "Returning"])[1])}</span></div>
   <div class="bk-lbl">October</div><div class="bk-days">{d}</div>
   <div class="bk-lbl">Available times</div><div class="bk-slots" id="{px}bk-slots">{s}</div>
   <div class="bk-go" id="{px}bk-go">Confirm Tue 10:00 AM</div>
