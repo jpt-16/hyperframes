@@ -72,6 +72,27 @@ def shards(d=0.7):
         place(x, click(0.001 + 0.002 * rng.random(), 2500, 10000), tk, (0.2 + 0.6 * rng.random()) * (1 - tk / d))
     return space(np.stack([x, np.roll(x, 90)], 1), 0.4, 0.14)
 
+def noise_hit(d=0.66, seed=0):
+    """The cut sound from the reference: an instant burst of bright air (energy 2-5 kHz, reaching ~13 kHz),
+    a small click on the attack, a straight fade in dB, and a hard stop just before the next cut."""
+    g = np.random.default_rng(seed); t = T(d); u = t / d
+    n = g.standard_normal((len(t), 2))
+    body = np.stack([_bp(n[:, c], 1100, 13000) + 0.9 * _bp(n[:, c], 1800, 3400) for c in range(2)], 1)
+    # darken as it fades (centroid ~5 kHz -> ~3.3 kHz), block-wise low-pass
+    out = np.zeros_like(body); blk = 512
+    from scipy.signal import butter, sosfilt
+    zi = None
+    for i in range(0, len(t), blk):
+        fc = 13000 * (7000 / 13000) ** u[i]
+        sos = butter(2, fc, btype="low", fs=SR, output="sos")
+        if zi is None: zi = np.zeros((sos.shape[0], 2, 2))
+        for c in range(2):
+            out[i:i + blk, c], zi[:, :, c] = sosfilt(sos, body[i:i + blk, c], zi=zi[:, :, c])
+    env = 10 ** (-22 * u / 20) * np.minimum(1, t / 0.0015)
+    env *= np.clip((d - t) / 0.012, 0, 1)
+    click = np.zeros(len(t)); click[: int(0.002 * SR)] = g.standard_normal(int(0.002 * SR)) * 1.6
+    return out * env[:, None] + click[:, None] * 0.6
+
 if __name__ == "__main__":
     out = os.path.join(HERE, "..", "assets", "sfx"); os.makedirs(out, exist_ok=True)
     write(f"{out}/roll.wav", roll(), -3.0)
