@@ -7,16 +7,17 @@
 Real footage, hard cuts, one noise hit per cut (the format of the reference reel):
 0.00-1.87  the real egg clip (assets/media/egg.mp4): it rolls off the table and breaks on the tile
 1.87-2.33  "need a website?"
-2.33-2.97  outdated.   a 2011-style version of the site in a browser
-2.97-3.60  modern.     the real Gleam Detail Co. site (screenshot)
-3.60-4.40  mobile.     the same site laid out for a phone, scrolled to the quote button
-4.40-5.30  bookable.   the real quote form filling in (screen recording)
-5.30-6.40  findable.   a local search; the listing sits among the results (no ranking claim)
+2.33-2.97  outdated.   a generic 2011-style site for a made-up shop, in a browser
+2.97-3.60  modern.     cloverdownsdetailing.com, desktop (screenshot)
+3.60-4.40  mobile.     the same site on a phone, scrolling (frame-by-frame capture)
+4.40-5.30  bookable.   its quote form being filled in (captured; never submitted)
+5.30-6.40  findable.   its Beverly / Salem / Danvers town pages, hard cuts
 6.40-7.00  clean. / fast.
 7.00-9.00  "Your next customer is looking online." / JT Builds Co | DM 'SITE'
 
 assets/media/ is user footage and is not committed (see .gitignore): egg.mp4 / egg-bg.mp4 /
-egg-audio.wav come from the egg clip, gleam-site-clean.png and form-clean.mp4 from the Gleam demo.
+egg-audio.wav come from the egg clip; clover-*.png / clover-*.mp4 are captures of cloverdownsdetailing.com
+(tools/capture-site.js).
 """
 import importlib.util, json, os, subprocess, sys, wave
 import numpy as np
@@ -26,8 +27,6 @@ sys.path.insert(0, LIB)
 from comp import Comp, o, R, esc
 from brand import C, icon, BASE_CSS
 from mocks import phone, browser, PHONE, MOCK_CSS, site_old
-from sites import serp, SITES_CSS
-from scenes import typing, type_into, ring, TYPING_CSS
 from mix import read, codec_safe, measure
 from sfx import key_click
 from audio import SR
@@ -37,8 +36,7 @@ eggsfx = importlib.util.module_from_spec(spec); spec.loader.exec_module(eggsfx)
 D, FPS = 9.0, 30
 A, CREAM, INK, DARK = C["accent"], "#F2EADC", "#1A1206", "#121110"
 NICHES = {k: dict(v, _key=k) for k, v in json.load(open(os.path.join(HERE, "..", "jtb-shorts", "niches.json"))).items() if not k.startswith("_")}
-n = dict(NICHES["auto-detailing"], business="Gleam Detail Co.", short="Gleam", cta_label="Request my quote")
-QUERY = n["query"]
+OLD = dict(NICHES["auto-detailing"], business="Main Street Auto Detailing", phone="(978) 555-0110")
 
 # every cut sits on a frame boundary
 F = lambda f: round(f / FPS, 4)
@@ -74,51 +72,48 @@ def push(sel, k, s=1.045, origin="50% 40%"):
     c.ft(sel, o(scale=1, transformOrigin=origin), o(scale=s, duration=END(k) - T[k], ease="none"), T[k])
 
 # ----------------------------------------------------------------- outdated. / modern. (same browser, same spot: a straight before/after)
+# The "outdated" site is a generic 2011-style page for a made-up shop, not a past version of Clover Downs.
 BTOP = 520
-c.clip("b-old", T["old"], END("old"), f'<div class="stage" id="st-old">{browser("br-old", "Not secure  |  gleamdetailco.com/index.htm", [("s-old", site_old(n, "desktop"), "")], f"top:{BTOP}px")}</div>',
+c.clip("b-old", T["old"], END("old"), f'<div class="stage" id="st-old">{browser("br-old", "Not secure  |  mainstreetautodetail.net/index.htm", [("s-old", site_old(OLD, "desktop"), "")], f"top:{BTOP}px")}</div>',
        cls="layer", style="z-index:10")
 word("old", "outdated", 1300); push("#st-old", "old")
-site_img = f'<div class="shot"><img id="gl-img" src="{med("gleam-site-clean.png")}" alt="Gleam Detail Co. website"></div>'
-c.clip("b-new", T["modern"], END("modern"), f'<div class="stage" id="st-new">{browser("br-new", "gleamdetail.co", [("s-new", site_img, "")], f"top:{BTOP}px")}</div>',
+site_img = f'<div class="shot"><img id="cd-img" src="{med("clover-hero.jpg")}" alt="Clover Downs Detailing website"></div>'
+c.clip("b-new", T["modern"], END("modern"), f'<div class="stage" id="st-new">{browser("br-new", "cloverdownsdetailing.com", [("s-new", site_img, "")], f"top:{BTOP}px")}</div>',
        cls="layer", style="z-index:10")
 word("modern", "modern", 1300)
-c.ft("#gl-img", o(scale=1, transformOrigin="22% 38%"), o(scale=1.16, duration=END("modern") - T["modern"], ease="power1.inOut"), T["modern"])
+c.ft("#cd-img", o(scale=1, transformOrigin="18% 42%"), o(scale=1.14, duration=END("modern") - T["modern"], ease="power1.inOut"), T["modern"])
 
-# ----------------------------------------------------------------- mobile. the same site on a phone
-FIELDS = [("Full name", "Jane Smith"), ("Email", "jane@example.com"), ("Phone", "(555) 123-4567"), ("Vehicle", "2022 Audi Q5, silver"),
-          ("Service", "Select a service…"), ("Preferred date", "mm/dd/yyyy")]
-gm = f"""<div class="gm">
-  <div class="gm-nav"><span class="gm-logo"><i>G</i>Gleam Detail Co.</span><span class="gm-menu"><i></i><i></i></span></div>
-  <div class="gm-eye">AI LEAD RESPONSE</div>
-  <h1>Get a detailing quote. We reply in seconds.</h1>
-  <p>Tell us about your vehicle. You'll get a personal acknowledgement right away, and a real person follows up with pricing and availability.</p>
-  <div class="gm-card">{"".join(f'<label>{esc(a)}</label><div class="gm-in{" sel" if a == "Service" else ""}">{esc(b)}</div>' for a, b in FIELDS)}
-    <div class="gm-btn" id="gm-btn">Request my quote</div></div>
-</div>"""
+SBAR = ('<div class="sb"><b>9:41</b><span><i class="sig"><i></i><i></i><i></i><i></i></i><i class="bat"><i></i></i></span></div>')
+
+# ----------------------------------------------------------------- mobile. the real site on a phone, scrolled (frame-by-frame capture)
 PH_TOP = 196
-c.clip("p-mob", T["mobile"], END("mobile"), f'<div class="stage pstage" id="st-mob">{phone("ph-mob", [("s-mob", gm, "")], f"top:{PH_TOP}px")}</div>',
+c.clip("p-mob", T["mobile"], END("mobile"), f'<div class="stage pstage" id="st-mob">{phone("ph-mob", [("s-mob", "", "")], f"top:{PH_TOP}px")}</div>',
        cls="layer", style="z-index:10")
+# the capture plays over the phone's glass (a timed video can't sit inside a timed layer)
+c.raw(f'<video id="mob-v" class="clip" src="{med("clover-mobile.mp4")}" muted playsinline data-start="{T["mobile"]}" '
+      f'data-duration="{round(END("mobile") - T["mobile"], 4)}" data-track-index="21" data-layout-ignore></video>')
+c.clip("mob-notch", T["mobile"], END("mobile"), f'<div class="sbo">{SBAR}</div><i class="notch2"></i>', cls="layer", style="z-index:13")
 word("mobile", "mobile")
-c.to("#s-mob-scr", o(y=-262, duration=0.42, ease="power3.inOut"), T["mobile"] + 0.16)
-c.to("#gm-btn", o(scale=0.95, duration=0.08, yoyo=True, repeat=1, ease="power1.inOut"), T["mobile"] + 0.62)
 
-# ----------------------------------------------------------------- bookable. the real form filling in
-c.clip("b-book", T["book"], END("book"), f'<div class="stage" id="st-book">{browser("br-book", "gleamdetail.co/quote", [("s-book", "", "")], f"top:{BTOP + 20}px;height:{54 + 601}px")}</div>',
+# ----------------------------------------------------------------- bookable. the real quote form being filled in (frame-by-frame capture, never submitted)
+c.clip("b-book", T["book"], END("book"), f'<div class="stage" id="st-book">{browser("br-book", "cloverdownsdetailing.com/#quote", [("s-book", "", "")], f"top:{BTOP}px")}</div>',
        cls="layer", style="z-index:10")
-c.raw(f'<video id="form-v" class="clip" src="{med("form-clean.mp4")}" muted playsinline data-start="{T["book"]}" data-duration="{round(END("book") - T["book"], 4)}" '
+c.raw(f'<video id="form-v" class="clip" src="{med("clover-form.mp4")}" muted playsinline data-start="{T["book"]}" data-duration="{round(END("book") - T["book"], 4)}" '
       f'data-track-index="20" data-layout-ignore></video>')
 word("book", "bookable", 1300)
+for k in range(3, 23):      # the typing, timed to the capture (frames 2-22 of 27)
+    if k % 2: c.key(T["book"] + k / FPS, -2.0)
 
-# ----------------------------------------------------------------- findable. a local search, the listing among the results
-c.clip("p-find", T["find"], END("find"), f'<div class="stage pstage" id="st-find">{phone("ph-find", [("s-serp", serp(n, typing(QUERY, 0)[0]), "")], f"top:{PH_TOP}px")}</div>',
+# ----------------------------------------------------------------- findable. the real town pages, one per area served
+TOWNS = ["beverly", "salem", "danvers"]
+c.clip("p-find", T["find"], END("find"), f'<div class="stage pstage" id="st-find">' + phone("ph-find", [
+    (f"s-{t}", SBAR + f'<img class="pg" src="{med(f"clover-{t}.png")}" alt="Clover Downs Detailing, {t.title()} page">', "") for t in TOWNS], f"top:{PH_TOP}px") + "</div>",
        cls="layer", style="z-index:10")
 word("find", "findable")
-te = type_into(c, QUERY, T["find"] + 0.04, cps=44)
-for sel, d in [("#sp-map", 0.0), ("#sp-places", 0.02), ("#s-serp .sp-row", 0.04)]:
-    c.ft(sel, o(opacity=0), o(opacity=1, duration=0.08, immediateRender=False), te + d)
-c.set("#sp-map, #sp-places, #s-serp .sp-row", o(opacity=0), T["find"])
-c.to("#sp-caret", o(opacity=0, duration=0.05), te)
-ring(c, "ring-sp-mine", te + 0.22, END("find") + 0.1)
+TOWN_T = [T["find"], F(171), F(183)]
+for i, t in enumerate(TOWNS):
+    if i: c.set(f"#s-{t}", o(opacity=0), T["find"]); c.set(f"#s-{t}", o(opacity=1), TOWN_T[i])
+push("#st-find", "find", 1.03, "540px 700px")
 
 # ----------------------------------------------------------------- 7-9 s: the line, then the brand
 c.clip("end", T["end"], D, f"""<div class="end">
@@ -132,7 +127,7 @@ c.ft(".end-t", o(scale=1.05), o(scale=1, duration=0.5, ease="power2.out"), T["en
 c.ft("#lock", o(scale=1.06), o(scale=1, duration=0.35, ease="power2.out", immediateRender=False), T_LOCK)
 
 # ----------------------------------------------------------------- sound: the filmed egg, then a noise hit on every cut
-HITS = [T[k] for k in ORDER[1:]] + [T_E2, T_LOCK]
+HITS = [T[k] for k in ORDER[1:]] + TOWN_T[1:] + [T_E2, T_LOCK]
 HITS.sort()
 
 def mixdown(path):
@@ -144,7 +139,7 @@ def mixdown(path):
         nxt = HITS[k + 1] if k + 1 < len(HITS) else D
         x = eggsfx.noise_hit(min(0.66, nxt - t - 0.08 if k + 1 < len(HITS) else 0.66), seed=11 + k)
         x /= np.max(np.abs(x))
-        g = -9.0 if t in (T_E2,) else -3.0
+        g = -9.0 if t in [T_E2] + TOWN_T[1:] else -3.0
         i = int(round(t * SR)); j = min(L, i + len(x)); buf[i:j] += x[: j - i] * 10 ** (g / 20)
     for t, gdb in c.keys:
         x = key_click(int(t * 1000)); i = int(t * SR); j = min(L, i + len(x))
@@ -157,7 +152,7 @@ def mixdown(path):
 # ----------------------------------------------------------------- CSS
 FONTS = "".join(f'@font-face {{ font-family:"Inter"; font-weight:{w}; font-display:block; src:url("assets/fonts/Inter-{w}-latin.woff2") format("woff2"); }}\n'
                 for w in (800, 900))
-CSS = "\n".join([BASE_CSS, FONTS, MOCK_CSS, SITES_CSS, TYPING_CSS, f"""
+CSS = "\n".join([BASE_CSS, FONTS, MOCK_CSS, f"""
 #grid, #glow, #vignette {{ display:none; }}
 #root {{ background:{DARK}; }}
 .layer {{ position:absolute; inset:0; pointer-events:none; }}
@@ -178,26 +173,20 @@ CSS = "\n".join([BASE_CSS, FONTS, MOCK_CSS, SITES_CSS, TYPING_CSS, f"""
 .phone {{ box-shadow:0 0 0 2px #2A2826, 0 0 0 9px #161514, 0 30px 70px rgba(0,0,0,.55); }}
 .pstage {{ transform:scale(1.1); transform-origin:540px {PH_TOP}px; }}
 #br-old .bbar span {{ color:#C5221F; }}
-.shot {{ width:1200px; height:{int(586 / 0.8)}px; overflow:hidden; background:#0A0F1D; }}
-#gl-img {{ display:block; width:1200px; height:auto; }}
-#form-v {{ position:absolute; left:60px; top:{BTOP + 20 + 54}px; width:960px; height:601px; z-index:12; }}
+.shot {{ width:1200px; height:{int(586 / 0.8)}px; overflow:hidden; background:#0C0C0C; }}
+#cd-img {{ display:block; width:1200px; height:auto; }}
+#form-v {{ position:absolute; left:60px; top:{BTOP + 54}px; width:960px; height:586px; z-index:12; }}
 
-/* the Gleam site, mobile layout (matches the live desktop design) */
-.gm {{ font-family:"Inter", sans-serif; background:linear-gradient(180deg, #0B1220 0%, #0A0F1D 100%); color:#E8EAF0; padding:58px 18px 40px; min-height:1300px; }}
-.gm-nav {{ display:flex; align-items:center; justify-content:space-between; margin-bottom:30px; }}
-.gm-logo {{ display:flex; align-items:center; gap:10px; font-weight:700; font-size:17px; }}
-.gm-logo i {{ width:30px; height:30px; border-radius:8px; background:#E8EAF0; color:#0B1220; font-style:normal; font-weight:800; font-size:16px;
-              display:flex; align-items:center; justify-content:center; }}
-.gm-menu {{ display:flex; flex-direction:column; gap:6px; }} .gm-menu i {{ width:22px; height:2px; background:#C9CEDA; border-radius:2px; }}
-.gm-eye {{ font-size:12px; font-weight:700; letter-spacing:.14em; color:#4FD1C5; margin-bottom:12px; }}
-.gm h1 {{ font-size:36px; line-height:1.06; letter-spacing:-.03em; font-weight:700; margin-bottom:14px; }}
-.gm p {{ font-size:15px; line-height:1.5; color:#A3ABBB; margin-bottom:22px; }}
-.gm-card {{ background:#fff; border-radius:16px; padding:18px 16px 18px; color:#111827; }}
-.gm-card label {{ display:block; font-size:13px; font-weight:600; margin:0 0 6px; }}
-.gm-in {{ height:42px; border:1px solid #D6D9E2; border-radius:10px; padding:0 12px; display:flex; align-items:center; font-size:14px; color:#7B8190; margin-bottom:12px; }}
-.gm-in.sel {{ justify-content:space-between; }}
-.gm-btn {{ height:48px; border-radius:10px; background:#0B1220; color:#fff; font-weight:700; font-size:15px; display:flex; align-items:center; justify-content:center; margin-top:6px; }}
-
+.pg {{ display:block; width:390px; height:802px; }}
+#ph-mob .pglass, #s-mob, #ph-find .pglass, #ph-find .pscreen {{ background:#0C0C0C; }}
+.sb {{ height:42px; background:#0C0C0C; display:flex; align-items:center; justify-content:space-between; padding:6px 30px 0 34px; color:#fff; font-family:"Inter", sans-serif; }}
+.sb b {{ font-size:15px; font-weight:600; }} .sb span {{ display:flex; align-items:center; gap:6px; }}
+.sig {{ display:flex; align-items:flex-end; gap:2px; height:11px; }} .sig i {{ width:3px; background:#fff; border-radius:1px; }}
+.sig i:nth-child(1) {{ height:4px; }} .sig i:nth-child(2) {{ height:6px; }} .sig i:nth-child(3) {{ height:8px; }} .sig i:nth-child(4) {{ height:11px; }}
+.bat {{ width:24px; height:12px; border:1.5px solid rgba(255,255,255,.55); border-radius:4px; padding:1.5px; display:block; }} .bat i {{ display:block; width:75%; height:100%; background:#fff; border-radius:1.5px; }}
+.sbo {{ position:absolute; left:269.4px; top:211.4px; width:390px; transform:scale(1.38769); transform-origin:0 0; border-radius:48px 48px 0 0; overflow:hidden; }}
+#mob-v {{ position:absolute; left:269.4px; top:269.7px; width:541.2px; height:1054.9px; border-radius:0 0 66px 66px; z-index:12; object-fit:cover; object-position:50% 0; }}
+.notch2 {{ position:absolute; left:468.5px; top:229.0px; width:143.0px; height:39.6px; border-radius:22px; background:#0B0B0C; }}
 .end {{ position:absolute; inset:0; background:{DARK}; }}
 .end-t {{ position:absolute; left:50px; right:50px; top:640px; text-align:center; font-family:"Inter", sans-serif; font-weight:900;
           font-size:100px; line-height:1.02; letter-spacing:-.05em; color:{CREAM}; }}
