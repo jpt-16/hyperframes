@@ -1,0 +1,11 @@
+assets/photos/
+assets/beat.wav
+assets/mix.wav
+assets/mix-fx.wav
+renders/
+snaps/
+.hyperframes/
+__pycache__/
+index.html
+.pre.wav
+.fx.wav
