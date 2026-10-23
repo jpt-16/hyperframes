@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lead inbox · ClearFlow Plumbing</title>
+  <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+  <header class="top">
+    <div class="top-in">
+      <a class="brand" href="/" aria-label="ClearFlow site"><span class="mark" data-logo></span><b>ClearFlow</b></a>
+      <span class="sep"></span>
+      <span class="crumb">Lead inbox</span>
+      <div class="top-r">
+        <span class="live" data-live><i></i><span>Connecting</span></span>
+        <span class="pill-demo mono" data-demo-pill>Demo data</span>
+        <button class="ghost" type="button" data-reset>Reset demo</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="title-row">
+      <div>
+        <h1>Leads</h1>
+        <p class="sub">Requests captured by the website assistant</p>
+      </div>
+    </div>
+
+    <section class="kpis" aria-label="Summary">
+      <div class="kpi"><span class="mono">New</span><b data-kpi="new">0</b><small>Waiting for a call back</small></div>
+      <div class="kpi"><span class="mono">Today</span><b data-kpi="today">0</b><small>Since midnight</small></div>
+      <div class="kpi em"><span class="mono">Emergency</span><b data-kpi="emergency">0</b><small>Emergency plumbing</small></div>
+      <div class="kpi"><span class="mono">All leads</span><b data-kpi="total">0</b><small>From website chat</small></div>
+    </section>
+
+    <section class="board" aria-label="Leads">
+      <div class="thead"><span>Customer</span><span>Service</span><span>Details</span><span>Received</span><span>Status</span></div>
+      <div class="rows" data-rows></div>
+      <p class="empty" data-empty hidden>No leads yet. Submit one through the website chat.</p>
+    </section>
+  </main>
+
+  <div class="toast" data-toast role="status" aria-live="polite"></div>
+
+  <aside class="drawer" data-drawer aria-hidden="true">
+    <div class="scrim" data-close></div>
+    <div class="sheet" role="dialog" aria-label="Lead details">
+      <header class="sheet-h"><div><span class="mono" data-d="ref"></span><h2 data-d="name"></h2></div><button class="icon-btn" type="button" data-close aria-label="Close"></button></header>
+      <div class="sheet-b">
+        <dl class="facts">
+          <div><dt>Contact</dt><dd data-d="contact"></dd></div>
+          <div><dt>Service</dt><dd data-d="service"></dd></div>
+          <div><dt>Details</dt><dd data-d="details"></dd></div>
+          <div><dt>Received</dt><dd data-d="received"></dd></div>
+          <div><dt>Source</dt><dd data-d="source"></dd></div>
+        </dl>
+        <div class="status-set" role="group" aria-label="Status">
+          <button type="button" data-status="new">New</button><button type="button" data-status="contacted">Contacted</button><button type="button" data-status="scheduled">Scheduled</button>
+        </div>
+        <h3 class="mono">Conversation</h3>
+        <div class="convo" data-convo></div>
+      </div>
+    </div>
+  </aside>
+
+  <script type="module" src="/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+node_modules/
+data/
+capture/
+reel/assets/media/
+reel/renders/
+reel/snaps/
+reel/.hyperframes/
+reel/index.html
+reel/assets/mix.wav
+__pycache__/

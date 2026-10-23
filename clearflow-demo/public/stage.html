@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ClearFlow demo · 9:16 recording stage</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/base.css">
+  <style>
+    html, body { height: 100%; }
+    body { margin: 0; background: #0e0d0c; display: grid; place-items: center; overflow: hidden; }
+    .frame { position: relative; height: min(100vh - 32px, (100vw - 32px) * 16 / 9); aspect-ratio: 9 / 16; border-radius: 6px; overflow: hidden; background: #fff;
+             box-shadow: 0 0 0 1px rgba(255,255,255,.06); }
+    .frame iframe { position: absolute; left: 0; top: 0; width: 390px; height: 693px; border: 0; transform-origin: 0 0; transition: opacity .5s ease; background: #fff; }
+    .frame iframe.off { opacity: 0; pointer-events: none; }
+    .ctl { position: fixed; top: 16px; left: 16px; display: grid; gap: 8px; width: 240px; padding: 14px; border-radius: 12px; background: #1b1a18; color: #e9e6e1;
+           font-size: 13px; box-shadow: 0 10px 30px rgba(0,0,0,.4); transition: opacity .2s; }
+    .ctl.hide { opacity: 0; pointer-events: none; }
+    .ctl b { font-family: var(--display); font-size: 15px; }
+    .ctl p { color: #a9a39b; font-size: 12px; line-height: 1.45; }
+    .ctl button { height: 36px; border-radius: 8px; border: 1px solid #3a3733; background: #262421; color: #fff; font-size: 13px; font-weight: 500; }
+    .ctl button.go { background: #ffb547; border-color: #ffb547; color: #1a1206; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="frame" id="frame">
+    <iframe id="site" src="/" title="ClearFlow site (mobile)"></iframe>
+    <iframe id="dash" class="off" title="ClearFlow lead inbox (mobile)"></iframe>
+  </div>
+  <div class="ctl" id="ctl">
+    <b>Recording stage</b>
+    <p>Record this window. Play runs the demo through the real site, then shows the lead arriving in the dashboard. H hides this panel, Space plays.</p>
+    <button class="go" id="play" type="button">Play demo</button>
+    <button id="site-btn" type="button">Show site</button>
+    <button id="dash-btn" type="button">Show dashboard</button>
+    <button id="reset" type="button">Reset leads</button>
+  </div>
+  <script>
+    const frame = document.getElementById("frame"), site = document.getElementById("site"), dash = document.getElementById("dash");
+    const fit = () => { const s = frame.clientWidth / 390; site.style.transform = dash.style.transform = `scale(${s})`; };
+    addEventListener("resize", fit); fit();
+    const show = (which) => { site.classList.toggle("off", which !== "site"); dash.classList.toggle("off", which !== "dash"); };
+    function openDash(replay) {
+      dash.src = "/dashboard" + (replay ? "?replay=1" : "");
+      dash.onload = () => setTimeout(() => show("dash"), 150);
+    }
+    function play() {
+      document.getElementById("ctl").classList.add("hide");
+      show("site");
+      site.src = "/?r=" + Date.now();
+      site.onload = () => site.contentWindow.postMessage({ type: "cf-autopilot" }, location.origin);
+    }
+    addEventListener("message", (e) => { if (e.origin === location.origin && e.data?.type === "cf-autopilot-done") openDash(true); });
+    document.getElementById("play").onclick = play;
+    document.getElementById("site-btn").onclick = () => show("site");
+    document.getElementById("dash-btn").onclick = () => openDash(false);
+    document.getElementById("reset").onclick = () => fetch("/api/demo/reset", { method: "POST" });
+    addEventListener("keydown", (e) => {
+      if (e.key === "h" || e.key === "H") document.getElementById("ctl").classList.toggle("hide");
+      if (e.key === " ") { e.preventDefault(); play(); }
+    });
+  </script>
+</body>
+</html>

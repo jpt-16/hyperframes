@@ -1,0 +1,14 @@
+{
+  "name": "clearflow-demo",
+  "private": true,
+  "type": "module",
+  "description": "ClearFlow Plumbing (fictional): website + chat assistant + lead dashboard demo for JT Builds Co",
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "node tools/smoke.mjs"
+  },
+  "optionalDependencies": {
+    "@anthropic-ai/sdk": "^0.70.0"
+  },
+  "engines": { "node": ">=20" }
+}

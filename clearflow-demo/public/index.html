@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>ClearFlow Plumbing · Denver metro plumbers</title>
+  <meta name="description" content="ClearFlow Plumbing (a fictional demo business): leaks, drains, water heaters and sewer lines across the Denver metro.">
+  <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/site.css">
+  <link rel="stylesheet" href="/css/chat.css">
+</head>
+<body>
+  <div class="util">
+    <div class="wrap util-in">
+      <a class="util-em" href="tel:+15550147720"><i class="pulse" aria-hidden="true"></i><span>24/7 emergency line</span><b data-fact="phone">(555) 014-7720</b></a>
+      <span class="util-r">Licensed &amp; insured · Denver metro</span>
+    </div>
+  </div>
+
+  <header class="nav wrap">
+    <a class="brand" href="/" aria-label="ClearFlow Plumbing home"><span class="mark" data-logo></span><span class="brand-t">ClearFlow<small>Plumbing</small></span></a>
+    <nav class="links" aria-label="Main"><a href="#services">Services</a><a href="#areas">Service area</a><a href="#hours">Hours</a></nav>
+    <button class="btn btn-primary nav-cta" data-open-chat="Book a plumber">Book a plumber</button>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="rule"></span>Residential plumbing · Denver metro</p>
+        <h1>Plumbing fixed right, <span class="soft">the first time.</span></h1>
+        <p class="lede">Leaks, clogs, water heaters and sewer lines, handled by licensed plumbers. You get a written estimate before any work starts.</p>
+        <div class="cta-row">
+          <button class="btn btn-primary" data-open-chat="Book a plumber">Book a plumber</button>
+          <a class="btn btn-ghost" href="tel:+15550147720"><span class="ic" data-icon="phone"></span>(555) 014-7720</a>
+        </div>
+        <ul class="proof">
+          <li><span data-icon="shield"></span>Licensed &amp; insured</li>
+          <li><span data-icon="doc"></span>Written estimate first</li>
+          <li><span data-icon="clock"></span>24/7 emergency line</li>
+        </ul>
+      </div>
+
+      <aside class="triage" aria-labelledby="triage-h">
+        <div class="triage-head">
+          <span class="mono">Start here</span>
+          <h2 id="triage-h">What's going on?</h2>
+          <p>Pick one and our assistant will take it from there.</p>
+        </div>
+        <div class="triage-grid">
+          <button data-open-chat="I think I have a leak" data-icon-btn="leak">Leak or water stain</button>
+          <button data-open-chat="My drain is clogged" data-icon-btn="drain">Clogged drain</button>
+          <button data-open-chat="I have no hot water" data-icon-btn="water-heater">No hot water</button>
+          <button data-open-chat="Do you do sewer line inspections?" data-icon-btn="sewer">Sewer line</button>
+          <button data-open-chat="I need a new faucet installed" data-icon-btn="fixtures">Faucet or fixture</button>
+          <button class="hot" data-open-chat="I have a burst pipe, is this an emergency?" data-icon-btn="emergency">Burst pipe</button>
+        </div>
+        <a class="triage-foot" href="tel:+15550147720"><span>Water coming through the ceiling?</span><b>Call now <span data-icon="arrowUpRight"></span></b></a>
+      </aside>
+    </section>
+
+    <section id="services" class="section wrap">
+      <div class="sec-head"><span class="mono">Services</span><h2>Everything that carries water in and out of your home.</h2></div>
+      <div class="svc-grid" data-services></div>
+    </section>
+
+    <section id="areas" class="section wrap split">
+      <div class="area-card">
+        <span class="mono">Service area</span>
+        <h2>Across the Denver metro</h2>
+        <ul class="chips" data-areas></ul>
+        <p class="muted">Not sure if you're covered? Ask the assistant, it only answers from this list.</p>
+      </div>
+      <div id="hours" class="hours-card">
+        <span class="mono">Hours</span>
+        <h2>Scheduled work</h2>
+        <dl class="hours" data-hours></dl>
+        <div class="em-note"><span data-icon="emergency"></span><div><b>Emergencies: 24/7</b><p data-fact="emergencyHow"></p></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <a class="brand" href="/"><span class="mark" data-logo></span><span class="brand-t">ClearFlow<small>Plumbing</small></span></a>
+      <p class="foot-c"><span data-fact="phone"></span> · <span data-fact="email"></span></p>
+      <p class="foot-d">ClearFlow Plumbing is a fictional business created for a JT Builds Co demo.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/site.js"></script>
+  <script type="module" src="/js/autopilot.js"></script>
+</body>
+</html>
