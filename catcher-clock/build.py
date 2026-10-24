@@ -19,6 +19,11 @@ from audio import SR
 
 TM = json.load(open(os.path.join(HERE, "assets", "vo", "timing.json")))
 L = [(x["t0"], x["t1"], x["text"]) for x in TM["lines"]]
+WORDS = [x["words"] for x in TM["lines"]]
+def W(line, word, end=False, nth=0):
+    """Video time a spoken word starts (or ends) in line `line` (word as spoken, punctuation ignored)."""
+    hits = [w for w in WORDS[line] if w["w"].strip(".,!?").lower() == word.lower()]
+    return hits[nth]["t1" if end else "t0"]
 D = TM["duration"]
 Y, CYAN, WHITE = "#FFD84D", "#56D1FF", "#F4F6F8"
 
@@ -27,9 +32,10 @@ def run_dist(p, r=0.05, v=30, tau=0.62): return 0 if p <= r else v * ((p - r) - 
 RUN = next(p for p in np.arange(0, 6, 0.0005) if run_dist(p) >= 78)
 
 # shot boundaries, keyed to the voiceover lines
-S = dict(s1b=3.0, s2=L[2][0] - 0.3, go2=L[2][0] + 0.7, s3=L[3][0] - 0.25, go3a=L[3][0] + 0.15, go3b=L[3][0] + 3.45,
-         s4=L[4][0] - 0.15, s5=L[5][0] - 0.2)
-S["go5"] = S["s5"] + 0.6
+# the timers land on the spoken numbers: 1.40 as "seconds" ends, 1.90 as "pop time" ends, 1.20 as "seconds" ends
+S = dict(s1b=3.0, s2=L[2][0] - 0.3, go2=L[2][0] + 0.7, s3=L[3][0] - 0.25, go3a=W(3, "seconds", end=True) - 1.4 / 0.5,
+         go3b=W(3, "time", end=True) - 1.9 / 0.5, s4=L[4][0] - 0.15, s5=L[5][0] - 0.2)
+S["go5"] = W(5, "seconds", end=True) - 1.2 / 0.42
 S["s6"] = round(S["go5"] + 3.10 / 0.42 + 0.12, 3)      # freeze just after the ball reaches second
 S["s7"] = L[9][0] - 0.15
 S = {k: round(v, 3) for k, v in S.items()}
@@ -48,7 +54,7 @@ c.ft(".divider", o(scaleX=0), o(scaleX=1, duration=0.35, ease="power3.out"), S["
 c.ft("#tbox-pop", o(opacity=0, y=-20), o(opacity=1, y=0, duration=0.3, ease="power3.out"), S["s3"] + 0.2)
 
 # ----------------------------------------------------------------- 1.40 + 1.90 = 3.30
-eq_t = [S["s4"] + 0.15, S["s4"] + 0.55, S["s4"] + 0.95, L[4][0] + 1.1]
+eq_t = [S["s4"] + 0.1, S["s4"] + 0.35, W(4, "three"), W(4, "accounting")]
 c.clip("eq", S["s4"], S["s5"], f'''<div class="eq">
   <div class="eq-row"><span class="eq-n" id="eq1"><i>Delivery</i>1.40</span><span class="eq-op" id="eqp">+</span><span class="eq-n" id="eq2"><i>Pop time</i>1.90</span></div>
   <div class="eq-total" id="eq3"><span>=</span>3.30<small>s</small></div>
@@ -57,7 +63,7 @@ for i, (sel, t) in enumerate(zip(["#eq1", "#eqp, #eq2", "#eq3", "#eq4"], eq_t)):
     c.ft(sel, o(opacity=0, y=24, scale=1.05), o(opacity=1, y=0, scale=1, duration=0.32, ease="power3.out"), t)
 
 # ----------------------------------------------------------------- 1.2 s delivery: the comparison
-cmp_t = L[6][0] + 0.2
+cmp_t = L[5][0] + 1.2
 c.clip("cmp", S["s5"], S["s6"], f'''<div class="timer" id="tbox-b"><span class="tl">Time to plate</span><b><span id="tm-b-del">0.00</span><small>s</small></b></div>
   <div class="bars" id="bars">
     <div class="bar-row"><span class="bl">1.4 s delivery</span><div class="track"><i class="fill a" id="fa"></i></div><span class="bv">3.30</span></div>
@@ -67,11 +73,11 @@ c.ft("#tbox-b", o(opacity=0, y=-20), o(opacity=1, y=0, duration=0.3, ease="power
 c.ft("#bars", o(opacity=0, y=20), o(opacity=1, y=0, duration=0.3, ease="power3.out"), cmp_t)
 c.ft("#fa", o(scaleX=0), o(scaleX=1, duration=0.7, ease="power2.out"), cmp_t + 0.1)
 c.ft("#fb", o(scaleX=0), o(scaleX=3.10 / 3.30, duration=0.7, ease="power2.out"), cmp_t + 0.25)
-c.ft("#delta", o(opacity=0, scale=0.85), o(opacity=1, scale=1, duration=0.35, ease="back.out(2)"), cmp_t + 1.0)
+c.ft("#delta", o(opacity=0, scale=0.85), o(opacity=1, scale=1, duration=0.35, ease="back.out(2)"), W(6, "two-tenths"))
 c.clip("note", S["s4"], S["s7"], '<div class="note">Illustrative timings</div>', cls="layer", style="z-index:10")
 
 # ----------------------------------------------------------------- freeze: the race
-race_t = L[8][0] + 0.1
+race_t = L[8][0] - 0.2
 c.clip("frz", S["s6"], S["s7"], f'''<div class="frz" id="frz"><i></i>Ball at second · 3.10 s</div>
   <div class="race" id="race">
     <div class="lane"><span class="ln">Pitcher's delivery</span><div class="lt"><i class="seg del" id="r1"></i></div><span class="lv">1.20</span></div>
@@ -80,37 +86,52 @@ c.clip("frz", S["s6"], S["s7"], f'''<div class="frz" id="frz"><i></i>Ball at sec
     <div class="finish" style="left:calc(var(--lane0) + {3.10 / 3.4:.4f} * var(--lanew))"></div></div>''', cls="layer", style="z-index:10")
 c.ft("#frz", o(opacity=0, y=-14), o(opacity=1, y=0, duration=0.25, ease="power3.out"), S["s6"] + 0.05)
 c.ft("#race", o(opacity=0, y=20), o(opacity=1, y=0, duration=0.3, ease="power3.out"), race_t)
-c.ft("#r1", o(scaleX=0), o(scaleX=1, duration=0.6, ease="power2.inOut"), race_t + 0.3)
-c.ft("#r2", o(scaleX=0), o(scaleX=1, duration=0.8, ease="power2.inOut"), race_t + 0.9)
-c.ft("#r3", o(scaleX=0), o(scaleX=1, duration=1.4, ease="power2.inOut"), race_t + 0.3)
+c.ft("#r1", o(scaleX=0), o(scaleX=1, duration=0.55, ease="power2.inOut"), W(8, "delivery"))
+c.ft("#r2", o(scaleX=0), o(scaleX=1, duration=0.7, ease="power2.inOut"), W(8, "throw"))
+c.ft("#r3", o(scaleX=0), o(scaleX=1, duration=0.9, ease="power2.inOut"), W(8, "jump"))
 
 # ----------------------------------------------------------------- the end: look at the clock
 end_t = L[10][0]
 c.clip("end", end_t - 0.1, D, f'''<div class="endc" id="endc"><div class="watch"><span class="wl">Stolen base</span><b>3.10<small>s</small></b></div>
-  <div class="end-t">Look at the <em>clock.</em></div></div>''', cls="layer", style="z-index:12")
+  <div class="end-t"><span id="ew0">Look</span> <span id="ew1">at</span> <span id="ew2">the</span> <em id="ew3">clock.</em></div></div>''', cls="layer", style="z-index:12")
+for k, w in enumerate(WORDS[10]):                    # the last line, word by word as it's said
+    c.ft(f"#ew{k}", o(opacity=0, y=18), o(opacity=1, y=0, duration=0.16, ease="power2.out"), w["t0"])
 c.ft("#endc", o(opacity=0, scale=1.08), o(opacity=1, scale=1, duration=0.35, ease="power3.out"), end_t - 0.1)
 
-# ----------------------------------------------------------------- captions: the script, in short phrases timed across each line
-HL = re.compile(r"(\d\.\d(?:-second)?|two-tenths|clock)")
-def chunks(text):
-    words = text.split(); out, cur = [], []
-    for w in words:
-        cur.append(w)
-        if len(cur) >= 4 or w[-1] in ",.?" or (len(cur) >= 3 and len(" ".join(cur)) > 18):
-            out.append(" ".join(cur)); cur = []
-    if cur: out.append(" ".join(cur))
+# ----------------------------------------------------------------- captions: the script word for word, each word lit while it's spoken
+# A caption word covers one spoken word, except numbers, which the voice reads out ("1.9-second" = one point nine second).
+def span_of(tok):
+    m = re.match(r"^(\d)\.(\d)(-second)?", tok)
+    return (3 + (1 if m.group(3) else 0)) if m else 1
+def phrases(toks):
+    out, cur = [], []
+    for t in toks:
+        cur.append(t)
+        if t[-1] in ",.?" or len(cur) >= 4 or (len(cur) >= 3 and len(" ".join(cur)) > 17):
+            out.append(cur); cur = []
+    if cur: out.append(cur)
     return out
-cap_html, k = [], 0
-for t0, t1, text in L:
-    if text == "Look at the clock.": continue          # the end card says it
-    parts = chunks(text); w = [len(p) + 3 for p in parts]; tot = sum(w); t = t0
-    for p, wi in zip(parts, w):
-        dt = (t1 - t0) * wi / tot
+k = 0
+for li, (t0, t1, text) in enumerate(L):
+    if li == 10: continue                                     # the end card says it, word by word
+    toks = text.split()
+    assert sum(span_of(t) for t in toks) == len(WORDS[li]), f"caption/voice mismatch on line {li}"
+    times, j = [], 0
+    for t in toks:
+        n = span_of(t); times.append((WORDS[li][j]["t0"], WORDS[li][j + n - 1]["t1"])); j += n
+    groups, i = phrases(toks), 0
+    for gi, g in enumerate(groups):
+        gt = times[i:i + len(g)]
+        start = gt[0][0] - 0.06
+        nxt = times[i + len(g)][0] - 0.06 if i + len(g) < len(times) else min(t1 + 0.35, L[li + 1][0] - 0.06 if li + 1 < len(L) else D)
         cid = f"cap{k}"; k += 1
-        html_ = HL.sub(r"<em>\1</em>", esc(p.rstrip(",")))
-        c.clip(cid, t, min(t + dt, t1 + 0.05), f'<div class="cap"><span id="{cid}-t">{html_}</span></div>', cls="layer", style="z-index:20")
-        c.ft(f"#{cid}-t", o(opacity=0, y=10, scale=0.96), o(opacity=1, y=0, scale=1, duration=0.12, ease="power2.out"), t)
-        t += dt
+        words_html = " ".join(f'<span class="cw" id="{cid}w{n}">{esc(w.rstrip(","))}</span>' for n, w in enumerate(g))
+        c.clip(cid, start, nxt, f'<div class="cap"><span class="cl" id="{cid}-t">{words_html}</span></div>', cls="layer", style="z-index:20")
+        c.ft(f"#{cid}-t", o(opacity=0, y=10, scale=0.96), o(opacity=1, y=0, scale=1, duration=0.1, ease="power2.out"), start)
+        for n, (a_, b_) in enumerate(gt):
+            c.set(f"#{cid}w{n}", o(color=Y), a_)
+            c.set(f"#{cid}w{n}", o(color="#ffffff"), max(b_, a_ + 0.12))
+        i += len(g)
 
 # ----------------------------------------------------------------- sound
 def cue(n, t, db=0.0): c.cue(n, t, db)
@@ -123,7 +144,7 @@ cue("glove", S["go5"] + 3.10 / 0.42, 0); cue("impact", S["s6"], -6); cue("riser-
 for t0, t1 in [(S["go2"], S["go2"] + 1.4 / 0.5), (S["go3a"], S["go3a"] + 1.4 / 0.5), (S["go3b"], S["go3b"] + 1.9 / 0.5), (S["go5"], S["go5"] + 1.2 / 0.42)]:
     for t in np.arange(t0, t1, 0.25): cue("tick", float(t), -14)
 for t in eq_t: cue("hit", t, -12)
-cue("popup", cmp_t + 1.0, -8); cue("popup", race_t, -10)
+cue("popup", W(6, "two-tenths"), -8); cue("popup", race_t, -10)
 cue("hit", end_t - 0.1, -5)
 for i in range(4): cue("tick", end_t + 0.35 + i * 0.25, -8)
 
@@ -226,9 +247,9 @@ html, body {{ width:1080px; height:1920px; overflow:hidden; background:#05080d; 
 .end-t em {{ font-style:normal; color:{Y}; }}
 
 .cap {{ position:absolute; left:40px; right:40px; top:1380px; text-align:center; }}
-.cap span {{ display:inline-block; font-weight:800; font-size:84px; line-height:1.0; letter-spacing:.005em; text-transform:uppercase; color:#fff;
+.cap .cl {{ display:inline-block; font-weight:800; font-size:84px; line-height:1.0; letter-spacing:.005em; text-transform:uppercase; color:#fff;
              -webkit-text-stroke:12px rgba(0,0,0,.85); paint-order:stroke fill; text-shadow:0 6px 24px rgba(0,0,0,.6); }}
-.cap em {{ font-style:normal; color:{Y}; }}
+.cap .cw {{ color:#ffffff; }}
 """])
 
 HEAD = '''<script type="importmap">{"imports":{"three":"./assets/vendor/three.module.min.js"}}</script>'''

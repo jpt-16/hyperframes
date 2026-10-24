@@ -1,13 +1,12 @@
 # "Look at the clock": a stolen base is a race
 
-A 51.7 s vertical (1080×1920) explainer built from the script. It has a 3D field, timers, captions, a scratch voiceover and sound effects.
+A 50.3 s vertical (1080×1920) explainer built from the script. It has a 3D field, timers, word-timed captions, a voiceover (HyperFrames' built-in Kokoro TTS) and sound effects.
 
 ```bash
-python3 tools/vo.py && python3 tools/assemble.py     # scratch voiceover + line timing (needs kokoro-onnx, see below)
+$HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # voiceover (hyperframes tts) + word timing, see below
 python3 tools/sfx.py                                 # crowd bed, glove pop, stopwatch tick
 python3 build.py                                     # index.html + assets/mix.wav + assets/mix-novo.wav
 npx --yes hyperframes@0.8.154 render . -o renders/look-at-the-clock.mp4 --video-bitrate 16M
-ffmpeg -i renders/look-at-the-clock.mp4 -i assets/mix-novo.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 192k -shortest renders/look-at-the-clock-novo.mp4
 ```
 
 ## The 3D
@@ -57,17 +56,32 @@ These runner numbers are an illustrative model, not measured data. The video say
 
 Captions are the script, word for word.
 
-## Voiceover
+## Voiceover and captions
 
-`assets/vo/` holds a scratch voiceover from a local text-to-speech model (Kokoro, voice `am_michael`). It needs the `kokoro-onnx` and `soundfile` Python packages, pointed to with `HYPERFRAMES_PYTHON`.
+**The voice.** Every line is spoken by HyperFrames' built-in TTS (`hyperframes tts`), using the local Kokoro model. No external voice service is used.
 
-- **Spoken text:** the numbers are spelled out ("one point nine second pop time"), because the model otherwise misreads "1.9-second".
-- **Captions:** they keep the script's numerals.
+- **Voice and speed:** `am_michael` at 1.05× speed, for a clear, confident tutorial read.
+- **Setup:** `HYPERFRAMES_PYTHON` must point at a Python that has `kokoro-onnx`, `soundfile` and `onnx`.
+- **Numbers:** the spoken text spells them out ("one point nine second pop time"), because Kokoro otherwise reads "1.9-second" as "one. nine second". The captions keep the script's numerals.
 
-**To use your own voice:**
+**Word timing.** `tools/vo.py` works out when each word is spoken:
 
-- **Easiest:** record over `renders/look-at-the-clock-novo.mp4`, which has the same picture with sound effects only. The line start times are listed in `assets/vo/timing.json`.
-- **Or:** replace `assets/vo/vo.wav` with your recording, edit the start times in `tools/assemble.py`, and rebuild. The shots move with the lines.
+1. It makes a copy of HyperFrames' `kokoro-v1.0.onnx` with the model's own per-phoneme duration tensor exposed as an output. The weights are untouched, and the copy is cached in `.cache/`.
+2. kokoro-onnx's `create_timed()` runs that copy without inserting pauses. Each line is checked to match the `hyperframes tts` audio sample for sample, so the timings are the times in the file.
+3. Phonemes are aligned to words. This handles espeak merging short words such as "for the".
+
+**What the timings drive:**
+
+- **Captions:** the script word for word, in short phrases. The word being spoken turns yellow.
+- **Animations:**
+  - TIME TO PLATE reaches 1.40 as "seconds" ends.
+  - POP TIME reaches 1.90 on "pop time".
+  - The 1.2 s delivery reaches 1.20 on "seconds".
+  - "3.30" lands on "three point three".
+  - "−0.20 s" lands on "two-tenths".
+  - The race lanes fill on "delivery", "throw" and "jump".
+  - "Look at the clock." appears word by word.
+- **Line timing:** the pauses between lines are set in `tools/assemble.py`, and every shot moves with them.
 
 ## Sound
 
@@ -79,4 +93,4 @@ Captions are the script, word for word.
 - Hits on the equation.
 - Ticks into the final "Look at the clock."
 
-All of it is synthesised or taken from the shared JT kit. No music. The voice version is mastered to about −14 LUFS.
+All of it is synthesised or taken from the shared JT kit. No music. The effects sit 6 dB under the voice, and the mix is mastered to about −14 LUFS.

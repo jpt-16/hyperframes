@@ -8,3 +8,4 @@ index.html
 .pre.wav
 .fx.wav
 assets/vo/*.wav
+.cache/

@@ -1,4 +1,5 @@
-"""Lay the voiceover lines on one track with designed pauses -> assets/vo/vo.wav + assets/vo/timing.json."""
+"""Lay the voiceover lines on one track with designed pauses -> assets/vo/vo.wav + assets/vo/timing.json
+(line start/end and every word's start/end on the video's clock)."""
 import json, os, subprocess, wave
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); VO = os.path.join(HERE, "..", "assets", "vo")
@@ -15,8 +16,10 @@ t, clips, timing = START, [], []
 for ln, gap in zip(lines, GAP_AFTER):
     x = load(os.path.join(VO, f"{ln['i']:02d}.wav"))
     nz = np.where(np.abs(x) > 0.004)[0]                      # trim the model's leading/trailing silence
-    x = x[max(0, nz[0] - int(0.02 * SR)): nz[-1] + int(0.06 * SR)]
-    clips.append((t, x)); timing.append({"i": ln["i"], "text": ln["text"], "t0": round(t, 3), "t1": round(t + len(x) / SR, 3)})
+    a = max(0, nz[0] - int(0.02 * SR))
+    x = x[a: nz[-1] + int(0.06 * SR)]
+    words = [{"w": w["w"], "t0": round(t + w["start"] - a / SR, 3), "t1": round(t + w["end"] - a / SR, 3)} for w in ln.get("words", [])]
+    clips.append((t, x)); timing.append({"i": ln["i"], "text": ln["text"], "spoken": ln.get("spoken", ln["text"]), "t0": round(t, 3), "t1": round(t + len(x) / SR, 3), "words": words})
     t += len(x) / SR + gap
 D = round(t, 2)
 buf = np.zeros(int(D * SR) + SR)

@@ -3,66 +3,768 @@
   "i": 0,
   "text": "Everyone judges a catcher by how fast he throws to second.",
   "spoken": "Everyone judges a catcher by how fast he throws to second.",
-  "dur": 4.181
+  "dur": 4.096,
+  "words": [
+   {
+    "w": "Everyone",
+    "start": 0.176,
+    "end": 0.601
+   },
+   {
+    "w": "judges",
+    "start": 0.651,
+    "end": 1.101
+   },
+   {
+    "w": "a",
+    "start": 1.101,
+    "end": 1.101
+   },
+   {
+    "w": "catcher",
+    "start": 1.176,
+    "end": 1.926
+   },
+   {
+    "w": "by",
+    "start": 2.026,
+    "end": 2.151
+   },
+   {
+    "w": "how",
+    "start": 2.201,
+    "end": 2.376
+   },
+   {
+    "w": "fast",
+    "start": 2.476,
+    "end": 2.801
+   },
+   {
+    "w": "he",
+    "start": 2.826,
+    "end": 2.901
+   },
+   {
+    "w": "throws",
+    "start": 2.976,
+    "end": 3.351
+   },
+   {
+    "w": "to",
+    "start": 3.401,
+    "end": 3.476
+   },
+   {
+    "w": "second.",
+    "start": 3.551,
+    "end": 4.096
+   }
+  ]
  },
  {
   "i": 1,
   "text": "But that's only half the story.",
   "spoken": "But that's only half the story.",
-  "dur": 1.856
+  "dur": 1.813,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.055,
+    "end": 0.155
+   },
+   {
+    "w": "that's",
+    "start": 0.205,
+    "end": 0.43
+   },
+   {
+    "w": "only",
+    "start": 0.48,
+    "end": 0.68
+   },
+   {
+    "w": "half",
+    "start": 0.755,
+    "end": 0.98
+   },
+   {
+    "w": "the",
+    "start": 1.005,
+    "end": 1.055
+   },
+   {
+    "w": "story.",
+    "start": 1.105,
+    "end": 1.813
+   }
+  ]
  },
  {
   "i": 2,
   "text": "Because before the catcher can even make a throw, the pitcher has to deliver the ball.",
   "spoken": "Because before the catcher can even make a throw, the pitcher has to deliver the ball.",
-  "dur": 5.056
+  "dur": 4.885,
+  "words": [
+   {
+    "w": "Because",
+    "start": 0.037,
+    "end": 0.337
+   },
+   {
+    "w": "before",
+    "start": 0.387,
+    "end": 0.662
+   },
+   {
+    "w": "the",
+    "start": 0.687,
+    "end": 0.762
+   },
+   {
+    "w": "catcher",
+    "start": 0.837,
+    "end": 1.212
+   },
+   {
+    "w": "can",
+    "start": 1.262,
+    "end": 1.387
+   },
+   {
+    "w": "even",
+    "start": 1.512,
+    "end": 1.712
+   },
+   {
+    "w": "make",
+    "start": 1.762,
+    "end": 2.012
+   },
+   {
+    "w": "a",
+    "start": 2.012,
+    "end": 2.012
+   },
+   {
+    "w": "throw,",
+    "start": 2.112,
+    "end": 2.787
+   },
+   {
+    "w": "the",
+    "start": 2.937,
+    "end": 3.012
+   },
+   {
+    "w": "pitcher",
+    "start": 3.087,
+    "end": 3.462
+   },
+   {
+    "w": "has",
+    "start": 3.512,
+    "end": 3.712
+   },
+   {
+    "w": "to",
+    "start": 3.762,
+    "end": 3.837
+   },
+   {
+    "w": "deliver",
+    "start": 3.887,
+    "end": 4.262
+   },
+   {
+    "w": "the",
+    "start": 4.312,
+    "end": 4.387
+   },
+   {
+    "w": "ball.",
+    "start": 4.462,
+    "end": 4.885
+   }
+  ]
  },
  {
   "i": 3,
   "text": "Let's say the pitcher takes 1.4 seconds to deliver, and the catcher has a 1.9-second pop time.",
   "spoken": "Let's say the pitcher takes one point four seconds to deliver, and the catcher has a one point nine second pop time.",
-  "dur": 7.488
+  "dur": 7.296,
+  "words": [
+   {
+    "w": "Let's",
+    "start": 0.151,
+    "end": 0.326
+   },
+   {
+    "w": "say",
+    "start": 0.376,
+    "end": 0.551
+   },
+   {
+    "w": "the",
+    "start": 0.601,
+    "end": 0.651
+   },
+   {
+    "w": "pitcher",
+    "start": 0.701,
+    "end": 1.051
+   },
+   {
+    "w": "takes",
+    "start": 1.101,
+    "end": 1.401
+   },
+   {
+    "w": "one",
+    "start": 1.476,
+    "end": 1.751
+   },
+   {
+    "w": "point",
+    "start": 1.826,
+    "end": 2.151
+   },
+   {
+    "w": "four",
+    "start": 2.226,
+    "end": 2.426
+   },
+   {
+    "w": "seconds",
+    "start": 2.501,
+    "end": 2.851
+   },
+   {
+    "w": "to",
+    "start": 2.901,
+    "end": 2.976
+   },
+   {
+    "w": "deliver,",
+    "start": 3.026,
+    "end": 3.801
+   },
+   {
+    "w": "and",
+    "start": 3.951,
+    "end": 4.026
+   },
+   {
+    "w": "the",
+    "start": 4.051,
+    "end": 4.101
+   },
+   {
+    "w": "catcher",
+    "start": 4.176,
+    "end": 4.601
+   },
+   {
+    "w": "has",
+    "start": 4.651,
+    "end": 4.901
+   },
+   {
+    "w": "a",
+    "start": 4.901,
+    "end": 4.901
+   },
+   {
+    "w": "one",
+    "start": 4.976,
+    "end": 5.301
+   },
+   {
+    "w": "point",
+    "start": 5.376,
+    "end": 5.701
+   },
+   {
+    "w": "nine",
+    "start": 5.776,
+    "end": 6.051
+   },
+   {
+    "w": "second",
+    "start": 6.126,
+    "end": 6.426
+   },
+   {
+    "w": "pop",
+    "start": 6.476,
+    "end": 6.751
+   },
+   {
+    "w": "time.",
+    "start": 6.801,
+    "end": 7.296
+   }
+  ]
  },
  {
   "i": 4,
   "text": "That's 3.3 seconds before accounting for the runner's jump and the tag.",
   "spoken": "That's three point three seconds before accounting for the runner's jump and the tag.",
-  "dur": 4.907
+  "dur": 4.779,
+  "words": [
+   {
+    "w": "That's",
+    "start": 0.059,
+    "end": 0.284
+   },
+   {
+    "w": "three",
+    "start": 0.359,
+    "end": 0.584
+   },
+   {
+    "w": "point",
+    "start": 0.634,
+    "end": 0.909
+   },
+   {
+    "w": "three",
+    "start": 0.984,
+    "end": 1.184
+   },
+   {
+    "w": "seconds",
+    "start": 1.284,
+    "end": 1.984
+   },
+   {
+    "w": "before",
+    "start": 2.084,
+    "end": 2.334
+   },
+   {
+    "w": "accounting",
+    "start": 2.384,
+    "end": 2.859
+   },
+   {
+    "w": "for",
+    "start": 2.909,
+    "end": 3.009
+   },
+   {
+    "w": "the",
+    "start": 3.009,
+    "end": 3.084
+   },
+   {
+    "w": "runner's",
+    "start": 3.134,
+    "end": 3.459
+   },
+   {
+    "w": "jump",
+    "start": 3.534,
+    "end": 3.934
+   },
+   {
+    "w": "and",
+    "start": 4.034,
+    "end": 4.109
+   },
+   {
+    "w": "the",
+    "start": 4.134,
+    "end": 4.184
+   },
+   {
+    "w": "tag.",
+    "start": 4.259,
+    "end": 4.779
+   }
+  ]
  },
  {
   "i": 5,
   "text": "Now compare that with a pitcher who delivers in 1.2 seconds.",
   "spoken": "Now compare that with a pitcher who delivers in one point two seconds.",
-  "dur": 4.437
+  "dur": 4.309,
+  "words": [
+   {
+    "w": "Now",
+    "start": 0.087,
+    "end": 0.337
+   },
+   {
+    "w": "compare",
+    "start": 0.387,
+    "end": 0.762
+   },
+   {
+    "w": "that",
+    "start": 0.812,
+    "end": 0.987
+   },
+   {
+    "w": "with",
+    "start": 1.037,
+    "end": 1.212
+   },
+   {
+    "w": "a",
+    "start": 1.212,
+    "end": 1.212
+   },
+   {
+    "w": "pitcher",
+    "start": 1.287,
+    "end": 1.962
+   },
+   {
+    "w": "who",
+    "start": 2.037,
+    "end": 2.137
+   },
+   {
+    "w": "delivers",
+    "start": 2.187,
+    "end": 2.687
+   },
+   {
+    "w": "in",
+    "start": 2.737,
+    "end": 2.837
+   },
+   {
+    "w": "one",
+    "start": 2.912,
+    "end": 3.137
+   },
+   {
+    "w": "point",
+    "start": 3.187,
+    "end": 3.462
+   },
+   {
+    "w": "two",
+    "start": 3.537,
+    "end": 3.712
+   },
+   {
+    "w": "seconds.",
+    "start": 3.787,
+    "end": 4.309
+   }
+  ]
  },
  {
   "i": 6,
   "text": "That's two-tenths of a second less time for the runner to advance.",
   "spoken": "That's two-tenths of a second less time for the runner to advance.",
-  "dur": 3.84
+  "dur": 3.733,
+  "words": [
+   {
+    "w": "That's",
+    "start": 0.059,
+    "end": 0.284
+   },
+   {
+    "w": "two-tenths",
+    "start": 0.334,
+    "end": 0.834
+   },
+   {
+    "w": "of",
+    "start": 0.834,
+    "end": 0.934
+   },
+   {
+    "w": "a",
+    "start": 0.934,
+    "end": 0.934
+   },
+   {
+    "w": "second",
+    "start": 1.009,
+    "end": 1.584
+   },
+   {
+    "w": "less",
+    "start": 1.684,
+    "end": 1.859
+   },
+   {
+    "w": "time",
+    "start": 1.934,
+    "end": 2.334
+   },
+   {
+    "w": "for",
+    "start": 2.384,
+    "end": 2.484
+   },
+   {
+    "w": "the",
+    "start": 2.484,
+    "end": 2.559
+   },
+   {
+    "w": "runner",
+    "start": 2.634,
+    "end": 2.909
+   },
+   {
+    "w": "to",
+    "start": 2.959,
+    "end": 3.059
+   },
+   {
+    "w": "advance.",
+    "start": 3.109,
+    "end": 3.733
+   }
+  ]
  },
  {
   "i": 7,
   "text": "And that's why stopping a stolen base isn't just a catching problem.",
   "spoken": "And that's why stopping a stolen base isn't just a catching problem.",
-  "dur": 4.267
+  "dur": 4.117,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.151,
+    "end": 0.226
+   },
+   {
+    "w": "that's",
+    "start": 0.251,
+    "end": 0.476
+   },
+   {
+    "w": "why",
+    "start": 0.526,
+    "end": 0.751
+   },
+   {
+    "w": "stopping",
+    "start": 0.801,
+    "end": 1.251
+   },
+   {
+    "w": "a",
+    "start": 1.251,
+    "end": 1.251
+   },
+   {
+    "w": "stolen",
+    "start": 1.326,
+    "end": 1.776
+   },
+   {
+    "w": "base",
+    "start": 1.826,
+    "end": 2.426
+   },
+   {
+    "w": "isn't",
+    "start": 2.551,
+    "end": 2.726
+   },
+   {
+    "w": "just",
+    "start": 2.751,
+    "end": 3.026
+   },
+   {
+    "w": "a",
+    "start": 3.026,
+    "end": 3.026
+   },
+   {
+    "w": "catching",
+    "start": 3.101,
+    "end": 3.501
+   },
+   {
+    "w": "problem.",
+    "start": 3.551,
+    "end": 4.117
+   }
+  ]
  },
  {
   "i": 8,
   "text": "It's a race between the pitcher's delivery, the catcher's throw, and the runner's jump.",
   "spoken": "It's a race between the pitcher's delivery, the catcher's throw, and the runner's jump.",
-  "dur": 4.971
+  "dur": 4.864,
+  "words": [
+   {
+    "w": "It's",
+    "start": 0.084,
+    "end": 0.309
+   },
+   {
+    "w": "a",
+    "start": 0.309,
+    "end": 0.309
+   },
+   {
+    "w": "race",
+    "start": 0.384,
+    "end": 0.684
+   },
+   {
+    "w": "between",
+    "start": 0.734,
+    "end": 0.984
+   },
+   {
+    "w": "the",
+    "start": 1.009,
+    "end": 1.059
+   },
+   {
+    "w": "pitcher's",
+    "start": 1.109,
+    "end": 1.509
+   },
+   {
+    "w": "delivery,",
+    "start": 1.559,
+    "end": 2.209
+   },
+   {
+    "w": "the",
+    "start": 2.334,
+    "end": 2.409
+   },
+   {
+    "w": "catcher's",
+    "start": 2.459,
+    "end": 2.909
+   },
+   {
+    "w": "throw,",
+    "start": 2.984,
+    "end": 3.634
+   },
+   {
+    "w": "and",
+    "start": 3.759,
+    "end": 3.834
+   },
+   {
+    "w": "the",
+    "start": 3.859,
+    "end": 3.934
+   },
+   {
+    "w": "runner's",
+    "start": 3.984,
+    "end": 4.334
+   },
+   {
+    "w": "jump.",
+    "start": 4.409,
+    "end": 4.864
+   }
+  ]
  },
  {
   "i": 9,
   "text": "So next time a runner steals second, don't just blame the catcher.",
   "spoken": "So next time a runner steals second, don't just blame the catcher.",
-  "dur": 4.032
+  "dur": 3.925,
+  "words": [
+   {
+    "w": "So",
+    "start": 0.105,
+    "end": 0.205
+   },
+   {
+    "w": "next",
+    "start": 0.255,
+    "end": 0.48
+   },
+   {
+    "w": "time",
+    "start": 0.53,
+    "end": 0.905
+   },
+   {
+    "w": "a",
+    "start": 0.905,
+    "end": 0.905
+   },
+   {
+    "w": "runner",
+    "start": 0.98,
+    "end": 1.28
+   },
+   {
+    "w": "steals",
+    "start": 1.355,
+    "end": 1.68
+   },
+   {
+    "w": "second,",
+    "start": 1.755,
+    "end": 2.33
+   },
+   {
+    "w": "don't",
+    "start": 2.48,
+    "end": 2.655
+   },
+   {
+    "w": "just",
+    "start": 2.68,
+    "end": 2.855
+   },
+   {
+    "w": "blame",
+    "start": 2.905,
+    "end": 3.18
+   },
+   {
+    "w": "the",
+    "start": 3.205,
+    "end": 3.255
+   },
+   {
+    "w": "catcher.",
+    "start": 3.33,
+    "end": 3.925
+   }
+  ]
  },
  {
   "i": 10,
   "text": "Look at the clock.",
   "spoken": "Look at the clock.",
-  "dur": 1.237
+  "dur": 1.216,
+  "words": [
+   {
+    "w": "Look",
+    "start": 0.151,
+    "end": 0.326
+   },
+   {
+    "w": "at",
+    "start": 0.351,
+    "end": 0.401
+   },
+   {
+    "w": "the",
+    "start": 0.426,
+    "end": 0.501
+   },
+   {
+    "w": "clock.",
+    "start": 0.576,
+    "end": 1.216
+   }
+  ]
  }
 ]
