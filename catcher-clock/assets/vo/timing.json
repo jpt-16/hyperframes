@@ -1,0 +1,71 @@
+{
+ "duration": 51.66,
+ "lines": [
+  {
+   "i": 0,
+   "text": "Everyone judges a catcher by how fast he throws to second.",
+   "t0": 0.35,
+   "t1": 4.342
+  },
+  {
+   "i": 1,
+   "text": "But that's only half the story.",
+   "t0": 4.692,
+   "t1": 6.319
+  },
+  {
+   "i": 2,
+   "text": "Because before the catcher can even make a throw, the pitcher has to deliver the ball.",
+   "t0": 6.919,
+   "t1": 11.933
+  },
+  {
+   "i": 3,
+   "text": "Let's say the pitcher takes 1.4 seconds to deliver, and the catcher has a 1.9-second pop time.",
+   "t0": 12.433,
+   "t1": 19.802
+  },
+  {
+   "i": 4,
+   "text": "That's 3.3 seconds before accounting for the runner's jump and the tag.",
+   "t0": 20.152,
+   "t1": 24.965
+  },
+  {
+   "i": 5,
+   "text": "Now compare that with a pitcher who delivers in 1.2 seconds.",
+   "t0": 25.615,
+   "t1": 30.009
+  },
+  {
+   "i": 6,
+   "text": "That's two-tenths of a second less time for the runner to advance.",
+   "t0": 30.309,
+   "t1": 34.099
+  },
+  {
+   "i": 7,
+   "text": "And that's why stopping a stolen base isn't just a catching problem.",
+   "t0": 34.699,
+   "t1": 38.799
+  },
+  {
+   "i": 8,
+   "text": "It's a race between the pitcher's delivery, the catcher's throw, and the runner's jump.",
+   "t0": 39.099,
+   "t1": 43.964
+  },
+  {
+   "i": 9,
+   "text": "So next time a runner steals second, don't just blame the catcher.",
+   "t0": 44.564,
+   "t1": 48.514
+  },
+  {
+   "i": 10,
+   "text": "Look at the clock.",
+   "t0": 48.864,
+   "t1": 49.964
+  }
+ ]
+}

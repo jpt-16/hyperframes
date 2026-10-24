@@ -1,0 +1,10 @@
+assets/mix.wav
+assets/mix-novo.wav
+renders/
+snaps/
+.hyperframes/
+__pycache__/
+index.html
+.pre.wav
+.fx.wav
+assets/vo/*.wav

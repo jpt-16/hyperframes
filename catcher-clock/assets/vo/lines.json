@@ -1,0 +1,68 @@
+[
+ {
+  "i": 0,
+  "text": "Everyone judges a catcher by how fast he throws to second.",
+  "spoken": "Everyone judges a catcher by how fast he throws to second.",
+  "dur": 4.181
+ },
+ {
+  "i": 1,
+  "text": "But that's only half the story.",
+  "spoken": "But that's only half the story.",
+  "dur": 1.856
+ },
+ {
+  "i": 2,
+  "text": "Because before the catcher can even make a throw, the pitcher has to deliver the ball.",
+  "spoken": "Because before the catcher can even make a throw, the pitcher has to deliver the ball.",
+  "dur": 5.056
+ },
+ {
+  "i": 3,
+  "text": "Let's say the pitcher takes 1.4 seconds to deliver, and the catcher has a 1.9-second pop time.",
+  "spoken": "Let's say the pitcher takes one point four seconds to deliver, and the catcher has a one point nine second pop time.",
+  "dur": 7.488
+ },
+ {
+  "i": 4,
+  "text": "That's 3.3 seconds before accounting for the runner's jump and the tag.",
+  "spoken": "That's three point three seconds before accounting for the runner's jump and the tag.",
+  "dur": 4.907
+ },
+ {
+  "i": 5,
+  "text": "Now compare that with a pitcher who delivers in 1.2 seconds.",
+  "spoken": "Now compare that with a pitcher who delivers in one point two seconds.",
+  "dur": 4.437
+ },
+ {
+  "i": 6,
+  "text": "That's two-tenths of a second less time for the runner to advance.",
+  "spoken": "That's two-tenths of a second less time for the runner to advance.",
+  "dur": 3.84
+ },
+ {
+  "i": 7,
+  "text": "And that's why stopping a stolen base isn't just a catching problem.",
+  "spoken": "And that's why stopping a stolen base isn't just a catching problem.",
+  "dur": 4.267
+ },
+ {
+  "i": 8,
+  "text": "It's a race between the pitcher's delivery, the catcher's throw, and the runner's jump.",
+  "spoken": "It's a race between the pitcher's delivery, the catcher's throw, and the runner's jump.",
+  "dur": 4.971
+ },
+ {
+  "i": 9,
+  "text": "So next time a runner steals second, don't just blame the catcher.",
+  "spoken": "So next time a runner steals second, don't just blame the catcher.",
+  "dur": 4.032
+ },
+ {
+  "i": 10,
+  "text": "Look at the clock.",
+  "spoken": "Look at the clock.",
+  "dur": 1.237
+ }
+]
