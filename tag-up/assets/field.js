@@ -363,7 +363,7 @@ const runLine = lineMesh(Array.from({ length: 31 }, (_, i) => onLine3(89 * i / 3
 const arcPts = (path, n = 80) => Array.from({ length: n + 1 }, (_, i) => pathAt(path, path.t0 + path.dur * i / n));
 const directArc = lineMesh(arcPts(PLAY.path.direct), 0xffd84d, 1.6, 0, false, 0.95, true);
 const loopArc = lineMesh(arcPts(PLAY.path.loop), 0xff8a3d, 1.6, 0, false, 0.95, true);
-const catchRing = new THREE.Mesh(new THREE.RingGeometry(3.2, 3.8, 48), new THREE.MeshBasicMaterial({ color: 0xffd84d, transparent: true, opacity: 0.8, depthWrite: false, side: THREE.DoubleSide }));
+const catchRing = new THREE.Mesh(new THREE.RingGeometry(3.4, 4.3, 64), new THREE.MeshBasicMaterial({ color: 0xff6a3d, transparent: true, opacity: 0.9, depthWrite: false, side: THREE.DoubleSide }));
 catchRing.rotation.x = -Math.PI / 2; catchRing.position.set(CATCH.x, 0.12, CATCH.z); scene.add(catchRing);
 const gapMark = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.06, 1), new THREE.MeshBasicMaterial({ color: 0x56d1ff })); scene.add(gapMark);
 function labelSprite(text, color = "#ffffff", bg = "rgba(8,12,20,0.82)") {
@@ -488,17 +488,19 @@ const T = CC.shots;      // video-time shot boundaries and play-time mapping, fr
 function shotAt(v) {
   // returns { t, mode, cam: [pos, look, fov], show: {...}, ghost }
   const s = T;
-  if (v < s.v1) {                                   // hook: behind the runner on third, the fly ball coming down in right-center
-    const t = v - s.catchV, u = v / s.v1;
-    const d = CATCH.clone().sub(B3).setY(0).normalize();
-    const pos = B3.clone().addScaledVector(d, -19).add(v3(0, 6.5, 0)).addScaledVector(v3(-d.z, 0, d.x), 2.0).addScaledVector(d, 3 * u);
-    return { t, cam: [pos, CATCH.clone().setY(30), 50], show: { ring: true } };
-  }
-  if (v < s.catchV) {                               // behind the right fielder: tracking the ball into his glove
-    const t = v - s.catchV, u = (v - s.v1) / (s.catchV - s.v1);
-    const pos = CATCH.clone().setY(0).addScaledVector(U, 26).addScaledVector(SIDE, 5).add(v3(0, 6.5, 0)).addScaledVector(TOHOME, 5 * u);
+  if (v < s.catchV) {                              // hook: one continuous move, from straight above the runner on third,
+    const t = v - s.catchV;                         // diving out over the infield to low behind the right fielder for the catch
+    const u = easeIO((v - s.sw0) / (s.sw1 - s.sw0));
     const ballP = pathAt(PLAY.path.fly, t);
-    return { t, cam: [pos, mixV(ballP, CATCH.clone().setY(4), lerp(0.55, 1, smooth(u))), 48], show: { ring: true } };
+    const p0 = B3.clone().add(v3(14, 105, 34)).add(v3(0, -6 * clamp(v / s.sw0, 0, 1), 0));
+    const p2 = CATCH.clone().setY(0).addScaledVector(U, 26).addScaledVector(SIDE, 5).add(v3(0, 6.5, 0)).addScaledVector(TOHOME, 4 * smooth((v - s.sw1) / (s.catchV - s.sw1)));
+    const p1 = CATCH.clone().setY(120).addScaledVector(U, 40).addScaledVector(SIDE, -150);   // swing wide and deep, never over the fielder
+    const pos = p0.clone().multiplyScalar((1 - u) * (1 - u)).addScaledVector(p1, 2 * u * (1 - u)).addScaledVector(p2, u * u);
+    const look0 = B3.clone().add(v3(4, 0, -6));
+    const spot = CATCH.clone().setY(3);
+    const track = mixV(spot, ballP, 0.24 * smooth((v - 1.75) / 0.35) * (1 - smooth((v - 2.3) / 0.5)));   // fielder centred; the ball enters the frame late   // keep the fielder low, the ball high in frame
+    const look = mixV(look0, track, smooth((v - s.sw0) / 0.75));
+    return { t, cam: [pos, look, lerp(52, 48, u)], show: { ring: true }, ringPulse: v - s.ringT };
   }
   if (v < s.v3) {                                   // freeze at the catch: how far is it?
     const u = (v - s.catchV) / (s.v3 - s.catchV);
@@ -582,6 +584,8 @@ function renderAt(v) {
   reveal(runLine, st.show?.runLine ?? 0);
   directArc.visible = loopArc.visible = !!st.show?.arcs;
   catchRing.visible = !!st.show?.ring;
+  const rp = st.ringPulse ?? -1;                 // the ring punches out on "HERE?"
+  catchRing.scale.setScalar(rp > 0 ? 1 + 0.55 * Math.exp(-rp * 5) * Math.sin(Math.min(rp * 14, Math.PI)) : 1);
   gapMark.visible = !!st.show?.gap;
   if (gapLabel) gapLabel.visible = !!st.show?.gap;
   if (st.show?.gap) {                       // the distance the runner's foot is still short of the plate

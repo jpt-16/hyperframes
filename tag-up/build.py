@@ -16,12 +16,12 @@ from audio import SR
 
 P = json.load(open(os.path.join(HERE, "assets", "play.json")))
 A, DR, LP, FL = P["assume"], P["direct"], P["loop"], P["flips"]
-Y, CYAN, ORANGE, WHITE, RED, GREEN = "#FFD84D", "#56D1FF", "#FF8A3D", "#F4F6F8", "#FF5A5A", "#3DD68C"
+Y, CYAN, ORANGE, WHITE, RED, GREEN, HOT = "#FFD84D", "#56D1FF", "#FF8A3D", "#F4F6F8", "#FF5A5A", "#3DD68C", "#FF6A3D"
 GAP = A["r_dist"] - DR["runner_at_tag"]
 f2 = lambda x: f"{x:.2f}"
 
 # ----------------------------------------------------------------- shots: video time v, play time t (t = 0 at the catch)
-S = dict(v1=1.35, catchV=2.8, v3=5.0, r3=0.75, v4=6.45, v5=8.3, t5=2.85, v6=9.5, t6=3.45, v7=10.9, v8=14.8, t8=3.4, v9=17.6)
+S = dict(sw0=0.55, sw1=2.25, ringT=2.0, catchV=2.8, v3=5.0, r3=0.75, v4=6.45, v5=8.3, t5=2.85, v6=9.5, t6=3.45, v7=10.9, v8=14.8, t8=3.4, v9=17.6)
 S["t4"] = (S["v4"] - S["v3"]) * S["r3"]
 S["r4"] = (S["t5"] - S["t4"]) / (S["v5"] - S["v4"])
 S["r5"] = (S["t6"] - S["t5"]) / (S["v6"] - S["v5"])
@@ -44,10 +44,20 @@ c.clip("shade", 0, D, '<div class="shade-top"></div><div class="shade-bot"></div
 c.clip("simtag", 0, D, '<div class="simtag"><i></i>Simulation · not MLB tracking data</div>', cls="layer", style="z-index:30")
 c.ft(".simtag", o(opacity=0), o(opacity=1, duration=0.3), 0.05)
 
-# ----------------------------------------------------------------- hook
-c.clip("hook", 0, S["catchV"] - 0.05, '<div class="hook" id="hook"><span id="h1">Can an outfielder</span> <span id="h2">throw him out</span> <em id="h3">from here?</em></div>', cls="layer", style="z-index:12")
-for sel, t in [("#h1", 0.12), ("#h2", 0.42), ("#h3", 0.85)]:
-    c.ft(sel, o(opacity=0, y=26), o(opacity=1, y=0, duration=0.3, ease="power3.out"), t)
+# ----------------------------------------------------------------- hook: a statement on frame one, then the question word by word
+c.clip("hook0", 0, S["sw0"] + 0.02, '''<div class="eyebrow"><i></i>Tagging up from third</div>
+  <div class="hk big"><span class="hl">Arm strength</span><span class="hl acc">isn't everything.</span></div>''', cls="layer", style="z-index:12")
+c.to(".hk.big", o(opacity=0, y=-30, filter="blur(10px)", duration=0.14, ease="power2.in"), S["sw0"] - 0.14)
+HOOK = [("Can", 0.62, 0), ("an", 0.72, 0), ("outfielder", 0.84, 0), ("throw", 1.12, 1), ("him", 1.26, 1), ("out", 1.38, 1), ("from", 1.86, 2), ("here?", 2.0, 2)]
+lines = {}
+for k, (w, t, ln) in enumerate(HOOK):
+    lines.setdefault(ln, []).append(f'<span class="hw{" acc" if ln == 2 else ""}" id="hw{k}">{esc(w)}</span>')
+c.clip("hook", S["sw0"], S["catchV"] - 0.02, '<div class="eyebrow"><i></i>Tagging up from third</div><div class="hk">' +
+       "".join(f'<span class="hl">{" ".join(ws)}</span>' for ws in lines.values()) + '</div>', cls="layer", style="z-index:12")
+for k, (w, t, ln) in enumerate(HOOK):
+    c.ft(f"#hw{k}", o(opacity=0, y=46, filter="blur(12px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.2, ease="power3.out"), t)
+c.ft("#hw7", o(scale=1), o(scale=1.12, duration=0.12, ease="power2.out", yoyo=True, repeat=1), 2.0)
+c.to("#hook .hk", o(opacity=0, y=-24, duration=0.16, ease="power2.in"), S["catchV"] - 0.2)
 
 # ----------------------------------------------------------------- freeze at the catch: the distance
 cv = S["catchV"]; dist_dur = S["v3"] - cv
@@ -126,7 +136,10 @@ c.ft("#src", o(opacity=0), o(opacity=1, duration=0.4), v9 + 0.7 + len(rows) * 0.
 
 # ----------------------------------------------------------------- sound (no narration)
 def cue(n, t, db=0.0): c.cue(n, t, db)
-for k in ["v1", "v3", "v4", "v5", "v6", "v8", "v9"]: cue("whoosh", S[k], -9)
+for k in ["v3", "v4", "v5", "v6", "v8", "v9"]: cue("whoosh", S[k], -9)
+cue("hit", 0.0, -6); cue("whoosh", S["sw0"] + 0.35, -4)                      # hook: the statement, then the dive
+for w, t, ln in HOOK: cue("tick", t, -10 if ln < 2 else -6)
+cue("hit", S["ringT"], -4)
 cue("glove", cv, -1); cue("impact", cv + 0.02, -10); cue("riser-s", S["v3"], -10)
 cue("whoosh", rel_v, -3)                                                     # the throw
 for t in np.arange(0.25, DR["tag_t"], 0.25): cue("tick", vt(float(t)), -15)
@@ -179,6 +192,14 @@ html, body {{ width:1080px; height:1920px; overflow:hidden; background:#05080d; 
            {MONO} font-size:19px; letter-spacing:.14em; color:#cfd6e0; }}
 .simtag i {{ width:10px; height:10px; border-radius:50%; background:{ORANGE}; }}
 
+.eyebrow {{ position:absolute; left:56px; top:232px; display:flex; align-items:center; gap:14px; {MONO} font-size:24px; letter-spacing:.2em; color:#cfd6e0; text-shadow:0 2px 10px rgba(0,0,0,.8); }}
+.eyebrow i {{ width:34px; height:3px; background:{HOT}; }}
+.hk {{ position:absolute; left:52px; right:40px; top:278px; display:grid; gap:2px; font-family:"Barlow Condensed", sans-serif; font-weight:800; text-transform:uppercase;
+       font-size:124px; line-height:.94; letter-spacing:.005em; color:#fff; text-shadow:0 6px 30px rgba(0,0,0,.75), 0 2px 4px rgba(0,0,0,.6); }}
+.hk.big {{ font-size:132px; }}
+.hk .hl {{ display:block; }}
+.hk .acc, .hk .hl.acc {{ color:{HOT}; }}
+.hk .hw {{ display:inline-block; transform-origin:0 80%; }}
 .hook {{ position:absolute; left:60px; right:60px; top:300px; font-family:"Inter", sans-serif; font-weight:800; font-size:96px; line-height:1.02; letter-spacing:-.03em;
          text-shadow:0 8px 34px rgba(0,0,0,.7); }}
 .hook span, .hook em {{ display:inline-block; }}

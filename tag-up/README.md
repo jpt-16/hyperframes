@@ -2,6 +2,12 @@
 
 A 23.8 s vertical (1080×1920) 3D simulation of a sacrifice fly. A runner tags at third, the right fielder catches a deep fly ball and throws home, and the catcher applies the tag. The video shows the numbers that decide the play and then freezes it at the plate. There's no narration, only on-screen statistics and sound effects.
 
+**The hook** follows a short-form explainer style:
+- **Opening frame:** a bold statement is on screen from the first frame.
+- **Eyebrow:** a small "— Tagging up from third" label sits above the headline.
+- **Caption build:** the question builds word by word, each word sliding up out of a blur.
+- **Accent and sync:** the payoff words are in orange, and the catch-spot ring pulses on "here?".
+
 The project uses the same framework and render workflow as `catcher-clock`: a three.js field driven by HyperFrames time, and the comp library in `jtb-shorts/lib`.
 
 ```bash
@@ -64,8 +70,8 @@ That's why the video doesn't claim any arm speed guarantees an out. A 92 mph thr
 
 | Time | Shot | On screen |
 |---|---|---|
-| 0–1.35 s | Behind the runner on third, the fly ball coming down in right-center | "Can an outfielder throw him out from here?" |
-| 1.35–2.8 s | Behind the right fielder, tracking the ball into his glove | – |
+| 0–0.55 s | Straight down on the runner at third (the opening frame) | "Arm strength isn't everything." |
+| 0.55–2.8 s | One continuous dive: up and out over the infield, swinging wide of right field, down behind the fielder for the catch; an orange ring marks the spot | "Can an outfielder throw him out from here?", word by word |
 | 2.8–5.0 s | Freeze on the catch. The camera rises over right field; the throw line and the runner's line draw on the field | Caught 300 ft · throw ≈ 290 ft · runner 89 ft |
 | 5.0–6.45 s | The crow hop and release, from the side (0.75× speed) | Runner and Ball clocks start at the catch; 92 mph, 14° |
 | 6.45–8.3 s | Both throws, chased from behind; the loop is released at the same moment | Flight timers for both |
