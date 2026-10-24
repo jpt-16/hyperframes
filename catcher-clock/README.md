@@ -5,7 +5,7 @@ A 50.3 s vertical (1080×1920) explainer built from the script. It has a 3D fiel
 ```bash
 $HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # voiceover (hyperframes tts) + word timing, see below
 python3 tools/sfx.py                                 # crowd bed, glove pop, stopwatch tick
-python3 build.py                                     # index.html + assets/mix.wav + assets/mix-novo.wav
+python3 build.py                                     # index.html + assets/mix.wav
 npx --yes hyperframes@0.8.154 render . -o renders/look-at-the-clock.mp4 --video-bitrate 16M
 ```
 
@@ -46,13 +46,13 @@ These runner numbers are an illustrative model, not measured data. The video say
 | Time | Shot | On screen |
 |---|---|---|
 | 0–3.0 s | Behind the runner leading off first | – |
-| 3.0–6.6 s | Behind the catcher | – |
-| 6.6–12.2 s | Center-field camera: the delivery, at half speed | TIME TO PLATE counts to 1.40 |
-| 12.2–20.0 s | Split screen: delivery (top) and the catcher's pop (bottom) | 1.40 and POP TIME 1.90 |
-| 20.0–25.4 s | High wide view with the ball's path drawn | 1.40 + 1.90 = 3.30 s, + the runner's jump + the tag |
-| 25.4–33.5 s | The 1.2 s pitcher: the runner breaks, the throw travels | 1.20, the 3.30 vs 3.10 bars, −0.20 s |
-| 33.5–44.4 s | Freeze as the shortstop receives the throw, with an orbit around second | ≈ 5 FT; the race: 1.20 / 1.90 / runner 3.27 |
-| 44.4–51.7 s | Overhead at second base, the tag | STOLEN BASE 3.10 s, "Look at the clock." |
+| 3.0–6.4 s | Behind the catcher | – |
+| 6.4–11.9 s | Center-field camera: the delivery, at half speed | TIME TO PLATE counts to 1.40 |
+| 11.9–19.4 s | Split screen: delivery (top) and the catcher's pop (bottom) | 1.40 and POP TIME 1.90 |
+| 19.4–24.7 s | High wide view with the ball's path drawn | 1.40 + 1.90 = 3.30 s, + the runner's jump + the tag |
+| 24.7–33.8 s | The 1.2 s pitcher: the runner breaks, the throw travels | 1.20, the 3.30 vs 3.10 bars, −0.20 s |
+| 33.8–43.2 s | Freeze as the shortstop receives the throw, with an orbit around second | ≈ 5 FT; the race: 1.20 / 1.90 / runner 3.27 |
+| 43.2–50.3 s | Overhead at second base, the tag | STOLEN BASE 3.10 s, "Look at the clock." |
 
 Captions are the script, word for word.
 
