@@ -20,9 +20,11 @@ from audio import SR
 TM = json.load(open(os.path.join(HERE, "assets", "vo", "timing.json")))
 L = [(x["t0"], x["t1"], x["text"]) for x in TM["lines"]]
 WORDS = [x["words"] for x in TM["lines"]]
-def W(line, word, end=False, nth=0):
-    """Video time a spoken word starts (or ends) in line `line` (word as spoken, punctuation ignored)."""
-    hits = [w for w in WORDS[line] if w["w"].strip(".,!?").lower() == word.lower()]
+IDX = {x["id"]: k for k, x in enumerate(TM["lines"])}
+LN = lambda lid: L[IDX[lid]]
+def W(lid, word, end=False, nth=0):
+    """Video time a spoken word starts (or ends) in line `lid` (word as spoken, punctuation ignored)."""
+    hits = [w for w in WORDS[IDX[lid]] if w["w"].strip(".,!?").lower() == word.lower()]
     return hits[nth]["t1" if end else "t0"]
 D = TM["duration"]
 Y, CYAN, WHITE = "#FFD84D", "#56D1FF", "#F4F6F8"
@@ -33,11 +35,14 @@ RUN = next(p for p in np.arange(0, 6, 0.0005) if run_dist(p) >= 78)
 
 # shot boundaries, keyed to the voiceover lines
 # the timers land on the spoken numbers: 1.40 as "seconds" ends, 1.90 as "pop time" ends, 1.20 as "seconds" ends
-S = dict(s1b=3.0, s2=L[2][0] - 0.3, go2=L[2][0] + 0.7, s3=L[3][0] - 0.25, go3a=W(3, "seconds", end=True) - 1.4 / 0.5,
-         go3b=W(3, "time", end=True) - 1.9 / 0.5, s4=L[4][0] - 0.15, s5=L[5][0] - 0.2)
-S["go5"] = W(5, "seconds", end=True) - 1.2 / 0.42
+S = dict(s1b=3.0, s2=LN("deliver")[0] - 0.3, go2=LN("deliver")[0] + 0.7, s3=LN("numbers")[0] - 0.25,
+         go3a=W("numbers", "seconds", end=True) - 1.4 / 0.5, go3b=W("numbers", "time", end=True) - 1.9 / 0.5,
+         s4=LN("total")[0] - 0.15, s4b=LN("lead")[0] - 0.25, s5=LN("compare")[0] - 0.2)
+S["run"] = round(float(RUN), 4)
+S["go4b"] = float(W("runner", "seconds", end=True) - RUN)      # the runner reaches second as "3.2 seconds" is said
+S["go5"] = W("compare", "seconds", end=True) - 1.2 / 0.42
 S["s6"] = round(S["go5"] + 3.10 / 0.42 + 0.12, 3)      # freeze just after the ball reaches second
-S["s7"] = L[9][0] - 0.15
+S["s7"] = LN("next")[0] - 0.15
 S = {k: round(v, 3) for k, v in S.items()}
 c = Comp(D, 30)
 
@@ -54,16 +59,34 @@ c.ft(".divider", o(scaleX=0), o(scaleX=1, duration=0.35, ease="power3.out"), S["
 c.ft("#tbox-pop", o(opacity=0, y=-20), o(opacity=1, y=0, duration=0.3, ease="power3.out"), S["s3"] + 0.2)
 
 # ----------------------------------------------------------------- 1.40 + 1.90 = 3.30
-eq_t = [S["s4"] + 0.1, S["s4"] + 0.35, W(4, "three"), W(4, "accounting")]
-c.clip("eq", S["s4"], S["s5"], f'''<div class="eq">
+eq_t = [S["s4"] + 0.1, S["s4"] + 0.35, W("total", "three"), W("total", "accounting")]
+c.clip("eq", S["s4"], S["s4b"], f'''<div class="eq">
   <div class="eq-row"><span class="eq-n" id="eq1"><i>Delivery</i>1.40</span><span class="eq-op" id="eqp">+</span><span class="eq-n" id="eq2"><i>Pop time</i>1.90</span></div>
   <div class="eq-total" id="eq3"><span>=</span>3.30<small>s</small></div>
   <div class="eq-more" id="eq4">+ the runner's jump &nbsp;+ the tag</div></div>''', cls="layer", style="z-index:10")
 for i, (sel, t) in enumerate(zip(["#eq1", "#eqp, #eq2", "#eq3", "#eq4"], eq_t)):
     c.ft(sel, o(opacity=0, y=24, scale=1.05), o(opacity=1, y=0, scale=1, duration=0.32, ease="power3.out"), t)
 
+# ----------------------------------------------------------------- the runner's side: 90 ft, a 10-12 ft lead, 78-80 ft to go, ~3.2 s
+lead_t = [W("lead", "ninety-foot"), W("lead", "ten"), W("lead", "seventy-eight")]
+run_t0 = LN("runner")[0]
+c.clip("leadc", S["s4b"], run_t0 + 0.1, f'''<div class="dist" id="dist">
+  <div class="dr" id="dr1"><b>90 FT</b><span>basepath</span></div>
+  <div class="dr" id="dr2"><b><i>−</i>10–12 FT</b><span>lead</span></div>
+  <div class="dr tot" id="dr3"><b><i>=</i>78–80 FT</b><span>left to cover</span></div></div>''', cls="layer", style="z-index:10")
+c.ft("#dist", o(opacity=0), o(opacity=1, duration=0.25), lead_t[0] - 0.12)
+for sel, t in zip(["#dr1", "#dr2", "#dr3"], lead_t):
+    c.ft(sel, o(opacity=0, x=-30), o(opacity=1, x=0, duration=0.3, ease="power3.out"), t)
+c.to("#dist", o(opacity=0, y=-20, duration=0.25, ease="power2.in"), run_t0 - 0.15)
+safe_t, out_t = W("runner", "safe"), W("runner", "out")
+c.clip("runc", run_t0 - 0.05, S["s5"], f'''<div class="timer" id="tbox-run"><span class="tl">Runner to second</span><b class="cy"><span id="tm-run">0.00</span><small>s</small></b></div>
+  <div class="verdicts"><div class="vd ok" id="vd1"><span>Ball at 3.30</span><b>SAFE</b></div><div class="vd no" id="vd2"><span>Ball at 3.10</span><b>OUT</b></div></div>''', cls="layer", style="z-index:10")
+c.ft("#tbox-run", o(opacity=0, y=-20), o(opacity=1, y=0, duration=0.3, ease="power3.out"), run_t0 - 0.05)
+c.ft("#vd1", o(opacity=0, y=16, scale=0.9), o(opacity=1, y=0, scale=1, duration=0.3, ease="back.out(2)"), safe_t)
+c.ft("#vd2", o(opacity=0, y=16, scale=0.9), o(opacity=1, y=0, scale=1, duration=0.3, ease="back.out(2)"), out_t)
+
 # ----------------------------------------------------------------- 1.2 s delivery: the comparison
-cmp_t = L[5][0] + 1.2
+cmp_t = LN("compare")[0] + 1.2
 c.clip("cmp", S["s5"], S["s6"], f'''<div class="timer" id="tbox-b"><span class="tl">Time to plate</span><b><span id="tm-b-del">0.00</span><small>s</small></b></div>
   <div class="bars" id="bars">
     <div class="bar-row"><span class="bl">1.4 s delivery</span><div class="track"><i class="fill a" id="fa"></i></div><span class="bv">3.30</span></div>
@@ -73,11 +96,10 @@ c.ft("#tbox-b", o(opacity=0, y=-20), o(opacity=1, y=0, duration=0.3, ease="power
 c.ft("#bars", o(opacity=0, y=20), o(opacity=1, y=0, duration=0.3, ease="power3.out"), cmp_t)
 c.ft("#fa", o(scaleX=0), o(scaleX=1, duration=0.7, ease="power2.out"), cmp_t + 0.1)
 c.ft("#fb", o(scaleX=0), o(scaleX=3.10 / 3.30, duration=0.7, ease="power2.out"), cmp_t + 0.25)
-c.ft("#delta", o(opacity=0, scale=0.85), o(opacity=1, scale=1, duration=0.35, ease="back.out(2)"), W(6, "two-tenths"))
-c.clip("note", S["s4"], S["s7"], '<div class="note">Illustrative timings</div>', cls="layer", style="z-index:10")
+c.ft("#delta", o(opacity=0, scale=0.85), o(opacity=1, scale=1, duration=0.35, ease="back.out(2)"), W("tenths", "two-tenths"))
 
 # ----------------------------------------------------------------- freeze: the race
-race_t = L[8][0] - 0.2
+race_t = LN("race")[0] - 0.2
 c.clip("frz", S["s6"], S["s7"], f'''<div class="frz" id="frz"><i></i>Ball at second · 3.10 s</div>
   <div class="race" id="race">
     <div class="lane"><span class="ln">Pitcher's delivery</span><div class="lt"><i class="seg del" id="r1"></i></div><span class="lv">1.20</span></div>
@@ -86,15 +108,15 @@ c.clip("frz", S["s6"], S["s7"], f'''<div class="frz" id="frz"><i></i>Ball at sec
     <div class="finish" style="left:calc(var(--lane0) + {3.10 / 3.4:.4f} * var(--lanew))"></div></div>''', cls="layer", style="z-index:10")
 c.ft("#frz", o(opacity=0, y=-14), o(opacity=1, y=0, duration=0.25, ease="power3.out"), S["s6"] + 0.05)
 c.ft("#race", o(opacity=0, y=20), o(opacity=1, y=0, duration=0.3, ease="power3.out"), race_t)
-c.ft("#r1", o(scaleX=0), o(scaleX=1, duration=0.55, ease="power2.inOut"), W(8, "delivery"))
-c.ft("#r2", o(scaleX=0), o(scaleX=1, duration=0.7, ease="power2.inOut"), W(8, "throw"))
-c.ft("#r3", o(scaleX=0), o(scaleX=1, duration=0.9, ease="power2.inOut"), W(8, "jump"))
+c.ft("#r1", o(scaleX=0), o(scaleX=1, duration=0.55, ease="power2.inOut"), W("race", "delivery"))
+c.ft("#r2", o(scaleX=0), o(scaleX=1, duration=0.7, ease="power2.inOut"), W("race", "throw"))
+c.ft("#r3", o(scaleX=0), o(scaleX=1, duration=0.9, ease="power2.inOut"), W("race", "jump"))
 
 # ----------------------------------------------------------------- the end: look at the clock
-end_t = L[10][0]
+end_t = LN("clock")[0]
 c.clip("end", end_t - 0.1, D, f'''<div class="endc" id="endc"><div class="watch"><span class="wl">Stolen base</span><b>3.10<small>s</small></b></div>
   <div class="end-t"><span id="ew0">Look</span> <span id="ew1">at</span> <span id="ew2">the</span> <em id="ew3">clock.</em></div></div>''', cls="layer", style="z-index:12")
-for k, w in enumerate(WORDS[10]):                    # the last line, word by word as it's said
+for k, w in enumerate(WORDS[IDX["clock"]]):                    # the last line, word by word as it's said
     c.ft(f"#ew{k}", o(opacity=0, y=18), o(opacity=1, y=0, duration=0.16, ease="power2.out"), w["t0"])
 c.ft("#endc", o(opacity=0, scale=1.08), o(opacity=1, scale=1, duration=0.35, ease="power3.out"), end_t - 0.1)
 
@@ -102,7 +124,11 @@ c.ft("#endc", o(opacity=0, scale=1.08), o(opacity=1, scale=1, duration=0.35, eas
 # A caption word covers one spoken word, except numbers, which the voice reads out ("1.9-second" = one point nine second).
 def span_of(tok):
     m = re.match(r"^(\d)\.(\d)(-second)?", tok)
-    return (3 + (1 if m.group(3) else 0)) if m else 1
+    if m: return 3 + (1 if m.group(3) else 0)                 # 1.9-second = one point nine second
+    m = re.match(r"^\d+–\d+(-foot)?", tok)
+    if m: return 3 + (1 if m.group(1) else 0)                 # 10–12-foot = ten to twelve foot, 78–80 = seventy-eight to eighty
+    if tok.lower().startswith("baserunner"): return 2         # spoken as "base runner"
+    return tok.count("—") + 1                                 # jump—which = jump, which
 def phrases(toks):
     out, cur = [], []
     for t in toks:
@@ -113,7 +139,7 @@ def phrases(toks):
     return out
 k = 0
 for li, (t0, t1, text) in enumerate(L):
-    if li == 10: continue                                     # the end card says it, word by word
+    if li == IDX["clock"]: continue                           # the end card says it, word by word
     toks = text.split()
     assert sum(span_of(t) for t in toks) == len(WORDS[li]), f"caption/voice mismatch on line {li}"
     times, j = [], 0
@@ -135,7 +161,11 @@ for li, (t0, t1, text) in enumerate(L):
 
 # ----------------------------------------------------------------- sound
 def cue(n, t, db=0.0): c.cue(n, t, db)
-for k_ in ["s1b", "s2", "s3", "s4", "s5", "s7"]: cue("whoosh", S[k_], -10)
+for k_ in ["s1b", "s2", "s3", "s4", "s4b", "s5", "s7"]: cue("whoosh", S[k_], -10)
+for t in lead_t: cue("hit", t, -13)
+cue("glove", S["go4b"] + 1.4, -6); cue("glove", S["go4b"] + 3.30, -2)          # basepath shot: catch, then the late throw
+for t in np.arange(S["go4b"], S["go4b"] + RUN, 0.25): cue("tick", float(t), -15)
+cue("popup", safe_t, -9); cue("popup", out_t, -9)
 cue("impact", 0.0, -10)
 cue("glove", S["go2"] + 1.4 / 0.5, -2)                         # center-field shot: the catch
 cue("glove", S["go3a"] + 1.4 / 0.5, -6)                        # split, top panel
@@ -144,7 +174,7 @@ cue("glove", S["go5"] + 3.10 / 0.42, 0); cue("impact", S["s6"], -6); cue("riser-
 for t0, t1 in [(S["go2"], S["go2"] + 1.4 / 0.5), (S["go3a"], S["go3a"] + 1.4 / 0.5), (S["go3b"], S["go3b"] + 1.9 / 0.5), (S["go5"], S["go5"] + 1.2 / 0.42)]:
     for t in np.arange(t0, t1, 0.25): cue("tick", float(t), -14)
 for t in eq_t: cue("hit", t, -12)
-cue("popup", W(6, "two-tenths"), -8); cue("popup", race_t, -10)
+cue("popup", W("tenths", "two-tenths"), -8); cue("popup", race_t, -10)
 cue("hit", end_t - 0.1, -5)
 for i in range(4): cue("tick", end_t + 0.35 + i * 0.25, -8)
 
@@ -200,6 +230,20 @@ html, body {{ width:1080px; height:1920px; overflow:hidden; background:#05080d; 
               padding:8px 14px; border-radius:8px; background:rgba(6,10,18,.7); color:#cfd6e0; }}
 .panel-tag.top {{ top:880px; }} .panel-tag.bot {{ top:1840px; }}
 
+.dist {{ position:absolute; left:60px; right:60px; top:190px; display:grid; gap:10px; padding:22px 30px; border-radius:20px; background:rgba(6,10,18,.8); border:1px solid rgba(255,255,255,.1); }}
+.dr {{ display:flex; align-items:baseline; justify-content:space-between; gap:20px; }}
+.dr b {{ font-weight:800; font-size:84px; line-height:1; color:{WHITE}; }}
+.dr b i {{ font-style:normal; color:#AEB8C6; margin-right:16px; }}
+.dr span {{ font-family:"Plex Mono", monospace; font-weight:500; font-size:24px; letter-spacing:.14em; text-transform:uppercase; color:#AEB8C6; }}
+.dr.tot b {{ color:{Y}; }}
+#dr2 b {{ color:{CYAN}; }}
+.timer b.cy {{ color:{CYAN}; }}
+.verdicts {{ position:absolute; left:0; right:0; top:390px; display:flex; justify-content:center; gap:18px; }}
+.vd {{ display:grid; justify-items:center; padding:12px 26px 10px; border-radius:16px; background:rgba(6,10,18,.82); border:2px solid; }}
+.vd span {{ font-family:"Plex Mono", monospace; font-weight:500; font-size:20px; letter-spacing:.12em; text-transform:uppercase; color:#AEB8C6; }}
+.vd b {{ font-weight:800; font-size:64px; line-height:1; }}
+.vd.ok {{ border-color:rgba(61,214,140,.7); }} .vd.ok b {{ color:#3DD68C; }}
+.vd.no {{ border-color:rgba(255,97,97,.7); }} .vd.no b {{ color:#FF6161; }}
 .eq {{ position:absolute; left:40px; right:40px; top:560px; display:grid; justify-items:center; gap:18px; }}
 .eq-row {{ display:flex; align-items:flex-end; gap:28px; }}
 .eq-n {{ display:grid; justify-items:center; font-weight:800; font-size:150px; line-height:.9; color:{WHITE}; padding:22px 30px 18px; border-radius:22px; background:rgba(6,10,18,.78); }}
@@ -220,7 +264,6 @@ html, body {{ width:1080px; height:1920px; overflow:hidden; background:#05080d; 
 .bv.y {{ color:{Y}; }}
 .delta {{ justify-self:end; font-weight:800; font-size:56px; color:{CYAN}; }}
 .delta span {{ font-family:"Inter", sans-serif; font-weight:700; font-size:30px; color:#cfd6e0; margin-left:8px; }}
-.note {{ position:absolute; left:0; right:0; top:1840px; text-align:center; font-family:"Plex Mono", monospace; font-weight:500; font-size:21px; letter-spacing:.12em; text-transform:uppercase; color:#95a0b0; }}
 
 .frz {{ position:absolute; left:50%; top:200px; transform:translateX(-50%); display:inline-flex; align-items:center; gap:12px; padding:12px 22px; border-radius:12px;
         background:rgba(6,10,18,.82); font-family:"Plex Mono", monospace; font-weight:500; font-size:26px; letter-spacing:.12em; text-transform:uppercase; color:{Y}; white-space:nowrap; }}

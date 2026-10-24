@@ -329,6 +329,8 @@ function lineMesh(points, color, width, y = 0.08, dashed = false) {
 const runPath = lineMesh(Array.from({ length: 31 }, (_, i) => B1.clone().addScaledVector(DIR12, LEAD + (i / 30) * (90 - LEAD))), 0x56d1ff, 0.55, 0.06, true);
 function arcPoints(a, b, h, n = 40) { return Array.from({ length: n + 1 }, (_, i) => { const u = i / n; const p = a.clone().lerp(b, u); p.y += h * 4 * u * (1 - u); return p; }); }
 const PITCH_FROM = v3(-1.8, MOUND_H + 5.4, -54.6), GLOVE_AT = v3(0.25, 2.25, 1.0), THROW_FROM = v3(0.55, 6.1, 1.2), TAG_AT = v3(0.45, 2.0, -126.4);
+const leadPath = lineMesh([B1.clone(), B1.clone().addScaledVector(DIR12, LEAD)], 0x56d1ff, 0.7, 0.07, false);      // the 10-12 ft lead
+const togoPath = lineMesh(Array.from({ length: 31 }, (_, i) => B1.clone().addScaledVector(DIR12, LEAD + (i / 30) * (90 - LEAD))), 0xffd84d, 0.7, 0.07, false);  // 78-80 ft to go
 const ballPath = lineMesh([...arcPoints(PITCH_FROM, GLOVE_AT, 0.6, 20), ...arcPoints(THROW_FROM, TAG_AT, 4.2, 40)], 0xffd84d, 0.32, 0, false);
 
 function labelSprite(text, color = "#ffffff", bg = "rgba(8,12,20,0.82)") {
@@ -483,9 +485,15 @@ function shotAt(t) {
     return { split: { top: { p: pTop, cam: [CF_POS, CF_LOOK, 4.6] }, bot: { p: pBot, cam: [v3(25, 5, -15), v3(-0.5, 3.4, 0.5), 23] } }, S: SCN.A,
              timer: { del: clamp(pTop, 0, 1.4), pop: clamp(pBot - 1.4, 0, 1.9) } };
   }
-  if (t < s.s5) {                                            // the 3.3 seconds, drawn out on the field
-    const u = (t - s.s4) / (s.s5 - s.s4);
+  if (t < s.s4b) {                                           // the 3.3 seconds, drawn out on the field
+    const u = (t - s.s4) / (s.s4b - s.s4);
     return { p: SCN.A.arrive, S: SCN.A, cam: [mixV(v3(26, 120, 66), v3(48, 108, 44), easeIO(u)), v3(14, 0, -78), 38], show: { paths: true } };
+  }
+  if (t < s.s5) {                                            // the runner's side: the lead, the 78 ft to go, the sprint
+    const u = (t - s.s4b) / (s.s5 - s.s4b);
+    const p = clamp(t - s.go4b, -9, SCN.A.arrive + 0.5);
+    const look = mixV(v3(30, 0, -97), v3(12, 0, -114), easeIO(u));
+    return { p, S: SCN.A, cam: [mixV(v3(106, 46, -22), v3(96, 37, -32), easeIO(u)), look, 40], timer: { run: clamp(p, 0, s.run) }, show: { lead: true } };
   }
   if (t < s.s6) {                                            // 1.2 s delivery: the runner breaks, the ball travels
     const p = clamp((t - s.go5) * 0.42, -1.5, SCN.B.arrive);
@@ -515,6 +523,7 @@ function overlays(st) {
   if ($("tm-del") && tm.del != null) $("tm-del").textContent = fmt(tm.del);
   if ($("tm-pop") && tm.pop != null) $("tm-pop").textContent = fmt(tm.pop);
   if ($("tm-b-del") && tm.del != null && st.S === SCN.B) $("tm-b-del").textContent = fmt(tm.del);
+  if ($("tm-run") && tm.run != null) $("tm-run").textContent = fmt(tm.run);
   if ($("tm-b-tot") && tm.total != null) $("tm-b-tot").textContent = fmt(tm.total);
 }
 
@@ -522,6 +531,7 @@ function renderAt(t) {
   const st = shotAt(t);
   runPath.visible = !!st.show?.runPath || !!st.show?.paths;
   ballPath.visible = !!st.show?.paths;
+  leadPath.visible = togoPath.visible = !!st.show?.lead;
   gapMark.visible = !!st.show?.gap;
   if (gapLabel) gapLabel.visible = !!st.show?.gap;
   for (const m of trail) m.visible = false;

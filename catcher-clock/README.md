@@ -1,6 +1,6 @@
 # "Look at the clock": a stolen base is a race
 
-A 50.3 s vertical (1080×1920) explainer built from the script. It has a 3D field, timers, word-timed captions, a voiceover (HyperFrames' built-in Kokoro TTS) and sound effects.
+A 71.4 s vertical (1080×1920) explainer built from the script. It has a 3D field, timers, word-timed captions, a voiceover (HyperFrames' built-in Kokoro TTS) and sound effects.
 
 ```bash
 $HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # voiceover (hyperframes tts) + word timing, see below
@@ -39,7 +39,7 @@ The pitch takes about 0.42 s to reach the plate (about 90 mph).
   - With the 1.4 s pitcher he's in just ahead of the ball.
   - With the 1.2 s pitcher he's 4.96 ft short when the ball arrives, which is the "≈ 5 FT" in the freeze frame.
 
-These runner numbers are an illustrative model, not measured data. The video says "Illustrative timings" on screen.
+These runner numbers are a model, not measured data. They match the script's "roughly 3.2 seconds" over 78–80 ft.
 
 ## Shots (timed to the voiceover)
 
@@ -49,10 +49,11 @@ These runner numbers are an illustrative model, not measured data. The video say
 | 3.0–6.4 s | Behind the catcher | – |
 | 6.4–11.9 s | Center-field camera: the delivery, at half speed | TIME TO PLATE counts to 1.40 |
 | 11.9–19.4 s | Split screen: delivery (top) and the catcher's pop (bottom) | 1.40 and POP TIME 1.90 |
-| 19.4–24.7 s | High wide view with the ball's path drawn | 1.40 + 1.90 = 3.30 s, + the runner's jump + the tag |
-| 24.7–33.8 s | The 1.2 s pitcher: the runner breaks, the throw travels | 1.20, the 3.30 vs 3.10 bars, −0.20 s |
-| 33.8–43.2 s | Freeze as the shortstop receives the throw, with an orbit around second | ≈ 5 FT; the race: 1.20 / 1.90 / runner 3.27 |
-| 43.2–50.3 s | Overhead at second base, the tag | STOLEN BASE 3.10 s, "Look at the clock." |
+| 19.4–24.6 s | High wide view with the ball's path drawn | 1.40 + 1.90 = 3.30 s, + the runner's jump + the tag |
+| 24.6–45.8 s | Down the basepath from behind first: the lead (blue), the distance to go (yellow), then the sprint | 90 FT − 10–12 FT = 78–80 FT; RUNNER TO SECOND counts to 3.27; SAFE (ball at 3.30) / OUT (ball at 3.10) |
+| 45.8–54.9 s | The 1.2 s pitcher: the runner breaks, the throw travels | 1.20, the 3.30 vs 3.10 bars, −0.20 s |
+| 54.9–64.3 s | Freeze as the shortstop receives the throw, with an orbit around second | ≈ 5 FT; the race: 1.20 / 1.90 / runner 3.27 |
+| 64.3–71.4 s | Overhead at second base, the tag | STOLEN BASE 3.10 s, "Look at the clock." |
 
 Captions are the script, word for word.
 
@@ -62,7 +63,7 @@ Captions are the script, word for word.
 
 - **Voice and speed:** `am_michael` at 1.05× speed, for a clear, confident tutorial read.
 - **Setup:** `HYPERFRAMES_PYTHON` must point at a Python that has `kokoro-onnx`, `soundfile` and `onnx`.
-- **Numbers:** the spoken text spells them out ("one point nine second pop time"), because Kokoro otherwise reads "1.9-second" as "one. nine second". The captions keep the script's numerals.
+- **Numbers:** the spoken text spells them out ("one point nine second pop time", "ten to twelve foot", "seventy-eight to eighty"), because Kokoro otherwise reads "1.9-second" as "one. nine second" and drops the "to" in ranges. "baserunner" is spoken as "base runner". The captions keep the script's wording.
 
 **Word timing.** `tools/vo.py` works out when each word is spoken:
 
@@ -78,6 +79,8 @@ Captions are the script, word for word.
   - POP TIME reaches 1.90 on "pop time".
   - The 1.2 s delivery reaches 1.20 on "seconds".
   - "3.30" lands on "three point three".
+  - The basepath card builds on "ninety-foot", "ten" and "seventy-eight".
+  - RUNNER TO SECOND reaches 3.27 as "3.2 seconds" ends; SAFE and OUT pop on those words.
   - "−0.20 s" lands on "two-tenths".
   - The race lanes fill on "delivery", "throw" and "jump".
   - "Look at the clock." appears word by word.

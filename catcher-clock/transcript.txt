@@ -6,9 +6,11 @@ LOOK AT THE CLOCK - voiceover transcript
 3. [6.7s] Because before the catcher can even make a throw, the pitcher has to deliver the ball.
 4. [12.1s] Let's say the pitcher takes 1.4 seconds to deliver, and the catcher has a 1.9-second pop time.
 5. [19.6s] That's 3.3 seconds before accounting for the runner's jump and the tag.
-6. [24.9s] Now compare that with a pitcher who delivers in 1.2 seconds.
-7. [29.4s] That's two-tenths of a second less time for the runner to advance.
-8. [33.7s] And that's why stopping a stolen base isn't just a catching problem.
-9. [38.0s] It's a race between the pitcher's delivery, the catcher's throw, and the runner's jump.
-10. [43.4s] So next time a runner steals second, don't just blame the catcher.
-11. [47.6s] Look at the clock.
+6. [24.8s] From a 90-foot basepath, a runner taking a 10–12-foot lead only has about 78–80 feet left to cover.
+7. [33.1s] A decent baserunner can cover that distance in roughly 3.2 seconds with a good jump—which is why even a small delay in the pitcher's delivery can make the difference between safe and out.
+8. [46.0s] Now compare that with a pitcher who delivers in 1.2 seconds.
+9. [50.5s] That's two-tenths of a second less time for the runner to advance.
+10. [54.8s] And that's why stopping a stolen base isn't just a catching problem.
+11. [59.1s] It's a race between the pitcher's delivery, the catcher's throw, and the runner's jump.
+12. [64.5s] So next time a runner steals second, don't just blame the catcher.
+13. [68.7s] Look at the clock.

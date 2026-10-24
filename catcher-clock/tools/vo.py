@@ -22,22 +22,27 @@ TIMED = os.path.join(CACHE, "kokoro-v1.0-timed.onnx")
 VOICE, SPEED = "am_michael", 1.05
 
 # (caption = the script exactly as written, spoken = what the voice reads)
-# Numbers are spelled out for the voice: "1.9-second" otherwise comes out as "one. nine second".
-LINES = [
-    ("Everyone judges a catcher by how fast he throws to second.", None),
-    ("But that's only half the story.", None),
-    ("Because before the catcher can even make a throw, the pitcher has to deliver the ball.", None),
-    ("Let's say the pitcher takes 1.4 seconds to deliver, and the catcher has a 1.9-second pop time.",
+# Numbers are spelled out for the voice: "1.9-second" otherwise comes out as "one. nine second",
+# "10–12-foot" as "ten twelve-foot"; "baserunner" is read as "bass-er-runner", so the voice says "base runner".
+LINES = [   # (id, caption, spoken)
+    ("hook", "Everyone judges a catcher by how fast he throws to second.", None),
+    ("half", "But that's only half the story.", None),
+    ("deliver", "Because before the catcher can even make a throw, the pitcher has to deliver the ball.", None),
+    ("numbers", "Let's say the pitcher takes 1.4 seconds to deliver, and the catcher has a 1.9-second pop time.",
      "Let's say the pitcher takes one point four seconds to deliver, and the catcher has a one point nine second pop time."),
-    ("That's 3.3 seconds before accounting for the runner's jump and the tag.",
+    ("total", "That's 3.3 seconds before accounting for the runner's jump and the tag.",
      "That's three point three seconds before accounting for the runner's jump and the tag."),
-    ("Now compare that with a pitcher who delivers in 1.2 seconds.",
+    ("lead", "From a 90-foot basepath, a runner taking a 10–12-foot lead only has about 78–80 feet left to cover.",
+     "From a ninety-foot basepath, a runner taking a ten to twelve foot lead only has about seventy-eight to eighty feet left to cover."),
+    ("runner", "A decent baserunner can cover that distance in roughly 3.2 seconds with a good jump—which is why even a small delay in the pitcher's delivery can make the difference between safe and out.",
+     "A decent base runner can cover that distance in roughly three point two seconds with a good jump, which is why even a small delay in the pitcher's delivery can make the difference between safe and out."),
+    ("compare", "Now compare that with a pitcher who delivers in 1.2 seconds.",
      "Now compare that with a pitcher who delivers in one point two seconds."),
-    ("That's two-tenths of a second less time for the runner to advance.", None),
-    ("And that's why stopping a stolen base isn't just a catching problem.", None),
-    ("It's a race between the pitcher's delivery, the catcher's throw, and the runner's jump.", None),
-    ("So next time a runner steals second, don't just blame the catcher.", None),
-    ("Look at the clock.", None),
+    ("tenths", "That's two-tenths of a second less time for the runner to advance.", None),
+    ("why", "And that's why stopping a stolen base isn't just a catching problem.", None),
+    ("race", "It's a race between the pitcher's delivery, the catcher's throw, and the runner's jump.", None),
+    ("next", "So next time a runner steals second, don't just blame the catcher.", None),
+    ("clock", "Look at the clock.", None),
 ]
 
 def timed_model():
@@ -85,7 +90,7 @@ if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     kokoro = timed_model()
     meta = []
-    for i, (caption, spoken) in enumerate(LINES):
+    for i, (lid, caption, spoken) in enumerate(LINES):
         spoken = spoken or caption
         path = os.path.join(OUT, f"{i:02d}.wav")
         subprocess.run(["npx", "--yes", "hyperframes@0.8.154", "tts", spoken, "-v", VOICE, "-s", str(SPEED), "-o", path], check=True, capture_output=True)
@@ -96,6 +101,6 @@ if __name__ == "__main__":
         err = float(np.max(np.abs(cli[:n] - audio[:n])))
         assert sr == sr2 and abs(len(cli) - len(audio)) <= 1 and err < 2e-3, f"line {i}: timing model doesn't match the TTS audio ({len(cli)} vs {len(audio)}, err {err})"
         words = word_times(kokoro, spoken, tim)
-        meta.append({"i": i, "text": caption, "spoken": spoken, "dur": round(len(cli) / sr, 3), "words": words})
+        meta.append({"i": i, "id": lid, "text": caption, "spoken": spoken, "dur": round(len(cli) / sr, 3), "words": words})
         print(f"{i:02d} {len(cli) / sr:5.2f}s  {len(words)} words, matches TTS audio (max diff {err:.1e})  {spoken}")
     json.dump(meta, open(os.path.join(OUT, "lines.json"), "w"), indent=1)

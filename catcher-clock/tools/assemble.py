@@ -4,7 +4,8 @@ import json, os, subprocess, wave
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); VO = os.path.join(HERE, "..", "assets", "vo")
 SR = 48000
-GAP_AFTER = [0.35, 0.6, 0.5, 0.35, 0.65, 0.3, 0.6, 0.3, 0.6, 0.35, 1.7]   # pause after each line
+GAP_AFTER = {"hook": 0.35, "half": 0.6, "deliver": 0.5, "numbers": 0.35, "total": 0.6, "lead": 0.4, "runner": 0.65,
+             "compare": 0.3, "tenths": 0.6, "why": 0.3, "race": 0.6, "next": 0.35, "clock": 1.7}   # pause after each line
 START = 0.35
 
 def load(path):
@@ -13,13 +14,14 @@ def load(path):
 
 lines = json.load(open(os.path.join(VO, "lines.json")))
 t, clips, timing = START, [], []
-for ln, gap in zip(lines, GAP_AFTER):
+for ln in lines:
+    gap = GAP_AFTER[ln["id"]]
     x = load(os.path.join(VO, f"{ln['i']:02d}.wav"))
     nz = np.where(np.abs(x) > 0.004)[0]                      # trim the model's leading/trailing silence
     a = max(0, nz[0] - int(0.02 * SR))
     x = x[a: nz[-1] + int(0.06 * SR)]
     words = [{"w": w["w"], "t0": round(t + w["start"] - a / SR, 3), "t1": round(t + w["end"] - a / SR, 3)} for w in ln.get("words", [])]
-    clips.append((t, x)); timing.append({"i": ln["i"], "text": ln["text"], "spoken": ln.get("spoken", ln["text"]), "t0": round(t, 3), "t1": round(t + len(x) / SR, 3), "words": words})
+    clips.append((t, x)); timing.append({"i": ln["i"], "id": ln["id"], "text": ln["text"], "spoken": ln.get("spoken", ln["text"]), "t0": round(t, 3), "t1": round(t + len(x) / SR, 3), "words": words})
     t += len(x) / SR + gap
 D = round(t, 2)
 buf = np.zeros(int(D * SR) + SR)

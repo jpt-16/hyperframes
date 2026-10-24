@@ -1,6 +1,7 @@
 [
  {
   "i": 0,
+  "id": "hook",
   "text": "Everyone judges a catcher by how fast he throws to second.",
   "spoken": "Everyone judges a catcher by how fast he throws to second.",
   "dur": 4.096,
@@ -64,6 +65,7 @@
  },
  {
   "i": 1,
+  "id": "half",
   "text": "But that's only half the story.",
   "spoken": "But that's only half the story.",
   "dur": 1.813,
@@ -102,6 +104,7 @@
  },
  {
   "i": 2,
+  "id": "deliver",
   "text": "Because before the catcher can even make a throw, the pitcher has to deliver the ball.",
   "spoken": "Because before the catcher can even make a throw, the pitcher has to deliver the ball.",
   "dur": 4.885,
@@ -190,6 +193,7 @@
  },
  {
   "i": 3,
+  "id": "numbers",
   "text": "Let's say the pitcher takes 1.4 seconds to deliver, and the catcher has a 1.9-second pop time.",
   "spoken": "Let's say the pitcher takes one point four seconds to deliver, and the catcher has a one point nine second pop time.",
   "dur": 7.296,
@@ -308,6 +312,7 @@
  },
  {
   "i": 4,
+  "id": "total",
   "text": "That's 3.3 seconds before accounting for the runner's jump and the tag.",
   "spoken": "That's three point three seconds before accounting for the runner's jump and the tag.",
   "dur": 4.779,
@@ -386,6 +391,325 @@
  },
  {
   "i": 5,
+  "id": "lead",
+  "text": "From a 90-foot basepath, a runner taking a 10\u201312-foot lead only has about 78\u201380 feet left to cover.",
+  "spoken": "From a ninety-foot basepath, a runner taking a ten to twelve foot lead only has about seventy-eight to eighty feet left to cover.",
+  "dur": 7.957,
+  "words": [
+   {
+    "w": "From",
+    "start": 0.084,
+    "end": 0.284
+   },
+   {
+    "w": "a",
+    "start": 0.284,
+    "end": 0.284
+   },
+   {
+    "w": "ninety-foot",
+    "start": 0.334,
+    "end": 0.934
+   },
+   {
+    "w": "basepath,",
+    "start": 0.984,
+    "end": 2.134
+   },
+   {
+    "w": "a",
+    "start": 2.134,
+    "end": 2.134
+   },
+   {
+    "w": "runner",
+    "start": 2.209,
+    "end": 2.509
+   },
+   {
+    "w": "taking",
+    "start": 2.559,
+    "end": 2.959
+   },
+   {
+    "w": "a",
+    "start": 2.959,
+    "end": 2.959
+   },
+   {
+    "w": "ten",
+    "start": 3.034,
+    "end": 3.284
+   },
+   {
+    "w": "to",
+    "start": 3.334,
+    "end": 3.409
+   },
+   {
+    "w": "twelve",
+    "start": 3.459,
+    "end": 3.759
+   },
+   {
+    "w": "foot",
+    "start": 3.834,
+    "end": 4.009
+   },
+   {
+    "w": "lead",
+    "start": 4.059,
+    "end": 4.509
+   },
+   {
+    "w": "only",
+    "start": 4.659,
+    "end": 4.934
+   },
+   {
+    "w": "has",
+    "start": 4.984,
+    "end": 5.134
+   },
+   {
+    "w": "about",
+    "start": 5.184,
+    "end": 5.559
+   },
+   {
+    "w": "seventy-eight",
+    "start": 5.684,
+    "end": 6.384
+   },
+   {
+    "w": "to",
+    "start": 6.434,
+    "end": 6.509
+   },
+   {
+    "w": "eighty",
+    "start": 6.634,
+    "end": 6.834
+   },
+   {
+    "w": "feet",
+    "start": 6.909,
+    "end": 7.134
+   },
+   {
+    "w": "left",
+    "start": 7.184,
+    "end": 7.409
+   },
+   {
+    "w": "to",
+    "start": 7.459,
+    "end": 7.534
+   },
+   {
+    "w": "cover.",
+    "start": 7.584,
+    "end": 7.957
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "runner",
+  "text": "A decent baserunner can cover that distance in roughly 3.2 seconds with a good jump\u2014which is why even a small delay in the pitcher's delivery can make the difference between safe and out.",
+  "spoken": "A decent base runner can cover that distance in roughly three point two seconds with a good jump, which is why even a small delay in the pitcher's delivery can make the difference between safe and out.",
+  "dur": 12.373,
+  "words": [
+   {
+    "w": "A",
+    "start": 0.151,
+    "end": 0.201
+   },
+   {
+    "w": "decent",
+    "start": 0.276,
+    "end": 0.676
+   },
+   {
+    "w": "base",
+    "start": 0.751,
+    "end": 1.026
+   },
+   {
+    "w": "runner",
+    "start": 1.076,
+    "end": 1.351
+   },
+   {
+    "w": "can",
+    "start": 1.401,
+    "end": 1.551
+   },
+   {
+    "w": "cover",
+    "start": 1.626,
+    "end": 1.901
+   },
+   {
+    "w": "that",
+    "start": 1.951,
+    "end": 2.126
+   },
+   {
+    "w": "distance",
+    "start": 2.176,
+    "end": 2.651
+   },
+   {
+    "w": "in",
+    "start": 2.701,
+    "end": 2.801
+   },
+   {
+    "w": "roughly",
+    "start": 2.876,
+    "end": 3.251
+   },
+   {
+    "w": "three",
+    "start": 3.376,
+    "end": 3.626
+   },
+   {
+    "w": "point",
+    "start": 3.701,
+    "end": 4.001
+   },
+   {
+    "w": "two",
+    "start": 4.076,
+    "end": 4.251
+   },
+   {
+    "w": "seconds",
+    "start": 4.351,
+    "end": 4.951
+   },
+   {
+    "w": "with",
+    "start": 5.001,
+    "end": 5.176
+   },
+   {
+    "w": "a",
+    "start": 5.176,
+    "end": 5.176
+   },
+   {
+    "w": "good",
+    "start": 5.251,
+    "end": 5.451
+   },
+   {
+    "w": "jump,",
+    "start": 5.526,
+    "end": 6.276
+   },
+   {
+    "w": "which",
+    "start": 6.426,
+    "end": 6.576
+   },
+   {
+    "w": "is",
+    "start": 6.601,
+    "end": 6.701
+   },
+   {
+    "w": "why",
+    "start": 6.751,
+    "end": 6.976
+   },
+   {
+    "w": "even",
+    "start": 7.101,
+    "end": 7.401
+   },
+   {
+    "w": "a",
+    "start": 7.401,
+    "end": 7.401
+   },
+   {
+    "w": "small",
+    "start": 7.526,
+    "end": 7.901
+   },
+   {
+    "w": "delay",
+    "start": 7.951,
+    "end": 8.401
+   },
+   {
+    "w": "in",
+    "start": 8.451,
+    "end": 8.551
+   },
+   {
+    "w": "the",
+    "start": 8.551,
+    "end": 8.601
+   },
+   {
+    "w": "pitcher's",
+    "start": 8.651,
+    "end": 9.051
+   },
+   {
+    "w": "delivery",
+    "start": 9.101,
+    "end": 9.851
+   },
+   {
+    "w": "can",
+    "start": 9.926,
+    "end": 10.026
+   },
+   {
+    "w": "make",
+    "start": 10.076,
+    "end": 10.276
+   },
+   {
+    "w": "the",
+    "start": 10.326,
+    "end": 10.376
+   },
+   {
+    "w": "difference",
+    "start": 10.451,
+    "end": 10.851
+   },
+   {
+    "w": "between",
+    "start": 10.901,
+    "end": 11.251
+   },
+   {
+    "w": "safe",
+    "start": 11.376,
+    "end": 11.776
+   },
+   {
+    "w": "and",
+    "start": 11.851,
+    "end": 11.951
+   },
+   {
+    "w": "out.",
+    "start": 12.126,
+    "end": 12.373
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "compare",
   "text": "Now compare that with a pitcher who delivers in 1.2 seconds.",
   "spoken": "Now compare that with a pitcher who delivers in one point two seconds.",
   "dur": 4.309,
@@ -458,7 +782,8 @@
   ]
  },
  {
-  "i": 6,
+  "i": 8,
+  "id": "tenths",
   "text": "That's two-tenths of a second less time for the runner to advance.",
   "spoken": "That's two-tenths of a second less time for the runner to advance.",
   "dur": 3.733,
@@ -526,7 +851,8 @@
   ]
  },
  {
-  "i": 7,
+  "i": 9,
+  "id": "why",
   "text": "And that's why stopping a stolen base isn't just a catching problem.",
   "spoken": "And that's why stopping a stolen base isn't just a catching problem.",
   "dur": 4.117,
@@ -594,7 +920,8 @@
   ]
  },
  {
-  "i": 8,
+  "i": 10,
+  "id": "race",
   "text": "It's a race between the pitcher's delivery, the catcher's throw, and the runner's jump.",
   "spoken": "It's a race between the pitcher's delivery, the catcher's throw, and the runner's jump.",
   "dur": 4.864,
@@ -672,7 +999,8 @@
   ]
  },
  {
-  "i": 9,
+  "i": 11,
+  "id": "next",
   "text": "So next time a runner steals second, don't just blame the catcher.",
   "spoken": "So next time a runner steals second, don't just blame the catcher.",
   "dur": 3.925,
@@ -740,7 +1068,8 @@
   ]
  },
  {
-  "i": 10,
+  "i": 12,
+  "id": "clock",
   "text": "Look at the clock.",
   "spoken": "Look at the clock.",
   "dur": 1.216,
