@@ -485,11 +485,21 @@ function frame(c, pos, look, fov) { c.position.copy(pos); c.fov = fov; c.aspect 
 const mixV = (a, b, u) => a.clone().lerp(b, u);
 const T = CC.shots;      // video-time shot boundaries and play-time mapping, from build.py
 
+const pw = (v, vs, ts) => {                                   // piecewise-linear video time -> play time
+  if (v <= vs[0]) return ts[0];
+  for (let i = 1; i < vs.length; i++) if (v <= vs[i]) return lerp(ts[i - 1], ts[i], (v - vs[i - 1]) / (vs[i] - vs[i - 1]));
+  return ts.at(-1);
+};
+const SIDECAM = (u) => {                                      // far side view of the throw line, everything to scale
+  const mid = REL.clone().lerp(GLOVE, 0.5).setY(0);
+  return [mid.clone().addScaledVector(SIDE, lerp(-660, -620, u)).add(v3(0, 22, 0)), mid.clone().add(v3(0, 190, 0)), 50];
+};
+
 function shotAt(v) {
-  // returns { t, mode, cam: [pos, look, fov], show: {...}, ghost }
+  // returns { t, mode, cam: [pos, look, fov], show: {...}, replay }
   const s = T;
   if (v < s.catchV) {                              // hook: one continuous move, from straight above the runner on third,
-    const t = v - s.catchV;                         // diving out over the infield to low behind the right fielder for the catch
+    const t = v - s.catchV;                         // out over the infield, wide of right field and down behind the fielder for the catch
     const u = easeIO((v - s.sw0) / (s.sw1 - s.sw0));
     const ballP = pathAt(PLAY.path.fly, t);
     const p0 = B3.clone().add(v3(14, 105, 34)).add(v3(0, -6 * clamp(v / s.sw0, 0, 1), 0));
@@ -498,56 +508,75 @@ function shotAt(v) {
     const pos = p0.clone().multiplyScalar((1 - u) * (1 - u)).addScaledVector(p1, 2 * u * (1 - u)).addScaledVector(p2, u * u);
     const look0 = B3.clone().add(v3(4, 0, -6));
     const spot = CATCH.clone().setY(3);
-    const track = mixV(spot, ballP, 0.24 * smooth((v - 1.75) / 0.35) * (1 - smooth((v - 2.3) / 0.5)));   // fielder centred; the ball enters the frame late   // keep the fielder low, the ball high in frame
-    const look = mixV(look0, track, smooth((v - s.sw0) / 0.75));
+    const k = s.catchV - 1.4;                       // the ball drops into frame over the last 1.4 s
+    const track = mixV(spot, ballP, 0.24 * smooth((v - k) / 0.4) * (1 - smooth((v - (s.catchV - 0.5)) / 0.5)));
+    const look = mixV(look0, track, smooth((v - s.sw0) / 1.6));
     return { t, cam: [pos, look, lerp(52, 48, u)], show: { ring: true }, ringPulse: v - s.ringT };
   }
   if (v < s.v3) {                                   // freeze at the catch: how far is it?
     const u = (v - s.catchV) / (s.v3 - s.catchV);
-    const p0 = CATCH.clone().setY(0).addScaledVector(U, 30).addScaledVector(SIDE, 6).add(v3(0, 7, 0));
+    const p0 = CATCH.clone().setY(0).addScaledVector(U, 26).addScaledVector(SIDE, 5).add(v3(0, 6.5, 0)).addScaledVector(TOHOME, 4);
     const p1 = CATCH.clone().setY(0).addScaledVector(U, 95).addScaledVector(SIDE, 20).add(v3(0, 150, 0));
-    const look = mixV(CATCH.clone().setY(5), v3(CATCH.x * 0.45, 0, CATCH.z * 0.45), easeIO(u));
-    return { t: 0, cam: [mixV(p0, p1, easeIO(u)), look, lerp(44, 52, easeIO(u))], show: { throwLine: smooth((u - 0.25) / 0.45), runLine: smooth((u - 0.45) / 0.35) } };
+    const look = mixV(CATCH.clone().setY(4), v3(CATCH.x * 0.45, 0, CATCH.z * 0.45), easeIO(u * 1.3));
+    return { t: 0, cam: [mixV(p0, p1, easeIO(u * 1.3)), look, lerp(48, 52, easeIO(u))], show: { ring: true, throwLine: smooth((v - s.dl0) / 1.1), runLine: smooth((v - s.dl1) / 0.8) } };
   }
-  if (v < s.v4) {                                   // the crow hop and release, from the side (slow motion)
-    const t = (v - s.v3) * s.r3, u = (v - s.v3) / (s.v4 - s.v3);
+  if (v < s.v4) {                                   // the exchange, in slow motion: glove, crow hop, release
+    const t = pw(v, [s.v3, s.vRel, s.v4], [0, EXCH, s.t4]);
+    const u = (v - s.v3) / (s.v4 - s.v3);
     const c = REL.clone().setY(0).addScaledVector(U, 3);
-    const pos = c.clone().addScaledVector(SIDE, -17).addScaledVector(TOHOME, 9).add(v3(0, 4.2, 0)).addScaledVector(TOHOME, 3 * u);
-    return { t, cam: [pos, c.clone().add(v3(0, 4, 0)).addScaledVector(TOHOME, 3 * u), 36], ghost: true, show: {} };
+    const a = lerp(0.2, 0.95, easeIO(u));
+    const dir = SIDE.clone().multiplyScalar(-Math.cos(a)).addScaledVector(TOHOME, Math.sin(a));
+    return { t, cam: [c.clone().addScaledVector(dir, lerp(19, 15, u)).add(v3(0, 4.4, 0)), c.clone().add(v3(0, 3.9, 0)).addScaledVector(TOHOME, 2), 36], show: {} };
   }
-  if (v < s.v5) {                                   // the two throws, chased from behind and beside them
-    const t = s.t4 + (v - s.v4) * s.r4, u = (v - s.v4) / (s.v5 - s.v4);
-    const bd = pathAt(PLAY.path.direct, t), bl = pathAt(PLAY.path.loop, t);
-    const mid = bd.clone().lerp(bl, 0.5);
-    const pos = mid.clone().setY(0).addScaledVector(TOHOME, -92).addScaledVector(SIDE, 46).add(v3(0, 12, 0));
-    return { t, cam: [pos, mid.clone().addScaledVector(TOHOME, 18), 56], ghost: true, show: {} };
+  if (v < s.v4b) {                                  // the throw, chased from behind and beside it
+    const t = pw(v, [s.v4, s.v5], [s.t4, s.t5]);
+    const b = pathAt(PLAY.path.direct, t);
+    const pos = b.clone().setY(0).addScaledVector(TOHOME, -58).addScaledVector(SIDE, 30).add(v3(0, 12, 0));
+    return { t, cam: [pos, b.clone().addScaledVector(TOHOME, 30).setY(b.y * 0.7), 50], show: {} };
+  }
+  if (v < s.v5) {                                   // looking out from behind the plate: the ball still coming
+    const t = pw(v, [s.v4, s.v5], [s.t4, s.t5]), u = (v - s.v4b) / (s.v5 - s.v4b);
+    const b = pathAt(PLAY.path.direct, t);
+    const pos = GLOVE.clone().setY(0).addScaledVector(TOHOME, 20).addScaledVector(SIDE, -4).add(v3(0, 4.5, 0)).addScaledVector(TOHOME, -3 * u);
+    return { t, cam: [pos, mixV(b, GLOVE.clone().addScaledVector(U, 60).setY(10), 0.45), 42], show: {} };
   }
   if (v < s.v6) {                                   // the runner, tracked from behind his shoulder
-    const t = s.t5 + (v - s.v5) * s.r5;
+    const t = pw(v, [s.v5, s.v6], [s.t5, s.t6]);
     const b = onLine3(runS(t), 0.6);
     const pos = b.clone().addScaledVector(D3H, -15).addScaledVector(FOUL3, 7).add(v3(0, 5.5, 0));
-    return { t, cam: [pos, b.clone().addScaledVector(D3H, 6).add(v3(0, 2.4, 0)), 40], ghost: true, show: {} };
+    return { t, cam: [pos, b.clone().addScaledVector(D3H, 6).add(v3(0, 2.4, 0)), 40], show: {} };
   }
-  if (v < s.v7) {                                   // the plate from the first-base side: the catch and the tag (slow motion), freezing on the tag
-    const t = Math.min(s.t6 + (v - s.v6) * s.r6, PLAY.direct.tag_t), u = (v - s.v6) / (s.v7 - s.v6);
-    return { t, cam: [mixV(v3(21, 6.2, -15.5), v3(14, 4.6, -11), easeIO(u)), v3(-3.6, 1.5, -3.8), lerp(44, 36, easeIO(u))], ghost: true, show: {} };
+  if (v < s.v7) {                                   // replay, side view to scale: the line and the loop launched together
+    const u = (v - s.v6) / (s.v7 - s.v6);
+    const tr = EXCH + Math.max(0, v - s.vLaunch) * s.rRep;
+    return { t: EXCH, cam: SIDECAM(u * 0.5), show: { arcsTo: tr }, replay: tr, hud: false };
   }
-  if (v < s.v8) {                                   // freeze: orbit the tag from foul ground
-    const u = (v - s.v7) / (s.v8 - s.v7), t = PLAY.direct.tag_t;
-    const ctr = v3(-2.6, 1.2, -3.6);
-    const a = lerp(-1.75, -0.55, easeIO(u)), rad = lerp(13, 15.5, u);
+  if (v < s.vPlate) {                               // the race: behind the runner as the ball comes in
+    const t = pw(v, [s.v7, s.vPlate, s.vTime], [s.t7, PLAY.direct.glove_t, PLAY.direct.tag_t]);
+    const b = onLine3(runS(t), 0.6);
+    const pos = b.clone().addScaledVector(D3H, -17).addScaledVector(FOUL3, 9).add(v3(0, 6.5, 0));
+    return { t, cam: [pos, b.clone().addScaledVector(D3H, 9).add(v3(0, 2.6, 0)), 46], show: {} };
+  }
+  if (v < s.vTime) {                                // the plate from the first-base side, slowing to the tag
+    const t = pw(v, [s.v7, s.vPlate, s.vTime], [s.t7, PLAY.direct.glove_t, PLAY.direct.tag_t]);
+    const u = easeIO((v - s.vPlate) / (s.vTime - s.vPlate));
+    return { t, cam: [mixV(v3(21, 6.2, -15.5), v3(18, 5.4, -13.2), u), mixV(v3(-4.2, 1.5, -4.4), v3(-4.8, 1.3, -4.8), u), lerp(44, 41, u)], show: {} };
+  }
+  if (v < s.v8) {                                   // freeze on the tag: orbit from foul ground
+    const u = (v - s.vTime) / (s.v8 - s.vTime), t = PLAY.direct.tag_t;
+    const ctr = v3(-3.0, 1.2, -3.4);
+    const a = lerp(-1.75, -0.55, easeIO(u)), rad = lerp(13, 16, u);
     const pos = v3(ctr.x + Math.sin(a) * rad, lerp(3.4, 6.0, easeIO(u)), ctr.z + Math.cos(a) * rad);
-    return { t, cam: [pos, ctr, 38], ghost: true, show: { gap: true } };
+    return { t, cam: [pos, ctr, 38], show: { gap: true } };
   }
-  if (v < s.v9) {                                   // same play, the looping throw: the runner beats it
-    const t = Math.min(s.t8 + (v - s.v8) * s.r8, PLAY.loop.tag_t + 0.15), u = (v - s.v8) / (s.v9 - s.v8);
-    return { t, mode: "loop", cam: [mixV(v3(22, 7.5, -16), v3(19, 6.4, -14), u), v3(-2.2, 3.4, -2.6), 50], show: {} };
+  if (v < s.v9) {                                   // what decides it: both throws side by side, to scale
+    const u = (v - s.v8) / (s.v9 - s.v8);
+    return { t: PLAY.direct.tag_t, cam: SIDECAM(0.5 + 0.5 * u), show: { arcsTo: 99 }, hud: false };
   }
-  {                                                 // the two throws side by side, drawn to scale (no vertical exaggeration)
+  {                                                 // send him or hold him? back above the runner on third, before the catch
     const u = (v - s.v9) / (CC.duration - s.v9);
-    const mid = REL.clone().lerp(GLOVE, 0.5).setY(0);
-    const pos = mid.clone().addScaledVector(SIDE, lerp(-640, -610, easeIO(u))).add(v3(0, 22, 0));
-    return { t: PLAY.direct.tag_t, cam: [pos, mid.clone().add(v3(0, 190, 0)), 50], show: { arcs: true } };
+    const pos = B3.clone().add(v3(lerp(10, 6, u), lerp(70, 52, easeIO(u)), lerp(26, 18, u)));
+    return { t: -0.35, cam: [pos, B3.clone().add(v3(5, 0, -4)), 50], show: { ring: true }, hud: false };
   }
 }
 
@@ -555,36 +584,35 @@ function shotAt(v) {
 const $ = (id) => document.getElementById(id);
 const fmt = (x) => Math.max(0, x).toFixed(2);
 function overlays(st) {
-  const t = st.t, sc = SC[st.mode || "direct"];
+  const set = (id, txt) => { for (const k of [id, id.replace("tm-", "tm2-")]) { const e = $(k); if (e) e.textContent = txt; } };   // both clock panels
+  const t = st.t, sc = SC.direct;
   const scored = runS(t) >= A.r_dist;
-  const runT = scored ? PLAY.score_t : t;
-  if ($("tm-run")) $("tm-run").textContent = fmt(runT);
-  if ($("tm-run-ft")) $("tm-run-ft").textContent = scored ? "safe at the plate" : `${Math.max(0, A.r_dist - runS(t)).toFixed(1)} ft to go`;
-  const ballT = Math.min(t, sc.tag_t);
-  if ($("tm-ball")) $("tm-ball").textContent = fmt(ballT);
-  if ($("tm-ball-ph")) $("tm-ball-ph").textContent = t < EXCH ? "exchange" : t < sc.glove_t ? `in flight ${fmt(t - EXCH)} s` : t < sc.tag_t ? "caught · tag" : "tag applied";
-  if ($("tm-fl")) $("tm-fl").textContent = fmt(clamp(t - EXCH, 0, PLAY.direct.flight));
-  if ($("tm-fl2")) $("tm-fl2").textContent = fmt(clamp(t - EXCH, 0, PLAY.loop.flight));
+  set("tm-run", fmt(scored ? PLAY.score_t : t));
+  set("tm-run-ft", scored ? "safe at the plate" : `${Math.max(0, A.r_dist - runS(t)).toFixed(1)} ft to go`);
+  set("tm-ball", fmt(Math.min(t, sc.tag_t)));
+  set("tm-ball-ph", t < EXCH ? "release" : t < sc.glove_t ? `in flight ${fmt(t - EXCH)} s` : t < sc.tag_t ? "caught · tag" : "tag applied");
+  set("tm-fl", fmt(clamp(t - EXCH, 0, PLAY.direct.flight)));
+  if (st.replay != null) {
+    set("tm-rd", fmt(clamp(st.replay - EXCH, 0, PLAY.direct.flight)));
+    set("tm-rl", fmt(clamp(st.replay - EXCH, 0, PLAY.loop.flight)));
+  }
 }
 
+function revealArc(g, path, tr) { reveal(g, clamp((tr - path.t0) / path.dur, 0, 1) + 1e-6 * (tr >= path.t0 + path.dur)); }
 function renderAt(v) {
-  const st = shotAt(v), mode = st.mode || "direct";
-  const r = setPlay(st.t, mode);
-  // the comparison throw (ghost), on the same clock
-  const gOn = !!st.ghost && st.t >= EXCH;
-  if (gOn) {
-    const gp = st.t < PLAY.loop.glove_t ? pathAt(PLAY.path.loop, st.t) : GLOVE.clone();
-    placeBall(GHOST, gp, PLAY.path.loop, st.t, st.t < PLAY.loop.glove_t, true);
+  const st = shotAt(v);
+  const r = setPlay(st.t, "direct");
+  if (st.replay != null) {                  // the replay: both throws on their own clock, the players held at the release
+    const tr = st.replay;
+    placeBall(BALL, tr < flightEnd(PLAY.path.direct) ? pathAt(PLAY.path.direct, tr) : GLOVE.clone(), PLAY.path.direct, tr, true, true);
+    placeBall(GHOST, tr < flightEnd(PLAY.path.loop) ? pathAt(PLAY.path.loop, tr) : GLOVE.clone(), PLAY.path.loop, tr, true, true);
   } else placeBall(GHOST, v3(0, -50, 0), null, 0, false, false);
-  if (mode === "loop") {                    // in the loop replay the real ball is the looping one: tint it
-    for (const tr of BALL.trail) tr.material.color.setHex(0xff8a3d);
-    BALL.glow.material.color.setHex(0xff8a3d);
-  } else { for (const tr of BALL.trail) tr.material.color.setHex(0xffd84d); BALL.glow.material.color.setHex(0xffd84d); }
   reveal(throwLine, st.show?.throwLine ?? 0);
   reveal(runLine, st.show?.runLine ?? 0);
-  directArc.visible = loopArc.visible = !!st.show?.arcs;
+  if (st.show?.arcsTo != null) { revealArc(directArc, PLAY.path.direct, st.show.arcsTo); revealArc(loopArc, PLAY.path.loop, st.show.arcsTo); }
+  else directArc.visible = loopArc.visible = false;
   catchRing.visible = !!st.show?.ring;
-  const rp = st.ringPulse ?? -1;                 // the ring punches out on "HERE?"
+  const rp = st.ringPulse ?? -1;                 // the ring punches out on the cue word
   catchRing.scale.setScalar(rp > 0 ? 1 + 0.55 * Math.exp(-rp * 5) * Math.sin(Math.min(rp * 14, Math.PI)) : 1);
   gapMark.visible = !!st.show?.gap;
   if (gapLabel) gapLabel.visible = !!st.show?.gap;
@@ -595,7 +623,7 @@ function renderAt(v) {
   }
   frame(cam, st.cam[0], st.cam[1], st.cam[2]);
   renderer.render(scene, cam);
-  overlays({ ...st, mode });
+  overlays(st);
 }
 
 let last = -1;

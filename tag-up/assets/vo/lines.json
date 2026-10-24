@@ -1,0 +1,955 @@
+[
+ {
+  "i": 0,
+  "id": "q",
+  "text": "How hard is it to throw out a runner tagging up from third?",
+  "spoken": "How hard is it to throw out a runner tagging up from third?",
+  "dur": 3.52,
+  "words": [
+   {
+    "w": "How",
+    "start": 0.126,
+    "end": 0.301
+   },
+   {
+    "w": "hard",
+    "start": 0.376,
+    "end": 0.676
+   },
+   {
+    "w": "is",
+    "start": 0.726,
+    "end": 0.801
+   },
+   {
+    "w": "it",
+    "start": 0.851,
+    "end": 0.926
+   },
+   {
+    "w": "to",
+    "start": 0.976,
+    "end": 1.051
+   },
+   {
+    "w": "throw",
+    "start": 1.151,
+    "end": 1.401
+   },
+   {
+    "w": "out",
+    "start": 1.476,
+    "end": 1.676
+   },
+   {
+    "w": "a",
+    "start": 1.676,
+    "end": 1.676
+   },
+   {
+    "w": "runner",
+    "start": 1.776,
+    "end": 2.176
+   },
+   {
+    "w": "tagging",
+    "start": 2.276,
+    "end": 2.626
+   },
+   {
+    "w": "up",
+    "start": 2.701,
+    "end": 2.801
+   },
+   {
+    "w": "from",
+    "start": 2.851,
+    "end": 3.001
+   },
+   {
+    "w": "third?",
+    "start": 3.101,
+    "end": 3.52
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "brk",
+  "text": "Let's break it down.",
+  "spoken": "Let's break it down.",
+  "dur": 1.408,
+  "words": [
+   {
+    "w": "Let's",
+    "start": 0.173,
+    "end": 0.423
+   },
+   {
+    "w": "break",
+    "start": 0.473,
+    "end": 0.673
+   },
+   {
+    "w": "it",
+    "start": 0.698,
+    "end": 0.773
+   },
+   {
+    "w": "down.",
+    "start": 0.823,
+    "end": 1.408
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "catch",
+  "text": "Imagine the outfielder catches this ball about 300 feet from home plate.",
+  "spoken": "Imagine the outfielder catches this ball about three hundred feet from home plate.",
+  "dur": 4.949,
+  "words": [
+   {
+    "w": "Imagine",
+    "start": 0.084,
+    "end": 0.584
+   },
+   {
+    "w": "the",
+    "start": 0.634,
+    "end": 0.734
+   },
+   {
+    "w": "outfielder",
+    "start": 0.809,
+    "end": 1.384
+   },
+   {
+    "w": "catches",
+    "start": 1.459,
+    "end": 1.859
+   },
+   {
+    "w": "this",
+    "start": 1.909,
+    "end": 2.059
+   },
+   {
+    "w": "ball",
+    "start": 2.134,
+    "end": 2.634
+   },
+   {
+    "w": "about",
+    "start": 2.709,
+    "end": 3.084
+   },
+   {
+    "w": "three",
+    "start": 3.184,
+    "end": 3.409
+   },
+   {
+    "w": "hundred",
+    "start": 3.459,
+    "end": 3.809
+   },
+   {
+    "w": "feet",
+    "start": 3.884,
+    "end": 4.109
+   },
+   {
+    "w": "from",
+    "start": 4.159,
+    "end": 4.259
+   },
+   {
+    "w": "home",
+    "start": 4.309,
+    "end": 4.559
+   },
+   {
+    "w": "plate.",
+    "start": 4.634,
+    "end": 4.949
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "exch",
+  "text": "He needs to get the ball out of his glove, generate enough arm speed, and deliver an accurate throw to the catcher.",
+  "spoken": "He needs to get the ball out of his glove, generate enough arm speed, and deliver an accurate throw to the catcher.",
+  "dur": 7.317,
+  "words": [
+   {
+    "w": "He",
+    "start": 0.08,
+    "end": 0.155
+   },
+   {
+    "w": "needs",
+    "start": 0.205,
+    "end": 0.455
+   },
+   {
+    "w": "to",
+    "start": 0.505,
+    "end": 0.555
+   },
+   {
+    "w": "get",
+    "start": 0.605,
+    "end": 0.73
+   },
+   {
+    "w": "the",
+    "start": 0.78,
+    "end": 0.855
+   },
+   {
+    "w": "ball",
+    "start": 0.93,
+    "end": 1.305
+   },
+   {
+    "w": "out",
+    "start": 1.405,
+    "end": 1.555
+   },
+   {
+    "w": "of",
+    "start": 1.555,
+    "end": 1.58
+   },
+   {
+    "w": "his",
+    "start": 1.605,
+    "end": 1.73
+   },
+   {
+    "w": "glove,",
+    "start": 1.805,
+    "end": 2.505
+   },
+   {
+    "w": "generate",
+    "start": 2.68,
+    "end": 3.205
+   },
+   {
+    "w": "enough",
+    "start": 3.255,
+    "end": 3.53
+   },
+   {
+    "w": "arm",
+    "start": 3.705,
+    "end": 3.905
+   },
+   {
+    "w": "speed,",
+    "start": 3.98,
+    "end": 4.73
+   },
+   {
+    "w": "and",
+    "start": 4.855,
+    "end": 4.93
+   },
+   {
+    "w": "deliver",
+    "start": 4.98,
+    "end": 5.48
+   },
+   {
+    "w": "an",
+    "start": 5.48,
+    "end": 5.555
+   },
+   {
+    "w": "accurate",
+    "start": 5.73,
+    "end": 6.055
+   },
+   {
+    "w": "throw",
+    "start": 6.155,
+    "end": 6.53
+   },
+   {
+    "w": "to",
+    "start": 6.58,
+    "end": 6.63
+   },
+   {
+    "w": "the",
+    "start": 6.655,
+    "end": 6.705
+   },
+   {
+    "w": "catcher.",
+    "start": 6.755,
+    "end": 7.317
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "speed",
+  "text": "At 95 miles per hour, the ball is moving fast \u2014 but it still takes time to cover that distance.",
+  "spoken": "At ninety-five miles per hour, the ball is moving fast, but it still takes time to cover that distance.",
+  "dur": 6.528,
+  "words": [
+   {
+    "w": "At",
+    "start": 0.176,
+    "end": 0.276
+   },
+   {
+    "w": "ninety-five",
+    "start": 0.351,
+    "end": 0.951
+   },
+   {
+    "w": "miles",
+    "start": 1.001,
+    "end": 1.401
+   },
+   {
+    "w": "per",
+    "start": 1.451,
+    "end": 1.601
+   },
+   {
+    "w": "hour,",
+    "start": 1.776,
+    "end": 2.151
+   },
+   {
+    "w": "the",
+    "start": 2.251,
+    "end": 2.326
+   },
+   {
+    "w": "ball",
+    "start": 2.401,
+    "end": 2.726
+   },
+   {
+    "w": "is",
+    "start": 2.776,
+    "end": 2.876
+   },
+   {
+    "w": "moving",
+    "start": 2.926,
+    "end": 3.226
+   },
+   {
+    "w": "fast,",
+    "start": 3.301,
+    "end": 4.001
+   },
+   {
+    "w": "but",
+    "start": 4.126,
+    "end": 4.226
+   },
+   {
+    "w": "it",
+    "start": 4.251,
+    "end": 4.301
+   },
+   {
+    "w": "still",
+    "start": 4.351,
+    "end": 4.576
+   },
+   {
+    "w": "takes",
+    "start": 4.626,
+    "end": 4.876
+   },
+   {
+    "w": "time",
+    "start": 4.926,
+    "end": 5.251
+   },
+   {
+    "w": "to",
+    "start": 5.301,
+    "end": 5.376
+   },
+   {
+    "w": "cover",
+    "start": 5.426,
+    "end": 5.701
+   },
+   {
+    "w": "that",
+    "start": 5.751,
+    "end": 5.926
+   },
+   {
+    "w": "distance.",
+    "start": 5.976,
+    "end": 6.528
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "run",
+  "text": "And the runner is already sprinting toward home.",
+  "spoken": "And the runner is already sprinting toward home.",
+  "dur": 2.581,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.126,
+    "end": 0.201
+   },
+   {
+    "w": "the",
+    "start": 0.226,
+    "end": 0.301
+   },
+   {
+    "w": "runner",
+    "start": 0.376,
+    "end": 0.701
+   },
+   {
+    "w": "is",
+    "start": 0.751,
+    "end": 0.876
+   },
+   {
+    "w": "already",
+    "start": 0.976,
+    "end": 1.276
+   },
+   {
+    "w": "sprinting",
+    "start": 1.351,
+    "end": 1.801
+   },
+   {
+    "w": "toward",
+    "start": 1.851,
+    "end": 2.126
+   },
+   {
+    "w": "home.",
+    "start": 2.176,
+    "end": 2.581
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "traj1",
+  "text": "The outfielder also has to account for the throw's trajectory.",
+  "spoken": "The outfielder also has to account for the throw's trajectory.",
+  "dur": 3.541,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.059,
+    "end": 0.159
+   },
+   {
+    "w": "outfielder",
+    "start": 0.234,
+    "end": 0.859
+   },
+   {
+    "w": "also",
+    "start": 0.984,
+    "end": 1.284
+   },
+   {
+    "w": "has",
+    "start": 1.334,
+    "end": 1.484
+   },
+   {
+    "w": "to",
+    "start": 1.534,
+    "end": 1.634
+   },
+   {
+    "w": "account",
+    "start": 1.684,
+    "end": 2.109
+   },
+   {
+    "w": "for",
+    "start": 2.159,
+    "end": 2.259
+   },
+   {
+    "w": "the",
+    "start": 2.259,
+    "end": 2.359
+   },
+   {
+    "w": "throw's",
+    "start": 2.434,
+    "end": 2.784
+   },
+   {
+    "w": "trajectory.",
+    "start": 2.834,
+    "end": 3.541
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "traj2",
+  "text": "A high, looping throw gives the runner more time, while a low, direct throw can get there faster if it's accurate and physically possible.",
+  "spoken": "A high, looping throw gives the runner more time, while a low, direct throw can get there faster if it's accurate and physically possible.",
+  "dur": 8.213,
+  "words": [
+   {
+    "w": "A",
+    "start": 0.151,
+    "end": 0.201
+   },
+   {
+    "w": "high,",
+    "start": 0.301,
+    "end": 0.701
+   },
+   {
+    "w": "looping",
+    "start": 0.826,
+    "end": 1.151
+   },
+   {
+    "w": "throw",
+    "start": 1.251,
+    "end": 1.626
+   },
+   {
+    "w": "gives",
+    "start": 1.676,
+    "end": 1.876
+   },
+   {
+    "w": "the",
+    "start": 1.926,
+    "end": 2.001
+   },
+   {
+    "w": "runner",
+    "start": 2.051,
+    "end": 2.276
+   },
+   {
+    "w": "more",
+    "start": 2.326,
+    "end": 2.526
+   },
+   {
+    "w": "time,",
+    "start": 2.601,
+    "end": 3.351
+   },
+   {
+    "w": "while",
+    "start": 3.476,
+    "end": 3.701
+   },
+   {
+    "w": "a",
+    "start": 3.701,
+    "end": 3.701
+   },
+   {
+    "w": "low,",
+    "start": 3.801,
+    "end": 4.226
+   },
+   {
+    "w": "direct",
+    "start": 4.326,
+    "end": 4.701
+   },
+   {
+    "w": "throw",
+    "start": 4.776,
+    "end": 5.076
+   },
+   {
+    "w": "can",
+    "start": 5.126,
+    "end": 5.226
+   },
+   {
+    "w": "get",
+    "start": 5.276,
+    "end": 5.401
+   },
+   {
+    "w": "there",
+    "start": 5.451,
+    "end": 5.576
+   },
+   {
+    "w": "faster",
+    "start": 5.676,
+    "end": 6.201
+   },
+   {
+    "w": "if",
+    "start": 6.251,
+    "end": 6.326
+   },
+   {
+    "w": "it's",
+    "start": 6.351,
+    "end": 6.451
+   },
+   {
+    "w": "accurate",
+    "start": 6.626,
+    "end": 7.026
+   },
+   {
+    "w": "and",
+    "start": 7.076,
+    "end": 7.151
+   },
+   {
+    "w": "physically",
+    "start": 7.226,
+    "end": 7.601
+   },
+   {
+    "w": "possible.",
+    "start": 7.651,
+    "end": 8.213
+   }
+  ]
+ },
+ {
+  "i": 8,
+  "id": "race",
+  "text": "Now it comes down to the race: can the ball beat the runner to the plate, and can the catcher apply the tag in time?",
+  "spoken": "Now it comes down to the race: can the ball beat the runner to the plate, and can the catcher apply the tag in time?",
+  "dur": 6.912,
+  "words": [
+   {
+    "w": "Now",
+    "start": 0.112,
+    "end": 0.387
+   },
+   {
+    "w": "it",
+    "start": 0.437,
+    "end": 0.487
+   },
+   {
+    "w": "comes",
+    "start": 0.537,
+    "end": 0.812
+   },
+   {
+    "w": "down",
+    "start": 0.887,
+    "end": 1.137
+   },
+   {
+    "w": "to",
+    "start": 1.187,
+    "end": 1.237
+   },
+   {
+    "w": "the",
+    "start": 1.262,
+    "end": 1.337
+   },
+   {
+    "w": "race:",
+    "start": 1.387,
+    "end": 2.087
+   },
+   {
+    "w": "can",
+    "start": 2.237,
+    "end": 2.337
+   },
+   {
+    "w": "the",
+    "start": 2.362,
+    "end": 2.437
+   },
+   {
+    "w": "ball",
+    "start": 2.512,
+    "end": 2.837
+   },
+   {
+    "w": "beat",
+    "start": 2.912,
+    "end": 3.137
+   },
+   {
+    "w": "the",
+    "start": 3.187,
+    "end": 3.262
+   },
+   {
+    "w": "runner",
+    "start": 3.337,
+    "end": 3.637
+   },
+   {
+    "w": "to",
+    "start": 3.687,
+    "end": 3.737
+   },
+   {
+    "w": "the",
+    "start": 3.787,
+    "end": 3.862
+   },
+   {
+    "w": "plate,",
+    "start": 3.937,
+    "end": 4.512
+   },
+   {
+    "w": "and",
+    "start": 4.637,
+    "end": 4.712
+   },
+   {
+    "w": "can",
+    "start": 4.762,
+    "end": 4.862
+   },
+   {
+    "w": "the",
+    "start": 4.887,
+    "end": 4.937
+   },
+   {
+    "w": "catcher",
+    "start": 5.012,
+    "end": 5.437
+   },
+   {
+    "w": "apply",
+    "start": 5.487,
+    "end": 5.812
+   },
+   {
+    "w": "the",
+    "start": 5.862,
+    "end": 5.912
+   },
+   {
+    "w": "tag",
+    "start": 5.987,
+    "end": 6.337
+   },
+   {
+    "w": "in",
+    "start": 6.362,
+    "end": 6.462
+   },
+   {
+    "w": "time?",
+    "start": 6.512,
+    "end": 6.912
+   }
+  ]
+ },
+ {
+  "i": 9,
+  "id": "why",
+  "text": "That's why arm strength alone doesn't determine the outcome.",
+  "spoken": "That's why arm strength alone doesn't determine the outcome.",
+  "dur": 3.669,
+  "words": [
+   {
+    "w": "That's",
+    "start": 0.037,
+    "end": 0.262
+   },
+   {
+    "w": "why",
+    "start": 0.337,
+    "end": 0.587
+   },
+   {
+    "w": "arm",
+    "start": 0.737,
+    "end": 0.937
+   },
+   {
+    "w": "strength",
+    "start": 0.987,
+    "end": 1.312
+   },
+   {
+    "w": "alone",
+    "start": 1.362,
+    "end": 2.062
+   },
+   {
+    "w": "doesn't",
+    "start": 2.162,
+    "end": 2.412
+   },
+   {
+    "w": "determine",
+    "start": 2.462,
+    "end": 2.937
+   },
+   {
+    "w": "the",
+    "start": 2.962,
+    "end": 3.062
+   },
+   {
+    "w": "outcome.",
+    "start": 3.187,
+    "end": 3.669
+   }
+  ]
+ },
+ {
+  "i": 10,
+  "id": "fact",
+  "text": "Distance, release time, trajectory, accuracy, and the runner's speed all matter.",
+  "spoken": "Distance, release time, trajectory, accuracy, and the runner's speed all matter.",
+  "dur": 4.757,
+  "words": [
+   {
+    "w": "Distance,",
+    "start": 0.087,
+    "end": 0.562
+   },
+   {
+    "w": "release",
+    "start": 0.637,
+    "end": 0.987
+   },
+   {
+    "w": "time,",
+    "start": 1.037,
+    "end": 1.487
+   },
+   {
+    "w": "trajectory,",
+    "start": 1.612,
+    "end": 2.262
+   },
+   {
+    "w": "accuracy,",
+    "start": 2.437,
+    "end": 3.062
+   },
+   {
+    "w": "and",
+    "start": 3.137,
+    "end": 3.212
+   },
+   {
+    "w": "the",
+    "start": 3.237,
+    "end": 3.287
+   },
+   {
+    "w": "runner's",
+    "start": 3.337,
+    "end": 3.662
+   },
+   {
+    "w": "speed",
+    "start": 3.737,
+    "end": 4.112
+   },
+   {
+    "w": "all",
+    "start": 4.212,
+    "end": 4.337
+   },
+   {
+    "w": "matter.",
+    "start": 4.387,
+    "end": 4.757
+   }
+  ]
+ },
+ {
+  "i": 11,
+  "id": "send",
+  "text": "So, would you send the runner or hold him at third?",
+  "spoken": "So, would you send the runner or hold him at third?",
+  "dur": 2.816,
+  "words": [
+   {
+    "w": "So,",
+    "start": 0.13,
+    "end": 0.43
+   },
+   {
+    "w": "would",
+    "start": 0.48,
+    "end": 0.555
+   },
+   {
+    "w": "you",
+    "start": 0.605,
+    "end": 0.68
+   },
+   {
+    "w": "send",
+    "start": 0.755,
+    "end": 0.955
+   },
+   {
+    "w": "the",
+    "start": 0.98,
+    "end": 1.055
+   },
+   {
+    "w": "runner",
+    "start": 1.13,
+    "end": 1.53
+   },
+   {
+    "w": "or",
+    "start": 1.605,
+    "end": 1.73
+   },
+   {
+    "w": "hold",
+    "start": 1.78,
+    "end": 2.005
+   },
+   {
+    "w": "him",
+    "start": 2.03,
+    "end": 2.13
+   },
+   {
+    "w": "at",
+    "start": 2.18,
+    "end": 2.28
+   },
+   {
+    "w": "third?",
+    "start": 2.355,
+    "end": 2.816
+   }
+  ]
+ }
+]
