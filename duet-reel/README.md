@@ -1,13 +1,13 @@
 # Claude Duet for small business: JT Builds Co reel
 
-A 36 s, 9:16 (1080×1920, 30 fps) faceless Instagram Reel about Anthropic's Claude Duet research preview and what it could mean for small business owners.
+A 36 s, 9:16 (1080×1920, 30 fps) Instagram Reel about Anthropic's Claude Duet research preview and what it could mean for small business owners.
 
-- **Voice:** the creator's own voiceover recording. The face is not used.
+- **Footage and voice:** the creator's own talking-head recording (`assets/media/talk.mp4`, not committed). The voice is taken from the same file, so picture and voice stay in sync.
 - **Text:** large key-phrase captions.
 - **Sound:** subtle effects and a quiet music bed.
 
 ```bash
-# put the voiceover at assets/vo/voice.wav (48 kHz mono; not committed), then:
+# put the recording at assets/media/talk.mp4 and its audio at assets/vo/voice.wav (48 kHz mono); neither is committed, then:
 python3 build.py                 # index.html + assets/mix.wav (with voice) + assets/mix-novo.wav (effects + bed only)
 npx --yes hyperframes@0.8.154 render . -o renders/claude-duet-reel.mp4 --video-bitrate 16M
 python3 tools/finish.py          # renders/claude-duet-reel-ig.mp4 and renders/claude-duet-reel-novo-ig.mp4
@@ -31,6 +31,18 @@ Everything on screen is defined in `build.py`: the scenes, mock interfaces, capt
 - **Approval shown on screen:** every mock action ends in an approval step, such as "Needs your OK", "Approve & send", "1 change proposed" or "Waiting on you". The board reads "Nothing goes out until you approve it."
 - **Disclaimer:** the end card carries the research-preview, approval and mistakes caveat.
 - **Branding:** no Anthropic or Claude logos are reproduced. "Claude Duet" is set in plain type, and the orange is a restrained Claude-inspired accent.
+
+## Layouts
+
+The reel alternates between three layouts, set in the `MODES` table in `build.py`:
+
+| Layout | What's on screen |
+|---|---|
+| **You, full screen** | The recording fills the frame. |
+| **Split** | The recording on the top half, cropped to your face, with an orange seam line. Below it sit the caption, the mockup label and the scaled-down mockup. |
+| **Mockup, full screen** | The Duet mockup fills the frame. |
+
+The order is: you (hook), split, mockup, split, mockup, split, mockup, split, you, mockup, split, mockup (end card).
 
 ## Timeline (cut to the voiceover)
 

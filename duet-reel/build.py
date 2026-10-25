@@ -29,7 +29,7 @@ OK = "#7FC8A0"
 T = dict(title=3.92, pro=7.62, inv=11.72, fol=13.88, cal=15.58, mkt=17.48, focus=18.42, shift=21.45, later=23.62,
          stop=26.55, start=28.52, end=31.5)
 CAPS = [   # key-phrase captions, on the words they echo
-    ("Could change how *small businesses* operate", 1.05, 3.85),
+    ("Could change how *small businesses* operate", 2.02, 3.85),
     ("It's called *Claude Duet*", 4.05, 5.55),
     ("Things that *need your attention*", 7.68, 10.02),
     ("Working on tasks *in the background*", 10.06, 11.66),
@@ -42,6 +42,13 @@ CAPS = [   # key-phrase captions, on the words they echo
     ("To AI that helps *get work done*", 23.66, 26.42),
 ]
 
+# layout: you full screen ("face"), you on top / the mockup below ("split"), or the mockup full screen ("ui")
+MODES = [(0, 2.0, "face"), (2.0, 3.92, "split"), (3.92, 7.62, "ui"), (7.62, 11.72, "split"), (11.72, 13.88, "ui"), (13.88, 15.58, "split"),
+         (15.58, 18.42, "ui"), (18.42, 21.45, "split"), (21.45, 23.62, "face"), (23.62, 26.55, "ui"), (26.55, 31.5, "split"), (31.5, D, "ui")]
+SPLIT_SCENE = {2.0: ("s1", 850, 0.62, 1170), 7.62: ("s3", 300, 0.66, 1172), 13.88: ("s5", 300, 0.66, 1172), 18.42: ("s7b", 330, 0.66, 1172), 26.55: ("s9", 520, 0.62, 1030)}
+SPLIT_TOP, CAM_Y = 1118, -380            # where the mockup starts in split; how far your frame shifts up so your face fills the top half
+def mode_at(t): return next(m for a, b, m in MODES if a <= t < b)
+
 c = Comp(D, 30)
 def tag(cid, t0, t1, text, top=150):
     c.clip(cid, t0, t1, f'<div class="mtag" style="top:{top}px"><i></i>{esc(text)}</div>', cls="layer", style="z-index:25")
@@ -52,15 +59,15 @@ NOTES = [("Invoices", "3 invoices are past due. Reminders drafted.", "Needs your
          ("Marketing", "Next week's newsletter draft is ready to review.", "For review")]
 notes_html = "".join(f'''<div class="ntf" id="n{k}"><div class="nh"><span class="nd"></span><b>Duet</b><span class="nt">{w}</span><span class="nw">{esc(a)}</span></div>
     <div class="nb">{esc(b)}</div><span class="nk">{esc(k_)}</span></div>''' for k, (a, b, k_), w in zip(range(3), NOTES, ["now", "1m ago", "4m ago"]))
-c.clip("s1", 0, T["title"], f'''<div class="hook">
+c.clip("s1h", 0, MODES[1][0], """<div class="hook">
     <div class="hk-k" id="hk0">Anthropic · research preview</div>
-    <h1 id="hk1">AI that works</h1><h1 class="a" id="hk2">while you don't?</h1></div>
-  <div class="phone" id="ph1"><div class="ls-time">2:14</div><div class="ls-date">Tuesday</div><div class="ntfs">{notes_html}</div></div>''', cls="scene clip")
+    <h1 id="hk1">AI that works</h1><h1 class="a" id="hk2">while you don't?</h1></div>""", cls="layer", style="z-index:20")
+c.ft("#hk0", o(opacity=0), o(opacity=1, duration=0.4), 0.9)
+c.clip("s1", 0, T["title"], f'''<div class="phone" id="ph1"><div class="ls-time">2:14</div><div class="ls-date">Tuesday</div><div class="ntfs">{notes_html}</div></div>''', cls="scene clip")
 c.set("#s1", o(opacity=1), 0)
-c.ft("#ph1", o(y=120, scale=0.96), o(y=0, scale=1, duration=3.9, ease="power2.out"), 0)
-for k, t in enumerate([0.4, 0.85], 1):                          # the first notification is already there on frame one
+c.ft("#ph1", o(y=80), o(y=0, duration=1.9, ease="power2.out"), MODES[1][0])
+for k, t in enumerate([2.3, 2.75], 1):                          # the first notification is already waiting when the split opens
     c.ft(f"#n{k}", o(opacity=0, y=-40, scale=0.96), o(opacity=1, y=0, scale=1, duration=0.32, ease="power3.out"), t)
-c.ft("#hk0", o(opacity=0), o(opacity=1, duration=0.4), 1.6)
 
 # ----------------------------------------------------------------- 2. Claude Duet: what it is
 c.clip("s2", T["title"], T["pro"], f'''<div class="title">
@@ -176,6 +183,20 @@ c.ft("#lock", o(opacity=0, y=30, scale=0.94), o(opacity=1, y=0, scale=1, duratio
 c.ft("#q2", o(opacity=0, y=16), o(opacity=1, y=0, duration=0.4), e0 + 0.85)
 c.ft("#fine", o(opacity=0), o(opacity=1, duration=0.5), e0 + 1.6)
 
+# ----------------------------------------------------------------- you: full screen, top half, or off (your recording; the voice comes from the same file)
+c.raw(f'''<div id="camw"><video id="cam" class="clip" src="assets/media/talk.mp4" muted playsinline data-start="0" data-duration="{D}" data-track-index="2"></video>
+        <div class="cg-top"></div><div class="cg-bot"></div><i class="seam"></i></div>''')
+for a, b, m in MODES:
+    if m == "face": c.set("#camw", o(opacity=1, height=1920), a); c.set("#cam", o(y=0), a); c.set("#camw .seam", o(opacity=0), a)
+    elif m == "split": c.set("#camw", o(opacity=1, height=960), a); c.set("#cam", o(y=CAM_Y), a); c.set("#camw .seam", o(opacity=1), a)
+    else: c.set("#camw", o(opacity=0), a)
+    if m == "split":                                            # the mockup drops into the bottom half
+        sid, top, sc, to = SPLIT_SCENE[a]
+        c.set(f"#{sid}", o(y=to - top * sc, scale=sc, transformOrigin="50% 0%"), a)
+        c.set(f"#{sid}", o(y=0, scale=1), b)
+    for tid in ["#mt .mtag", "#mt2 .mtag"]:                     # the mockup label follows the mockup, and steps aside for you
+        c.set(tid, o(opacity=0) if m == "face" else o(opacity=1, top=SPLIT_TOP if m == "split" else 150), a)
+
 # ----------------------------------------------------------------- captions: large, key phrases, on the words
 for k, (txt, a, b) in enumerate(CAPS):
     ws = txt.split()
@@ -184,7 +205,7 @@ for k, (txt, a, b) in enumerate(CAPS):
         s = w.startswith("*"); acc = acc or s; e = w.endswith("*")
         html_.append(f'<span class="cw{" a" if acc else ""}" id="c{k}w{n}">{esc(w.strip("*"))}</span>')
         if e: acc = False
-    c.clip(f"cap{k}", a, b, f'<div class="cap{" hk" if a < T["title"] else ""}"><span class="cl">{" ".join(html_)}</span></div>', cls="layer", style="z-index:30")
+    c.clip(f"cap{k}", a, b, f'<div class="cap {mode_at(a)}"><span class="cl">{" ".join(html_)}</span></div>', cls="layer", style="z-index:30")
     for n in range(len(ws)):
         c.ft(f"#c{k}w{n}", o(opacity=0, y=26), o(opacity=1, y=0, duration=0.2, ease="power3.out"), a + n * 0.06)
 
@@ -247,9 +268,9 @@ html, body {{ width:1080px; height:1920px; overflow:hidden; background:{BG}; }}
 .mtag i {{ width:8px; height:8px; border-radius:50%; background:{ACC}; }}
 
 /* 1. hook */
-.hook {{ position:absolute; left:70px; right:60px; top:236px; }}
+.hook {{ position:absolute; left:64px; right:60px; top:118px; }}
 .hk-k {{ {MONO} font-size:22px; letter-spacing:.18em; color:{MUTED}; margin-bottom:22px; }}
-.hook h1 {{ font-family:"Inter", sans-serif; font-weight:800; font-size:118px; line-height:.98; letter-spacing:-.04em; text-transform:uppercase; }}
+.hook h1 {{ font-family:"Inter", sans-serif; font-weight:800; font-size:106px; text-shadow:0 6px 36px rgba(0,0,0,.6); line-height:.98; letter-spacing:-.04em; text-transform:uppercase; }}
 .hook h1.a {{ color:{ACC}; }}
 .phone {{ position:absolute; left:150px; width:780px; top:850px; height:1300px; border-radius:76px; background:linear-gradient(180deg, #1A1714, #100E0C);
           border:2px solid rgba(255,255,255,.10); box-shadow:0 40px 120px rgba(0,0,0,.6), inset 0 0 0 10px #0A0908; padding:80px 46px 0; }}
@@ -350,10 +371,15 @@ html, body {{ width:1080px; height:1920px; overflow:hidden; background:{BG}; }}
 .q2 {{ font-family:"Fraunces", serif; font-size:44px; line-height:1.25; color:#D8D2CA; opacity:0; }}
 .fine {{ font-size:22px; line-height:1.45; color:{DIM}; opacity:0; max-width:880px; }}
 
+#camw {{ position:absolute; left:0; top:0; width:1080px; height:1920px; overflow:hidden; z-index:15; opacity:0; background:#000; }}
+#cam {{ position:absolute; left:0; top:0; width:1080px; height:1920px; object-fit:cover; filter:contrast(1.05) saturate(.9) brightness(.97); }}
+.cg-top {{ position:absolute; left:0; right:0; top:0; height:640px; background:linear-gradient(180deg, rgba(8,7,6,.82), rgba(8,7,6,0)); }}
+.cg-bot {{ position:absolute; left:0; right:0; bottom:0; height:560px; background:linear-gradient(0deg, rgba(8,7,6,.85), rgba(8,7,6,0)); }}
+.seam {{ position:absolute; left:0; right:0; bottom:0; height:5px; background:{ACC}; opacity:0; }}
 .cap {{ position:absolute; left:60px; right:60px; top:1380px; text-align:center; }}
 .cap .cl {{ display:inline; font-family:"Inter", sans-serif; font-weight:800; font-size:70px; line-height:1.08; letter-spacing:-.025em; text-transform:uppercase;
             color:{INK}; text-shadow:0 4px 30px rgba(0,0,0,.85), 0 2px 6px rgba(0,0,0,.6); }}
-.cap.hk {{ top:668px; text-align:left; left:70px; }} .cap.hk .cl {{ font-size:48px; color:#D8D2CA; }}
+.cap.split {{ top:978px; }} .cap.split .cl {{ font-size:60px; }} .cap.face {{ top:1520px; }} .cap.face .cl {{ font-size:64px; }}
 .cap .cw {{ display:inline-block; }} .cap .cw.a {{ color:{ACC}; }}
 """])
 
