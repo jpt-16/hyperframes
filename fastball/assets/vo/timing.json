@@ -1,0 +1,540 @@
+{
+ "duration": 27.33,
+ "lines": [
+  {
+   "i": 0,
+   "id": "q",
+   "text": "You think you could hit a 100-mile-per-hour fastball?",
+   "spoken": "You think you could hit a hundred mile per hour fastball?",
+   "t0": 0.45,
+   "t1": 2.73,
+   "words": [
+    {
+     "w": "You",
+     "t0": 0.456,
+     "t1": 0.531
+    },
+    {
+     "w": "think",
+     "t0": 0.581,
+     "t1": 0.706
+    },
+    {
+     "w": "you",
+     "t0": 0.731,
+     "t1": 0.806
+    },
+    {
+     "w": "could",
+     "t0": 0.831,
+     "t1": 0.906
+    },
+    {
+     "w": "hit",
+     "t0": 0.931,
+     "t1": 1.081
+    },
+    {
+     "w": "a",
+     "t0": 1.081,
+     "t1": 1.081
+    },
+    {
+     "w": "hundred",
+     "t0": 1.131,
+     "t1": 1.456
+    },
+    {
+     "w": "mile",
+     "t0": 1.506,
+     "t1": 1.781
+    },
+    {
+     "w": "per",
+     "t0": 1.831,
+     "t1": 1.931
+    },
+    {
+     "w": "hour",
+     "t0": 2.031,
+     "t1": 2.181
+    },
+    {
+     "w": "fastball?",
+     "t0": 2.231,
+     "t1": 2.745
+    }
+   ]
+  },
+  {
+   "i": 1,
+   "id": "speed",
+   "text": "At that speed, the ball travels nearly 147 feet every second.",
+   "spoken": "At that speed, the ball travels nearly a hundred and forty-seven feet every second.",
+   "t0": 3.28,
+   "t1": 7.238,
+   "words": [
+    {
+     "w": "At",
+     "t0": 3.31,
+     "t1": 3.385
+    },
+    {
+     "w": "that",
+     "t0": 3.435,
+     "t1": 3.585
+    },
+    {
+     "w": "speed,",
+     "t0": 3.635,
+     "t1": 4.01
+    },
+    {
+     "w": "the",
+     "t0": 4.06,
+     "t1": 4.11
+    },
+    {
+     "w": "ball",
+     "t0": 4.16,
+     "t1": 4.385
+    },
+    {
+     "w": "travels",
+     "t0": 4.435,
+     "t1": 4.81
+    },
+    {
+     "w": "nearly",
+     "t0": 4.86,
+     "t1": 5.185
+    },
+    {
+     "w": "a",
+     "t0": 5.185,
+     "t1": 5.185
+    },
+    {
+     "w": "hundred",
+     "t0": 5.235,
+     "t1": 5.61
+    },
+    {
+     "w": "and",
+     "t0": 5.635,
+     "t1": 5.71
+    },
+    {
+     "w": "forty-seven",
+     "t0": 5.76,
+     "t1": 6.285
+    },
+    {
+     "w": "feet",
+     "t0": 6.36,
+     "t1": 6.585
+    },
+    {
+     "w": "every",
+     "t0": 6.685,
+     "t1": 6.885
+    },
+    {
+     "w": "second.",
+     "t0": 6.935,
+     "t1": 7.238
+    }
+   ]
+  },
+  {
+   "i": 2,
+   "id": "time",
+   "text": "From the pitcher's mound to the plate, it can arrive in around four-tenths of a second.",
+   "spoken": "From the pitcher's mound to the plate, it can arrive in around four-tenths of a second.",
+   "t0": 7.438,
+   "t1": 11.126,
+   "words": [
+    {
+     "w": "From",
+     "t0": 7.465,
+     "t1": 7.59
+    },
+    {
+     "w": "the",
+     "t0": 7.59,
+     "t1": 7.64
+    },
+    {
+     "w": "pitcher's",
+     "t0": 7.69,
+     "t1": 8.065
+    },
+    {
+     "w": "mound",
+     "t0": 8.115,
+     "t1": 8.39
+    },
+    {
+     "w": "to",
+     "t0": 8.415,
+     "t1": 8.465
+    },
+    {
+     "w": "the",
+     "t0": 8.49,
+     "t1": 8.54
+    },
+    {
+     "w": "plate,",
+     "t0": 8.59,
+     "t1": 9.015
+    },
+    {
+     "w": "it",
+     "t0": 9.14,
+     "t1": 9.19
+    },
+    {
+     "w": "can",
+     "t0": 9.215,
+     "t1": 9.29
+    },
+    {
+     "w": "arrive",
+     "t0": 9.34,
+     "t1": 9.715
+    },
+    {
+     "w": "in",
+     "t0": 9.74,
+     "t1": 9.79
+    },
+    {
+     "w": "around",
+     "t0": 9.84,
+     "t1": 10.065
+    },
+    {
+     "w": "four-tenths",
+     "t0": 10.14,
+     "t1": 10.615
+    },
+    {
+     "w": "of",
+     "t0": 10.615,
+     "t1": 10.715
+    },
+    {
+     "w": "a",
+     "t0": 10.715,
+     "t1": 10.715
+    },
+    {
+     "w": "second.",
+     "t0": 10.765,
+     "t1": 11.137
+    }
+   ]
+  },
+  {
+   "i": 3,
+   "id": "catch",
+   "text": "But here's the catch: you can't wait until the ball reaches you to decide to swing.",
+   "spoken": "But here's the catch: you can't wait until the ball reaches you to decide to swing.",
+   "t0": 11.526,
+   "t1": 15.058,
+   "words": [
+    {
+     "w": "But",
+     "t0": 11.537,
+     "t1": 11.637
+    },
+    {
+     "w": "here's",
+     "t0": 11.662,
+     "t1": 11.887
+    },
+    {
+     "w": "the",
+     "t0": 11.912,
+     "t1": 11.962
+    },
+    {
+     "w": "catch:",
+     "t0": 12.012,
+     "t1": 12.487
+    },
+    {
+     "w": "you",
+     "t0": 12.612,
+     "t1": 12.687
+    },
+    {
+     "w": "can't",
+     "t0": 12.737,
+     "t1": 12.912
+    },
+    {
+     "w": "wait",
+     "t0": 12.962,
+     "t1": 13.162
+    },
+    {
+     "w": "until",
+     "t0": 13.187,
+     "t1": 13.362
+    },
+    {
+     "w": "the",
+     "t0": 13.387,
+     "t1": 13.437
+    },
+    {
+     "w": "ball",
+     "t0": 13.487,
+     "t1": 13.737
+    },
+    {
+     "w": "reaches",
+     "t0": 13.787,
+     "t1": 14.087
+    },
+    {
+     "w": "you",
+     "t0": 14.112,
+     "t1": 14.187
+    },
+    {
+     "w": "to",
+     "t0": 14.212,
+     "t1": 14.262
+    },
+    {
+     "w": "decide",
+     "t0": 14.287,
+     "t1": 14.587
+    },
+    {
+     "w": "to",
+     "t0": 14.612,
+     "t1": 14.687
+    },
+    {
+     "w": "swing.",
+     "t0": 14.737,
+     "t1": 15.063
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "id": "steps",
+   "text": "You have to recognize the pitch, make a decision, and time your swing before it gets there.",
+   "spoken": "You have to recognize the pitch, make a decision, and time your swing before it gets there.",
+   "t0": 15.258,
+   "t1": 19.284,
+   "words": [
+    {
+     "w": "You",
+     "t0": 15.271,
+     "t1": 15.346
+    },
+    {
+     "w": "have",
+     "t0": 15.371,
+     "t1": 15.496
+    },
+    {
+     "w": "to",
+     "t0": 15.521,
+     "t1": 15.571
+    },
+    {
+     "w": "recognize",
+     "t0": 15.621,
+     "t1": 16.146
+    },
+    {
+     "w": "the",
+     "t0": 16.171,
+     "t1": 16.221
+    },
+    {
+     "w": "pitch,",
+     "t0": 16.271,
+     "t1": 16.546
+    },
+    {
+     "w": "make",
+     "t0": 16.596,
+     "t1": 16.796
+    },
+    {
+     "w": "a",
+     "t0": 16.796,
+     "t1": 16.796
+    },
+    {
+     "w": "decision,",
+     "t0": 16.821,
+     "t1": 17.421
+    },
+    {
+     "w": "and",
+     "t0": 17.546,
+     "t1": 17.621
+    },
+    {
+     "w": "time",
+     "t0": 17.671,
+     "t1": 17.921
+    },
+    {
+     "w": "your",
+     "t0": 17.946,
+     "t1": 18.046
+    },
+    {
+     "w": "swing",
+     "t0": 18.121,
+     "t1": 18.346
+    },
+    {
+     "w": "before",
+     "t0": 18.371,
+     "t1": 18.621
+    },
+    {
+     "w": "it",
+     "t0": 18.646,
+     "t1": 18.696
+    },
+    {
+     "w": "gets",
+     "t0": 18.746,
+     "t1": 18.971
+    },
+    {
+     "w": "there.",
+     "t0": 19.021,
+     "t1": 19.284
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "id": "why",
+   "text": "That's what makes a 100-mile-per-hour fastball so difficult to hit.",
+   "spoken": "That's what makes a hundred mile per hour fastball so difficult to hit.",
+   "t0": 20.084,
+   "t1": 23.466,
+   "words": [
+    {
+     "w": "That's",
+     "t0": 20.092,
+     "t1": 20.267
+    },
+    {
+     "w": "what",
+     "t0": 20.292,
+     "t1": 20.367
+    },
+    {
+     "w": "makes",
+     "t0": 20.392,
+     "t1": 20.592
+    },
+    {
+     "w": "a",
+     "t0": 20.592,
+     "t1": 20.592
+    },
+    {
+     "w": "hundred",
+     "t0": 20.642,
+     "t1": 20.992
+    },
+    {
+     "w": "mile",
+     "t0": 21.042,
+     "t1": 21.317
+    },
+    {
+     "w": "per",
+     "t0": 21.367,
+     "t1": 21.467
+    },
+    {
+     "w": "hour",
+     "t0": 21.567,
+     "t1": 21.717
+    },
+    {
+     "w": "fastball",
+     "t0": 21.767,
+     "t1": 22.392
+    },
+    {
+     "w": "so",
+     "t0": 22.492,
+     "t1": 22.667
+    },
+    {
+     "w": "difficult",
+     "t0": 22.717,
+     "t1": 23.067
+    },
+    {
+     "w": "to",
+     "t0": 23.117,
+     "t1": 23.192
+    },
+    {
+     "w": "hit.",
+     "t0": 23.242,
+     "t1": 23.469
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "id": "end",
+   "text": "Be honest. Could you make contact?",
+   "spoken": "Be honest. Could you make contact?",
+   "t0": 24.716,
+   "t1": 26.235,
+   "words": [
+    {
+     "w": "Be",
+     "t0": 24.736,
+     "t1": 24.836
+    },
+    {
+     "w": "honest.",
+     "t0": 24.936,
+     "t1": 25.186
+    },
+    {
+     "w": "Could",
+     "t0": 25.261,
+     "t1": 25.336
+    },
+    {
+     "w": "you",
+     "t0": 25.361,
+     "t1": 25.436
+    },
+    {
+     "w": "make",
+     "t0": 25.461,
+     "t1": 25.611
+    },
+    {
+     "w": "contact?",
+     "t0": 25.661,
+     "t1": 26.235
+    }
+   ]
+  }
+ ]
+}
