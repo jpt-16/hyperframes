@@ -1,0 +1,646 @@
+[
+ {
+  "i": 0,
+  "id": "hook",
+  "text": "Every pitch is designed to mess with the hitter's timing.",
+  "spoken": "Every pitch is designed to mess with the hitter's timing.",
+  "dur": 2.901,
+  "words": [
+   {
+    "w": "Every",
+    "start": 0.123,
+    "end": 0.323
+   },
+   {
+    "w": "pitch",
+    "start": 0.373,
+    "end": 0.623
+   },
+   {
+    "w": "is",
+    "start": 0.673,
+    "end": 0.773
+   },
+   {
+    "w": "designed",
+    "start": 0.823,
+    "end": 1.173
+   },
+   {
+    "w": "to",
+    "start": 1.198,
+    "end": 1.248
+   },
+   {
+    "w": "mess",
+    "start": 1.298,
+    "end": 1.723
+   },
+   {
+    "w": "with",
+    "start": 1.773,
+    "end": 1.898
+   },
+   {
+    "w": "the",
+    "start": 1.898,
+    "end": 1.948
+   },
+   {
+    "w": "hitter's",
+    "start": 1.998,
+    "end": 2.298
+   },
+   {
+    "w": "timing.",
+    "start": 2.348,
+    "end": 2.901
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "seq",
+  "text": "A pitcher might challenge you with a high fastball, then come back with a curveball.",
+  "spoken": "A pitcher might challenge you with a high fastball, then come back with a curveball.",
+  "dur": 4.139,
+  "words": [
+   {
+    "w": "A",
+    "start": 0.094,
+    "end": 0.144
+   },
+   {
+    "w": "pitcher",
+    "start": 0.194,
+    "end": 0.469
+   },
+   {
+    "w": "might",
+    "start": 0.519,
+    "end": 0.719
+   },
+   {
+    "w": "challenge",
+    "start": 0.769,
+    "end": 1.169
+   },
+   {
+    "w": "you",
+    "start": 1.219,
+    "end": 1.294
+   },
+   {
+    "w": "with",
+    "start": 1.319,
+    "end": 1.444
+   },
+   {
+    "w": "a",
+    "start": 1.444,
+    "end": 1.444
+   },
+   {
+    "w": "high",
+    "start": 1.494,
+    "end": 1.744
+   },
+   {
+    "w": "fastball,",
+    "start": 1.819,
+    "end": 2.544
+   },
+   {
+    "w": "then",
+    "start": 2.669,
+    "end": 2.819
+   },
+   {
+    "w": "come",
+    "start": 2.869,
+    "end": 3.069
+   },
+   {
+    "w": "back",
+    "start": 3.119,
+    "end": 3.344
+   },
+   {
+    "w": "with",
+    "start": 3.369,
+    "end": 3.494
+   },
+   {
+    "w": "a",
+    "start": 3.494,
+    "end": 3.494
+   },
+   {
+    "w": "curveball.",
+    "start": 3.544,
+    "end": 4.139
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "look",
+  "text": "Early on, the pitches can look similar, but the curveball breaks, and now you have to adjust your timing and where you expect the ball to arrive.",
+  "spoken": "Early on, the pitches can look similar, but the curveball breaks, and now you have to adjust your timing and where you expect the ball to arrive.",
+  "dur": 7.189,
+  "words": [
+   {
+    "w": "Early",
+    "start": 0.08,
+    "end": 0.255
+   },
+   {
+    "w": "on,",
+    "start": 0.43,
+    "end": 0.655
+   },
+   {
+    "w": "the",
+    "start": 0.705,
+    "end": 0.755
+   },
+   {
+    "w": "pitches",
+    "start": 0.805,
+    "end": 1.13
+   },
+   {
+    "w": "can",
+    "start": 1.18,
+    "end": 1.255
+   },
+   {
+    "w": "look",
+    "start": 1.305,
+    "end": 1.455
+   },
+   {
+    "w": "similar,",
+    "start": 1.53,
+    "end": 1.88
+   },
+   {
+    "w": "but",
+    "start": 1.93,
+    "end": 2.03
+   },
+   {
+    "w": "the",
+    "start": 2.055,
+    "end": 2.105
+   },
+   {
+    "w": "curveball",
+    "start": 2.155,
+    "end": 2.68
+   },
+   {
+    "w": "breaks,",
+    "start": 2.73,
+    "end": 3.305
+   },
+   {
+    "w": "and",
+    "start": 3.43,
+    "end": 3.505
+   },
+   {
+    "w": "now",
+    "start": 3.555,
+    "end": 3.78
+   },
+   {
+    "w": "you",
+    "start": 3.83,
+    "end": 3.905
+   },
+   {
+    "w": "have",
+    "start": 3.955,
+    "end": 4.105
+   },
+   {
+    "w": "to",
+    "start": 4.155,
+    "end": 4.23
+   },
+   {
+    "w": "adjust",
+    "start": 4.28,
+    "end": 4.605
+   },
+   {
+    "w": "your",
+    "start": 4.63,
+    "end": 4.705
+   },
+   {
+    "w": "timing",
+    "start": 4.755,
+    "end": 5.305
+   },
+   {
+    "w": "and",
+    "start": 5.38,
+    "end": 5.455
+   },
+   {
+    "w": "where",
+    "start": 5.48,
+    "end": 5.58
+   },
+   {
+    "w": "you",
+    "start": 5.63,
+    "end": 5.705
+   },
+   {
+    "w": "expect",
+    "start": 5.755,
+    "end": 6.13
+   },
+   {
+    "w": "the",
+    "start": 6.155,
+    "end": 6.205
+   },
+   {
+    "w": "ball",
+    "start": 6.255,
+    "end": 6.505
+   },
+   {
+    "w": "to",
+    "start": 6.555,
+    "end": 6.655
+   },
+   {
+    "w": "arrive.",
+    "start": 6.705,
+    "end": 7.189
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "wait",
+  "text": "And you can't wait to see exactly what the pitch does. By then, it may be too late to get your swing there.",
+  "spoken": "And you can't wait to see exactly what the pitch does. By then, it may be too late to get your swing there.",
+  "dur": 5.013,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.051,
+    "end": 0.126
+   },
+   {
+    "w": "you",
+    "start": 0.151,
+    "end": 0.226
+   },
+   {
+    "w": "can't",
+    "start": 0.276,
+    "end": 0.451
+   },
+   {
+    "w": "wait",
+    "start": 0.501,
+    "end": 0.626
+   },
+   {
+    "w": "to",
+    "start": 0.651,
+    "end": 0.701
+   },
+   {
+    "w": "see",
+    "start": 0.751,
+    "end": 0.876
+   },
+   {
+    "w": "exactly",
+    "start": 0.926,
+    "end": 1.426
+   },
+   {
+    "w": "what",
+    "start": 1.476,
+    "end": 1.576
+   },
+   {
+    "w": "the",
+    "start": 1.601,
+    "end": 1.651
+   },
+   {
+    "w": "pitch",
+    "start": 1.701,
+    "end": 1.951
+   },
+   {
+    "w": "does.",
+    "start": 2.001,
+    "end": 2.526
+   },
+   {
+    "w": "By",
+    "start": 2.651,
+    "end": 2.776
+   },
+   {
+    "w": "then,",
+    "start": 2.826,
+    "end": 3.151
+   },
+   {
+    "w": "it",
+    "start": 3.276,
+    "end": 3.326
+   },
+   {
+    "w": "may",
+    "start": 3.351,
+    "end": 3.451
+   },
+   {
+    "w": "be",
+    "start": 3.476,
+    "end": 3.551
+   },
+   {
+    "w": "too",
+    "start": 3.601,
+    "end": 3.776
+   },
+   {
+    "w": "late",
+    "start": 3.826,
+    "end": 4.026
+   },
+   {
+    "w": "to",
+    "start": 4.076,
+    "end": 4.126
+   },
+   {
+    "w": "get",
+    "start": 4.176,
+    "end": 4.301
+   },
+   {
+    "w": "your",
+    "start": 4.326,
+    "end": 4.401
+   },
+   {
+    "w": "swing",
+    "start": 4.476,
+    "end": 4.701
+   },
+   {
+    "w": "there.",
+    "start": 4.751,
+    "end": 5.013
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "mind",
+  "text": "And here's the mind game. If you've been jumping early on breaking balls, the pitcher might flip the script and challenge you with a fastball instead.",
+  "spoken": "And here's the mind game. If you've been jumping early on breaking balls, the pitcher might flip the script and challenge you with a fastball instead.",
+  "dur": 7.189,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.076,
+    "end": 0.151
+   },
+   {
+    "w": "here's",
+    "start": 0.201,
+    "end": 0.426
+   },
+   {
+    "w": "the",
+    "start": 0.476,
+    "end": 0.551
+   },
+   {
+    "w": "mind",
+    "start": 0.601,
+    "end": 0.951
+   },
+   {
+    "w": "game.",
+    "start": 1.001,
+    "end": 1.576
+   },
+   {
+    "w": "If",
+    "start": 1.701,
+    "end": 1.776
+   },
+   {
+    "w": "you've",
+    "start": 1.826,
+    "end": 1.926
+   },
+   {
+    "w": "been",
+    "start": 1.951,
+    "end": 2.076
+   },
+   {
+    "w": "jumping",
+    "start": 2.126,
+    "end": 2.476
+   },
+   {
+    "w": "early",
+    "start": 2.601,
+    "end": 2.801
+   },
+   {
+    "w": "on",
+    "start": 2.876,
+    "end": 2.926
+   },
+   {
+    "w": "breaking",
+    "start": 2.976,
+    "end": 3.276
+   },
+   {
+    "w": "balls,",
+    "start": 3.326,
+    "end": 3.876
+   },
+   {
+    "w": "the",
+    "start": 3.976,
+    "end": 4.026
+   },
+   {
+    "w": "pitcher",
+    "start": 4.076,
+    "end": 4.351
+   },
+   {
+    "w": "might",
+    "start": 4.401,
+    "end": 4.601
+   },
+   {
+    "w": "flip",
+    "start": 4.676,
+    "end": 4.876
+   },
+   {
+    "w": "the",
+    "start": 4.901,
+    "end": 4.951
+   },
+   {
+    "w": "script",
+    "start": 5.001,
+    "end": 5.326
+   },
+   {
+    "w": "and",
+    "start": 5.376,
+    "end": 5.451
+   },
+   {
+    "w": "challenge",
+    "start": 5.501,
+    "end": 5.901
+   },
+   {
+    "w": "you",
+    "start": 5.926,
+    "end": 6.001
+   },
+   {
+    "w": "with",
+    "start": 6.026,
+    "end": 6.151
+   },
+   {
+    "w": "a",
+    "start": 6.151,
+    "end": 6.151
+   },
+   {
+    "w": "fastball",
+    "start": 6.226,
+    "end": 6.701
+   },
+   {
+    "w": "instead.",
+    "start": 6.726,
+    "end": 7.189
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "pay",
+  "text": "That's pitch sequencing. The pitcher isn't just throwing pitches. He's trying to control what you expect next.",
+  "spoken": "That's pitch sequencing. The pitcher isn't just throwing pitches. He's trying to control what you expect next.",
+  "dur": 5.461,
+  "words": [
+   {
+    "w": "That's",
+    "start": 0.051,
+    "end": 0.251
+   },
+   {
+    "w": "pitch",
+    "start": 0.301,
+    "end": 0.526
+   },
+   {
+    "w": "sequencing.",
+    "start": 0.576,
+    "end": 1.351
+   },
+   {
+    "w": "The",
+    "start": 1.476,
+    "end": 1.526
+   },
+   {
+    "w": "pitcher",
+    "start": 1.576,
+    "end": 1.876
+   },
+   {
+    "w": "isn't",
+    "start": 1.926,
+    "end": 2.101
+   },
+   {
+    "w": "just",
+    "start": 2.126,
+    "end": 2.276
+   },
+   {
+    "w": "throwing",
+    "start": 2.326,
+    "end": 2.651
+   },
+   {
+    "w": "pitches.",
+    "start": 2.701,
+    "end": 3.301
+   },
+   {
+    "w": "He's",
+    "start": 3.401,
+    "end": 3.501
+   },
+   {
+    "w": "trying",
+    "start": 3.551,
+    "end": 3.776
+   },
+   {
+    "w": "to",
+    "start": 3.801,
+    "end": 3.851
+   },
+   {
+    "w": "control",
+    "start": 3.901,
+    "end": 4.326
+   },
+   {
+    "w": "what",
+    "start": 4.376,
+    "end": 4.451
+   },
+   {
+    "w": "you",
+    "start": 4.501,
+    "end": 4.576
+   },
+   {
+    "w": "expect",
+    "start": 4.626,
+    "end": 5.001
+   },
+   {
+    "w": "next.",
+    "start": 5.051,
+    "end": 5.461
+   }
+  ]
+ }
+]
