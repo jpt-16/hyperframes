@@ -4,526 +4,660 @@
   "id": "q",
   "text": "You think you could hit a 100-mile-per-hour fastball?",
   "spoken": "You think you could hit a hundred mile per hour fastball?",
-  "dur": 2.304,
+  "dur": 2.965,
   "words": [
    {
     "w": "You",
-    "start": 0.015,
-    "end": 0.09
+    "start": 0.08,
+    "end": 0.155
    },
    {
     "w": "think",
-    "start": 0.14,
-    "end": 0.265
+    "start": 0.205,
+    "end": 0.33
    },
    {
     "w": "you",
-    "start": 0.29,
-    "end": 0.365
+    "start": 0.38,
+    "end": 0.455
    },
    {
     "w": "could",
-    "start": 0.39,
-    "end": 0.465
+    "start": 0.505,
+    "end": 0.58
    },
    {
     "w": "hit",
-    "start": 0.49,
-    "end": 0.64
+    "start": 0.63,
+    "end": 0.955
    },
    {
     "w": "a",
-    "start": 0.64,
-    "end": 0.64
+    "start": 0.955,
+    "end": 0.955
    },
    {
     "w": "hundred",
-    "start": 0.69,
-    "end": 1.015
+    "start": 1.03,
+    "end": 1.43
    },
    {
     "w": "mile",
-    "start": 1.065,
-    "end": 1.34
+    "start": 1.48,
+    "end": 1.78
    },
    {
     "w": "per",
-    "start": 1.39,
-    "end": 1.49
+    "start": 1.83,
+    "end": 1.955
    },
    {
     "w": "hour",
-    "start": 1.59,
-    "end": 1.74
+    "start": 2.055,
+    "end": 2.205
    },
    {
     "w": "fastball?",
-    "start": 1.79,
-    "end": 2.304
+    "start": 2.28,
+    "end": 2.965
    }
   ]
  },
  {
   "i": 1,
   "id": "speed",
-  "text": "At that speed, the ball travels nearly 147 feet every second.",
-  "spoken": "At that speed, the ball travels nearly a hundred and forty-seven feet every second.",
-  "dur": 3.968,
+  "text": "At that speed, the ball covers nearly 147 feet every second.",
+  "spoken": "At that speed, the ball covers nearly a hundred and forty-seven feet every second.",
+  "dur": 4.8,
   "words": [
    {
     "w": "At",
-    "start": 0.04,
-    "end": 0.115
+    "start": 0.08,
+    "end": 0.155
    },
    {
     "w": "that",
-    "start": 0.165,
-    "end": 0.315
+    "start": 0.205,
+    "end": 0.38
    },
    {
     "w": "speed,",
-    "start": 0.365,
-    "end": 0.74
+    "start": 0.43,
+    "end": 1.08
    },
    {
     "w": "the",
-    "start": 0.79,
-    "end": 0.84
+    "start": 1.205,
+    "end": 1.28
    },
    {
     "w": "ball",
-    "start": 0.89,
-    "end": 1.115
+    "start": 1.355,
+    "end": 1.63
    },
    {
-    "w": "travels",
-    "start": 1.165,
-    "end": 1.54
+    "w": "covers",
+    "start": 1.68,
+    "end": 1.98
    },
    {
     "w": "nearly",
-    "start": 1.59,
-    "end": 1.915
+    "start": 2.03,
+    "end": 2.405
    },
    {
     "w": "a",
-    "start": 1.915,
-    "end": 1.915
+    "start": 2.405,
+    "end": 2.405
    },
    {
     "w": "hundred",
-    "start": 1.965,
-    "end": 2.34
+    "start": 2.48,
+    "end": 2.905
    },
    {
     "w": "and",
-    "start": 2.365,
-    "end": 2.44
+    "start": 2.93,
+    "end": 3.005
    },
    {
     "w": "forty-seven",
-    "start": 2.49,
-    "end": 3.015
+    "start": 3.08,
+    "end": 3.705
    },
    {
     "w": "feet",
-    "start": 3.09,
-    "end": 3.315
+    "start": 3.805,
+    "end": 4.055
    },
    {
     "w": "every",
-    "start": 3.415,
-    "end": 3.615
+    "start": 4.155,
+    "end": 4.355
    },
    {
     "w": "second.",
-    "start": 3.665,
-    "end": 3.968
+    "start": 4.43,
+    "end": 4.8
    }
   ]
  },
  {
   "i": 2,
-  "id": "time",
-  "text": "From the pitcher's mound to the plate, it can arrive in around four-tenths of a second.",
-  "spoken": "From the pitcher's mound to the plate, it can arrive in around four-tenths of a second.",
-  "dur": 3.712,
+  "id": "blink",
+  "text": "It reaches the plate in about four-tenths of a second, about as long as a blink.",
+  "spoken": "It reaches the plate in about four-tenths of a second, about as long as a blink.",
+  "dur": 4.395,
   "words": [
    {
-    "w": "From",
-    "start": 0.04,
-    "end": 0.165
+    "w": "It",
+    "start": 0.059,
+    "end": 0.159
+   },
+   {
+    "w": "reaches",
+    "start": 0.209,
+    "end": 0.559
    },
    {
     "w": "the",
-    "start": 0.165,
-    "end": 0.215
+    "start": 0.609,
+    "end": 0.659
    },
    {
-    "w": "pitcher's",
-    "start": 0.265,
-    "end": 0.64
-   },
-   {
-    "w": "mound",
-    "start": 0.69,
-    "end": 0.965
-   },
-   {
-    "w": "to",
-    "start": 0.99,
-    "end": 1.04
-   },
-   {
-    "w": "the",
-    "start": 1.065,
-    "end": 1.115
-   },
-   {
-    "w": "plate,",
-    "start": 1.165,
-    "end": 1.59
-   },
-   {
-    "w": "it",
-    "start": 1.715,
-    "end": 1.765
-   },
-   {
-    "w": "can",
-    "start": 1.79,
-    "end": 1.865
-   },
-   {
-    "w": "arrive",
-    "start": 1.915,
-    "end": 2.29
+    "w": "plate",
+    "start": 0.734,
+    "end": 1.009
    },
    {
     "w": "in",
-    "start": 2.315,
-    "end": 2.365
+    "start": 1.084,
+    "end": 1.159
    },
    {
-    "w": "around",
-    "start": 2.415,
-    "end": 2.64
+    "w": "about",
+    "start": 1.209,
+    "end": 1.509
    },
    {
     "w": "four-tenths",
-    "start": 2.715,
-    "end": 3.19
+    "start": 1.584,
+    "end": 2.059
    },
    {
     "w": "of",
-    "start": 3.19,
-    "end": 3.29
+    "start": 2.059,
+    "end": 2.159
    },
    {
     "w": "a",
-    "start": 3.29,
-    "end": 3.29
+    "start": 2.159,
+    "end": 2.159
    },
    {
-    "w": "second.",
-    "start": 3.34,
-    "end": 3.712
+    "w": "second,",
+    "start": 2.234,
+    "end": 2.884
+   },
+   {
+    "w": "about",
+    "start": 3.034,
+    "end": 3.259
+   },
+   {
+    "w": "as",
+    "start": 3.309,
+    "end": 3.409
+   },
+   {
+    "w": "long",
+    "start": 3.484,
+    "end": 3.734
+   },
+   {
+    "w": "as",
+    "start": 3.759,
+    "end": 3.909
+   },
+   {
+    "w": "a",
+    "start": 3.909,
+    "end": 3.909
+   },
+   {
+    "w": "blink.",
+    "start": 3.984,
+    "end": 4.395
    }
   ]
  },
  {
   "i": 3,
-  "id": "catch",
-  "text": "But here's the catch: you can't wait until the ball reaches you to decide to swing.",
-  "spoken": "But here's the catch: you can't wait until the ball reaches you to decide to swing.",
-  "dur": 3.541,
+  "id": "react",
+  "text": "Just reacting to something you see takes most people around a quarter of a second.",
+  "spoken": "Just reacting to something you see takes most people around a quarter of a second.",
+  "dur": 4.544,
   "words": [
    {
-    "w": "But",
-    "start": 0.015,
-    "end": 0.115
+    "w": "Just",
+    "start": 0.059,
+    "end": 0.334
    },
    {
-    "w": "here's",
-    "start": 0.14,
-    "end": 0.365
-   },
-   {
-    "w": "the",
-    "start": 0.39,
-    "end": 0.44
-   },
-   {
-    "w": "catch:",
-    "start": 0.49,
-    "end": 0.965
-   },
-   {
-    "w": "you",
-    "start": 1.09,
-    "end": 1.165
-   },
-   {
-    "w": "can't",
-    "start": 1.215,
-    "end": 1.39
-   },
-   {
-    "w": "wait",
-    "start": 1.44,
-    "end": 1.64
-   },
-   {
-    "w": "until",
-    "start": 1.665,
-    "end": 1.84
-   },
-   {
-    "w": "the",
-    "start": 1.865,
-    "end": 1.915
-   },
-   {
-    "w": "ball",
-    "start": 1.965,
-    "end": 2.215
-   },
-   {
-    "w": "reaches",
-    "start": 2.265,
-    "end": 2.565
-   },
-   {
-    "w": "you",
-    "start": 2.59,
-    "end": 2.665
+    "w": "reacting",
+    "start": 0.384,
+    "end": 0.834
    },
    {
     "w": "to",
-    "start": 2.69,
-    "end": 2.74
+    "start": 0.884,
+    "end": 0.959
    },
    {
-    "w": "decide",
-    "start": 2.765,
-    "end": 3.065
+    "w": "something",
+    "start": 1.009,
+    "end": 1.359
    },
    {
-    "w": "to",
-    "start": 3.09,
-    "end": 3.165
+    "w": "you",
+    "start": 1.409,
+    "end": 1.509
    },
    {
-    "w": "swing.",
-    "start": 3.215,
-    "end": 3.541
+    "w": "see",
+    "start": 1.609,
+    "end": 2.134
+   },
+   {
+    "w": "takes",
+    "start": 2.234,
+    "end": 2.534
+   },
+   {
+    "w": "most",
+    "start": 2.584,
+    "end": 2.834
+   },
+   {
+    "w": "people",
+    "start": 2.884,
+    "end": 3.209
+   },
+   {
+    "w": "around",
+    "start": 3.259,
+    "end": 3.534
+   },
+   {
+    "w": "a",
+    "start": 3.534,
+    "end": 3.534
+   },
+   {
+    "w": "quarter",
+    "start": 3.584,
+    "end": 3.934
+   },
+   {
+    "w": "of",
+    "start": 3.934,
+    "end": 4.034
+   },
+   {
+    "w": "a",
+    "start": 4.034,
+    "end": 4.034
+   },
+   {
+    "w": "second.",
+    "start": 4.109,
+    "end": 4.544
    }
   ]
  },
  {
   "i": 4,
-  "id": "steps",
-  "text": "You have to recognize the pitch, make a decision, and time your swing before it gets there.",
-  "spoken": "You have to recognize the pitch, make a decision, and time your swing before it gets there.",
-  "dur": 4.032,
+  "id": "decide",
+  "text": "So a hitter has to read the pitch and commit to a swing with the ball still 20 feet away.",
+  "spoken": "So a hitter has to read the pitch and commit to a swing with the ball still twenty feet away.",
+  "dur": 5.035,
   "words": [
    {
-    "w": "You",
-    "start": 0.019,
-    "end": 0.094
-   },
-   {
-    "w": "have",
-    "start": 0.119,
-    "end": 0.244
-   },
-   {
-    "w": "to",
-    "start": 0.269,
-    "end": 0.319
-   },
-   {
-    "w": "recognize",
-    "start": 0.369,
-    "end": 0.894
-   },
-   {
-    "w": "the",
-    "start": 0.919,
-    "end": 0.969
-   },
-   {
-    "w": "pitch,",
-    "start": 1.019,
-    "end": 1.294
-   },
-   {
-    "w": "make",
-    "start": 1.344,
-    "end": 1.544
+    "w": "So",
+    "start": 0.101,
+    "end": 0.301
    },
    {
     "w": "a",
-    "start": 1.544,
-    "end": 1.544
+    "start": 0.301,
+    "end": 0.301
    },
    {
-    "w": "decision,",
-    "start": 1.569,
-    "end": 2.169
+    "w": "hitter",
+    "start": 0.351,
+    "end": 0.601
+   },
+   {
+    "w": "has",
+    "start": 0.651,
+    "end": 0.801
+   },
+   {
+    "w": "to",
+    "start": 0.851,
+    "end": 0.926
+   },
+   {
+    "w": "read",
+    "start": 0.976,
+    "end": 1.176
+   },
+   {
+    "w": "the",
+    "start": 1.201,
+    "end": 1.251
+   },
+   {
+    "w": "pitch",
+    "start": 1.301,
+    "end": 1.876
    },
    {
     "w": "and",
-    "start": 2.294,
-    "end": 2.369
+    "start": 1.951,
+    "end": 2.026
    },
    {
-    "w": "time",
-    "start": 2.419,
-    "end": 2.669
+    "w": "commit",
+    "start": 2.076,
+    "end": 2.326
    },
    {
-    "w": "your",
-    "start": 2.694,
-    "end": 2.794
+    "w": "to",
+    "start": 2.376,
+    "end": 2.551
+   },
+   {
+    "w": "a",
+    "start": 2.551,
+    "end": 2.551
    },
    {
     "w": "swing",
-    "start": 2.869,
-    "end": 3.094
+    "start": 2.651,
+    "end": 2.976
    },
    {
-    "w": "before",
-    "start": 3.119,
-    "end": 3.369
+    "w": "with",
+    "start": 3.026,
+    "end": 3.151
    },
    {
-    "w": "it",
-    "start": 3.394,
-    "end": 3.444
+    "w": "the",
+    "start": 3.151,
+    "end": 3.226
    },
    {
-    "w": "gets",
-    "start": 3.494,
-    "end": 3.719
+    "w": "ball",
+    "start": 3.276,
+    "end": 3.626
    },
    {
-    "w": "there.",
-    "start": 3.769,
-    "end": 4.032
+    "w": "still",
+    "start": 3.701,
+    "end": 4.001
+   },
+   {
+    "w": "twenty",
+    "start": 4.076,
+    "end": 4.326
+   },
+   {
+    "w": "feet",
+    "start": 4.401,
+    "end": 4.551
+   },
+   {
+    "w": "away.",
+    "start": 4.601,
+    "end": 5.035
    }
   ]
  },
  {
   "i": 5,
-  "id": "why",
-  "text": "That's what makes a 100-mile-per-hour fastball so difficult to hit.",
-  "spoken": "That's what makes a hundred mile per hour fastball so difficult to hit.",
-  "dur": 3.392,
+  "id": "hit",
+  "text": "Then his hands have to put a round bat on a ball less than three inches wide, at exactly the right instant.",
+  "spoken": "Then his hands have to put a round bat on a ball less than three inches wide, at exactly the right instant.",
+  "dur": 6.059,
   "words": [
    {
-    "w": "That's",
-    "start": 0.015,
-    "end": 0.19
+    "w": "Then",
+    "start": 0.059,
+    "end": 0.209
    },
    {
-    "w": "what",
-    "start": 0.215,
-    "end": 0.29
+    "w": "his",
+    "start": 0.259,
+    "end": 0.384
    },
    {
-    "w": "makes",
-    "start": 0.315,
-    "end": 0.515
+    "w": "hands",
+    "start": 0.434,
+    "end": 0.759
    },
    {
-    "w": "a",
-    "start": 0.515,
-    "end": 0.515
-   },
-   {
-    "w": "hundred",
-    "start": 0.565,
-    "end": 0.915
-   },
-   {
-    "w": "mile",
-    "start": 0.965,
-    "end": 1.24
-   },
-   {
-    "w": "per",
-    "start": 1.29,
-    "end": 1.39
-   },
-   {
-    "w": "hour",
-    "start": 1.49,
-    "end": 1.64
-   },
-   {
-    "w": "fastball",
-    "start": 1.69,
-    "end": 2.315
-   },
-   {
-    "w": "so",
-    "start": 2.415,
-    "end": 2.59
-   },
-   {
-    "w": "difficult",
-    "start": 2.64,
-    "end": 2.99
+    "w": "have",
+    "start": 0.809,
+    "end": 0.984
    },
    {
     "w": "to",
-    "start": 3.04,
-    "end": 3.115
+    "start": 1.009,
+    "end": 1.059
    },
    {
-    "w": "hit.",
-    "start": 3.165,
-    "end": 3.392
+    "w": "put",
+    "start": 1.109,
+    "end": 1.309
+   },
+   {
+    "w": "a",
+    "start": 1.309,
+    "end": 1.309
+   },
+   {
+    "w": "round",
+    "start": 1.384,
+    "end": 1.759
+   },
+   {
+    "w": "bat",
+    "start": 1.834,
+    "end": 2.084
+   },
+   {
+    "w": "on",
+    "start": 2.159,
+    "end": 2.284
+   },
+   {
+    "w": "a",
+    "start": 2.284,
+    "end": 2.284
+   },
+   {
+    "w": "ball",
+    "start": 2.359,
+    "end": 2.659
+   },
+   {
+    "w": "less",
+    "start": 2.709,
+    "end": 2.884
+   },
+   {
+    "w": "than",
+    "start": 2.934,
+    "end": 3.059
+   },
+   {
+    "w": "three",
+    "start": 3.134,
+    "end": 3.309
+   },
+   {
+    "w": "inches",
+    "start": 3.359,
+    "end": 3.634
+   },
+   {
+    "w": "wide,",
+    "start": 3.709,
+    "end": 4.359
+   },
+   {
+    "w": "at",
+    "start": 4.509,
+    "end": 4.584
+   },
+   {
+    "w": "exactly",
+    "start": 4.634,
+    "end": 5.159
+   },
+   {
+    "w": "the",
+    "start": 5.209,
+    "end": 5.284
+   },
+   {
+    "w": "right",
+    "start": 5.334,
+    "end": 5.584
+   },
+   {
+    "w": "instant.",
+    "start": 5.659,
+    "end": 6.059
    }
   ]
  },
  {
   "i": 6,
+  "id": "why",
+  "text": "That's why hitting a baseball is arguably the hardest thing to do in sports.",
+  "spoken": "That's why hitting a baseball is arguably the hardest thing to do in sports.",
+  "dur": 4.352,
+  "words": [
+   {
+    "w": "That's",
+    "start": 0.055,
+    "end": 0.28
+   },
+   {
+    "w": "why",
+    "start": 0.33,
+    "end": 0.505
+   },
+   {
+    "w": "hitting",
+    "start": 0.555,
+    "end": 0.805
+   },
+   {
+    "w": "a",
+    "start": 0.805,
+    "end": 0.805
+   },
+   {
+    "w": "baseball",
+    "start": 0.855,
+    "end": 1.48
+   },
+   {
+    "w": "is",
+    "start": 1.555,
+    "end": 1.68
+   },
+   {
+    "w": "arguably",
+    "start": 1.855,
+    "end": 2.33
+   },
+   {
+    "w": "the",
+    "start": 2.38,
+    "end": 2.455
+   },
+   {
+    "w": "hardest",
+    "start": 2.53,
+    "end": 2.98
+   },
+   {
+    "w": "thing",
+    "start": 3.03,
+    "end": 3.205
+   },
+   {
+    "w": "to",
+    "start": 3.255,
+    "end": 3.33
+   },
+   {
+    "w": "do",
+    "start": 3.38,
+    "end": 3.555
+   },
+   {
+    "w": "in",
+    "start": 3.605,
+    "end": 3.705
+   },
+   {
+    "w": "sports.",
+    "start": 3.78,
+    "end": 4.352
+   }
+  ]
+ },
+ {
+  "i": 7,
   "id": "end",
   "text": "Be honest. Could you make contact?",
   "spoken": "Be honest. Could you make contact?",
-  "dur": 1.536,
+  "dur": 2.069,
   "words": [
    {
     "w": "Be",
-    "start": 0.037,
-    "end": 0.137
+    "start": 0.055,
+    "end": 0.18
    },
    {
     "w": "honest.",
-    "start": 0.237,
-    "end": 0.487
+    "start": 0.33,
+    "end": 0.78
    },
    {
     "w": "Could",
-    "start": 0.562,
-    "end": 0.637
+    "start": 0.905,
+    "end": 0.98
    },
    {
     "w": "you",
-    "start": 0.662,
-    "end": 0.737
+    "start": 1.005,
+    "end": 1.08
    },
    {
     "w": "make",
-    "start": 0.762,
-    "end": 0.912
+    "start": 1.105,
+    "end": 1.28
    },
    {
     "w": "contact?",
-    "start": 0.962,
-    "end": 1.536
+    "start": 1.33,
+    "end": 2.069
    }
   ]
  }

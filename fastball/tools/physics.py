@@ -88,7 +88,7 @@ if __name__ == "__main__":
         "release": RELEASE.tolist(), "plate_front": PLATE_FRONT, "release_dist": round(-RELEASE[2] + PLATE_FRONT, 1),
         "t_front": round(t_front, 3), "t_glove": round(float(T[-1]), 3), "glove": [round(x, 3) for x in P[-1].tolist()], "t_contact": round(t_contact, 3), "contact": [round(x, 3) for x in p_contact.tolist()],
         "mph_front": round(mph(v_front), 1), "mph_contact": round(mph(v_contact), 1),
-        "swing": SWING, "t_swing": round(t_contact - SWING, 3), "recognize": RECOGNIZE,
+        "swing": SWING, "t_swing": round(t_contact - SWING, 3), "z_swing": round(float(np.interp(t_contact - SWING, T, P[:, 2])), 2), "recognize": RECOGNIZE,
         "inch_per_ms": round(inch_per_ms, 2), "drop_ft": round(float(RELEASE[1] - p_front[1]), 2),
         "ev_mph": EV_MPH, "la": LA, "spray": SPRAY,
         "path": {"pitch": samples(T, P), "hit": samples(BT, BP, 120)},

@@ -28,23 +28,25 @@ Y, CYAN, WHITE, HOT, MUTED = "#FFD84D", "#56D1FF", "#F4F6F8", "#FF6A3D", "#AEB8C
 f2 = lambda x: f"{x:.2f}"
 
 # ----------------------------------------------------------------- shots (video time) and play-time mapping (t = 0 at release)
-S = dict(h1=0.75, h2=1.35, hRel=2.42, p0=LN("speed")["t0"] - 0.12)
-S["pRel"] = W("speed", "ball") + 0.0                       # center-field view: the pitch leaves the hand on "ball"
+S = dict(h1=0.75, h2=1.35, hRel=2.72, p0=LN("speed")["t0"] - 0.12)
+S["pRel"] = W("speed", "ball")                              # center-field view: the pitch leaves the hand on "ball"
 S["p1"] = S["pRel"] + P["t_glove"] + 0.38
-S["p2"] = LN("time")["t0"] - 0.1
+S["p2"] = LN("blink")["t0"] - 0.1
 S["p1r"] = 0.33 / (S["p2"] - S["p1"])                      # 1/8 speed, alongside the ball
 S["p2Rate"] = 0.25
-S["p2Rel"] = W("time", "four-tenths") - P["t_front"] / S["p2Rate"]   # the 1/4-speed replay reaches the plate on "four-tenths"
-S["d0"] = LN("catch")["t0"] - 0.12
-S["dRel"] = W("catch", "reaches") - P["t_front"]
-S["d1"] = LN("steps")["t0"] - 0.08
-S["d1v"] = [S["d1"], W("steps", "decision"), W("steps", "swing"), W("steps", "there", end=True) - 0.2, LN("steps")["t1"] + 0.55]
-S["d1t"] = [-0.06, P["recognize"], P["t_swing"], P["t_contact"], P["t_contact"] + 0.05]
+S["p2Rel"] = W("blink", "four-tenths") - P["t_front"] / S["p2Rate"]   # the 1/4-speed replay reaches the plate on "four-tenths"
+S["d0"] = LN("react")["t0"] - 0.12
+S["dRel"] = W("react", "quarter") - P["t_front"]           # batter's eyes, real time: the ball arrives on "quarter"
+S["d1"] = LN("decide")["t0"] - 0.08
+S["d1v"] = [S["d1"], W("decide", "read"), W("decide", "commit"), W("decide", "twenty"), LN("decide")["t1"] + 0.3]
+S["d1t"] = [-0.06, 0.03, P["recognize"], P["t_swing"], P["t_swing"] + 0.03]      # the swing starts on "twenty feet away"
 S["s0"] = S["d1v"][-1]
-S["sC"] = W("why", "so") - 0.05                             # slow-motion replay: contact just before "so difficult"
-S["sF"] = LN("why")["t1"] + 0.55
-S["e0"] = LN("end")["t0"] - 0.2
-S["eC"] = W("end", "honest") + 0.05                         # real time: the crack on "honest"
+S["sT0"] = P["t_swing"] - 0.02                              # the side replay picks up as the swing begins
+S["sC"] = W("hit", "wide", end=True)                        # contact on "less than three inches wide"
+S["sF"] = LN("hit")["t1"] + 0.6
+S["e0"] = S["sF"]
+S["eC"] = W("why", "hitting") + 0.05                        # real time: the crack on "hitting"
+S["e1"] = W("why", "arguably") - 0.1                        # wide: the ball into the gap
 S = {k: (round(v, 4) if not isinstance(v, list) else [round(x, 4) for x in v]) for k, v in S.items()}
 
 c = Comp(D, 30)
@@ -68,10 +70,9 @@ c.ft("#hw8", o(scale=1), o(scale=1.1, duration=0.1, yoyo=True, repeat=1), qw[10]
 c.to("#hook .hk, #hook .eyebrow", o(opacity=0, y=-24, duration=0.14, ease="power2.in"), S["p0"] - 0.2)
 
 # ----------------------------------------------------------------- captions: the voiceover, word by word (lines that aren't already on screen)
-ACC = {"147", "feet", "four-tenths", "second", "catch", "wait", "decide", "swing", "difficult", "100-mile-per-hour"}
+ACC = {"147", "feet", "four-tenths", "blink", "reacting", "quarter", "round", "three", "inches", "instant"}
 def span_of(tok):
     if tok == "147": return 4                               # a hundred and forty-seven
-    if tok.startswith("100-mile-per-hour"): return 4        # hundred mile per hour
     return 1
 def phrases(toks):
     out, cur = [], []
@@ -81,11 +82,10 @@ def phrases(toks):
         if (t[-1] in ",.?:" and n >= 10) or n > 24: out.append(cur); cur = []
     if cur: out.append(cur)
     return out
-CAP_TOP = {"speed": 300, "time": 300, "catch": 300, "why": 300}
 kcap = 0
-for lid in ["speed", "time", "catch", "why"]:
+for lid in ["speed", "blink", "react", "hit"]:
     ln = LN(lid); words = ln["words"]; toks = ln["text"].split()
-    spans = [span_of(t) for t in toks]                     # "147" and "100-mile-per-hour" are spoken as several words
+    spans = [span_of(t) for t in toks]
     assert sum(spans) == len(words), f"caption/voice mismatch on {lid}: {sum(spans)} vs {len(words)}"
     times, j = [], 0
     for n in spans: times.append((words[j]["t0"], words[j + n - 1]["t1"])); j += n
@@ -99,56 +99,64 @@ for lid in ["speed", "time", "catch", "why"]:
         sp = []
         for n, w in enumerate(g):
             key = re.sub(r"[^\w'-]", "", w).lower()
-            shown = w.replace("100-mile-per-hour", "100 MPH")
-            sp.append(f'<span class="cw{" acc" if key in ACC else ""}" id="{cid}w{n}">{esc(shown.rstrip(",:") if n == len(g) - 1 else shown)}</span>')
-        c.clip(cid, start, end, f'<div class="cap" style="top:{CAP_TOP[lid]}px"><span class="cl">{" ".join(sp)}</span></div>', cls="layer", style="z-index:20")
+            sp.append(f'<span class="cw{" acc" if key in ACC else ""}" id="{cid}w{n}">{esc(w.rstrip(",:") if n == len(g) - 1 else w)}</span>')
+        c.clip(cid, start, end, f'<div class="cap" style="top:300px"><span class="cl">{" ".join(sp)}</span></div>', cls="layer", style="z-index:20")
         for n, (a_, b_) in enumerate(gt):
             c.ft(f"#{cid}w{n}", o(opacity=0, y=34, filter="blur(10px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.15, ease="power3.out"), a_ - 0.04)
         i += len(g)
 
-# ----------------------------------------------------------------- the speed, the distance, the time
+# ----------------------------------------------------------------- the speed, the distance, the blink
 v47 = W("speed", "forty-seven")
 c.clip("fps", v47 - 0.1, S["p2"], f"""<div class="card mid" id="cfps"><b class="y">{P["v0_mph"]:.0f} MPH</b><i>=</i><b>{P["fps"]:.1f}</b><span>feet per second</span>
   <div class="sub">White lines: where a constant 100 mph ball would be every 0.1 s ({P["fps"] / 10:.1f} ft apart)</div></div>""", cls="layer", style="z-index:11")
 c.ft("#cfps", o(opacity=0, y=30, scale=0.94), o(opacity=1, y=0, scale=1, duration=0.3, ease="back.out(1.8)"), v47 - 0.1)
-vft = W("time", "four-tenths")
+vft, vbl = W("blink", "four-tenths"), W("blink", "blink")
 c.clip("dist", S["p2"] + 0.2, S["d0"], f"""<div class="dcard" id="dcard">
     <div class="drow" id="dr1"><span>Rubber to plate · constant 100 mph</span><b>60 FT 6 IN <i>→</i> {P["const_time"]:.2f} S</b></div>
     <div class="drow y" id="dr2"><span>Real pitch · released {P["extension"]:.1f} ft in front of the rubber, slows to {P["mph_front"]:.0f} mph</span><b>{P["release_dist"]:.1f} FT <i>→</i> {P["t_front"]:.2f} S</b></div>
-    <div class="flt" id="flt">Flight <b id="tm-fl">0.00</b> s</div></div>""", cls="layer", style="z-index:11")
+    <div class="flt" id="flt">Flight <b id="tm-fl">0.00</b> s</div>
+    <div class="blk" id="blk"><svg viewBox="0 0 120 60" class="eye"><path class="lid" d="M6 30 Q60 -6 114 30 Q60 66 6 30 Z"/><circle class="iris" cx="60" cy="30" r="14"/><rect class="shut" x="0" y="0" width="120" height="60"/></svg>
+      <div><b>A BLINK ≈ 0.25–0.45 S</b><span>The pitch arrives in about the time it takes to blink.</span></div></div></div>""", cls="layer", style="z-index:11")
 c.ft("#dcard", o(opacity=0, y=30), o(opacity=1, y=0, duration=0.3, ease="power3.out"), S["p2"] + 0.25)
-c.ft("#dr1", o(opacity=0, x=-24), o(opacity=1, x=0, duration=0.28, ease="power3.out"), W("time", "mound"))
-c.ft("#dr2", o(opacity=0, x=-24), o(opacity=1, x=0, duration=0.28, ease="power3.out"), vft + 0.35)
+c.ft("#dr1", o(opacity=0, x=-24), o(opacity=1, x=0, duration=0.28, ease="power3.out"), W("blink", "plate"))
+c.ft("#dr2", o(opacity=0, x=-24), o(opacity=1, x=0, duration=0.28, ease="power3.out"), vft + 0.3)
+c.ft("#blk", o(opacity=0, y=20), o(opacity=1, y=0, duration=0.3, ease="power3.out"), W("blink", "long") - 0.1)
+c.ft("#blk .shut", o(scaleY=0), o(scaleY=1, duration=0.09, ease="power2.in", yoyo=True, repeat=1, transformOrigin="50% 0%"), vbl)
 
-# ----------------------------------------------------------------- the hitter's clock: recognize, decide, swing
+# ----------------------------------------------------------------- the hitter's clock: see, decide, swing, against a typical reaction time
+TF = P["t_front"]; pct = lambda x: f"{x / TF * 100:.2f}%"
 bar_html = f"""<div class="bar" id="bar">
-    <div class="bl"><span>Release</span><span>Ball reaches the plate · {P["t_front"]:.2f} s</span></div>
-    <div class="track"><i class="sg r" style="width:{P["recognize"] / P["t_front"] * 100:.2f}%"></i><i class="sg d" style="width:{(P["t_swing"] - P["recognize"]) / P["t_front"] * 100:.2f}%"></i><i class="sg s" style="width:{(P["t_contact"] - P["t_swing"]) / P["t_front"] * 100:.2f}%"></i>
-      <b class="ph" id="bar-ph"></b></div>
-    <div class="bk"><span class="r">Recognize</span><span class="d">Decide</span><span class="s">Swing ≈ {P["swing"]:.2f} s</span></div>
-    <div class="bn" id="bn">The swing has to start by ≈ {P["t_swing"]:.2f} s, before the ball is even halfway... <b id="bar-t">0.00 s</b></div></div>"""
-bar_html = bar_html.replace(", before the ball is even halfway...", "")
+    <div class="bl"><span>Release</span><span>Ball reaches the plate · {TF:.2f} s</span></div>
+    <div class="track"><i class="sg r" style="width:{pct(P["recognize"])}"></i><i class="sg d" style="width:{pct(P["t_swing"] - P["recognize"])}"></i><i class="sg s" style="width:{pct(P["t_contact"] - P["t_swing"])}"></i>
+      <span class="rx" id="rx" style="left:{pct(0.20)};width:{pct(0.05)}"></span><b class="ph" id="bar-ph"></b></div>
+    <div class="bk"><span class="r">See</span><span class="d">Decide</span><span class="s">Swing ≈ {P["swing"]:.2f} s</span></div>
+    <div class="bx" id="bx"><i></i>Typical reaction to something you see: ≈ 0.20–0.25 s</div>
+    <div class="bn" id="bn">The swing has to start by ≈ {P["t_swing"]:.2f} s, so a hitter can't just react. <b id="bar-t">0.00 s</b></div></div>"""
 c.clip("barc", S["d0"] + 0.1, S["s0"], bar_html, cls="layer", style="z-index:11")
 c.ft("#bar", o(opacity=0, y=30), o(opacity=1, y=0, duration=0.3, ease="power3.out"), S["d0"] + 0.15)
-c.ft("#bn", o(opacity=0), o(opacity=1, duration=0.3), W("catch", "decide"))
-BIG = [("Recognize.", W("steps", "recognize")), ("Decide.", W("steps", "decision")), ("Swing.", W("steps", "swing"))]
-c.clip("big", S["d1"], S["s0"], '<div class="bigw">' + "".join(f'<span id="bw{k}">{w}</span>' for k, (w, t) in enumerate(BIG)) + "</div>", cls="layer", style="z-index:12")
+c.ft("#rx, #bx", o(opacity=0), o(opacity=1, duration=0.3), W("react", "reacting"))
+c.ft("#bn", o(opacity=0), o(opacity=1, duration=0.3), W("react", "quarter") + 0.2)
+BIG = [("Read.", W("decide", "read")), ("Commit.", W("decide", "commit"))]
+c.clip("big", S["d1"], S["s0"], '<div class="bigw">' + "".join(f'<span id="bw{k}">{w}</span>' for k, (w, t) in enumerate(BIG)) +
+       f'<em id="bw2">Swing starts · ball still {abs(P["contact"][2] - P["z_swing"]):.0f} ft away</em></div>', cls="layer", style="z-index:12")
 for k, (w, t) in enumerate(BIG):
     c.ft(f"#bw{k}", o(opacity=0, x=-40, filter="blur(10px)"), o(opacity=1, x=0, filter="blur(0px)", duration=0.2, ease="power3.out"), t - 0.04)
-    if k < 2: c.to(f"#bw{k}", o(opacity=0.32, duration=0.2), BIG[k + 1][1] - 0.05)
+c.to("#bw0", o(opacity=0.32, duration=0.2), BIG[1][1] - 0.05)
+c.ft("#bw2", o(opacity=0, y=20), o(opacity=1, y=0, duration=0.25, ease="power3.out"), W("decide", "twenty") - 0.05)
 
-# ----------------------------------------------------------------- the freeze: how small the window is
-c.clip("frz", S["sC"], S["sF"], f"""<div class="frzc" id="frzc"><i></i>Freeze · contact</div>
-  <div class="card win" id="cwin"><b class="y">{P["inch_per_ms"]:.1f} IN</b><span>the ball still covers every millisecond at the plate ({P["mph_contact"]:.0f} mph)</span>
-    <div class="sub">Swing 10 ms early or late and the ball is ≈ {P["inch_per_ms"] * 10:.0f} in from where the bat meets it.</div></div>""", cls="layer", style="z-index:11")
-c.ft("#frzc", o(opacity=0, y=-12), o(opacity=1, y=0, duration=0.22), S["sC"] + 0.02)
-c.ft("#cwin", o(opacity=0, y=30), o(opacity=1, y=0, duration=0.3, ease="power3.out"), S["sC"] + 0.35)
+# ----------------------------------------------------------------- the freeze: round bat, round ball, one instant
+c.clip("frz", S["sC"], S["sF"], f"""<div class="card win" id="cwin"><b class="y">2.9 IN</b><span>the width of the ball, met by a round bat</span>
+    <div class="sub" id="cw2">At {P["mph_contact"]:.0f} mph it moves {P["inch_per_ms"]:.1f} in every millisecond: swing 10 ms early or late and the bat misses its spot by ≈ {P["inch_per_ms"] * 10:.0f} in.</div></div>""", cls="layer", style="z-index:11")
+c.ft("#cwin", o(opacity=0, y=30), o(opacity=1, y=0, duration=0.3, ease="power3.out"), S["sC"] + 0.2)
+c.ft("#cw2", o(opacity=0), o(opacity=1, duration=0.3), W("hit", "exactly") - 0.1)
 
-# ----------------------------------------------------------------- payoff
-ew = LN("end")["words"]                                     # be honest. could you make contact?
-c.clip("end", S["e0"], D, f"""<div class="endt"><div class="e1" id="e1">That's why <em>100 MPH</em> is elite.</div>
+# ----------------------------------------------------------------- payoff: arguably the hardest thing in sports
+yw, ew = LN("why")["words"], LN("end")["words"]
+HARD = [("Arguably", "arguably"), ("the", "the"), ("hardest", "hardest"), ("thing", "thing"), ("in", "in"), ("sports.", "sports.")]
+c.clip("end", S["e0"], D, f"""<div class="endt"><div class="e1">{" ".join(f'<span class="ew{" acc" if w == "hardest" else ""}" id="hw2{k}">{esc(w.upper())}</span>' for k, (w, _) in enumerate(HARD))}</div>
   <div class="e2">{" ".join(f'<span class="ew" id="ew{k}">{esc(w["w"].upper())}</span>' for k, w in enumerate(ew[2:]))}</div></div>""", cls="layer", style="z-index:12")
-c.ft("#e1", o(opacity=0, y=30), o(opacity=1, y=0, duration=0.3, ease="power3.out"), S["e0"] + 0.05)
+for k, (w, sw) in enumerate(HARD):
+    c.ft(f"#hw2{k}", o(opacity=0, y=40, filter="blur(12px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.18, ease="power3.out"), W("why", sw.strip(".")) - 0.04)
 for k, w in enumerate(ew[2:]):
     c.ft(f"#ew{k}", o(opacity=0, y=46, filter="blur(12px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.18, ease="power3.out"), w["t0"] - 0.04)
 
@@ -161,11 +169,13 @@ for rel in [S["hRel"], S["pRel"], S["dRel"]]:
     cue("whoosh", rel + 0.12, -2)                           # the pitch
     cue("glove", rel + P["t_glove"], 0)
 cue("impact", S["hRel"] + P["t_glove"], -6)
-for k in ["p0", "p1", "p2", "d0", "d1", "s0", "e0"]: cue("whoosh", S[k], -12)
+for k in ["p0", "p1", "p2", "d0", "d1", "s0", "e0", "e1"]: cue("whoosh", S[k], -12)
 cue("whoosh", S["p2Rel"] + 0.5, -10); cue("glove", S["p2Rel"] + P["t_glove"] / S["p2Rate"], -6)
-cue("popup", v47, -8); cue("popup", vft + 0.35, -9)
+cue("popup", v47, -8); cue("popup", vft + 0.3, -9); cue("tick", vbl, -4)
+cue("hit", W("react", "reacting"), -9)
 for k, (w, t) in enumerate(BIG): cue("hit", t, -7)
-cue("impact", S["sC"], -5); cue("riser-m", S["sC"], -10); cue("hit", S["sC"] + 0.35, -8)
+cue("hit", W("decide", "twenty"), -6)
+cue("impact", S["sC"], -5); cue("riser-m", S["sC"], -10); cue("popup", W("hit", "exactly"), -9)
 cue("whoosh", S["eC"] - 0.06, -4)                           # the swing, real time
 LEVEL = {"impact": -3.0, "hit": -5.0, "whoosh": -6.0, "glove": -2.0, "tick": -6.0, "popup": -8.0, "riser-m": -7.0, "riser-s": -7.0}
 
@@ -246,7 +256,7 @@ html, body {{ width:1080px; height:1920px; overflow:hidden; background:#05080d; 
 .card .sub {{ grid-column:1 / -1; font-family:"Inter", sans-serif; font-weight:700; font-size:24px; color:{MUTED}; line-height:1.35; }}
 .y {{ color:{Y}; }}
 
-.dcard {{ position:absolute; left:44px; right:44px; top:1180px; display:grid; gap:18px; padding:24px 28px; border-radius:22px; background:rgba(6,10,18,.86); border:1px solid rgba(255,255,255,.1); }}
+.dcard {{ position:absolute; left:44px; right:44px; top:1110px; display:grid; gap:18px; padding:24px 28px; border-radius:22px; background:rgba(6,10,18,.86); border:1px solid rgba(255,255,255,.1); }}
 .drow {{ display:grid; gap:4px; }}
 .drow span {{ {MONO} font-size:20px; letter-spacing:.1em; color:{MUTED}; line-height:1.4; }}
 .drow b {{ font-weight:800; font-size:78px; line-height:1; color:{WHITE}; font-variant-numeric:tabular-nums; }}
@@ -267,7 +277,16 @@ html, body {{ width:1080px; height:1920px; overflow:hidden; background:#05080d; 
 .bn b {{ font-family:"Barlow Condensed", sans-serif; font-weight:800; font-size:40px; color:{Y}; margin-left:10px; font-variant-numeric:tabular-nums; }}
 .bigw {{ position:absolute; left:52px; top:560px; display:grid; gap:0; font-family:"Barlow Condensed", sans-serif; font-weight:800; font-size:150px; line-height:.92; text-transform:uppercase;
          text-shadow:0 6px 30px rgba(0,0,0,.75); }}
-.bigw span:nth-child(1) {{ color:{CYAN}; }} .bigw span:nth-child(2) {{ color:{HOT}; }} .bigw span:nth-child(3) {{ color:#fff; }}
+.bigw span:nth-child(1) {{ color:{CYAN}; }} .bigw span:nth-child(2) {{ color:{HOT}; }}
+.bigw em {{ font-style:normal; font-size:58px; line-height:1.05; color:#fff; margin-top:18px; max-width:900px; }}
+.rx {{ position:absolute; top:-6px; bottom:-6px; border-radius:6px; background:repeating-linear-gradient(45deg, rgba(255,255,255,.75) 0 6px, rgba(255,255,255,.2) 6px 12px); outline:2px solid #fff; }}
+.bx {{ display:flex; align-items:center; gap:12px; font-family:"Inter", sans-serif; font-weight:700; font-size:27px; color:#fff; }}
+.bx i {{ width:34px; height:16px; border-radius:4px; background:repeating-linear-gradient(45deg, rgba(255,255,255,.75) 0 6px, rgba(255,255,255,.2) 6px 12px); outline:2px solid #fff; }}
+.blk {{ display:grid; grid-template-columns:120px 1fr; align-items:center; gap:20px; padding-top:6px; border-top:1px solid rgba(255,255,255,.1); }}
+.eye {{ width:120px; height:60px; overflow:visible; }}
+.eye .lid {{ fill:#f4f6f8; }} .eye .iris {{ fill:#1d2a3c; }} .eye .shut {{ fill:#0b1018; transform:scaleY(0); }}
+.blk b {{ display:block; font-weight:800; font-size:52px; line-height:1; color:{CYAN}; }}
+.blk span {{ font-family:"Inter", sans-serif; font-weight:700; font-size:26px; color:#dfe5ec; }}
 
 .frzc {{ position:absolute; left:50%; top:150px; transform:translateX(-50%); display:inline-flex; align-items:center; gap:12px; padding:10px 20px; border-radius:12px;
          background:rgba(6,10,18,.82); {MONO} font-size:24px; letter-spacing:.14em; color:{Y}; white-space:nowrap; }}
@@ -275,7 +294,7 @@ html, body {{ width:1080px; height:1920px; overflow:hidden; background:#05080d; 
 
 .endt {{ position:absolute; left:52px; right:40px; top:278px; display:grid; gap:24px; }}
 .e1 {{ font-family:"Barlow Condensed", sans-serif; font-weight:800; font-size:92px; line-height:.95; text-transform:uppercase; text-shadow:0 6px 30px rgba(0,0,0,.75); }}
-.e1 em {{ font-style:normal; color:{HOT}; }}
+.e1 .acc {{ color:{HOT}; }}
 .e2 {{ font-family:"Barlow Condensed", sans-serif; font-weight:800; font-size:132px; line-height:.92; color:#fff; text-shadow:0 6px 30px rgba(0,0,0,.75); }}
 .ew {{ display:inline-block; }}
 """])

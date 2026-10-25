@@ -493,17 +493,22 @@ function shotAt(v) {
     return { t, swing: true, pov: true, camFn: () => { const hd = headPos().add(v3(0.25, 0.05, -0.45)); return [hd, v3(-0.4, 3.6, -40), 44]; }, speed: "slow12", bar: true };
   }
   if (v < s.e0) {                                   // slow-motion replay from the side: the path, the swing, the contact
-    const t = v < s.sC ? pw(v, [s.s0, s.sC], [0.1, T_CONTACT]) : v < s.sF ? T_CONTACT : pw(v, [s.sF, s.e0], [T_CONTACT, T_CONTACT + 0.12]);
+    const t = v < s.sC ? pw(v, [s.s0, s.sC], [s.sT0, T_CONTACT]) : T_CONTACT;
     const fz = v >= s.sC && v < s.sF, u = (v - s.s0) / (s.e0 - s.s0);
     const a = lerp(0.55, 0.95, easeIO(u)), r = lerp(9.5, 8.2, u);
     const pos = v3(-1.2 + Math.sin(a) * r, 3.4, -2.2 - Math.cos(a) * r * 0.9);
     return { t, swing: true, cam: [pos, v3(-1.0, 2.8, -2.0), 40], show: { line: Math.min(t, T_CONTACT), contact: fz }, speed: fz ? "freeze" : "replay" };
   }
-  {                                                 // back to real time: contact, and the ball gone
+  if (v < s.e1) {                                   // back to real time: contact, and the ball gone
     const t = T_CONTACT + (v - s.eC);
     const b = pathAt(PLAY.path.hit, Math.max(0, t - T_CONTACT));
     const look = v3(-1.2, 2.9, -1.8);
     return { t, swing: true, cam: [v3(3.6, 3.6, -9.6), look, 46], speed: "rt" };
+  }
+  {                                                 // high behind the plate: the line drive into the gap
+    const t = T_CONTACT + (v - s.eC), u = (v - s.e1) / (CC.duration - s.e1);
+    const b = pathAt(PLAY.path.hit, Math.max(0, t - T_CONTACT));
+    return { t, swing: true, cam: [mixV(v3(2.5, 13, 24), v3(1.5, 16, 18), u), v3(-8, 4, -110).lerp(b, 0.5), 44], speed: "rt" };
   }
 }
 

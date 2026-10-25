@@ -19,17 +19,19 @@ CACHE = os.path.join(HERE, "..", ".cache")
 HF_TTS = os.path.expanduser("~/.cache/hyperframes/tts")
 MODEL, VOICES = os.path.join(HF_TTS, "models", "kokoro-v1.0.onnx"), os.path.join(HF_TTS, "voices", "voices-v1.0.bin")
 TIMED = os.path.join(CACHE, "kokoro-v1.0-timed.onnx")
-VOICE, SPEED = "am_adam", 1.25
+VOICE, SPEED = "am_michael", 1.15
 
 # (caption = the script exactly as written, spoken = what the voice reads)
 # Numbers are spelled out for the voice so Kokoro reads them cleanly; the captions keep the script's numerals.
 LINES = [   # (id, caption, spoken)
     ("q", "You think you could hit a 100-mile-per-hour fastball?", "You think you could hit a hundred mile per hour fastball?"),
-    ("speed", "At that speed, the ball travels nearly 147 feet every second.", "At that speed, the ball travels nearly a hundred and forty-seven feet every second."),
-    ("time", "From the pitcher's mound to the plate, it can arrive in around four-tenths of a second.", None),
-    ("catch", "But here's the catch: you can't wait until the ball reaches you to decide to swing.", None),
-    ("steps", "You have to recognize the pitch, make a decision, and time your swing before it gets there.", None),
-    ("why", "That's what makes a 100-mile-per-hour fastball so difficult to hit.", "That's what makes a hundred mile per hour fastball so difficult to hit."),
+    ("speed", "At that speed, the ball covers nearly 147 feet every second.", "At that speed, the ball covers nearly a hundred and forty-seven feet every second."),
+    ("blink", "It reaches the plate in about four-tenths of a second, about as long as a blink.", None),
+    ("react", "Just reacting to something you see takes most people around a quarter of a second.", None),
+    ("decide", "So a hitter has to read the pitch and commit to a swing with the ball still 20 feet away.",
+     "So a hitter has to read the pitch and commit to a swing with the ball still twenty feet away."),
+    ("hit", "Then his hands have to put a round bat on a ball less than three inches wide, at exactly the right instant.", None),
+    ("why", "That's why hitting a baseball is arguably the hardest thing to do in sports.", None),
     ("end", "Be honest. Could you make contact?", None),
 ]
 

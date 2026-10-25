@@ -4,7 +4,7 @@ import json, os, subprocess, wave
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); VO = os.path.join(HERE, "..", "assets", "vo")
 SR = 48000
-GAP_AFTER = {"q": 0.55, "speed": 0.2, "time": 0.4, "catch": 0.2, "steps": 0.8, "why": 1.25, "end": 1.1}   # room for the pitch, the replay and the contact
+GAP_AFTER = {"q": 0.5, "speed": 0.2, "blink": 0.3, "react": 0.25, "decide": 0.3, "hit": 0.75, "why": 0.35, "end": 1.15}   # room for the pitch, the replay and the contact
 START = 0.45
 
 def load(path):
