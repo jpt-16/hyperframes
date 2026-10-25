@@ -1,0 +1,657 @@
+[
+ {
+  "i": 0,
+  "id": "hook",
+  "text": "In a bang-bang play at first, is diving actually faster?",
+  "spoken": "In a bang-bang play at first, is diving actually faster?",
+  "dur": 2.624,
+  "words": [
+   {
+    "w": "In",
+    "start": 0.051,
+    "end": 0.151
+   },
+   {
+    "w": "a",
+    "start": 0.151,
+    "end": 0.151
+   },
+   {
+    "w": "bang-bang",
+    "start": 0.201,
+    "end": 0.576
+   },
+   {
+    "w": "play",
+    "start": 0.601,
+    "end": 0.726
+   },
+   {
+    "w": "at",
+    "start": 0.751,
+    "end": 0.801
+   },
+   {
+    "w": "first,",
+    "start": 0.851,
+    "end": 1.276
+   },
+   {
+    "w": "is",
+    "start": 1.401,
+    "end": 1.451
+   },
+   {
+    "w": "diving",
+    "start": 1.501,
+    "end": 1.776
+   },
+   {
+    "w": "actually",
+    "start": 1.876,
+    "end": 2.101
+   },
+   {
+    "w": "faster?",
+    "start": 2.151,
+    "end": 2.624
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "race",
+  "text": "Diving lets you reach farther with your hands, but transitioning out of a sprint can cost momentum. Running through the bag lets you keep moving at full speed.",
+  "spoken": "Diving lets you reach farther with your hands, but transitioning out of a sprint can cost momentum. Running through the bag lets you keep moving at full speed.",
+  "dur": 6.741,
+  "words": [
+   {
+    "w": "Diving",
+    "start": 0.055,
+    "end": 0.38
+   },
+   {
+    "w": "lets",
+    "start": 0.405,
+    "end": 0.53
+   },
+   {
+    "w": "you",
+    "start": 0.555,
+    "end": 0.63
+   },
+   {
+    "w": "reach",
+    "start": 0.68,
+    "end": 0.83
+   },
+   {
+    "w": "farther",
+    "start": 0.88,
+    "end": 1.08
+   },
+   {
+    "w": "with",
+    "start": 1.105,
+    "end": 1.18
+   },
+   {
+    "w": "your",
+    "start": 1.205,
+    "end": 1.28
+   },
+   {
+    "w": "hands,",
+    "start": 1.33,
+    "end": 1.83
+   },
+   {
+    "w": "but",
+    "start": 1.905,
+    "end": 2.055
+   },
+   {
+    "w": "transitioning",
+    "start": 2.105,
+    "end": 2.655
+   },
+   {
+    "w": "out",
+    "start": 2.705,
+    "end": 2.805
+   },
+   {
+    "w": "of",
+    "start": 2.805,
+    "end": 2.88
+   },
+   {
+    "w": "a",
+    "start": 2.88,
+    "end": 2.88
+   },
+   {
+    "w": "sprint",
+    "start": 2.955,
+    "end": 3.18
+   },
+   {
+    "w": "can",
+    "start": 3.205,
+    "end": 3.28
+   },
+   {
+    "w": "cost",
+    "start": 3.33,
+    "end": 3.555
+   },
+   {
+    "w": "momentum.",
+    "start": 3.605,
+    "end": 4.355
+   },
+   {
+    "w": "Running",
+    "start": 4.505,
+    "end": 4.705
+   },
+   {
+    "w": "through",
+    "start": 4.755,
+    "end": 4.855
+   },
+   {
+    "w": "the",
+    "start": 4.88,
+    "end": 4.93
+   },
+   {
+    "w": "bag",
+    "start": 4.98,
+    "end": 5.28
+   },
+   {
+    "w": "lets",
+    "start": 5.33,
+    "end": 5.455
+   },
+   {
+    "w": "you",
+    "start": 5.48,
+    "end": 5.555
+   },
+   {
+    "w": "keep",
+    "start": 5.605,
+    "end": 5.73
+   },
+   {
+    "w": "moving",
+    "start": 5.78,
+    "end": 5.98
+   },
+   {
+    "w": "at",
+    "start": 6.005,
+    "end": 6.055
+   },
+   {
+    "w": "full",
+    "start": 6.105,
+    "end": 6.255
+   },
+   {
+    "w": "speed.",
+    "start": 6.33,
+    "end": 6.741
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "sci",
+  "text": "In a biomechanics study, running through the base was fastest overall. A possible advantage for a precisely timed dive wasn't proven, and the researchers concluded that the risks likely outweigh any tiny gain.",
+  "spoken": "In a biomechanics study, running through the base was fastest overall. A possible advantage for a precisely timed dive wasn't proven, and the researchers concluded that the risks likely outweigh any tiny gain.",
+  "dur": 10.112,
+  "words": [
+   {
+    "w": "In",
+    "start": 0.051,
+    "end": 0.151
+   },
+   {
+    "w": "a",
+    "start": 0.151,
+    "end": 0.151
+   },
+   {
+    "w": "biomechanics",
+    "start": 0.201,
+    "end": 0.801
+   },
+   {
+    "w": "study,",
+    "start": 0.826,
+    "end": 1.201
+   },
+   {
+    "w": "running",
+    "start": 1.326,
+    "end": 1.501
+   },
+   {
+    "w": "through",
+    "start": 1.551,
+    "end": 1.651
+   },
+   {
+    "w": "the",
+    "start": 1.676,
+    "end": 1.726
+   },
+   {
+    "w": "base",
+    "start": 1.776,
+    "end": 2.001
+   },
+   {
+    "w": "was",
+    "start": 2.026,
+    "end": 2.126
+   },
+   {
+    "w": "fastest",
+    "start": 2.201,
+    "end": 2.551
+   },
+   {
+    "w": "overall.",
+    "start": 2.601,
+    "end": 3.551
+   },
+   {
+    "w": "A",
+    "start": 3.551,
+    "end": 3.551
+   },
+   {
+    "w": "possible",
+    "start": 3.601,
+    "end": 3.926
+   },
+   {
+    "w": "advantage",
+    "start": 3.951,
+    "end": 4.351
+   },
+   {
+    "w": "for",
+    "start": 4.401,
+    "end": 4.526
+   },
+   {
+    "w": "a",
+    "start": 4.526,
+    "end": 4.526
+   },
+   {
+    "w": "precisely",
+    "start": 4.576,
+    "end": 5.026
+   },
+   {
+    "w": "timed",
+    "start": 5.076,
+    "end": 5.351
+   },
+   {
+    "w": "dive",
+    "start": 5.401,
+    "end": 5.751
+   },
+   {
+    "w": "wasn't",
+    "start": 5.801,
+    "end": 5.976
+   },
+   {
+    "w": "proven,",
+    "start": 6.026,
+    "end": 6.601
+   },
+   {
+    "w": "and",
+    "start": 6.726,
+    "end": 6.801
+   },
+   {
+    "w": "the",
+    "start": 6.826,
+    "end": 6.876
+   },
+   {
+    "w": "researchers",
+    "start": 6.901,
+    "end": 7.276
+   },
+   {
+    "w": "concluded",
+    "start": 7.326,
+    "end": 7.751
+   },
+   {
+    "w": "that",
+    "start": 7.776,
+    "end": 7.926
+   },
+   {
+    "w": "the",
+    "start": 7.926,
+    "end": 8.001
+   },
+   {
+    "w": "risks",
+    "start": 8.051,
+    "end": 8.376
+   },
+   {
+    "w": "likely",
+    "start": 8.451,
+    "end": 8.726
+   },
+   {
+    "w": "outweigh",
+    "start": 8.801,
+    "end": 9.176
+   },
+   {
+    "w": "any",
+    "start": 9.226,
+    "end": 9.351
+   },
+   {
+    "w": "tiny",
+    "start": 9.401,
+    "end": 9.676
+   },
+   {
+    "w": "gain.",
+    "start": 9.726,
+    "end": 10.112
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "risk",
+  "text": "A dive also adds injury risk and can leave you less ready to advance if the throw gets away from the fielder.",
+  "spoken": "A dive also adds injury risk and can leave you less ready to advance if the throw gets away from the fielder.",
+  "dur": 4.821,
+  "words": [
+   {
+    "w": "A",
+    "start": 0.051,
+    "end": 0.101
+   },
+   {
+    "w": "dive",
+    "start": 0.151,
+    "end": 0.476
+   },
+   {
+    "w": "also",
+    "start": 0.551,
+    "end": 0.776
+   },
+   {
+    "w": "adds",
+    "start": 0.901,
+    "end": 0.976
+   },
+   {
+    "w": "injury",
+    "start": 1.051,
+    "end": 1.251
+   },
+   {
+    "w": "risk",
+    "start": 1.276,
+    "end": 1.751
+   },
+   {
+    "w": "and",
+    "start": 1.826,
+    "end": 1.901
+   },
+   {
+    "w": "can",
+    "start": 1.926,
+    "end": 2.001
+   },
+   {
+    "w": "leave",
+    "start": 2.026,
+    "end": 2.151
+   },
+   {
+    "w": "you",
+    "start": 2.176,
+    "end": 2.251
+   },
+   {
+    "w": "less",
+    "start": 2.301,
+    "end": 2.476
+   },
+   {
+    "w": "ready",
+    "start": 2.526,
+    "end": 2.676
+   },
+   {
+    "w": "to",
+    "start": 2.726,
+    "end": 2.776
+   },
+   {
+    "w": "advance",
+    "start": 2.801,
+    "end": 3.301
+   },
+   {
+    "w": "if",
+    "start": 3.351,
+    "end": 3.401
+   },
+   {
+    "w": "the",
+    "start": 3.426,
+    "end": 3.476
+   },
+   {
+    "w": "throw",
+    "start": 3.551,
+    "end": 3.801
+   },
+   {
+    "w": "gets",
+    "start": 3.851,
+    "end": 3.976
+   },
+   {
+    "w": "away",
+    "start": 4.001,
+    "end": 4.201
+   },
+   {
+    "w": "from",
+    "start": 4.226,
+    "end": 4.326
+   },
+   {
+    "w": "the",
+    "start": 4.326,
+    "end": 4.376
+   },
+   {
+    "w": "fielder.",
+    "start": 4.451,
+    "end": 4.821
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "take",
+  "text": "So if you're beating a throw to first, keep sprinting through the bag. Save sliding for situations where you need to avoid a tag or stop at a base.",
+  "spoken": "So if you're beating a throw to first, keep sprinting through the bag. Save sliding for situations where you need to avoid a tag or stop at a base.",
+  "dur": 6.677,
+  "words": [
+   {
+    "w": "So",
+    "start": 0.073,
+    "end": 0.173
+   },
+   {
+    "w": "if",
+    "start": 0.198,
+    "end": 0.248
+   },
+   {
+    "w": "you're",
+    "start": 0.273,
+    "end": 0.348
+   },
+   {
+    "w": "beating",
+    "start": 0.398,
+    "end": 0.673
+   },
+   {
+    "w": "a",
+    "start": 0.673,
+    "end": 0.673
+   },
+   {
+    "w": "throw",
+    "start": 0.748,
+    "end": 0.973
+   },
+   {
+    "w": "to",
+    "start": 0.998,
+    "end": 1.048
+   },
+   {
+    "w": "first,",
+    "start": 1.098,
+    "end": 1.498
+   },
+   {
+    "w": "keep",
+    "start": 1.623,
+    "end": 1.773
+   },
+   {
+    "w": "sprinting",
+    "start": 1.823,
+    "end": 2.123
+   },
+   {
+    "w": "through",
+    "start": 2.173,
+    "end": 2.273
+   },
+   {
+    "w": "the",
+    "start": 2.298,
+    "end": 2.348
+   },
+   {
+    "w": "bag.",
+    "start": 2.398,
+    "end": 3.023
+   },
+   {
+    "w": "Save",
+    "start": 3.223,
+    "end": 3.423
+   },
+   {
+    "w": "sliding",
+    "start": 3.498,
+    "end": 3.748
+   },
+   {
+    "w": "for",
+    "start": 3.773,
+    "end": 3.873
+   },
+   {
+    "w": "situations",
+    "start": 3.923,
+    "end": 4.448
+   },
+   {
+    "w": "where",
+    "start": 4.498,
+    "end": 4.598
+   },
+   {
+    "w": "you",
+    "start": 4.623,
+    "end": 4.698
+   },
+   {
+    "w": "need",
+    "start": 4.723,
+    "end": 4.848
+   },
+   {
+    "w": "to",
+    "start": 4.873,
+    "end": 4.923
+   },
+   {
+    "w": "avoid",
+    "start": 4.973,
+    "end": 5.298
+   },
+   {
+    "w": "a",
+    "start": 5.298,
+    "end": 5.298
+   },
+   {
+    "w": "tag",
+    "start": 5.348,
+    "end": 5.698
+   },
+   {
+    "w": "or",
+    "start": 5.748,
+    "end": 5.823
+   },
+   {
+    "w": "stop",
+    "start": 5.898,
+    "end": 6.148
+   },
+   {
+    "w": "at",
+    "start": 6.173,
+    "end": 6.248
+   },
+   {
+    "w": "a",
+    "start": 6.248,
+    "end": 6.248
+   },
+   {
+    "w": "base.",
+    "start": 6.298,
+    "end": 6.677
+   }
+  ]
+ }
+]
