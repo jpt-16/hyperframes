@@ -33,39 +33,40 @@ def shot(a, b, cam, vs, ts, speed, **kw):
     SHOTS.append(dict(a=round(a, 4), b=round(b, 4), cam=cam, vs=[round(x, 4) for x in vs], ts=[round(x, 4) for x in ts], speed=speed, **kw))
 def rate(a, b, cam, t0, r, speed, **kw): shot(a, b, cam, [a, b], [t0, t0 + (b - a) * r], speed, **kw)
 def hold(a, b, cam, t0, speed="none", **kw): shot(a, b, cam, [a, b], [t0, t0], speed, **kw)
-CALL0, FRAME0, BLOCK0, THROW0, HIT0, RUN0, END0 = (LN(k)["t0"] - 0.06 for k in ["call", "frame", "block", "throw", "hit", "run", "end"])
+CALL0, FRAME0, BLOCK0, THROW0, HIT0, RUN0, LIST0, END0 = (LN(k)["t0"] - 0.06 for k in ["call", "frame", "block", "throw", "hit", "run", "l1", "end"])
 FLASH = []                                                    # cut points that get a white flash
 # hook: the catcher, and quick flashes of what he does
-HK = [(0.0, 0.42, "hero", "slider", -2.0, 0), (0.42, 0.72, "plate", "slider", -0.25, 1), (0.72, 1.02, "dirt", "block", -0.15, 1),
-      (1.02, 1.32, "steal", "steal", 0.62, 1), (1.32, 1.62, "bat", "hit", -0.12, 1)]
+HK = [(0.0, 0.5, "hero", "slider", -2.0, 0), (0.5, 0.95, "plate", "slider", -0.3, 1), (0.95, 1.4, "dirt", "block", -0.2, 1),
+      (1.4, 1.85, "steal", "steal", 0.6, 1), (1.85, 2.3, "bat", "hit", -0.15, 1)]
 for a, b, cam, play, t0, r in HK:
     rate(a, b, cam, t0, r, "none", play=play); FLASH.append(a)
-rate(1.62, CALL0, "hero", -1.8, 0.3, "none", play="slider"); FLASH.append(1.62)
+S = dict(hC0=W("hook", "ball") + 0.05)                       # back on the catcher: the pitch pops his glove on "catching the ball"
+rate(2.3, CALL0, "hero", 2.3 - S["hC0"], 1, "none", play="frame"); FLASH.append(2.3)
 # 1 pitch calling: the sign; the chase; the plan for the next pitch
-S = dict(c1=W("call", "he") - 0.15)
+S["c1"] = W("call", "read") - 0.15
 rate(CALL0, S["c1"], "sign", -3.4, 1, "none", play="sign")
-S["cC"] = W("call", "breaking") - 0.05                         # the slider reaches the glove (and the swing goes by it) on "breaking ball"
+S["cC"] = W("call", "tendencies", end=True) - 0.1              # the slider reaches the glove (and the swing goes by it) on "tendencies"
 S["c2"] = S["cC"] + 0.55
 rate(S["c1"], S["c2"], "plate", S["c1"] - S["cC"], 1, "rt", play="slider")
-S["c3"] = W("call", "count") - 0.3
-rate(S["c2"], S["c3"], "mound", -3.0, 0.5, "none", play="sign", nodAt=-2.3)
+S["c3"] = W("call", "help") - 0.3
+rate(S["c2"], S["c3"], "mound", -2.7, 0.5, "none", play="sign", nodAt=-2.3)
 rate(S["c3"], FRAME0, "zone", -2.0, 0.15, "none", play="slider", show={"zone": 1, "chase": 1, "marks": ["slider"], "target": 1, "slider": 1})
 # 2 framing: the pitch, a half-speed replay at the glove, the zone and the call
-S["fC"] = W("frame", "it") + 0.25
+S["fC"] = W("frame", "framing", end=True) + 0.1
 S["f1"] = S["fC"] + 0.6
 rate(FRAME0, S["f1"], "plate", FRAME0 - S["fC"], 1, "rt", play="frame", strike=True)
-S["f2"] = W("frame", "with") - 0.1
+S["f2"] = W("frame", "can") - 0.1
 rate(S["f1"], S["f2"], "glove", -0.4, 0.5, "replay", play="frame", strike=True)
 rate(S["f2"], BLOCK0, "zone", 0.3, 0.3, "none", play="frame", strike=True, show={"zone": 1, "marks": ["fastball"]})
 # 3 blocking: in the dirt; drop and smother (replay from the side); the runner stays at first
-S["bC"] = W("block", "can't") + 0.25
+S["bC"] = W("block", "block") + 0.25
 S["b1"] = S["bC"] + 0.45
 rate(BLOCK0, S["b1"], "dirt", BLOCK0 - S["bC"], 1, "rt", play="block")
-S["b2"] = S["b1"] + 2.0
-rate(S["b1"], S["b2"], "side", -0.45, 0.5, "replay", play="block")
+S["b2"] = W("block", "runners") - 0.1
+rate(S["b1"], S["b2"], "side", -0.25, 0.5, "replay", play="block")
 rate(S["b2"], THROW0, "first", 0.55, 1, "rt", play="block")
 # 4 throwing: the runner goes; half speed through the catch, exchange and footwork; real time for the release; the tag at second
-S["tR"] = W("throw", "release") + 0.05                          # release on "fast release"
+S["tR"] = W("throw", "arm") + 0.05                              # release on "arm"
 S["tS"] = W("throw", "exchange") - 0.6                          # slow motion from just before the catch
 TC_ = -0.42
 S["t2"] = S["tS"]
@@ -77,20 +78,21 @@ S["t3"] = S["tR"] + 0.35
 t3 = ST["t_release"] + 0.35 * 0.5
 rate(S["t3"], HIT0, "tag", t3, 1, "rt", play="steal", show={"throwPath": 1})
 # 5 hitting: the catcher at the plate, into the gap
-S["hC"] = W("hit", "plate") - 0.05
-S["h2"] = W("hit", "driving") - 0.25
+S["hC"] = W("hit", "catchers") + 0.1                           # contact mid-line, so the run that follows gets him around first
+S["h2"] = S["hC"] + 0.5
 rate(HIT0, S["h2"], "bat", HIT0 - S["hC"], 1, "rt", play="hit")
 rate(S["h2"], RUN0, "gap", S["h2"] - S["hC"], 1, "rt", play="run", show={"hitPath": 1})
 # 6 speed: out of the box and around first
-rate(RUN0, END0, "run", RUN0 - S["hC"], 1, "rt", play="run")
-# finale: quick callbacks, then the catcher behind the plate
+rate(RUN0, LIST0, "run", RUN0 - S["hC"], 1, "rt", play="run")
+# finale: a callback on each skill as it's named, then the catcher behind the plate
 CB_ = [("sign", "sign", -2.0, 1, "1 · Pitch calling"), ("zone", "frame", 0.4, 0.3, "2 · Framing"), ("dirt", "block", -0.1, 1, "3 · Blocking"),
        ("steal", "steal", ST["t_release"] - 0.1, 1, "4 · Throwing"), ("bat", "hit", -0.15, 1, "5 · Hitting"), ("run", "run", 3.6, 1, "6 · Speed")]
-v = END0; CBV = []
-for cam, play, t0, r, lab in CB_:
+CBV = []
+for k, (cam, play, t0, r, lab) in enumerate(CB_):
+    a, b = LN(f"l{k + 1}")["t0"] - 0.06, (LN(f"l{k + 2}")["t0"] - 0.06 if k < 5 else END0)
     kw = {"show": {"zone": 1, "marks": ["fastball"]}} if play == "frame" else {}
-    rate(v, v + 0.5, cam, t0, r, "none", play=play, **kw); FLASH.append(v); CBV.append((v, lab)); v += 0.5
-rate(v, D, "hero", -2.0, 0.2, "none", play="slider"); FLASH.append(v); S["e1"] = v
+    rate(a, b, cam, t0, r, "none", play=play, **kw); FLASH.append(a); CBV.append((a, b, lab))
+rate(END0, D, "hero", -1.6, 0.5, "none", play="frame"); FLASH.append(END0); S["e1"] = END0   # one last pitch received, slowed down under the title
 for x, y in zip(SHOTS, SHOTS[1:]): assert abs(x["b"] - y["a"]) < 1e-3 and x["b"] > x["a"], (x, y)
 S = {k: round(v_, 4) for k, v_ in S.items()}
 S["list"] = SHOTS
@@ -115,20 +117,19 @@ c.clip("hook", 0, CALL0 - 0.02, """<div class="eyebrow"><i></i>Baseball Decoded<
   <div class="hk"><span class="hl">Being a catcher</span><span class="hl">is more than</span><span class="hl acc">you think.</span></div>""", cls="layer", style="z-index:12")
 c.to("#hook .hk, #hook .eyebrow", o(opacity=0, y=-24, duration=0.14, ease="power2.in"), CALL0 - 0.17)
 SK = [(CALL0, FRAME0, "1", "Pitch calling"), (FRAME0, BLOCK0, "2", "Framing"), (BLOCK0, THROW0, "3", "Blocking"), (THROW0, HIT0, "4", "Throwing"),
-      (HIT0, RUN0, "5", "Hitting"), (RUN0, END0, "6", "Speed")]
+      (HIT0, RUN0, "5", "Hitting"), (RUN0, LIST0, "6", "Speed")]
 for k, (a, b, n, name) in enumerate(SK):
     c.clip(f"sk{k}", a + 0.05, b - 0.02, f'<div class="skill" id="sk{k}x"><b>{n}</b><span>{name}</span></div>', cls="layer", style="z-index:21")
     c.ft(f"#sk{k}x", o(opacity=0, x=-40), o(opacity=1, x=0, duration=0.22, ease="power3.out"), a + 0.08)
 
 # ----------------------------------------------------------------- captions (the hook and "six skills" are on screen as titles)
-CAPS = [("call", 0, 5, {3: "acc", 4: "acc", 5: "acc"}), ("call", 6, 9, {7: "acc"}), ("call", 10, 15, {12: "acc"}), ("call", 16, 21, {}), ("call", 22, 26, {24: "acc", 26: "acc"}), ("call", 27, 32, {30: "acc", 31: "acc", 32: "acc"}),
-        ("frame", 0, 5, {4: "acc"}), ("frame", 6, 9, {7: "cb", 8: "cb", 9: "cb"}), ("frame", 10, 14, {13: "acc"}), ("frame", 15, 18, {18: "acc"}), ("frame", 19, 24, {21: "acc"}),
-        ("frame", 25, 28, {26: "cb", 27: "cb", 28: "cb"}), ("frame", 29, 33, {33: "acc"}), ("frame", 34, 39, {}),
-        ("block", 0, 2, {}), ("block", 3, 7, {7: "acc"}), ("block", 8, 10, {}), ("block", 11, 14, {12: "acc", 13: "acc"}), ("block", 15, 19, {18: "acc", 19: "acc"}), ("block", 20, 23, {}),
-        ("throw", 0, 3, {}), ("throw", 4, 7, {7: "acc"}), ("throw", 8, 9, {9: "acc"}), ("throw", 10, 12, {12: "acc"}), ("throw", 13, 19, {19: "acc"}),
-        ("hit", 0, 2, {1: "acc"}), ("hit", 3, 8, {7: "acc"}), ("hit", 9, 14, {14: "acc"}),
-        ("run", 0, 4, {}), ("run", 5, 7, {7: "cb"}), ("run", 8, 10, {}), ("run", 11, 15, {14: "acc", 15: "acc"}), ("run", 16, 18, {}),
-        ("end", 2, 8, {7: "acc", 8: "acc"}), ("end", 9, 13, {}), ("end", 14, 18, {16: "acc"})]
+CAPS = [("call", 0, 6, {4: "acc", 5: "acc", 6: "acc"}), ("call", 7, 10, {10: "acc"}), ("call", 11, 13, {13: "acc"}), ("call", 14, 19, {17: "cb", 19: "acc"}),
+        ("frame", 0, 2, {2: "acc"}), ("frame", 3, 8, {4: "acc"}), ("frame", 9, 13, {10: "cb", 11: "cb"}), ("frame", 14, 17, {16: "acc", 17: "acc"}), ("frame", 18, 21, {21: "acc"}),
+        ("block", 0, 4, {3: "acc"}), ("block", 5, 7, {7: "acc"}), ("block", 8, 12, {12: "acc"}),
+        ("throw", 0, 3, {3: "acc"}), ("throw", 4, 7, {5: "acc", 6: "acc", 7: "acc"}), ("throw", 8, 9, {9: "acc"}), ("throw", 10, 14, {14: "acc"}),
+        ("hit", 0, 4, {3: "acc"}), ("hit", 5, 10, {6: "acc"}),
+        ("run", 0, 4, {4: "acc"}), ("run", 5, 7, {6: "cb", 7: "cb"}),
+        ("end", 3, 6, {4: "acc"}), ("end", 7, 11, {11: "acc"})]
 for k, (lid, i0, i1, acc) in enumerate(CAPS):
     ln = LN(lid); words = ln["words"]
     start = words[i0]["t0"] - 0.06
@@ -150,20 +151,20 @@ def tag(tid, t0, t1, cls, text, top):
 
 # ----------------------------------------------------------------- 1 pitch calling: the read and the plan
 tag("cs", CALL0 + 0.3, S["c1"] - 0.05, "wh", "The sign: two fingers, slider", 1560)
-tag("cc", W("call", "chase") - 0.05, S["c2"] - 0.05, "hot", "Chases the breaking ball, low and away", 1560)
-PLAN = [("count", "Count", "1–2: he's protecting"), ("location", "Location", "Low and away, off the plate"), ("pitcher", "Pitcher's strength", "His slider")]
-c.clip("plan", W("call", "count") - 0.1, FRAME0 - 0.05, '<div class="plan">' + "".join(f'<div class="pr" id="pl{k}"><span>{a}</span><b>{b}</b></div>' for k, (_, a, b) in enumerate(PLAN)) + "</div>", cls="layer", style="z-index:11")
+tag("cc", W("call", "tendencies") - 0.05, S["c2"] - 0.05, "hot", "Chases the breaking ball, low and away", 1560)
+PLAN = [("situation", "Count", "1–2: he's protecting"), ("pitcher", "Pitcher's strength", "His slider"), ("weaknesses", "Location", "Low and away: his weakness")]
+c.clip("plan", W("call", "situation") - 0.1, FRAME0 - 0.05, '<div class="plan">' + "".join(f'<div class="pr" id="pl{k}"><span>{a}</span><b>{b}</b></div>' for k, (_, a, b) in enumerate(PLAN)) + "</div>", cls="layer", style="z-index:11")
 for k, (w, a, b) in enumerate(PLAN): pop(f"#pl{k}", W("call", w) - 0.05, 16)
 c.clip("plg", S["c3"] + 0.2, FRAME0 - 0.05, '<div class="leg"><span class="hot"><i></i>Where he chases</span><span class="cb"><i></i>The target</span></div>', cls="layer", style="z-index:11")
 
 # ----------------------------------------------------------------- 2 framing
-tag("fb", W("frame", "borderline") - 0.05, S["f2"] - 0.05, "cb", "Borderline: the bottom edge · a quiet glove, held there", 1560)
-c.clip("abs", W("frame", "with") - 0.05, BLOCK0 - 0.05, """<div class="abs" id="absx"><div class="ar"><b>Umpire's call</b><span>Receiving can influence borderline pitches</span></div>
+tag("fb", S["f1"] + 0.1, S["f2"] - 0.05, "cb", "Borderline: the bottom edge · a quiet glove, held there", 1560)
+c.clip("abs", W("frame", "can") - 0.05, BLOCK0 - 0.05, """<div class="abs" id="absx"><div class="ar"><b>Umpire's call</b><span>Receiving can influence borderline pitches</span></div>
   <div class="ar" id="ab2"><b class="cb">ABS</b><span>The call can be challenged, or made by the system</span></div></div>""", cls="layer", style="z-index:12")
-pop("#absx", W("frame", "with") - 0.05); pop("#ab2", W("frame", "challenged") - 0.05, 12)
+pop("#absx", W("frame", "can") - 0.05); pop("#ab2", W("frame", "human") - 0.05, 12)
 
 # ----------------------------------------------------------------- 3 blocking
-tag("bk", W("block", "drops") - 0.08, S["b2"] - 0.05, "cb", "Drop · square up · keep it in front", 1560)
+tag("bk", W("block", "block") - 0.08, S["b2"] - 0.05, "cb", "Drop · square up · keep it in front", 1560)
 tag("bk2", S["b2"] + 0.1, THROW0 - 0.05, "wh", "The runner stays at first", 1560)
 
 # ----------------------------------------------------------------- 4 throwing: the steps, as they happen
@@ -172,20 +173,21 @@ def v_of(t):
     for x in ss:
         r_ = at_play(x, t)
         if r_ is not None: return r_
-TH = [("Exchange", 0.08), ("Footwork", 0.38), ("Release", ST["t_release"]), ("On the bag", ST["t_tag"])]
+TH = [("Exchange", 0.08), ("Footwork", 0.38), ("Arm", ST["t_release"]), ("Accuracy", None)]   # accuracy comes up as the throw is on its way
 c.clip("thr", v_of(0.08) - 0.05, HIT0 - 0.05, '<div class="steps">' + "".join(f'<span id="ts{k}">{w}</span>' for k, (w, _) in enumerate(TH)) + "</div>", cls="layer", style="z-index:12")
-for k, (w, t_) in enumerate(TH): c.ft(f"#ts{k}", o(opacity=0.0, y=14), o(opacity=1, y=0, duration=0.18, ease="power3.out"), v_of(t_) - 0.03)
+TH_V = [v_of(t_) if t_ is not None else W("throw", "accuracy") for _, t_ in TH]
+for k, tv in enumerate(TH_V): c.ft(f"#ts{k}", o(opacity=0.0, y=14), o(opacity=1, y=0, duration=0.18, ease="power3.out"), tv - 0.03)
 tag("out", v_of(ST["t_tag"]) + 0.1, HIT0 - 0.05, "hot", "Tag down before he gets there", 1440)
 
 # ----------------------------------------------------------------- 6 speed: a bonus
-tag("bon", W("run", "bonus") - 0.05, END0 - 0.05, "cb", "A bonus, not a requirement", 1560)
+tag("bon", W("run", "that's") - 0.05, LIST0 - 0.05, "cb", "An added weapon, not a requirement", 1560)
 
 # ----------------------------------------------------------------- finale
-for k, (v_, lab) in enumerate(CBV):
-    c.clip(f"cbk{k}", v_ + 0.03, v_ + 0.5, f'<div class="cbl" id="cbk{k}x">{esc(lab)}</div>', cls="layer", style="z-index:21")
-c.clip("endt", END0 + 0.1, D, '<div class="endt"><span id="et1">6 skills.</span><span class="acc" id="et2">One complete catcher.</span></div>', cls="layer", style="z-index:22")
-c.ft("#et1", o(opacity=0, y=40, filter="blur(12px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.2, ease="power3.out"), W("end", "six") - 0.04)
-c.ft("#et2", o(opacity=0, y=40, filter="blur(12px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.2, ease="power3.out"), S["e1"] + 0.05)
+for k, (v_, b_, lab) in enumerate(CBV):
+    c.clip(f"cbk{k}", v_ + 0.03, b_, f'<div class="cbl" id="cbk{k}x">{esc(lab)}</div>', cls="layer", style="z-index:21")
+c.clip("endt", LIST0, D, '<div class="endt"><span id="et1">6 skills.</span><span class="acc" id="et2">One complete catcher.</span></div>', cls="layer", style="z-index:22")
+c.ft("#et1", o(opacity=0, y=40, filter="blur(12px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.2, ease="power3.out"), LIST0 + 0.04)
+c.ft("#et2", o(opacity=0, y=40, filter="blur(12px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.2, ease="power3.out"), W("end", "complete") - 0.04)
 
 # ----------------------------------------------------------------- sound
 def cue(n, t, db=0.0):
@@ -216,9 +218,9 @@ for x in SHOTS:
         for k in range(1, 40):                                                             # his footsteps
             t_ = k * 0.27 + 0.3
             if t_ < 7: cue("tap", at_play(x, t_), -12)
-for t_ in [W("call", "count"), W("call", "location"), W("call", "pitcher"), W("frame", "with"), W("frame", "challenged")]: cue("popup", t_ - 0.05, -10)
-for k, (w, t_) in enumerate(TH): cue("hit", v_of(t_) - 0.03, -10)
-cue("impact", W("end", "six") - 0.04, -5); cue("impact", S["e1"] + 0.05, -4)
+for t_ in [W("call", "situation"), W("call", "pitcher"), W("call", "weaknesses"), W("frame", "can"), W("frame", "human")]: cue("popup", t_ - 0.05, -10)
+for tv in TH_V: cue("hit", tv - 0.03, -10)
+cue("impact", LIST0 + 0.04, -5); cue("impact", W("end", "complete") - 0.04, -4)
 LEVEL = {"impact": -3.0, "hit": -5.0, "whoosh": -6.0, "glove": -1.0, "tick": -6.0, "popup": -8.0, "riser-m": -7.0, "riser-s": -7.0, "tap": -3.0}
 
 def crack(rng):
@@ -325,7 +327,7 @@ html, body {{ width:1080px; height:1920px; overflow:hidden; background:#05080d; 
 .pr {{ display:flex; justify-content:space-between; align-items:baseline; gap:18px; padding:14px 22px; border-radius:16px; background:rgba(6,10,18,.84); }}
 .pr span {{ {MONO} font-size:22px; letter-spacing:.1em; color:{MUTED}; }}
 .pr b {{ font-family:"Barlow Condensed", sans-serif; font-weight:800; font-size:48px; text-transform:uppercase; color:#fff; }}
-.leg {{ position:absolute; left:44px; top:460px; display:grid; gap:8px; padding:12px 18px; border-radius:12px; background:rgba(6,10,18,.72); {MONO} font-size:22px; letter-spacing:.06em; }}
+.leg {{ position:absolute; left:44px; top:540px; display:grid; gap:8px; padding:12px 18px; border-radius:12px; background:rgba(6,10,18,.72); {MONO} font-size:22px; letter-spacing:.06em; }}
 .leg span {{ display:flex; align-items:center; gap:12px; }} .leg i {{ width:22px; height:22px; border-radius:5px; background:currentColor; opacity:.8; }}
 .abs {{ position:absolute; left:44px; right:44px; top:1300px; display:grid; gap:12px; }}
 .ar {{ display:grid; gap:4px; padding:16px 22px; border-radius:16px; background:rgba(6,10,18,.86); }}

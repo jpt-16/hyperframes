@@ -3,7 +3,7 @@
     export HYPERFRAMES_PYTHON=<python with kokoro-onnx + soundfile + onnx>
     $HYPERFRAMES_PYTHON tools/vo.py
 
-1. Each script line is spoken by `hyperframes tts` (local Kokoro model, voice am_michael, speed 1.05).
+1. Each script line is spoken by `hyperframes tts` (local Kokoro model, voice am_michael, speed 1.2).
 2. Word timings come from the same model: a copy of HyperFrames' kokoro-v1.0.onnx with its internal
    per-phoneme duration tensor exposed as an output (weights untouched). kokoro-onnx's create_timed()
    with no inserted pauses reproduces the CLI audio sample for sample, so its phoneme times are the
@@ -19,19 +19,25 @@ CACHE = os.path.join(HERE, "..", ".cache")
 HF_TTS = os.path.expanduser("~/.cache/hyperframes/tts")
 MODEL, VOICES = os.path.join(HF_TTS, "models", "kokoro-v1.0.onnx"), os.path.join(HF_TTS, "voices", "voices-v1.0.bin")
 TIMED = os.path.join(CACHE, "kokoro-v1.0-timed.onnx")
-VOICE, SPEED = "am_michael", 1.35
+VOICE, SPEED = "am_michael", 1.2
 
 # (caption = the script exactly as written, spoken = what the voice reads)
 # Numbers are spelled out for the voice so Kokoro reads them cleanly; the captions keep the script's numerals.
 LINES = [   # (id, caption, spoken)
-    ("hook", "Being a catcher is more than you think.", None),
-    ("call", "It starts with calling the game. He reads the hitter, sees him chase the breaking ball, then sets up the next pitch around the count, the location, and what his pitcher does best.", None),
-    ("frame", "Then he has to receive it. A quiet, stable glove can help a borderline pitch get called a strike when an umpire makes the call. With automated ball-strike systems, those calls can be challenged or made by the system instead.", None),
-    ("block", "With runners on, a ball in the dirt can't get by. He drops, smothers it, and keeps it in front, so nobody moves up.", None),
-    ("throw", "When the runner goes, it's a quick exchange, clean footwork, a fast release, and a throw right to the bag.", None),
-    ("hit", "A complete catcher can help at the plate too, driving the ball into the gap.", None),
-    ("run", "And if he can run, that's a bonus, not a requirement, but it puts extra pressure on the defense.", None),
-    ("end", "Six skills. Most catchers lean on a few strengths, but the more you bring, the more complete you are.", None),
+    ("hook", "Being a catcher is about way more than catching the ball.", None),
+    ("call", "First, you have to call the game. Read the hitter's tendencies, understand the situation, and help your pitcher attack weaknesses.", None),
+    ("frame", "Then there's framing. Small details in how you receive a borderline pitch can matter when a human umpire is making the call.", None),
+    ("block", "You have to block balls in the dirt to keep runners from advancing.", None),
+    ("throw", "And when someone steals, your exchange, footwork, arm, and accuracy all have to work together.", None),
+    ("hit", "But the best all-around catchers can contribute at the plate, too.", None),
+    ("run", "And if you can run? That's another weapon.", None),
+    ("l1", "Pitch calling.", None),
+    ("l2", "Framing.", None),
+    ("l3", "Blocking.", None),
+    ("l4", "Throwing.", None),
+    ("l5", "Hitting.", None),
+    ("l6", "Speed.", None),
+    ("end", "A complete catcher can change the game in more ways than one.", None),
 ]
 
 def timed_model():

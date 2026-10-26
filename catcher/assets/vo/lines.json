@@ -2,573 +2,462 @@
  {
   "i": 0,
   "id": "hook",
-  "text": "Being a catcher is more than you think.",
-  "spoken": "Being a catcher is more than you think.",
-  "dur": 1.664,
+  "text": "Being a catcher is about way more than catching the ball.",
+  "spoken": "Being a catcher is about way more than catching the ball.",
+  "dur": 3.072,
   "words": [
    {
     "w": "Being",
-    "start": 0.026,
-    "end": 0.226
+    "start": 0.034,
+    "end": 0.334
    },
    {
     "w": "a",
-    "start": 0.226,
-    "end": 0.226
+    "start": 0.334,
+    "end": 0.334
    },
    {
     "w": "catcher",
-    "start": 0.276,
-    "end": 0.701
+    "start": 0.409,
+    "end": 1.059
    },
    {
     "w": "is",
-    "start": 0.776,
-    "end": 0.851
+    "start": 1.134,
+    "end": 1.209
+   },
+   {
+    "w": "about",
+    "start": 1.234,
+    "end": 1.534
+   },
+   {
+    "w": "way",
+    "start": 1.584,
+    "end": 1.759
    },
    {
     "w": "more",
-    "start": 0.901,
-    "end": 1.026
+    "start": 1.809,
+    "end": 1.984
    },
    {
     "w": "than",
-    "start": 1.051,
-    "end": 1.126
+    "start": 2.009,
+    "end": 2.134
    },
    {
-    "w": "you",
-    "start": 1.151,
-    "end": 1.226
+    "w": "catching",
+    "start": 2.184,
+    "end": 2.534
    },
    {
-    "w": "think.",
-    "start": 1.301,
-    "end": 1.664
+    "w": "the",
+    "start": 2.559,
+    "end": 2.609
+   },
+   {
+    "w": "ball.",
+    "start": 2.659,
+    "end": 3.072
    }
   ]
  },
  {
   "i": 1,
   "id": "call",
-  "text": "It starts with calling the game. He reads the hitter, sees him chase the breaking ball, then sets up the next pitch around the count, the location, and what his pitcher does best.",
-  "spoken": "It starts with calling the game. He reads the hitter, sees him chase the breaking ball, then sets up the next pitch around the count, the location, and what his pitcher does best.",
-  "dur": 7.872,
+  "text": "First, you have to call the game. Read the hitter's tendencies, understand the situation, and help your pitcher attack weaknesses.",
+  "spoken": "First, you have to call the game. Read the hitter's tendencies, understand the situation, and help your pitcher attack weaknesses.",
+  "dur": 7.189,
   "words": [
    {
-    "w": "It",
-    "start": 0.051,
-    "end": 0.126
+    "w": "First,",
+    "start": 0.101,
+    "end": 0.401
    },
    {
-    "w": "starts",
-    "start": 0.176,
-    "end": 0.426
-   },
-   {
-    "w": "with",
+    "w": "you",
     "start": 0.451,
     "end": 0.526
    },
    {
-    "w": "calling",
+    "w": "have",
     "start": 0.576,
-    "end": 0.851
+    "end": 0.726
+   },
+   {
+    "w": "to",
+    "start": 0.751,
+    "end": 0.801
+   },
+   {
+    "w": "call",
+    "start": 0.851,
+    "end": 1.076
    },
    {
     "w": "the",
-    "start": 0.876,
-    "end": 0.926
+    "start": 1.101,
+    "end": 1.151
    },
    {
     "w": "game.",
-    "start": 0.976,
-    "end": 1.551
+    "start": 1.201,
+    "end": 1.851
    },
    {
-    "w": "He",
-    "start": 1.676,
-    "end": 1.751
-   },
-   {
-    "w": "reads",
-    "start": 1.801,
-    "end": 2.026
+    "w": "Read",
+    "start": 2.026,
+    "end": 2.226
    },
    {
     "w": "the",
-    "start": 2.051,
-    "end": 2.101
+    "start": 2.276,
+    "end": 2.326
    },
    {
-    "w": "hitter,",
-    "start": 2.151,
-    "end": 2.401
-   },
-   {
-    "w": "sees",
-    "start": 2.526,
+    "w": "hitter's",
+    "start": 2.376,
     "end": 2.676
    },
    {
-    "w": "him",
-    "start": 2.701,
-    "end": 2.801
+    "w": "tendencies,",
+    "start": 2.726,
+    "end": 3.576
    },
    {
-    "w": "chase",
-    "start": 2.851,
-    "end": 3.101
-   },
-   {
-    "w": "the",
-    "start": 3.126,
-    "end": 3.176
-   },
-   {
-    "w": "breaking",
-    "start": 3.226,
-    "end": 3.501
-   },
-   {
-    "w": "ball,",
-    "start": 3.551,
-    "end": 3.951
-   },
-   {
-    "w": "then",
-    "start": 4.051,
-    "end": 4.176
-   },
-   {
-    "w": "sets",
-    "start": 4.251,
-    "end": 4.376
-   },
-   {
-    "w": "up",
-    "start": 4.426,
-    "end": 4.476
+    "w": "understand",
+    "start": 3.751,
+    "end": 4.276
    },
    {
     "w": "the",
-    "start": 4.501,
-    "end": 4.551
+    "start": 4.301,
+    "end": 4.351
    },
    {
-    "w": "next",
-    "start": 4.601,
-    "end": 4.751
-   },
-   {
-    "w": "pitch",
-    "start": 4.801,
-    "end": 5.001
-   },
-   {
-    "w": "around",
-    "start": 5.026,
-    "end": 5.251
-   },
-   {
-    "w": "the",
-    "start": 5.276,
-    "end": 5.326
-   },
-   {
-    "w": "count,",
-    "start": 5.376,
-    "end": 5.726
-   },
-   {
-    "w": "the",
-    "start": 5.776,
-    "end": 5.826
-   },
-   {
-    "w": "location,",
-    "start": 5.851,
-    "end": 6.576
+    "w": "situation,",
+    "start": 4.401,
+    "end": 5.201
    },
    {
     "w": "and",
-    "start": 6.676,
-    "end": 6.751
+    "start": 5.301,
+    "end": 5.376
    },
    {
-    "w": "what",
-    "start": 6.801,
-    "end": 6.876
+    "w": "help",
+    "start": 5.426,
+    "end": 5.626
    },
    {
-    "w": "his",
-    "start": 6.901,
-    "end": 7.001
+    "w": "your",
+    "start": 5.651,
+    "end": 5.726
    },
    {
     "w": "pitcher",
-    "start": 7.051,
-    "end": 7.301
+    "start": 5.776,
+    "end": 6.126
    },
    {
-    "w": "does",
-    "start": 7.351,
-    "end": 7.476
+    "w": "attack",
+    "start": 6.176,
+    "end": 6.501
    },
    {
-    "w": "best.",
-    "start": 7.526,
-    "end": 7.872
+    "w": "weaknesses.",
+    "start": 6.551,
+    "end": 7.189
    }
   ]
  },
  {
   "i": 2,
   "id": "frame",
-  "text": "Then he has to receive it. A quiet, stable glove can help a borderline pitch get called a strike when an umpire makes the call. With automated ball-strike systems, those calls can be challenged or made by the system instead.",
-  "spoken": "Then he has to receive it. A quiet, stable glove can help a borderline pitch get called a strike when an umpire makes the call. With automated ball-strike systems, those calls can be challenged or made by the system instead.",
-  "dur": 10.411,
+  "text": "Then there's framing. Small details in how you receive a borderline pitch can matter when a human umpire is making the call.",
+  "spoken": "Then there's framing. Small details in how you receive a borderline pitch can matter when a human umpire is making the call.",
+  "dur": 6.997,
   "words": [
    {
     "w": "Then",
-    "start": 0.048,
-    "end": 0.148
+    "start": 0.055,
+    "end": 0.23
    },
    {
-    "w": "he",
-    "start": 0.173,
-    "end": 0.248
+    "w": "there's",
+    "start": 0.28,
+    "end": 0.455
    },
    {
-    "w": "has",
-    "start": 0.273,
-    "end": 0.398
+    "w": "framing.",
+    "start": 0.53,
+    "end": 1.305
    },
    {
-    "w": "to",
-    "start": 0.448,
-    "end": 0.498
+    "w": "Small",
+    "start": 1.505,
+    "end": 1.78
+   },
+   {
+    "w": "details",
+    "start": 1.83,
+    "end": 2.33
+   },
+   {
+    "w": "in",
+    "start": 2.38,
+    "end": 2.43
+   },
+   {
+    "w": "how",
+    "start": 2.48,
+    "end": 2.655
+   },
+   {
+    "w": "you",
+    "start": 2.705,
+    "end": 2.78
    },
    {
     "w": "receive",
-    "start": 0.523,
-    "end": 0.873
-   },
-   {
-    "w": "it.",
-    "start": 0.898,
-    "end": 1.398
-   },
-   {
-    "w": "A",
-    "start": 1.398,
-    "end": 1.398
-   },
-   {
-    "w": "quiet,",
-    "start": 1.448,
-    "end": 1.798
-   },
-   {
-    "w": "stable",
-    "start": 1.898,
-    "end": 2.148
-   },
-   {
-    "w": "glove",
-    "start": 2.198,
-    "end": 2.473
-   },
-   {
-    "w": "can",
-    "start": 2.498,
-    "end": 2.573
-   },
-   {
-    "w": "help",
-    "start": 2.598,
-    "end": 2.798
+    "start": 2.83,
+    "end": 3.255
    },
    {
     "w": "a",
-    "start": 2.798,
-    "end": 2.798
+    "start": 3.255,
+    "end": 3.255
    },
    {
     "w": "borderline",
-    "start": 2.873,
-    "end": 3.248
+    "start": 3.33,
+    "end": 3.905
    },
    {
     "w": "pitch",
-    "start": 3.298,
-    "end": 3.523
-   },
-   {
-    "w": "get",
-    "start": 3.573,
-    "end": 3.673
-   },
-   {
-    "w": "called",
-    "start": 3.698,
-    "end": 3.898
-   },
-   {
-    "w": "a",
-    "start": 3.898,
-    "end": 3.898
-   },
-   {
-    "w": "strike",
-    "start": 3.973,
-    "end": 4.298
-   },
-   {
-    "w": "when",
-    "start": 4.323,
-    "end": 4.448
-   },
-   {
-    "w": "an",
-    "start": 4.448,
-    "end": 4.473
-   },
-   {
-    "w": "umpire",
-    "start": 4.598,
-    "end": 4.998
-   },
-   {
-    "w": "makes",
-    "start": 5.023,
-    "end": 5.173
-   },
-   {
-    "w": "the",
-    "start": 5.198,
-    "end": 5.248
-   },
-   {
-    "w": "call.",
-    "start": 5.298,
-    "end": 5.923
-   },
-   {
-    "w": "With",
-    "start": 6.048,
-    "end": 6.148
-   },
-   {
-    "w": "automated",
-    "start": 6.273,
-    "end": 6.573
-   },
-   {
-    "w": "ball-strike",
-    "start": 6.623,
-    "end": 7.023
-   },
-   {
-    "w": "systems,",
-    "start": 7.073,
-    "end": 7.648
-   },
-   {
-    "w": "those",
-    "start": 7.748,
-    "end": 7.898
-   },
-   {
-    "w": "calls",
-    "start": 7.948,
-    "end": 8.173
+    "start": 3.955,
+    "end": 4.205
    },
    {
     "w": "can",
-    "start": 8.198,
-    "end": 8.273
+    "start": 4.255,
+    "end": 4.405
    },
    {
-    "w": "be",
-    "start": 8.298,
-    "end": 8.373
+    "w": "matter",
+    "start": 4.455,
+    "end": 5.005
    },
    {
-    "w": "challenged",
-    "start": 8.423,
-    "end": 8.973
+    "w": "when",
+    "start": 5.08,
+    "end": 5.205
    },
    {
-    "w": "or",
-    "start": 9.048,
-    "end": 9.123
+    "w": "a",
+    "start": 5.205,
+    "end": 5.205
    },
    {
-    "w": "made",
-    "start": 9.173,
-    "end": 9.348
+    "w": "human",
+    "start": 5.255,
+    "end": 5.555
    },
    {
-    "w": "by",
-    "start": 9.373,
-    "end": 9.498
+    "w": "umpire",
+    "start": 5.655,
+    "end": 6.105
+   },
+   {
+    "w": "is",
+    "start": 6.155,
+    "end": 6.255
+   },
+   {
+    "w": "making",
+    "start": 6.305,
+    "end": 6.555
    },
    {
     "w": "the",
-    "start": 9.523,
-    "end": 9.573
+    "start": 6.58,
+    "end": 6.63
    },
    {
-    "w": "system",
-    "start": 9.623,
-    "end": 9.898
-   },
-   {
-    "w": "instead.",
-    "start": 9.948,
-    "end": 10.411
+    "w": "call.",
+    "start": 6.68,
+    "end": 6.997
    }
   ]
  },
  {
   "i": 3,
   "id": "block",
-  "text": "With runners on, a ball in the dirt can't get by. He drops, smothers it, and keeps it in front, so nobody moves up.",
-  "spoken": "With runners on, a ball in the dirt can't get by. He drops, smothers it, and keeps it in front, so nobody moves up.",
-  "dur": 5.227,
+  "text": "You have to block balls in the dirt to keep runners from advancing.",
+  "spoken": "You have to block balls in the dirt to keep runners from advancing.",
+  "dur": 3.584,
   "words": [
    {
-    "w": "With",
-    "start": 0.048,
-    "end": 0.123
+    "w": "You",
+    "start": 0.055,
+    "end": 0.13
    },
    {
-    "w": "runners",
-    "start": 0.148,
-    "end": 0.348
+    "w": "have",
+    "start": 0.18,
+    "end": 0.33
    },
    {
-    "w": "on,",
-    "start": 0.498,
-    "end": 0.698
+    "w": "to",
+    "start": 0.355,
+    "end": 0.405
    },
    {
-    "w": "a",
-    "start": 0.698,
-    "end": 0.698
+    "w": "block",
+    "start": 0.455,
+    "end": 0.78
    },
    {
-    "w": "ball",
-    "start": 0.748,
-    "end": 0.973
+    "w": "balls",
+    "start": 0.855,
+    "end": 1.23
    },
    {
     "w": "in",
-    "start": 0.998,
-    "end": 1.048
+    "start": 1.255,
+    "end": 1.355
    },
    {
     "w": "the",
-    "start": 1.048,
-    "end": 1.098
+    "start": 1.355,
+    "end": 1.43
    },
    {
     "w": "dirt",
-    "start": 1.148,
-    "end": 1.323
+    "start": 1.48,
+    "end": 1.905
    },
    {
-    "w": "can't",
-    "start": 1.373,
-    "end": 1.523
+    "w": "to",
+    "start": 1.98,
+    "end": 2.055
    },
    {
-    "w": "get",
-    "start": 1.548,
-    "end": 1.623
+    "w": "keep",
+    "start": 2.105,
+    "end": 2.33
    },
    {
-    "w": "by.",
-    "start": 1.648,
-    "end": 2.198
+    "w": "runners",
+    "start": 2.405,
+    "end": 2.755
    },
    {
-    "w": "He",
-    "start": 2.323,
-    "end": 2.398
+    "w": "from",
+    "start": 2.805,
+    "end": 2.905
    },
    {
-    "w": "drops,",
-    "start": 2.448,
-    "end": 2.898
-   },
-   {
-    "w": "smothers",
-    "start": 3.048,
-    "end": 3.373
-   },
-   {
-    "w": "it,",
-    "start": 3.423,
-    "end": 3.473
-   },
-   {
-    "w": "and",
-    "start": 3.523,
-    "end": 3.598
-   },
-   {
-    "w": "keeps",
-    "start": 3.648,
-    "end": 3.798
-   },
-   {
-    "w": "it",
-    "start": 3.823,
-    "end": 3.873
-   },
-   {
-    "w": "in",
-    "start": 3.898,
-    "end": 3.948
-   },
-   {
-    "w": "front,",
-    "start": 4.023,
-    "end": 4.298
-   },
-   {
-    "w": "so",
-    "start": 4.373,
-    "end": 4.473
-   },
-   {
-    "w": "nobody",
-    "start": 4.523,
-    "end": 4.798
-   },
-   {
-    "w": "moves",
-    "start": 4.823,
-    "end": 4.973
-   },
-   {
-    "w": "up.",
-    "start": 5.073,
-    "end": 5.227
+    "w": "advancing.",
+    "start": 2.93,
+    "end": 3.584
    }
   ]
  },
  {
   "i": 4,
   "id": "throw",
-  "text": "When the runner goes, it's a quick exchange, clean footwork, a fast release, and a throw right to the bag.",
-  "spoken": "When the runner goes, it's a quick exchange, clean footwork, a fast release, and a throw right to the bag.",
-  "dur": 4.544,
+  "text": "And when someone steals, your exchange, footwork, arm, and accuracy all have to work together.",
+  "spoken": "And when someone steals, your exchange, footwork, arm, and accuracy all have to work together.",
+  "dur": 5.312,
   "words": [
    {
-    "w": "When",
+    "w": "And",
+    "start": 0.076,
+    "end": 0.151
+   },
+   {
+    "w": "when",
+    "start": 0.176,
+    "end": 0.326
+   },
+   {
+    "w": "someone",
+    "start": 0.376,
+    "end": 0.626
+   },
+   {
+    "w": "steals,",
+    "start": 0.676,
+    "end": 1.376
+   },
+   {
+    "w": "your",
+    "start": 1.501,
+    "end": 1.601
+   },
+   {
+    "w": "exchange,",
+    "start": 1.651,
+    "end": 2.351
+   },
+   {
+    "w": "footwork,",
+    "start": 2.426,
+    "end": 2.851
+   },
+   {
+    "w": "arm,",
+    "start": 3.051,
+    "end": 3.226
+   },
+   {
+    "w": "and",
+    "start": 3.276,
+    "end": 3.351
+   },
+   {
+    "w": "accuracy",
+    "start": 3.501,
+    "end": 3.976
+   },
+   {
+    "w": "all",
+    "start": 4.101,
+    "end": 4.251
+   },
+   {
+    "w": "have",
+    "start": 4.301,
+    "end": 4.451
+   },
+   {
+    "w": "to",
+    "start": 4.501,
+    "end": 4.576
+   },
+   {
+    "w": "work",
+    "start": 4.626,
+    "end": 4.826
+   },
+   {
+    "w": "together.",
+    "start": 4.876,
+    "end": 5.312
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "hit",
+  "text": "But the best all-around catchers can contribute at the plate, too.",
+  "spoken": "But the best all-around catchers can contribute at the plate, too.",
+  "dur": 3.307,
+  "words": [
+   {
+    "w": "But",
     "start": 0.026,
     "end": 0.126
    },
@@ -578,386 +467,256 @@
     "end": 0.201
    },
    {
-    "w": "runner",
-    "start": 0.226,
-    "end": 0.401
+    "w": "best",
+    "start": 0.251,
+    "end": 0.526
    },
    {
-    "w": "goes,",
-    "start": 0.451,
-    "end": 0.776
+    "w": "all-around",
+    "start": 0.651,
+    "end": 1.101
    },
    {
-    "w": "it's",
-    "start": 0.826,
-    "end": 0.951
-   },
-   {
-    "w": "a",
-    "start": 0.951,
-    "end": 0.951
-   },
-   {
-    "w": "quick",
-    "start": 1.001,
-    "end": 1.126
-   },
-   {
-    "w": "exchange,",
+    "w": "catchers",
     "start": 1.151,
     "end": 1.701
    },
    {
-    "w": "clean",
-    "start": 1.801,
-    "end": 2.026
-   },
-   {
-    "w": "footwork,",
-    "start": 2.076,
-    "end": 2.476
-   },
-   {
-    "w": "a",
-    "start": 2.476,
-    "end": 2.476
-   },
-   {
-    "w": "fast",
-    "start": 2.551,
-    "end": 2.801
-   },
-   {
-    "w": "release,",
-    "start": 2.826,
-    "end": 3.351
-   },
-   {
-    "w": "and",
-    "start": 3.451,
-    "end": 3.576
-   },
-   {
-    "w": "a",
-    "start": 3.576,
-    "end": 3.576
-   },
-   {
-    "w": "throw",
-    "start": 3.651,
-    "end": 3.876
-   },
-   {
-    "w": "right",
-    "start": 3.926,
-    "end": 4.051
-   },
-   {
-    "w": "to",
-    "start": 4.076,
-    "end": 4.126
-   },
-   {
-    "w": "the",
-    "start": 4.151,
-    "end": 4.201
-   },
-   {
-    "w": "bag.",
-    "start": 4.226,
-    "end": 4.544
-   }
-  ]
- },
- {
-  "i": 5,
-  "id": "hit",
-  "text": "A complete catcher can help at the plate too, driving the ball into the gap.",
-  "spoken": "A complete catcher can help at the plate too, driving the ball into the gap.",
-  "dur": 3.179,
-  "words": [
-   {
-    "w": "A",
-    "start": 0.048,
-    "end": 0.073
-   },
-   {
-    "w": "complete",
-    "start": 0.098,
-    "end": 0.373
-   },
-   {
-    "w": "catcher",
-    "start": 0.423,
-    "end": 0.698
-   },
-   {
     "w": "can",
-    "start": 0.723,
-    "end": 0.798
+    "start": 1.751,
+    "end": 1.826
    },
    {
-    "w": "help",
-    "start": 0.823,
-    "end": 0.973
+    "w": "contribute",
+    "start": 1.876,
+    "end": 2.326
    },
    {
     "w": "at",
-    "start": 0.998,
-    "end": 1.048
+    "start": 2.351,
+    "end": 2.401
    },
    {
     "w": "the",
-    "start": 1.073,
-    "end": 1.123
+    "start": 2.426,
+    "end": 2.476
    },
    {
-    "w": "plate",
-    "start": 1.173,
-    "end": 1.348
+    "w": "plate,",
+    "start": 2.526,
+    "end": 2.826
    },
    {
-    "w": "too,",
-    "start": 1.398,
-    "end": 1.823
-   },
-   {
-    "w": "driving",
-    "start": 1.948,
-    "end": 2.223
-   },
-   {
-    "w": "the",
-    "start": 2.248,
-    "end": 2.298
-   },
-   {
-    "w": "ball",
-    "start": 2.348,
-    "end": 2.573
-   },
-   {
-    "w": "into",
-    "start": 2.623,
-    "end": 2.748
-   },
-   {
-    "w": "the",
-    "start": 2.773,
-    "end": 2.823
-   },
-   {
-    "w": "gap.",
-    "start": 2.873,
-    "end": 3.179
+    "w": "too.",
+    "start": 2.951,
+    "end": 3.307
    }
   ]
  },
  {
   "i": 6,
   "id": "run",
-  "text": "And if he can run, that's a bonus, not a requirement, but it puts extra pressure on the defense.",
-  "spoken": "And if he can run, that's a bonus, not a requirement, but it puts extra pressure on the defense.",
-  "dur": 3.989,
+  "text": "And if you can run? That's another weapon.",
+  "spoken": "And if you can run? That's another weapon.",
+  "dur": 2.283,
   "words": [
    {
     "w": "And",
-    "start": 0.051,
-    "end": 0.126
+    "start": 0.119,
+    "end": 0.194
    },
    {
     "w": "if",
-    "start": 0.151,
-    "end": 0.201
+    "start": 0.219,
+    "end": 0.319
    },
    {
-    "w": "he",
-    "start": 0.226,
-    "end": 0.301
+    "w": "you",
+    "start": 0.369,
+    "end": 0.444
    },
    {
     "w": "can",
-    "start": 0.326,
-    "end": 0.401
+    "start": 0.494,
+    "end": 0.644
    },
    {
-    "w": "run,",
-    "start": 0.451,
-    "end": 0.876
+    "w": "run?",
+    "start": 0.694,
+    "end": 1.094
    },
    {
-    "w": "that's",
-    "start": 0.976,
-    "end": 1.151
+    "w": "That's",
+    "start": 1.219,
+    "end": 1.419
    },
    {
-    "w": "a",
-    "start": 1.151,
-    "end": 1.151
+    "w": "another",
+    "start": 1.444,
+    "end": 1.744
    },
    {
-    "w": "bonus,",
-    "start": 1.226,
-    "end": 1.626
-   },
-   {
-    "w": "not",
-    "start": 1.676,
-    "end": 1.826
-   },
-   {
-    "w": "a",
-    "start": 1.826,
-    "end": 1.826
-   },
-   {
-    "w": "requirement,",
-    "start": 1.851,
-    "end": 2.401
-   },
-   {
-    "w": "but",
-    "start": 2.451,
-    "end": 2.551
-   },
-   {
-    "w": "it",
-    "start": 2.576,
-    "end": 2.626
-   },
-   {
-    "w": "puts",
-    "start": 2.651,
-    "end": 2.801
-   },
-   {
-    "w": "extra",
-    "start": 2.876,
-    "end": 3.026
-   },
-   {
-    "w": "pressure",
-    "start": 3.076,
-    "end": 3.351
-   },
-   {
-    "w": "on",
-    "start": 3.401,
-    "end": 3.451
-   },
-   {
-    "w": "the",
-    "start": 3.451,
-    "end": 3.501
-   },
-   {
-    "w": "defense.",
-    "start": 3.526,
-    "end": 3.989
+    "w": "weapon.",
+    "start": 1.794,
+    "end": 2.283
    }
   ]
  },
  {
   "i": 7,
-  "id": "end",
-  "text": "Six skills. Most catchers lean on a few strengths, but the more you bring, the more complete you are.",
-  "spoken": "Six skills. Most catchers lean on a few strengths, but the more you bring, the more complete you are.",
-  "dur": 4.373,
+  "id": "l1",
+  "text": "Pitch calling.",
+  "spoken": "Pitch calling.",
+  "dur": 0.981,
   "words": [
    {
-    "w": "Six",
-    "start": 0.094,
-    "end": 0.219
+    "w": "Pitch",
+    "start": 0.051,
+    "end": 0.301
    },
    {
-    "w": "skills.",
-    "start": 0.269,
-    "end": 0.919
-   },
+    "w": "calling.",
+    "start": 0.351,
+    "end": 0.981
+   }
+  ]
+ },
+ {
+  "i": 8,
+  "id": "l2",
+  "text": "Framing.",
+  "spoken": "Framing.",
+  "dur": 0.811,
+  "words": [
    {
-    "w": "Most",
-    "start": 1.044,
-    "end": 1.194
-   },
+    "w": "Framing.",
+    "start": 0.144,
+    "end": 0.811
+   }
+  ]
+ },
+ {
+  "i": 9,
+  "id": "l3",
+  "text": "Blocking.",
+  "spoken": "Blocking.",
+  "dur": 0.811,
+  "words": [
    {
-    "w": "catchers",
-    "start": 1.244,
-    "end": 1.594
-   },
+    "w": "Blocking.",
+    "start": 0.098,
+    "end": 0.811
+   }
+  ]
+ },
+ {
+  "i": 10,
+  "id": "l4",
+  "text": "Throwing.",
+  "spoken": "Throwing.",
+  "dur": 0.768,
+  "words": [
    {
-    "w": "lean",
-    "start": 1.644,
-    "end": 1.819
-   },
+    "w": "Throwing.",
+    "start": 0.123,
+    "end": 0.768
+   }
+  ]
+ },
+ {
+  "i": 11,
+  "id": "l5",
+  "text": "Hitting.",
+  "spoken": "Hitting.",
+  "dur": 0.683,
+  "words": [
    {
-    "w": "on",
-    "start": 1.869,
-    "end": 1.969
-   },
+    "w": "Hitting.",
+    "start": 0.119,
+    "end": 0.683
+   }
+  ]
+ },
+ {
+  "i": 12,
+  "id": "l6",
+  "text": "Speed.",
+  "spoken": "Speed.",
+  "dur": 0.768,
+  "words": [
    {
-    "w": "a",
-    "start": 1.969,
-    "end": 1.969
-   },
+    "w": "Speed.",
+    "start": 0.119,
+    "end": 0.768
+   }
+  ]
+ },
+ {
+  "i": 13,
+  "id": "end",
+  "text": "A complete catcher can change the game in more ways than one.",
+  "spoken": "A complete catcher can change the game in more ways than one.",
+  "dur": 3.328,
+  "words": [
    {
-    "w": "few",
-    "start": 2.019,
-    "end": 2.144
-   },
-   {
-    "w": "strengths,",
-    "start": 2.194,
-    "end": 2.469
-   },
-   {
-    "w": "but",
-    "start": 2.519,
-    "end": 2.619
-   },
-   {
-    "w": "the",
-    "start": 2.644,
-    "end": 2.694
-   },
-   {
-    "w": "more",
-    "start": 2.744,
-    "end": 2.894
-   },
-   {
-    "w": "you",
-    "start": 2.919,
-    "end": 2.994
-   },
-   {
-    "w": "bring,",
-    "start": 3.044,
-    "end": 3.419
-   },
-   {
-    "w": "the",
-    "start": 3.494,
-    "end": 3.544
-   },
-   {
-    "w": "more",
-    "start": 3.569,
-    "end": 3.694
+    "w": "A",
+    "start": 0.119,
+    "end": 0.169
    },
    {
     "w": "complete",
-    "start": 3.719,
-    "end": 3.994
+    "start": 0.219,
+    "end": 0.644
    },
    {
-    "w": "you",
-    "start": 4.044,
-    "end": 4.119
+    "w": "catcher",
+    "start": 0.694,
+    "end": 1.069
    },
    {
-    "w": "are.",
-    "start": 4.194,
-    "end": 4.373
+    "w": "can",
+    "start": 1.119,
+    "end": 1.219
+   },
+   {
+    "w": "change",
+    "start": 1.269,
+    "end": 1.594
+   },
+   {
+    "w": "the",
+    "start": 1.619,
+    "end": 1.669
+   },
+   {
+    "w": "game",
+    "start": 1.719,
+    "end": 2.044
+   },
+   {
+    "w": "in",
+    "start": 2.094,
+    "end": 2.194
+   },
+   {
+    "w": "more",
+    "start": 2.244,
+    "end": 2.444
+   },
+   {
+    "w": "ways",
+    "start": 2.494,
+    "end": 2.769
+   },
+   {
+    "w": "than",
+    "start": 2.819,
+    "end": 2.969
+   },
+   {
+    "w": "one.",
+    "start": 3.019,
+    "end": 3.328
    }
   ]
  }

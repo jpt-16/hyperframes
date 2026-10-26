@@ -4,7 +4,8 @@ import json, os, subprocess, wave
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); VO = os.path.join(HERE, "..", "assets", "vo")
 SR = 48000
-GAP_AFTER = {"hook": 0.25, "call": 0.25, "frame": 0.25, "block": 0.25, "throw": 0.25, "hit": 0.2, "run": 0.25, "end": 1.4}   # the end card holds after the last line
+GAP_AFTER = {"hook": 0.25, "call": 0.3, "frame": 0.7, "block": 0.6, "throw": 0.5, "hit": 0.2, "run": 0.6,
+             "l1": 0.2, "l2": 0.2, "l3": 0.2, "l4": 0.2, "l5": 0.2, "l6": 0.35, "end": 1.6}   # a beat after each skill in the list; the end card holds after the last line
 START = 0.25
 
 def load(path):
