@@ -1,0 +1,637 @@
+[
+ {
+  "i": 0,
+  "id": "hook",
+  "text": "The hardest part of catching a fly ball happens before you even start running.",
+  "spoken": "The hardest part of catching a fly ball happens before you even start running.",
+  "dur": 3.179,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.048,
+    "end": 0.098
+   },
+   {
+    "w": "hardest",
+    "start": 0.148,
+    "end": 0.423
+   },
+   {
+    "w": "part",
+    "start": 0.473,
+    "end": 0.648
+   },
+   {
+    "w": "of",
+    "start": 0.673,
+    "end": 0.748
+   },
+   {
+    "w": "catching",
+    "start": 0.798,
+    "end": 1.123
+   },
+   {
+    "w": "a",
+    "start": 1.123,
+    "end": 1.123
+   },
+   {
+    "w": "fly",
+    "start": 1.198,
+    "end": 1.423
+   },
+   {
+    "w": "ball",
+    "start": 1.473,
+    "end": 1.698
+   },
+   {
+    "w": "happens",
+    "start": 1.748,
+    "end": 2.098
+   },
+   {
+    "w": "before",
+    "start": 2.123,
+    "end": 2.348
+   },
+   {
+    "w": "you",
+    "start": 2.373,
+    "end": 2.448
+   },
+   {
+    "w": "even",
+    "start": 2.498,
+    "end": 2.623
+   },
+   {
+    "w": "start",
+    "start": 2.648,
+    "end": 2.823
+   },
+   {
+    "w": "running.",
+    "start": 2.873,
+    "end": 3.179
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "split",
+  "text": "On a shallow ball, you need to charge. On a deep ball, you need to turn and run. Read it wrong, and the first step can cost you the catch.",
+  "spoken": "On a shallow ball, you need to charge. On a deep ball, you need to turn and run. Read it wrong, and the first step can cost you the catch.",
+  "dur": 6.037,
+  "words": [
+   {
+    "w": "On",
+    "start": 0.14,
+    "end": 0.24
+   },
+   {
+    "w": "a",
+    "start": 0.24,
+    "end": 0.24
+   },
+   {
+    "w": "shallow",
+    "start": 0.315,
+    "end": 0.59
+   },
+   {
+    "w": "ball,",
+    "start": 0.64,
+    "end": 0.84
+   },
+   {
+    "w": "you",
+    "start": 0.89,
+    "end": 0.965
+   },
+   {
+    "w": "need",
+    "start": 0.99,
+    "end": 1.115
+   },
+   {
+    "w": "to",
+    "start": 1.14,
+    "end": 1.19
+   },
+   {
+    "w": "charge.",
+    "start": 1.24,
+    "end": 1.84
+   },
+   {
+    "w": "On",
+    "start": 1.99,
+    "end": 2.09
+   },
+   {
+    "w": "a",
+    "start": 2.09,
+    "end": 2.09
+   },
+   {
+    "w": "deep",
+    "start": 2.14,
+    "end": 2.265
+   },
+   {
+    "w": "ball,",
+    "start": 2.315,
+    "end": 2.54
+   },
+   {
+    "w": "you",
+    "start": 2.59,
+    "end": 2.665
+   },
+   {
+    "w": "need",
+    "start": 2.69,
+    "end": 2.815
+   },
+   {
+    "w": "to",
+    "start": 2.84,
+    "end": 2.89
+   },
+   {
+    "w": "turn",
+    "start": 2.94,
+    "end": 3.14
+   },
+   {
+    "w": "and",
+    "start": 3.165,
+    "end": 3.24
+   },
+   {
+    "w": "run.",
+    "start": 3.29,
+    "end": 3.765
+   },
+   {
+    "w": "Read",
+    "start": 3.915,
+    "end": 4.04
+   },
+   {
+    "w": "it",
+    "start": 4.065,
+    "end": 4.115
+   },
+   {
+    "w": "wrong,",
+    "start": 4.165,
+    "end": 4.465
+   },
+   {
+    "w": "and",
+    "start": 4.515,
+    "end": 4.59
+   },
+   {
+    "w": "the",
+    "start": 4.615,
+    "end": 4.665
+   },
+   {
+    "w": "first",
+    "start": 4.715,
+    "end": 4.865
+   },
+   {
+    "w": "step",
+    "start": 4.89,
+    "end": 5.04
+   },
+   {
+    "w": "can",
+    "start": 5.065,
+    "end": 5.14
+   },
+   {
+    "w": "cost",
+    "start": 5.19,
+    "end": 5.415
+   },
+   {
+    "w": "you",
+    "start": 5.44,
+    "end": 5.515
+   },
+   {
+    "w": "the",
+    "start": 5.54,
+    "end": 5.59
+   },
+   {
+    "w": "catch.",
+    "start": 5.64,
+    "end": 6.037
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "pos",
+  "text": "And the read changes with your position. Center fielders cover huge gaps. Corner outfielders have to account for the foul lines, their angles, and how the ball moves through the air.",
+  "spoken": "And the read changes with your position. Center fielders cover huge gaps. Corner outfielders have to account for the foul lines, their angles, and how the ball moves through the air.",
+  "dur": 8.427,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.051,
+    "end": 0.126
+   },
+   {
+    "w": "the",
+    "start": 0.151,
+    "end": 0.201
+   },
+   {
+    "w": "read",
+    "start": 0.251,
+    "end": 0.426
+   },
+   {
+    "w": "changes",
+    "start": 0.476,
+    "end": 0.851
+   },
+   {
+    "w": "with",
+    "start": 0.876,
+    "end": 0.951
+   },
+   {
+    "w": "your",
+    "start": 0.976,
+    "end": 1.051
+   },
+   {
+    "w": "position.",
+    "start": 1.076,
+    "end": 1.751
+   },
+   {
+    "w": "Center",
+    "start": 1.901,
+    "end": 2.126
+   },
+   {
+    "w": "fielders",
+    "start": 2.201,
+    "end": 2.576
+   },
+   {
+    "w": "cover",
+    "start": 2.626,
+    "end": 2.801
+   },
+   {
+    "w": "huge",
+    "start": 2.901,
+    "end": 3.176
+   },
+   {
+    "w": "gaps.",
+    "start": 3.226,
+    "end": 3.776
+   },
+   {
+    "w": "Corner",
+    "start": 3.901,
+    "end": 4.151
+   },
+   {
+    "w": "outfielders",
+    "start": 4.226,
+    "end": 4.751
+   },
+   {
+    "w": "have",
+    "start": 4.776,
+    "end": 4.876
+   },
+   {
+    "w": "to",
+    "start": 4.901,
+    "end": 4.951
+   },
+   {
+    "w": "account",
+    "start": 5.001,
+    "end": 5.276
+   },
+   {
+    "w": "for",
+    "start": 5.301,
+    "end": 5.351
+   },
+   {
+    "w": "the",
+    "start": 5.351,
+    "end": 5.401
+   },
+   {
+    "w": "foul",
+    "start": 5.476,
+    "end": 5.701
+   },
+   {
+    "w": "lines,",
+    "start": 5.726,
+    "end": 6.076
+   },
+   {
+    "w": "their",
+    "start": 6.126,
+    "end": 6.226
+   },
+   {
+    "w": "angles,",
+    "start": 6.376,
+    "end": 6.851
+   },
+   {
+    "w": "and",
+    "start": 6.951,
+    "end": 7.026
+   },
+   {
+    "w": "how",
+    "start": 7.051,
+    "end": 7.176
+   },
+   {
+    "w": "the",
+    "start": 7.201,
+    "end": 7.251
+   },
+   {
+    "w": "ball",
+    "start": 7.301,
+    "end": 7.551
+   },
+   {
+    "w": "moves",
+    "start": 7.601,
+    "end": 7.826
+   },
+   {
+    "w": "through",
+    "start": 7.876,
+    "end": 7.976
+   },
+   {
+    "w": "the",
+    "start": 8.001,
+    "end": 8.076
+   },
+   {
+    "w": "air.",
+    "start": 8.251,
+    "end": 8.427
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "spin",
+  "text": "Spin, wind, and contact can make a ball slice away from you. You can't just run toward where it first looks like it's going.",
+  "spoken": "Spin, wind, and contact can make a ball slice away from you. You can't just run toward where it first looks like it's going.",
+  "dur": 5.675,
+  "words": [
+   {
+    "w": "Spin,",
+    "start": 0.09,
+    "end": 0.49
+   },
+   {
+    "w": "wind,",
+    "start": 0.615,
+    "end": 0.965
+   },
+   {
+    "w": "and",
+    "start": 1.015,
+    "end": 1.09
+   },
+   {
+    "w": "contact",
+    "start": 1.14,
+    "end": 1.64
+   },
+   {
+    "w": "can",
+    "start": 1.69,
+    "end": 1.765
+   },
+   {
+    "w": "make",
+    "start": 1.79,
+    "end": 1.965
+   },
+   {
+    "w": "a",
+    "start": 1.965,
+    "end": 1.965
+   },
+   {
+    "w": "ball",
+    "start": 2.015,
+    "end": 2.215
+   },
+   {
+    "w": "slice",
+    "start": 2.29,
+    "end": 2.54
+   },
+   {
+    "w": "away",
+    "start": 2.565,
+    "end": 2.74
+   },
+   {
+    "w": "from",
+    "start": 2.79,
+    "end": 2.89
+   },
+   {
+    "w": "you.",
+    "start": 2.94,
+    "end": 3.34
+   },
+   {
+    "w": "You",
+    "start": 3.465,
+    "end": 3.54
+   },
+   {
+    "w": "can't",
+    "start": 3.565,
+    "end": 3.715
+   },
+   {
+    "w": "just",
+    "start": 3.74,
+    "end": 3.915
+   },
+   {
+    "w": "run",
+    "start": 3.965,
+    "end": 4.14
+   },
+   {
+    "w": "toward",
+    "start": 4.19,
+    "end": 4.44
+   },
+   {
+    "w": "where",
+    "start": 4.465,
+    "end": 4.565
+   },
+   {
+    "w": "it",
+    "start": 4.59,
+    "end": 4.64
+   },
+   {
+    "w": "first",
+    "start": 4.69,
+    "end": 4.865
+   },
+   {
+    "w": "looks",
+    "start": 4.915,
+    "end": 5.04
+   },
+   {
+    "w": "like",
+    "start": 5.065,
+    "end": 5.19
+   },
+   {
+    "w": "it's",
+    "start": 5.215,
+    "end": 5.29
+   },
+   {
+    "w": "going.",
+    "start": 5.34,
+    "end": 5.675
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "hitter",
+  "text": "Knowing the hitter's tendencies can help you anticipate. But once the ball's hit, reading its actual flight is everything.",
+  "spoken": "Knowing the hitter's tendencies can help you anticipate. But once the ball's hit, reading its actual flight is everything.",
+  "dur": 5.525,
+  "words": [
+   {
+    "w": "Knowing",
+    "start": 0.076,
+    "end": 0.326
+   },
+   {
+    "w": "the",
+    "start": 0.351,
+    "end": 0.401
+   },
+   {
+    "w": "hitter's",
+    "start": 0.451,
+    "end": 0.651
+   },
+   {
+    "w": "tendencies",
+    "start": 0.701,
+    "end": 1.151
+   },
+   {
+    "w": "can",
+    "start": 1.176,
+    "end": 1.251
+   },
+   {
+    "w": "help",
+    "start": 1.301,
+    "end": 1.451
+   },
+   {
+    "w": "you",
+    "start": 1.476,
+    "end": 1.576
+   },
+   {
+    "w": "anticipate.",
+    "start": 1.651,
+    "end": 2.526
+   },
+   {
+    "w": "But",
+    "start": 2.626,
+    "end": 2.726
+   },
+   {
+    "w": "once",
+    "start": 2.751,
+    "end": 2.926
+   },
+   {
+    "w": "the",
+    "start": 2.951,
+    "end": 3.001
+   },
+   {
+    "w": "ball's",
+    "start": 3.051,
+    "end": 3.326
+   },
+   {
+    "w": "hit,",
+    "start": 3.376,
+    "end": 3.776
+   },
+   {
+    "w": "reading",
+    "start": 3.926,
+    "end": 4.151
+   },
+   {
+    "w": "its",
+    "start": 4.176,
+    "end": 4.251
+   },
+   {
+    "w": "actual",
+    "start": 4.376,
+    "end": 4.576
+   },
+   {
+    "w": "flight",
+    "start": 4.651,
+    "end": 4.926
+   },
+   {
+    "w": "is",
+    "start": 4.976,
+    "end": 5.051
+   },
+   {
+    "w": "everything.",
+    "start": 5.151,
+    "end": 5.525
+   }
+  ]
+ }
+]
