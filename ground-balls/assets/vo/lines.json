@@ -1,0 +1,622 @@
+[
+ {
+  "i": 0,
+  "id": "hook",
+  "text": "Great infielders don't just field the ball. They work through it.",
+  "spoken": "Great infielders don't just field the ball. They work through it.",
+  "dur": 3.115,
+  "words": [
+   {
+    "w": "Great",
+    "start": 0.051,
+    "end": 0.301
+   },
+   {
+    "w": "infielders",
+    "start": 0.351,
+    "end": 0.901
+   },
+   {
+    "w": "don't",
+    "start": 0.951,
+    "end": 1.101
+   },
+   {
+    "w": "just",
+    "start": 1.126,
+    "end": 1.276
+   },
+   {
+    "w": "field",
+    "start": 1.326,
+    "end": 1.551
+   },
+   {
+    "w": "the",
+    "start": 1.576,
+    "end": 1.626
+   },
+   {
+    "w": "ball.",
+    "start": 1.676,
+    "end": 2.176
+   },
+   {
+    "w": "They",
+    "start": 2.301,
+    "end": 2.401
+   },
+   {
+    "w": "work",
+    "start": 2.451,
+    "end": 2.651
+   },
+   {
+    "w": "through",
+    "start": 2.726,
+    "end": 2.951
+   },
+   {
+    "w": "it.",
+    "start": 3.001,
+    "end": 3.115
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "wrong",
+  "text": "If you wait for the ball, you can get stuck reacting to every hop, and lose the momentum you need to make the play.",
+  "spoken": "If you wait for the ball, you can get stuck reacting to every hop, and lose the momentum you need to make the play.",
+  "dur": 5.653,
+  "words": [
+   {
+    "w": "If",
+    "start": 0.051,
+    "end": 0.126
+   },
+   {
+    "w": "you",
+    "start": 0.176,
+    "end": 0.251
+   },
+   {
+    "w": "wait",
+    "start": 0.301,
+    "end": 0.501
+   },
+   {
+    "w": "for",
+    "start": 0.551,
+    "end": 0.651
+   },
+   {
+    "w": "the",
+    "start": 0.651,
+    "end": 0.701
+   },
+   {
+    "w": "ball,",
+    "start": 0.751,
+    "end": 1.251
+   },
+   {
+    "w": "you",
+    "start": 1.351,
+    "end": 1.426
+   },
+   {
+    "w": "can",
+    "start": 1.451,
+    "end": 1.526
+   },
+   {
+    "w": "get",
+    "start": 1.576,
+    "end": 1.726
+   },
+   {
+    "w": "stuck",
+    "start": 1.776,
+    "end": 2.001
+   },
+   {
+    "w": "reacting",
+    "start": 2.051,
+    "end": 2.476
+   },
+   {
+    "w": "to",
+    "start": 2.526,
+    "end": 2.601
+   },
+   {
+    "w": "every",
+    "start": 2.701,
+    "end": 2.901
+   },
+   {
+    "w": "hop,",
+    "start": 2.951,
+    "end": 3.426
+   },
+   {
+    "w": "and",
+    "start": 3.551,
+    "end": 3.626
+   },
+   {
+    "w": "lose",
+    "start": 3.676,
+    "end": 3.901
+   },
+   {
+    "w": "the",
+    "start": 3.951,
+    "end": 4.001
+   },
+   {
+    "w": "momentum",
+    "start": 4.051,
+    "end": 4.551
+   },
+   {
+    "w": "you",
+    "start": 4.601,
+    "end": 4.676
+   },
+   {
+    "w": "need",
+    "start": 4.726,
+    "end": 4.926
+   },
+   {
+    "w": "to",
+    "start": 4.976,
+    "end": 5.026
+   },
+   {
+    "w": "make",
+    "start": 5.051,
+    "end": 5.226
+   },
+   {
+    "w": "the",
+    "start": 5.251,
+    "end": 5.301
+   },
+   {
+    "w": "play.",
+    "start": 5.351,
+    "end": 5.653
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "hop",
+  "text": "You have to read the hop. Charge when you can attack the ball under control. If the hop or timing demands it, create space and get your body into position.",
+  "spoken": "You have to read the hop. Charge when you can attack the ball under control. If the hop or timing demands it, create space and get your body into position.",
+  "dur": 7.915,
+  "words": [
+   {
+    "w": "You",
+    "start": 0.051,
+    "end": 0.126
+   },
+   {
+    "w": "have",
+    "start": 0.176,
+    "end": 0.326
+   },
+   {
+    "w": "to",
+    "start": 0.351,
+    "end": 0.426
+   },
+   {
+    "w": "read",
+    "start": 0.476,
+    "end": 0.626
+   },
+   {
+    "w": "the",
+    "start": 0.651,
+    "end": 0.701
+   },
+   {
+    "w": "hop.",
+    "start": 0.751,
+    "end": 1.251
+   },
+   {
+    "w": "Charge",
+    "start": 1.401,
+    "end": 1.776
+   },
+   {
+    "w": "when",
+    "start": 1.801,
+    "end": 1.876
+   },
+   {
+    "w": "you",
+    "start": 1.901,
+    "end": 1.976
+   },
+   {
+    "w": "can",
+    "start": 2.001,
+    "end": 2.076
+   },
+   {
+    "w": "attack",
+    "start": 2.101,
+    "end": 2.401
+   },
+   {
+    "w": "the",
+    "start": 2.451,
+    "end": 2.501
+   },
+   {
+    "w": "ball",
+    "start": 2.551,
+    "end": 2.801
+   },
+   {
+    "w": "under",
+    "start": 2.851,
+    "end": 2.951
+   },
+   {
+    "w": "control.",
+    "start": 3.001,
+    "end": 3.726
+   },
+   {
+    "w": "If",
+    "start": 3.851,
+    "end": 3.926
+   },
+   {
+    "w": "the",
+    "start": 3.951,
+    "end": 4.001
+   },
+   {
+    "w": "hop",
+    "start": 4.076,
+    "end": 4.351
+   },
+   {
+    "w": "or",
+    "start": 4.401,
+    "end": 4.501
+   },
+   {
+    "w": "timing",
+    "start": 4.551,
+    "end": 4.901
+   },
+   {
+    "w": "demands",
+    "start": 4.951,
+    "end": 5.301
+   },
+   {
+    "w": "it,",
+    "start": 5.351,
+    "end": 5.601
+   },
+   {
+    "w": "create",
+    "start": 5.701,
+    "end": 6.051
+   },
+   {
+    "w": "space",
+    "start": 6.101,
+    "end": 6.426
+   },
+   {
+    "w": "and",
+    "start": 6.476,
+    "end": 6.551
+   },
+   {
+    "w": "get",
+    "start": 6.601,
+    "end": 6.726
+   },
+   {
+    "w": "your",
+    "start": 6.751,
+    "end": 6.826
+   },
+   {
+    "w": "body",
+    "start": 6.876,
+    "end": 7.151
+   },
+   {
+    "w": "into",
+    "start": 7.201,
+    "end": 7.326
+   },
+   {
+    "w": "position.",
+    "start": 7.376,
+    "end": 7.915
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "work",
+  "text": "Either way, don't stop your feet at the ball. Work through it, stay balanced, and let your momentum carry you toward your target.",
+  "spoken": "Either way, don't stop your feet at the ball. Work through it, stay balanced, and let your momentum carry you toward your target.",
+  "dur": 6.293,
+  "words": [
+   {
+    "w": "Either",
+    "start": 0.101,
+    "end": 0.276
+   },
+   {
+    "w": "way,",
+    "start": 0.326,
+    "end": 0.526
+   },
+   {
+    "w": "don't",
+    "start": 0.576,
+    "end": 0.726
+   },
+   {
+    "w": "stop",
+    "start": 0.776,
+    "end": 1.001
+   },
+   {
+    "w": "your",
+    "start": 1.026,
+    "end": 1.101
+   },
+   {
+    "w": "feet",
+    "start": 1.151,
+    "end": 1.301
+   },
+   {
+    "w": "at",
+    "start": 1.326,
+    "end": 1.376
+   },
+   {
+    "w": "the",
+    "start": 1.401,
+    "end": 1.451
+   },
+   {
+    "w": "ball.",
+    "start": 1.501,
+    "end": 2.101
+   },
+   {
+    "w": "Work",
+    "start": 2.251,
+    "end": 2.476
+   },
+   {
+    "w": "through",
+    "start": 2.551,
+    "end": 2.751
+   },
+   {
+    "w": "it,",
+    "start": 2.801,
+    "end": 2.976
+   },
+   {
+    "w": "stay",
+    "start": 3.076,
+    "end": 3.301
+   },
+   {
+    "w": "balanced,",
+    "start": 3.351,
+    "end": 3.951
+   },
+   {
+    "w": "and",
+    "start": 4.051,
+    "end": 4.126
+   },
+   {
+    "w": "let",
+    "start": 4.176,
+    "end": 4.276
+   },
+   {
+    "w": "your",
+    "start": 4.326,
+    "end": 4.401
+   },
+   {
+    "w": "momentum",
+    "start": 4.451,
+    "end": 4.951
+   },
+   {
+    "w": "carry",
+    "start": 5.001,
+    "end": 5.251
+   },
+   {
+    "w": "you",
+    "start": 5.301,
+    "end": 5.451
+   },
+   {
+    "w": "toward",
+    "start": 5.501,
+    "end": 5.751
+   },
+   {
+    "w": "your",
+    "start": 5.776,
+    "end": 5.851
+   },
+   {
+    "w": "target.",
+    "start": 5.901,
+    "end": 6.293
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "pay",
+  "text": "Now you're moving toward first instead of starting from a standstill. That can make your transfer more efficient and help you make a quicker, more controlled throw.",
+  "spoken": "Now you're moving toward first instead of starting from a standstill. That can make your transfer more efficient and help you make a quicker, more controlled throw.",
+  "dur": 7.915,
+  "words": [
+   {
+    "w": "Now",
+    "start": 0.076,
+    "end": 0.301
+   },
+   {
+    "w": "you're",
+    "start": 0.351,
+    "end": 0.426
+   },
+   {
+    "w": "moving",
+    "start": 0.476,
+    "end": 0.776
+   },
+   {
+    "w": "toward",
+    "start": 0.826,
+    "end": 1.151
+   },
+   {
+    "w": "first",
+    "start": 1.226,
+    "end": 1.476
+   },
+   {
+    "w": "instead",
+    "start": 1.526,
+    "end": 1.776
+   },
+   {
+    "w": "of",
+    "start": 1.801,
+    "end": 1.851
+   },
+   {
+    "w": "starting",
+    "start": 1.901,
+    "end": 2.226
+   },
+   {
+    "w": "from",
+    "start": 2.276,
+    "end": 2.426
+   },
+   {
+    "w": "a",
+    "start": 2.426,
+    "end": 2.426
+   },
+   {
+    "w": "standstill.",
+    "start": 2.476,
+    "end": 3.351
+   },
+   {
+    "w": "That",
+    "start": 3.476,
+    "end": 3.601
+   },
+   {
+    "w": "can",
+    "start": 3.651,
+    "end": 3.726
+   },
+   {
+    "w": "make",
+    "start": 3.751,
+    "end": 3.901
+   },
+   {
+    "w": "your",
+    "start": 3.926,
+    "end": 4.001
+   },
+   {
+    "w": "transfer",
+    "start": 4.051,
+    "end": 4.526
+   },
+   {
+    "w": "more",
+    "start": 4.576,
+    "end": 4.726
+   },
+   {
+    "w": "efficient",
+    "start": 4.751,
+    "end": 5.376
+   },
+   {
+    "w": "and",
+    "start": 5.451,
+    "end": 5.526
+   },
+   {
+    "w": "help",
+    "start": 5.576,
+    "end": 5.776
+   },
+   {
+    "w": "you",
+    "start": 5.801,
+    "end": 5.876
+   },
+   {
+    "w": "make",
+    "start": 5.901,
+    "end": 6.101
+   },
+   {
+    "w": "a",
+    "start": 6.101,
+    "end": 6.101
+   },
+   {
+    "w": "quicker,",
+    "start": 6.151,
+    "end": 6.601
+   },
+   {
+    "w": "more",
+    "start": 6.726,
+    "end": 6.876
+   },
+   {
+    "w": "controlled",
+    "start": 6.926,
+    "end": 7.401
+   },
+   {
+    "w": "throw.",
+    "start": 7.476,
+    "end": 7.915
+   }
+  ]
+ }
+]
