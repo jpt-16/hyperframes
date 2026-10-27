@@ -1,0 +1,623 @@
+[
+ {
+  "i": 0,
+  "id": "q",
+  "text": "Why does every team want a left-handed pitcher?",
+  "spoken": "Why does every team want a left-handed pitcher?",
+  "dur": 2.539,
+  "words": [
+   {
+    "w": "Why",
+    "start": 0.055,
+    "end": 0.205
+   },
+   {
+    "w": "does",
+    "start": 0.23,
+    "end": 0.38
+   },
+   {
+    "w": "every",
+    "start": 0.48,
+    "end": 0.68
+   },
+   {
+    "w": "team",
+    "start": 0.73,
+    "end": 0.98
+   },
+   {
+    "w": "want",
+    "start": 1.03,
+    "end": 1.28
+   },
+   {
+    "w": "a",
+    "start": 1.28,
+    "end": 1.28
+   },
+   {
+    "w": "left-handed",
+    "start": 1.33,
+    "end": 1.905
+   },
+   {
+    "w": "pitcher?",
+    "start": 1.955,
+    "end": 2.539
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "see",
+  "text": "For starters, most hitters grow up seeing far more right-handed pitching.",
+  "spoken": "For starters, most hitters grow up seeing far more right-handed pitching.",
+  "dur": 3.883,
+  "words": [
+   {
+    "w": "For",
+    "start": 0.073,
+    "end": 0.173
+   },
+   {
+    "w": "starters,",
+    "start": 0.223,
+    "end": 0.898
+   },
+   {
+    "w": "most",
+    "start": 0.998,
+    "end": 1.198
+   },
+   {
+    "w": "hitters",
+    "start": 1.248,
+    "end": 1.523
+   },
+   {
+    "w": "grow",
+    "start": 1.573,
+    "end": 1.773
+   },
+   {
+    "w": "up",
+    "start": 1.823,
+    "end": 1.923
+   },
+   {
+    "w": "seeing",
+    "start": 1.973,
+    "end": 2.223
+   },
+   {
+    "w": "far",
+    "start": 2.298,
+    "end": 2.523
+   },
+   {
+    "w": "more",
+    "start": 2.523,
+    "end": 2.748
+   },
+   {
+    "w": "right-handed",
+    "start": 2.798,
+    "end": 3.398
+   },
+   {
+    "w": "pitching.",
+    "start": 3.448,
+    "end": 3.883
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "angle",
+  "text": "A lefty's release angle and pitch movement can look completely different.",
+  "spoken": "A lefty's release angle and pitch movement can look completely different.",
+  "dur": 3.669,
+  "words": [
+   {
+    "w": "A",
+    "start": 0.098,
+    "end": 0.148
+   },
+   {
+    "w": "lefty's",
+    "start": 0.198,
+    "end": 0.573
+   },
+   {
+    "w": "release",
+    "start": 0.623,
+    "end": 0.923
+   },
+   {
+    "w": "angle",
+    "start": 1.048,
+    "end": 1.298
+   },
+   {
+    "w": "and",
+    "start": 1.348,
+    "end": 1.423
+   },
+   {
+    "w": "pitch",
+    "start": 1.473,
+    "end": 1.723
+   },
+   {
+    "w": "movement",
+    "start": 1.773,
+    "end": 2.348
+   },
+   {
+    "w": "can",
+    "start": 2.423,
+    "end": 2.523
+   },
+   {
+    "w": "look",
+    "start": 2.573,
+    "end": 2.723
+   },
+   {
+    "w": "completely",
+    "start": 2.773,
+    "end": 3.273
+   },
+   {
+    "w": "different.",
+    "start": 3.323,
+    "end": 3.669
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "ll",
+  "text": "Then there's the lefty-on-lefty matchup.",
+  "spoken": "Then there's the lefty-on-lefty matchup.",
+  "dur": 2.027,
+  "words": [
+   {
+    "w": "Then",
+    "start": 0.055,
+    "end": 0.255
+   },
+   {
+    "w": "there's",
+    "start": 0.305,
+    "end": 0.505
+   },
+   {
+    "w": "the",
+    "start": 0.53,
+    "end": 0.58
+   },
+   {
+    "w": "lefty-on-lefty",
+    "start": 0.63,
+    "end": 1.355
+   },
+   {
+    "w": "matchup.",
+    "start": 1.405,
+    "end": 2.027
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "ll2",
+  "text": "Left-handed hitters generally have a tougher time against pitchers throwing from the same side.",
+  "spoken": "Left-handed hitters generally have a tougher time against pitchers throwing from the same side.",
+  "dur": 4.821,
+  "words": [
+   {
+    "w": "Left-handed",
+    "start": 0.059,
+    "end": 0.634
+   },
+   {
+    "w": "hitters",
+    "start": 0.684,
+    "end": 1.109
+   },
+   {
+    "w": "generally",
+    "start": 1.184,
+    "end": 1.559
+   },
+   {
+    "w": "have",
+    "start": 1.609,
+    "end": 1.784
+   },
+   {
+    "w": "a",
+    "start": 1.784,
+    "end": 1.784
+   },
+   {
+    "w": "tougher",
+    "start": 1.834,
+    "end": 2.084
+   },
+   {
+    "w": "time",
+    "start": 2.134,
+    "end": 2.434
+   },
+   {
+    "w": "against",
+    "start": 2.484,
+    "end": 2.734
+   },
+   {
+    "w": "pitchers",
+    "start": 2.784,
+    "end": 3.409
+   },
+   {
+    "w": "throwing",
+    "start": 3.509,
+    "end": 3.834
+   },
+   {
+    "w": "from",
+    "start": 3.884,
+    "end": 4.009
+   },
+   {
+    "w": "the",
+    "start": 4.009,
+    "end": 4.059
+   },
+   {
+    "w": "same",
+    "start": 4.134,
+    "end": 4.384
+   },
+   {
+    "w": "side.",
+    "start": 4.459,
+    "end": 4.821
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "run",
+  "text": "But here's another advantage: controlling runners.",
+  "spoken": "But here's another advantage: controlling runners.",
+  "dur": 2.667,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.026,
+    "end": 0.126
+   },
+   {
+    "w": "here's",
+    "start": 0.176,
+    "end": 0.376
+   },
+   {
+    "w": "another",
+    "start": 0.426,
+    "end": 0.751
+   },
+   {
+    "w": "advantage:",
+    "start": 0.801,
+    "end": 1.501
+   },
+   {
+    "w": "controlling",
+    "start": 1.626,
+    "end": 2.126
+   },
+   {
+    "w": "runners.",
+    "start": 2.176,
+    "end": 2.667
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "run2",
+  "text": "A left-handed pitcher naturally faces first base when delivering from the stretch, making it easier to watch the runner and threaten a pickoff.",
+  "spoken": "A left-handed pitcher naturally faces first base when delivering from the stretch, making it easier to watch the runner and threaten a pickoff.",
+  "dur": 7.659,
+  "words": [
+   {
+    "w": "A",
+    "start": 0.098,
+    "end": 0.148
+   },
+   {
+    "w": "left-handed",
+    "start": 0.223,
+    "end": 0.848
+   },
+   {
+    "w": "pitcher",
+    "start": 0.898,
+    "end": 1.373
+   },
+   {
+    "w": "naturally",
+    "start": 1.473,
+    "end": 1.898
+   },
+   {
+    "w": "faces",
+    "start": 1.973,
+    "end": 2.323
+   },
+   {
+    "w": "first",
+    "start": 2.398,
+    "end": 2.673
+   },
+   {
+    "w": "base",
+    "start": 2.723,
+    "end": 3.023
+   },
+   {
+    "w": "when",
+    "start": 3.073,
+    "end": 3.173
+   },
+   {
+    "w": "delivering",
+    "start": 3.223,
+    "end": 3.698
+   },
+   {
+    "w": "from",
+    "start": 3.748,
+    "end": 3.898
+   },
+   {
+    "w": "the",
+    "start": 3.898,
+    "end": 3.948
+   },
+   {
+    "w": "stretch,",
+    "start": 3.998,
+    "end": 4.673
+   },
+   {
+    "w": "making",
+    "start": 4.798,
+    "end": 5.048
+   },
+   {
+    "w": "it",
+    "start": 5.073,
+    "end": 5.148
+   },
+   {
+    "w": "easier",
+    "start": 5.273,
+    "end": 5.573
+   },
+   {
+    "w": "to",
+    "start": 5.623,
+    "end": 5.698
+   },
+   {
+    "w": "watch",
+    "start": 5.748,
+    "end": 6.023
+   },
+   {
+    "w": "the",
+    "start": 6.073,
+    "end": 6.148
+   },
+   {
+    "w": "runner",
+    "start": 6.198,
+    "end": 6.648
+   },
+   {
+    "w": "and",
+    "start": 6.723,
+    "end": 6.798
+   },
+   {
+    "w": "threaten",
+    "start": 6.873,
+    "end": 7.173
+   },
+   {
+    "w": "a",
+    "start": 7.173,
+    "end": 7.173
+   },
+   {
+    "w": "pickoff.",
+    "start": 7.223,
+    "end": 7.659
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "combo",
+  "text": "And when you combine that with great stuff and command, you get a pitcher who can change an entire matchup.",
+  "spoken": "And when you combine that with great stuff and command, you get a pitcher who can change an entire matchup.",
+  "dur": 5.141,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.034,
+    "end": 0.109
+   },
+   {
+    "w": "when",
+    "start": 0.134,
+    "end": 0.234
+   },
+   {
+    "w": "you",
+    "start": 0.259,
+    "end": 0.334
+   },
+   {
+    "w": "combine",
+    "start": 0.384,
+    "end": 0.784
+   },
+   {
+    "w": "that",
+    "start": 0.834,
+    "end": 1.009
+   },
+   {
+    "w": "with",
+    "start": 1.034,
+    "end": 1.159
+   },
+   {
+    "w": "great",
+    "start": 1.209,
+    "end": 1.484
+   },
+   {
+    "w": "stuff",
+    "start": 1.534,
+    "end": 1.784
+   },
+   {
+    "w": "and",
+    "start": 1.809,
+    "end": 1.884
+   },
+   {
+    "w": "command,",
+    "start": 1.934,
+    "end": 2.634
+   },
+   {
+    "w": "you",
+    "start": 2.759,
+    "end": 2.834
+   },
+   {
+    "w": "get",
+    "start": 2.884,
+    "end": 3.034
+   },
+   {
+    "w": "a",
+    "start": 3.034,
+    "end": 3.034
+   },
+   {
+    "w": "pitcher",
+    "start": 3.084,
+    "end": 3.459
+   },
+   {
+    "w": "who",
+    "start": 3.484,
+    "end": 3.584
+   },
+   {
+    "w": "can",
+    "start": 3.634,
+    "end": 3.759
+   },
+   {
+    "w": "change",
+    "start": 3.809,
+    "end": 4.159
+   },
+   {
+    "w": "an",
+    "start": 4.159,
+    "end": 4.184
+   },
+   {
+    "w": "entire",
+    "start": 4.234,
+    "end": 4.659
+   },
+   {
+    "w": "matchup.",
+    "start": 4.709,
+    "end": 5.141
+   }
+  ]
+ },
+ {
+  "i": 8,
+  "id": "end",
+  "text": "That's why a quality lefty is such a valuable weapon.",
+  "spoken": "That's why a quality lefty is such a valuable weapon.",
+  "dur": 2.987,
+  "words": [
+   {
+    "w": "That's",
+    "start": 0.051,
+    "end": 0.251
+   },
+   {
+    "w": "why",
+    "start": 0.301,
+    "end": 0.501
+   },
+   {
+    "w": "a",
+    "start": 0.501,
+    "end": 0.501
+   },
+   {
+    "w": "quality",
+    "start": 0.551,
+    "end": 0.926
+   },
+   {
+    "w": "lefty",
+    "start": 0.976,
+    "end": 1.501
+   },
+   {
+    "w": "is",
+    "start": 1.576,
+    "end": 1.651
+   },
+   {
+    "w": "such",
+    "start": 1.701,
+    "end": 1.976
+   },
+   {
+    "w": "a",
+    "start": 1.976,
+    "end": 1.976
+   },
+   {
+    "w": "valuable",
+    "start": 2.051,
+    "end": 2.551
+   },
+   {
+    "w": "weapon.",
+    "start": 2.601,
+    "end": 2.987
+   }
+  ]
+ }
+]

@@ -1,12 +1,11 @@
-"""'Why every team wants a lefty': the left-hander's three edges (1080x1920, sound effects only).
+"""'Why every team wants a lefty': the left-hander's three edges (1080x1920, voiceover + effects).
 
-    python3 tools/physics.py        # the pitches -> assets/play.json
-    python3 build.py                # index.html + assets/mix.wav (effects only) + vo-cues.txt / vo-cues.srt
+    python3 tools/physics.py                                       # the pitches -> assets/play.json
+    $HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # Kokoro voiceover (am_michael) + word timing
+    python3 build.py                                               # index.html + assets/mix.wav (+ assets/mix-novo.wav, effects only)
     npx --yes hyperframes@0.8.154 render . -o renders/lefty.mp4 --video-bitrate 16M
 
-There is NO narration in this video: the voiceover is recorded separately and laid on top. Every scene change sits
-on a planned voiceover cue (VO below), and vo-cues.txt / vo-cues.srt give the window each line should land in.
-The effects are mastered to -20 LUFS so a voiceover at normal level sits on top without fighting them.
+Shots, captions and reveals are keyed to the words of the voiceover.
 """
 import json, os, sys, wave
 import numpy as np
@@ -18,53 +17,55 @@ from audio import SR
 
 P = json.load(open(os.path.join(HERE, "assets", "play.json")))
 PI_ = P["pitches"]
-D = 40.0
+TM = json.load(open(os.path.join(HERE, "assets", "vo", "timing.json")))
+IDX = {x["id"]: k for k, x in enumerate(TM["lines"])}
+LN = lambda lid: TM["lines"][IDX[lid]]
+def W(lid, word, end=False, nth=0):
+    hits = [w for w in LN(lid)["words"] if w["w"].strip(".,!?:").lower() == word.lower()]
+    return hits[nth]["t1" if end else "t0"]
+D = TM["duration"]
 Y, CYAN, WHITE, HOT, MUTED = "#FFD84D", "#56D1FF", "#F4F6F8", "#FF6A3D", "#AEB8C6"
-
-# ----------------------------------------------------------------- the voiceover plan (recorded separately)
-# (in, out): the window each line should land in. Scene changes are cut to these.
-VO = [
-    (0.25, 2.75, "Why does every team want a left-handed pitcher?"),
-    (3.1, 7.1, "For starters, most hitters grow up seeing far more right-handed pitching."),
-    (7.4, 11.6, "A lefty's release angle and pitch movement can look completely different."),
-    (12.0, 14.0, "Then there's the lefty-on-lefty matchup."),
-    (14.3, 20.3, "Left-handed hitters generally have a tougher time against pitchers throwing from the same side."),
-    (20.8, 23.2, "But here's another advantage: controlling runners."),
-    (23.5, 30.1, "A left-handed pitcher naturally faces first base when delivering from the stretch, making it easier to watch the runner and threaten a pickoff."),
-    (30.6, 36.9, "And when you combine that with great stuff and command, you get a pitcher who can change an entire matchup."),
-    (37.3, 39.8, "That's why a quality lefty is such a valuable weapon."),
-]
-S2, S3, S4, S5 = 2.9, 11.8, 20.6, 30.4                         # scene starts (the brief: 0-3, 3-12, 12-21, 21-31, 31-40)
-END1, END2 = 35.6, 37.3                                        # "ONE ARM. THREE ADVANTAGES." / "THAT'S THE VALUE OF A LEFTY."
+S2, S3, S4, S5 = (LN(k)["t0"] - 0.06 for k in ["see", "ll", "run", "combo"])      # scene changes, on the voiceover
 
 # ----------------------------------------------------------------- shots (video time v) and the play time each one shows
 SHOTS = []
 def shot(a, b, cam, vs, ts, speed, **kw):
     SHOTS.append(dict(a=round(a, 4), b=round(b, 4), cam=cam, vs=[round(x, 4) for x in vs], ts=[round(x, 4) for x in ts], speed=speed, **kw))
 def rate(a, b, cam, t0, r, speed, **kw): shot(a, b, cam, [a, b], [t0, t0 + (b - a) * r], speed, **kw)
-# 1 hook: the left-hander explodes into his delivery; the left-handed hitter can't pick up the slider
-rate(0.0, 1.15, "hookP", -1.5, 1, "none", play="sl_l_lhb")
-rate(1.15, 1.95, "hookB", -0.35, 0.5, "slow2", play="sl_l_lhb")             # tracking it in...
-rate(1.95, S2, "front", -0.22, 0.5, "slow2", play="sl_l_lhb")                 # ...and swinging right through it
-# 2 a different look: what hitters see most; the same pitch from each side; the hitter's view of the lefty
-rate(S2, 5.3, "behind", -1.9, 1, "rt", play="fb_r", show={"ghost": ["fb_r", "sl_r", "ch_r", "cu_r"], "ghostT0": -1.75, "tube": "fb_r"})
-rate(5.3, 8.9, "behind", -1.25, 0.5, "slow2", mode="split")
-rate(8.9, S3, "eye", -0.95, 0.5, "slow2", play="fb_l", noHitter=True, show={"tube": "fb_l", "ghost": ["fb_r"]})
-# 3 lefty vs lefty: the slider runs away from the left-handed hitter; the same pitch at a right-hander's back foot
-rate(S3, 14.8, "plate", -2.3, 1, "rt", play="sl_l_lhb")
-rate(14.8, 17.6, "zone", -0.75, 0.5, "replay", play="sl_l_lhb", show={"zone": 1, "mark": 1, "tube": "sl_l"})
-rate(17.6, S4, "plate", -2.3, 1, "rt", play="sl_l_rhb", show={"tube": "sl_l"})
-# 4 the running game: the lead; the lefty facing first in the set; the pickoff; a replay with a freeze on the move
-rate(S4, 23.0, "wide", -6.0, 1, "rt", play="pick")
-rate(23.0, 25.2, "pov", -3.6, 1, "rt", play="pick", show={"sight": 1})
-rate(25.2, 27.5, "pick", -1.3, 1, "rt", play="pick")
-FRZ = (27.9, 28.35)
-shot(27.5, S5, "replay", [27.5, FRZ[0], FRZ[1], S5], [-0.5, -0.3, -0.3, -0.3 + (S5 - FRZ[1]) * 0.5], "replay", play="pick", freeze=list(FRZ), show={"lead": 1, "step": 1})
-# 5 the payoff: the pitch, the left-handed hitter, the runner frozen at first; the pitcher back on the mound
-rate(S5, 31.9, "low", -1.65, 1, "none", play="sl_l_lhb")
-rate(31.9, 33.5, "catcherV", -0.2, 1, "none", play="sl_l_lhb")
-rate(33.5, END1 - 0.2, "first", 0.0, 1, "none", play="hold")
+def on(v, t, a, r=1.0): return t - (v - a) * r                   # the play time to start a shot at a so that play time t lands at video time v
+# 1 hook: one continuous shot, the left-hander through his delivery at half speed; the question builds over it
+rate(0.0, S2, "hookP", on(W("q", "pitcher") + 0.05, -0.48, 0.0, 0.5), 0.5, "none", play="sl_l_lhb")
+# 2 a different look: what hitters see most (the pitch in on "more"); the same pitch from each side; the hitter's view of the lefty
+A2 = LN("angle")["t0"] - 0.06
+rate(S2, A2, "behind", on(W("see", "more"), 0.0, S2), 1, "rt", play="fb_r", show={"ghost": ["fb_r", "sl_r", "ch_r", "cu_r"], "ghostT0": on(W("see", "most"), 0.0, S2) - 0.1, "tube": "fb_r"})
+B2 = W("angle", "can") - 0.08
+rate(A2, B2, "behind", on(W("angle", "release") + 0.1, -0.43, A2, 0.5), 0.5, "slow2", mode="split")
+rate(B2, S3, "eye", on(W("angle", "different") + 0.25, 0.0, B2, 0.5), 0.5, "slow2", play="fb_l", noHitter=True, show={"tube": "fb_l", "ghost": ["fb_r"]})
+# 3 lefty vs lefty: the left-handed hitter chases (on "matchup"); the replay at the zone; the same pitch to a right-hander (on "same side")
+A3 = LN("ll2")["t0"] - 0.06
+rate(S3, A3, "plate", on(W("ll", "matchup") + 0.15, 0.0, S3), 1, "rt", play="sl_l_lhb")
+B3 = W("ll2", "pitchers") - 0.1
+rate(A3, B3, "zone", -0.85, 0.5, "replay", play="sl_l_lhb", show={"zone": 1, "mark": 1, "tube": "sl_l"})
+rate(B3, S4, "plate", on(W("ll2", "same"), 0.0, B3), 1, "rt", play="sl_l_rhb", show={"tube": "sl_l"})
+# 4 the running game: the lead; over his shoulder in the set; the pickoff (thrown on "easier"); the replay, frozen on his step
+A4 = LN("run2")["t0"] - 0.06
+rate(S4, A4, "wide", -6.3, 1, "rt", play="pick")
+C4 = W("run2", "making") - 1.4
+rate(A4, C4, "pov", -1.22 - (C4 - A4), 1, "rt", play="pick", show={"sight": 1})
+TREL = W("run2", "easier") + 0.25
+D4 = TREL + 0.8
+rate(C4, D4, "pick", on(TREL, 0.0, C4), 1, "rt", play="pick")
+FRZ = (D4 + 0.1, D4 + 0.55)
+shot(D4, S5, "replay", [D4, FRZ[0], FRZ[1], S5], [-0.35, -0.3, -0.3, -0.3 + (S5 - FRZ[1]) * 0.5], "replay", play="pick", freeze=list(FRZ), show={"lead": 1, "step": 1})
+# 5 the payoff: the pitch (released on "stuff"), the left-handed hitter, the runner frozen at first; the pitcher back on the mound
+P2 = W("combo", "command") - 0.1
+rate(S5, P2, "low", on(W("combo", "stuff"), -0.48, S5), 1, "none", play="sl_l_lhb")
+P3 = W("combo", "who") - 0.1
+rate(P2, P3, "catcherV", -0.3, 1, "none", play="sl_l_lhb")
+END1 = LN("end")["t0"] - 0.25                                  # "ONE ARM. THREE ADVANTAGES."
+rate(P3, END1 - 0.2, "first", 0.0, 1, "none", play="hold")
 rate(END1 - 0.2, D, "walk", 0.2, 1, "none", play="walk")
+END2 = W("end", "lefty") - 0.05                               # "THAT'S THE VALUE OF A LEFTY."
 for x, y in zip(SHOTS, SHOTS[1:]): assert abs(x["b"] - y["a"]) < 1e-3 and x["b"] > x["a"], (x, y)
 
 def at_play(sh, t):
@@ -73,14 +74,11 @@ def at_play(sh, t):
         if ts[i] != ts[i - 1] and min(ts[i - 1], ts[i]) <= t <= max(ts[i - 1], ts[i]):
             return vs[i - 1] + (t - ts[i - 1]) / (ts[i] - ts[i - 1]) * (vs[i] - vs[i - 1])
     return None
-def first_shot(**kw): return next(x for x in SHOTS if all(x.get(k) == v for k, v in kw.items()))
 
 c = Comp(D, 30)
 c.clip("fieldl", 0, D, '<canvas id="field-gl" width="1080" height="1920" data-layout-ignore></canvas>', cls="layer", style="z-index:1")
 c.clip("shade", 0, D, '<div class="shade-top"></div><div class="shade-bot"></div>', cls="layer", style="z-index:2")
 c.clip("spdc", 0, D, '<div class="spd rt" id="spd"></div>', cls="layer", style="z-index:30")
-c.clip("flash", 0, D, '<div class="flash" id="flash"></div>', cls="layer", style="z-index:40")
-for f in [1.15, 1.95]: c.set("#flash", '{"opacity":0.8}', f); c.to("#flash", o(opacity=0, duration=0.16, ease="power2.out"), f + 0.001)
 
 def pop(sel, t, dy=24):
     c.ft(sel, o(opacity=0, y=dy, scale=0.96), o(opacity=1, y=0, scale=1, duration=0.26, ease="back.out(1.7)"), t)
@@ -89,62 +87,83 @@ def tag(tid, t0, t1, cls, text, top):
 def note(nid, t0, t1, text, top=1700):
     c.clip(nid, t0, t1, f'<div class="mdl" id="{nid}x" style="top:{top}px">{text}</div>', cls="layer", style="z-index:12")
     c.ft(f"#{nid}x", o(opacity=0), o(opacity=1, duration=0.3), t0)
+WORD_IN = lambda sel, t: c.ft(sel, o(opacity=0, y=34, filter="blur(10px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.15, ease="power3.out"), t - 0.04)
 
-# ----------------------------------------------------------------- 1 the hook: readable on frame one
-c.clip("hook", 0, S2 - 0.02, """<div class="eyebrow"><i></i>Baseball Decoded</div>
-  <div class="hk" id="hkx"><span class="hl">Why does</span><span class="hl">every team</span><span class="hl">want a <em class="acc">lefty?</em></span></div>""", cls="layer", style="z-index:12")
-c.ft("#hkx", o(scale=1.07, transformOrigin="0% 50%"), o(scale=1, duration=0.35, ease="power3.out"), 0.0)
-c.ft("#hkx .acc", o(scale=1.0), o(scale=1.12, duration=0.12, ease="power2.out", yoyo=True, repeat=1), 1.15)
+# ----------------------------------------------------------------- 1 the hook: the question, word by word with the voice ("lefty?" on "left-handed")
+HQ = [("Why", "why"), ("does", "does"), ("every", "every"), ("team", "team"), ("want", "want"), ("a", "a"), ("lefty?", "left-handed")]
+rows = [[0, 1], [2, 3], [4, 5, 6]]
+html = "".join('<span class="hl">' + " ".join(f'<span class="hw{" acc" if k == 6 else ""}" id="hq{k}">{esc(HQ[k][0])}</span>' for k in r) + "</span>" for r in rows)
+c.clip("hook", 0, S2 - 0.02, f'<div class="eyebrow"><i></i>Baseball Decoded</div><div class="hk" id="hkx">{html}</div>', cls="layer", style="z-index:12")
+for k, (_, w) in enumerate(HQ): WORD_IN(f"#hq{k}", 0.04 if k == 0 else W("q", w))      # "Why" is there on frame one
 c.to("#hook .hk, #hook .eyebrow", o(opacity=0, y=-24, duration=0.14, ease="power2.in"), S2 - 0.16)
 
-# ----------------------------------------------------------------- scene titles
-for k, (a, b, html) in enumerate([(S2, S3, 'A <em class="acc">different</em> look'), (S3, S4, 'The <em class="acc">lefty-lefty</em> matchup'),
-                                   (S4, S5, 'Control the <em class="acc">running game</em>')]):
-    c.clip(f"ttl{k}", a + 0.02, b - 0.02, f'<div class="st" id="ttl{k}x">{html}</div>', cls="layer", style="z-index:12")
-    c.ft(f"#ttl{k}x", o(opacity=0, y=40, filter="blur(10px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.25, ease="power3.out"), a + 0.04)
+# ----------------------------------------------------------------- scene chips (top left)
+for k, (a_, b_, name) in enumerate([(S2, S3, "A different look"), (S3, S4, "The lefty-lefty matchup"), (S4, S5, "Control the running game")]):
+    c.clip(f"sk{k}", a_ + 0.05, b_ - 0.02, f'<div class="skill" id="sk{k}x"><b>{k + 1}</b><span>{name}</span></div>', cls="layer", style="z-index:21")
+    c.ft(f"#sk{k}x", o(opacity=0, x=-40), o(opacity=1, x=0, duration=0.22, ease="power3.out"), a_ + 0.08)
+
+# ----------------------------------------------------------------- captions: the voiceover, word by word (the hook and the end card are titles instead)
+CAPS = [("see", 0, 1, {}), ("see", 2, 6, {3: "acc"}), ("see", 7, 10, {9: "cb", 10: "cb"}),
+        ("angle", 0, 3, {1: "acc"}), ("angle", 4, 6, {6: "acc"}), ("angle", 7, 10, {10: "acc"}),
+        ("ll", 0, 4, {3: "acc"}),
+        ("ll2", 0, 2, {0: "acc"}), ("ll2", 3, 6, {5: "acc"}), ("ll2", 7, 9, {}), ("ll2", 10, 13, {12: "acc", 13: "acc"}),
+        ("run", 0, 3, {3: "acc"}), ("run", 4, 5, {4: "acc", 5: "acc"}),
+        ("run2", 0, 2, {1: "acc"}), ("run2", 3, 6, {5: "acc", 6: "acc"}), ("run2", 7, 11, {11: "acc"}), ("run2", 12, 15, {}), ("run2", 16, 18, {16: "acc"}), ("run2", 19, 22, {20: "acc", 22: "acc"}),
+        ("combo", 0, 4, {}), ("combo", 5, 9, {7: "acc", 9: "acc"}), ("combo", 10, 13, {}), ("combo", 14, 19, {16: "acc", 18: "acc", 19: "acc"})]
+for k, (lid, i0, i1, acc) in enumerate(CAPS):
+    ln = LN(lid); words = ln["words"]
+    start = words[i0]["t0"] - 0.06
+    if k + 1 < len(CAPS) and CAPS[k + 1][0] == lid: end = words[CAPS[k + 1][1]]["t0"] - 0.06
+    else: end = min(ln["t1"] + 0.35, TM["lines"][IDX[lid] + 1]["t0"] - 0.1, END1 - 0.02)
+    cid = f"cap{k}"; sp = []
+    for n in range(i0, i1 + 1):
+        w = words[n]["w"]; w = w.rstrip(",:") if n == i1 else w
+        sp.append(f'<span class="cw{(" " + acc[n]) if n in acc else ""}" id="{cid}w{n - i0}">{esc(w)}</span>')
+    c.clip(cid, start, end, f'<div class="cap" style="top:300px"><span class="cl">{" ".join(sp)}</span></div>', cls="layer", style="z-index:20")
+    for n in range(i0, i1 + 1): WORD_IN(f"#{cid}w{n - i0}", words[n]["t0"])
 
 # ----------------------------------------------------------------- 2 a different look
-tag("fam", S2 + 0.35, 5.25, "wh", "Most hitters see far more right-handers", 1560)
-c.clip("splt", 5.3, 8.88, '<div class="seam"></div><div class="side l" id="sdl"><b class="cb">Righty</b></div><div class="side r" id="sdr"><b class="hot">Lefty</b></div>', cls="layer", style="z-index:11")
-pop("#sdl", 5.35, 12); pop("#sdr", 5.45, 12)
-tag("same", 5.6, 8.85, "wh", "Same pitch, mirrored: a different release angle", 1560)
-c.clip("eyel", 8.92, S3 - 0.02, '<div class="leg"><span class="mono">The hitter\'s view</span><span class="cb"><i></i>The usual righty path</span><span class="hot"><i></i>The lefty\'s pitch</span></div>', cls="layer", style="z-index:11")
-tag("eyet", 9.3, S3 - 0.05, "hot", "From the other side: a less familiar look", 1560)
+tag("fam", W("see", "most") - 0.05, A2 - 0.05, "wh", "Most hitters see far more right-handers", 1560)
+c.clip("splt", A2, B2 - 0.02, '<div class="seam"></div><div class="side l" id="sdl"><b class="cb">Righty</b></div><div class="side r" id="sdr"><b class="hot">Lefty</b></div>', cls="layer", style="z-index:11")
+pop("#sdl", A2 + 0.05, 12); pop("#sdr", A2 + 0.15, 12)
+tag("same", A2 + 0.3, B2 - 0.05, "wh", "Same pitch, mirrored: a different release angle", 1560)
+c.clip("eyel", B2 + 0.02, S3 - 0.02, '<div class="leg"><span class="mono">The hitter\'s view</span><span class="cb"><i></i>The usual righty path</span><span class="hot"><i></i>The lefty\'s pitch</span></div>', cls="layer", style="z-index:11")
+tag("eyet", B2 + 0.2, S3 - 0.05, "hot", "From the other side: a less familiar look", 1560)
 
 # ----------------------------------------------------------------- 3 lefty vs lefty
-tag("ll", S3 + 0.4, 14.75, "hot", "Lefty pitcher vs. lefty hitter", 1560)
-tag("away", 15.0, 17.55, "yl", "Starts on his side, then breaks away", 1560)
-tag("rh", 17.8, S4 - 0.05, "cb", "Righty hitter: the same pitch breaks toward him", 1560)
-note("avg", 15.0, S4 - 0.05, "On average, a tougher matchup · not true of every hitter")
+tag("ll", S3 + 0.3, A3 - 0.05, "hot", "Lefty pitcher vs. lefty hitter", 1560)
+tag("away", A3 + 0.2, B3 - 0.05, "yl", "Starts on his side, then breaks away", 1560)
+tag("rh", B3 + 0.2, S4 - 0.05, "cb", "Righty hitter: the same pitch breaks toward him", 1560)
+note("avg", A3 + 0.2, S4 - 0.05, "On average, a tougher matchup · not true of every hitter")
 
 # ----------------------------------------------------------------- 4 the running game
-tag("rn", S4 + 0.4, 22.95, "wh", "Runner on first · lefty in the stretch", 1120)
-c.clip("setc", 23.05, 25.15, """<div class="abs" id="setx"><div class="ar"><b class="cb">Righty in the set</b><span>Faces third base: the runner is behind him</span></div>
+tag("rn", S4 + 0.3, A4 - 0.05, "wh", "Runner on first · lefty in the stretch", 1120)
+c.clip("setc", A4 + 0.05, C4 - 0.05, """<div class="abs" id="setx"><div class="ar"><b class="cb">Righty in the set</b><span>Faces third base: the runner is behind him</span></div>
   <div class="ar" id="set2"><b class="hot">Lefty in the set</b><span>Faces first base: the runner is right in front of him</span></div></div>""", cls="layer", style="z-index:12")
-pop("#setx", 23.1); pop("#set2", 23.6, 12)
+pop("#setx", A4 + 0.1); pop("#set2", W("run2", "faces") - 0.05, 12)
 c.clip("lead", FRZ[0] - 0.02, S5 - 0.02, '<div class="pinw" id="leadw"><div class="pin" id="leadx"><span>His lead</span></div></div><div class="pinw" id="stepw"><div class="pin" id="stepx"><span>Step to first</span></div></div>', cls="layer", style="z-index:12")
 pop("#leadx", FRZ[0]); pop("#stepx", FRZ[0] + 0.12)
 note("mv", FRZ[0] + 0.2, S5 - 0.05, "A good move is a threat · not a guaranteed out")
 
 # ----------------------------------------------------------------- 5 the payoff
-for k, (a, b, lab) in enumerate([(S5, 31.9, "1 · A different look"), (31.9, 33.5, "2 · Lefty vs. lefty"), (33.5, END1 - 0.2, "3 · The pickoff threat")]):
-    c.clip(f"pay{k}", a + 0.03, b - 0.02, f'<div class="cbl" id="pay{k}x">{esc(lab)}</div>', cls="layer", style="z-index:21")
-    pop(f"#pay{k}x", a + 0.05, 18)
+for k, (a_, b_, lab) in enumerate([(S5, P2, "1 · A different look"), (P2, P3, "2 · Lefty vs. lefty"), (P3, END1 - 0.2, "3 · The pickoff threat")]):
+    c.clip(f"pay{k}", a_ + 0.03, b_ - 0.02, f'<div class="cbl" id="pay{k}x">{esc(lab)}</div>', cls="layer", style="z-index:21")
+    pop(f"#pay{k}x", a_ + 0.05, 18)
 c.clip("endt", END1, D, '<div class="endt"><span id="et1">One arm.</span><span class="acc" id="et2">Three advantages.</span></div><div class="endv" id="et3">That\'s the value of a <em class="acc">lefty.</em></div>', cls="layer", style="z-index:22")
 c.ft("#et1", o(opacity=0, y=40, filter="blur(12px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.22, ease="power3.out"), END1)
-c.ft("#et2", o(opacity=0, y=40, filter="blur(12px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.22, ease="power3.out"), END1 + 0.45)
+c.ft("#et2", o(opacity=0, y=40, filter="blur(12px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.22, ease="power3.out"), END1 + 0.4)
 c.ft("#et3", o(opacity=0, y=30, filter="blur(10px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.25, ease="power3.out"), END2)
 
-# ----------------------------------------------------------------- sound (effects only; the voiceover is added later)
+# ----------------------------------------------------------------- sound
 def cue(n, t, db=0.0):
     if t is not None and 0 <= t < D: c.cue(n, t, db)
-cue("impact", 0.0, -2); cue("whoosh", 1.15, -6); cue("impact", 1.15, -8); cue("whoosh", 1.95, -8)
+cue("impact", 0.0, -4)
 for t_ in [S2, S3, S4, S5]: cue("whoosh", t_, -9)
-for t_ in [31.9, 33.5, END1 - 0.2]: cue("whoosh", t_, -11)
+for t_ in [P2, P3, END1 - 0.2]: cue("whoosh", t_, -11)
 PICK = {"t_arr": 0.55, "t_tag": 0.68}
 for x in SHOTS:
     pl = x.get("play") if x.get("mode") != "split" else "fb_r"
-    slow = x["speed"] in ("slow2", "replay"); g = -5 if slow else 0
+    slow = x["speed"] in ("slow2", "replay") or x["cam"] == "hookP"; g = -5 if slow else 0
     if pl in ("fb_r", "fb_l", "sl_l_lhb", "sl_l_rhb"):
         pk = {"fb_r": "fb_r", "fb_l": "fb_l", "sl_l_lhb": "sl_l", "sl_l_rhb": "sl_l"}[pl]; fl = PI_[pk]["flight"]
         cue("whoosh", at_play(x, -fl + 0.08), -6 + g); cue("glove", at_play(x, 0.0), g)
@@ -156,7 +175,7 @@ for x in SHOTS:
     if pl == "hold": cue("tap", at_play(x, 0.95), -8)
     if pl == "walk":
         for k in range(8): cue("tap", at_play(x, 0.35 + k * 0.33), -16)
-cue("riser-m", END1, -4); cue("impact", END1, -3); cue("impact", END1 + 0.45, -6); cue("impact", END2, -4)
+cue("riser-m", END1, -4); cue("impact", END1, -3); cue("impact", END1 + 0.4, -6); cue("impact", END2, -4)
 LEVEL = {"impact": -3.0, "hit": -5.0, "whoosh": -6.0, "glove": -1.0, "tick": -6.0, "popup": -8.0, "riser-m": -7.0, "riser-s": -7.0, "tap": -3.0}
 
 def mixdown():
@@ -170,21 +189,18 @@ def mixdown():
         if j > i: fx[i:j] += x[: j - i] * 10 ** ((LEVEL.get(name, -8.0) + gdb) / 20)
     crowd = read(os.path.join(HERE, "assets", "sfx", "crowd.wav"))
     crowd = np.concatenate([crowd] * (n // len(crowd) + 1))[:n]
-    fx += crowd * 10 ** (-26 / 20)
-    pre = os.path.join(HERE, ".pre.wav")
-    w = wave.open(pre, "wb"); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
-    w.writeframes((np.clip(fx * 0.5, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
-    m = master(pre, os.path.join(HERE, "assets", "mix.wav"), target=-20.0)
-    os.remove(pre)
+    fx += crowd * 10 ** (-28 / 20)
+    vo = read(os.path.join(HERE, "assets", "vo", "vo.wav"))[:n]
+    full = fx * 10 ** (-6 / 20); full[: len(vo)] += vo
+    def wav(path, x):
+        w = wave.open(path, "wb"); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
+        w.writeframes((np.clip(x * 0.5, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
+    pre, pfx = os.path.join(HERE, ".pre.wav"), os.path.join(HERE, ".fx.wav")
+    wav(pre, full); wav(pfx, fx * 10 ** (-6 / 20))
+    m = master(pre, os.path.join(HERE, "assets", "mix.wav"))
+    master(pre, os.path.join(HERE, "assets", "mix-novo.wav"), fx_path=pfx)   # the same effects at the same level, without the voice
+    os.remove(pre); os.remove(pfx)
     return m
-
-def vo_cues():
-    fmt = lambda t: f"{int(t // 3600):02d}:{int(t % 3600 // 60):02d}:{int(t % 60):02d},{int(round(t % 1 * 1000)):03d}"
-    with open(os.path.join(HERE, "vo-cues.srt"), "w") as f:
-        for k, (a, b, line) in enumerate(VO): f.write(f"{k + 1}\n{fmt(a)} --> {fmt(b)}\n{line}\n\n")
-    with open(os.path.join(HERE, "vo-cues.txt"), "w") as f:
-        f.write("Voiceover cue sheet: start each line at its IN time and finish by its OUT time. The picture cuts on these.\n\n")
-        for a, b, line in VO: f.write(f"{a:5.2f}  -  {b:5.2f}  ({b - a:3.1f} s)   {line}\n")
 
 # ----------------------------------------------------------------- CSS
 F = lambda fam, w, f: f'@font-face {{ font-family:"{fam}"; font-weight:{w}; font-display:block; src:url("assets/fonts/{f}") format("woff2"); }}'
@@ -268,7 +284,7 @@ html, body {{ width:1080px; height:1920px; overflow:hidden; background:#05080d; 
 .endt .acc {{ color:{HOT}; }}
 """])
 CSS += f"""
-.hk {{ top:300px; font-size:150px; }} .hk em {{ font-style:normal; }}
+.hk {{ top:300px; font-size:150px; }} .hk em {{ font-style:normal; }} .hk .hw {{ display:inline-block; }}
 .st {{ position:absolute; left:52px; right:40px; top:250px; font-family:"Barlow Condensed", sans-serif; font-weight:800; font-size:104px; line-height:.94; text-transform:uppercase; color:#fff;
        text-shadow:0 6px 28px rgba(0,0,0,.8), 0 2px 4px rgba(0,0,0,.7); }}
 .st em {{ font-style:normal; color:{HOT}; }}
@@ -295,6 +311,5 @@ if __name__ == "__main__":
         '<script src="assets/vendor/gsap.min.js"></script>\n    ' + HEAD + f'\n    <script>window.__CC = {json.dumps(cc)}; window.__PLAY = {json.dumps(P)};</script>')
     h = h.replace("</body>", '  <script type="module" src="./assets/field.js"></script>\n  </body>')
     open(os.path.join(HERE, "index.html"), "w").write(h)
-    vo_cues()
     m = mixdown()
-    print(f"index.html: {D}s, {len(SHOTS)} shots; {len(c.cues)} sounds; effects {m['lufs']} LUFS / {m['true_peak']} dBTP; {len(VO)} voiceover cues")
+    print(f"index.html: {D}s, {len(SHOTS)} shots; {len(c.cues)} sounds; {len(CAPS)} caption phrases; {m['lufs']} LUFS / {m['true_peak']} dBTP")
