@@ -1,0 +1,8 @@
+{
+  "name": "lefty-pitcher",
+  "private": true,
+  "scripts": {
+    "check": "npx --yes hyperframes@0.8.154 check",
+    "render": "npx --yes hyperframes@0.8.154 render"
+  }
+}

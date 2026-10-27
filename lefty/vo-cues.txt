@@ -1,0 +1,11 @@
+Voiceover cue sheet: start each line at its IN time and finish by its OUT time. The picture cuts on these.
+
+ 0.25  -   2.75  (2.5 s)   Why does every team want a left-handed pitcher?
+ 3.10  -   7.10  (4.0 s)   For starters, most hitters grow up seeing far more right-handed pitching.
+ 7.40  -  11.60  (4.2 s)   A lefty's release angle and pitch movement can look completely different.
+12.00  -  14.00  (2.0 s)   Then there's the lefty-on-lefty matchup.
+14.30  -  20.30  (6.0 s)   Left-handed hitters generally have a tougher time against pitchers throwing from the same side.
+20.80  -  23.20  (2.4 s)   But here's another advantage: controlling runners.
+23.50  -  30.10  (6.6 s)   A left-handed pitcher naturally faces first base when delivering from the stretch, making it easier to watch the runner and threaten a pickoff.
+30.60  -  36.90  (6.3 s)   And when you combine that with great stuff and command, you get a pitcher who can change an entire matchup.
+37.30  -  39.80  (2.5 s)   That's why a quality lefty is such a valuable weapon.
