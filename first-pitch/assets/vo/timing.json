@@ -1,0 +1,680 @@
+{
+ "duration": 28.35,
+ "lines": [
+  {
+   "i": 0,
+   "id": "hook",
+   "text": "Is taking the first pitch actually smart, or are hitters giving away strikes?",
+   "spoken": "Is taking the first pitch actually smart, or are hitters giving away strikes?",
+   "t0": 0.25,
+   "t1": 3.149,
+   "words": [
+    {
+     "w": "Is",
+     "t0": 0.284,
+     "t1": 0.334
+    },
+    {
+     "w": "taking",
+     "t0": 0.359,
+     "t1": 0.534
+    },
+    {
+     "w": "the",
+     "t0": 0.559,
+     "t1": 0.609
+    },
+    {
+     "w": "first",
+     "t0": 0.659,
+     "t1": 0.809
+    },
+    {
+     "w": "pitch",
+     "t0": 0.834,
+     "t1": 0.959
+    },
+    {
+     "w": "actually",
+     "t0": 1.059,
+     "t1": 1.284
+    },
+    {
+     "w": "smart,",
+     "t0": 1.359,
+     "t1": 1.809
+    },
+    {
+     "w": "or",
+     "t0": 1.934,
+     "t1": 2.009
+    },
+    {
+     "w": "are",
+     "t0": 2.034,
+     "t1": 2.109
+    },
+    {
+     "w": "hitters",
+     "t0": 2.159,
+     "t1": 2.359
+    },
+    {
+     "w": "giving",
+     "t0": 2.384,
+     "t1": 2.534
+    },
+    {
+     "w": "away",
+     "t0": 2.559,
+     "t1": 2.684
+    },
+    {
+     "w": "strikes?",
+     "t0": 2.734,
+     "t1": 3.18
+    }
+   ]
+  },
+  {
+   "i": 1,
+   "id": "data",
+   "text": "First-pitch strike rates in pro baseball are generally around 60 percent, although they vary by season, pitcher, and hitter.",
+   "spoken": "First-pitch strike rates in pro baseball are generally around sixty percent, although they vary by season, pitcher, and hitter.",
+   "t0": 3.449,
+   "t1": 8.58,
+   "words": [
+    {
+     "w": "First-pitch",
+     "t0": 3.505,
+     "t1": 3.83
+    },
+    {
+     "w": "strike",
+     "t0": 3.88,
+     "t1": 4.055
+    },
+    {
+     "w": "rates",
+     "t0": 4.08,
+     "t1": 4.23
+    },
+    {
+     "w": "in",
+     "t0": 4.255,
+     "t1": 4.305
+    },
+    {
+     "w": "pro",
+     "t0": 4.33,
+     "t1": 4.455
+    },
+    {
+     "w": "baseball",
+     "t0": 4.48,
+     "t1": 4.855
+    },
+    {
+     "w": "are",
+     "t0": 4.88,
+     "t1": 4.955
+    },
+    {
+     "w": "generally",
+     "t0": 5.005,
+     "t1": 5.28
+    },
+    {
+     "w": "around",
+     "t0": 5.305,
+     "t1": 5.53
+    },
+    {
+     "w": "sixty",
+     "t0": 5.605,
+     "t1": 5.78
+    },
+    {
+     "w": "percent,",
+     "t0": 5.805,
+     "t1": 6.38
+    },
+    {
+     "w": "although",
+     "t0": 6.505,
+     "t1": 6.68
+    },
+    {
+     "w": "they",
+     "t0": 6.705,
+     "t1": 6.78
+    },
+    {
+     "w": "vary",
+     "t0": 6.83,
+     "t1": 7.055
+    },
+    {
+     "w": "by",
+     "t0": 7.08,
+     "t1": 7.18
+    },
+    {
+     "w": "season,",
+     "t0": 7.255,
+     "t1": 7.705
+    },
+    {
+     "w": "pitcher,",
+     "t0": 7.83,
+     "t1": 8.155
+    },
+    {
+     "w": "and",
+     "t0": 8.205,
+     "t1": 8.28
+    },
+    {
+     "w": "hitter.",
+     "t0": 8.33,
+     "t1": 8.663
+    }
+   ]
+  },
+  {
+   "i": 2,
+   "id": "twist",
+   "text": "That means taking the first pitch can put you behind in the count before you've even taken a swing.",
+   "spoken": "That means taking the first pitch can put you behind in the count before you've even taken a swing.",
+   "t0": 8.88,
+   "t1": 12.64,
+   "words": [
+    {
+     "w": "That",
+     "t0": 8.91,
+     "t1": 9.01
+    },
+    {
+     "w": "means",
+     "t0": 9.035,
+     "t1": 9.21
+    },
+    {
+     "w": "taking",
+     "t0": 9.26,
+     "t1": 9.46
+    },
+    {
+     "w": "the",
+     "t0": 9.485,
+     "t1": 9.535
+    },
+    {
+     "w": "first",
+     "t0": 9.61,
+     "t1": 9.785
+    },
+    {
+     "w": "pitch",
+     "t0": 9.835,
+     "t1": 10.085
+    },
+    {
+     "w": "can",
+     "t0": 10.11,
+     "t1": 10.185
+    },
+    {
+     "w": "put",
+     "t0": 10.21,
+     "t1": 10.31
+    },
+    {
+     "w": "you",
+     "t0": 10.335,
+     "t1": 10.41
+    },
+    {
+     "w": "behind",
+     "t0": 10.435,
+     "t1": 10.76
+    },
+    {
+     "w": "in",
+     "t0": 10.785,
+     "t1": 10.835
+    },
+    {
+     "w": "the",
+     "t0": 10.835,
+     "t1": 10.885
+    },
+    {
+     "w": "count",
+     "t0": 10.935,
+     "t1": 11.21
+    },
+    {
+     "w": "before",
+     "t0": 11.235,
+     "t1": 11.46
+    },
+    {
+     "w": "you've",
+     "t0": 11.51,
+     "t1": 11.81
+    },
+    {
+     "w": "even",
+     "t0": 11.91,
+     "t1": 12.035
+    },
+    {
+     "w": "taken",
+     "t0": 12.085,
+     "t1": 12.31
+    },
+    {
+     "w": "a",
+     "t0": 12.31,
+     "t1": 12.31
+    },
+    {
+     "w": "swing.",
+     "t0": 12.385,
+     "t1": 12.706
+    }
+   ]
+  },
+  {
+   "i": 3,
+   "id": "twist2",
+   "text": "But swinging at everything isn't the answer either.",
+   "spoken": "But swinging at everything isn't the answer either.",
+   "t0": 12.79,
+   "t1": 14.583,
+   "words": [
+    {
+     "w": "But",
+     "t0": 12.806,
+     "t1": 12.906
+    },
+    {
+     "w": "swinging",
+     "t0": 12.956,
+     "t1": 13.206
+    },
+    {
+     "w": "at",
+     "t0": 13.256,
+     "t1": 13.306
+    },
+    {
+     "w": "everything",
+     "t0": 13.381,
+     "t1": 13.706
+    },
+    {
+     "w": "isn't",
+     "t0": 13.781,
+     "t1": 13.906
+    },
+    {
+     "w": "the",
+     "t0": 13.931,
+     "t1": 13.981
+    },
+    {
+     "w": "answer",
+     "t0": 14.081,
+     "t1": 14.256
+    },
+    {
+     "w": "either.",
+     "t0": 14.356,
+     "t1": 14.771
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "id": "drive",
+   "text": "If it's a pitch you can drive, in your hitting zone, attacking early can be a huge advantage.",
+   "spoken": "If it's a pitch you can drive, in your hitting zone, attacking early can be a huge advantage.",
+   "t0": 14.883,
+   "t1": 18.802,
+   "words": [
+    {
+     "w": "If",
+     "t0": 14.904,
+     "t1": 14.979
+    },
+    {
+     "w": "it's",
+     "t0": 15.004,
+     "t1": 15.129
+    },
+    {
+     "w": "a",
+     "t0": 15.129,
+     "t1": 15.129
+    },
+    {
+     "w": "pitch",
+     "t0": 15.179,
+     "t1": 15.329
+    },
+    {
+     "w": "you",
+     "t0": 15.354,
+     "t1": 15.429
+    },
+    {
+     "w": "can",
+     "t0": 15.454,
+     "t1": 15.529
+    },
+    {
+     "w": "drive,",
+     "t0": 15.579,
+     "t1": 16.054
+    },
+    {
+     "w": "in",
+     "t0": 16.104,
+     "t1": 16.154
+    },
+    {
+     "w": "your",
+     "t0": 16.179,
+     "t1": 16.254
+    },
+    {
+     "w": "hitting",
+     "t0": 16.279,
+     "t1": 16.454
+    },
+    {
+     "w": "zone,",
+     "t0": 16.504,
+     "t1": 16.954
+    },
+    {
+     "w": "attacking",
+     "t0": 17.079,
+     "t1": 17.404
+    },
+    {
+     "w": "early",
+     "t0": 17.504,
+     "t1": 17.704
+    },
+    {
+     "w": "can",
+     "t0": 17.729,
+     "t1": 17.804
+    },
+    {
+     "w": "be",
+     "t0": 17.829,
+     "t1": 17.954
+    },
+    {
+     "w": "a",
+     "t0": 17.954,
+     "t1": 17.954
+    },
+    {
+     "w": "huge",
+     "t0": 18.029,
+     "t1": 18.229
+    },
+    {
+     "w": "advantage.",
+     "t0": 18.254,
+     "t1": 18.803
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "id": "edge",
+   "text": "But if it's on the edge or a pitch you struggle to hit, taking it can be the smarter play.",
+   "spoken": "But if it's on the edge or a pitch you struggle to hit, taking it can be the smarter play.",
+   "t0": 18.952,
+   "t1": 22.612,
+   "words": [
+    {
+     "w": "But",
+     "t0": 18.956,
+     "t1": 19.056
+    },
+    {
+     "w": "if",
+     "t0": 19.081,
+     "t1": 19.131
+    },
+    {
+     "w": "it's",
+     "t0": 19.156,
+     "t1": 19.231
+    },
+    {
+     "w": "on",
+     "t0": 19.281,
+     "t1": 19.356
+    },
+    {
+     "w": "the",
+     "t0": 19.356,
+     "t1": 19.431
+    },
+    {
+     "w": "edge",
+     "t0": 19.606,
+     "t1": 19.781
+    },
+    {
+     "w": "or",
+     "t0": 19.831,
+     "t1": 19.956
+    },
+    {
+     "w": "a",
+     "t0": 19.956,
+     "t1": 19.956
+    },
+    {
+     "w": "pitch",
+     "t0": 20.006,
+     "t1": 20.381
+    },
+    {
+     "w": "you",
+     "t0": 20.456,
+     "t1": 20.531
+    },
+    {
+     "w": "struggle",
+     "t0": 20.581,
+     "t1": 20.806
+    },
+    {
+     "w": "to",
+     "t0": 20.831,
+     "t1": 20.881
+    },
+    {
+     "w": "hit,",
+     "t0": 20.931,
+     "t1": 21.306
+    },
+    {
+     "w": "taking",
+     "t0": 21.431,
+     "t1": 21.656
+    },
+    {
+     "w": "it",
+     "t0": 21.681,
+     "t1": 21.731
+    },
+    {
+     "w": "can",
+     "t0": 21.756,
+     "t1": 21.831
+    },
+    {
+     "w": "be",
+     "t0": 21.856,
+     "t1": 21.931
+    },
+    {
+     "w": "the",
+     "t0": 21.956,
+     "t1": 22.006
+    },
+    {
+     "w": "smarter",
+     "t0": 22.056,
+     "t1": 22.331
+    },
+    {
+     "w": "play.",
+     "t0": 22.381,
+     "t1": 22.649
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "id": "goal",
+   "text": "The goal isn't to swing first pitch or always take it. It's to attack the right pitch.",
+   "spoken": "The goal isn't to swing first pitch or always take it. It's to attack the right pitch.",
+   "t0": 22.912,
+   "t1": 26.114,
+   "words": [
+    {
+     "w": "The",
+     "t0": 22.95,
+     "t1": 23.0
+    },
+    {
+     "w": "goal",
+     "t0": 23.05,
+     "t1": 23.2
+    },
+    {
+     "w": "isn't",
+     "t0": 23.25,
+     "t1": 23.375
+    },
+    {
+     "w": "to",
+     "t0": 23.4,
+     "t1": 23.45
+    },
+    {
+     "w": "swing",
+     "t0": 23.5,
+     "t1": 23.675
+    },
+    {
+     "w": "first",
+     "t0": 23.725,
+     "t1": 23.875
+    },
+    {
+     "w": "pitch",
+     "t0": 23.925,
+     "t1": 24.125
+    },
+    {
+     "w": "or",
+     "t0": 24.15,
+     "t1": 24.25
+    },
+    {
+     "w": "always",
+     "t0": 24.325,
+     "t1": 24.525
+    },
+    {
+     "w": "take",
+     "t0": 24.575,
+     "t1": 24.725
+    },
+    {
+     "w": "it.",
+     "t0": 24.75,
+     "t1": 25.05
+    },
+    {
+     "w": "It's",
+     "t0": 25.15,
+     "t1": 25.225
+    },
+    {
+     "w": "to",
+     "t0": 25.25,
+     "t1": 25.3
+    },
+    {
+     "w": "attack",
+     "t0": 25.325,
+     "t1": 25.55
+    },
+    {
+     "w": "the",
+     "t0": 25.575,
+     "t1": 25.625
+    },
+    {
+     "w": "right",
+     "t0": 25.65,
+     "t1": 25.775
+    },
+    {
+     "w": "pitch.",
+     "t0": 25.825,
+     "t1": 26.127
+    }
+   ]
+  },
+  {
+   "i": 7,
+   "id": "q",
+   "text": "Would you swing or take?",
+   "spoken": "Would you swing or take?",
+   "t0": 26.364,
+   "t1": 27.346,
+   "words": [
+    {
+     "w": "Would",
+     "t0": 26.395,
+     "t1": 26.47
+    },
+    {
+     "w": "you",
+     "t0": 26.495,
+     "t1": 26.57
+    },
+    {
+     "w": "swing",
+     "t0": 26.645,
+     "t1": 26.87
+    },
+    {
+     "w": "or",
+     "t0": 26.895,
+     "t1": 26.97
+    },
+    {
+     "w": "take?",
+     "t0": 27.02,
+     "t1": 27.495
+    }
+   ]
+  }
+ ]
+}

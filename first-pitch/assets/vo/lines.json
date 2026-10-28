@@ -1,0 +1,669 @@
+[
+ {
+  "i": 0,
+  "id": "hook",
+  "text": "Is taking the first pitch actually smart, or are hitters giving away strikes?",
+  "spoken": "Is taking the first pitch actually smart, or are hitters giving away strikes?",
+  "dur": 2.944,
+  "words": [
+   {
+    "w": "Is",
+    "start": 0.048,
+    "end": 0.098
+   },
+   {
+    "w": "taking",
+    "start": 0.123,
+    "end": 0.298
+   },
+   {
+    "w": "the",
+    "start": 0.323,
+    "end": 0.373
+   },
+   {
+    "w": "first",
+    "start": 0.423,
+    "end": 0.573
+   },
+   {
+    "w": "pitch",
+    "start": 0.598,
+    "end": 0.723
+   },
+   {
+    "w": "actually",
+    "start": 0.823,
+    "end": 1.048
+   },
+   {
+    "w": "smart,",
+    "start": 1.123,
+    "end": 1.573
+   },
+   {
+    "w": "or",
+    "start": 1.698,
+    "end": 1.773
+   },
+   {
+    "w": "are",
+    "start": 1.798,
+    "end": 1.873
+   },
+   {
+    "w": "hitters",
+    "start": 1.923,
+    "end": 2.123
+   },
+   {
+    "w": "giving",
+    "start": 2.148,
+    "end": 2.298
+   },
+   {
+    "w": "away",
+    "start": 2.323,
+    "end": 2.448
+   },
+   {
+    "w": "strikes?",
+    "start": 2.498,
+    "end": 2.944
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "data",
+  "text": "First-pitch strike rates in pro baseball are generally around 60 percent, although they vary by season, pitcher, and hitter.",
+  "spoken": "First-pitch strike rates in pro baseball are generally around sixty percent, although they vary by season, pitcher, and hitter.",
+  "dur": 5.248,
+  "words": [
+   {
+    "w": "First-pitch",
+    "start": 0.09,
+    "end": 0.415
+   },
+   {
+    "w": "strike",
+    "start": 0.465,
+    "end": 0.64
+   },
+   {
+    "w": "rates",
+    "start": 0.665,
+    "end": 0.815
+   },
+   {
+    "w": "in",
+    "start": 0.84,
+    "end": 0.89
+   },
+   {
+    "w": "pro",
+    "start": 0.915,
+    "end": 1.04
+   },
+   {
+    "w": "baseball",
+    "start": 1.065,
+    "end": 1.44
+   },
+   {
+    "w": "are",
+    "start": 1.465,
+    "end": 1.54
+   },
+   {
+    "w": "generally",
+    "start": 1.59,
+    "end": 1.865
+   },
+   {
+    "w": "around",
+    "start": 1.89,
+    "end": 2.115
+   },
+   {
+    "w": "sixty",
+    "start": 2.19,
+    "end": 2.365
+   },
+   {
+    "w": "percent,",
+    "start": 2.39,
+    "end": 2.965
+   },
+   {
+    "w": "although",
+    "start": 3.09,
+    "end": 3.265
+   },
+   {
+    "w": "they",
+    "start": 3.29,
+    "end": 3.365
+   },
+   {
+    "w": "vary",
+    "start": 3.415,
+    "end": 3.64
+   },
+   {
+    "w": "by",
+    "start": 3.665,
+    "end": 3.765
+   },
+   {
+    "w": "season,",
+    "start": 3.84,
+    "end": 4.29
+   },
+   {
+    "w": "pitcher,",
+    "start": 4.415,
+    "end": 4.74
+   },
+   {
+    "w": "and",
+    "start": 4.79,
+    "end": 4.865
+   },
+   {
+    "w": "hitter.",
+    "start": 4.915,
+    "end": 5.248
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "twist",
+  "text": "That means taking the first pitch can put you behind in the count before you've even taken a swing.",
+  "spoken": "That means taking the first pitch can put you behind in the count before you've even taken a swing.",
+  "dur": 3.84,
+  "words": [
+   {
+    "w": "That",
+    "start": 0.044,
+    "end": 0.144
+   },
+   {
+    "w": "means",
+    "start": 0.169,
+    "end": 0.344
+   },
+   {
+    "w": "taking",
+    "start": 0.394,
+    "end": 0.594
+   },
+   {
+    "w": "the",
+    "start": 0.619,
+    "end": 0.669
+   },
+   {
+    "w": "first",
+    "start": 0.744,
+    "end": 0.919
+   },
+   {
+    "w": "pitch",
+    "start": 0.969,
+    "end": 1.219
+   },
+   {
+    "w": "can",
+    "start": 1.244,
+    "end": 1.319
+   },
+   {
+    "w": "put",
+    "start": 1.344,
+    "end": 1.444
+   },
+   {
+    "w": "you",
+    "start": 1.469,
+    "end": 1.544
+   },
+   {
+    "w": "behind",
+    "start": 1.569,
+    "end": 1.894
+   },
+   {
+    "w": "in",
+    "start": 1.919,
+    "end": 1.969
+   },
+   {
+    "w": "the",
+    "start": 1.969,
+    "end": 2.019
+   },
+   {
+    "w": "count",
+    "start": 2.069,
+    "end": 2.344
+   },
+   {
+    "w": "before",
+    "start": 2.369,
+    "end": 2.594
+   },
+   {
+    "w": "you've",
+    "start": 2.644,
+    "end": 2.944
+   },
+   {
+    "w": "even",
+    "start": 3.044,
+    "end": 3.169
+   },
+   {
+    "w": "taken",
+    "start": 3.219,
+    "end": 3.444
+   },
+   {
+    "w": "a",
+    "start": 3.444,
+    "end": 3.444
+   },
+   {
+    "w": "swing.",
+    "start": 3.519,
+    "end": 3.84
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "twist2",
+  "text": "But swinging at everything isn't the answer either.",
+  "spoken": "But swinging at everything isn't the answer either.",
+  "dur": 2.005,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.04,
+    "end": 0.14
+   },
+   {
+    "w": "swinging",
+    "start": 0.19,
+    "end": 0.44
+   },
+   {
+    "w": "at",
+    "start": 0.49,
+    "end": 0.54
+   },
+   {
+    "w": "everything",
+    "start": 0.615,
+    "end": 0.94
+   },
+   {
+    "w": "isn't",
+    "start": 1.015,
+    "end": 1.14
+   },
+   {
+    "w": "the",
+    "start": 1.165,
+    "end": 1.215
+   },
+   {
+    "w": "answer",
+    "start": 1.315,
+    "end": 1.49
+   },
+   {
+    "w": "either.",
+    "start": 1.59,
+    "end": 2.005
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "drive",
+  "text": "If it's a pitch you can drive, in your hitting zone, attacking early can be a huge advantage.",
+  "spoken": "If it's a pitch you can drive, in your hitting zone, attacking early can be a huge advantage.",
+  "dur": 3.947,
+  "words": [
+   {
+    "w": "If",
+    "start": 0.048,
+    "end": 0.123
+   },
+   {
+    "w": "it's",
+    "start": 0.148,
+    "end": 0.273
+   },
+   {
+    "w": "a",
+    "start": 0.273,
+    "end": 0.273
+   },
+   {
+    "w": "pitch",
+    "start": 0.323,
+    "end": 0.473
+   },
+   {
+    "w": "you",
+    "start": 0.498,
+    "end": 0.573
+   },
+   {
+    "w": "can",
+    "start": 0.598,
+    "end": 0.673
+   },
+   {
+    "w": "drive,",
+    "start": 0.723,
+    "end": 1.198
+   },
+   {
+    "w": "in",
+    "start": 1.248,
+    "end": 1.298
+   },
+   {
+    "w": "your",
+    "start": 1.323,
+    "end": 1.398
+   },
+   {
+    "w": "hitting",
+    "start": 1.423,
+    "end": 1.598
+   },
+   {
+    "w": "zone,",
+    "start": 1.648,
+    "end": 2.098
+   },
+   {
+    "w": "attacking",
+    "start": 2.223,
+    "end": 2.548
+   },
+   {
+    "w": "early",
+    "start": 2.648,
+    "end": 2.848
+   },
+   {
+    "w": "can",
+    "start": 2.873,
+    "end": 2.948
+   },
+   {
+    "w": "be",
+    "start": 2.973,
+    "end": 3.098
+   },
+   {
+    "w": "a",
+    "start": 3.098,
+    "end": 3.098
+   },
+   {
+    "w": "huge",
+    "start": 3.173,
+    "end": 3.373
+   },
+   {
+    "w": "advantage.",
+    "start": 3.398,
+    "end": 3.947
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "edge",
+  "text": "But if it's on the edge or a pitch you struggle to hit, taking it can be the smarter play.",
+  "spoken": "But if it's on the edge or a pitch you struggle to hit, taking it can be the smarter play.",
+  "dur": 3.712,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.019,
+    "end": 0.119
+   },
+   {
+    "w": "if",
+    "start": 0.144,
+    "end": 0.194
+   },
+   {
+    "w": "it's",
+    "start": 0.219,
+    "end": 0.294
+   },
+   {
+    "w": "on",
+    "start": 0.344,
+    "end": 0.419
+   },
+   {
+    "w": "the",
+    "start": 0.419,
+    "end": 0.494
+   },
+   {
+    "w": "edge",
+    "start": 0.669,
+    "end": 0.844
+   },
+   {
+    "w": "or",
+    "start": 0.894,
+    "end": 1.019
+   },
+   {
+    "w": "a",
+    "start": 1.019,
+    "end": 1.019
+   },
+   {
+    "w": "pitch",
+    "start": 1.069,
+    "end": 1.444
+   },
+   {
+    "w": "you",
+    "start": 1.519,
+    "end": 1.594
+   },
+   {
+    "w": "struggle",
+    "start": 1.644,
+    "end": 1.869
+   },
+   {
+    "w": "to",
+    "start": 1.894,
+    "end": 1.944
+   },
+   {
+    "w": "hit,",
+    "start": 1.994,
+    "end": 2.369
+   },
+   {
+    "w": "taking",
+    "start": 2.494,
+    "end": 2.719
+   },
+   {
+    "w": "it",
+    "start": 2.744,
+    "end": 2.794
+   },
+   {
+    "w": "can",
+    "start": 2.819,
+    "end": 2.894
+   },
+   {
+    "w": "be",
+    "start": 2.919,
+    "end": 2.994
+   },
+   {
+    "w": "the",
+    "start": 3.019,
+    "end": 3.069
+   },
+   {
+    "w": "smarter",
+    "start": 3.119,
+    "end": 3.394
+   },
+   {
+    "w": "play.",
+    "start": 3.444,
+    "end": 3.712
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "goal",
+  "text": "The goal isn't to swing first pitch or always take it. It's to attack the right pitch.",
+  "spoken": "The goal isn't to swing first pitch or always take it. It's to attack the right pitch.",
+  "dur": 3.221,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.044,
+    "end": 0.094
+   },
+   {
+    "w": "goal",
+    "start": 0.144,
+    "end": 0.294
+   },
+   {
+    "w": "isn't",
+    "start": 0.344,
+    "end": 0.469
+   },
+   {
+    "w": "to",
+    "start": 0.494,
+    "end": 0.544
+   },
+   {
+    "w": "swing",
+    "start": 0.594,
+    "end": 0.769
+   },
+   {
+    "w": "first",
+    "start": 0.819,
+    "end": 0.969
+   },
+   {
+    "w": "pitch",
+    "start": 1.019,
+    "end": 1.219
+   },
+   {
+    "w": "or",
+    "start": 1.244,
+    "end": 1.344
+   },
+   {
+    "w": "always",
+    "start": 1.419,
+    "end": 1.619
+   },
+   {
+    "w": "take",
+    "start": 1.669,
+    "end": 1.819
+   },
+   {
+    "w": "it.",
+    "start": 1.844,
+    "end": 2.144
+   },
+   {
+    "w": "It's",
+    "start": 2.244,
+    "end": 2.319
+   },
+   {
+    "w": "to",
+    "start": 2.344,
+    "end": 2.394
+   },
+   {
+    "w": "attack",
+    "start": 2.419,
+    "end": 2.644
+   },
+   {
+    "w": "the",
+    "start": 2.669,
+    "end": 2.719
+   },
+   {
+    "w": "right",
+    "start": 2.744,
+    "end": 2.869
+   },
+   {
+    "w": "pitch.",
+    "start": 2.919,
+    "end": 3.221
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "q",
+  "text": "Would you swing or take?",
+  "spoken": "Would you swing or take?",
+  "dur": 1.173,
+  "words": [
+   {
+    "w": "Would",
+    "start": 0.065,
+    "end": 0.14
+   },
+   {
+    "w": "you",
+    "start": 0.165,
+    "end": 0.24
+   },
+   {
+    "w": "swing",
+    "start": 0.315,
+    "end": 0.54
+   },
+   {
+    "w": "or",
+    "start": 0.565,
+    "end": 0.64
+   },
+   {
+    "w": "take?",
+    "start": 0.69,
+    "end": 1.165
+   }
+  ]
+ }
+]
