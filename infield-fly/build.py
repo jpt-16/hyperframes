@@ -1,14 +1,16 @@
-"""'The infield fly rule': why an infielder can't drop an easy pop-up for a cheap double play (1080x1920, music + effects, no narration).
+"""'The infield fly rule': why an infielder can't drop an easy pop-up for a cheap double play (1080x1920, voiceover + music + effects).
 
-    python3 tools/physics.py        # the pitch and the pop-up -> assets/play.json
-    python3 build.py                # index.html + assets/mix.wav
+    python3 tools/physics.py                                       # the pitch and the pop-up -> assets/play.json
+    $HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # Kokoro voiceover (am_michael) + word timing
+    python3 build.py                                               # index.html + assets/mix.wav (+ assets/mix-novo.wav without the voice)
     npx --yes hyperframes@0.8.154 render . -o renders/infield-fly.mp4 --video-bitrate 16M
 
-The rule as shown (MLB Official Baseball Rules, definition of an infield fly and 5.09(a)(12)): a fair fly ball (not a
-line drive or a bunt) that an infielder can catch with ordinary effort, with runners on 1st and 2nd or the bases loaded
-and fewer than two out. The umpire declares it while the ball is in the air; the batter is out whether or not it's
-caught; the ball stays live and the runners may advance at their own risk (no force, since the batter is out). The play
-has one out, runners on 1st and 2nd; the pop-up comes down on the infield dirt in front of the shortstop.
+Shots, captions and reveals are keyed to the words of the voiceover. The rule as shown (MLB Official Baseball Rules,
+definition of an infield fly and 5.09(a)(12)): a fair fly ball (not a line drive or a bunt) that an infielder can catch
+with ordinary effort, with runners on 1st and 2nd or the bases loaded and fewer than two out. The umpire declares it
+while the ball is in the air; the batter is out whether or not it's caught; the ball stays live and the runners may
+advance at their own risk (no force, since the batter is out). The play: bases loaded, one out, a pop-up that comes down
+on the infield dirt in front of the shortstop.
 """
 import json, os, sys, wave
 import numpy as np
@@ -21,9 +23,16 @@ from audio import SR, make_bed
 P = json.load(open(os.path.join(HERE, "assets", "play.json")))
 PO = P["pop"]; TL = PO["t_land"]
 T_CALL, TF = 1.2, TL + 0.36
-TR1 = TF + 0.34; TC1 = TR1 + 0.42; TR2 = TC1 + 0.3; TC2 = TR2 + 1.0              # mirrors assets/field.js
-D = 29.4
+TR1 = TF + 0.34; TC1 = TR1 + 0.42; TR2 = TC1 + 0.25; TC2 = TR2 + 0.8              # mirrors assets/field.js
+TM = json.load(open(os.path.join(HERE, "assets", "vo", "timing.json")))
+IDX = {x["id"]: k for k, x in enumerate(TM["lines"])}
+LN = lambda lid: TM["lines"][IDX[lid]]
+def W(lid, word, end=False, nth=0):
+    hits = [w for w in LN(lid)["words"] if w["w"].strip(".,!?:").lower() == word.lower()]
+    return hits[nth]["t1" if end else "t0"]
+D = TM["duration"]
 Y, CYAN, WHITE, HOT, MUTED = "#FFD84D", "#56D1FF", "#F4F6F8", "#FF6A3D", "#AEB8C6"
+S2, S3, S4, S5, S6, S7, S8 = (LN(k)["t0"] - 0.06 for k in ["setup", "trap", "name", "rule", "why", "twist", "end"])
 
 # ----------------------------------------------------------------- shots (video time v) and the play time each one shows
 SHOTS = []
@@ -34,33 +43,44 @@ def vat(sh, t):                                                    # the video t
     vs, ts = sh["vs"], sh["ts"]
     for i in range(1, len(vs)):
         if ts[i] != ts[i - 1] and min(ts[i - 1], ts[i]) <= t <= max(ts[i - 1], ts[i]): return vs[i - 1] + (t - ts[i - 1]) / (ts[i] - ts[i - 1]) * (vs[i] - vs[i - 1])
-# 1 the trap: the swing (contact at 0.3), the ball going up, the shortstop under it, the glove pulled away; freeze just above the dirt
-S2, S3, S4, S5 = 3.9, 9.4, 16.6, 23.4
+# 1-2 the trap, one continuous pop-up (contact at 0.3; it reaches the dirt as he says "on purpose"): the swing, the climb,
+#     bases loaded, the shortstop under it, the glove pulled away; freeze just above the dirt
 CT = 0.3
-rate(0.0, 0.7, "plateHi", -CT, play="rule")
-rate(0.7, 1.5, "rise", 0.55, play="rule")
-rate(1.5, 2.35, "under", TL - 2.0, play="rule")
-FRZ1 = 3.0; TFZ = TL - 0.015
-shot(2.35, S2, "drop", [2.35, FRZ1, S2], [TFZ - (FRZ1 - 2.35), TFZ, TFZ], play="rule", zt=TFZ - 0.14, freeze=FRZ1)
-# 2 the rule: the replay from the infield at half speed; the umpire's arm goes up while it's climbing; the batter is out
-rate(S2, 5.4, "mound", -0.25, 0.5, "replay", play="rule")
-rate(5.4, 7.2, "umpCU", 0.55, 0.5, "replay", play="rule", zt=T_CALL)
-rate(7.2, S3, "wideAir", TL - 1.9, play="rule")
-VCALL = vat(SHOTS[-2], T_CALL); VLAND2 = vat(SHOTS[-1], TL)
-# 3 why it exists: the same pop-up, no rule (top) vs. the rule (bottom)
-SPL = 15.2
-shot(S3, S4, "split", [S3, SPL, S4], [TL - 1.0, TC2 + 0.45, TC2 + 0.45], mode="split", play="rule", marks=1)
-SP = SHOTS[-1]; VL3, VC1, VC2, VF3 = (vat(SP, x) for x in (TL, TC1, TC2, TF))
-# 4 the conditions: the board over the field from above
-rate(S4, S5, "top", -1.0, 0.02, play="rule")
-# 5 the twist: it falls in (half speed), the runner tries his luck and is looked back, the batter walks off; freeze
-rate(S5, 25.0, "dirt", TL - 0.5, 0.5, "slow", play="rule")
-rate(25.0, 26.8, "runners", TL + 0.1, play="rule")
-FRZ2 = 27.6
-shot(26.8, D, "final", [26.8, FRZ2, D], [TL + 1.6, TL + 2.4, TL + 2.4], play="rule", freeze=FRZ2)
+FRZ1 = W("setup", "on") + 0.05; TFZ = TL - 0.015
+R = TFZ / (FRZ1 - CT)                                             # a touch under real time so the pop-up spans the two lines
+A2, A3, A4, A5 = 0.75, S2, W("setup", "the") - 0.06, W("setup", "and") - 0.06
+t_ = lambda v: (v - CT) * R
+rate(0.0, A2, "plateHi", t_(0.0), R, play="rule")
+rate(A2, A3, "rise", t_(A2), R, play="rule")
+rate(A3, A4, "loaded", t_(A3), R, play="rule", marks="run")
+rate(A4, A5, "under", t_(A4), R, play="rule")
+shot(A5, S3, "drop", [A5, FRZ1, S3], [t_(A5), TFZ, TFZ], play="rule", zt=TFZ - 0.14, freeze=FRZ1)
+# 3 "the runners take off, the defense gets easy outs": without the rule, the drop becomes a double play
+B2 = W("trap", "except") + 0.04
+shot(S3, B2, "dpWide", [S3, B2], [TL - 0.05, TC2 + 0.12], play="norule", marks=1)
+# "...except they don't": the umpire's arm goes up (½ speed); "That's the infield fly rule"
+rate(B2, S5, "umpCU", T_CALL - 0.2, 0.5, "slow", play="rule", zt=T_CALL)
+VCALL = vat(SHOTS[-1], T_CALL + 0.04)
+# 4 the conditions: fair fly, ordinary effort (the shortstop camped under it), then the board: runners, bases loaded, outs;
+#   "the umpire can call the batter out immediately"
+C2, C3 = W("rule", "with", nth=1) - 0.12, W("rule", "the", nth=1) - 0.06
+rate(S5, C2, "under", 2.2, 0.35, "slow", play="rule")
+rate(C2, C3, "top", -1.0, 0.02, play="rule")
+rate(C3, S6, "wideAir", 1.7, play="rule")
+# 5 why: the same pop-up, no rule (top) vs. the rule (bottom)
+shot(S6, S7, "split", [S6, S7], [TL - 0.55, TC2 + 0.35], mode="split", play="rule", marks=1)
+SP = SHOTS[-1]; VL3, VC1, VC2 = (vat(SP, x) for x in (TL, TC1, TC2))
+# 6 the twist: it falls in (½ speed); the runner on third breaks for home at his own risk and is looked back
+D2 = W("twist", "the", nth=1) - 0.08
+rate(S7, D2, "dirt", TL - 0.42, 0.5, "slow", play="rule")
+rate(D2, S8, "runners", TL + 0.12, play="rule")
+# 7 "Baseball has a rule for a play that looks too easy": the batter walks off; freeze
+FRZ2 = LN("end")["t1"] + 0.06
+shot(S8, D, "final", [S8, FRZ2, D], [TL + 1.6, TL + 1.6 + (FRZ2 - S8), TL + 1.6 + (FRZ2 - S8)], play="rule", freeze=FRZ2)
 for x, y in zip(SHOTS, SHOTS[1:]): assert abs(x["b"] - y["a"]) < 1e-3 and x["b"] > x["a"], (x, y)
-VL5 = vat(SHOTS[-3], TL); VF5 = vat(SHOTS[-2], TF)
+VL7 = vat(SHOTS[-3], TL)
 CUTS = [x["a"] for x in SHOTS[1:]]
+DPS = SHOTS[5]; VDC1, VDC2, VDL = vat(DPS, TC1), vat(DPS, TC2), S3 + 0.05
 
 c = Comp(D, 30)
 PINS = []
@@ -68,7 +88,7 @@ c.clip("fieldl", 0, D, '<canvas id="field-gl" width="1080" height="1920" data-la
 c.clip("shade", 0, D, '<div class="shade-top"></div><div class="shade-bot"></div>', cls="layer", style="z-index:2")
 c.clip("spdc", 0, D, '<div class="spd" id="spd"></div>', cls="layer", style="z-index:30")
 c.clip("flash", 0, D, '<div class="flash" id="flash"></div>', cls="layer", style="z-index:40")
-for f in [FRZ1, S2, VCALL, S3, S4, S5, FRZ2]:
+for f in [FRZ1, S3, B2, S5, C2, S6, S7, FRZ2]:
     c.set("#flash", '{"opacity":0.6}', f); c.to("#flash", o(opacity=0, duration=0.14, ease="power2.out"), f + 0.001)
 
 def pop(sel, t, dy=24):
@@ -81,37 +101,52 @@ def punch(pid, t0, t1, html, top=1300, cls=""):
 def pinl(pid, t0, t1, text, key, cls=""):
     c.clip(pid, t0, t1, f'<div class="pinw" id="{pid}w"><div class="pin {cls}" id="{pid}x"><span>{text}</span></div></div>', cls="layer", style="z-index:12")
     pop(f"#{pid}x", t0, 10); PINS.append([f"{pid}w", key])
-def words(wid, t0, t1, parts, top=300, cls="hk"):                # a headline that lands word group by word group
-    spans = "".join(f'<span class="hl{(" " + k) if k else ""}">' + " ".join(f'<span class="hw" id="{wid}{i}_{j}">{esc(w)}</span>' for j, w in enumerate(txt.split())) + "</span>" for i, (txt, k, _) in enumerate(parts))
+def words(wid, t0, t1, parts, top=300, cls="hk"):                # a headline that lands word by word, each on its own time
+    spans = "".join(f'<span class="hl{(" " + k) if k else ""}">' + " ".join(f'<span class="hw" id="{wid}{i}_{j}">{esc(w)}</span>' for j, (w, _) in enumerate(ws)) + "</span>" for i, (ws, k) in enumerate(parts))
     c.clip(wid, t0, t1, f'<div class="{cls}" id="{wid}x" style="top:{top}px">{spans}</div>', cls="layer", style="z-index:22")
-    for i, (txt, _, ts_) in enumerate(parts):
-        for j, _w in enumerate(txt.split()):
-            c.ft(f"#{wid}{i}_{j}", o(opacity=0, scale=1.35, filter="blur(10px)"), o(opacity=1, scale=1, filter="blur(0px)", duration=0.16, ease="power3.out"), ts_ + 0.07 * j)
+    for i, (ws, _) in enumerate(parts):
+        for j, (_, ts_) in enumerate(ws):
+            c.ft(f"#{wid}{i}_{j}", o(opacity=0, scale=1.35, filter="blur(10px)"), o(opacity=1, scale=1, filter="blur(0px)", duration=0.16, ease="power3.out"), ts_ - 0.03)
+LW = lambda lid, i0, i1: [(LN(lid)["words"][n]["w"].rstrip(",:"), LN(lid)["words"][n]["t0"]) for n in range(i0, i1 + 1)]
 
-# ----------------------------------------------------------------- 1 the trap
-tag("sit", 0.05, 2.3, "wh", "1 out · runners on 1st & 2nd", 300)
-pinl("pss", 1.6, 2.33, "Shortstop: “I got it”", "ss", "yl")
-words("hook", FRZ1 - 0.3, S2, [("Wait…", "", FRZ1 - 0.3), ("He did that", "", FRZ1 - 0.05), ("on purpose?", "acc", FRZ1 + 0.1)], 300)
-c.ft("#hookx", o(scale=1.0, transformOrigin="0% 0%"), o(scale=1.06, duration=0.14, ease="power3.out"), FRZ1 + 0.1)
+# ----------------------------------------------------------------- 1 the hook: the line builds with the voice over the pop-up
+words("hook", 0.0, S2 - 0.02, [(LW("hook", 0, 3), ""), (LW("hook", 4, 6), "acc")], 300)
+c.to("#hookx", o(opacity=0, y=-24, duration=0.12, ease="power2.in"), S2 - 0.14)
 
-# ----------------------------------------------------------------- 2 the rule
-c.clip("ttl", S2 + 0.05, S3 - 0.02, '<div class="bnr" id="bnrx"><b>The rule</b><span>Infield fly</span></div>', cls="layer", style="z-index:16"); pop("#bnrx", S2 + 0.05, 8)
-words("ifly", VCALL - 0.02, 7.2 - 0.02, [("“Infield fly!”", "acc", VCALL - 0.02)], 300)
-tag("tif", VCALL + 0.2, 7.2 - 0.02, "wh", "Arm straight up: called while the ball is <b class='yl'>still in the air</b>", 1500)
-pinl("pout", 7.3, S3 - 0.02, "Out", "batter")
-words("bout", 7.3, S3 - 0.02, [("Batter:", "", 7.32), ("automatically out", "acc", 7.55)], 300, "hk mid")
-tag("tnc", VLAND2 + 0.05, S3 - 0.02, "yl", "…even though nobody caught it", 1500)
+# ----------------------------------------------------------------- captions: the voiceover, word by word (titles instead on the hook, "on purpose" and "That's the infield fly rule")
+CAPS = [("setup", 0, 1, {0: "acc", 1: "acc"}), ("setup", 2, 5, {4: "acc"}), ("setup", 6, 10, {10: "acc"}), ("setup", 11, 16, {16: "acc"}),
+        ("trap", 0, 3, {2: "acc", 3: "acc"}), ("trap", 4, 8, {7: "acc", 8: "acc"}), ("trap", 9, 11, {11: "acc"}),
+        ("rule", 0, 4, {2: "acc", 3: "acc", 4: "acc"}), ("rule", 5, 10, {10: "acc"}), ("rule", 11, 13, {12: "acc", 13: "acc"}), ("rule", 14, 19, {17: "acc", 19: "acc"}),
+        ("rule", 20, 23, {22: "acc", 23: "acc"}), ("rule", 24, 28, {25: "acc", 27: "acc", 28: "acc"}), ("rule", 29, 32, {30: "acc"}), ("rule", 33, 36, {35: "acc", 36: "acc"}),
+        ("why", 0, 0, {0: "acc"}), ("why", 1, 4, {}), ("why", 5, 9, {6: "acc"}), ("why", 10, 13, {}), ("why", 14, 17, {15: "acc", 16: "acc", 17: "acc"}),
+        ("twist", 0, 3, {3: "acc"}), ("twist", 4, 8, {8: "acc"}), ("twist", 9, 12, {11: "acc", 12: "acc"}),
+        ("end", 0, 3, {3: "acc"}), ("end", 4, 10, {9: "acc", 10: "acc"})]
+for k, (lid, i0, i1, acc) in enumerate(CAPS):
+    ln = LN(lid); wd = ln["words"]
+    start = wd[i0]["t0"] - 0.06
+    if k + 1 < len(CAPS) and CAPS[k + 1][0] == lid: end = wd[CAPS[k + 1][1]]["t0"] - 0.06
+    elif lid == "setup": end = FRZ1 - 0.12
+    elif lid == "end": end = FRZ2 - 0.02
+    else: end = min(ln["t1"] + 0.35, TM["lines"][IDX[lid] + 1]["t0"] - 0.1)
+    cid = f"cap{k}"; sp = []
+    for n in range(i0, i1 + 1):
+        w = wd[n]["w"].replace("...", "…"); w = w.rstrip(",:") if n == i1 else w
+        sp.append(f'<span class="cw{(" " + acc[n]) if n in acc else ""}" id="{cid}w{n - i0}">{esc(w)}</span>')
+    c.clip(cid, start, end, f'<div class="cap" style="top:300px"><span class="cl">{" ".join(sp)}</span></div>', cls="layer", style="z-index:20")
+    for n in range(i0, i1 + 1): c.ft(f"#{cid}w{n - i0}", o(opacity=0, y=34, filter="blur(10px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.15, ease="power3.out"), wd[n]["t0"] - 0.04)
 
-# ----------------------------------------------------------------- 3 why the rule exists
-c.clip("splt", S3, S4, f"""<div class="seam"></div>
-  <div class="half t"><span class="hlab hot" id="hl1">Without the rule</span></div>
-  <div class="half b"><span class="hlab yl" id="hl2">With the rule · batter already out</span></div>""", cls="layer", style="z-index:11")
-pop("#hl1", S3 + 0.05, 10); pop("#hl2", S3 + 0.15, 10)
-tag("sdrop", VL3 - 0.1, VC1 - 0.05, "hot", "Dropped on purpose", 760)
-tag("s2b", VC1, VC2 - 0.05, "hot", "Force out at 2nd", 760)
-tag("s1b", VC2, S4 - 0.02, "hot", "And at 1st: <b>double play</b>", 760)
-tag("sno", VL3 + 0.1, S4 - 0.02, "yl", "No force: runners may advance at their own risk", 1730)
-punch("pdp", 14.9, S4 - 0.02, "No cheap<br><em>double play.</em>", 1240, "ctr")
+# ----------------------------------------------------------------- 2 the trap
+tag("sit", A3 + 0.05, A4 - 0.02, "wh", "Bases loaded · 1 out", 560)
+pinl("pss", A4 + 0.1, A5 - 0.02, "Shortstop: “I got it”", "ss", "yl")
+words("hookq", FRZ1 - 0.12, S3 - 0.02, [([("Wait…", FRZ1 - 0.12)], ""), ([("He", FRZ1 + 0.05), ("did", FRZ1 + 0.1), ("that", FRZ1 + 0.15)], ""), ([("on", FRZ1 + 0.22), ("purpose?", FRZ1 + 0.27)], "acc")], 300)
+c.ft("#hookqx", o(scale=1.0, transformOrigin="0% 0%"), o(scale=1.06, duration=0.14, ease="power3.out"), FRZ1 + 0.27)
+
+# ----------------------------------------------------------------- 3 without the rule, then the call
+c.clip("nor", S3 + 0.02, B2 - 0.02, '<span class="hlab hot nr" id="norx">Without the rule</span>', cls="layer", style="z-index:13"); pop("#norx", S3 + 0.02, 10)
+tag("d2b", VDC1, VDC2 - 0.02, "hot", "Force out at 2nd", 1500)
+tag("d1b", VDC2, B2 - 0.02, "hot", "And 1st: double play", 1500)
+words("ifr", W("name", "that's") - 0.03, S5 - 0.02, [(LW("name", 0, 1), ""), (LW("name", 2, 4), "acc")], 300)
+tag("tif", VCALL + 0.1, S5 - 0.02, "wh", "Arm straight up: called while the ball is <b class='yl'>still in the air</b>", 1500)
 
 # ----------------------------------------------------------------- 4 the conditions
 BXY = {"h": (0.5, 0.9), "1": (0.88, 0.5), "2": (0.5, 0.1), "3": (0.12, 0.5)}
@@ -122,44 +157,55 @@ def diamond(did, w, runners, batter=True, extra=""):
     rs = "".join(f'<b class="rn" id="{did}r{k}" style="left:{P_[k][0]:.0f}px;top:{P_[k][1]:.0f}px"></b>' for k in runners)
     bt = f'<b class="rn bt" id="{did}rh" style="left:{P_["h"][0]:.0f}px;top:{P_["h"][1]:.0f}px">★</b>' if batter else ""
     return f'<div class="dia" style="width:{w:.0f}px;height:{h:.0f}px"><svg width="{w:.0f}" height="{h:.0f}"><polygon points="{pts}" /></svg>{bases}{rs}{bt}{extra}</div>', P_
-dc, PC = diamond("cd", 460, "12", batter=False, extra="")
-dc = dc.replace("</div>", f'<b class="rn" id="cr3" style="left:{PC["3"][0]:.0f}px;top:{PC["3"][1]:.0f}px;opacity:0"></b></div>', 1)
-CX = [("Less than 2 outs", 17.0), ("Runners on 1st + 2nd", 18.1), ("Fair fly ball", 19.2), ("Catchable with ordinary effort", 20.3)]
-TBL = 21.5
-c.clip("cond", S4, S5, f"""<div class="tac" id="tacx"></div>
-  <div class="ch" id="chx"><span>Infield fly rule</span><b>When it applies</b></div>
-  <div class="cdia" id="cdx">{dc}</div>
-  <div class="cl">""" + "".join(f'<div class="ci" id="ci{i}"><i>✓</i><b>{esc(t)}</b></div>' for i, (t, _) in enumerate(CX)) + """</div>
-  <div class="cbl" id="cblx">Bases loaded <em>also qualifies</em></div>
-  <div class="cfn" id="cfnx">Not on a line drive or a bunt · the umpire's judgment</div>""", cls="layer", style="z-index:11")
-c.ft("#tacx", o(opacity=0), o(opacity=1, duration=0.25), S4)
-pop("#chx", S4 + 0.05, 14); pop("#cdx", S4 + 0.15, 14)
-for i, (_, t_) in enumerate(CX): c.ft(f"#ci{i}", o(opacity=0, x=-60), o(opacity=1, x=0, duration=0.22, ease="power3.out"), t_)
-c.ft("#cr3", o(opacity=0, scale=1.8), o(opacity=1, scale=1, duration=0.25, ease="back.out(2)"), TBL)
-pop("#cblx", TBL + 0.05, 14); c.ft("#cfnx", o(opacity=0), o(opacity=1, duration=0.3), 20.9)
+dc, PC = diamond("cd", 420, "", batter=False)
+dc = dc.replace("</div>", "".join(f'<b class="rn" id="cr{k}" style="left:{PC[k][0]:.0f}px;top:{PC[k][1]:.0f}px;opacity:0"></b>' for k in "123") + "</div>", 1)
+CX = [("Fair fly ball", W("rule", "fair")), ("Catchable with ordinary effort", W("rule", "ordinary")), ("Runners on 1st + 2nd", W("rule", "first")),
+      ("…or bases loaded", W("rule", "bases")), ("Less than 2 outs", W("rule", "fewer"))]
+c.clip("clist", S5 + 0.05, C3 - 0.02, '<div class="clst" id="clx">' + "".join(f'<div class="ci" id="ci{i}"><i>✓</i><b>{esc(t)}</b></div>' for i, (t, _) in enumerate(CX)) + "</div>", cls="layer", style="z-index:13")
+for i, (_, t_c) in enumerate(CX): c.ft(f"#ci{i}", o(opacity=0, x=-60), o(opacity=1, x=0, duration=0.22, ease="power3.out"), t_c - 0.03)
+c.clip("cond", C2, C3, f'<div class="tac" id="tacx"></div><div class="cdia" id="cdx">{dc}</div>', cls="layer", style="z-index:11")
+c.ft("#tacx", o(opacity=0), o(opacity=1, duration=0.2), C2); pop("#cdx", C2 + 0.02, 14)
+for k_, t_c in [("1", W("rule", "first")), ("2", W("rule", "second")), ("3", W("rule", "bases"))]:
+    c.ft(f"#cr{k_}", o(opacity=0, scale=1.8), o(opacity=1, scale=1, duration=0.25, ease="back.out(2)"), t_c - 0.03)
+c.clip("cfn", C2 + 0.3, C3 - 0.02, '<div class="cfn" id="cfnx">Not on a line drive or a bunt · the umpire’s judgment</div>', cls="layer", style="z-index:13")
+c.ft("#cfnx", o(opacity=0), o(opacity=1, duration=0.3), C2 + 0.3)
+pinl("pout", C3 + 0.08, S6 - 0.02, "Out", "batter")
+punch("pbo", W("rule", "batter") - 0.05, S6 - 0.02, "Batter:<br><em>automatically out</em>", 1300)
 
-# ----------------------------------------------------------------- 5 the twist
-words("cdm", S5 + 0.5, FRZ2 - 0.02, [("The catch", "", S5 + 0.5), ("doesn't matter.", "acc", S5 + 0.75)], 300, "hk mid")
-tag("trn", 25.15, 26.78, "wh", "Ball's live: he can try for 3rd <b class='yl'>at his own risk</b>", 1500)
-pinl("pr2", 25.15, 26.78, "Runner", "r2", "yl")
-pinl("pout2", 26.9, D, "Out", "batter")
-tag("tbo", 26.9, FRZ2 - 0.02, "wh", "The batter was out the moment it was called", 1500)
-words("q", FRZ2, D, [("Did you know", "", FRZ2 + 0.02), ("this rule?", "acc", FRZ2 + 0.25)], 300)
+# ----------------------------------------------------------------- 5 why: no cheap double play
+c.clip("splt", S6, S7, f"""<div class="seam"></div>
+  <div class="half t"><span class="hlab hot" id="hl1">Without the rule</span></div>
+  <div class="half b"><span class="hlab yl" id="hl2">With the rule · batter already out</span></div>""", cls="layer", style="z-index:11")
+pop("#hl1", S6 + 0.05, 10); pop("#hl2", S6 + 0.15, 10)
+tag("sdrop", VL3 - 0.1, VC1 - 0.05, "hot", "Dropped on purpose", 760)
+tag("s2b", VC1, VC2 - 0.05, "hot", "Force out at 2nd", 760)
+tag("s1b", VC2, S7 - 0.02, "hot", "And at 1st: <b>double play</b>", 760)
+tag("sno", VL3 + 0.1, S7 - 0.02, "yl", "No force: runners may advance at their own risk", 1730)
+punch("pdp", W("why", "cheap") - 0.05, S7 - 0.02, "No cheap<br><em>double play.</em>", 1240, "ctr")
+
+# ----------------------------------------------------------------- 6 the twist; 7 the end
+punch("pcd", W("twist", "twist") - 0.05, D2 - 0.02, "The catch<br><em>doesn't matter.</em>", 1280)
+pinl("pr3", D2 + 0.1, S8 - 0.02, "Runner", "r3", "yl")
+tag("trn", W("twist", "advance") - 0.05, S8 - 0.02, "wh", "Ball's live: he can try for home <b class='yl'>at his own risk</b>", 1500)
+pinl("pout2", S8 + 0.1, D, "Out", "batter")
+tag("tbo", S8 + 0.2, FRZ2 - 0.02, "wh", "The batter was out the moment it was called", 1500)
+words("q", FRZ2, D, [([("Did", FRZ2 + 0.02), ("you", FRZ2 + 0.08), ("know", FRZ2 + 0.14)], ""), ([("this", FRZ2 + 0.24), ("rule?", FRZ2 + 0.3)], "acc")], 300)
 
 # ----------------------------------------------------------------- sound
 def cue(n, t, db=0.0):
     if t is not None and 0 <= t < D: c.cue(n, t, db)
-for t_ in CUTS: cue("whoosh", t_, -10)
-cue("riser-s", FRZ1, -4); cue("impact", FRZ1, 0); cue("tick", FRZ1, -1); cue("impact", S2, -5)
-cue("tap", VCALL, 0); cue("impact", VCALL, -1); cue("riser-s", VCALL, -9)
-cue("popup", 7.32, -6); cue("impact", 7.55, -6)
-cue("glove", VC1, -1); cue("glove", VC2, -1); cue("popup", VC1, -7); cue("popup", VC2, -5); cue("impact", 14.9, -4)
-for _, t_ in CX: cue("tick", t_, -2)
-cue("popup", TBL, -4)
-cue("glove", VF5, -6); cue("impact", S5 + 0.75, -5)
-cue("riser-m", FRZ2, -5); cue("impact", FRZ2, -1); cue("tick", FRZ2, -2)
-CRACKS = [(CT, 0.6), (vat(SHOTS[4], 0.0), 0.3)]
-THUDS = [(VLAND2, 0.9), (VL3, 0.7), (VL5, 1.0, 0.5)]                # the ball hitting the dirt (the last one at half speed)
+for t_c in CUTS: cue("whoosh", t_c, -10)
+cue("impact", 0.0, -8); cue("riser-s", FRZ1, -4); cue("impact", FRZ1, 0); cue("tick", FRZ1, -1)
+cue("glove", VDC1, -1); cue("glove", VDC2, -1); cue("popup", VDC1, -7); cue("popup", VDC2, -5)
+cue("tap", VCALL, 0); cue("impact", VCALL, -1); cue("riser-s", VCALL, -9); cue("impact", W("name", "infield") - 0.03, -5)
+for _, t_c in CX: cue("tick", t_c, -2)
+for k_ in ["first", "second", "bases"]: cue("popup", W("rule", k_), -8)
+cue("impact", W("rule", "batter") - 0.05, -5)
+cue("glove", VC1, -6); cue("glove", VC2, -6); cue("impact", W("why", "cheap") - 0.05, -4)
+cue("impact", W("twist", "twist") - 0.05, -6)
+cue("riser-m", FRZ2, -6); cue("impact", FRZ2, -1); cue("tick", FRZ2, -2)
+CRACKS = [(CT, 0.6)]
+THUDS = [(vat(SHOTS[5], TL), 0.8), (VL3, 0.6), (VL7, 1.0, 0.5)]   # the ball on the dirt (the last one at half speed)
 LEVEL = {"impact": -3.0, "hit": -5.0, "whoosh": -6.0, "glove": -1.0, "tick": -6.0, "popup": -8.0, "riser-m": -7.0, "riser-s": -7.0, "tap": -3.0}
 
 def crack(rng):
@@ -195,16 +241,24 @@ def mixdown():
     for th in THUDS:
         x = thud(rng, th[2] if len(th) > 2 else 1.0); i = int(th[0] * SR); j = min(n, i + len(x)); fx[i:j] += x[: j - i] * th[1]
     crowd = read(os.path.join(HERE, "assets", "sfx", "crowd.wav")); crowd = np.concatenate([crowd] * (n // len(crowd) + 1))[:n]
-    fx += crowd * 10 ** (-28 / 20)
-    # the music bed: made for this video (lands its chord on the closing question); no voice, so it sits higher
+    fx += crowd * 10 ** (-30 / 20)
+    # the music bed: made for this video (lands its chord on the closing question), ducked under the voice
     bedp = os.path.join(HERE, "assets", "bed.wav"); make_bed(bedp, D, FRZ2, style="drive", seed=31)
     bed = read(bedp)[:n]; bed = np.pad(bed, ((0, n - len(bed)), (0, 0)))
-    full = fx + bed * 10 ** (-9 / 20)
+    vo = read(os.path.join(HERE, "assets", "vo", "vo.wav"))[:n]; vo = np.pad(vo, ((0, n - len(vo)), (0, 0)))
+    env = np.convolve(np.abs(vo).mean(1), np.ones(int(0.12 * SR)) / int(0.12 * SR), "same")
+    duck = 10 ** (-7 * np.clip(env / 0.05, 0, 1) / 20)                         # up to 7 dB under the voice
+    duck = np.convolve(duck, np.ones(int(0.08 * SR)) / int(0.08 * SR), "same")
+    music = bed * duck[:, None] * 10 ** (-17 / 20)
+    full = (fx + music) * 10 ** (-6 / 20) + vo
     def wav(path, x):
         w = wave.open(path, "wb"); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
         w.writeframes((np.clip(x * 0.5, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
-    pre = os.path.join(HERE, ".pre.wav"); wav(pre, full)
-    m = master(pre, os.path.join(HERE, "assets", "mix.wav")); os.remove(pre)
+    pre, pfx = os.path.join(HERE, ".pre.wav"), os.path.join(HERE, ".fx.wav")
+    wav(pre, full); wav(pfx, (fx + bed * 10 ** (-17 / 20)) * 10 ** (-6 / 20))
+    m = master(pre, os.path.join(HERE, "assets", "mix.wav"))
+    master(pre, os.path.join(HERE, "assets", "mix-novo.wav"), fx_path=pfx)       # music + effects at the same level, without the voice
+    os.remove(pre); os.remove(pfx)
     return m
 
 # ----------------------------------------------------------------- CSS
@@ -285,18 +339,24 @@ CSS += f"""
 .pt.ctr {{ left:0; right:0; text-align:center; font-size:112px; }}
 .seam {{ position:absolute; left:0; right:0; top:958px; height:4px; background:rgba(255,255,255,.75); box-shadow:0 0 18px rgba(0,0,0,.6); }}
 .half {{ position:absolute; left:0; right:0; height:960px; }} .half.t {{ top:0; }} .half.b {{ top:960px; }}
-.hlab {{ position:absolute; left:40px; top:200px; padding:8px 18px; border-radius:12px; background:rgba(6,10,18,.88); {BC} font-size:56px; }}
+.hlab {{ position:absolute; left:40px; top:180px; padding:8px 18px; border-radius:12px; background:rgba(6,10,18,.88); {BC} font-size:56px; }}
 .half.b .hlab {{ top:28px; }}
 .ch {{ position:absolute; left:52px; top:250px; display:grid; gap:4px; }}
 .ch span {{ {MONO} font-size:26px; letter-spacing:.16em; color:{MUTED}; }} .ch b {{ {BC} font-size:110px; line-height:.95; color:#fff; }}
-.cdia {{ position:absolute; left:0; right:0; top:480px; display:flex; justify-content:center; }}
-.cl {{ position:absolute; left:52px; right:52px; top:960px; display:grid; gap:14px; }}
+.cdia {{ position:absolute; left:0; right:0; top:620px; display:flex; justify-content:center; }}
+.clst {{ position:absolute; left:52px; right:52px; top:960px; display:grid; gap:14px; }}
 .ci {{ display:flex; align-items:center; gap:22px; padding:16px 22px; {CARD} border-left:6px solid {Y}; }}
 .ci i {{ display:grid; place-items:center; width:58px; height:58px; flex:none; border-radius:50%; background:{Y}; color:#05080d; font-style:normal; font-family:"Inter", sans-serif; font-weight:800; font-size:36px; }}
 .ci b {{ {BC} font-size:64px; line-height:1; color:#fff; }}
 .cbl {{ position:absolute; left:52px; right:52px; top:1530px; padding:16px 22px; border-radius:14px; background:{HOT}; color:#05080d; {BC} font-size:62px; text-align:center; }}
 .cbl em {{ font-style:normal; color:#fff; }}
 .cfn {{ position:absolute; left:52px; right:52px; top:1680px; {MONO} font-size:24px; letter-spacing:.08em; color:#cfd6e0; text-align:center; }}
+"""
+
+CSS += f"""
+.hlab.nr {{ position:absolute; left:40px; top:200px; }}
+.clst {{ top:1080px; gap:12px; }} .ci b {{ font-size:58px; }}
+.cfn {{ top:1760px; }}
 """
 
 HEAD = '''<script type="importmap">{"imports":{"three":"./assets/vendor/three.module.min.js"}}</script>'''

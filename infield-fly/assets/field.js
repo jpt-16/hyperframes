@@ -347,12 +347,12 @@ for (const x of [OD.x, -OD.x]) { const m = new THREE.Mesh(new THREE.RingGeometry
 
 
 // ------------------------------------------------------------------ the cast
-// the defense (white); the hitters (dark): a right-handed batter, runners on first and second
+// the defense (white); the hitters (dark): a right-handed batter, the bases loaded
 const pitcher = makePlayer(KIT.home, { glove: true });
 const C = makePlayer(KIT.home, { glove: true, catcher: true });
 const ump = makePlayer(KIT.ump, { catcher: true });
 const batter = makePlayer(KIT.away, { helmet: true, bat: true });
-const R1 = makePlayer(KIT.away, { helmet: true }), R2 = makePlayer(KIT.away, { helmet: true });
+const R1 = makePlayer(KIT.away, { helmet: true }), R2 = makePlayer(KIT.away, { helmet: true }), R3 = makePlayer(KIT.away, { helmet: true });
 const homeD = { b1: [61.8, -65.2], b2: [26, -116], ss: [-27, -114], b3: [-58, -76], lf: [-118, -262], cf: [0, -312], rf: [118, -262] };
 const HD = {}; for (const [k, [x, z]] of Object.entries(homeD)) { HD[k] = makePlayer(KIT.home, { glove: true }); HD[k].root.position.set(x, 0, z); }
 const SS = HD.ss, B2F = HD.b2, B1F = HD.b1;
@@ -360,7 +360,7 @@ const bench = [];
 for (const [g, kit, xs] of [[dg3, KIT.home, [-24, -12, -4, 9, 20]], [dg1, KIT.away, [-22, -9, 4, 16, 25]]]) for (const x of xs) {
   const p = makePlayer(kit); const q = dgAt(g, x, 3.4); p.root.position.copy(q); p.root.rotation.y = dgYaw(g); applyPose(p, { ...STAND, lean: 8, shL: [50, 12, 0], shR: [50, 12, 0], elL: 70, elR: 70, nod: -4 }); bench.push(p);
 }
-for (const p of [pitcher, C, ump, batter, R1, R2, ...Object.values(HD), ...bench]) scene.add(p.root);
+for (const p of [pitcher, C, ump, batter, R1, R2, R3, ...Object.values(HD), ...bench]) scene.add(p.root);
 const PLATE_C = v3(0, 0, -0.7);
 const headTop = (P) => wpos(P.neck).add(v3(0, 1.4, 0));
 
@@ -389,10 +389,10 @@ const T_CALL = 1.2;                                   // the umpire declares it:
 const TF = TL + 0.36;                                 // the shortstop has it after the short hop
 const TR1 = TF + 0.34, B2S = v3(1.8, 0, -125.6), B1S = v3(61.8, 0, -65.2);
 const SSREL = () => wpos(SS.root).add(v3(0, 6.2, 0));
-const T1 = 0.42, TC1 = TR1 + T1, TR2 = TC1 + 0.3, T2 = 1.0, TC2 = TR2 + T2;     // the cheap double play: short to second, second to first
+const T1 = 0.42, TC1 = TR1 + T1, TR2 = TC1 + 0.25, T2 = 0.8, TC2 = TR2 + T2;     // the cheap double play: short to second, second to first
 const UD = LAND.clone().setY(0).normalize();
 const SS0 = v3(...homeD.ss.slice(0, 1), 0, homeD.ss[1]), UNDER = LAND.clone().setY(0).addScaledVector(UD, 1.5), BACK = LAND.clone().setY(0).addScaledVector(UD, 2.7);
-const R1L = B1.clone().lerp(B2, 9 / 90), R2L = B2.clone().lerp(B3, 11 / 90);
+const R1L = B1.clone().lerp(B2, 9 / 90), R2L = B2.clone().lerp(B3, 11 / 90), R3L = B3.clone().lerp(HOME, 10 / 90).add(v3(-1.8, 0, 1.8));   // the runner on third leads off in foul territory
 const BPATH = [[-3.0, 0, -0.9], [2.4, 0, -3.2], [63.0, 0, -63.0]];
 
 // ------------------------------------------------------------------ poses
@@ -439,7 +439,7 @@ function placeBall(pos, trailFn) {
   for (let i = 0; i < BALL.trail.length; i++) { const p = trailFn ? trailFn((i + 1) * 0.02) : null, tr = BALL.trail[i]; tr.visible = !!p; if (p) tr.position.copy(p); }
 }
 const ringMat = (c) => new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.9, depthWrite: false, side: THREE.DoubleSide });
-const MARKS = [0, 1, 2].map(() => { const m = new THREE.Mesh(new THREE.RingGeometry(2.6, 3.6, 36), ringMat(0xff6a3d)); m.rotation.x = -Math.PI / 2; m.renderOrder = 5; m.visible = false; scene.add(m); return m; });   // the batter and runners, marked in the split screen
+const MARKS = [0, 1, 2, 3].map(() => { const m = new THREE.Mesh(new THREE.RingGeometry(2.6, 3.6, 36), ringMat(0xff6a3d)); m.rotation.x = -Math.PI / 2; m.renderOrder = 5; m.visible = false; scene.add(m); return m; });   // the batter and runners, marked in the split screen
 const SHADOW = new THREE.Mesh(new THREE.CircleGeometry(0.5, 20), new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.35, depthWrite: false }));
 SHADOW.rotation.x = -Math.PI / 2; SHADOW.renderOrder = 5; scene.add(SHADOW);                                                 // where it will come down
 
@@ -460,7 +460,7 @@ function setScene(t, s) {
   }
   let sy = yawTo(sp, PLATE_C);
   if (t > TF) {
-    if (rule) { sq = keyed([[TF, SS_FIELD], [TF + 0.4, SS_HOLD]], t); sy = lerp(sy, yawTo(sp, B2) + 0.9, smooth((t - TF) / 0.4)); }
+    if (rule) { sq = keyed([[TF, SS_FIELD], [TF + 0.4, SS_HOLD]], t); sy = lerp(sy, yawTo(sp, B3), smooth((t - TF) / 0.4)); }
     else { sq = keyed([[TF, SS_FIELD], [TF + 0.25, SS_BACK], ...THROW(TF + 0.25, TR1).slice(1)], t); sy = lerp(sy, yawTo(sp, B2S) + 0.25, smooth((t - TF) / 0.25)); }
   }
   SS.root.position.copy(sp); SS.root.rotation.y = sy; applyPose(SS, sq);
@@ -499,7 +499,7 @@ function setScene(t, s) {
   }
   batter.root.position.copy(bp); batter.root.rotation.y = by; applyPose(batter, q);
   // runners: leads; frozen while it's up; they scramble back when he pulls the glove away; then...
-  for (const [R, base, lead, next] of [[R1, B1, R1L, B2], [R2, B2, R2L, B3]]) {
+  for (const [R, base, lead, next] of [[R1, B1, R1L, B2], [R2, B2, R2L, B3], [R3, B3, R3L, HOME]]) {
     let p = lead.clone(), yaw = yawTo(lead, PLATE_C), rq = t < 0.15 ? LEAD_POSE : { ...UPLOOK, look: 0 };
     if (t > TL - 0.55) { const u = smooth((t - TL + 0.55) / 0.75); p = lead.clone().lerp(base, u); yaw = yawTo(lead, base); rq = u < 1 ? runPose(((t - TL) * 2.2) % 1, 0.85) : { ...STAND, look: 0 }; if (u >= 1) yaw = yawTo(base, LAND); }
     if (t > TL + 0.1) {
@@ -509,8 +509,8 @@ function setScene(t, s) {
         if (R === R1 && t > TC1 + 0.3) d = sprint(TC1 + 0.3 - TL - 0.1, 25, 0.7) + (t - TC1 - 0.3) * 4;
         d = Math.min(d, 88.5); p = base.clone().addScaledVector(dir, d); yaw = yawTo(base, next);
         rq = d >= 88.5 ? STAND : runPose((d / 11) % 1, R === R1 && t > TC1 + 0.3 ? 0.25 : 0.95);
-      } else if (R === R2) {                                 // the rule: no force; he tries to advance at his own risk, the shortstop looks him back
-        const go = TL + 0.15, turn = TF + 0.45, dGo = sprint(Math.min(t, turn) - go, 21, 0.6);
+      } else if (R === R3) {                                 // the rule: no force; he breaks for home at his own risk, the shortstop looks him back
+        const go = TL + 0.05, turn = TF + 0.7, dGo = sprint(Math.min(t, turn) - go, 24, 0.6);
         const d = t < turn ? dGo : dGo * (1 - smooth((t - turn) / 1.1));
         p = base.clone().addScaledVector(dir, d); yaw = t < turn + 0.15 ? yawTo(base, next) : yawTo(next, base);
         rq = t < turn ? runPose((d / 10) % 1, 0.8) : d > 0.6 ? runPose(((t - turn) * 2) % 1, 0.7) : { ...STAND, look: 0 };
@@ -533,7 +533,7 @@ function setScene(t, s) {
   else if (t < TC2) bpos = arcAt(v3(2.2, 6.3, -125.2), wpos(B1F.handL), T2, t - TR2);
   else bpos = wpos(B1F.handL);
   placeBall(bpos, trail);
-  [batter, R1, R2].forEach((P, i) => { const q = wpos(P.pelvis); MARKS[i].position.set(q.x, 0.08, q.z); MARKS[i].visible = !!s.marks; });
+  [batter, R1, R2, R3].forEach((P, i) => { const q = wpos(P.pelvis); MARKS[i].position.set(q.x, 0.08, q.z); MARKS[i].visible = !!s.marks && !(i === 0 && s.marks === "run"); });
   SHADOW.visible = t > 1.0 && t < TL; SHADOW.position.set(LAND.x, 0.06, LAND.z); SHADOW.material.opacity = 0.15 + 0.3 * smooth((t - 1) / (TL - 1));
 }
 
@@ -556,11 +556,13 @@ const CAMS = {
   mound: (u, t) => { const b = popAt(t); return [mixV(v3(4, 1.6, -40), v3(3.6, 1.6, -37), u), v3(0, 3, 0).lerp(b, 0.35), 46]; },   // the replay: low in front of the mound
   umpCU: (u, t, s) => [mixV(v3(-8.5, 4.4, -1.5), v3(-8, 4.5, -0.8), easeIO(u)), wpos(ump.neck).add(v3(0, 1.8, 0)), zoom(s, t, 42, 36)],   // third-base side of the plate umpire
   wideAir: (u, t) => [mixV(v3(34, 30, 30), v3(30, 28, 26), u), v3(-6, 14, -70), 54],
+  loaded: (u) => [mixV(v3(0, 44, 42), v3(0, 41, 37), u), v3(0, 0, -60), 55],                                              // high behind the plate: bases loaded
+  dpWide: (u) => [mixV(v3(30, 75, 40), v3(28, 72, 36), u), v3(20, 0, -85), 52],                                           // without the rule: the drop, the force at 2nd, the relay to 1st
   split: () => [v3(34, 58, 4), v3(28, 0, -92), 44],
   top: (u) => { const a = lerp(0.1, -0.1, u); return [v3(Math.sin(a) * 30, 250, -64 + Math.cos(a) * 30), v3(0, 0, -64), 40]; },
   dirt: (u) => [mixV(v3(-30, 1.5, -92), v3(-29, 1.5, -93), u), v3(-22, 2.4, -104), 42],                                  // on the dirt: it falls in
-  runners: (u) => [mixV(v3(-78, 8, -52), v3(-74, 7.5, -55), u), v3(-6, 3, -116), 36],
-  final: (u) => [mixV(v3(40, 42, 28), v3(38, 39, 24), easeIO(u)), v3(6, 0, -80), 56],
+  runners: (u) => [mixV(v3(-16, 6, -122), v3(-17, 5.8, -120), u), v3(-50, 3, -58), 44],                                 // behind the shortstop: the runner on third breaks for home
+  final: (u) => [mixV(v3(44, 42, 28), v3(42, 39, 24), easeIO(u)), v3(12, 0, -78), 56],
 };
 function shotAt(v) {
   const L = CC.shots.list;
@@ -571,7 +573,7 @@ function shotAt(v) {
 // ------------------------------------------------------------------ DOM overlays fed from the same clock
 const $ = (id) => document.getElementById(id);
 const SPEEDS = { rt: "", replay: "Replay · ½ speed", slow: "Slow motion · ½ speed", freeze: "Freeze", none: "" };
-const PINT = { batter: () => headTop(batter), ump: () => headTop(ump).add(v3(0, 2.4, 0)), ss: () => headTop(SS), r2: () => headTop(R2) };
+const PINT = { batter: () => headTop(batter), ump: () => headTop(ump).add(v3(0, 2.4, 0)), ss: () => headTop(SS), r2: () => headTop(R2), r3: () => headTop(R3) };
 function pin(id, p) {
   const el = $(id); if (!el || !p) return;
   const q = p.clone().project(cam);

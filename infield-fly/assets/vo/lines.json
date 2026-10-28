@@ -1,0 +1,684 @@
+[
+ {
+  "i": 0,
+  "id": "hook",
+  "text": "This is one of baseball's weirdest rules.",
+  "spoken": "This is one of baseball's weirdest rules.",
+  "dur": 1.728,
+  "words": [
+   {
+    "w": "This",
+    "start": 0.044,
+    "end": 0.219
+   },
+   {
+    "w": "is",
+    "start": 0.269,
+    "end": 0.319
+   },
+   {
+    "w": "one",
+    "start": 0.344,
+    "end": 0.444
+   },
+   {
+    "w": "of",
+    "start": 0.469,
+    "end": 0.519
+   },
+   {
+    "w": "baseball's",
+    "start": 0.569,
+    "end": 0.919
+   },
+   {
+    "w": "weirdest",
+    "start": 0.969,
+    "end": 1.169
+   },
+   {
+    "w": "rules.",
+    "start": 1.219,
+    "end": 1.728
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "setup",
+  "text": "Bases loaded, less than two outs. The batter hits a pop-up, and the infielder lets it drop on purpose.",
+  "spoken": "Bases loaded, less than two outs. The batter hits a pop-up, and the infielder lets it drop on purpose.",
+  "dur": 4.16,
+  "words": [
+   {
+    "w": "Bases",
+    "start": 0.044,
+    "end": 0.294
+   },
+   {
+    "w": "loaded,",
+    "start": 0.344,
+    "end": 0.694
+   },
+   {
+    "w": "less",
+    "start": 0.794,
+    "end": 0.919
+   },
+   {
+    "w": "than",
+    "start": 0.944,
+    "end": 1.019
+   },
+   {
+    "w": "two",
+    "start": 1.069,
+    "end": 1.169
+   },
+   {
+    "w": "outs.",
+    "start": 1.244,
+    "end": 1.669
+   },
+   {
+    "w": "The",
+    "start": 1.769,
+    "end": 1.819
+   },
+   {
+    "w": "batter",
+    "start": 1.844,
+    "end": 2.019
+   },
+   {
+    "w": "hits",
+    "start": 2.044,
+    "end": 2.219
+   },
+   {
+    "w": "a",
+    "start": 2.219,
+    "end": 2.219
+   },
+   {
+    "w": "pop-up,",
+    "start": 2.269,
+    "end": 2.669
+   },
+   {
+    "w": "and",
+    "start": 2.719,
+    "end": 2.794
+   },
+   {
+    "w": "the",
+    "start": 2.819,
+    "end": 2.869
+   },
+   {
+    "w": "infielder",
+    "start": 2.894,
+    "end": 3.194
+   },
+   {
+    "w": "lets",
+    "start": 3.219,
+    "end": 3.344
+   },
+   {
+    "w": "it",
+    "start": 3.369,
+    "end": 3.419
+   },
+   {
+    "w": "drop",
+    "start": 3.469,
+    "end": 3.644
+   },
+   {
+    "w": "on",
+    "start": 3.694,
+    "end": 3.744
+   },
+   {
+    "w": "purpose.",
+    "start": 3.794,
+    "end": 4.16
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "trap",
+  "text": "The runners take off, the defense gets easy outs\u2026 except they don't.",
+  "spoken": "The runners take off, the defense gets easy outs... except they don't.",
+  "dur": 2.709,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.04,
+    "end": 0.09
+   },
+   {
+    "w": "runners",
+    "start": 0.115,
+    "end": 0.315
+   },
+   {
+    "w": "take",
+    "start": 0.34,
+    "end": 0.465
+   },
+   {
+    "w": "off,",
+    "start": 0.59,
+    "end": 0.69
+   },
+   {
+    "w": "the",
+    "start": 0.74,
+    "end": 0.79
+   },
+   {
+    "w": "defense",
+    "start": 0.815,
+    "end": 1.065
+   },
+   {
+    "w": "gets",
+    "start": 1.09,
+    "end": 1.24
+   },
+   {
+    "w": "easy",
+    "start": 1.34,
+    "end": 1.515
+   },
+   {
+    "w": "outs...",
+    "start": 1.615,
+    "end": 1.965
+   },
+   {
+    "w": "except",
+    "start": 2.115,
+    "end": 2.315
+   },
+   {
+    "w": "they",
+    "start": 2.34,
+    "end": 2.415
+   },
+   {
+    "w": "don't.",
+    "start": 2.44,
+    "end": 2.709
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "name",
+  "text": "That's the infield fly rule.",
+  "spoken": "That's the infield fly rule.",
+  "dur": 1.237,
+  "words": [
+   {
+    "w": "That's",
+    "start": 0.044,
+    "end": 0.169
+   },
+   {
+    "w": "the",
+    "start": 0.194,
+    "end": 0.244
+   },
+   {
+    "w": "infield",
+    "start": 0.269,
+    "end": 0.569
+   },
+   {
+    "w": "fly",
+    "start": 0.619,
+    "end": 0.769
+   },
+   {
+    "w": "rule.",
+    "start": 0.819,
+    "end": 1.237
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "rule",
+  "text": "When a fair fly ball can be caught by an infielder with ordinary effort, with runners on first and second\u2014or the bases loaded\u2014and fewer than two outs, the umpire can call the batter out immediately.",
+  "spoken": "When a fair fly ball can be caught by an infielder with ordinary effort, with runners on first and second, or the bases loaded, and fewer than two outs, the umpire can call the batter out immediately.",
+  "dur": 8.597,
+  "words": [
+   {
+    "w": "When",
+    "start": 0.044,
+    "end": 0.194
+   },
+   {
+    "w": "a",
+    "start": 0.194,
+    "end": 0.194
+   },
+   {
+    "w": "fair",
+    "start": 0.269,
+    "end": 0.419
+   },
+   {
+    "w": "fly",
+    "start": 0.494,
+    "end": 0.694
+   },
+   {
+    "w": "ball",
+    "start": 0.719,
+    "end": 0.869
+   },
+   {
+    "w": "can",
+    "start": 0.894,
+    "end": 0.969
+   },
+   {
+    "w": "be",
+    "start": 0.994,
+    "end": 1.069
+   },
+   {
+    "w": "caught",
+    "start": 1.119,
+    "end": 1.269
+   },
+   {
+    "w": "by",
+    "start": 1.294,
+    "end": 1.469
+   },
+   {
+    "w": "an",
+    "start": 1.469,
+    "end": 1.494
+   },
+   {
+    "w": "infielder",
+    "start": 1.519,
+    "end": 1.944
+   },
+   {
+    "w": "with",
+    "start": 1.969,
+    "end": 2.069
+   },
+   {
+    "w": "ordinary",
+    "start": 2.144,
+    "end": 2.444
+   },
+   {
+    "w": "effort,",
+    "start": 2.544,
+    "end": 2.994
+   },
+   {
+    "w": "with",
+    "start": 3.069,
+    "end": 3.144
+   },
+   {
+    "w": "runners",
+    "start": 3.194,
+    "end": 3.419
+   },
+   {
+    "w": "on",
+    "start": 3.469,
+    "end": 3.519
+   },
+   {
+    "w": "first",
+    "start": 3.594,
+    "end": 3.844
+   },
+   {
+    "w": "and",
+    "start": 3.869,
+    "end": 3.944
+   },
+   {
+    "w": "second,",
+    "start": 4.019,
+    "end": 4.469
+   },
+   {
+    "w": "or",
+    "start": 4.569,
+    "end": 4.769
+   },
+   {
+    "w": "the",
+    "start": 4.819,
+    "end": 4.869
+   },
+   {
+    "w": "bases",
+    "start": 4.919,
+    "end": 5.169
+   },
+   {
+    "w": "loaded,",
+    "start": 5.219,
+    "end": 5.719
+   },
+   {
+    "w": "and",
+    "start": 5.819,
+    "end": 5.894
+   },
+   {
+    "w": "fewer",
+    "start": 5.944,
+    "end": 6.119
+   },
+   {
+    "w": "than",
+    "start": 6.144,
+    "end": 6.219
+   },
+   {
+    "w": "two",
+    "start": 6.269,
+    "end": 6.369
+   },
+   {
+    "w": "outs,",
+    "start": 6.444,
+    "end": 6.794
+   },
+   {
+    "w": "the",
+    "start": 6.869,
+    "end": 6.944
+   },
+   {
+    "w": "umpire",
+    "start": 7.019,
+    "end": 7.319
+   },
+   {
+    "w": "can",
+    "start": 7.344,
+    "end": 7.419
+   },
+   {
+    "w": "call",
+    "start": 7.469,
+    "end": 7.594
+   },
+   {
+    "w": "the",
+    "start": 7.619,
+    "end": 7.669
+   },
+   {
+    "w": "batter",
+    "start": 7.719,
+    "end": 7.894
+   },
+   {
+    "w": "out",
+    "start": 7.969,
+    "end": 8.044
+   },
+   {
+    "w": "immediately.",
+    "start": 8.069,
+    "end": 8.597
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "why",
+  "text": "Why? To stop the defense from dropping an easy pop-up and turning it into a cheap double play.",
+  "spoken": "Why? To stop the defense from dropping an easy pop-up and turning it into a cheap double play.",
+  "dur": 3.861,
+  "words": [
+   {
+    "w": "Why?",
+    "start": 0.048,
+    "end": 0.373
+   },
+   {
+    "w": "To",
+    "start": 0.473,
+    "end": 0.523
+   },
+   {
+    "w": "stop",
+    "start": 0.548,
+    "end": 0.723
+   },
+   {
+    "w": "the",
+    "start": 0.748,
+    "end": 0.798
+   },
+   {
+    "w": "defense",
+    "start": 0.823,
+    "end": 1.098
+   },
+   {
+    "w": "from",
+    "start": 1.123,
+    "end": 1.223
+   },
+   {
+    "w": "dropping",
+    "start": 1.248,
+    "end": 1.548
+   },
+   {
+    "w": "an",
+    "start": 1.548,
+    "end": 1.573
+   },
+   {
+    "w": "easy",
+    "start": 1.673,
+    "end": 1.798
+   },
+   {
+    "w": "pop-up",
+    "start": 1.848,
+    "end": 2.398
+   },
+   {
+    "w": "and",
+    "start": 2.473,
+    "end": 2.548
+   },
+   {
+    "w": "turning",
+    "start": 2.598,
+    "end": 2.798
+   },
+   {
+    "w": "it",
+    "start": 2.823,
+    "end": 2.873
+   },
+   {
+    "w": "into",
+    "start": 2.923,
+    "end": 3.098
+   },
+   {
+    "w": "a",
+    "start": 3.098,
+    "end": 3.098
+   },
+   {
+    "w": "cheap",
+    "start": 3.148,
+    "end": 3.323
+   },
+   {
+    "w": "double",
+    "start": 3.373,
+    "end": 3.523
+   },
+   {
+    "w": "play.",
+    "start": 3.573,
+    "end": 3.861
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "twist",
+  "text": "And here's the twist: the runners can still advance at their own risk.",
+  "spoken": "And here's the twist: the runners can still advance at their own risk.",
+  "dur": 2.624,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.023,
+    "end": 0.098
+   },
+   {
+    "w": "here's",
+    "start": 0.123,
+    "end": 0.273
+   },
+   {
+    "w": "the",
+    "start": 0.298,
+    "end": 0.348
+   },
+   {
+    "w": "twist:",
+    "start": 0.398,
+    "end": 0.848
+   },
+   {
+    "w": "the",
+    "start": 0.973,
+    "end": 1.023
+   },
+   {
+    "w": "runners",
+    "start": 1.073,
+    "end": 1.273
+   },
+   {
+    "w": "can",
+    "start": 1.298,
+    "end": 1.373
+   },
+   {
+    "w": "still",
+    "start": 1.423,
+    "end": 1.573
+   },
+   {
+    "w": "advance",
+    "start": 1.598,
+    "end": 1.898
+   },
+   {
+    "w": "at",
+    "start": 1.923,
+    "end": 1.973
+   },
+   {
+    "w": "their",
+    "start": 1.998,
+    "end": 2.073
+   },
+   {
+    "w": "own",
+    "start": 2.148,
+    "end": 2.273
+   },
+   {
+    "w": "risk.",
+    "start": 2.323,
+    "end": 2.624
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "end",
+  "text": "Baseball has a rule for a play that looks too easy.",
+  "spoken": "Baseball has a rule for a play that looks too easy.",
+  "dur": 1.963,
+  "words": [
+   {
+    "w": "Baseball",
+    "start": 0.044,
+    "end": 0.344
+   },
+   {
+    "w": "has",
+    "start": 0.369,
+    "end": 0.494
+   },
+   {
+    "w": "a",
+    "start": 0.494,
+    "end": 0.494
+   },
+   {
+    "w": "rule",
+    "start": 0.544,
+    "end": 0.744
+   },
+   {
+    "w": "for",
+    "start": 0.769,
+    "end": 0.869
+   },
+   {
+    "w": "a",
+    "start": 0.869,
+    "end": 0.869
+   },
+   {
+    "w": "play",
+    "start": 0.894,
+    "end": 1.044
+   },
+   {
+    "w": "that",
+    "start": 1.069,
+    "end": 1.144
+   },
+   {
+    "w": "looks",
+    "start": 1.169,
+    "end": 1.294
+   },
+   {
+    "w": "too",
+    "start": 1.344,
+    "end": 1.444
+   },
+   {
+    "w": "easy.",
+    "start": 1.544,
+    "end": 1.963
+   }
+  ]
+ }
+]
