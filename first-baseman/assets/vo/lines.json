@@ -1,0 +1,674 @@
+[
+ {
+  "i": 0,
+  "id": "hook",
+  "text": "First base is a lot harder than it looks.",
+  "spoken": "First base is a lot harder than it looks.",
+  "dur": 2.283,
+  "words": [
+   {
+    "w": "First",
+    "start": 0.098,
+    "end": 0.348
+   },
+   {
+    "w": "base",
+    "start": 0.398,
+    "end": 0.723
+   },
+   {
+    "w": "is",
+    "start": 0.773,
+    "end": 0.973
+   },
+   {
+    "w": "a",
+    "start": 0.973,
+    "end": 0.973
+   },
+   {
+    "w": "lot",
+    "start": 1.023,
+    "end": 1.273
+   },
+   {
+    "w": "harder",
+    "start": 1.323,
+    "end": 1.573
+   },
+   {
+    "w": "than",
+    "start": 1.623,
+    "end": 1.698
+   },
+   {
+    "w": "it",
+    "start": 1.723,
+    "end": 1.773
+   },
+   {
+    "w": "looks.",
+    "start": 1.823,
+    "end": 2.283
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "stretch",
+  "text": "A great first baseman has to stretch to reach difficult throws while keeping a foot on the bag.",
+  "spoken": "A great first baseman has to stretch to reach difficult throws while keeping a foot on the bag.",
+  "dur": 4.992,
+  "words": [
+   {
+    "w": "A",
+    "start": 0.076,
+    "end": 0.126
+   },
+   {
+    "w": "great",
+    "start": 0.201,
+    "end": 0.476
+   },
+   {
+    "w": "first",
+    "start": 0.526,
+    "end": 0.801
+   },
+   {
+    "w": "baseman",
+    "start": 0.851,
+    "end": 1.251
+   },
+   {
+    "w": "has",
+    "start": 1.301,
+    "end": 1.426
+   },
+   {
+    "w": "to",
+    "start": 1.476,
+    "end": 1.551
+   },
+   {
+    "w": "stretch",
+    "start": 1.601,
+    "end": 1.926
+   },
+   {
+    "w": "to",
+    "start": 1.976,
+    "end": 2.051
+   },
+   {
+    "w": "reach",
+    "start": 2.101,
+    "end": 2.326
+   },
+   {
+    "w": "difficult",
+    "start": 2.376,
+    "end": 2.776
+   },
+   {
+    "w": "throws",
+    "start": 2.851,
+    "end": 3.526
+   },
+   {
+    "w": "while",
+    "start": 3.576,
+    "end": 3.701
+   },
+   {
+    "w": "keeping",
+    "start": 3.751,
+    "end": 4.126
+   },
+   {
+    "w": "a",
+    "start": 4.126,
+    "end": 4.126
+   },
+   {
+    "w": "foot",
+    "start": 4.226,
+    "end": 4.401
+   },
+   {
+    "w": "on",
+    "start": 4.451,
+    "end": 4.551
+   },
+   {
+    "w": "the",
+    "start": 4.551,
+    "end": 4.601
+   },
+   {
+    "w": "bag.",
+    "start": 4.651,
+    "end": 4.992
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "types",
+  "text": "Low throws, high throws, balls pulling them off the base, they have to react in a split second.",
+  "spoken": "Low throws, high throws, balls pulling them off the base, they have to react in a split second.",
+  "dur": 5.312,
+  "words": [
+   {
+    "w": "Low",
+    "start": 0.084,
+    "end": 0.284
+   },
+   {
+    "w": "throws,",
+    "start": 0.359,
+    "end": 0.784
+   },
+   {
+    "w": "high",
+    "start": 0.859,
+    "end": 1.084
+   },
+   {
+    "w": "throws,",
+    "start": 1.159,
+    "end": 1.709
+   },
+   {
+    "w": "balls",
+    "start": 1.809,
+    "end": 2.159
+   },
+   {
+    "w": "pulling",
+    "start": 2.209,
+    "end": 2.459
+   },
+   {
+    "w": "them",
+    "start": 2.484,
+    "end": 2.584
+   },
+   {
+    "w": "off",
+    "start": 2.659,
+    "end": 2.759
+   },
+   {
+    "w": "the",
+    "start": 2.784,
+    "end": 2.834
+   },
+   {
+    "w": "base,",
+    "start": 2.884,
+    "end": 3.459
+   },
+   {
+    "w": "they",
+    "start": 3.584,
+    "end": 3.659
+   },
+   {
+    "w": "have",
+    "start": 3.709,
+    "end": 3.859
+   },
+   {
+    "w": "to",
+    "start": 3.909,
+    "end": 3.984
+   },
+   {
+    "w": "react",
+    "start": 4.034,
+    "end": 4.384
+   },
+   {
+    "w": "in",
+    "start": 4.409,
+    "end": 4.509
+   },
+   {
+    "w": "a",
+    "start": 4.509,
+    "end": 4.509
+   },
+   {
+    "w": "split",
+    "start": 4.559,
+    "end": 4.834
+   },
+   {
+    "w": "second.",
+    "start": 4.909,
+    "end": 5.312
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "bad",
+  "text": "And when an infielder makes a great play but the throw isn't perfect, the first baseman can be the difference between an out and an error.",
+  "spoken": "And when an infielder makes a great play but the throw isn't perfect, the first baseman can be the difference between an out and an error.",
+  "dur": 7.125,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.123,
+    "end": 0.198
+   },
+   {
+    "w": "when",
+    "start": 0.223,
+    "end": 0.398
+   },
+   {
+    "w": "an",
+    "start": 0.398,
+    "end": 0.423
+   },
+   {
+    "w": "infielder",
+    "start": 0.473,
+    "end": 0.998
+   },
+   {
+    "w": "makes",
+    "start": 1.048,
+    "end": 1.323
+   },
+   {
+    "w": "a",
+    "start": 1.323,
+    "end": 1.323
+   },
+   {
+    "w": "great",
+    "start": 1.373,
+    "end": 1.648
+   },
+   {
+    "w": "play",
+    "start": 1.698,
+    "end": 2.048
+   },
+   {
+    "w": "but",
+    "start": 2.098,
+    "end": 2.198
+   },
+   {
+    "w": "the",
+    "start": 2.223,
+    "end": 2.298
+   },
+   {
+    "w": "throw",
+    "start": 2.398,
+    "end": 2.723
+   },
+   {
+    "w": "isn't",
+    "start": 2.798,
+    "end": 2.998
+   },
+   {
+    "w": "perfect,",
+    "start": 3.048,
+    "end": 3.823
+   },
+   {
+    "w": "the",
+    "start": 3.948,
+    "end": 3.998
+   },
+   {
+    "w": "first",
+    "start": 4.073,
+    "end": 4.348
+   },
+   {
+    "w": "baseman",
+    "start": 4.398,
+    "end": 4.823
+   },
+   {
+    "w": "can",
+    "start": 4.873,
+    "end": 4.973
+   },
+   {
+    "w": "be",
+    "start": 5.023,
+    "end": 5.098
+   },
+   {
+    "w": "the",
+    "start": 5.123,
+    "end": 5.173
+   },
+   {
+    "w": "difference",
+    "start": 5.248,
+    "end": 5.623
+   },
+   {
+    "w": "between",
+    "start": 5.673,
+    "end": 5.973
+   },
+   {
+    "w": "an",
+    "start": 5.973,
+    "end": 6.023
+   },
+   {
+    "w": "out",
+    "start": 6.198,
+    "end": 6.423
+   },
+   {
+    "w": "and",
+    "start": 6.498,
+    "end": 6.623
+   },
+   {
+    "w": "an",
+    "start": 6.623,
+    "end": 6.673
+   },
+   {
+    "w": "error.",
+    "start": 6.823,
+    "end": 7.125
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "help",
+  "text": "They're not just catching the ball. They're helping the entire infield look better.",
+  "spoken": "They're not just catching the ball. They're helping the entire infield look better.",
+  "dur": 4.075,
+  "words": [
+   {
+    "w": "They're",
+    "start": 0.051,
+    "end": 0.151
+   },
+   {
+    "w": "not",
+    "start": 0.201,
+    "end": 0.376
+   },
+   {
+    "w": "just",
+    "start": 0.401,
+    "end": 0.551
+   },
+   {
+    "w": "catching",
+    "start": 0.601,
+    "end": 0.951
+   },
+   {
+    "w": "the",
+    "start": 0.976,
+    "end": 1.026
+   },
+   {
+    "w": "ball.",
+    "start": 1.076,
+    "end": 1.626
+   },
+   {
+    "w": "They're",
+    "start": 1.751,
+    "end": 1.876
+   },
+   {
+    "w": "helping",
+    "start": 1.926,
+    "end": 2.226
+   },
+   {
+    "w": "the",
+    "start": 2.251,
+    "end": 2.351
+   },
+   {
+    "w": "entire",
+    "start": 2.401,
+    "end": 2.901
+   },
+   {
+    "w": "infield",
+    "start": 2.951,
+    "end": 3.451
+   },
+   {
+    "w": "look",
+    "start": 3.501,
+    "end": 3.676
+   },
+   {
+    "w": "better.",
+    "start": 3.726,
+    "end": 4.075
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "power",
+  "text": "But that's not all. First basemen are often expected to bring serious power at the plate, too.",
+  "spoken": "But that's not all. First basemen are often expected to bring serious power at the plate, too.",
+  "dur": 5.141,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.026,
+    "end": 0.126
+   },
+   {
+    "w": "that's",
+    "start": 0.176,
+    "end": 0.401
+   },
+   {
+    "w": "not",
+    "start": 0.451,
+    "end": 0.601
+   },
+   {
+    "w": "all.",
+    "start": 0.726,
+    "end": 1.176
+   },
+   {
+    "w": "First",
+    "start": 1.326,
+    "end": 1.576
+   },
+   {
+    "w": "basemen",
+    "start": 1.626,
+    "end": 2.076
+   },
+   {
+    "w": "are",
+    "start": 2.126,
+    "end": 2.226
+   },
+   {
+    "w": "often",
+    "start": 2.376,
+    "end": 2.526
+   },
+   {
+    "w": "expected",
+    "start": 2.576,
+    "end": 3.051
+   },
+   {
+    "w": "to",
+    "start": 3.101,
+    "end": 3.151
+   },
+   {
+    "w": "bring",
+    "start": 3.201,
+    "end": 3.401
+   },
+   {
+    "w": "serious",
+    "start": 3.501,
+    "end": 3.876
+   },
+   {
+    "w": "power",
+    "start": 3.926,
+    "end": 4.226
+   },
+   {
+    "w": "at",
+    "start": 4.251,
+    "end": 4.301
+   },
+   {
+    "w": "the",
+    "start": 4.326,
+    "end": 4.376
+   },
+   {
+    "w": "plate,",
+    "start": 4.426,
+    "end": 4.701
+   },
+   {
+    "w": "too.",
+    "start": 4.801,
+    "end": 5.141
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "both",
+  "text": "They have to save outs on defense and do damage on offense.",
+  "spoken": "They have to save outs on defense and do damage on offense.",
+  "dur": 3.435,
+  "words": [
+   {
+    "w": "They",
+    "start": 0.051,
+    "end": 0.126
+   },
+   {
+    "w": "have",
+    "start": 0.176,
+    "end": 0.326
+   },
+   {
+    "w": "to",
+    "start": 0.351,
+    "end": 0.426
+   },
+   {
+    "w": "save",
+    "start": 0.501,
+    "end": 0.751
+   },
+   {
+    "w": "outs",
+    "start": 0.876,
+    "end": 1.051
+   },
+   {
+    "w": "on",
+    "start": 1.126,
+    "end": 1.176
+   },
+   {
+    "w": "defense",
+    "start": 1.201,
+    "end": 1.876
+   },
+   {
+    "w": "and",
+    "start": 1.976,
+    "end": 2.051
+   },
+   {
+    "w": "do",
+    "start": 2.101,
+    "end": 2.276
+   },
+   {
+    "w": "damage",
+    "start": 2.326,
+    "end": 2.701
+   },
+   {
+    "w": "on",
+    "start": 2.776,
+    "end": 2.826
+   },
+   {
+    "w": "offense.",
+    "start": 2.851,
+    "end": 3.435
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "end",
+  "text": "That's what makes a complete first baseman.",
+  "spoken": "That's what makes a complete first baseman.",
+  "dur": 2.048,
+  "words": [
+   {
+    "w": "That's",
+    "start": 0.055,
+    "end": 0.28
+   },
+   {
+    "w": "what",
+    "start": 0.33,
+    "end": 0.455
+   },
+   {
+    "w": "makes",
+    "start": 0.48,
+    "end": 0.73
+   },
+   {
+    "w": "a",
+    "start": 0.73,
+    "end": 0.73
+   },
+   {
+    "w": "complete",
+    "start": 0.78,
+    "end": 1.205
+   },
+   {
+    "w": "first",
+    "start": 1.255,
+    "end": 1.53
+   },
+   {
+    "w": "baseman.",
+    "start": 1.58,
+    "end": 2.048
+   }
+  ]
+ }
+]

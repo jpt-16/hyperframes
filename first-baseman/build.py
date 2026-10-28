@@ -1,12 +1,12 @@
-"""'First base is harder than it looks': the glove work and the bat (1080x1920, sound effects only).
+"""'First base is harder than it looks': the glove work and the bat (1080x1920, voiceover + effects).
 
-    python3 tools/physics.py        # the home run -> assets/play.json
-    python3 build.py                # index.html + assets/mix.wav (effects only)
+    python3 tools/physics.py                                       # the home run -> assets/play.json
+    $HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # Kokoro voiceover (am_michael) + word timing
+    python3 build.py                                               # index.html + assets/mix.wav (+ assets/mix-novo.wav, effects only)
     npx --yes hyperframes@0.8.154 render . -o renders/first-baseman.mp4 --video-bitrate 16M
 
-There is no narration: the voiceover is recorded separately and laid on top. The effects are mastered to -20 LUFS so a
-voiceover at normal level sits over them. Every throw is worked out in assets/field.js from the 3D figures (the fielder's
-hand at release, the first baseman's glove at the catch, his right foot pinned to the bag).
+Shots, captions and reveals are keyed to the words of the voiceover. Every throw is worked out in assets/field.js from
+the 3D figures (the fielder's hand at release, the first baseman's glove at the catch, his right foot pinned to the bag).
 """
 import json, os, sys, wave
 import numpy as np
@@ -18,9 +18,15 @@ from audio import SR
 
 P = json.load(open(os.path.join(HERE, "assets", "play.json")))
 HR = P["hr"]
-D = 40.0
+TM = json.load(open(os.path.join(HERE, "assets", "vo", "timing.json")))
+IDX = {x["id"]: k for k, x in enumerate(TM["lines"])}
+LN = lambda lid: TM["lines"][IDX[lid]]
+def W(lid, word, end=False, nth=0):
+    hits = [w for w in LN(lid)["words"] if w["w"].strip(".,!?:").lower() == word.lower()]
+    return hits[nth]["t1" if end else "t0"]
+D = TM["duration"]
 Y, CYAN, WHITE, HOT, MUTED = "#FFD84D", "#56D1FF", "#F4F6F8", "#FF6A3D", "#AEB8C6"
-S2, S3, S4, S5, S6 = 3.0, 11.0, 20.0, 28.0, 36.0                 # the brief's scene starts
+S2, S3B, S3, S4, S5, S6, S7 = (LN(k)["t0"] - 0.06 for k in ["stretch", "types", "bad", "help", "power", "both", "end"])   # scene changes, on the voiceover
 
 # the throws' timing, as field.js works it out (release at -distance/speed; the fielder fields it EXCH earlier)
 PLAYS = {"hook": ("backhand", (-41, -113), 80), "low": ("field", (36, -108), 74), "glove": ("field", (-24, -110), 82), "pull": ("field", (-52, -72), 84),
@@ -30,6 +36,7 @@ EXCH = {"field": 0.75, "backhand": 0.85, "charge": 0.6, "bare": 0.42, "dive": 1.
 def tr_of(k):
     kind, (x, z), mph = PLAYS[k]; return -(np.hypot(63.64 - x, -63.64 - z) - 2.0) / (mph * 1.4667 * 0.98)
 def tf_of(k): return tr_of(k) - EXCH[PLAYS[k][0]]
+RUNNER = {"hook": 0.07, "low": 0.35, "glove": 0.3, "pull": 0.85, "scoop": 0.12, "late": 0.12, "high": 0.3, "wide": 0.0, "p3b": 0.15, "p2b": 0.18, "pss": 0.08}
 
 # ----------------------------------------------------------------- shots (video time v) and the play time each one shows
 SHOTS = []
@@ -37,43 +44,53 @@ def shot(a, b, cam, vs, ts, speed, **kw):
     SHOTS.append(dict(a=round(a, 4), b=round(b, 4), cam=cam, vs=[round(x, 4) for x in vs], ts=[round(x, 4) for x in ts], speed=speed, **kw))
 def rate(a, b, cam, t0, r, speed, **kw): shot(a, b, cam, [a, b], [t0, t0 + (b - a) * r], speed, **kw)
 def hold(a, b, cam, t0, speed="none", **kw): shot(a, b, cam, [a, b], [t0, t0], speed, **kw)
+def on(v, t, a, r=1.0): return t - (v - a) * r                    # the play time to start a shot at a so that play time t lands at video time v
 FLASH = []
-# 1 hook: the shortstop goes deep in the hole, backhands it, throws falling away; the first baseman at full stretch, the runner a step away; freeze on the catch
-H1 = 1.0; FRZ0 = 2.2
+# 1 hook: the shortstop deep in the hole, the throw falling away; the first baseman at full stretch, the runner a step away; freeze on "looks"
+FRZ0 = W("hook", "looks") + 0.05
+H1 = 1.0
 rate(0.0, H1, "fielder", tf_of("hook") - 0.2, 1, "none", play="hook")
 t_h = tf_of("hook") - 0.2 + H1
 rate(H1, FRZ0, "fbSide", t_h, -t_h / (FRZ0 - H1), "none", play="hook")
 hold(FRZ0, S2, "fbSide", 0.0, "none", play="hook", freeze=[FRZ0, S2], show={"foot": 1})
-# 2 the stretch: a low throw, one to his glove side, one that pulls him up the line; then a replay with the distance the stretch gains
-rate(S2, 4.7, "fbSide", -1.2, 1, "rt", play="low")
-rate(4.7, 6.4, "fbFront", -1.2, 1, "rt", play="glove")
-rate(6.4, 8.2, "fbLine", -1.3, 1, "rt", play="pull")
-rate(8.2, S3, "gain", -0.85, 0.5, "replay", play="glove", show={"gain": 1, "foot": 1})
-# 3 bad throws: the shortstop charges, throws on the run, it short-hops; the first baseman who stays tall vs. the one who scoops it; high; wide
-rate(S3, 12.5, "fielder", tf_of("scoop") - 0.45, 1, "rt", play="scoop")
-rate(12.5, 14.3, "fbIn", -0.75, 1, "rt", play="late")
-rate(14.3, 16.3, "fbIn", -0.6, 0.5, "replay", play="scoop", show={"foot": 1})
-rate(16.3, 18.15, "fbFront", -1.1, 1, "rt", play="high")
-rate(18.15, S4, "fbWide", -1.1, 1, "rt", play="wide")
-# 4 they finish the play: three tough plays, three clean picks, three fielders who know it
-v = S4
-for k, (play, cb) in enumerate([("p3b", "fbSide"), ("p2b", "fbFront"), ("pss", "fbIn")]):
-    tr, tf = tr_of(play), tf_of(play)
-    a1 = 1.05 if play != "p2b" else 1.15
-    rate(v, v + a1, "fielder", tr - a1 + 0.2, 1, "rt", play=play); FLASH.append(v)
-    rate(v + a1, v + a1 + 0.95, cb, -0.75, 1, "rt", play=play)
-    rate(v + a1 + 0.95, v + 8 / 3 if k < 2 else S5, "fielder", 0.45, 1, "rt", play=play)
-    v = v + 8 / 3
-# 5 the bat: the same first baseman hits; load, stride, turn; the line drive leaves the park
-rate(S5, 29.4, "batLow", -1.6, 1, "rt", play="hr")
-rate(29.4, 30.6, "bat", -0.25, 1, "rt", play="hr")
-rate(30.6, 33.9, "track", 0.95, 1, "rt", play="hr", show={"hrPath": 1})
-rate(33.9, S6, "wall", 4.2, 0.5, "slow2", play="hr", show={"hrPath": 1})
-# finale: the stretch, the scoop, the swing; then around first base
-rate(S6, 36.5, "fbSide", -0.05, 0.3, "none", play="hook"); FLASH.append(S6)
-rate(36.5, 37.0, "fbIn", -0.08, 0.4, "none", play="scoop"); FLASH.append(36.5)
-rate(37.0, 37.5, "bat", -0.12, 0.5, "none", play="hr"); FLASH.append(37.0)
-rate(37.5, D, "trot", 4.0, 1, "none", play="trot"); FLASH.append(37.5)
+# 2 the stretch: a throw to his glove side, caught on "throws"; the replay with the reach the stretch gains, on "keeping a foot on the bag"
+A2 = W("stretch", "while") - 0.1
+rate(S2, A2, "fbFront", on(W("stretch", "throws") + 0.1, 0.0, S2), 1, "rt", play="glove")
+rate(A2, S3B, "gain", on(W("stretch", "foot"), 0.0, A2, 0.5), 0.5, "replay", play="glove", show={"gain": 1, "foot": 1})
+#   low throws, high throws, pulled off the base; a split-second reaction up the line
+B1_ = W("types", "high") - 0.1; B2_ = W("types", "balls") - 0.1; B3_ = W("types", "they") - 0.1
+rate(S3B, B1_, "fbSide", on(W("types", "throws") + 0.1, 0.0, S3B), 1, "rt", play="low")
+rate(B1_, B2_, "fbFront", on(W("types", "throws", nth=1) + 0.1, 0.0, B1_), 1, "rt", play="high")
+rate(B2_, B3_, "fbWide", on(W("types", "base") + 0.1, 0.0, B2_), 1, "rt", play="wide")
+rate(B3_, S3, "fbLine", on(W("types", "second") + 0.05, 0.0, B3_), 1, "rt", play="pull")
+# 3 bad throws: the shortstop's play; the throw isn't perfect: the first baseman who stays tall (an error); the one who scoops it (an out)
+C1 = W("bad", "but") - 0.1; C2 = W("bad", "the", nth=1) - 0.1
+rate(S3, C1, "fielder", on(W("bad", "play"), tr_of("scoop"), S3), 1, "rt", play="scoop")
+rate(C1, C2, "fbIn", on(W("bad", "perfect") + 0.1, 0.0, C1), 1, "rt", play="late")
+rate(C2, S4, "fbIn", on(W("bad", "out"), 0.0, C2, 0.5), 0.5, "replay", play="scoop", show={"foot": 1})
+# 4 they help the whole infield: three tough plays, three clean picks, a fielder who knows it
+SEG = [("p3b", "fbSide", 0.75, 0.8), ("p2b", "fbFront", 0.75, 0.8), ("pss", "fbIn", 0.7, 0.7)]
+v = S4; FP = []
+for k, (play, cb, f1, f2) in enumerate(SEG):
+    tr = tr_of(play)
+    rate(v, v + f1, "fielder", tr - f1 + 0.15, 1, "rt", play=play); FLASH.append(v); FP.append(v)
+    end = v + f1 + f2 if k < 2 else v + f1 + f2
+    rate(v + f1, end, cb, -f2 + 0.25, 1, "rt", play=play)
+    v = end
+rate(v, S5, "fielder", 0.5, 1, "rt", play="pss")                                  # the shortstop: that's an out
+# 5 the bat: the same first baseman hits; contact on "power"; the line drive heads out
+TC = W("power", "power") + 0.05
+rate(S5, S5 + 1.6, "bat", -(TC - 0.3 - S5), 1, "rt", play="hr")                  # in front of him: in the box, the pitcher sets
+rate(S5 + 1.6, TC - 0.3, "batLow", -(TC - 0.3 - S5 - 1.6) - 0.3, 1, "rt", play="hr")   # behind him: load, stride
+rate(TC - 0.3, TC + 0.35, "bat", -0.3, 1, "rt", play="hr")                         # the turn, contact on "power"
+rate(TC + 0.35, S6, "track", 0.35, 1, "rt", play="hr", show={"hrPath": 1})
+# 6 "save outs on defense and do damage on offense": the stretch, the scoop, the home run clearing the wall
+E1 = W("both", "on") - 0.1; E2 = W("both", "and") - 0.1
+rate(S6, E1, "fbSide", -0.05, 0.25, "none", play="hook"); FLASH.append(S6)
+rate(E1, E2, "fbIn", -0.1, 0.3, "none", play="scoop"); FLASH.append(E1)
+rate(E2, S7, "wall", 4.2, 0.5, "slow2", play="hr", show={"hrPath": 1}); FLASH.append(E2)
+# end: around first base
+rate(S7, D, "trot", 4.0, 1, "none", play="trot"); FLASH.append(S7)
 for x, y in zip(SHOTS, SHOTS[1:]): assert abs(x["b"] - y["a"]) < 1e-3 and x["b"] > x["a"], (x, y)
 
 def at_play(sh, t):
@@ -98,58 +115,79 @@ def tag(tid, t0, t1, cls, text, top=1560):
 def note(nid, t0, t1, text, top=1700):
     c.clip(nid, t0, t1, f'<div class="mdl" id="{nid}x" style="top:{top}px">{text}</div>', cls="layer", style="z-index:12")
     c.ft(f"#{nid}x", o(opacity=0), o(opacity=1, duration=0.3), t0)
+WORD_IN = lambda sel, t: c.ft(sel, o(opacity=0, y=34, filter="blur(10px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.15, ease="power3.out"), t - 0.04)
 
-# ----------------------------------------------------------------- 1 the hook: the title on frame one
-c.clip("hook", 0, S2 - 0.02, """<div class="eyebrow"><i></i>Baseball Decoded</div>
-  <div class="hk" id="hkx"><span class="hl">First base is</span><span class="hl"><em class="acc">harder</em> than</span><span class="hl">it looks</span></div>""", cls="layer", style="z-index:12")
-c.ft("#hkx", o(scale=1.07, transformOrigin="0% 50%"), o(scale=1, duration=0.35, ease="power3.out"), 0.0)
-c.ft("#hkx .acc", o(scale=1.0), o(scale=1.12, duration=0.12, ease="power2.out", yoyo=True, repeat=1), FRZ0)
+# ----------------------------------------------------------------- 1 the hook: the title, word by word with the voice ("First" on frame one)
+HQ = [("First", "first"), ("base", "base"), ("is", "is"), ("harder", "harder"), ("than", "than"), ("it", "it"), ("looks", "looks")]
+rows = [[0, 1, 2], [3, 4], [5, 6]]
+html = "".join('<span class="hl">' + " ".join(f'<span class="hw{" acc" if k == 3 else ""}" id="hq{k}">{esc(HQ[k][0])}</span>' for k in r) + "</span>" for r in rows)
+c.clip("hook", 0, S2 - 0.02, f'<div class="eyebrow"><i></i>Baseball Decoded</div><div class="hk" id="hkx">{html}</div>', cls="layer", style="z-index:12")
+for k, (_, w) in enumerate(HQ): WORD_IN(f"#hq{k}", 0.04 if k == 0 else W("hook", w))
 c.to("#hook .hk, #hook .eyebrow", o(opacity=0, y=-24, duration=0.14, ease="power2.in"), S2 - 0.16)
 c.clip("frzt", FRZ0 + 0.05, S2 - 0.02, '<div class="pinw" id="footw"><div class="pin" id="footx"><span>Foot on the bag</span></div></div>', cls="layer", style="z-index:12")
 pop("#footx", FRZ0 + 0.08)
 
-# ----------------------------------------------------------------- scene titles
-for k, (a, b, html) in enumerate([(S2, S3, 'The stretch can <em class="acc">save an out</em>'), (S3, S4, 'Bad throw? <em class="acc">Save it.</em>'),
-                                   (S4, S5, 'They <em class="acc">finish</em> the play'), (S5, S6, 'And they have to <em class="acc">hit bombs</em>')]):
-    c.clip(f"ttl{k}", a + 0.02, b - 0.02, f'<div class="st" id="ttl{k}x">{html}</div>', cls="layer", style="z-index:12")
-    c.ft(f"#ttl{k}x", o(opacity=0, y=40, filter="blur(10px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.25, ease="power3.out"), a + 0.04)
+# ----------------------------------------------------------------- scene chips (top left)
+for k, (a_, b_, name) in enumerate([(S2, S3, "The stretch can save an out"), (S3, S4, "Bad throw? Save it."), (S4, S5, "They finish the play"), (S5, S6, "And they have to hit bombs")]):
+    c.clip(f"sk{k}", a_ + 0.05, b_ - 0.02, f'<div class="skill" id="sk{k}x"><b>{k + 1}</b><span>{esc(name)}</span></div>', cls="layer", style="z-index:21")
+    c.ft(f"#sk{k}x", o(opacity=0, x=-40), o(opacity=1, x=0, duration=0.22, ease="power3.out"), a_ + 0.08)
+
+# ----------------------------------------------------------------- captions: the voiceover, word by word (the hook and the end card are titles instead)
+CAPS = [("stretch", 0, 3, {2: "acc", 3: "acc"}), ("stretch", 4, 6, {6: "acc"}), ("stretch", 7, 10, {9: "acc"}), ("stretch", 11, 17, {14: "cb", 17: "cb"}),
+        ("types", 0, 1, {0: "acc"}), ("types", 2, 3, {2: "acc"}), ("types", 4, 9, {5: "acc", 7: "acc"}), ("types", 10, 13, {13: "acc"}), ("types", 14, 17, {16: "acc", 17: "acc"}),
+        ("bad", 0, 3, {}), ("bad", 4, 7, {6: "acc", 7: "acc"}), ("bad", 8, 12, {11: "acc", 12: "acc"}), ("bad", 13, 15, {}), ("bad", 16, 20, {19: "acc"}), ("bad", 21, 25, {22: "cb", 25: "acc"}),
+        ("help", 0, 5, {3: "acc"}), ("help", 6, 12, {9: "acc", 10: "acc"}),
+        ("power", 0, 3, {}), ("power", 4, 8, {}), ("power", 9, 12, {11: "acc", 12: "acc"}), ("power", 13, 16, {}),
+        ("both", 0, 6, {3: "cb", 4: "cb"}), ("both", 7, 11, {9: "acc"})]
+for k, (lid, i0, i1, acc) in enumerate(CAPS):
+    ln = LN(lid); words = ln["words"]
+    start = words[i0]["t0"] - 0.06
+    if k + 1 < len(CAPS) and CAPS[k + 1][0] == lid: end = words[CAPS[k + 1][1]]["t0"] - 0.06
+    else: end = min(ln["t1"] + 0.35, TM["lines"][IDX[lid] + 1]["t0"] - 0.1, S7 - 0.02)
+    cid = f"cap{k}"; sp = []
+    for n in range(i0, i1 + 1):
+        w = words[n]["w"]; w = w.rstrip(",:") if n == i1 else w
+        sp.append(f'<span class="cw{(" " + acc[n]) if n in acc else ""}" id="{cid}w{n - i0}">{esc(w)}</span>')
+    c.clip(cid, start, end, f'<div class="cap" style="top:300px"><span class="cl">{" ".join(sp)}</span></div>', cls="layer", style="z-index:20")
+    for n in range(i0, i1 + 1): WORD_IN(f"#{cid}w{n - i0}", words[n]["t0"])
 
 # ----------------------------------------------------------------- 2 the stretch
-tag("t1", S2 + 0.3, 4.65, "wh", "Low throw: get down to it")
-tag("t2", 4.75, 6.35, "wh", "Glove side: lead with the glove")
-tag("t3", 6.45, 8.15, "wh", "Pulled up the line: the toe stays on the bag")
-c.clip("gain", 8.2 + 0.85 * 2 - 0.5, S3 - 0.02, '<div class="pinw" id="gainw"><div class="pin" id="gainx"><span id="gainv">+0 ft</span></div></div>', cls="layer", style="z-index:12")
-pop("#gainx", 8.2 + 0.85 * 2 - 0.45)
-tag("t4", 8.35, S3 - 0.05, "cb", "Reads it, then stretches · foot on the bag until it's in the glove")
-note("n4", 9.6, S3 - 0.05, "3D model · how much closer the stretch takes the catch")
+tag("t2", S2 + 0.3, A2 - 0.05, "wh", "Glove side: lead with the glove")
+T0G = on(W("stretch", "foot"), 0.0, A2, 0.5)                   # the replay's starting play time; the line draws from t = -0.25
+c.clip("gain", A2 + (-0.25 - T0G) / 0.5, S3B - 0.02, '<div class="pinw" id="gainw"><div class="pin" id="gainx"><span id="gainv">+0 ft</span></div></div>', cls="layer", style="z-index:12")
+pop("#gainx", A2 + (-0.2 - T0G) / 0.5)
+tag("t4", A2 + 0.15, S3B - 0.05, "cb", "Foot stays on the bag until it's in the glove")
+tag("t5", S3B + 0.1, B1_ - 0.03, "wh", "Low: get down to it")
+tag("t6", B1_ + 0.05, B2_ - 0.03, "wh", "High: stay on the bag, go up")
+tag("t7", B2_ + 0.05, B3_ - 0.03, "yl", "Too wide: off the bag, keep it in front")
+tag("t8", B3_ + 0.05, S3 - 0.05, "wh", "Pulled up the line: toe stays on the bag")
 
 # ----------------------------------------------------------------- 3 bad throws
-tag("b1", S3 + 0.3, 12.45, "wh", "Charging, throwing on the run")
-tag("b2", 12.6, 14.25, "hot", "Stays tall: the short hop gets by him")
-tag("b3", 14.4, 16.25, "cb", "Reads the hop · glove out front · scoops it")
-tag("b4", 16.4, 18.1, "wh", "High: stay on the bag, go up and get it")
-tag("b5", 18.25, S4 - 0.05, "yl", "Too wide: off the bag, but it stays in front")
-note("n5", 18.6, S4 - 0.05, "Not every bad throw can be caught · keep the ball in front")
+tag("b1", S3 + 0.3, C1 - 0.05, "wh", "Charging, throwing on the run")
+tag("b2", W("bad", "perfect") - 0.05, C2 - 0.05, "hot", "Stays tall: the short hop gets by · error")
+tag("b3", C2 + 0.15, S4 - 0.05, "cb", "Reads the hop · glove out front · scoops it")
+c.clip("outc", W("bad", "out") - 0.05, S4 - 0.02, '<div class="cbl" id="outx" style="top:1400px">Out</div>', cls="layer", style="z-index:21"); pop("#outx", W("bad", "out") - 0.05, 18)
+note("n5", C2 + 0.4, S4 - 0.05, "Not every bad throw can be caught", 1700)
 
-# ----------------------------------------------------------------- 4 they finish the play
-for k, (a, lab) in enumerate([(S4, "Anticipation"), (S4 + 8 / 3, "Soft hands"), (S4 + 16 / 3, "Footwork")]):
-    c.clip(f"fp{k}", a + 0.05, a + 8 / 3 - 0.03, f'<div class="cbl" id="fp{k}x">{esc(lab)}</div>', cls="layer", style="z-index:21")
+# ----------------------------------------------------------------- 4 they help the whole infield
+for k, (a, lab) in enumerate(zip(FP, ["Anticipation", "Soft hands", "Footwork"])):
+    b_ = FP[k + 1] if k + 1 < len(FP) else S5
+    c.clip(f"fp{k}", a + 0.05, b_ - 0.03, f'<div class="cbl" id="fp{k}x">{esc(lab)}</div>', cls="layer", style="z-index:21")
     pop(f"#fp{k}x", a + 0.08, 18)
 
 # ----------------------------------------------------------------- 5 the bat
-tag("h1", 30.65, 33.85, "yl", f"{HR['ev']} mph off the bat · over the wall", 1560)
-note("n6", 30.9, 33.85, "3D model · drag and spin included")
+tag("h1", TC + 0.4, S6 - 0.05, "yl", f"{HR['ev']} mph off the bat · over the wall", 1560)
 
-# ----------------------------------------------------------------- finale
-c.clip("endt", 37.55, D, '<div class="endt"><span id="et1">Defense saves outs.</span><span class="acc" id="et2">Bats win games.</span></div>', cls="layer", style="z-index:22")
-c.ft("#et1", o(opacity=0, y=40, filter="blur(12px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.22, ease="power3.out"), 37.6)
-c.ft("#et2", o(opacity=0, y=40, filter="blur(12px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.22, ease="power3.out"), 38.3)
+# ----------------------------------------------------------------- end
+c.clip("endt", S7, D, '<div class="endt"><span id="et1">Defense saves outs.</span><span class="acc" id="et2">Bats win games.</span></div>', cls="layer", style="z-index:22")
+c.ft("#et1", o(opacity=0, y=40, filter="blur(12px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.22, ease="power3.out"), S7 + 0.05)
+c.ft("#et2", o(opacity=0, y=40, filter="blur(12px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.22, ease="power3.out"), W("end", "complete") - 0.04)
 
 # ----------------------------------------------------------------- sound (effects only; the voiceover is added later)
 def cue(n, t, db=0.0):
     if t is not None and 0 <= t < D: c.cue(n, t, db)
 cue("impact", 0.0, -3)
-for t_ in [S2, S3, S4, S5, S6]: cue("whoosh", t_, -8)
+for t_ in [S2, S3B, S3, S4, S5, S6, S7]: cue("whoosh", t_, -8)
 for t_ in FLASH: cue("whoosh", t_, -11)
 BOUNCE = {"scoop", "late", "pss"}
 CRACKS = []
@@ -160,7 +198,7 @@ for x in SHOTS:
         if pl in BOUNCE: cue("tap", at_play(x, -0.05), -2 + g)                         # the short hop off the dirt
         if pl == "late": cue("tap", at_play(x, 0.32), -6); cue("tap", at_play(x, 0.62), -9)
         else: cue("glove", at_play(x, 0.0), g)
-        cue("tap", at_play(x, {"hook": 0.07, "low": 0.35, "glove": 0.3, "pull": 0.85, "scoop": 0.12, "late": 0.12, "high": 0.3, "wide": 0.0, "p3b": 0.15, "p2b": 0.18, "pss": 0.08}[pl]), -9 + g)   # his foot on the bag
+        cue("tap", at_play(x, RUNNER[pl]), -9 + g)                                     # the runner's foot on the bag
         cue("glove", at_play(x, tf_of(pl)), -8 + g)                                    # the fielder's glove
     if pl == "hr" and x["cam"] in ("bat", "batLow"):
         v0 = at_play(x, 0.0)
@@ -168,7 +206,7 @@ for x in SHOTS:
     if pl == "trot":
         for k in range(8): cue("tap", at_play(x, 4.1 + k * 0.3), -16)
 cue("tick", FRZ0, -1); cue("impact", FRZ0, -6)
-cue("riser-m", 37.6, -4); cue("impact", 37.6, -3); cue("impact", 38.3, -5)
+cue("riser-m", S7 + 0.05, -4); cue("impact", S7 + 0.05, -3); cue("impact", W("end", "complete") - 0.04, -5)
 LEVEL = {"impact": -3.0, "hit": -5.0, "whoosh": -6.0, "glove": -1.0, "tick": -6.0, "popup": -8.0, "riser-m": -7.0, "riser-s": -7.0, "tap": -3.0}
 
 def crack(rng):
@@ -196,12 +234,17 @@ def mixdown():
     crowd = read(os.path.join(HERE, "assets", "sfx", "crowd.wav")); crowd = np.concatenate([crowd] * (n // len(crowd) + 1))[:n]
     tt = np.arange(n) / SR; env = np.ones(n)
     for vt, g in CRACKS: env += 2.2 * np.exp(-np.clip(tt - vt, 0, None) / 2.5) * (tt > vt)          # the crowd comes up on the home run
-    fx += crowd * env[:, None] * 10 ** (-26 / 20)
-    pre = os.path.join(HERE, ".pre.wav")
-    w = wave.open(pre, "wb"); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
-    w.writeframes((np.clip(fx * 0.5, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
-    m = master(pre, os.path.join(HERE, "assets", "mix.wav"), target=-20.0)
-    os.remove(pre)
+    fx += crowd * env[:, None] * 10 ** (-28 / 20)
+    vo = read(os.path.join(HERE, "assets", "vo", "vo.wav"))[:n]
+    full = fx * 10 ** (-6 / 20); full[: len(vo)] += vo
+    def wav(path, x):
+        w = wave.open(path, "wb"); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
+        w.writeframes((np.clip(x * 0.5, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
+    pre, pfx = os.path.join(HERE, ".pre.wav"), os.path.join(HERE, ".fx.wav")
+    wav(pre, full); wav(pfx, fx * 10 ** (-6 / 20))
+    m = master(pre, os.path.join(HERE, "assets", "mix.wav"))
+    master(pre, os.path.join(HERE, "assets", "mix-novo.wav"), fx_path=pfx)   # the same effects at the same level, without the voice
+    os.remove(pre); os.remove(pfx)
     return m
 
 # ----------------------------------------------------------------- CSS
@@ -286,7 +329,7 @@ html, body {{ width:1080px; height:1920px; overflow:hidden; background:#05080d; 
 .endt .acc {{ color:{HOT}; }}
 """])
 CSS += f"""
-.hk {{ top:300px; font-size:138px; }} .hk em {{ font-style:normal; }}
+.hk {{ top:300px; font-size:138px; }} .hk em {{ font-style:normal; }} .hk .hw {{ display:inline-block; }}
 .st {{ position:absolute; left:52px; right:40px; top:250px; font-family:"Barlow Condensed", sans-serif; font-weight:800; font-size:100px; line-height:.94; text-transform:uppercase; color:#fff;
        text-shadow:0 6px 28px rgba(0,0,0,.8), 0 2px 4px rgba(0,0,0,.7); }}
 .st em {{ font-style:normal; color:{HOT}; }}
@@ -307,4 +350,4 @@ if __name__ == "__main__":
     h = h.replace("</body>", '  <script type="module" src="./assets/field.js"></script>\n  </body>')
     open(os.path.join(HERE, "index.html"), "w").write(h)
     m = mixdown()
-    print(f"index.html: {D}s, {len(SHOTS)} shots; {len(c.cues)} sounds; effects {m['lufs']} LUFS / {m['true_peak']} dBTP")
+    print(f"index.html: {D}s, {len(SHOTS)} shots; {len(c.cues)} sounds; {len(CAPS)} caption phrases; {m['lufs']} LUFS / {m['true_peak']} dBTP")
