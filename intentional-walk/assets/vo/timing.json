@@ -1,0 +1,615 @@
+{
+ "duration": 29.68,
+ "lines": [
+  {
+   "i": 0,
+   "id": "hook",
+   "text": "Why would a manager intentionally put the other team's best hitter on base?",
+   "spoken": "Why would a manager intentionally put the other team's best hitter on base?",
+   "t0": 0.25,
+   "t1": 3.104,
+   "words": [
+    {
+     "w": "Why",
+     "t0": 0.27,
+     "t1": 0.395
+    },
+    {
+     "w": "would",
+     "t0": 0.42,
+     "t1": 0.545
+    },
+    {
+     "w": "a",
+     "t0": 0.545,
+     "t1": 0.545
+    },
+    {
+     "w": "manager",
+     "t0": 0.57,
+     "t1": 1.045
+    },
+    {
+     "w": "intentionally",
+     "t0": 1.095,
+     "t1": 1.57
+    },
+    {
+     "w": "put",
+     "t0": 1.62,
+     "t1": 1.72
+    },
+    {
+     "w": "the",
+     "t0": 1.745,
+     "t1": 1.795
+    },
+    {
+     "w": "other",
+     "t0": 1.845,
+     "t1": 1.945
+    },
+    {
+     "w": "team's",
+     "t0": 1.995,
+     "t1": 2.245
+    },
+    {
+     "w": "best",
+     "t0": 2.295,
+     "t1": 2.445
+    },
+    {
+     "w": "hitter",
+     "t0": 2.47,
+     "t1": 2.62
+    },
+    {
+     "w": "on",
+     "t0": 2.67,
+     "t1": 2.72
+    },
+    {
+     "w": "base?",
+     "t0": 2.77,
+     "t1": 3.187
+    }
+   ]
+  },
+  {
+   "i": 1,
+   "id": "target",
+   "text": "Because sometimes, the real target isn't the hitter at the plate. It's the matchup that comes next.",
+   "spoken": "Because sometimes, the real target isn't the hitter at the plate. It's the matchup that comes next.",
+   "t0": 3.354,
+   "t1": 7.262,
+   "words": [
+    {
+     "w": "Because",
+     "t0": 3.366,
+     "t1": 3.541
+    },
+    {
+     "w": "sometimes,",
+     "t0": 3.591,
+     "t1": 4.141
+    },
+    {
+     "w": "the",
+     "t0": 4.216,
+     "t1": 4.266
+    },
+    {
+     "w": "real",
+     "t0": 4.316,
+     "t1": 4.466
+    },
+    {
+     "w": "target",
+     "t0": 4.516,
+     "t1": 4.791
+    },
+    {
+     "w": "isn't",
+     "t0": 4.841,
+     "t1": 4.966
+    },
+    {
+     "w": "the",
+     "t0": 4.991,
+     "t1": 5.041
+    },
+    {
+     "w": "hitter",
+     "t0": 5.091,
+     "t1": 5.266
+    },
+    {
+     "w": "at",
+     "t0": 5.291,
+     "t1": 5.341
+    },
+    {
+     "w": "the",
+     "t0": 5.366,
+     "t1": 5.416
+    },
+    {
+     "w": "plate.",
+     "t0": 5.466,
+     "t1": 5.941
+    },
+    {
+     "w": "It's",
+     "t0": 6.066,
+     "t1": 6.141
+    },
+    {
+     "w": "the",
+     "t0": 6.166,
+     "t1": 6.216
+    },
+    {
+     "w": "matchup",
+     "t0": 6.266,
+     "t1": 6.616
+    },
+    {
+     "w": "that",
+     "t0": 6.641,
+     "t1": 6.716
+    },
+    {
+     "w": "comes",
+     "t0": 6.741,
+     "t1": 6.891
+    },
+    {
+     "w": "next.",
+     "t0": 6.941,
+     "t1": 7.294
+    }
+   ]
+  },
+  {
+   "i": 2,
+   "id": "risk",
+   "text": "But there's a risk.",
+   "spoken": "But there's a risk.",
+   "t0": 7.412,
+   "t1": 8.127,
+   "words": [
+    {
+     "w": "But",
+     "t0": 7.438,
+     "t1": 7.538
+    },
+    {
+     "w": "there's",
+     "t0": 7.563,
+     "t1": 7.738
+    },
+    {
+     "w": "a",
+     "t0": 7.738,
+     "t1": 7.738
+    },
+    {
+     "w": "risk.",
+     "t0": 7.788,
+     "t1": 8.213
+    }
+   ]
+  },
+  {
+   "i": 3,
+   "id": "nlcs",
+   "text": "In the 2024 NLCS, the Dodgers intentionally walked Francisco Lindor. The next batter, Mark Vientos, responded with a grand slam.",
+   "spoken": "In the twenty twenty-four N L C S, the Dodgers intentionally walked Francisco Lindor. The next batter, Mark Vientos, responded with a grand slam.",
+   "t0": 8.277,
+   "t1": 15.253,
+   "words": [
+    {
+     "w": "In",
+     "t0": 8.296,
+     "t1": 8.346
+    },
+    {
+     "w": "the",
+     "t0": 8.346,
+     "t1": 8.396
+    },
+    {
+     "w": "twenty",
+     "t0": 8.421,
+     "t1": 8.621
+    },
+    {
+     "w": "twenty-four",
+     "t0": 8.646,
+     "t1": 9.121
+    },
+    {
+     "w": "N",
+     "t0": 9.221,
+     "t1": 9.321
+    },
+    {
+     "w": "L",
+     "t0": 9.421,
+     "t1": 9.521
+    },
+    {
+     "w": "C",
+     "t0": 9.596,
+     "t1": 9.721
+    },
+    {
+     "w": "S,",
+     "t0": 9.846,
+     "t1": 10.171
+    },
+    {
+     "w": "the",
+     "t0": 10.271,
+     "t1": 10.321
+    },
+    {
+     "w": "Dodgers",
+     "t0": 10.371,
+     "t1": 10.771
+    },
+    {
+     "w": "intentionally",
+     "t0": 10.821,
+     "t1": 11.246
+    },
+    {
+     "w": "walked",
+     "t0": 11.296,
+     "t1": 11.471
+    },
+    {
+     "w": "Francisco",
+     "t0": 11.521,
+     "t1": 11.946
+    },
+    {
+     "w": "Lindor.",
+     "t0": 11.971,
+     "t1": 12.546
+    },
+    {
+     "w": "The",
+     "t0": 12.671,
+     "t1": 12.721
+    },
+    {
+     "w": "next",
+     "t0": 12.746,
+     "t1": 12.896
+    },
+    {
+     "w": "batter,",
+     "t0": 12.921,
+     "t1": 13.171
+    },
+    {
+     "w": "Mark",
+     "t0": 13.221,
+     "t1": 13.371
+    },
+    {
+     "w": "Vientos,",
+     "t0": 13.421,
+     "t1": 13.971
+    },
+    {
+     "w": "responded",
+     "t0": 14.046,
+     "t1": 14.421
+    },
+    {
+     "w": "with",
+     "t0": 14.446,
+     "t1": 14.571
+    },
+    {
+     "w": "a",
+     "t0": 14.571,
+     "t1": 14.571
+    },
+    {
+     "w": "grand",
+     "t0": 14.621,
+     "t1": 14.896
+    },
+    {
+     "w": "slam.",
+     "t0": 14.946,
+     "t1": 15.31
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "id": "gamble",
+   "text": "That's the gamble: avoid one dangerous hitter, but give another a chance with runners on base.",
+   "spoken": "That's the gamble: avoid one dangerous hitter, but give another a chance with runners on base.",
+   "t0": 15.603,
+   "t1": 19.412,
+   "words": [
+    {
+     "w": "That's",
+     "t0": 15.617,
+     "t1": 15.742
+    },
+    {
+     "w": "the",
+     "t0": 15.767,
+     "t1": 15.817
+    },
+    {
+     "w": "gamble:",
+     "t0": 15.867,
+     "t1": 16.342
+    },
+    {
+     "w": "avoid",
+     "t0": 16.442,
+     "t1": 16.692
+    },
+    {
+     "w": "one",
+     "t0": 16.742,
+     "t1": 16.917
+    },
+    {
+     "w": "dangerous",
+     "t0": 16.967,
+     "t1": 17.292
+    },
+    {
+     "w": "hitter,",
+     "t0": 17.317,
+     "t1": 17.667
+    },
+    {
+     "w": "but",
+     "t0": 17.742,
+     "t1": 17.842
+    },
+    {
+     "w": "give",
+     "t0": 17.867,
+     "t1": 17.967
+    },
+    {
+     "w": "another",
+     "t0": 17.992,
+     "t1": 18.242
+    },
+    {
+     "w": "a",
+     "t0": 18.242,
+     "t1": 18.242
+    },
+    {
+     "w": "chance",
+     "t0": 18.292,
+     "t1": 18.592
+    },
+    {
+     "w": "with",
+     "t0": 18.617,
+     "t1": 18.692
+    },
+    {
+     "w": "runners",
+     "t0": 18.742,
+     "t1": 18.942
+    },
+    {
+     "w": "on",
+     "t0": 18.992,
+     "t1": 19.042
+    },
+    {
+     "w": "base.",
+     "t0": 19.067,
+     "t1": 19.417
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "id": "analytics",
+   "text": "Analytics says the extra baserunner matters. So managers have to weigh the hitter, the next matchup, the outs, and whether a double play is possible.",
+   "spoken": "Analytics says the extra baserunner matters. So managers have to weigh the hitter, the next matchup, the outs, and whether a double play is possible.",
+   "t0": 19.562,
+   "t1": 25.667,
+   "words": [
+    {
+     "w": "Analytics",
+     "t0": 19.637,
+     "t1": 19.912
+    },
+    {
+     "w": "says",
+     "t0": 19.962,
+     "t1": 20.112
+    },
+    {
+     "w": "the",
+     "t0": 20.137,
+     "t1": 20.212
+    },
+    {
+     "w": "extra",
+     "t0": 20.287,
+     "t1": 20.437
+    },
+    {
+     "w": "baserunner",
+     "t0": 20.487,
+     "t1": 20.887
+    },
+    {
+     "w": "matters.",
+     "t0": 20.912,
+     "t1": 21.462
+    },
+    {
+     "w": "So",
+     "t0": 21.587,
+     "t1": 21.687
+    },
+    {
+     "w": "managers",
+     "t0": 21.737,
+     "t1": 22.087
+    },
+    {
+     "w": "have",
+     "t0": 22.112,
+     "t1": 22.237
+    },
+    {
+     "w": "to",
+     "t0": 22.262,
+     "t1": 22.312
+    },
+    {
+     "w": "weigh",
+     "t0": 22.362,
+     "t1": 22.487
+    },
+    {
+     "w": "the",
+     "t0": 22.512,
+     "t1": 22.562
+    },
+    {
+     "w": "hitter,",
+     "t0": 22.612,
+     "t1": 22.962
+    },
+    {
+     "w": "the",
+     "t0": 23.037,
+     "t1": 23.087
+    },
+    {
+     "w": "next",
+     "t0": 23.112,
+     "t1": 23.262
+    },
+    {
+     "w": "matchup,",
+     "t0": 23.287,
+     "t1": 23.687
+    },
+    {
+     "w": "the",
+     "t0": 23.762,
+     "t1": 23.837
+    },
+    {
+     "w": "outs,",
+     "t0": 23.962,
+     "t1": 24.312
+    },
+    {
+     "w": "and",
+     "t0": 24.412,
+     "t1": 24.487
+    },
+    {
+     "w": "whether",
+     "t0": 24.512,
+     "t1": 24.712
+    },
+    {
+     "w": "a",
+     "t0": 24.712,
+     "t1": 24.712
+    },
+    {
+     "w": "double",
+     "t0": 24.762,
+     "t1": 24.912
+    },
+    {
+     "w": "play",
+     "t0": 24.962,
+     "t1": 25.162
+    },
+    {
+     "w": "is",
+     "t0": 25.187,
+     "t1": 25.237
+    },
+    {
+     "w": "possible.",
+     "t0": 25.287,
+     "t1": 25.704
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "id": "q",
+   "text": "So when is walking a superstar actually smart baseball?",
+   "spoken": "So when is walking a superstar actually smart baseball?",
+   "t0": 25.917,
+   "t1": 28.177,
+   "words": [
+    {
+     "w": "So",
+     "t0": 25.95,
+     "t1": 26.05
+    },
+    {
+     "w": "when",
+     "t0": 26.074,
+     "t1": 26.15
+    },
+    {
+     "w": "is",
+     "t0": 26.174,
+     "t1": 26.224
+    },
+    {
+     "w": "walking",
+     "t0": 26.274,
+     "t1": 26.55
+    },
+    {
+     "w": "a",
+     "t0": 26.55,
+     "t1": 26.55
+    },
+    {
+     "w": "superstar",
+     "t0": 26.6,
+     "t1": 27.174
+    },
+    {
+     "w": "actually",
+     "t0": 27.3,
+     "t1": 27.524
+    },
+    {
+     "w": "smart",
+     "t0": 27.574,
+     "t1": 27.774
+    },
+    {
+     "w": "baseball?",
+     "t0": 27.8,
+     "t1": 28.188
+    }
+   ]
+  }
+ ]
+}
