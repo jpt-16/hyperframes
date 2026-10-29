@@ -1,0 +1,556 @@
+[
+ {
+  "i": 0,
+  "id": "hook",
+  "text": "Tommy John surgery doesn't magically make pitchers throw harder.",
+  "spoken": "Tommy John surgery doesn't magically make pitchers throw harder.",
+  "dur": 2.709,
+  "words": [
+   {
+    "w": "Tommy",
+    "start": 0.062,
+    "end": 0.262
+   },
+   {
+    "w": "John",
+    "start": 0.287,
+    "end": 0.462
+   },
+   {
+    "w": "surgery",
+    "start": 0.512,
+    "end": 1.012
+   },
+   {
+    "w": "doesn't",
+    "start": 1.087,
+    "end": 1.262
+   },
+   {
+    "w": "magically",
+    "start": 1.312,
+    "end": 1.662
+   },
+   {
+    "w": "make",
+    "start": 1.687,
+    "end": 1.812
+   },
+   {
+    "w": "pitchers",
+    "start": 1.862,
+    "end": 2.112
+   },
+   {
+    "w": "throw",
+    "start": 2.162,
+    "end": 2.287
+   },
+   {
+    "w": "harder.",
+    "start": 2.337,
+    "end": 2.709
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "rebuild",
+  "text": "It rebuilds the ligament that stabilizes your elbow during a throw.",
+  "spoken": "It rebuilds the ligament that stabilizes your elbow during a throw.",
+  "dur": 2.496,
+  "words": [
+   {
+    "w": "It",
+    "start": 0.048,
+    "end": 0.098
+   },
+   {
+    "w": "rebuilds",
+    "start": 0.123,
+    "end": 0.423
+   },
+   {
+    "w": "the",
+    "start": 0.448,
+    "end": 0.498
+   },
+   {
+    "w": "ligament",
+    "start": 0.548,
+    "end": 0.798
+   },
+   {
+    "w": "that",
+    "start": 0.823,
+    "end": 0.898
+   },
+   {
+    "w": "stabilizes",
+    "start": 0.948,
+    "end": 1.373
+   },
+   {
+    "w": "your",
+    "start": 1.398,
+    "end": 1.473
+   },
+   {
+    "w": "elbow",
+    "start": 1.548,
+    "end": 1.823
+   },
+   {
+    "w": "during",
+    "start": 1.873,
+    "end": 2.098
+   },
+   {
+    "w": "a",
+    "start": 2.098,
+    "end": 2.098
+   },
+   {
+    "w": "throw.",
+    "start": 2.173,
+    "end": 2.496
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "stat",
+  "text": "And here's the surprising part: a study of MLB pitchers found that only 28% returned to full performance within three seasons of surgery.",
+  "spoken": "And here's the surprising part: a study of M L B pitchers found that only twenty-eight percent returned to full performance within three seasons of surgery.",
+  "dur": 6.549,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.026,
+    "end": 0.101
+   },
+   {
+    "w": "here's",
+    "start": 0.126,
+    "end": 0.276
+   },
+   {
+    "w": "the",
+    "start": 0.301,
+    "end": 0.351
+   },
+   {
+    "w": "surprising",
+    "start": 0.401,
+    "end": 0.801
+   },
+   {
+    "w": "part:",
+    "start": 0.826,
+    "end": 1.426
+   },
+   {
+    "w": "a",
+    "start": 1.426,
+    "end": 1.426
+   },
+   {
+    "w": "study",
+    "start": 1.476,
+    "end": 1.676
+   },
+   {
+    "w": "of",
+    "start": 1.701,
+    "end": 1.776
+   },
+   {
+    "w": "M",
+    "start": 1.901,
+    "end": 2.051
+   },
+   {
+    "w": "L",
+    "start": 2.176,
+    "end": 2.276
+   },
+   {
+    "w": "B",
+    "start": 2.326,
+    "end": 2.426
+   },
+   {
+    "w": "pitchers",
+    "start": 2.476,
+    "end": 3.001
+   },
+   {
+    "w": "found",
+    "start": 3.076,
+    "end": 3.251
+   },
+   {
+    "w": "that",
+    "start": 3.276,
+    "end": 3.376
+   },
+   {
+    "w": "only",
+    "start": 3.451,
+    "end": 3.651
+   },
+   {
+    "w": "twenty-eight",
+    "start": 3.701,
+    "end": 4.051
+   },
+   {
+    "w": "percent",
+    "start": 4.076,
+    "end": 4.351
+   },
+   {
+    "w": "returned",
+    "start": 4.376,
+    "end": 4.701
+   },
+   {
+    "w": "to",
+    "start": 4.726,
+    "end": 4.776
+   },
+   {
+    "w": "full",
+    "start": 4.826,
+    "end": 4.926
+   },
+   {
+    "w": "performance",
+    "start": 4.951,
+    "end": 5.301
+   },
+   {
+    "w": "within",
+    "start": 5.326,
+    "end": 5.501
+   },
+   {
+    "w": "three",
+    "start": 5.576,
+    "end": 5.726
+   },
+   {
+    "w": "seasons",
+    "start": 5.776,
+    "end": 6.076
+   },
+   {
+    "w": "of",
+    "start": 6.101,
+    "end": 6.151
+   },
+   {
+    "w": "surgery.",
+    "start": 6.201,
+    "end": 6.549
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "diff",
+  "text": "Getting back on the mound and getting back to your old level are two completely different things.",
+  "spoken": "Getting back on the mound and getting back to your old level are two completely different things.",
+  "dur": 3.541,
+  "words": [
+   {
+    "w": "Getting",
+    "start": 0.044,
+    "end": 0.219
+   },
+   {
+    "w": "back",
+    "start": 0.244,
+    "end": 0.369
+   },
+   {
+    "w": "on",
+    "start": 0.394,
+    "end": 0.444
+   },
+   {
+    "w": "the",
+    "start": 0.444,
+    "end": 0.494
+   },
+   {
+    "w": "mound",
+    "start": 0.544,
+    "end": 0.969
+   },
+   {
+    "w": "and",
+    "start": 1.019,
+    "end": 1.094
+   },
+   {
+    "w": "getting",
+    "start": 1.119,
+    "end": 1.269
+   },
+   {
+    "w": "back",
+    "start": 1.294,
+    "end": 1.419
+   },
+   {
+    "w": "to",
+    "start": 1.444,
+    "end": 1.494
+   },
+   {
+    "w": "your",
+    "start": 1.519,
+    "end": 1.594
+   },
+   {
+    "w": "old",
+    "start": 1.644,
+    "end": 1.744
+   },
+   {
+    "w": "level",
+    "start": 1.769,
+    "end": 2.119
+   },
+   {
+    "w": "are",
+    "start": 2.169,
+    "end": 2.269
+   },
+   {
+    "w": "two",
+    "start": 2.319,
+    "end": 2.419
+   },
+   {
+    "w": "completely",
+    "start": 2.444,
+    "end": 2.819
+   },
+   {
+    "w": "different",
+    "start": 2.869,
+    "end": 3.094
+   },
+   {
+    "w": "things.",
+    "start": 3.144,
+    "end": 3.541
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "recovery",
+  "text": "Recovery can take 12 to 18 months, and even after that, pitchers still need time to regain their command and performance.",
+  "spoken": "Recovery can take twelve to eighteen months, and even after that, pitchers still need time to regain their command and performance.",
+  "dur": 5.099,
+  "words": [
+   {
+    "w": "Recovery",
+    "start": 0.001,
+    "end": 0.326
+   },
+   {
+    "w": "can",
+    "start": 0.351,
+    "end": 0.426
+   },
+   {
+    "w": "take",
+    "start": 0.451,
+    "end": 0.576
+   },
+   {
+    "w": "twelve",
+    "start": 0.626,
+    "end": 0.876
+   },
+   {
+    "w": "to",
+    "start": 0.901,
+    "end": 0.976
+   },
+   {
+    "w": "eighteen",
+    "start": 1.051,
+    "end": 1.251
+   },
+   {
+    "w": "months,",
+    "start": 1.276,
+    "end": 1.726
+   },
+   {
+    "w": "and",
+    "start": 1.826,
+    "end": 1.901
+   },
+   {
+    "w": "even",
+    "start": 1.976,
+    "end": 2.101
+   },
+   {
+    "w": "after",
+    "start": 2.176,
+    "end": 2.276
+   },
+   {
+    "w": "that,",
+    "start": 2.301,
+    "end": 2.626
+   },
+   {
+    "w": "pitchers",
+    "start": 2.726,
+    "end": 3.001
+   },
+   {
+    "w": "still",
+    "start": 3.051,
+    "end": 3.201
+   },
+   {
+    "w": "need",
+    "start": 3.226,
+    "end": 3.351
+   },
+   {
+    "w": "time",
+    "start": 3.401,
+    "end": 3.626
+   },
+   {
+    "w": "to",
+    "start": 3.651,
+    "end": 3.701
+   },
+   {
+    "w": "regain",
+    "start": 3.726,
+    "end": 4.001
+   },
+   {
+    "w": "their",
+    "start": 4.026,
+    "end": 4.101
+   },
+   {
+    "w": "command",
+    "start": 4.126,
+    "end": 4.451
+   },
+   {
+    "w": "and",
+    "start": 4.476,
+    "end": 4.551
+   },
+   {
+    "w": "performance.",
+    "start": 4.576,
+    "end": 5.099
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "end",
+  "text": "The surgery can save a career. But it doesn't guarantee you'll get your old arm back.",
+  "spoken": "The surgery can save a career. But it doesn't guarantee you'll get your old arm back.",
+  "dur": 3.243,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.04,
+    "end": 0.09
+   },
+   {
+    "w": "surgery",
+    "start": 0.165,
+    "end": 0.465
+   },
+   {
+    "w": "can",
+    "start": 0.49,
+    "end": 0.565
+   },
+   {
+    "w": "save",
+    "start": 0.64,
+    "end": 0.865
+   },
+   {
+    "w": "a",
+    "start": 0.865,
+    "end": 0.865
+   },
+   {
+    "w": "career.",
+    "start": 0.89,
+    "end": 1.44
+   },
+   {
+    "w": "But",
+    "start": 1.515,
+    "end": 1.615
+   },
+   {
+    "w": "it",
+    "start": 1.64,
+    "end": 1.69
+   },
+   {
+    "w": "doesn't",
+    "start": 1.715,
+    "end": 1.89
+   },
+   {
+    "w": "guarantee",
+    "start": 1.94,
+    "end": 2.29
+   },
+   {
+    "w": "you'll",
+    "start": 2.315,
+    "end": 2.415
+   },
+   {
+    "w": "get",
+    "start": 2.44,
+    "end": 2.515
+   },
+   {
+    "w": "your",
+    "start": 2.54,
+    "end": 2.615
+   },
+   {
+    "w": "old",
+    "start": 2.665,
+    "end": 2.765
+   },
+   {
+    "w": "arm",
+    "start": 2.865,
+    "end": 2.965
+   },
+   {
+    "w": "back.",
+    "start": 2.99,
+    "end": 3.243
+   }
+  ]
+ }
+]
