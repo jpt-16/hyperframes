@@ -1,0 +1,702 @@
+[
+ {
+  "i": 0,
+  "id": "hook",
+  "text": "A hit-and-run is one of baseball's biggest calculated risks.",
+  "spoken": "A hit-and-run is one of baseball's biggest calculated risks.",
+  "dur": 2.581,
+  "words": [
+   {
+    "w": "A",
+    "start": 0.044,
+    "end": 0.069
+   },
+   {
+    "w": "hit-and-run",
+    "start": 0.094,
+    "end": 0.669
+   },
+   {
+    "w": "is",
+    "start": 0.719,
+    "end": 0.769
+   },
+   {
+    "w": "one",
+    "start": 0.794,
+    "end": 0.894
+   },
+   {
+    "w": "of",
+    "start": 0.919,
+    "end": 0.969
+   },
+   {
+    "w": "baseball's",
+    "start": 0.994,
+    "end": 1.419
+   },
+   {
+    "w": "biggest",
+    "start": 1.494,
+    "end": 1.744
+   },
+   {
+    "w": "calculated",
+    "start": 1.794,
+    "end": 2.194
+   },
+   {
+    "w": "risks.",
+    "start": 2.244,
+    "end": 2.581
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "setup",
+  "text": "With a runner on first, the runner takes off as soon as the pitcher delivers the ball.",
+  "spoken": "With a runner on first, the runner takes off as soon as the pitcher delivers the ball.",
+  "dur": 3.221,
+  "words": [
+   {
+    "w": "With",
+    "start": 0.044,
+    "end": 0.169
+   },
+   {
+    "w": "a",
+    "start": 0.169,
+    "end": 0.169
+   },
+   {
+    "w": "runner",
+    "start": 0.219,
+    "end": 0.369
+   },
+   {
+    "w": "on",
+    "start": 0.419,
+    "end": 0.469
+   },
+   {
+    "w": "first,",
+    "start": 0.519,
+    "end": 0.919
+   },
+   {
+    "w": "the",
+    "start": 0.994,
+    "end": 1.044
+   },
+   {
+    "w": "runner",
+    "start": 1.094,
+    "end": 1.269
+   },
+   {
+    "w": "takes",
+    "start": 1.319,
+    "end": 1.469
+   },
+   {
+    "w": "off",
+    "start": 1.619,
+    "end": 1.719
+   },
+   {
+    "w": "as",
+    "start": 1.769,
+    "end": 1.819
+   },
+   {
+    "w": "soon",
+    "start": 1.894,
+    "end": 2.019
+   },
+   {
+    "w": "as",
+    "start": 2.044,
+    "end": 2.094
+   },
+   {
+    "w": "the",
+    "start": 2.119,
+    "end": 2.169
+   },
+   {
+    "w": "pitcher",
+    "start": 2.219,
+    "end": 2.444
+   },
+   {
+    "w": "delivers",
+    "start": 2.469,
+    "end": 2.744
+   },
+   {
+    "w": "the",
+    "start": 2.769,
+    "end": 2.819
+   },
+   {
+    "w": "ball.",
+    "start": 2.869,
+    "end": 3.221
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "catch",
+  "text": "But here's the catch: the hitter is expected to swing and make contact.",
+  "spoken": "But here's the catch: the hitter is expected to swing and make contact.",
+  "dur": 2.901,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.019,
+    "end": 0.119
+   },
+   {
+    "w": "here's",
+    "start": 0.144,
+    "end": 0.319
+   },
+   {
+    "w": "the",
+    "start": 0.344,
+    "end": 0.394
+   },
+   {
+    "w": "catch:",
+    "start": 0.444,
+    "end": 0.919
+   },
+   {
+    "w": "the",
+    "start": 1.044,
+    "end": 1.094
+   },
+   {
+    "w": "hitter",
+    "start": 1.144,
+    "end": 1.294
+   },
+   {
+    "w": "is",
+    "start": 1.319,
+    "end": 1.369
+   },
+   {
+    "w": "expected",
+    "start": 1.394,
+    "end": 1.694
+   },
+   {
+    "w": "to",
+    "start": 1.719,
+    "end": 1.769
+   },
+   {
+    "w": "swing",
+    "start": 1.844,
+    "end": 2.044
+   },
+   {
+    "w": "and",
+    "start": 2.069,
+    "end": 2.144
+   },
+   {
+    "w": "make",
+    "start": 2.169,
+    "end": 2.294
+   },
+   {
+    "w": "contact.",
+    "start": 2.319,
+    "end": 2.901
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "why",
+  "text": "Why?",
+  "spoken": "Why?",
+  "dur": 0.533,
+  "words": [
+   {
+    "w": "Why?",
+    "start": 0.09,
+    "end": 0.49
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "cover",
+  "text": "Because the second baseman or shortstop has to cover second base, opening up a hole in the infield.",
+  "spoken": "Because the second baseman or shortstop has to cover second base, opening up a hole in the infield.",
+  "dur": 3.968,
+  "words": [
+   {
+    "w": "Because",
+    "start": 0.0,
+    "end": 0.148
+   },
+   {
+    "w": "the",
+    "start": 0.173,
+    "end": 0.223
+   },
+   {
+    "w": "second",
+    "start": 0.273,
+    "end": 0.448
+   },
+   {
+    "w": "baseman",
+    "start": 0.498,
+    "end": 0.823
+   },
+   {
+    "w": "or",
+    "start": 0.873,
+    "end": 0.948
+   },
+   {
+    "w": "shortstop",
+    "start": 1.023,
+    "end": 1.523
+   },
+   {
+    "w": "has",
+    "start": 1.548,
+    "end": 1.623
+   },
+   {
+    "w": "to",
+    "start": 1.648,
+    "end": 1.698
+   },
+   {
+    "w": "cover",
+    "start": 1.723,
+    "end": 1.898
+   },
+   {
+    "w": "second",
+    "start": 1.948,
+    "end": 2.123
+   },
+   {
+    "w": "base,",
+    "start": 2.148,
+    "end": 2.598
+   },
+   {
+    "w": "opening",
+    "start": 2.748,
+    "end": 2.948
+   },
+   {
+    "w": "up",
+    "start": 2.998,
+    "end": 3.098
+   },
+   {
+    "w": "a",
+    "start": 3.098,
+    "end": 3.098
+   },
+   {
+    "w": "hole",
+    "start": 3.148,
+    "end": 3.373
+   },
+   {
+    "w": "in",
+    "start": 3.398,
+    "end": 3.448
+   },
+   {
+    "w": "the",
+    "start": 3.448,
+    "end": 3.498
+   },
+   {
+    "w": "infield.",
+    "start": 3.523,
+    "end": 3.968
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "gap",
+  "text": "If the hitter puts the ball through that gap, the runner can advance an extra base.",
+  "spoken": "If the hitter puts the ball through that gap, the runner can advance an extra base.",
+  "dur": 2.965,
+  "words": [
+   {
+    "w": "If",
+    "start": 0.044,
+    "end": 0.094
+   },
+   {
+    "w": "the",
+    "start": 0.119,
+    "end": 0.169
+   },
+   {
+    "w": "hitter",
+    "start": 0.219,
+    "end": 0.394
+   },
+   {
+    "w": "puts",
+    "start": 0.419,
+    "end": 0.544
+   },
+   {
+    "w": "the",
+    "start": 0.569,
+    "end": 0.619
+   },
+   {
+    "w": "ball",
+    "start": 0.669,
+    "end": 0.844
+   },
+   {
+    "w": "through",
+    "start": 0.894,
+    "end": 0.994
+   },
+   {
+    "w": "that",
+    "start": 1.019,
+    "end": 1.119
+   },
+   {
+    "w": "gap,",
+    "start": 1.169,
+    "end": 1.519
+   },
+   {
+    "w": "the",
+    "start": 1.594,
+    "end": 1.644
+   },
+   {
+    "w": "runner",
+    "start": 1.694,
+    "end": 1.869
+   },
+   {
+    "w": "can",
+    "start": 1.894,
+    "end": 1.969
+   },
+   {
+    "w": "advance",
+    "start": 1.994,
+    "end": 2.319
+   },
+   {
+    "w": "an",
+    "start": 2.319,
+    "end": 2.369
+   },
+   {
+    "w": "extra",
+    "start": 2.444,
+    "end": 2.594
+   },
+   {
+    "w": "base.",
+    "start": 2.619,
+    "end": 2.965
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "dp",
+  "text": "It can also make a double play much harder because the runner is already moving toward second.",
+  "spoken": "It can also make a double play much harder because the runner is already moving toward second.",
+  "dur": 3.605,
+  "words": [
+   {
+    "w": "It",
+    "start": 0.001,
+    "end": 0.051
+   },
+   {
+    "w": "can",
+    "start": 0.076,
+    "end": 0.151
+   },
+   {
+    "w": "also",
+    "start": 0.226,
+    "end": 0.426
+   },
+   {
+    "w": "make",
+    "start": 0.451,
+    "end": 0.626
+   },
+   {
+    "w": "a",
+    "start": 0.626,
+    "end": 0.626
+   },
+   {
+    "w": "double",
+    "start": 0.676,
+    "end": 0.826
+   },
+   {
+    "w": "play",
+    "start": 0.851,
+    "end": 0.976
+   },
+   {
+    "w": "much",
+    "start": 1.026,
+    "end": 1.151
+   },
+   {
+    "w": "harder",
+    "start": 1.201,
+    "end": 1.651
+   },
+   {
+    "w": "because",
+    "start": 1.701,
+    "end": 2.001
+   },
+   {
+    "w": "the",
+    "start": 2.026,
+    "end": 2.101
+   },
+   {
+    "w": "runner",
+    "start": 2.151,
+    "end": 2.376
+   },
+   {
+    "w": "is",
+    "start": 2.401,
+    "end": 2.476
+   },
+   {
+    "w": "already",
+    "start": 2.551,
+    "end": 2.751
+   },
+   {
+    "w": "moving",
+    "start": 2.801,
+    "end": 3.001
+   },
+   {
+    "w": "toward",
+    "start": 3.026,
+    "end": 3.226
+   },
+   {
+    "w": "second.",
+    "start": 3.276,
+    "end": 3.605
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "miss",
+  "text": "But if the hitter swings and misses, the runner could be an easy target for the catcher.",
+  "spoken": "But if the hitter swings and misses, the runner could be an easy target for the catcher.",
+  "dur": 3.371,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.019,
+    "end": 0.119
+   },
+   {
+    "w": "if",
+    "start": 0.144,
+    "end": 0.194
+   },
+   {
+    "w": "the",
+    "start": 0.219,
+    "end": 0.269
+   },
+   {
+    "w": "hitter",
+    "start": 0.294,
+    "end": 0.469
+   },
+   {
+    "w": "swings",
+    "start": 0.544,
+    "end": 0.869
+   },
+   {
+    "w": "and",
+    "start": 0.894,
+    "end": 0.969
+   },
+   {
+    "w": "misses,",
+    "start": 0.994,
+    "end": 1.519
+   },
+   {
+    "w": "the",
+    "start": 1.594,
+    "end": 1.644
+   },
+   {
+    "w": "runner",
+    "start": 1.694,
+    "end": 1.869
+   },
+   {
+    "w": "could",
+    "start": 1.894,
+    "end": 1.969
+   },
+   {
+    "w": "be",
+    "start": 1.994,
+    "end": 2.119
+   },
+   {
+    "w": "an",
+    "start": 2.119,
+    "end": 2.169
+   },
+   {
+    "w": "easy",
+    "start": 2.294,
+    "end": 2.444
+   },
+   {
+    "w": "target",
+    "start": 2.494,
+    "end": 2.769
+   },
+   {
+    "w": "for",
+    "start": 2.794,
+    "end": 2.844
+   },
+   {
+    "w": "the",
+    "start": 2.844,
+    "end": 2.894
+   },
+   {
+    "w": "catcher.",
+    "start": 2.944,
+    "end": 3.371
+   }
+  ]
+ },
+ {
+  "i": 8,
+  "id": "end",
+  "text": "One pitch can turn a smart strategy into a costly mistake.",
+  "spoken": "One pitch can turn a smart strategy into a costly mistake.",
+  "dur": 2.56,
+  "words": [
+   {
+    "w": "One",
+    "start": 0.069,
+    "end": 0.169
+   },
+   {
+    "w": "pitch",
+    "start": 0.219,
+    "end": 0.344
+   },
+   {
+    "w": "can",
+    "start": 0.369,
+    "end": 0.444
+   },
+   {
+    "w": "turn",
+    "start": 0.469,
+    "end": 0.644
+   },
+   {
+    "w": "a",
+    "start": 0.644,
+    "end": 0.644
+   },
+   {
+    "w": "smart",
+    "start": 0.694,
+    "end": 0.894
+   },
+   {
+    "w": "strategy",
+    "start": 0.919,
+    "end": 1.394
+   },
+   {
+    "w": "into",
+    "start": 1.469,
+    "end": 1.619
+   },
+   {
+    "w": "a",
+    "start": 1.619,
+    "end": 1.619
+   },
+   {
+    "w": "costly",
+    "start": 1.669,
+    "end": 1.969
+   },
+   {
+    "w": "mistake.",
+    "start": 1.994,
+    "end": 2.56
+   }
+  ]
+ },
+ {
+  "i": 9,
+  "id": "name",
+  "text": "That's the hit-and-run.",
+  "spoken": "That's the hit-and-run.",
+  "dur": 0.981,
+  "words": [
+   {
+    "w": "That's",
+    "start": 0.04,
+    "end": 0.165
+   },
+   {
+    "w": "the",
+    "start": 0.19,
+    "end": 0.24
+   },
+   {
+    "w": "hit-and-run.",
+    "start": 0.265,
+    "end": 0.965
+   }
+  ]
+ }
+]

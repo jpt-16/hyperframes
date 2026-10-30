@@ -1,13 +1,16 @@
-"""'The hit-and-run': why the runner is already running (1080x1920, music + effects, no narration).
+"""'The hit-and-run': why the runner is already running (1080x1920, voiceover + music + effects).
 
-    python3 tools/physics.py        # the pitch, the ground ball, the right fielder -> assets/play.json
-    python3 build.py                # index.html + assets/mix.wav
+    python3 tools/physics.py                                       # the pitch, the ground balls, the fielders -> assets/play.json
+    $HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # Kokoro voiceover (am_michael) + word timing
+    python3 build.py                                               # index.html + assets/mix.wav (+ assets/mix-novo.wav without the voice)
     npx --yes hyperframes@0.8.154 render . -o renders/hit-and-run.mp4 --video-bitrate 16M
 
-The play as shown: a runner on first, a right-handed batter. The runner breaks with the pitcher's first move; the
-batter's job is to swing and make contact. With a right-handed hitter the second baseman covers second on the runner's
-break, which opens a hole on the right side. Contact: a ground ball through that hole into right field, and the runner
-goes first to third. A miss: the catcher throws to second and the runner, who left on the pitch, is tagged out sliding in.
+Shots, captions and reveals are keyed to the words of the voiceover. The play as shown: a runner on first, a
+right-handed batter. The runner breaks with the pitcher's first move; the batter's job is to swing and make contact.
+With a right-handed hitter the second baseman covers second on the break, which opens a hole on the right side.
+Contact: a ground ball through the hole, and the runner goes first to third. A ground ball to short: the runner is
+already at second, so there's no force there, only the out at first. A miss: the catcher throws to second and the
+runner is tagged out sliding in.
 """
 import json, os, sys, wave
 import numpy as np
@@ -18,56 +21,70 @@ from mix import read, master, ANCHOR
 from audio import SR, make_bed
 
 P = json.load(open(os.path.join(HERE, "assets", "play.json")))
-FBP, GB = P["pitches"]["fb"], P["gb"]
+FBP, GB, DPP = P["pitches"]["fb"], P["gb"], P["dp"]
 FL, TC = FBP["flight"], FBP["t_contact"]
 T_MOVE = -1.3 - FL; T_BRK = T_MOVE + 0.15                       # mirrors assets/field.js
-T_FIELD = GB["t_field"]; T_RFTHROW = T_FIELD + 0.45; T_RFC = T_RFTHROW + 0.95
 T_CREL, T_CAT = 0.72, 0.72 + 1.1; T_TAG = T_CAT + 0.18; T_OUT = T_CAT + 0.6
-T_SAFE3 = 5.55
+T_SSF = TC + DPP["t_field"]; T_SSREL = T_SSF + 0.6; T_SSC = T_SSREL + 1.0
+T_SAFE3 = 5.55; T_THROUGH = TC + 1.27
+TM = json.load(open(os.path.join(HERE, "assets", "vo", "timing.json")))
+IDX = {x["id"]: k for k, x in enumerate(TM["lines"])}
+LN = lambda lid: TM["lines"][IDX[lid]]
+def W(lid, word, end=False, nth=0):
+    hits = [w for w in LN(lid)["words"] if w["w"].strip(".,!?:").lower() == word.lower()]
+    return hits[nth]["t1" if end else "t0"]
+D = TM["duration"]
 Y, CYAN, WHITE, HOT, MUTED = "#FFD84D", "#56D1FF", "#F4F6F8", "#FF6A3D", "#AEB8C6"
+S2, S3, S4, S5, S6, S7, S8, S9, S10 = (LN(k)["t0"] - 0.06 for k in ["setup", "catch", "why", "cover", "gap", "dp", "miss", "end", "name"])
 
 # ----------------------------------------------------------------- shots (video time v) and the play time each one shows
 SHOTS = []
 def shot(a, b, cam, vs, ts, speed="rt", **kw):
     SHOTS.append(dict(a=round(a, 4), b=round(b, 4), cam=cam, vs=[round(x, 4) for x in vs], ts=[round(x, 4) for x in ts], speed=speed, **kw))
 def rate(a, b, cam, t0, r=1.0, speed="rt", **kw): shot(a, b, cam, [a, b], [t0, t0 + (b - a) * r], speed, **kw)
-def vat(sh, t):                                                    # the video time a shot shows play time t
+def on(v, t, a, r=1.0): return t - (v - a) * r
+def vat(sh, t):
     vs, ts = sh["vs"], sh["ts"]
     for i in range(1, len(vs)):
         if ts[i] != ts[i - 1] and min(ts[i - 1], ts[i]) <= t <= max(ts[i - 1], ts[i]): return vs[i - 1] + (t - ts[i - 1]) / (ts[i] - ts[i - 1]) * (vs[i] - vs[i - 1])
-# hook: the runner is already going as the pitcher delivers; the batter starts his swing; freeze just before contact
-FRZ0 = 1.72
-rate(0.0, 1.05, "cfHigh", T_BRK - 0.25, play="hit", rings=["r"])
-shot(1.05, 2.3, "batSide", [1.05, FRZ0, 2.3], [-0.06 - (FRZ0 - 1.05), -0.06, -0.06], play="hit", zt=-0.2, freeze=FRZ0)
-# 1 the situation; 2 the delivery, the runner breaks with it; 3 contact, a ground ball
-E2, E3, E4 = 4.4, 6.4, 7.9
-rate(2.3, E2, "wideHigh", -3.6, play="hit", rings=["r"])
-rate(E2, E3, "runner", -2.0, play="hit", arR=[T_BRK, T_BRK + 0.7])
-rate(E3, E4, "batSide", -0.5, play="hit")
-VCT = vat(SHOTS[-1], TC)
-# 4 replay from above: the second baseman goes to cover second, the hole opens, the ball goes through it
-E5 = 11.0
-rate(E4, E5, "overhead", T_BRK - 0.2, speed="replay", play="hit", ar2=[T_BRK + 0.15, T_BRK + 1.5], gap=-0.35, trace=[TC, TC + 1.3], rings=["b2", "r"])
-OV = SHOTS[-1]; V2B, VGAP, VHOLE = vat(OV, T_BRK + 0.3), vat(OV, -0.35), vat(OV, TC + 1.25)
-# 5 through the hole into right field; the runner goes first to third
-E6, F1 = 13.0, 15.8
-rate(E5, E6, "track", 1.25, play="hit")
-rate(E6, F1, "third", 3.0, play="hit", ar3=[3.0, 3.7], rings=["r"])
+# hook: the runner is already going; the batter swings at the incoming pitch; freeze just before contact
+H2, FRZ0 = 1.15, 2.0
+rate(0.0, H2, "cfHigh", T_BRK - 0.3, play="hit", rings=["r"])
+shot(H2, S2, "batSide", [H2, FRZ0, S2], [-0.06 - (FRZ0 - H2), -0.06, -0.06], play="hit", zt=-0.2, freeze=FRZ0)
+# "With a runner on first, the runner takes off as soon as the pitcher delivers the ball"
+E2 = W("setup", "the", nth=0) - 0.06
+rate(S2, E2, "wideHigh", -3.6, play="hit", rings=["r"])
+E3 = 5.85
+rate(E2, E3, "runner", on(W("setup", "takes") + 0.1, T_BRK, E2), play="hit", arR=[T_BRK, T_BRK + 0.7])
+# "But here's the catch: the hitter is expected to swing and make contact" (behind the pitcher, then the swing at ½ speed)
+E4 = W("catch", "the", nth=1) - 0.06
+rate(E3, E4, "mound", -1.75, play="hit")
+rate(E4, S4, "batSide", on(W("catch", "contact"), TC, E4, 0.4), 0.4, "slow", play="hit")
+VCT = W("catch", "contact")
+# "Why?" ... "the second baseman or shortstop has to cover second base, opening up a hole" ... "through that gap" (from above, slow)
+OR = (T_THROUGH - TC) / (W("gap", "gap") - W("cover", "hole"))
+rate(S4, S6 + 1.32, "overhead", on(W("cover", "hole"), TC, S4, OR), OR, "replay", play="hit", ar2=[T_BRK + 0.15, T_BRK + 1.5], gap=-0.27, trace=[TC, TC + 1.3], rings=["b2", "r"])
+OV = SHOTS[-1]; V2B = W("cover", "cover"); VGAP = W("cover", "hole")
+# "the runner can advance an extra base"
+E6 = OV["b"]
+rate(E6, S7, "third", on(S7 - 0.05, T_SAFE3, E6), play="hit", ar3=[3.0, 3.7], rings=["r"])
 VSAFE = vat(SHOTS[-1], T_SAFE3)
-# 6 the same setup; he swings and misses; the catcher throws to second; the tag (½ speed)
-F2, F3, F4, SP = 17.9, 19.3, 21.3, 23.6
-rate(F1, F2, "cfHigh", -3.2, play="miss", rings=["r"])
-rate(F2, F3, "batSide", -0.6, play="miss")
-VMISS = vat(SHOTS[-1], TC)
-rate(F3, F4, "throwCam", 0.55, play="miss", rings=["r"])
-VCREL, VCAT = vat(SHOTS[-1], T_CREL), vat(SHOTS[-1], T_CAT)
-rate(F4, SP, "tag2", 1.5, 0.5, "slow", play="miss")
-VTAG, VOUT = vat(SHOTS[-1], T_TAG), vat(SHOTS[-1], T_OUT)
-# 7 side by side: contact (top) vs. a miss (bottom), the same pitch; freeze on the outcomes
-S0 = T_BRK - 0.3; SEND = SP + (T_SAFE3 + 0.15 - S0)
-D = round(SEND + 1.6, 2)
-shot(SP, D, "split", [SP, SEND, D], [S0, T_SAFE3 + 0.15, T_SAFE3 + 0.15], mode="split", play="hit", rings=["r"], freeze=round(SEND, 3))
-SPS = SHOTS[-1]; VS_CT, VS_CAT, VS_OUT, VS_SAFE = (vat(SPS, x) for x in (TC, T_CAT, T_OUT, T_SAFE3))
+# "It can also make a double play much harder because the runner is already moving toward second" (a ground ball to short)
+rate(S7, S8, "wideDP", on(W("dp", "already") - 0.35, T_SSF + 0.25, S7), play="dp", rings=["r", "ss"])
+DPS = SHOTS[-1]; VDPCT, VSSF, VSSREL, VSSC = (vat(DPS, x) for x in (TC, T_SSF, T_SSREL, T_SSC))
+# "But if the hitter swings and misses, the runner could be an easy target for the catcher"
+M2, M3 = W("miss", "the", nth=1) - 0.12, W("miss", "for") - 0.12
+rate(S8, M2, "batSide", on(W("miss", "misses"), TC, S8), play="miss")
+VMISS = W("miss", "misses")
+rate(M2, M3, "throwCam", on(M2, TC + 0.5, M2), play="miss", rings=["r"])
+VCREL = vat(SHOTS[-1], T_CREL)
+rate(M3, S9, "tag2", on(M3, T_CAT - 0.16, M3), play="miss")
+VCAT, VTAG, VOUT = (vat(SHOTS[-1], x) for x in (T_CAT, T_TAG, T_OUT))
+# "One pitch can turn a smart strategy into a costly mistake." / "That's the hit-and-run." Side by side, freezing on the outcomes
+VS1, VS2 = S9 + (T_SAFE3 + 0.05 - 4.2), S9 + (T_OUT + 0.1 - 1.55)
+shot(S9, D, "split", [S9, D], [0, 0], mode="split", play="hit", freeze=round(max(VS1, VS2), 3),
+     top=dict(play="hit", vs=[S9, VS1, D], ts=[4.2, T_SAFE3 + 0.05, T_SAFE3 + 0.05], rings=["r"]),
+     bot=dict(play="miss", vs=[S9, VS2, D], ts=[1.55, T_OUT + 0.1, T_OUT + 0.1], rings=["r"]))
 for x, y in zip(SHOTS, SHOTS[1:]): assert abs(x["b"] - y["a"]) < 1e-3 and x["b"] > x["a"], (x, y)
 CUTS = [x["a"] for x in SHOTS[1:]]
 
@@ -77,7 +94,7 @@ c.clip("fieldl", 0, D, '<canvas id="field-gl" width="1080" height="1920" data-la
 c.clip("shade", 0, D, '<div class="shade-top"></div><div class="shade-bot"></div>', cls="layer", style="z-index:2")
 c.clip("spdc", 0, D, '<div class="spd" id="spd"></div>', cls="layer", style="z-index:30")
 c.clip("flash", 0, D, '<div class="flash" id="flash"></div>', cls="layer", style="z-index:40")
-for f in [FRZ0, 2.3, E4, F1, SP, SEND]:
+for f in [FRZ0, S2, S4, S7, S8, S9]:
     c.set("#flash", '{"opacity":0.6}', f); c.to("#flash", o(opacity=0, duration=0.14, ease="power2.out"), f + 0.001)
 
 def pop(sel, t, dy=24):
@@ -98,59 +115,74 @@ def words(wid, t0, t1, parts, top=300, cls="hk"):
             c.ft(f"#{wid}{i}_{j}", o(opacity=0, scale=1.35, filter="blur(10px)"), o(opacity=1, scale=1, filter="blur(0px)", duration=0.16, ease="power3.out"), ts_ - 0.03)
 seq = lambda txt, t0, dt=0.07: [(w, t0 + dt * i) for i, w in enumerate(txt.split())]
 
-# ----------------------------------------------------------------- hook
-words("hook", 0.0, 2.28, [(seq("Why is the runner", 0.05), ""), (seq("already running?", 0.55), "acc")], 300)
+# ----------------------------------------------------------------- titles: the hook question, "Why?", the name at the end (captions everywhere else)
+words("hook", 0.0, S2 - 0.02, [(seq("Why is the runner", 0.05), ""), (seq("already running?", 0.55), "acc")], 300)
 c.ft("#hookx", o(scale=1.0, transformOrigin="0% 0%"), o(scale=1.06, duration=0.14, ease="power3.out"), FRZ0)
-pinl("ph0", 0.3, 1.03, "Runner", "runner", "yl")
-# ----------------------------------------------------------------- 1-3
-words("ttl", 2.32, E2 - 0.02, [(seq("The", 2.34), ""), (seq("hit-and-run", 2.44), "acc")], 300)
-pinl("pr1", 2.6, E2 - 0.02, "Runner", "runner", "yl")
-pinl("pb1", 2.8, E2 - 0.02, "Batter", "batter")
-tag("tgo", vat(SHOTS[3], T_BRK) + 0.05, E3 - 0.02, "yl", "He runs <b class='wh'>with the pitch</b>")
-tag("tsw", E3 + 0.05, E4 - 0.02, "wh", "The batter’s job: <b class='yl'>swing and make contact</b>")
-# ----------------------------------------------------------------- 4 the hole
-pinl("p2b", V2B, E5 - 0.02, "2B covers second", "b2", "")
-pinl("pgap", VGAP, E5 - 0.02, "The hole", "gap", "yl")
-tag("tth", VHOLE - 0.4, E5 - 0.02, "wh", "Ground ball <b class='yl'>right where he was</b>")
-# ----------------------------------------------------------------- 5 first to third
-tag("trf", E5 + 0.05, E6 - 0.02, "wh", "Through the right side")
-pinl("pr3", E6 + 0.05, F1 - 0.02, "Runner", "runner", "yl")
-punch("p13", VSAFE - 1.1, F1 - 0.02, "First<br><em>to third.</em>", 1360)
-# ----------------------------------------------------------------- 6 the miss
-words("ttl2", F1 + 0.02, F2 - 0.02, [(seq("Same play.", F1 + 0.04), ""), (seq("He misses.", F1 + 0.45), "acc")], 300)
-tag("tmi", VMISS + 0.05, F3 - 0.02, "hot", "Swing and miss")
-tag("tct", VCREL - 0.1, F4 - 0.02, "wh", "The catcher throws to second")
-c.clip("out", VOUT - 0.05, SP - 0.02, '<div class="stamp" id="outx">Out</div>', cls="layer", style="z-index:15")
-c.ft("#outx", o(opacity=0, scale=1.8, rotation=-8), o(opacity=1, scale=1, rotation=-8, duration=0.18, ease="back.out(2)"), VOUT - 0.05)
-tag("tex", VOUT + 0.15, SP - 0.02, "wh", "No contact: <b class='hot'>the runner is exposed</b>")
-# ----------------------------------------------------------------- 7 side by side
-c.clip("splt", SP, D, f"""<div class="seam"></div>
+pinl("ph0", 0.3, H2 - 0.02, "Runner", "runner", "yl")
+words("why", W("why", "why") - 0.03, S5 - 0.02, [([("Why?", W("why", "why"))], "acc")], 300, "hk big")
+
+# ----------------------------------------------------------------- captions: the voiceover, word by word
+CAPS = [("setup", 0, 4, {2: "acc", 4: "acc"}), ("setup", 5, 8, {7: "acc", 8: "acc"}), ("setup", 9, 16, {14: "acc"}),
+        ("catch", 0, 3, {3: "acc"}), ("catch", 4, 7, {7: "acc"}), ("catch", 8, 12, {9: "acc", 12: "acc"}),
+        ("cover", 0, 5, {2: "acc", 3: "acc", 5: "acc"}), ("cover", 6, 10, {8: "acc"}), ("cover", 11, 17, {14: "acc"}),
+        ("gap", 0, 8, {8: "acc"}), ("gap", 9, 15, {12: "acc", 14: "acc", 15: "acc"}),
+        ("dp", 0, 8, {5: "acc", 6: "acc", 8: "acc"}), ("dp", 9, 16, {13: "acc", 14: "acc"}),
+        ("miss", 0, 6, {4: "acc", 6: "acc"}), ("miss", 7, 16, {12: "acc", 13: "acc", 16: "acc"}),
+        ("end", 0, 6, {1: "acc", 5: "acc", 6: "acc"}), ("end", 7, 10, {9: "acc", 10: "acc"})]
+for k, (lid, i0, i1, acc) in enumerate(CAPS):
+    ln = LN(lid); wd = ln["words"]
+    start = wd[i0]["t0"] - 0.06
+    if k + 1 < len(CAPS) and CAPS[k + 1][0] == lid: end = wd[CAPS[k + 1][1]]["t0"] - 0.06
+    else: end = min(ln["t1"] + 0.35, TM["lines"][IDX[lid] + 1]["t0"] - 0.1)
+    cid = f"cap{k}"; sp = []
+    for n in range(i0, i1 + 1):
+        w = wd[n]["w"]; w = w.rstrip(",:") if n == i1 else w
+        sp.append(f'<span class="cw{(" " + acc[n]) if n in acc else ""}" id="{cid}w{n - i0}">{esc(w)}</span>')
+    c.clip(cid, start, end, f'<div class="cap" style="top:300px"><span class="cl">{" ".join(sp)}</span></div>', cls="layer", style="z-index:20")
+    for n in range(i0, i1 + 1): c.ft(f"#{cid}w{n - i0}", o(opacity=0, y=34, filter="blur(10px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.15, ease="power3.out"), wd[n]["t0"] - 0.04)
+
+# ----------------------------------------------------------------- the play
+pinl("pr1", W("setup", "runner") - 0.03, E2 - 0.02, "Runner", "runner", "yl")
+pinl("pb1", W("setup", "first") - 0.03, E2 - 0.02, "Batter", "batter")
+tag("tgo", W("setup", "takes") + 0.1, E3 - 0.02, "yl", "He runs <b class='wh'>with the pitch</b>")
+tag("tsw", E4 + 0.05, S4 - 0.02, "wh", "His job: <b class='yl'>swing and make contact</b>")
+pinl("p2b", V2B - 0.03, E6 - 0.02, "2B covers second", "b2", "")
+pinl("pgap", VGAP - 0.03, E6 - 0.02, "The hole", "gap", "yl")
+pinl("pr3", E6 + 0.05, S7 - 0.02, "Runner", "runner", "yl")
+punch("p13", W("gap", "extra") - 0.05, S7 - 0.02, "First<br><em>to third.</em>", 1360)
+tag("tns", vat(DPS, T_SSF + 0.2), S8 - 0.02, "wh", "He’s already at second: <b class='yl'>no double play</b>")
+c.clip("o1", VSSC - 0.03, S8 - 0.02, '<div class="rs2 hot" id="o1x" style="top:1420px">Out at 1st only</div>', cls="layer", style="z-index:13"); pop("#o1x", VSSC - 0.03, 10)
+tag("tmi", VMISS + 0.04, M2 - 0.02, "hot", "Swing and miss")
+c.clip("out", VTAG + 0.15, S9 - 0.02, '<div class="stamp" id="outx">Out</div>', cls="layer", style="z-index:15")
+c.ft("#outx", o(opacity=0, scale=1.8, rotation=-8), o(opacity=1, scale=1, rotation=-8, duration=0.18, ease="back.out(2)"), VTAG + 0.15)
+# the comparison
+c.clip("splt", S9, D, f"""<div class="seam"></div>
   <div class="half t"><span class="hlab yl" id="hl1">Contact</span></div>
   <div class="half b"><span class="hlab hot" id="hl2">Swing and miss</span></div>""", cls="layer", style="z-index:11")
-pop("#hl1", SP + 0.05, 10); pop("#hl2", SP + 0.15, 10)
-c.clip("rs1", VS_SAFE - 0.05, D, '<div class="rs2 yl" id="rs1x" style="top:210px">1st to 3rd ✓</div>', cls="layer", style="z-index:13"); pop("#rs1x", VS_SAFE - 0.05, 10)
-c.clip("rs2", VS_OUT, D, '<div class="rs2 hot" id="rs2x" style="top:1780px">Out at 2nd</div>', cls="layer", style="z-index:13"); pop("#rs2x", VS_OUT, 10)
-c.clip("end", SEND + 0.05, D, '<div class="endq" id="endx">One swing<br><em>decides it.</em></div>', cls="layer", style="z-index:22")
-c.ft("#endx", o(opacity=0, scale=1.2, filter="blur(10px)"), o(opacity=1, scale=1, filter="blur(0px)", duration=0.22, ease="power3.out"), SEND + 0.05)
+pop("#hl1", S9 + 0.05, 10); pop("#hl2", S9 + 0.15, 10)
+c.clip("rs1", W("end", "smart") - 0.05, D, '<div class="rs2 yl" id="rs1x" style="top:820px">1st to 3rd ✓</div>', cls="layer", style="z-index:13"); pop("#rs1x", W("end", "smart") - 0.05, 10)
+c.clip("rs2", W("end", "costly") - 0.05, D, '<div class="rs2 hot" id="rs2x" style="top:1780px">Out at 2nd</div>', cls="layer", style="z-index:13"); pop("#rs2x", W("end", "costly") - 0.05, 10)
+c.clip("endb", S10, D, '<div class="endq" id="endx"><span id="ew0">That’s the</span><br><em id="ew1">hit-and-run.</em></div>', cls="layer", style="z-index:22")
+c.ft("#endx", o(opacity=0), o(opacity=1, duration=0.15), S10)
+c.ft("#ew0", o(opacity=0, scale=1.3, filter="blur(10px)"), o(opacity=1, scale=1, filter="blur(0px)", duration=0.16, ease="power3.out"), W("name", "that's") - 0.03)
+c.ft("#ew1", o(opacity=0, scale=1.3, filter="blur(10px)"), o(opacity=1, scale=1, filter="blur(0px)", duration=0.16, ease="power3.out"), W("name", "hit-and-run") - 0.03)
 
 # ----------------------------------------------------------------- sound
 def cue(n, t, db=0.0):
     if t is not None and 0 <= t < D: c.cue(n, t, db)
 for t_ in CUTS: cue("whoosh", t_, -10)
 cue("impact", 0.0, -8); cue("riser-s", FRZ0, -4); cue("impact", FRZ0, -1); cue("tick", FRZ0, -2)
-cue("impact", 2.34, -5); cue("impact", F1 + 0.04, -5)
-for sh in SHOTS[:-1]:                                              # the pitch on its way in each shot that shows it
+cue("impact", W("why", "why"), -3)
+for sh in SHOTS[:-1]:
     v = vat(sh, -FL + 0.08)
     if v is not None and v > sh["a"] + 0.05: cue("whoosh", v, -9 if sh["speed"] == "rt" else -13)
-cue("glove", VMISS + 0.04, -1); cue("whoosh", VCREL, -6); cue("glove", VCAT, -2)
-cue("glove", vat(SHOTS[-2], T_CAT), -6); cue("popup", VTAG, -7); cue("impact", VOUT, -2)
-cue("glove", vat(SHOTS[5], T_FIELD), -6)
-cue("popup", VGAP, -6); cue("popup", V2B, -8)
-cue("impact", VSAFE - 1.1, -6)
-cue("glove", VS_CAT, -7); cue("impact", VS_OUT, -6); cue("popup", VS_SAFE, -5)
-cue("riser-m", SEND, -6); cue("impact", SEND + 0.05, -1)
-CRACKS = [(VCT, 0.9), (vat(SHOTS[0], TC), 0.0), (vat(OV, TC), 0.35), (VS_CT, 0.45)]
-SLIDES = [(vat(SHOTS[-3], T_CAT - 0.12), 0.6, 1.0), (vat(SHOTS[-2], T_CAT - 0.12), 0.7, 0.5)]
+cue("popup", V2B, -8); cue("popup", VGAP, -6); cue("impact", W("gap", "extra") - 0.05, -6)
+cue("glove", VSSF, -4); cue("glove", VSSC, -2); cue("popup", VSSC, -7)
+cue("glove", VMISS + 0.04, -1); cue("whoosh", VCREL, -6); cue("glove", VCAT, -2); cue("popup", VTAG, -7); cue("impact", VTAG + 0.15, -2)
+cue("popup", W("end", "smart") - 0.05, -6); cue("impact", W("end", "costly") - 0.05, -5)
+cue("riser-m", W("name", "that's"), -6); cue("impact", W("name", "hit-and-run") - 0.03, -2)
+CRACKS = [(VCT, 0.9), (vat(OV, TC), 0.35), (VDPCT, 0.7)]
+SLIDES = [(vat(SHOTS[-2], T_CAT - 0.12), 0.7, 1.0)]
 LEVEL = {"impact": -3.0, "hit": -5.0, "whoosh": -6.0, "glove": -1.0, "tick": -6.0, "popup": -8.0, "riser-m": -7.0, "riser-s": -7.0, "tap": -3.0}
 
 def crack(rng):
@@ -188,23 +220,28 @@ def mixdown():
         if j > i: fx[i:j] += x[: j - i] * 10 ** ((LEVEL.get(name, -8.0) + gdb) / 20)
     rng = np.random.default_rng(5); cr = crack(rng)
     for vt, g in CRACKS:
-        if vt is None or g <= 0: continue
         i = int(vt * SR); j = min(n, i + len(cr)); fx[i:j] += cr[: j - i] * g
     for vt, g, sl in SLIDES:
         x = slide(rng, 1 / sl if sl < 1 else 1.0); i = int(vt * SR); j = min(n, i + len(x)); fx[i:j] += x[: j - i] * g * 10 ** (-10 / 20)
     crowd = read(os.path.join(HERE, "assets", "sfx", "crowd.wav")); crowd = np.concatenate([crowd] * (n // len(crowd) + 1))[:n]
-    tt = np.arange(n) / SR                                               # the crowd: a murmur; it rises as the ball goes through and the runner goes to third
-    lift = np.clip((tt - VCT) / 0.6, 0, 1) * np.clip((F1 - tt) / 0.8, 0, 1)
-    fx += crowd * (10 ** (-30 / 20) + lift[:, None] * 10 ** (-20 / 20))
-    # the music bed (no narration, so it sits higher); it lands its chord on "One swing decides it"
-    bedp = os.path.join(HERE, "assets", "bed.wav"); make_bed(bedp, D, SEND + 0.05, style="drive", seed=51)
+    fx += crowd * 10 ** (-30 / 20)
+    # the music bed: made for this video (lands its chord on the closing question), ducked under the voice
+    bedp = os.path.join(HERE, "assets", "bed.wav"); make_bed(bedp, D, W("name", "that's"), style="drive", seed=51)
     bed = read(bedp)[:n]; bed = np.pad(bed, ((0, n - len(bed)), (0, 0)))
-    full = fx + bed * 10 ** (-9 / 20)
+    vo = read(os.path.join(HERE, "assets", "vo", "vo.wav"))[:n]; vo = np.pad(vo, ((0, n - len(vo)), (0, 0)))
+    env = np.convolve(np.abs(vo).mean(1), np.ones(int(0.12 * SR)) / int(0.12 * SR), "same")
+    duck = 10 ** (-7 * np.clip(env / 0.05, 0, 1) / 20)                         # up to 7 dB under the voice
+    duck = np.convolve(duck, np.ones(int(0.08 * SR)) / int(0.08 * SR), "same")
+    music = bed * duck[:, None] * 10 ** (-17 / 20)
+    full = (fx + music) * 10 ** (-6 / 20) + vo
     def wav(path, x):
         w = wave.open(path, "wb"); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
         w.writeframes((np.clip(x * 0.5, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
-    pre = os.path.join(HERE, ".pre.wav"); wav(pre, full)
-    m = master(pre, os.path.join(HERE, "assets", "mix.wav")); os.remove(pre)
+    pre, pfx = os.path.join(HERE, ".pre.wav"), os.path.join(HERE, ".fx.wav")
+    wav(pre, full); wav(pfx, (fx + bed * 10 ** (-17 / 20)) * 10 ** (-6 / 20))
+    m = master(pre, os.path.join(HERE, "assets", "mix.wav"))
+    master(pre, os.path.join(HERE, "assets", "mix-novo.wav"), fx_path=pfx)       # music + effects at the same level, without the voice
+    os.remove(pre); os.remove(pfx)
     return m
 
 # ----------------------------------------------------------------- CSS
@@ -308,6 +345,10 @@ CSS += f"""
 .stamp {{ position:absolute; left:0; right:0; top:620px; text-align:center; {BC} font-size:260px; line-height:1; color:{HOT}; text-shadow:0 10px 40px rgba(0,0,0,.85); }}
 .endq {{ position:absolute; left:0; right:0; top:830px; padding:26px 0 30px; background:rgba(5,8,13,.9); text-align:center; {BC} font-size:128px; line-height:.95; color:#fff; text-shadow:0 8px 34px rgba(0,0,0,.9); }}
 .endq em {{ font-style:normal; color:{Y}; }}
+"""
+
+CSS += f"""
+.hk.big {{ font-size:220px; }}
 """
 
 HEAD = '''<script type="importmap">{"imports":{"three":"./assets/vendor/three.module.min.js"}}</script>'''

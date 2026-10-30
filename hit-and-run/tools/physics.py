@@ -114,4 +114,13 @@ if __name__ == "__main__":
     r = lambda x, z: float(np.hypot(x, z))
     k2b = int(np.argmax(np.hypot(P2[:, 0], P2[:, 2]) >= 116))
     print(f"ground ball: {len(B)} hops; passes 116 ft out at x {P2[k2b, 0]:.1f}, z {P2[k2b, 2]:.1f} (2B's spot was 26, -116) at {T2[k2b]:.2f} s; RF fields it at {t_f:.2f} s at ({pf[0]:.0f}, {pf[2]:.0f}), {r(pf[0], pf[2]):.0f} ft out")
+    # a ground ball into the hole at short: the shortstop ranges for it; the runner, going on the pitch, is already at
+    # second when he has it, so there is no force there, only the out at first
+    phi, th = np.radians(-26), np.radians(-7)
+    dv = np.array([np.sin(phi) * np.cos(th), np.sin(th), -np.cos(phi) * np.cos(th)])
+    T3, P3, B3 = grounder(pc, dv * 80 * MPH / FT)
+    SS0 = np.array([-27.0, -114.0]); SSV = 22.0
+    tj = next(i for i, t in enumerate(T3) if t > 0.4 and np.hypot(P3[i, 0] - SS0[0], P3[i, 2] - SS0[1]) / SSV + 0.25 <= t and P3[i, 1] < 2.5)
+    out["dp"] = dict(path=samples(T3[: tj + 1], P3[: tj + 1], 0.0), t_field=round(float(T3[tj]), 3), field=P3[tj].round(2).tolist())
+    print(f"ground ball to short: the shortstop fields it at {T3[tj]:.2f} s at ({P3[tj, 0]:.0f}, {P3[tj, 2]:.0f}), {np.hypot(P3[tj, 0] - SS0[0], P3[tj, 2] - SS0[1]):.0f} ft from where he stood")
     json.dump(out, open(os.path.join(HERE, "..", "assets", "play.json"), "w"))

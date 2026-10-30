@@ -1,6 +1,6 @@
 # "The hit-and-run"
 
-A 32.8 s vertical (1080×1920, 30 fps) 3D baseball breakdown for Baseball Decoded: why the runner is already running, and what happens when the batter makes contact versus when he misses.
+A 29.1 s vertical (1080×1920, 30 fps) 3D baseball breakdown for Baseball Decoded: why the runner is already running, and what happens when the batter makes contact versus when he misses.
 
 - **Framework:** the same three.js field, players, dugouts, seats and HyperFrames workflow as `infield-fly`, `tommy-john` and `intentional-walk`.
 - **New:**
@@ -9,16 +9,21 @@ A 32.8 s vertical (1080×1920, 30 fps) 3D baseball breakdown for Baseball Decode
   - the catcher's pop-up throw to second, and the runner's slide with the tag
   - a 2B umpire with the out call
   - flat arrows on the ground and a highlighted hole
-- **Audio:** no narration; the brief asked for the play to read without it. Short on-screen text carries it. A `make_bed` music bed (style "drive") lands its chord on the closing line. Effects:
-  - bat crack and pitch whooshes
+- **Voiceover:** your script, voiced with HyperFrames' local Kokoro TTS (voice `am_michael`, 1.5×); the text is in `transcript.txt`. Shots, word-by-word captions, pins and arrows are keyed to its words.
+  - Big titles replace captions for the hook question (**WHY IS THE RUNNER ALREADY RUNNING?**), "Why?" and "That's the hit-and-run".
+  - In the slowed overhead replay, the second baseman leaves on "baseman", contact lands on "hole" and the ball goes through the gap on "gap".
+- **Music:** a `make_bed` bed (style "drive"), ducked up to 7 dB under the voice.
+- **Effects:**
+  - bat cracks and pitch whooshes
   - glove pops and a slide scrape
   - hits on the titles, the freeze and the out
-  - a crowd lift as the ball goes through
-- **Mix:** mastered to about −14 LUFS.
+- **Mixes:** mastered to about −14 LUFS. `assets/mix-novo.wav` is the music and effects without the voice.
 
 ```bash
-python3 tools/physics.py        # the pitch, the ground ball, the right fielder -> assets/play.json
-python3 build.py                # index.html + assets/mix.wav
+python3 tools/physics.py                                       # the pitch, the ground balls, the fielders -> assets/play.json
+export HYPERFRAMES_PYTHON=<python with kokoro-onnx, soundfile, onnx>
+$HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # voiceover + per-word timing
+python3 build.py                                               # index.html + assets/mix.wav (+ mix-novo.wav)
 npx --yes hyperframes@0.8.154 render . -o renders/hit-and-run.mp4 --video-bitrate 16M
 ```
 
@@ -33,20 +38,24 @@ npx --yes hyperframes@0.8.154 render . -o renders/hit-and-run.mp4 --video-bitrat
   - It passes about 116 ft out through the spot the second baseman left, 30 ft vs. his original 26 ft over.
   - The right fielder charges it 221 ft out and throws it in to second.
   - The runner, who had a head start, goes first to third.
+- **The double play line (a ground ball to short):**
+  - 80 mph into the hole; the shortstop ranges 25 ft to his left and has it 1.39 s after contact.
+  - By then the runner, who left on the pitch, is about 8 ft from second and into the bag before a throw could get there.
+  - So there's no force at second: the throw goes to first for the only out.
 - **A miss:**
   - The catcher receives the pitch, pops up and throws to second: the throw leaves at 0.72 s and arrives at 1.82 s.
   - The second baseman covering takes it and tags the sliding runner just before he reaches the bag (the out is by about 0.2 s, not exaggerated).
   - The 2B umpire signals out.
 
-## Shots
+## Shots (timed to the voiceover)
 
-| Time | Shot | On screen |
-|---|---|---|
-| 0–2.3 s | Behind the runner as he takes off; in front of the batter as he swings at the incoming pitch, freeze just before contact, push-in | **WHY IS THE RUNNER ALREADY RUNNING?**; runner pin |
-| 2.3–4.4 s | High behind the plate: pitcher, batter, runner on first | **THE HIT-AND-RUN**; runner and batter pins |
-| 4.4–6.4 s | Beyond first: the runner breaks with the delivery; an arrow on his path | "He runs with the pitch" |
-| 6.4–7.9 s | In front of the batter: contact, a ground ball | "The batter's job: swing and make contact" |
-| 7.9–11.0 s | Replay from above: 2B goes to cover (arrow); the hole lights up; the ball's track goes right through it | "2B covers second", "The hole", "Ground ball right where he was" |
-| 11.0–15.8 s | The ball rolls into right field; beyond third, the runner rounds second and reaches third | "Through the right side"; **FIRST TO THIRD.** |
-| 15.8–23.6 s | The same setup: the runner goes, the batter swings and misses; the catcher's throw; the tag at ½ speed; the out | **SAME PLAY. HE MISSES.**; "Swing and miss"; "The catcher throws to second"; **OUT**; "No contact: the runner is exposed" |
-| 23.6–32.8 s | Split screen, the same pitch: contact (top) vs. a miss (bottom), freezing on the outcomes | CONTACT / SWING AND MISS; "1st to 3rd ✓" / "Out at 2nd"; **ONE SWING DECIDES IT.** |
+| Time | Line | Shot | On screen |
+|---|---|---|---|
+| 0–2.9 s | "A hit-and-run is one of baseball's biggest calculated risks." | Behind the runner as he takes off; the batter swings at the incoming pitch, freeze just before contact | **WHY IS THE RUNNER ALREADY RUNNING?** |
+| 2.9–6.2 s | "With a runner on first, the runner takes off…" | High behind the plate (runner, batter pins); beyond first: he breaks on "takes off", with an arrow on his path | "He runs with the pitch" |
+| 6.2–9.1 s | "But here's the catch: the hitter is expected to swing and make contact." | Behind the pitcher; then the swing at ½ speed, contact on "contact" | "His job: swing and make contact" |
+| 9.1–15.2 s | "Why?" / "…cover second base, opening up a hole…" / "…through that gap" | Slowed replay from above: 2B goes to cover (arrow), the hole lights up, the ball's track goes through it | **WHY?**; "2B covers second", "The hole" |
+| 15.2–17.0 s | "…the runner can advance an extra base." | Beyond third: he rounds second and reaches third | **FIRST TO THIRD.** |
+| 17.0–20.7 s | "It can also make a double play much harder…" | Above first base: a grounder to short; the runner is already at second; the throw goes to first | "He's already at second: no double play"; "Out at 1st only" |
+| 20.7–24.3 s | "But if the hitter swings and misses…easy target for the catcher." | The miss; the catcher's throw; the tag at second | "Swing and miss"; **OUT** |
+| 24.3–29.1 s | "One pitch can turn a smart strategy into a costly mistake." / "That's the hit-and-run." | Split, freezing on the outcomes: contact (top) vs. a miss (bottom) | CONTACT / SWING AND MISS; "1st to 3rd ✓" on "smart", "Out at 2nd" on "costly"; **THAT'S THE HIT-AND-RUN.** |

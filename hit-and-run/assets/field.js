@@ -365,7 +365,7 @@ const PLATE_C = v3(0, 0, -0.7);
 const headTop = (P) => wpos(P.neck).add(v3(0, 1.4, 0));
 
 // ------------------------------------------------------------------ the model (tools/physics.py)
-const FB = PLAY.pitches.fb, GB = PLAY.gb, FL = FB.flight, TC = FB.t_contact;
+const FB = PLAY.pitches.fb, GB = PLAY.gb, DP = PLAY.dp, FL = FB.flight, TC = FB.t_contact;
 function pathAt(path, t) {
   const u = (t - path.t0) * path.hz, n = path.p.length - 1;
   if (u <= 0) return V(path.p[0]);
@@ -395,6 +395,8 @@ const T_FIELD = GB.t_field, RFP = V(GB.field).setY(0);
 const T_RFTHROW = T_FIELD + 0.45, T_RF = 0.95, T_RFC = T_RFTHROW + T_RF;   // the right fielder throws it in to second
 const T_CREL = 0.72, T_CT = 1.1, T_CAT = T_CREL + T_CT;                    // the catcher: receives at 0, throws at 0.72, it's at second at 1.82
 const L_MISS = pathLen(RUN_MISS);
+const T_SSF = TC + DP.t_field, SSP = V(DP.field).setY(0), T_SSREL = T_SSF + 0.6, T_SST = 1.0, T_SSC = T_SSREL + T_SST;   // the grounder to short: fielded, a look at second, the throw to first
+const B1S = v3(62.6, 0, -64.6);
 
 // ------------------------------------------------------------------ poses
 const C_SET = { ...CROUCH, shL: [62, 18, 0], elL: 40, shR: [20, 10, 0], elR: 50, nod: -18 };
@@ -419,6 +421,7 @@ const F_FIELD = { drop: -1.0, lean: 58, nod: -25, hipL: [62, 12], hipR: [62, 12]
 const F_BACK = { ...STAND, twist: -30, shR: [-30, 80, 0], elR: 95, shL: [70, 20, 0], elL: 30, hipL: [30, 6], knL: 20 };
 const F_REL = { ...STAND, lean: 22, twist: 30, shR: [160, 20, 0], elR: 15, shL: [30, 34, 0], elL: 70, hipL: [34, 4], knL: 24, hipR: [-10, 6], knR: 30 };
 const B2_RECV = { ...READY, drop: -0.3, lean: 16, shL: [86, -6, 0], elL: 10, shR: [50, 0, 0], elR: 40 };
+const B1_STRETCH = { ...READY, drop: -0.7, lean: 34, shL: [92, -6, 0], elL: 6, hipL: [56, 6], knL: 44, hipR: [-8, 6], knR: 8, shR: [40, 10, 0], elR: 40 };
 const B2_TAG = { drop: -1.1, lean: 48, nod: -26, hipL: [60, 14], hipR: [60, 14], knL: 72, knR: 72, shL: [52, -20, 0], elL: 8, shR: [40, 0, 0], elR: 40 };   // glove down on the sliding runner
 
 // ------------------------------------------------------------------ the ball, arrows, the hole
@@ -461,14 +464,14 @@ const GAP = (() => {                                                          //
 const GAPC = v3(Math.sin(THREE.MathUtils.degToRad(20)) * 121, 0, -Math.cos(THREE.MathUtils.degToRad(20)) * 121);
 const TRACE = (() => { const pts = []; for (let t = 0; t <= GB.t_field; t += 0.05) pts.push(pathAt(GB.path, t).setY(0.25)); const g = groundArrow(pts, 0xffffff, 0.5); g.userData.m.opacity = 0.75; return g; })();
 const ringMat = (c) => new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.9, depthWrite: false, side: THREE.DoubleSide });
-const RINGS = { r: [0xffd84d, R], b2: [0xff6a3d, B2F] };
+const RINGS = { r: [0xffd84d, R], b2: [0xff6a3d, B2F], ss: [0xff6a3d, SSF] };
 for (const k of Object.keys(RINGS)) { const m = new THREE.Mesh(new THREE.RingGeometry(1.8, 2.4, 36), ringMat(RINGS[k][0])); m.rotation.x = -Math.PI / 2; m.renderOrder = 7; m.visible = false; scene.add(m); RINGS[k].push(m); }
 
 // ------------------------------------------------------------------ one frame
 // s.play: "hit" (he swings, a ground ball through the hole, the runner goes first to third) or "miss" (he swings and
 // misses; the catcher throws to second; the runner is tagged out). t = 0: the pitch reaches the plate.
 function setScene(t, s) {
-  const hit = s.play === "hit";
+  const hit = s.play === "hit", dp = s.play === "dp", contact = hit || dp;
   // defense
   for (const [n, p] of Object.entries(HD)) { const [x, z] = homeD[n]; p.root.position.set(x, 0, z); p.root.rotation.y = Math.atan2(-x, -z); applyPose(p, t > T_MOVE + 0.9 ? READY : STAND); }
   B1F.root.rotation.y = yawTo(B1F.root.position, MOUND); applyPose(B1F, t < T_MOVE + 0.6 ? { ...READY, drop: -0.3, lean: 20, shL: [40, 30, 0], elL: 40 } : READY);   // holding the runner on
@@ -481,10 +484,16 @@ function setScene(t, s) {
     let q = u < 1 ? runPose(((t - T_BRK) * 1.9) % 1, 0.85) : B2_RECV;
     if (!hit && t > T_CAT - 0.1) q = keyed([[T_CAT - 0.1, B2_RECV], [T_CAT + 0.18, B2_TAG], [T_CAT + 0.75, B2_TAG], [T_CAT + 1.2, { ...STAND, shL: [100, 10, 0], elL: 20 }]], t);
     if (hit && t > T_RFC - 0.3) q = B2_RECV;
+    if (dp && t > T_SSREL + 0.3) q = { ...STAND, look: -30, shL: [20, 10, 0], elL: 40 };
     applyPose(B2F, q);
   }
   // the shortstop: backs up second
-  if (t > T_BRK + 0.4) { const p = v3(homeD.ss[0], 0, homeD.ss[1]).lerp(v3(-6, 0, -138), smooth((t - T_BRK - 0.4) / 1.6)); SSF.root.position.copy(p); SSF.root.rotation.y = yawTo(p, B2); applyPose(SSF, t < T_BRK + 2 ? runPose(((t - T_BRK) * 1.8) % 1, 0.7) : READY); }
+  if (dp && t > TC + 0.25) {                                       // the grounder to short: he ranges for it, looks at second (the runner is there), throws to first
+    const st = v3(homeD.ss[0], 0, homeD.ss[1]), u = clamp((t - TC - 0.25) / (T_SSF - TC - 0.25), 0, 1), p = st.clone().lerp(SSP.clone().add(v3(-1, 0, -1.2)), smooth(u));
+    SSF.root.position.copy(p); SSF.root.rotation.y = t < T_SSF ? yawTo(p, SSP) : t < T_SSF + 0.35 ? yawTo(p, B2) : yawTo(p, B1S);
+    applyPose(SSF, t < T_SSF - 0.25 ? runPose(((t - TC) * 1.9) % 1, 0.85) : keyed([[T_SSF - 0.25, F_FIELD], [T_SSF + 0.2, { ...READY, look: 0 }], [T_SSF + 0.35, F_BACK], [T_SSREL, F_REL], [T_SSREL + 0.5, STAND]], t));
+  } else if (!dp && t > T_BRK + 0.4) { const p = v3(homeD.ss[0], 0, homeD.ss[1]).lerp(v3(-6, 0, -138), smooth((t - T_BRK - 0.4) / 1.6)); SSF.root.position.copy(p); SSF.root.rotation.y = yawTo(p, B2); applyPose(SSF, t < T_BRK + 2 ? runPose(((t - T_BRK) * 1.8) % 1, 0.7) : READY); }
+  if (dp && t > TC + 0.3) { B1F.root.position.copy(v3(56, 0, -72).lerp(B1S, smooth((t - TC - 0.3) / 0.9))); B1F.root.rotation.y = yawTo(B1F.root.position, SSP); applyPose(B1F, t > T_SSREL - 0.2 ? B1_STRETCH : READY); }
   // the right fielder: charges the ground ball, fields it, throws it in to second
   if (hit && t > TC + 0.3) {
     const st = v3(homeD.rf[0], 0, homeD.rf[1]), u = clamp((t - TC - 0.3) / (T_FIELD - TC - 0.3), 0, 1), p = st.clone().lerp(RFP.clone().add(v3(1.2, 0, -1.5)), u);
@@ -493,26 +502,26 @@ function setScene(t, s) {
     HD.cf.root.position.copy(v3(0, 0, -312).lerp(v3(40, 0, -232), smooth((t - 0.4) / 3))); HD.cf.root.rotation.y = yawTo(HD.cf.root.position, RFP); applyPose(HD.cf, t < 3.2 ? runPose((t * 1.5) % 1, 0.7) : READY);
   }
   // umpires
-  ump.root.position.set(0.5, 0, 6.0); ump.root.rotation.y = Math.PI; applyPose(ump, t < 0.4 || !hit ? U_SET : { ...STAND, look: 20 });
-  const u2p = v3(-14, 0, -110).lerp(v3(-14, 0, -128), smooth((t - T_BRK - 0.3) / 1.4)); ump2.root.position.copy(u2p); ump2.root.rotation.y = yawTo(u2p, hit ? PLATE_C : B2);
-  applyPose(ump2, !hit && t > T_CAT + 0.35 ? keyed([[T_CAT + 0.35, U2_SET], [T_CAT + 0.6, U_OUT], [T_CAT + 1.6, U_OUT]], t) : U2_SET);
+  ump.root.position.set(0.5, 0, 6.0); ump.root.rotation.y = Math.PI; applyPose(ump, t < 0.4 || !contact ? U_SET : { ...STAND, look: 20 });
+  const u2p = v3(-14, 0, -110).lerp(v3(-14, 0, -128), smooth((t - T_BRK - 0.3) / 1.4)); ump2.root.position.copy(u2p); ump2.root.rotation.y = yawTo(u2p, contact ? PLATE_C : B2);
+  applyPose(ump2, s.play === "miss" && t > T_CAT + 0.35 ? keyed([[T_CAT + 0.35, U2_SET], [T_CAT + 0.6, U_OUT], [T_CAT + 1.6, U_OUT]], t) : U2_SET);
   // catcher
   C.root.position.set(0.15, 0, 3.0); C.root.rotation.y = Math.PI;
-  applyPose(C, hit ? keyed([[-0.6, C_SET], [-0.05, C_MID], [0.3, C_MID], [0.9, { ...STAND, look: 30 }]], t) : keyed([[-0.6, C_SET], [-0.05, C_MID], [0.12, C_MID], [0.45, C_POP], [T_CREL, C_THROW], [T_CREL + 0.5, STAND]], t));
-  if (!hit && t > 0.2) C.root.position.z = lerp(3.0, 1.8, smooth((t - 0.2) / 0.5));
+  applyPose(C, contact ? keyed([[-0.6, C_SET], [-0.05, C_MID], [0.3, C_MID], [0.9, { ...STAND, look: 30 }]], t) : keyed([[-0.6, C_SET], [-0.05, C_MID], [0.12, C_MID], [0.45, C_POP], [T_CREL, C_THROW], [T_CREL + 0.5, STAND]], t));
+  if (!contact && t > 0.2) C.root.position.z = lerp(3.0, 1.8, smooth((t - 0.2) / 0.5));
   // pitcher
   const tr = t + FL, zp = lerp(-60.6, -57.6, smooth((tr + 0.45) / 0.5));
   pitcher.root.position.set(0, MOUND_H * (zp > -59 ? 0.6 : 1), zp); pitcher.root.rotation.y = lerp(-Math.PI / 2, 0, smooth((tr + 0.6) / 0.6));
-  if (!hit && tr > 0.9) pitcher.root.rotation.y = lerp(0, Math.PI, smooth((tr - 0.9) / 0.5));
+  if (!contact && tr > 0.9) pitcher.root.rotation.y = lerp(0, Math.PI, smooth((tr - 0.9) / 0.5));
   applyPose(pitcher, keyed([[-1.3, P_SET], [-0.9, P_LIFT], [-0.35, P_STRIDE], [0, P_REL], [0.35, P_FOLLOW], [1.0, { ...READY, look: 0 }]], tr));
   // the batter: swings either way (that's his job on a hit-and-run); on contact he runs to first
   batter.root.position.set(-3.0, 0, -0.9); batter.root.rotation.y = Math.PI / 2; batter.bat.visible = true;
-  let q = keyed([[TC - 0.8, BAT_SET], [TC - 0.5, BAT_LOAD], [TC - 0.22, BAT_STRIDE], [TC, hit ? BAT_HIT : BAT_MISS], [TC + 0.3, BAT_FIN], [TC + 0.9, { ...BAT_FIN, lean: 6, drop: -0.1 }]], t);
-  if (hit && t > TC + 0.45) {
+  let q = keyed([[TC - 0.8, BAT_SET], [TC - 0.5, BAT_LOAD], [TC - 0.22, BAT_STRIDE], [TC, contact ? BAT_HIT : BAT_MISS], [TC + 0.3, BAT_FIN], [TC + 0.9, { ...BAT_FIN, lean: 6, drop: -0.1 }]], t);
+  if (contact && t > TC + 0.45) {
     const u = t - TC - 0.45, d = Math.min(92, sprint(u, 26, 0.8)), w = walkAt([v3(-3, 0, -0.9), v3(2.4, 0, -3.2), v3(66.5, 0, -61)], d);
     batter.root.position.copy(w.p); batter.root.rotation.y = w.yaw; batter.bat.visible = false;
     q = mixPose(q, w.end ? { ...STAND, look: -40 } : runPose((d / 11) % 1, 0.9), smooth(u / 0.25));
-  } else if (!hit && t > TC + 0.9) { q = mixPose(q, { ...STAND, look: -60, shR: [20, 10, 0], elR: 40 }, smooth((t - TC - 0.9) / 0.5)); }
+  } else if (!contact && t > TC + 0.9) { q = mixPose(q, { ...STAND, look: -60, shR: [20, 10, 0], elR: 40 }, smooth((t - TC - 0.9) / 0.5)); }
   applyPose(batter, q);
   // the runner: leads off, goes with the pitch; on contact he keeps going to third; on a miss he slides into second
   let rp = L1.clone(), ry = yawTo(L1, PLATE_C), rq = t < T_BRK - 0.6 ? { ...STAND, look: 0 } : LEAD_POSE;
@@ -523,6 +532,9 @@ function setScene(t, s) {
       rp = w.p; ry = w.yaw; rq = w.end ? { ...STAND, look: 40 } : runPose((d / 11.5) % 1, 1);
       if (w.end) ry = yawTo(rp, RFP);
       if (!w.end && t > TC + 0.15 && t < TC + 1.4) rq = { ...rq, look: 55, nod: -6 };        // a look in at the plate as he runs
+    } else if (dp) {                                              // the grounder to short: he's into second standing up before the shortstop has it set
+      const d = Math.min(L_MISS + 1.2, sprint(u, 27, 0.7)), w = walkAt([...RUN_MISS, v3(0.2, 0, -127.6)], d);
+      rp = w.p; ry = w.yaw; rq = w.end ? { ...STAND, look: -80 } : runPose((d / 11.5) % 1, 1);
     } else {
       const tSl = T_CAT - 0.12, d0s = sprint(tSl - T_BRK, 27, 0.7), vs = 26, dec = vs * vs / (2 * (L_MISS - d0s));   // he slides the last few feet
       let d = sprint(u, 27, 0.7), slide = 0;
@@ -536,13 +548,19 @@ function setScene(t, s) {
   const tRel = -FL - 0.02;
   let bp, trail = null;
   if (t < tRel) bp = wpos(pitcher.handR);
-  else if (hit && t >= TC) {
+  else if (dp && t >= TC) {
+    if (t < T_SSF) { bp = pathAt(DP.path, t - TC); trail = (d) => (t - d >= TC ? pathAt(DP.path, t - d - TC) : pathAt(FB.path, t - d)); }
+    else if (t < T_SSREL - 0.3) bp = wpos(SSF.handL);
+    else if (t < T_SSREL) bp = wpos(SSF.handR);
+    else if (t < T_SSC) bp = arcAt(v3(SSP.x, 6.0, SSP.z), wpos(B1F.handL), T_SST, t - T_SSREL);
+    else bp = wpos(B1F.handL);
+  } else if (hit && t >= TC) {
     if (t < T_FIELD) { bp = pathAt(GB.path, t - TC); trail = (d) => (t - d >= TC ? pathAt(GB.path, t - d - TC) : pathAt(FB.path, t - d)); }
     else if (t < T_RFTHROW) bp = wpos(RFF.handR);
     else if (t < T_RFC) bp = arcAt(v3(RFP.x, 6.2, RFP.z), wpos(B2F.handL), T_RF, t - T_RFTHROW);
     else bp = wpos(B2F.handL);
   } else if (t < 0) { bp = pathAt(FB.path, t); trail = (d) => (t - d > FB.path.t0 ? pathAt(FB.path, t - d) : null); }
-  else if (hit) bp = pathAt(FB.path, 0);
+  else if (contact) bp = pathAt(FB.path, 0);
   else if (t < T_CREL - 0.25) bp = wpos(C.handL);
   else if (t < T_CREL) bp = wpos(C.handR);
   else if (t < T_CAT) { bp = arcAt(v3(0.3, 6.1, 2.2), wpos(B2F.handL), T_CT, t - T_CREL); trail = (d) => (t - d > T_CREL ? arcAt(v3(0.3, 6.1, 2.2), wpos(B2F.handL), T_CT, t - d - T_CREL) : null); }
@@ -570,11 +588,13 @@ const CAMS = {
   batSide: (u, t, s) => [mixV(v3(5.5, 4.2, -11), v3(4.8, 4.0, -9.5), u), v3(-2.2, 3.2, -0.6), zoom(s, t, 46, 34)],          // in front of the batter: the swing
   wideHigh: (u) => [mixV(v3(10, 50, 50), v3(11, 46, 44), easeIO(u)), v3(19, 0, -58), 64],                                    // high behind the plate: the situation
   runner: (u) => [mixV(v3(78, 6.5, -46), v3(76, 6.2, -50), u), v3(18, 3.5, -104), 40],                                      // beyond first: the runner breaks, the pitcher delivers
-  overhead: (u) => [mixV(v3(34, 120, -40), v3(32, 112, -46), u), v3(26, 0, -100), 52],                                   // above: the second baseman goes, the hole opens
+  overhead: (u) => [mixV(v3(34, 120, -52), v3(32, 112, -58), u), v3(26, 0, -112), 52],                                  // above: the second baseman goes, the hole opens
   track: (u, t) => { const b = pathAt(GB.path, clamp(t - TC, 0, GB.t_field)); return [mixV(v3(10, 14, -84), v3(16, 16, -100), u), b.clone().lerp(v3(50, 0, -200), 0.3), 44]; },   // the ball through the hole
   third: (u) => [mixV(v3(-86, 8, -44), v3(-82, 7.5, -48), u), v3(-24, 3, -112), 40],                                       // beyond third: first to third
   throwCam: (u) => [mixV(v3(2, 17, 24), v3(2, 16, 20), u), v3(0, 3, -112), 26],                                            // high behind the plate: the throw to second
   tag2: (u) => [mixV(v3(16, 2.6, -114), v3(15, 2.6, -115), u), v3(0.5, 1.6, -126.5), 34],                                  // low, near second: the tag
+  wideDP: (u) => [mixV(v3(102, 134, -85), v3(96, 124, -86), easeIO(u)), v3(6, 0, -88), 50],                                 // above first base: short, second and first in one line
+  mound: (u) => [mixV(v3(-7, 14, -96), v3(-6.5, 13, -92), u), v3(5, 3, -22), 38],                                          // behind the pitcher: the delivery, the swing
   split: () => [v3(18, 52, 10), v3(-28, 0, -92), 50],
 };
 function shotAt(v) {
@@ -585,8 +605,8 @@ function shotAt(v) {
 
 // ------------------------------------------------------------------ DOM overlays fed from the same clock
 const $ = (id) => document.getElementById(id);
-const SPEEDS = { rt: "", replay: "Replay", slow: "Slow motion · ½ speed", freeze: "Freeze", none: "" };
-const PINT = { runner: () => headTop(R), batter: () => headTop(batter), pitcher: () => headTop(pitcher), b2: () => headTop(B2F), gap: () => GAPC.clone().setY(4), ball: () => BALL.m.position.clone().add(v3(0, 3, 0)) };
+const SPEEDS = { rt: "", replay: "Replay · slow motion", slow: "Slow motion · ½ speed", freeze: "Freeze", none: "" };
+const PINT = { ss: () => headTop(SSF), b1: () => headTop(B1F), runner: () => headTop(R), batter: () => headTop(batter), pitcher: () => headTop(pitcher), b2: () => headTop(B2F), gap: () => GAPC.clone().setY(4), ball: () => BALL.m.position.clone().add(v3(0, 3, 0)) };
 function pin(id, p) {
   const el = $(id); if (!el || !p) return;
   const q = p.clone().project(cam);
@@ -601,8 +621,8 @@ function renderAt(v) {
   renderer.setScissorTest(s.mode === "split");
   if (s.mode === "split") {                                       // the same play: contact (top), a miss (bottom)
     const c = CAMS.split(u, t, s);
-    for (const [y, play] of [[H / 2, "hit"], [0, "miss"]]) {
-      setScene(t, { ...s, play });
+    for (const [y, half] of [[H / 2, s.top], [0, s.bot]]) {
+      setScene(pw(v, half.vs, half.ts), { ...s, ...half });
       frame(cam, c[0], c[1], c[2], W / (H / 2));
       renderer.setViewport(0, y, W, H / 2); renderer.setScissor(0, y, W, H / 2);
       BALL.glow.scale.set(0.02, 0.02, 1);
