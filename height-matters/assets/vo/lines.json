@@ -1,0 +1,930 @@
+[
+ {
+  "i": 0,
+  "id": "hook",
+  "text": "The 2026 World Series is challenging one of baseball's biggest assumptions.",
+  "spoken": "The twenty twenty-six World Series is challenging one of baseball's biggest assumptions.",
+  "dur": 3.328,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.04,
+    "end": 0.09
+   },
+   {
+    "w": "twenty",
+    "start": 0.115,
+    "end": 0.315
+   },
+   {
+    "w": "twenty-six",
+    "start": 0.34,
+    "end": 0.69
+   },
+   {
+    "w": "World",
+    "start": 0.74,
+    "end": 0.89
+   },
+   {
+    "w": "Series",
+    "start": 0.94,
+    "end": 1.415
+   },
+   {
+    "w": "is",
+    "start": 1.49,
+    "end": 1.54
+   },
+   {
+    "w": "challenging",
+    "start": 1.59,
+    "end": 1.94
+   },
+   {
+    "w": "one",
+    "start": 1.965,
+    "end": 2.065
+   },
+   {
+    "w": "of",
+    "start": 2.09,
+    "end": 2.14
+   },
+   {
+    "w": "baseball's",
+    "start": 2.19,
+    "end": 2.615
+   },
+   {
+    "w": "biggest",
+    "start": 2.665,
+    "end": 2.865
+   },
+   {
+    "w": "assumptions.",
+    "start": 2.89,
+    "end": 3.328
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "short",
+  "text": "The Brewers and Rays have some of the shortest lineups in recent World Series history.",
+  "spoken": "The Brewers and Rays have some of the shortest lineups in recent World Series history.",
+  "dur": 3.371,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.037,
+    "end": 0.087
+   },
+   {
+    "w": "Brewers",
+    "start": 0.137,
+    "end": 0.412
+   },
+   {
+    "w": "and",
+    "start": 0.437,
+    "end": 0.512
+   },
+   {
+    "w": "Rays",
+    "start": 0.562,
+    "end": 0.987
+   },
+   {
+    "w": "have",
+    "start": 1.012,
+    "end": 1.112
+   },
+   {
+    "w": "some",
+    "start": 1.162,
+    "end": 1.262
+   },
+   {
+    "w": "of",
+    "start": 1.287,
+    "end": 1.337
+   },
+   {
+    "w": "the",
+    "start": 1.337,
+    "end": 1.387
+   },
+   {
+    "w": "shortest",
+    "start": 1.462,
+    "end": 1.712
+   },
+   {
+    "w": "lineups",
+    "start": 1.762,
+    "end": 2.037
+   },
+   {
+    "w": "in",
+    "start": 2.062,
+    "end": 2.112
+   },
+   {
+    "w": "recent",
+    "start": 2.162,
+    "end": 2.387
+   },
+   {
+    "w": "World",
+    "start": 2.412,
+    "end": 2.562
+   },
+   {
+    "w": "Series",
+    "start": 2.612,
+    "end": 2.862
+   },
+   {
+    "w": "history.",
+    "start": 2.887,
+    "end": 3.371
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "rays",
+  "text": "In fact, the Rays' starting lineup has just one player taller than six feet.",
+  "spoken": "In fact, the Rays' starting lineup has just one player taller than six feet.",
+  "dur": 2.923,
+  "words": [
+   {
+    "w": "In",
+    "start": 0.04,
+    "end": 0.09
+   },
+   {
+    "w": "fact,",
+    "start": 0.14,
+    "end": 0.315
+   },
+   {
+    "w": "the",
+    "start": 0.365,
+    "end": 0.415
+   },
+   {
+    "w": "Rays'",
+    "start": 0.465,
+    "end": 0.665
+   },
+   {
+    "w": "starting",
+    "start": 0.69,
+    "end": 0.915
+   },
+   {
+    "w": "lineup",
+    "start": 0.94,
+    "end": 1.315
+   },
+   {
+    "w": "has",
+    "start": 1.34,
+    "end": 1.44
+   },
+   {
+    "w": "just",
+    "start": 1.465,
+    "end": 1.615
+   },
+   {
+    "w": "one",
+    "start": 1.665,
+    "end": 1.765
+   },
+   {
+    "w": "player",
+    "start": 1.79,
+    "end": 1.965
+   },
+   {
+    "w": "taller",
+    "start": 2.015,
+    "end": 2.265
+   },
+   {
+    "w": "than",
+    "start": 2.29,
+    "end": 2.365
+   },
+   {
+    "w": "six",
+    "start": 2.415,
+    "end": 2.54
+   },
+   {
+    "w": "feet.",
+    "start": 2.59,
+    "end": 2.923
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "q",
+  "text": "So does height actually matter in baseball?",
+  "spoken": "So does height actually matter in baseball?",
+  "dur": 1.643,
+  "words": [
+   {
+    "w": "So",
+    "start": 0.062,
+    "end": 0.162
+   },
+   {
+    "w": "does",
+    "start": 0.187,
+    "end": 0.287
+   },
+   {
+    "w": "height",
+    "start": 0.312,
+    "end": 0.462
+   },
+   {
+    "w": "actually",
+    "start": 0.562,
+    "end": 0.787
+   },
+   {
+    "w": "matter",
+    "start": 0.837,
+    "end": 1.012
+   },
+   {
+    "w": "in",
+    "start": 1.037,
+    "end": 1.087
+   },
+   {
+    "w": "baseball?",
+    "start": 1.112,
+    "end": 1.643
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "tall",
+  "text": "Being taller can give players longer levers, and pitchers may benefit from a higher release point.",
+  "spoken": "Being taller can give players longer levers, and pitchers may benefit from a higher release point.",
+  "dur": 3.52,
+  "words": [
+   {
+    "w": "Being",
+    "start": 0.0,
+    "end": 0.144
+   },
+   {
+    "w": "taller",
+    "start": 0.194,
+    "end": 0.444
+   },
+   {
+    "w": "can",
+    "start": 0.469,
+    "end": 0.544
+   },
+   {
+    "w": "give",
+    "start": 0.569,
+    "end": 0.669
+   },
+   {
+    "w": "players",
+    "start": 0.719,
+    "end": 0.994
+   },
+   {
+    "w": "longer",
+    "start": 1.044,
+    "end": 1.244
+   },
+   {
+    "w": "levers,",
+    "start": 1.269,
+    "end": 1.719
+   },
+   {
+    "w": "and",
+    "start": 1.819,
+    "end": 1.894
+   },
+   {
+    "w": "pitchers",
+    "start": 1.944,
+    "end": 2.194
+   },
+   {
+    "w": "may",
+    "start": 2.219,
+    "end": 2.319
+   },
+   {
+    "w": "benefit",
+    "start": 2.369,
+    "end": 2.619
+   },
+   {
+    "w": "from",
+    "start": 2.644,
+    "end": 2.794
+   },
+   {
+    "w": "a",
+    "start": 2.794,
+    "end": 2.794
+   },
+   {
+    "w": "higher",
+    "start": 2.844,
+    "end": 3.044
+   },
+   {
+    "w": "release",
+    "start": 3.069,
+    "end": 3.269
+   },
+   {
+    "w": "point.",
+    "start": 3.319,
+    "end": 3.52
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "but",
+  "text": "But being shorter can come with advantages too.",
+  "spoken": "But being shorter can come with advantages too.",
+  "dur": 1.749,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.015,
+    "end": 0.115
+   },
+   {
+    "w": "being",
+    "start": 0.14,
+    "end": 0.29
+   },
+   {
+    "w": "shorter",
+    "start": 0.365,
+    "end": 0.615
+   },
+   {
+    "w": "can",
+    "start": 0.665,
+    "end": 0.74
+   },
+   {
+    "w": "come",
+    "start": 0.765,
+    "end": 0.865
+   },
+   {
+    "w": "with",
+    "start": 0.89,
+    "end": 0.965
+   },
+   {
+    "w": "advantages",
+    "start": 0.99,
+    "end": 1.415
+   },
+   {
+    "w": "too.",
+    "start": 1.465,
+    "end": 1.749
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "shortadv",
+  "text": "A shorter hitter may have a smaller strike zone, while some shorter infielders can benefit from getting lower to the ground.",
+  "spoken": "A shorter hitter may have a smaller strike zone, while some shorter infielders can benefit from getting lower to the ground.",
+  "dur": 4.501,
+  "words": [
+   {
+    "w": "A",
+    "start": 0.04,
+    "end": 0.065
+   },
+   {
+    "w": "shorter",
+    "start": 0.115,
+    "end": 0.315
+   },
+   {
+    "w": "hitter",
+    "start": 0.34,
+    "end": 0.515
+   },
+   {
+    "w": "may",
+    "start": 0.54,
+    "end": 0.665
+   },
+   {
+    "w": "have",
+    "start": 0.665,
+    "end": 0.815
+   },
+   {
+    "w": "a",
+    "start": 0.815,
+    "end": 0.815
+   },
+   {
+    "w": "smaller",
+    "start": 0.89,
+    "end": 1.165
+   },
+   {
+    "w": "strike",
+    "start": 1.215,
+    "end": 1.415
+   },
+   {
+    "w": "zone,",
+    "start": 1.465,
+    "end": 1.915
+   },
+   {
+    "w": "while",
+    "start": 1.99,
+    "end": 2.115
+   },
+   {
+    "w": "some",
+    "start": 2.165,
+    "end": 2.265
+   },
+   {
+    "w": "shorter",
+    "start": 2.34,
+    "end": 2.54
+   },
+   {
+    "w": "infielders",
+    "start": 2.565,
+    "end": 2.99
+   },
+   {
+    "w": "can",
+    "start": 3.015,
+    "end": 3.09
+   },
+   {
+    "w": "benefit",
+    "start": 3.14,
+    "end": 3.39
+   },
+   {
+    "w": "from",
+    "start": 3.415,
+    "end": 3.515
+   },
+   {
+    "w": "getting",
+    "start": 3.54,
+    "end": 3.715
+   },
+   {
+    "w": "lower",
+    "start": 3.765,
+    "end": 3.915
+   },
+   {
+    "w": "to",
+    "start": 3.94,
+    "end": 3.99
+   },
+   {
+    "w": "the",
+    "start": 4.015,
+    "end": 4.065
+   },
+   {
+    "w": "ground.",
+    "start": 4.09,
+    "end": 4.501
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "research",
+  "text": "And the research is interesting.",
+  "spoken": "And the research is interesting.",
+  "dur": 1.195,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.04,
+    "end": 0.115
+   },
+   {
+    "w": "the",
+    "start": 0.14,
+    "end": 0.19
+   },
+   {
+    "w": "research",
+    "start": 0.215,
+    "end": 0.515
+   },
+   {
+    "w": "is",
+    "start": 0.565,
+    "end": 0.64
+   },
+   {
+    "w": "interesting.",
+    "start": 0.715,
+    "end": 1.195
+   }
+  ]
+ },
+ {
+  "i": 8,
+  "id": "study",
+  "text": "A 2023 study examining 319 first-round MLB draft picks found no relationship between players' physical measurements in high school and their eventual MLB performance, measured by WAR.",
+  "spoken": "A twenty twenty-three study examining three hundred nineteen first-round M L B draft picks found no relationship between players' physical measurements in high school and their eventual M L B performance, measured by war.",
+  "dur": 9.237,
+  "words": [
+   {
+    "w": "A",
+    "start": 0.0,
+    "end": 0.023
+   },
+   {
+    "w": "twenty",
+    "start": 0.073,
+    "end": 0.273
+   },
+   {
+    "w": "twenty-three",
+    "start": 0.298,
+    "end": 0.648
+   },
+   {
+    "w": "study",
+    "start": 0.673,
+    "end": 0.898
+   },
+   {
+    "w": "examining",
+    "start": 0.948,
+    "end": 1.248
+   },
+   {
+    "w": "three",
+    "start": 1.298,
+    "end": 1.423
+   },
+   {
+    "w": "hundred",
+    "start": 1.448,
+    "end": 1.648
+   },
+   {
+    "w": "nineteen",
+    "start": 1.673,
+    "end": 1.973
+   },
+   {
+    "w": "first-round",
+    "start": 2.023,
+    "end": 2.498
+   },
+   {
+    "w": "M",
+    "start": 2.598,
+    "end": 2.723
+   },
+   {
+    "w": "L",
+    "start": 2.823,
+    "end": 2.923
+   },
+   {
+    "w": "B",
+    "start": 2.973,
+    "end": 3.073
+   },
+   {
+    "w": "draft",
+    "start": 3.123,
+    "end": 3.323
+   },
+   {
+    "w": "picks",
+    "start": 3.373,
+    "end": 3.823
+   },
+   {
+    "w": "found",
+    "start": 3.898,
+    "end": 4.073
+   },
+   {
+    "w": "no",
+    "start": 4.123,
+    "end": 4.273
+   },
+   {
+    "w": "relationship",
+    "start": 4.298,
+    "end": 4.698
+   },
+   {
+    "w": "between",
+    "start": 4.723,
+    "end": 4.923
+   },
+   {
+    "w": "players'",
+    "start": 4.948,
+    "end": 5.198
+   },
+   {
+    "w": "physical",
+    "start": 5.248,
+    "end": 5.448
+   },
+   {
+    "w": "measurements",
+    "start": 5.473,
+    "end": 5.798
+   },
+   {
+    "w": "in",
+    "start": 5.823,
+    "end": 5.873
+   },
+   {
+    "w": "high",
+    "start": 5.923,
+    "end": 6.098
+   },
+   {
+    "w": "school",
+    "start": 6.148,
+    "end": 6.623
+   },
+   {
+    "w": "and",
+    "start": 6.698,
+    "end": 6.773
+   },
+   {
+    "w": "their",
+    "start": 6.798,
+    "end": 6.873
+   },
+   {
+    "w": "eventual",
+    "start": 6.898,
+    "end": 7.223
+   },
+   {
+    "w": "M",
+    "start": 7.323,
+    "end": 7.423
+   },
+   {
+    "w": "L",
+    "start": 7.523,
+    "end": 7.598
+   },
+   {
+    "w": "B",
+    "start": 7.648,
+    "end": 7.748
+   },
+   {
+    "w": "performance,",
+    "start": 7.773,
+    "end": 8.373
+   },
+   {
+    "w": "measured",
+    "start": 8.498,
+    "end": 8.748
+   },
+   {
+    "w": "by",
+    "start": 8.773,
+    "end": 8.898
+   },
+   {
+    "w": "war.",
+    "start": 8.948,
+    "end": 9.237
+   }
+  ]
+ },
+ {
+  "i": 9,
+  "id": "take",
+  "text": "The takeaway?",
+  "spoken": "The takeaway?",
+  "dur": 0.704,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.058,
+    "end": 0.108
+   },
+   {
+    "w": "takeaway?",
+    "start": 0.158,
+    "end": 0.683
+   }
+  ]
+ },
+ {
+  "i": 10,
+  "id": "height",
+  "text": "Height can influence how a player moves and plays, but it doesn't determine how good they become.",
+  "spoken": "Height can influence how a player moves and plays, but it doesn't determine how good they become.",
+  "dur": 3.584,
+  "words": [
+   {
+    "w": "Height",
+    "start": 0.04,
+    "end": 0.19
+   },
+   {
+    "w": "can",
+    "start": 0.215,
+    "end": 0.29
+   },
+   {
+    "w": "influence",
+    "start": 0.365,
+    "end": 0.665
+   },
+   {
+    "w": "how",
+    "start": 0.69,
+    "end": 0.84
+   },
+   {
+    "w": "a",
+    "start": 0.84,
+    "end": 0.84
+   },
+   {
+    "w": "player",
+    "start": 0.89,
+    "end": 1.09
+   },
+   {
+    "w": "moves",
+    "start": 1.14,
+    "end": 1.39
+   },
+   {
+    "w": "and",
+    "start": 1.415,
+    "end": 1.49
+   },
+   {
+    "w": "plays,",
+    "start": 1.54,
+    "end": 2.09
+   },
+   {
+    "w": "but",
+    "start": 2.165,
+    "end": 2.265
+   },
+   {
+    "w": "it",
+    "start": 2.29,
+    "end": 2.34
+   },
+   {
+    "w": "doesn't",
+    "start": 2.365,
+    "end": 2.54
+   },
+   {
+    "w": "determine",
+    "start": 2.565,
+    "end": 2.865
+   },
+   {
+    "w": "how",
+    "start": 2.89,
+    "end": 2.99
+   },
+   {
+    "w": "good",
+    "start": 3.04,
+    "end": 3.14
+   },
+   {
+    "w": "they",
+    "start": 3.165,
+    "end": 3.24
+   },
+   {
+    "w": "become.",
+    "start": 3.265,
+    "end": 3.584
+   }
+  ]
+ },
+ {
+  "i": 11,
+  "id": "end",
+  "text": "The Brewers and Rays are proving that talent doesn't come in one size.",
+  "spoken": "The Brewers and Rays are proving that talent doesn't come in one size.",
+  "dur": 2.731,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.037,
+    "end": 0.087
+   },
+   {
+    "w": "Brewers",
+    "start": 0.137,
+    "end": 0.387
+   },
+   {
+    "w": "and",
+    "start": 0.412,
+    "end": 0.487
+   },
+   {
+    "w": "Rays",
+    "start": 0.537,
+    "end": 0.887
+   },
+   {
+    "w": "are",
+    "start": 0.912,
+    "end": 0.987
+   },
+   {
+    "w": "proving",
+    "start": 1.037,
+    "end": 1.287
+   },
+   {
+    "w": "that",
+    "start": 1.312,
+    "end": 1.412
+   },
+   {
+    "w": "talent",
+    "start": 1.462,
+    "end": 1.687
+   },
+   {
+    "w": "doesn't",
+    "start": 1.712,
+    "end": 1.887
+   },
+   {
+    "w": "come",
+    "start": 1.912,
+    "end": 2.012
+   },
+   {
+    "w": "in",
+    "start": 2.037,
+    "end": 2.087
+   },
+   {
+    "w": "one",
+    "start": 2.112,
+    "end": 2.237
+   },
+   {
+    "w": "size.",
+    "start": 2.287,
+    "end": 2.731
+   }
+  ]
+ }
+]
