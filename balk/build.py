@@ -71,7 +71,7 @@ rate(A6, A7, "ibbHigh", -6.2, play="ibb", box=round(-6.2 + (V5BOX - A6), 3))
 V5STEP, V5REL = W("box", "steps"), W("box", "releases") - 0.05
 V5F1 = V5REL + 0.65
 shot(A7, A8, "ibbBack", [A7, V5STEP, V5REL, V5F1, A8], [-1.3, IBB_STEP, -IBB["flight"], -IBB["flight"], -IBB["flight"] + (A8 - V5F1)], speed="slow", play="ibb",
-     box=-1.3, boxRed=-IBB["flight"] - 0.001, foot=IBB_STEP + 0.25, freeze=round(V5REL, 3))
+     box=-1.3, boxRed=-IBB["flight"] - 0.001, foot=IBB_STEP + 0.25, freeze=round(V5REL, 3), freezeEnd=round(V5F1, 3))
 IBS = SHOTS[-1]; V5CATCH = vat(IBS, 0.0) if vat(IBS, 0.0) else A8 + 1
 # the penalty: runners on base (the runner lights up on "runners"); he's awarded second on "advance"
 V6R, V6ADV = W("detail", "runners"), W("detail", "advance")
