@@ -588,7 +588,7 @@ function renderAt(v) {
   const g = c[2] < 16 ? 0.009 : 0.02; BALL.glow.scale.set(g, g, 1);
   renderer.render(scene, cam);
   for (const [id, key] of CC.pins) pin(id, PINT[key]());
-  if ($("spd")) { const sp = s.freeze != null && v >= s.freeze && (s.freezeEnd == null || v < s.freezeEnd) ? "Freeze" : s.speed === "slow" ? "Slow motion" : ""; $("spd").textContent = sp; $("spd").style.opacity = sp ? 1 : 0; }
+  if ($("spd")) { const sp = s.freeze != null && v >= s.freeze && (s.freezeEnd == null || v < s.freezeEnd) ? "Freeze" : s.speed === "slow" && (s.slowEnd == null || v < s.slowEnd) ? "Slow motion" : ""; $("spd").textContent = sp; $("spd").style.opacity = sp ? 1 : 0; }
 }
 
 let last = -1;
