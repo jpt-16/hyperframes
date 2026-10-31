@@ -1,0 +1,810 @@
+{
+ "duration": 35.9,
+ "lines": [
+  {
+   "i": 0,
+   "id": "hook",
+   "text": "A balk isn't always caused by the pitcher making a mistake.",
+   "spoken": "A balk isn't always caused by the pitcher making a mistake.",
+   "t0": 0.25,
+   "t1": 2.436,
+   "words": [
+    {
+     "w": "A",
+     "t0": 0.262,
+     "t1": 0.287
+    },
+    {
+     "w": "balk",
+     "t0": 0.337,
+     "t1": 0.562
+    },
+    {
+     "w": "isn't",
+     "t0": 0.612,
+     "t1": 0.737
+    },
+    {
+     "w": "always",
+     "t0": 0.812,
+     "t1": 0.987
+    },
+    {
+     "w": "caused",
+     "t0": 1.037,
+     "t1": 1.262
+    },
+    {
+     "w": "by",
+     "t0": 1.287,
+     "t1": 1.362
+    },
+    {
+     "w": "the",
+     "t0": 1.387,
+     "t1": 1.437
+    },
+    {
+     "w": "pitcher",
+     "t0": 1.462,
+     "t1": 1.712
+    },
+    {
+     "w": "making",
+     "t0": 1.762,
+     "t1": 2.012
+    },
+    {
+     "w": "a",
+     "t0": 2.012,
+     "t1": 2.012
+    },
+    {
+     "w": "mistake.",
+     "t0": 2.037,
+     "t1": 2.437
+    }
+   ]
+  },
+  {
+   "i": 1,
+   "id": "five",
+   "text": "Here are five different ways a balk can be called.",
+   "spoken": "Here are five different ways a balk can be called.",
+   "t0": 2.686,
+   "t1": 4.583,
+   "words": [
+    {
+     "w": "Here",
+     "t0": 2.697,
+     "t1": 2.797
+    },
+    {
+     "w": "are",
+     "t0": 2.822,
+     "t1": 2.897
+    },
+    {
+     "w": "five",
+     "t0": 2.972,
+     "t1": 3.172
+    },
+    {
+     "w": "different",
+     "t0": 3.197,
+     "t1": 3.397
+    },
+    {
+     "w": "ways",
+     "t0": 3.422,
+     "t1": 3.847
+    },
+    {
+     "w": "a",
+     "t0": 3.847,
+     "t1": 3.847
+    },
+    {
+     "w": "balk",
+     "t0": 3.897,
+     "t1": 4.047
+    },
+    {
+     "w": "can",
+     "t0": 4.072,
+     "t1": 4.147
+    },
+    {
+     "w": "be",
+     "t0": 4.172,
+     "t1": 4.247
+    },
+    {
+     "w": "called.",
+     "t0": 4.297,
+     "t1": 4.744
+    }
+   ]
+  },
+  {
+   "i": 2,
+   "id": "one",
+   "text": "Number one: The pitcher starts his delivery, then stops before throwing the ball.",
+   "spoken": "Number one: The pitcher starts his delivery, then stops before throwing the ball.",
+   "t0": 4.883,
+   "t1": 7.967,
+   "words": [
+    {
+     "w": "Number",
+     "t0": 4.917,
+     "t1": 5.092
+    },
+    {
+     "w": "one:",
+     "t0": 5.142,
+     "t1": 5.542
+    },
+    {
+     "w": "The",
+     "t0": 5.642,
+     "t1": 5.692
+    },
+    {
+     "w": "pitcher",
+     "t0": 5.717,
+     "t1": 5.917
+    },
+    {
+     "w": "starts",
+     "t0": 5.942,
+     "t1": 6.142
+    },
+    {
+     "w": "his",
+     "t0": 6.167,
+     "t1": 6.242
+    },
+    {
+     "w": "delivery,",
+     "t0": 6.267,
+     "t1": 6.642
+    },
+    {
+     "w": "then",
+     "t0": 6.692,
+     "t1": 6.792
+    },
+    {
+     "w": "stops",
+     "t0": 6.842,
+     "t1": 7.067
+    },
+    {
+     "w": "before",
+     "t0": 7.092,
+     "t1": 7.292
+    },
+    {
+     "w": "throwing",
+     "t0": 7.367,
+     "t1": 7.592
+    },
+    {
+     "w": "the",
+     "t0": 7.617,
+     "t1": 7.667
+    },
+    {
+     "w": "ball.",
+     "t0": 7.717,
+     "t1": 8.005
+    }
+   ]
+  },
+  {
+   "i": 3,
+   "id": "two",
+   "text": "Number two: The pitcher comes set but doesn't come to a complete stop before delivering the pitch.",
+   "spoken": "Number two: The pitcher comes set but doesn't come to a complete stop before delivering the pitch.",
+   "t0": 8.267,
+   "t1": 11.903,
+   "words": [
+    {
+     "w": "Number",
+     "t0": 8.299,
+     "t1": 8.499
+    },
+    {
+     "w": "two:",
+     "t0": 8.574,
+     "t1": 9.024
+    },
+    {
+     "w": "The",
+     "t0": 9.124,
+     "t1": 9.174
+    },
+    {
+     "w": "pitcher",
+     "t0": 9.199,
+     "t1": 9.374
+    },
+    {
+     "w": "comes",
+     "t0": 9.399,
+     "t1": 9.524
+    },
+    {
+     "w": "set",
+     "t0": 9.599,
+     "t1": 9.724
+    },
+    {
+     "w": "but",
+     "t0": 9.749,
+     "t1": 9.849
+    },
+    {
+     "w": "doesn't",
+     "t0": 9.874,
+     "t1": 10.049
+    },
+    {
+     "w": "come",
+     "t0": 10.074,
+     "t1": 10.174
+    },
+    {
+     "w": "to",
+     "t0": 10.199,
+     "t1": 10.299
+    },
+    {
+     "w": "a",
+     "t0": 10.299,
+     "t1": 10.299
+    },
+    {
+     "w": "complete",
+     "t0": 10.324,
+     "t1": 10.599
+    },
+    {
+     "w": "stop",
+     "t0": 10.649,
+     "t1": 10.974
+    },
+    {
+     "w": "before",
+     "t0": 10.999,
+     "t1": 11.199
+    },
+    {
+     "w": "delivering",
+     "t0": 11.224,
+     "t1": 11.499
+    },
+    {
+     "w": "the",
+     "t0": 11.524,
+     "t1": 11.574
+    },
+    {
+     "w": "pitch.",
+     "t0": 11.624,
+     "t1": 11.903
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "id": "three",
+   "text": "Number three: The pitcher throws to first without stepping directly toward the base.",
+   "spoken": "Number three: The pitcher throws to first without stepping directly toward the base.",
+   "t0": 12.203,
+   "t1": 15.39,
+   "words": [
+    {
+     "w": "Number",
+     "t0": 12.23,
+     "t1": 12.43
+    },
+    {
+     "w": "three:",
+     "t0": 12.505,
+     "t1": 12.98
+    },
+    {
+     "w": "The",
+     "t0": 13.055,
+     "t1": 13.105
+    },
+    {
+     "w": "pitcher",
+     "t0": 13.13,
+     "t1": 13.33
+    },
+    {
+     "w": "throws",
+     "t0": 13.38,
+     "t1": 13.605
+    },
+    {
+     "w": "to",
+     "t0": 13.63,
+     "t1": 13.68
+    },
+    {
+     "w": "first",
+     "t0": 13.755,
+     "t1": 14.005
+    },
+    {
+     "w": "without",
+     "t0": 14.03,
+     "t1": 14.205
+    },
+    {
+     "w": "stepping",
+     "t0": 14.23,
+     "t1": 14.43
+    },
+    {
+     "w": "directly",
+     "t0": 14.455,
+     "t1": 14.705
+    },
+    {
+     "w": "toward",
+     "t0": 14.755,
+     "t1": 14.955
+    },
+    {
+     "w": "the",
+     "t0": 14.98,
+     "t1": 15.03
+    },
+    {
+     "w": "base.",
+     "t0": 15.055,
+     "t1": 15.407
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "id": "four",
+   "text": "Number four: The pitcher drops the ball while touching the pitching rubber.",
+   "spoken": "Number four: The pitcher drops the ball while touching the pitching rubber.",
+   "t0": 15.69,
+   "t1": 18.392,
+   "words": [
+    {
+     "w": "Number",
+     "t0": 15.722,
+     "t1": 15.897
+    },
+    {
+     "w": "four:",
+     "t0": 15.972,
+     "t1": 16.397
+    },
+    {
+     "w": "The",
+     "t0": 16.497,
+     "t1": 16.547
+    },
+    {
+     "w": "pitcher",
+     "t0": 16.572,
+     "t1": 16.797
+    },
+    {
+     "w": "drops",
+     "t0": 16.847,
+     "t1": 17.047
+    },
+    {
+     "w": "the",
+     "t0": 17.072,
+     "t1": 17.122
+    },
+    {
+     "w": "ball",
+     "t0": 17.172,
+     "t1": 17.372
+    },
+    {
+     "w": "while",
+     "t0": 17.397,
+     "t1": 17.522
+    },
+    {
+     "w": "touching",
+     "t0": 17.572,
+     "t1": 17.797
+    },
+    {
+     "w": "the",
+     "t0": 17.822,
+     "t1": 17.872
+    },
+    {
+     "w": "pitching",
+     "t0": 17.897,
+     "t1": 18.122
+    },
+    {
+     "w": "rubber.",
+     "t0": 18.147,
+     "t1": 18.451
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "id": "five2",
+   "text": "And number five: The catcher balk.",
+   "spoken": "And number five: The catcher balk.",
+   "t0": 18.692,
+   "t1": 20.036,
+   "words": [
+    {
+     "w": "And",
+     "t0": 18.712,
+     "t1": 18.787
+    },
+    {
+     "w": "number",
+     "t0": 18.812,
+     "t1": 18.962
+    },
+    {
+     "w": "five:",
+     "t0": 19.012,
+     "t1": 19.312
+    },
+    {
+     "w": "The",
+     "t0": 19.362,
+     "t1": 19.412
+    },
+    {
+     "w": "catcher",
+     "t0": 19.462,
+     "t1": 19.737
+    },
+    {
+     "w": "balk.",
+     "t0": 19.787,
+     "t1": 20.183
+    }
+   ]
+  },
+  {
+   "i": 7,
+   "id": "yes",
+   "text": "Yes, the catcher can actually cause a balk.",
+   "spoken": "Yes, the catcher can actually cause a balk.",
+   "t0": 20.186,
+   "t1": 21.825,
+   "words": [
+    {
+     "w": "Yes,",
+     "t0": 20.231,
+     "t1": 20.481
+    },
+    {
+     "w": "the",
+     "t0": 20.531,
+     "t1": 20.581
+    },
+    {
+     "w": "catcher",
+     "t0": 20.606,
+     "t1": 20.856
+    },
+    {
+     "w": "can",
+     "t0": 20.881,
+     "t1": 20.956
+    },
+    {
+     "w": "actually",
+     "t0": 21.056,
+     "t1": 21.281
+    },
+    {
+     "w": "cause",
+     "t0": 21.306,
+     "t1": 21.506
+    },
+    {
+     "w": "a",
+     "t0": 21.506,
+     "t1": 21.506
+    },
+    {
+     "w": "balk.",
+     "t0": 21.556,
+     "t1": 21.997
+    }
+   ]
+  },
+  {
+   "i": 8,
+   "id": "box",
+   "text": "If the catcher steps outside the catcher's box before the pitcher releases the ball, it's a violation.",
+   "spoken": "If the catcher steps outside the catcher's box before the pitcher releases the ball, it's a violation.",
+   "t0": 21.975,
+   "t1": 25.91,
+   "words": [
+    {
+     "w": "If",
+     "t0": 21.982,
+     "t1": 22.032
+    },
+    {
+     "w": "the",
+     "t0": 22.057,
+     "t1": 22.107
+    },
+    {
+     "w": "catcher",
+     "t0": 22.157,
+     "t1": 22.407
+    },
+    {
+     "w": "steps",
+     "t0": 22.457,
+     "t1": 22.607
+    },
+    {
+     "w": "outside",
+     "t0": 22.657,
+     "t1": 22.982
+    },
+    {
+     "w": "the",
+     "t0": 23.007,
+     "t1": 23.057
+    },
+    {
+     "w": "catcher's",
+     "t0": 23.107,
+     "t1": 23.382
+    },
+    {
+     "w": "box",
+     "t0": 23.432,
+     "t1": 23.657
+    },
+    {
+     "w": "before",
+     "t0": 23.682,
+     "t1": 23.882
+    },
+    {
+     "w": "the",
+     "t0": 23.907,
+     "t1": 23.957
+    },
+    {
+     "w": "pitcher",
+     "t0": 23.982,
+     "t1": 24.207
+    },
+    {
+     "w": "releases",
+     "t0": 24.232,
+     "t1": 24.557
+    },
+    {
+     "w": "the",
+     "t0": 24.582,
+     "t1": 24.632
+    },
+    {
+     "w": "ball,",
+     "t0": 24.682,
+     "t1": 25.132
+    },
+    {
+     "w": "it's",
+     "t0": 25.232,
+     "t1": 25.357
+    },
+    {
+     "w": "a",
+     "t0": 25.357,
+     "t1": 25.357
+    },
+    {
+     "w": "violation.",
+     "t0": 25.382,
+     "t1": 25.97
+    }
+   ]
+  },
+  {
+   "i": 9,
+   "id": "detail",
+   "text": "And there's one more important detail: a balk generally requires runners on base, and the penalty is that runners advance one base.",
+   "spoken": "And there's one more important detail: a balk generally requires runners on base, and the penalty is that runners advance one base.",
+   "t0": 26.21,
+   "t1": 31.76,
+   "words": [
+    {
+     "w": "And",
+     "t0": 26.218,
+     "t1": 26.293
+    },
+    {
+     "w": "there's",
+     "t0": 26.318,
+     "t1": 26.418
+    },
+    {
+     "w": "one",
+     "t0": 26.468,
+     "t1": 26.568
+    },
+    {
+     "w": "more",
+     "t0": 26.593,
+     "t1": 26.718
+    },
+    {
+     "w": "important",
+     "t0": 26.743,
+     "t1": 27.043
+    },
+    {
+     "w": "detail:",
+     "t0": 27.068,
+     "t1": 27.843
+    },
+    {
+     "w": "a",
+     "t0": 27.843,
+     "t1": 27.843
+    },
+    {
+     "w": "balk",
+     "t0": 27.893,
+     "t1": 28.118
+    },
+    {
+     "w": "generally",
+     "t0": 28.168,
+     "t1": 28.418
+    },
+    {
+     "w": "requires",
+     "t0": 28.443,
+     "t1": 28.843
+    },
+    {
+     "w": "runners",
+     "t0": 28.918,
+     "t1": 29.118
+    },
+    {
+     "w": "on",
+     "t0": 29.168,
+     "t1": 29.218
+    },
+    {
+     "w": "base,",
+     "t0": 29.268,
+     "t1": 29.718
+    },
+    {
+     "w": "and",
+     "t0": 29.818,
+     "t1": 29.893
+    },
+    {
+     "w": "the",
+     "t0": 29.918,
+     "t1": 29.968
+    },
+    {
+     "w": "penalty",
+     "t0": 30.018,
+     "t1": 30.318
+    },
+    {
+     "w": "is",
+     "t0": 30.343,
+     "t1": 30.393
+    },
+    {
+     "w": "that",
+     "t0": 30.418,
+     "t1": 30.543
+    },
+    {
+     "w": "runners",
+     "t0": 30.618,
+     "t1": 30.868
+    },
+    {
+     "w": "advance",
+     "t0": 30.918,
+     "t1": 31.218
+    },
+    {
+     "w": "one",
+     "t0": 31.268,
+     "t1": 31.368
+    },
+    {
+     "w": "base.",
+     "t0": 31.418,
+     "t1": 31.76
+    }
+   ]
+  },
+  {
+   "i": 10,
+   "id": "end",
+   "text": "Baseball has some rules that even experienced fans don't know.",
+   "spoken": "Baseball has some rules that even experienced fans don't know.",
+   "t0": 32.06,
+   "t1": 34.401,
+   "words": [
+    {
+     "w": "Baseball",
+     "t0": 32.076,
+     "t1": 32.376
+    },
+    {
+     "w": "has",
+     "t0": 32.401,
+     "t1": 32.476
+    },
+    {
+     "w": "some",
+     "t0": 32.501,
+     "t1": 32.601
+    },
+    {
+     "w": "rules",
+     "t0": 32.651,
+     "t1": 32.951
+    },
+    {
+     "w": "that",
+     "t0": 32.976,
+     "t1": 33.076
+    },
+    {
+     "w": "even",
+     "t0": 33.126,
+     "t1": 33.251
+    },
+    {
+     "w": "experienced",
+     "t0": 33.276,
+     "t1": 33.701
+    },
+    {
+     "w": "fans",
+     "t0": 33.751,
+     "t1": 34.001
+    },
+    {
+     "w": "don't",
+     "t0": 34.026,
+     "t1": 34.176
+    },
+    {
+     "w": "know.",
+     "t0": 34.201,
+     "t1": 34.592
+    }
+   ]
+  }
+ ]
+}
