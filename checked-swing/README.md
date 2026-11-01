@@ -39,7 +39,7 @@ npx --yes hyperframes@0.8.154 render . -o renders/checked-swing.mp4 --video-bitr
 - **Contact on a check swing:** the ball is a batted ball like any other.
   - Fair: in play and live, as shown: the runner advances and the defense makes a play.
   - Foul: an ordinary foul ball, which is dead unless caught.
-  - The script says a foul ball is also live; the screen adds "Contact makes it a batted ball: fair is in play; foul is a foul ball".
+  - The voiceover says "…still puts the ball in fair territory, it's a live ball"; the screen adds "Contact makes it a batted ball: fair is in play; foul is a foul ball".
 
 ## Shots
 

@@ -77,14 +77,14 @@ hv = dict(vs=[A9, A10], ts=[A9 - V0, A10 - V0], appeal=round(APPEAL, 3), point=r
 shot(A9, A10, "u1", [A9, A10], [0, 0], mode="split", top=dict(hv, cam="u1", call=round(VC1 - V0, 3), callKind="yes"), bot=dict(hv, cam="u3", lhb=1, call=round(VC3 - V0, 3), callKind="no"))
 # 10 "and here's something interesting": runner on first
 A11 = W("live", "if") - 0.1
-VHIT = W("live", "hit")
+VHIT = W("live", "puts")
 rate(A10, A11, "wideHome", -3.3, play="contact", depth=0.15, rings=["r"])
 # 11 "if the batter checks his swing but the ball is hit": contact on the check, from the side, slowed
 A12 = VHIT + 0.42
 shot(A11, A12, "side", [A11, VHIT, A12], [TC - 0.85, TC, TC + 0.17], speed="slow", play="contact", depth=0.15)
 # 12 "into fair or foul territory, it's a live ball": the dribbler, the runner, the throw
 VFAIR = W("live", "fair")
-rate(A12, A13, "dribble", TC + 0.17, play="contact", depth=0.15, fair=round(TC + 0.17 + (VFAIR - A12), 3), rings=["r"])
+rate(A12, A13, "dribble", TC + 0.3, play="contact", depth=0.15, fair=round(TC + 0.3 + (VFAIR - A12), 3), rings=["r"])
 DRS = SHOTS[-1]; VFIELD, VCATCH = vat(DRS, T_F), vat(DRS, T_C3)
 # 13 the replay from the side: batter, catcher, umpire; slowed, the bat's path, where it ended up
 VENDS = W("end", "ends")
@@ -162,7 +162,7 @@ pinl("prn", A10 + 0.3, A11 - 0.02, "Runner on first", "runner", "yl")
 pinl("pch", VHIT - 0.45, A12 - 0.02, "Checked swing…", "batter", "")
 pinl("pfair", VFAIR - 0.03, VFIELD, "Fair", "ball", "gr")
 title("t12", VLIVE - 0.05, A13 - 0.02, [("The ball is", False), ("still live!", True)], 1250, "band")
-note("n12", W("live", "foul") - 0.03, A13 - 0.02, "Contact makes it a batted ball: <b>fair is in play; foul is a foul ball</b>", 1600)
+note("n12", W("live", "territory") - 0.03, A13 - 0.02, "Contact makes it a batted ball: <b>fair is in play; foul is a foul ball</b>", 1600)
 # 13 the replay and the end
 pinl("pend", VTIP - 0.03, W("end", "it's", nth=1) - 0.05, "Where the bat ended up", "mid", "yl")
 pinl("patt", W("end", "attempted") - 0.03, VEND - 0.02, "Did he try to hit it?", "mid", "")
@@ -182,7 +182,7 @@ CAPS = [("think", 0, 5, {5: "acc"}), ("think", 6, 12, {9: "acc", 10: "acc", 11: 
         ("judge", 0, 4, {4: "acc"}), ("judge", 5, 9, {}), ("judge", 10, 14, {10: "acc"}),
         ("appeal", 0, 4, {2: "acc", 3: "acc"}), ("appeal", 5, 10, {10: "acc"}), ("appeal", 11, 15, {15: "acc"}), ("appeal", 16, 20, {17: "acc", 18: "acc"}), ("appeal", 21, 25, {21: "acc", 23: "acc"}),
         ("final", 0, 6, {5: "acc", 6: "acc"}),
-        ("live", 0, 3, {3: "acc"}), ("live", 4, 9, {7: "acc"}), ("live", 10, 15, {14: "acc"}), ("live", 16, 19, {16: "acc", 18: "acc"}), ("live", 20, 23, {22: "acc"}),
+        ("live", 0, 3, {3: "acc"}), ("live", 4, 9, {7: "acc"}), ("live", 10, 14, {12: "acc"}), ("live", 15, 17, {16: "acc"}), ("live", 18, 21, {20: "acc"}),
         ("end", 0, 8, {6: "acc", 7: "acc"}), ("end", 9, 9, {}), ("end", 10, 18, {16: "acc", 17: "acc"}), ("end", 19, 26, {24: "acc"})]
 for k, (lid, i0, i1, acc) in enumerate(CAPS):
     ln = LN(lid); wd = ln["words"]

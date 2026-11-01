@@ -511,28 +511,28 @@
  {
   "i": 6,
   "id": "live",
-  "text": "And here's something interesting: if the batter checks his swing but the ball is hit into fair or foul territory, it's a live ball.",
-  "spoken": "And here's something interesting: if the batter checks his swing but the ball is hit into fair or foul territory, it's a live ball.",
-  "dur": 6.805,
+  "text": "And here's something interesting: if the batter checks his swing but still puts the ball in fair territory, it's a live ball.",
+  "spoken": "And here's something interesting: if the batter checks his swing but still puts the ball in fair territory, it's a live ball.",
+  "dur": 6.229,
   "words": [
    {
     "w": "And",
-    "start": 0.051,
-    "end": 0.126
+    "start": 0.076,
+    "end": 0.151
    },
    {
     "w": "here's",
-    "start": 0.151,
-    "end": 0.351
+    "start": 0.176,
+    "end": 0.376
    },
    {
     "w": "something",
-    "start": 0.401,
-    "end": 0.676
+    "start": 0.426,
+    "end": 0.701
    },
    {
     "w": "interesting:",
-    "start": 0.751,
+    "start": 0.776,
     "end": 1.526
    },
    {
@@ -558,82 +558,72 @@
    {
     "w": "his",
     "start": 2.451,
-    "end": 2.526
+    "end": 2.551
    },
    {
     "w": "swing",
-    "start": 2.601,
+    "start": 2.626,
     "end": 2.901
    },
    {
     "w": "but",
-    "start": 2.926,
-    "end": 3.026
+    "start": 2.951,
+    "end": 3.051
+   },
+   {
+    "w": "still",
+    "start": 3.101,
+    "end": 3.326
+   },
+   {
+    "w": "puts",
+    "start": 3.376,
+    "end": 3.576
    },
    {
     "w": "the",
-    "start": 3.051,
-    "end": 3.126
+    "start": 3.601,
+    "end": 3.651
    },
    {
     "w": "ball",
-    "start": 3.176,
-    "end": 3.451
+    "start": 3.701,
+    "end": 3.976
    },
    {
-    "w": "is",
-    "start": 3.501,
-    "end": 3.601
-   },
-   {
-    "w": "hit",
-    "start": 3.651,
-    "end": 3.801
-   },
-   {
-    "w": "into",
-    "start": 3.851,
-    "end": 4.026
+    "w": "in",
+    "start": 4.001,
+    "end": 4.076
    },
    {
     "w": "fair",
-    "start": 4.126,
-    "end": 4.401
-   },
-   {
-    "w": "or",
-    "start": 4.451,
-    "end": 4.551
-   },
-   {
-    "w": "foul",
-    "start": 4.651,
-    "end": 4.926
+    "start": 4.151,
+    "end": 4.326
    },
    {
     "w": "territory,",
-    "start": 4.976,
-    "end": 5.776
+    "start": 4.376,
+    "end": 5.151
    },
    {
     "w": "it's",
-    "start": 5.901,
-    "end": 6.076
+    "start": 5.276,
+    "end": 5.476
    },
    {
     "w": "a",
-    "start": 6.076,
-    "end": 6.076
+    "start": 5.476,
+    "end": 5.476
    },
    {
     "w": "live",
-    "start": 6.126,
-    "end": 6.401
+    "start": 5.526,
+    "end": 5.826
    },
    {
     "w": "ball.",
-    "start": 6.451,
-    "end": 6.805
+    "start": 5.876,
+    "end": 6.229
    }
   ]
  },

@@ -30,7 +30,7 @@ LINES = [   # (id, caption, spoken)
     ("judge", "Instead, umpires use their judgment to determine whether the batter attempted to strike the ball.", None),
     ("appeal", "If the home plate umpire initially calls a pitch a ball, the defensive team can appeal the checked swing to the first or third base umpire.", None),
     ("final", "That umpire then makes the final decision.", None),
-    ("live", "And here's something interesting: if the batter checks his swing but the ball is hit into fair or foul territory, it's a live ball.", None),
+    ("live", "And here's something interesting: if the batter checks his swing but still puts the ball in fair territory, it's a live ball.", None),
     ("end", "So next time you see a checked swing call, remember: it's not just about where the bat ends up. It's about whether the batter attempted to swing.", None),
 ]
 
