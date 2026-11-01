@@ -1,0 +1,784 @@
+[
+ {
+  "i": 0,
+  "id": "q",
+  "text": "What actually counts as a swing in baseball?",
+  "spoken": "What actually counts as a swing in baseball?",
+  "dur": 2.133,
+  "words": [
+   {
+    "w": "What",
+    "start": 0.051,
+    "end": 0.151
+   },
+   {
+    "w": "actually",
+    "start": 0.251,
+    "end": 0.551
+   },
+   {
+    "w": "counts",
+    "start": 0.601,
+    "end": 0.876
+   },
+   {
+    "w": "as",
+    "start": 0.926,
+    "end": 1.051
+   },
+   {
+    "w": "a",
+    "start": 1.051,
+    "end": 1.051
+   },
+   {
+    "w": "swing",
+    "start": 1.126,
+    "end": 1.351
+   },
+   {
+    "w": "in",
+    "start": 1.376,
+    "end": 1.426
+   },
+   {
+    "w": "baseball?",
+    "start": 1.476,
+    "end": 2.133
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "think",
+  "text": "You might think it's as simple as whether the bat crosses home plate, but it's not.",
+  "spoken": "You might think it's as simple as whether the bat crosses home plate, but it's not.",
+  "dur": 3.989,
+  "words": [
+   {
+    "w": "You",
+    "start": 0.051,
+    "end": 0.126
+   },
+   {
+    "w": "might",
+    "start": 0.176,
+    "end": 0.401
+   },
+   {
+    "w": "think",
+    "start": 0.451,
+    "end": 0.601
+   },
+   {
+    "w": "it's",
+    "start": 0.626,
+    "end": 0.726
+   },
+   {
+    "w": "as",
+    "start": 0.776,
+    "end": 0.976
+   },
+   {
+    "w": "simple",
+    "start": 1.101,
+    "end": 1.376
+   },
+   {
+    "w": "as",
+    "start": 1.426,
+    "end": 1.526
+   },
+   {
+    "w": "whether",
+    "start": 1.576,
+    "end": 1.776
+   },
+   {
+    "w": "the",
+    "start": 1.801,
+    "end": 1.851
+   },
+   {
+    "w": "bat",
+    "start": 1.901,
+    "end": 2.126
+   },
+   {
+    "w": "crosses",
+    "start": 2.176,
+    "end": 2.501
+   },
+   {
+    "w": "home",
+    "start": 2.551,
+    "end": 2.776
+   },
+   {
+    "w": "plate,",
+    "start": 2.826,
+    "end": 3.276
+   },
+   {
+    "w": "but",
+    "start": 3.351,
+    "end": 3.451
+   },
+   {
+    "w": "it's",
+    "start": 3.476,
+    "end": 3.626
+   },
+   {
+    "w": "not.",
+    "start": 3.676,
+    "end": 3.989
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "norule",
+  "text": "There is no universal rule that says the bat must cross a specific point to count as a swing.",
+  "spoken": "There is no universal rule that says the bat must cross a specific point to count as a swing.",
+  "dur": 4.779,
+  "words": [
+   {
+    "w": "There",
+    "start": 0.026,
+    "end": 0.151
+   },
+   {
+    "w": "is",
+    "start": 0.176,
+    "end": 0.276
+   },
+   {
+    "w": "no",
+    "start": 0.326,
+    "end": 0.501
+   },
+   {
+    "w": "universal",
+    "start": 0.551,
+    "end": 1.076
+   },
+   {
+    "w": "rule",
+    "start": 1.126,
+    "end": 1.626
+   },
+   {
+    "w": "that",
+    "start": 1.676,
+    "end": 1.776
+   },
+   {
+    "w": "says",
+    "start": 1.826,
+    "end": 2.001
+   },
+   {
+    "w": "the",
+    "start": 2.026,
+    "end": 2.076
+   },
+   {
+    "w": "bat",
+    "start": 2.126,
+    "end": 2.351
+   },
+   {
+    "w": "must",
+    "start": 2.401,
+    "end": 2.576
+   },
+   {
+    "w": "cross",
+    "start": 2.626,
+    "end": 3.051
+   },
+   {
+    "w": "a",
+    "start": 3.051,
+    "end": 3.051
+   },
+   {
+    "w": "specific",
+    "start": 3.101,
+    "end": 3.551
+   },
+   {
+    "w": "point",
+    "start": 3.601,
+    "end": 3.826
+   },
+   {
+    "w": "to",
+    "start": 3.851,
+    "end": 3.901
+   },
+   {
+    "w": "count",
+    "start": 3.951,
+    "end": 4.201
+   },
+   {
+    "w": "as",
+    "start": 4.251,
+    "end": 4.376
+   },
+   {
+    "w": "a",
+    "start": 4.376,
+    "end": 4.376
+   },
+   {
+    "w": "swing.",
+    "start": 4.451,
+    "end": 4.779
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "judge",
+  "text": "Instead, umpires use their judgment to determine whether the batter attempted to strike the ball.",
+  "spoken": "Instead, umpires use their judgment to determine whether the batter attempted to strike the ball.",
+  "dur": 4.8,
+  "words": [
+   {
+    "w": "Instead,",
+    "start": 0.051,
+    "end": 0.576
+   },
+   {
+    "w": "umpires",
+    "start": 0.726,
+    "end": 1.201
+   },
+   {
+    "w": "use",
+    "start": 1.251,
+    "end": 1.451
+   },
+   {
+    "w": "their",
+    "start": 1.501,
+    "end": 1.651
+   },
+   {
+    "w": "judgment",
+    "start": 1.701,
+    "end": 2.101
+   },
+   {
+    "w": "to",
+    "start": 2.151,
+    "end": 2.201
+   },
+   {
+    "w": "determine",
+    "start": 2.251,
+    "end": 2.826
+   },
+   {
+    "w": "whether",
+    "start": 2.876,
+    "end": 3.051
+   },
+   {
+    "w": "the",
+    "start": 3.076,
+    "end": 3.126
+   },
+   {
+    "w": "batter",
+    "start": 3.176,
+    "end": 3.501
+   },
+   {
+    "w": "attempted",
+    "start": 3.551,
+    "end": 3.926
+   },
+   {
+    "w": "to",
+    "start": 3.951,
+    "end": 4.001
+   },
+   {
+    "w": "strike",
+    "start": 4.051,
+    "end": 4.351
+   },
+   {
+    "w": "the",
+    "start": 4.401,
+    "end": 4.451
+   },
+   {
+    "w": "ball.",
+    "start": 4.501,
+    "end": 4.8
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "appeal",
+  "text": "If the home plate umpire initially calls a pitch a ball, the defensive team can appeal the checked swing to the first or third base umpire.",
+  "spoken": "If the home plate umpire initially calls a pitch a ball, the defensive team can appeal the checked swing to the first or third base umpire.",
+  "dur": 7.104,
+  "words": [
+   {
+    "w": "If",
+    "start": 0.051,
+    "end": 0.126
+   },
+   {
+    "w": "the",
+    "start": 0.151,
+    "end": 0.201
+   },
+   {
+    "w": "home",
+    "start": 0.251,
+    "end": 0.476
+   },
+   {
+    "w": "plate",
+    "start": 0.526,
+    "end": 0.701
+   },
+   {
+    "w": "umpire",
+    "start": 0.801,
+    "end": 1.301
+   },
+   {
+    "w": "initially",
+    "start": 1.351,
+    "end": 1.726
+   },
+   {
+    "w": "calls",
+    "start": 1.776,
+    "end": 2.076
+   },
+   {
+    "w": "a",
+    "start": 2.076,
+    "end": 2.076
+   },
+   {
+    "w": "pitch",
+    "start": 2.126,
+    "end": 2.351
+   },
+   {
+    "w": "a",
+    "start": 2.351,
+    "end": 2.351
+   },
+   {
+    "w": "ball,",
+    "start": 2.401,
+    "end": 2.951
+   },
+   {
+    "w": "the",
+    "start": 3.076,
+    "end": 3.126
+   },
+   {
+    "w": "defensive",
+    "start": 3.176,
+    "end": 3.601
+   },
+   {
+    "w": "team",
+    "start": 3.651,
+    "end": 3.926
+   },
+   {
+    "w": "can",
+    "start": 3.976,
+    "end": 4.051
+   },
+   {
+    "w": "appeal",
+    "start": 4.076,
+    "end": 4.401
+   },
+   {
+    "w": "the",
+    "start": 4.426,
+    "end": 4.476
+   },
+   {
+    "w": "checked",
+    "start": 4.526,
+    "end": 4.801
+   },
+   {
+    "w": "swing",
+    "start": 4.876,
+    "end": 5.151
+   },
+   {
+    "w": "to",
+    "start": 5.201,
+    "end": 5.251
+   },
+   {
+    "w": "the",
+    "start": 5.276,
+    "end": 5.326
+   },
+   {
+    "w": "first",
+    "start": 5.426,
+    "end": 5.776
+   },
+   {
+    "w": "or",
+    "start": 5.826,
+    "end": 5.926
+   },
+   {
+    "w": "third",
+    "start": 6.026,
+    "end": 6.251
+   },
+   {
+    "w": "base",
+    "start": 6.301,
+    "end": 6.526
+   },
+   {
+    "w": "umpire.",
+    "start": 6.626,
+    "end": 7.104
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "final",
+  "text": "That umpire then makes the final decision.",
+  "spoken": "That umpire then makes the final decision.",
+  "dur": 2.411,
+  "words": [
+   {
+    "w": "That",
+    "start": 0.048,
+    "end": 0.148
+   },
+   {
+    "w": "umpire",
+    "start": 0.248,
+    "end": 0.648
+   },
+   {
+    "w": "then",
+    "start": 0.698,
+    "end": 1.023
+   },
+   {
+    "w": "makes",
+    "start": 1.073,
+    "end": 1.298
+   },
+   {
+    "w": "the",
+    "start": 1.323,
+    "end": 1.373
+   },
+   {
+    "w": "final",
+    "start": 1.448,
+    "end": 1.773
+   },
+   {
+    "w": "decision.",
+    "start": 1.823,
+    "end": 2.411
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "live",
+  "text": "And here's something interesting: if the batter checks his swing but the ball is hit into fair or foul territory, it's a live ball.",
+  "spoken": "And here's something interesting: if the batter checks his swing but the ball is hit into fair or foul territory, it's a live ball.",
+  "dur": 6.805,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.051,
+    "end": 0.126
+   },
+   {
+    "w": "here's",
+    "start": 0.151,
+    "end": 0.351
+   },
+   {
+    "w": "something",
+    "start": 0.401,
+    "end": 0.676
+   },
+   {
+    "w": "interesting:",
+    "start": 0.751,
+    "end": 1.526
+   },
+   {
+    "w": "if",
+    "start": 1.651,
+    "end": 1.726
+   },
+   {
+    "w": "the",
+    "start": 1.751,
+    "end": 1.801
+   },
+   {
+    "w": "batter",
+    "start": 1.851,
+    "end": 2.126
+   },
+   {
+    "w": "checks",
+    "start": 2.176,
+    "end": 2.426
+   },
+   {
+    "w": "his",
+    "start": 2.451,
+    "end": 2.526
+   },
+   {
+    "w": "swing",
+    "start": 2.601,
+    "end": 2.901
+   },
+   {
+    "w": "but",
+    "start": 2.926,
+    "end": 3.026
+   },
+   {
+    "w": "the",
+    "start": 3.051,
+    "end": 3.126
+   },
+   {
+    "w": "ball",
+    "start": 3.176,
+    "end": 3.451
+   },
+   {
+    "w": "is",
+    "start": 3.501,
+    "end": 3.601
+   },
+   {
+    "w": "hit",
+    "start": 3.651,
+    "end": 3.801
+   },
+   {
+    "w": "into",
+    "start": 3.851,
+    "end": 4.026
+   },
+   {
+    "w": "fair",
+    "start": 4.126,
+    "end": 4.401
+   },
+   {
+    "w": "or",
+    "start": 4.451,
+    "end": 4.551
+   },
+   {
+    "w": "foul",
+    "start": 4.651,
+    "end": 4.926
+   },
+   {
+    "w": "territory,",
+    "start": 4.976,
+    "end": 5.776
+   },
+   {
+    "w": "it's",
+    "start": 5.901,
+    "end": 6.076
+   },
+   {
+    "w": "a",
+    "start": 6.076,
+    "end": 6.076
+   },
+   {
+    "w": "live",
+    "start": 6.126,
+    "end": 6.401
+   },
+   {
+    "w": "ball.",
+    "start": 6.451,
+    "end": 6.805
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "end",
+  "text": "So next time you see a checked swing call, remember: it's not just about where the bat ends up. It's about whether the batter attempted to swing.",
+  "spoken": "So next time you see a checked swing call, remember: it's not just about where the bat ends up. It's about whether the batter attempted to swing.",
+  "dur": 7.275,
+  "words": [
+   {
+    "w": "So",
+    "start": 0.073,
+    "end": 0.173
+   },
+   {
+    "w": "next",
+    "start": 0.223,
+    "end": 0.448
+   },
+   {
+    "w": "time",
+    "start": 0.498,
+    "end": 0.698
+   },
+   {
+    "w": "you",
+    "start": 0.748,
+    "end": 0.823
+   },
+   {
+    "w": "see",
+    "start": 0.873,
+    "end": 1.048
+   },
+   {
+    "w": "a",
+    "start": 1.048,
+    "end": 1.048
+   },
+   {
+    "w": "checked",
+    "start": 1.098,
+    "end": 1.398
+   },
+   {
+    "w": "swing",
+    "start": 1.448,
+    "end": 1.673
+   },
+   {
+    "w": "call,",
+    "start": 1.723,
+    "end": 2.048
+   },
+   {
+    "w": "remember:",
+    "start": 2.123,
+    "end": 2.773
+   },
+   {
+    "w": "it's",
+    "start": 2.923,
+    "end": 3.073
+   },
+   {
+    "w": "not",
+    "start": 3.123,
+    "end": 3.323
+   },
+   {
+    "w": "just",
+    "start": 3.373,
+    "end": 3.548
+   },
+   {
+    "w": "about",
+    "start": 3.573,
+    "end": 3.798
+   },
+   {
+    "w": "where",
+    "start": 3.848,
+    "end": 4.023
+   },
+   {
+    "w": "the",
+    "start": 4.048,
+    "end": 4.098
+   },
+   {
+    "w": "bat",
+    "start": 4.148,
+    "end": 4.373
+   },
+   {
+    "w": "ends",
+    "start": 4.473,
+    "end": 4.648
+   },
+   {
+    "w": "up.",
+    "start": 4.773,
+    "end": 5.123
+   },
+   {
+    "w": "It's",
+    "start": 5.248,
+    "end": 5.323
+   },
+   {
+    "w": "about",
+    "start": 5.348,
+    "end": 5.598
+   },
+   {
+    "w": "whether",
+    "start": 5.648,
+    "end": 5.823
+   },
+   {
+    "w": "the",
+    "start": 5.848,
+    "end": 5.898
+   },
+   {
+    "w": "batter",
+    "start": 5.948,
+    "end": 6.248
+   },
+   {
+    "w": "attempted",
+    "start": 6.298,
+    "end": 6.673
+   },
+   {
+    "w": "to",
+    "start": 6.723,
+    "end": 6.798
+   },
+   {
+    "w": "swing.",
+    "start": 6.873,
+    "end": 7.275
+   }
+  ]
+ }
+]
