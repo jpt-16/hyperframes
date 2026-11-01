@@ -1,12 +1,12 @@
-"""'What counts as a swing?': how umpires judge a checked swing (1080x1920, music + effects, no voice).
+"""'What counts as a swing?': how umpires judge a checked swing (1080x1920, voiceover + music + effects).
 
     python3 tools/physics.py                                       # the pitch and the checked-swing dribbler -> assets/play.json
-    $HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # a timing guide only: reads the script to place the shots
-    python3 build.py                                               # index.html + assets/mix.wav (music + effects, mastered low for a voice on top)
+    $HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # Kokoro voiceover (am_michael, 1.3x) + word timing
+    python3 build.py                                               # index.html + assets/mix.wav (+ assets/mix-novo.wav without the voice)
     npx --yes hyperframes@0.8.154 render . -o renders/checked-swing.mp4 --video-bitrate 16M
 
-The video ships without a voice: the narrator records it separately. The shots are timed to the script read at a
-natural pace (assets/vo/timing.json, written by the guide read); CUES.md lists when each line lands. Visuals: the
+Shots, captions and reveals are keyed to the words of the voiceover (CUES.md lists when each line lands, for anyone
+recording their own read over the music + effects version). Visuals: the
 check swing (frozen where the bat stops), a check vs a full swing from the side with the front of the plate as a
 plane and the bat tip's path, a borderline check (no rule draws that line), the plate umpire's no-call, the appeal
 (the catcher asks, the plate umpire points; a right-handed batter goes to the first-base umpire, a left-handed batter
@@ -140,8 +140,7 @@ title("t3", A3, A4 - 0.02, [("It’s not just about", False), ("crossing the pla
 note("n3", W("norule", "no") - 0.03, A4 - 0.02, "MLB’s rulebook doesn’t define a swing: <b>it’s the umpire’s call</b>", 1600)
 pinl("pq", W("norule", "specific") - 0.03, A4 - 0.02, "Where’s the line?", "plane", "cy")
 # 4-5 the umpire's judgment
-pinl("pu", A4 + 0.2, A5 - 0.02, "Plate umpire", "ump", "")
-title("t4", W("judge", "judgment") - 0.04, A6 - 0.02, [("The umpire", False), ("uses judgment", True)], 300)
+title("t4", W("judge", "judgment") - 0.04, A6 - 0.02, [("The umpire", False), ("uses judgment", True)], 1250, "band")
 pinl("ptip", W("judge", "attempted") - 0.03, A6 - 0.02, "An attempt to hit it?", "tip", "yl")
 # 6-9 the appeal
 chip("cb", VBALL - 0.03, A8 - 0.02, "Plate umpire: <b class='yl'>Ball</b>", 1560)
@@ -162,8 +161,7 @@ VLIVE = W("live", "live")
 pinl("prn", A10 + 0.3, A11 - 0.02, "Runner on first", "runner", "yl")
 pinl("pch", VHIT - 0.45, A12 - 0.02, "Checked swing…", "batter", "")
 pinl("pfair", VFAIR - 0.03, VFIELD, "Fair", "ball", "gr")
-pinl("prun", VFAIR + 0.3, VLIVE - 0.1, "Runner goes", "runner", "yl")
-title("t12", VLIVE - 0.05, A13 - 0.02, [("The ball is", False), ("still live!", True)], 300)
+title("t12", VLIVE - 0.05, A13 - 0.02, [("The ball is", False), ("still live!", True)], 1250, "band")
 note("n12", W("live", "foul") - 0.03, A13 - 0.02, "Contact makes it a batted ball: <b>fair is in play; foul is a foul ball</b>", 1600)
 # 13 the replay and the end
 pinl("pend", VTIP - 0.03, W("end", "it's", nth=1) - 0.05, "Where the bat ended up", "mid", "yl")
@@ -177,7 +175,29 @@ c.ft("#brx", o(opacity=0), o(opacity=1, duration=0.2), VBRAND)
 c.ft(".bmark", o(scale=0.4, rotation=-120), o(scale=1, rotation=0, duration=0.5, ease="back.out(1.6)"), VBRAND)
 c.ft(".bname", o(opacity=0, y=30), o(opacity=1, y=0, duration=0.3, ease="power3.out"), VBRAND + 0.15)
 
-# ----------------------------------------------------------------- sound (no voice: room left for the narrator)
+
+# ----------------------------------------------------------------- captions: the voiceover, word by word (the hook line is the big title instead)
+CAPS = [("think", 0, 5, {5: "acc"}), ("think", 6, 12, {9: "acc", 10: "acc", 11: "acc", 12: "acc"}), ("think", 13, 15, {15: "acc"}),
+        ("norule", 0, 4, {2: "acc", 3: "acc", 4: "acc"}), ("norule", 5, 10, {10: "acc"}), ("norule", 11, 18, {13: "acc"}),
+        ("judge", 0, 4, {4: "acc"}), ("judge", 5, 9, {}), ("judge", 10, 14, {10: "acc"}),
+        ("appeal", 0, 4, {2: "acc", 3: "acc"}), ("appeal", 5, 10, {10: "acc"}), ("appeal", 11, 15, {15: "acc"}), ("appeal", 16, 20, {17: "acc", 18: "acc"}), ("appeal", 21, 25, {21: "acc", 23: "acc"}),
+        ("final", 0, 6, {5: "acc", 6: "acc"}),
+        ("live", 0, 3, {3: "acc"}), ("live", 4, 9, {7: "acc"}), ("live", 10, 15, {14: "acc"}), ("live", 16, 19, {16: "acc", 18: "acc"}), ("live", 20, 23, {22: "acc"}),
+        ("end", 0, 8, {6: "acc", 7: "acc"}), ("end", 9, 9, {}), ("end", 10, 18, {16: "acc", 17: "acc"}), ("end", 19, 26, {24: "acc"})]
+for k, (lid, i0, i1, acc) in enumerate(CAPS):
+    ln = LN(lid); wd = ln["words"]
+    start = wd[i0]["t0"] - 0.06
+    if k + 1 < len(CAPS) and CAPS[k + 1][0] == lid: end = wd[CAPS[k + 1][1]]["t0"] - 0.06
+    elif IDX[lid] + 1 < len(TM["lines"]): end = min(ln["t1"] + 0.35, TM["lines"][IDX[lid] + 1]["t0"] - 0.1)
+    else: end = min(ln["t1"] + 0.3, VEND - 0.02)
+    cid = f"cap{k}"; sp = []
+    for n in range(i0, i1 + 1):
+        w = wd[n]["w"]; w = w.rstrip(",:") if n == i1 and i1 > i0 else w
+        sp.append(f'<span class="cw{(" " + acc[n]) if n in acc else ""}" id="{cid}w{n - i0}">{esc(w)}</span>')
+    c.clip(cid, start, end, f'<div class="cap" style="top:300px"><span class="cl">{" ".join(sp)}</span></div>', cls="layer", style="z-index:20")
+    for n in range(i0, i1 + 1): c.ft(f"#{cid}w{n - i0}", o(opacity=0, y=34, filter="blur(10px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.15, ease="power3.out"), wd[n]["t0"] - 0.04)
+
+# ----------------------------------------------------------------- sound
 def cue(n, t, db=0.0):
     if t is not None and 0 <= t < D: c.cue(n, t, db)
 for t_ in CUTS: cue("whoosh", t_, -11)
@@ -231,18 +251,25 @@ def mixdown():
     for vt, g in CRACKS:
         i = int(vt * SR); j = min(n, i + len(cr)); fx[i:j] += cr[: j - i] * g
     crowd = read(os.path.join(HERE, "assets", "sfx", "crowd.wav")); crowd = np.concatenate([crowd] * (n // len(crowd) + 1))[:n]
-    fx += crowd * 10 ** (-27 / 20)                                             # stadium ambience
-    # the music bed: subtle, lands its chord on the end card; no voice to duck under, so it sits low throughout
+    fx += crowd * 10 ** (-30 / 20)                                             # stadium ambience
+    # the music bed: subtle, builds over the opening, lands its chord on the end card; ducked under the voice
     bedp = os.path.join(HERE, "assets", "bed.wav"); make_bed(bedp, D, VBRAND, style="glow", seed=83)
     bed = read(bedp)[:n]; bed = np.pad(bed, ((0, n - len(bed)), (0, 0)))
-    ramp = np.clip(np.arange(n) / SR / 2.5, 0.55, 1.0)[:, None]               # builds in over the opening
-    full = (fx + bed * ramp * 10 ** (-15 / 20)) * 10 ** (-6 / 20)
+    ramp = np.clip(np.arange(n) / SR / 2.5, 0.55, 1.0)[:, None]
+    vo = read(os.path.join(HERE, "assets", "vo", "vo.wav"))[:n]; vo = np.pad(vo, ((0, n - len(vo)), (0, 0)))
+    env = np.convolve(np.abs(vo).mean(1), np.ones(int(0.12 * SR)) / int(0.12 * SR), "same")
+    duck = 10 ** (-7 * np.clip(env / 0.05, 0, 1) / 20)                         # up to 7 dB under the voice
+    duck = np.convolve(duck, np.ones(int(0.08 * SR)) / int(0.08 * SR), "same")
+    music = bed * ramp * duck[:, None] * 10 ** (-17 / 20)
+    full = (fx + music) * 10 ** (-6 / 20) + vo
     def wav(path, x):
         w = wave.open(path, "wb"); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
         w.writeframes((np.clip(x * 0.5, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
-    pre = os.path.join(HERE, ".pre.wav"); wav(pre, full)
-    m = master(pre, os.path.join(HERE, "assets", "mix.wav"), target=-20.0)    # low: headroom for a voice recorded on top
-    os.remove(pre)
+    pre, pfx = os.path.join(HERE, ".pre.wav"), os.path.join(HERE, ".fx.wav")
+    wav(pre, full); wav(pfx, (fx + bed * ramp * 10 ** (-17 / 20)) * 10 ** (-6 / 20))
+    m = master(pre, os.path.join(HERE, "assets", "mix.wav"))
+    master(pre, os.path.join(HERE, "assets", "mix-novo.wav"), fx_path=pfx)       # music + effects at the same level, without the voice
+    os.remove(pre); os.remove(pfx)
     return m
 
 # ----------------------------------------------------------------- CSS

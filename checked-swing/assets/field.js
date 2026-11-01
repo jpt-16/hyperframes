@@ -572,7 +572,7 @@ function shotAt(v) {
 // ------------------------------------------------------------------ DOM overlays fed from the same clock
 const $ = (id) => document.getElementById(id);
 const PINT = { batter: () => headTop(batter), catcher: () => headTop(C), ump: () => headTop(ump), u1: () => headTop(U1), u3: () => headTop(U3), runner: () => headTop(R),
-  tip: () => (TIP_END.visible ? TIP_END.position.clone() : batTip()).add(v3(0, 0.5, 0)), plane: () => v3(0, 6.6, -1.416), mid: () => v3(-1.5, 7.2, 0.6), ball: () => BALL.m.position.clone().add(v3(0, 2, 0)) };
+  tip: () => (TIP_END.visible ? TIP_END.position.clone() : batTip()).add(v3(0, 0.5, 0)), plane: () => v3(0, 6.6, -1.416), mid: () => v3(-1.2, 5.0, 0.4), ball: () => BALL.m.position.clone().add(v3(0, 2, 0)) };
 function pin(id, p) {                                            // x is clamped so the label stays on screen
   const el = $(id); if (!el || !p) return;
   const q = p.clone().project(cam);

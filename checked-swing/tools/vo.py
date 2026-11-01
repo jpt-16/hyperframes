@@ -1,4 +1,4 @@
-"""Voiceover for the checked-swing video (a timing guide only: the video ships without a voice), with HyperFrames' built-in Kokoro TTS, plus the time each word is spoken.
+"""Voiceover for the checked-swing video, with HyperFrames' built-in Kokoro TTS, plus the time each word is spoken.
 
     export HYPERFRAMES_PYTHON=<python with kokoro-onnx + soundfile + onnx>
     $HYPERFRAMES_PYTHON tools/vo.py
