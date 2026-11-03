@@ -578,6 +578,7 @@ const CAMS = {
   runnerFeet: (u) => [mixV(v3(49, 1.2, -80), v3(49.6, 1.1, -79.4), u), v3(54.8, 1.5, -72.5), 44],
   wideR: (u) => [mixV(v3(82, 9, -60), v3(80, 8.6, -63), u), v3(30, 3, -84), 40],                             // beyond first: the runner, the mound, second
   throwCam: (u) => [mixV(v3(2, 17, 24), v3(2, 16, 20), u), v3(0, 3, -112), 26],
+  tag2b: (u) => [mixV(v3(7, 3.4, -144), v3(6, 3.0, -141), u), v3(1.5, 1.4, -126), 34],                       // behind second: the slide and the tag, slowed
   tag2: (u) => [mixV(v3(-14, 3, -118), v3(-13, 3, -118.6), u), v3(2, 1.4, -125.5), 36],                     // the shortstop's side of the bag: the slide, the tag
   highHome: (u) => [mixV(v3(74.3, 10, -76.8), v3(73, 9.4, -76.4), easeIO(u)), v3(10, 2, -62), 40],      // up behind the runner: him and the pitcher
   pick: (u) => [mixV(v3(-22, 16, -58), v3(-21, 15.5, -58.5), u), v3(30, 1, -62), 40],
