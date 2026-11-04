@@ -1,7 +1,8 @@
-"""'How catchers adjust to the hitter' (1080x1920, music + effects; the narration is recorded separately).
+"""'How catchers adjust to the hitter' (1080x1920), cut to the voiceover (tools/vo.py + tools/assemble.py).
 
     python3 tools/physics.py        # the pitches -> assets/play.json
-    python3 build.py                # index.html + assets/mix.wav (music + effects, mastered low for a voice on top) + CUES.md
+    $HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # voiceover + per-word timing
+    python3 build.py                # index.html + assets/mix.wav (+ mix-novo.wav without the voice) + CUES.md
     npx --yes hyperframes@0.8.154 render . -o renders/catcher-setup.mp4 --video-bitrate 16M
 
 The same catcher and plate umpire throughout. The umpire works from the slot: between the catcher and the batter, on the
@@ -20,10 +21,17 @@ from audio import SR, make_bed
 
 P = json.load(open(os.path.join(HERE, "assets", "play.json")))
 PI_ = P["pitches"]
-D = 43.5
+TMJ = json.load(open(os.path.join(HERE, "assets", "vo", "timing.json")))
+IDX = {x["id"]: k for k, x in enumerate(TMJ["lines"])}
+LN = lambda lid: TMJ["lines"][IDX[lid]]
+def W(lid, word, end=False, nth=0):
+    hits = [w for w in LN(lid)["words"] if w["w"].strip(".,!?:").lower() == word.lower()]
+    return hits[nth]["t1" if end else "t0"]
+D = TMJ["duration"]
+S = {x["id"]: x["t0"] - 0.08 for x in TMJ["lines"]}
 Y, CYAN, WHITE, HOT, MUTED = "#FFD84D", "#56D1FF", "#F4F6F8", "#FF6A3D", "#AEB8C6"
 
-# ----------------------------------------------------------------- shots (video time v) and the play time each one shows
+# ----------------------------------------------------------------- shots (video time v) and the play time each one shows, keyed to the voiceover
 SHOTS = []
 def shot(a, b, cam, vs, ts, speed="rt", **kw):
     SHOTS.append(dict(a=round(a, 4), b=round(b, 4), cam=cam, vs=[round(x, 4) for x in vs], ts=[round(x, 4) for x in ts], speed=speed, **kw))
@@ -32,37 +40,46 @@ def vat(sh, t):
     vs, ts = sh["vs"], sh["ts"]
     for i in range(1, len(vs)):
         if ts[i] != ts[i - 1] and min(ts[i - 1], ts[i]) <= t <= max(ts[i - 1], ts[i]): return vs[i - 1] + (t - ts[i - 1]) / (ts[i] - ts[i - 1]) * (vs[i] - vs[i - 1])
-def pitch_shot(a, b, cam, k, vcatch, **kw):                    # a pitch caught at video time vcatch; the catcher sets up 1.3 s before
-    rate(a, b, cam, -(vcatch - a), pitch=k, setup=-1.3, **kw)
+def pitch_shot(a, b, cam, k, vcatch, setup=-1.3, **kw):       # a pitch caught at video time vcatch; the catcher sets up `setup` s before
+    rate(a, b, cam, -(vcatch - a), pitch=k, setup=setup, **kw)
     return SHOTS[-1]
-# 1 the hook (0-5): a right-handed hitter steps in, the catcher and umpire get down; a left-handed hitter in the other box; freeze
-rate(0.0, 2.3, "broadcast", 0.0, walk=1.6, rings=[])
-shot(2.3, 5.0, "broadcast", [2.3, 4.0, 5.0], [0.0, 1.7, 1.7], lhb=1, walk=1.5, freeze=4.0)
-# 2 the right-handed hitter (5-14): from above; then over the umpire's shoulder, an inside pitch and an outside pitch
-rate(5.0, 7.6, "overhead", 3.0, rings=["bat", "c", "u"])
-V_IN, V_OUT = 9.7, 13.0
-pitch_shot(7.6, 10.8, "umpView", "inR", V_IN, zone=-9, sight=-1.6, marks=-0.2)
-pitch_shot(10.8, 14.0, "umpView", "outR", V_OUT, zone=-9, sight=-9, marks=-0.2)
-# 3 the left-handed hitter (14-23): he steps in; the umpire moves to the other slot; then right vs left, split
-rate(14.0, 17.2, "overhead", 0.0, lhb=1, walk=1.4, umpMove=0.9, rings=["bat", "u"])
-V_SP = 21.0
-half = dict(vs=[17.2, 23.0], ts=[-(V_SP - 17.2), 23.0 - V_SP], cam="umpView", setup=-1.3, zone=-9, sight=-9, marks=-0.2)
-shot(17.2, 23.0, "umpView", [17.2, 23.0], [0, 0], mode="split", top=dict(half, pitch="outR"), bot=dict(half, pitch="outL", lhb=1))
-# 4 the catcher's adjustment (23-33): an inside pitch, an outside pitch, one on the edge (slowed at the catch)
-V4 = [25.4, 28.7, 32.0]
-A1 = pitch_shot(23.0, 26.3, "umpView", "inR", V4[0], zone=-9, sight=-9, marks=-0.2)
-A2 = pitch_shot(26.3, 29.6, "frontC", "outR", V4[1], marks=-0.2)
-shot(29.6, 33.0, "umpView", [29.6, 31.4, 32.6, 33.0], [-2.1, -0.3, 0.18, 0.58], speed="slow", pitch="edgeR", setup=-1.3, zone=-9, sight=-9, marks=-0.2)
-A3 = SHOTS[-1]; V4[2] = vat(A3, 0.0)
-# 5 the takeaway (33-43.5): an edge pitch to each hitter, received cleanly; the throw back; the end card
-V5 = [35.0, 37.8]
-B1 = pitch_shot(33.0, 35.8, "sideCatch", "edgeR", V5[0], marks=-0.2)
-B2 = pitch_shot(35.8, 38.6, "sideCatch", "edgeL", V5[1], lhb=1, marks=-0.2)
-VTOSS = 39.7
-rate(38.6, D, "toss", 38.6 - V5[1], pitch="edgeL", lhb=1, setup=-1.3, toss=round(VTOSS - V5[1], 3))
+# 1 "Did you know…": a right-handed hitter steps in; on "depending on which side", a left-handed hitter; freeze on "hitter stands"
+A1 = W("q", "depending") - 0.1; VFRZ = W("q", "hitter")
+rate(0.0, A1, "broadcast", 0.0, walk=1.6, rings=[])
+shot(A1, S["rhb"], "broadcast", [A1, VFRZ, S["rhb"]], [0.0, VFRZ - A1, VFRZ - A1], lhb=1, walk=1.5, freeze=VFRZ)
+# 2 "When a right-handed hitter steps into the box (overhead: he arrives on 'box'), the umpire and catcher (pins) have a particular viewing angle (umpire's view, inside pitch)"
+A2 = W("rhb", "have") - 0.05; V2 = W("rhb", "angle") + 0.05
+rate(S["rhb"], A2, "overhead", -(W("rhb", "box") - S["rhb"]) + 1.5, walk=1.5, rings=["bat", "c", "u"])
+pitch_shot(A2, S["lhb"], "umpView", "inR", V2, setup=-1.0, zone=-9, sight=-(V2 - W("rhb", "particular")), marks=-0.2)
+# 3 "But when a left-handed hitter steps up (arrives on 'up'), that angle changes (the umpire moves to the other slot)"
+T_UP = W("lhb", "up") + 0.1
+rate(S["lhb"], S["adj"], "overhead", 1.5 - (T_UP - S["lhb"]), lhb=1, walk=1.5, umpMove=1.5 - (T_UP - S["lhb"]) + (W("lhb", "that") - S["lhb"]), rings=["bat", "u"])
+# 4 "The catcher has to adjust to the hitter's position (split, right vs left), the pitch location (he sets up outside), and the umpire's line of sight (sightlines)"
+A4 = W("adj", "the", nth=2) - 0.08; V_SP = W("adj", "position") + 0.1
+half = dict(vs=[S["adj"], A4], ts=[-(V_SP - S["adj"]), A4 - V_SP], cam="umpView", setup=-1.3, zone=-9, sight=-9, marks=-0.2)
+shot(S["adj"], A4, "umpView", [S["adj"], A4], [0, 0], mode="split", top=dict(half, pitch="outR"), bot=dict(half, pitch="outL", lhb=1))
+V4 = W("adj", "sight") + 0.05
+pitch_shot(A4, S["why"], "umpView", "outR", V4, setup=-(V4 - W("adj", "location")), zone=-9, sight=-(V4 - W("adj", "umpire's")), marks=-0.2)
+# 5 "Why does this matter? Because catchers want to give the umpire the clearest possible look at the pitch (inside, umpire's view) while receiving it smoothly (outside, from in front)"
+V5 = W("look", "look") + 0.05; A6 = W("look", "pitch") + 0.1; V6 = W("look", "smoothly") + 0.3
+pitch_shot(S["why"], S["look"], "broadcast", "inR", V5)
+pitch_shot(S["look"], A6, "umpView", "inR", V5, zone=-9, sight=-9, marks=-0.2)
+pitch_shot(A6, S["frame"], "frontC", "outR", V6, setup=-1.0, marks=-0.2)
+# 6 "On borderline pitches, good framing can also help the umpire recognize…" the edge pitch, slowed; caught on "recognize"
+VC = W("frame", "recognize") + 0.1; v1 = VC - 1.4; v2 = VC + 0.8
+shot(S["frame"], S["level"], "umpView", [S["frame"], v1, v2, S["level"]], [-0.35 - (v1 - S["frame"]), -0.35, 0.2, 0.2 + (S["level"] - v2)],
+     speed="slow", pitch="edgeR", setup=-1.3, zone=-9, sight=-9, marks=-0.2)
+A3 = SHOTS[-1]
+# 7 "At the highest level, catching isn't just about stopping the baseball": an edge pitch to each hitter, caught cleanly
+V8a = W("level", "catching") + 0.05; A8 = W("level", "just") - 0.05; V8b = W("level", "baseball") + 0.2
+pitch_shot(S["level"], A8, "sideCatch", "edgeR", V8a, setup=-1.0, marks=-0.2)
+pitch_shot(A8, S["end"], "sideCatch", "edgeL", V8b, setup=-0.9, lhb=1, marks=-0.2)
+# 8 "It's about understanding everything happening around home plate": the throw back to the pitcher; the end card
+VTOSS = W("end", "understanding") + 0.05
+VBRAND = round(LN("end")["t1"] + 0.3, 2)
+rate(S["end"], D, "toss", S["end"] - V8b, pitch="edgeL", lhb=1, setup=-0.9, toss=round(VTOSS - V8b, 3))
 for x, y in zip(SHOTS, SHOTS[1:]): assert abs(x["b"] - y["a"]) < 1e-3 and x["b"] > x["a"], (x, y)
 CUTS = [x["a"] for x in SHOTS[1:]]
-VBRAND = 41.3
 
 c = Comp(D, 30)
 PINS = []
@@ -70,7 +87,7 @@ c.clip("fieldl", 0, D, '<canvas id="field-gl" width="1080" height="1920" data-la
 c.clip("shade", 0, D, '<div class="shade-top"></div><div class="shade-bot"></div>', cls="layer", style="z-index:2")
 c.clip("spdc", 0, D, '<div class="spd" id="spd"></div>', cls="layer", style="z-index:30")
 c.clip("flash", 0, D, '<div class="flash" id="flash"></div>', cls="layer", style="z-index:40")
-for f in [4.0, 5.0, 14.0, 23.0, 33.0, VBRAND]:
+for f in [VFRZ, S["rhb"], S["lhb"], S["look"], S["level"], VBRAND]:
     c.set("#flash", '{"opacity":0.5}', f); c.to("#flash", o(opacity=0, duration=0.14, ease="power2.out"), f + 0.001)
 
 def pop(sel, t, dy=24):
@@ -99,36 +116,41 @@ def card(cid, t0, t1, n, text):
 def marks(pid, vcatch, t1, cross="Crossed the zone", glove="Caught here"):
     pinl(pid + "a", vcatch - 0.02, t1, cross, "cross", "yl sm"); pinl(pid + "b", vcatch + 0.08, t1, glove, "glove", "cy sm")
 
-# ----------------------------------------------------------------- 1 the hook
-title("hook", 0.08, 4.98, [("Why does catcher", False), ("positioning change", False), ("with the hitter?", True)], 260, "hk2")
-chip("hr", 0.5, 2.28, "Right-handed hitter", 1560); chip("hl", 2.45, 4.98, "Left-handed hitter", 1560, "lb")
+# ----------------------------------------------------------------- 1 the hook (the question is the big title instead of captions)
+TT = 580                                                     # the scene titles sit under the captions
+title("hook", 0.08, S["rhb"] - 0.02, [("Why does catcher", False), ("positioning change", False), ("with the hitter?", True)], 260, "hk2")
+chip("hr", 0.5, A1 - 0.02, "Right-handed hitter", 1560); chip("hl", A1 + 0.1, S["rhb"] - 0.02, "Left-handed hitter", 1560, "lb")
 # 2 the right-handed hitter
-title("t2", 5.08, 13.98, [("The hitter", False), ("changes the view", True)], 260, "hk2")
-pinl("pb", 5.3, 7.58, "Batter", "batter", "")
-pinl("pc", 5.6, 7.58, "Catcher", "catcher", "yl")
-pinl("pu", 5.9, 7.58, "Umpire: in the slot", "ump", "cy")
-pinl("peye", 7.9, 10.78, "Umpire’s view", "eye", "cy sm")
-chip("ci", 8.0, 10.78, "Inside pitch", 1740); chip("co", 11.0, 13.98, "Outside pitch", 1740)
-marks("m1", V_IN, 10.78); marks("m2", V_OUT, 13.98)
+title("t2", S["rhb"] + 0.1, W("rhb", "umpire") - 0.1, [("The hitter", False), ("changes the view", True)], TT, "hk2")
+pinl("pb", W("rhb", "hitter"), A2 - 0.02, "Batter", "batter", "")
+pinl("pu", W("rhb", "umpire"), A2 - 0.02, "Umpire: in the slot", "ump", "cy")
+pinl("pc", W("rhb", "catcher"), A2 - 0.02, "Catcher", "catcher", "yl")
+pinl("peye", W("rhb", "particular"), S["lhb"] - 0.02, "Umpire’s view", "eye", "cy sm")
+marks("m1", V2, S["lhb"] - 0.02)
 # 3 the left-handed hitter
-title("t3", 14.08, 22.98, [("Opposite side.", False), ("Different angle.", True)], 260, "hk2")
-pinl("pu2", 14.9, 17.18, "Umpire moves to the other slot", "ump", "cy")
-pinl("pb2", 15.4, 17.18, "Left-handed hitter", "batter", "")
-c.clip("splt", 17.2, 23.0, """<div class="seam"></div>
+title("t3", W("lhb", "steps"), S["adj"] - 0.02, [("Opposite side.", False), ("Different angle.", True)], TT, "hk2")
+pinl("pb2", W("lhb", "left-handed"), S["adj"] - 0.02, "Left-handed hitter", "batter", "")
+pinl("pu2", W("lhb", "that"), S["adj"] - 0.02, "Umpire moves to the other slot", "ump", "cy")
+# 4 the adjustment: hitter (split), pitch location (setup), line of sight
+c.clip("splt", S["adj"], A4, """<div class="seam"></div>
   <div class="half t"><span class="hlab yl" id="hs1">Right-handed hitter</span></div>
   <div class="half b"><span class="hlab yl" id="hs2">Left-handed hitter</span></div>""", cls="layer", style="z-index:11")
-pop("#hs1", 17.25, 10); pop("#hs2", 17.35, 10)
-# 4 the adjustment
-title("t4", 23.08, 32.98, [("Positioning", False), ("+ presentation", True)], 260, "hk2")
-card("k1", 23.1, 26.28, "1", "Inside"); card("k2", 26.4, 29.58, "2", "Outside"); card("k3", 29.7, 32.98, "3", "On the edge")
-note("n4", 23.4, 26.28, "He sets up for the pitch that’s called: <b>inside, outside or on the edge</b>, depending on the hitter and the situation", 1640)
-pinl("pset", V4[1] - 1.25, V4[1] - 0.05, "Sets up outside", "catcher", "yl")
-marks("m3", V4[0], 26.28); marks("m4", V4[1], 29.58); marks("m5", V4[2], 32.98, "Crossed the edge", "Caught off the plate")
-note("n5", V4[2] + 0.1, 32.98, "The call is where it <b>crosses the zone</b>, not where it’s caught. Good receivers catch it cleanly and hold it.", 1640)
-# 5 the takeaway
-chip("r1", 33.1, 35.78, "Right-handed hitter · on the edge", 1560); chip("r2", 35.9, 38.58, "Left-handed hitter · on the edge", 1560, "lb")
-pinl("pq1", V5[0] + 0.1, 35.78, "Quiet glove", "glove", "cy sm"); pinl("pq2", V5[1] + 0.1, 38.58, "Quiet glove", "glove", "cy sm")
-title("t5", 38.7, VBRAND - 0.02, [("Elite catchers read", False), ("the entire field.", True)], 1480, "hk2")
+pop("#hs1", S["adj"] + 0.05, 10); pop("#hs2", S["adj"] + 0.15, 10)
+pinl("pset", W("adj", "location"), V4 - 0.1, "Sets up outside", "catcher", "yl")
+note("n4", A4 + 0.1, S["why"] - 0.02, "He sets up for the pitch that’s called: <b>inside, outside or on the edge</b>, depending on the hitter and the situation", 1640)
+marks("m2", V4, S["why"] - 0.02)
+# 5 why it matters: a clear look, a smooth catch
+title("t4", S["look"] + 0.05, V5 - 0.1, [("Positioning", False), ("+ presentation", True)], TT, "hk2")
+card("k1", S["look"] + 0.05, A6 - 0.02, "1", "Inside"); card("k2", A6 + 0.05, S["frame"] - 0.02, "2", "Outside")
+marks("m3", V5, A6 - 0.02); marks("m4", V6, S["frame"] - 0.02)
+# 6 borderline pitches
+card("k3", S["frame"] + 0.05, S["level"] - 0.02, "3", "On the edge")
+marks("m5", VC, S["level"] - 0.02, "Crossed the edge", "Caught off the plate")
+note("n5", VC + 0.15, S["level"] - 0.02, "The call is made where the pitch <b>crosses the zone</b>, not where it’s caught. A clean, quiet catch helps the umpire see it.", 1640)
+# 7 the takeaway
+chip("r1", S["level"] + 0.1, A8 - 0.02, "Right-handed hitter · on the edge", 1560); chip("r2", A8 + 0.1, S["end"] - 0.02, "Left-handed hitter · on the edge", 1560, "lb")
+pinl("pq1", V8a + 0.1, A8 - 0.02, "Quiet glove", "glove", "cy sm"); pinl("pq2", V8b + 0.1, S["end"] - 0.02, "Quiet glove", "glove", "cy sm")
+title("t5", S["end"] + 0.15, VBRAND - 0.02, [("Elite catchers read", False), ("the entire field.", True)], 1480, "hk2")
 c.clip("brand", VBRAND, D, """<div class="brand" id="brx"><div class="bmark"><svg viewBox="0 0 100 100" width="150" height="150"><circle cx="50" cy="50" r="44" fill="#f4f2ec" stroke="#05080d" stroke-width="3"/>
   <path d="M26 16 C40 34 40 66 26 84" fill="none" stroke="#ff6a3d" stroke-width="4" stroke-dasharray="6 5"/><path d="M74 16 C60 34 60 66 74 84" fill="none" stroke="#ff6a3d" stroke-width="4" stroke-dasharray="6 5"/></svg></div>
   <div class="bname"><span>Baseball</span><em>Decoded</em></div></div>""", cls="layer", style="z-index:24")
@@ -136,20 +158,42 @@ c.ft("#brx", o(opacity=0), o(opacity=1, duration=0.2), VBRAND)
 c.ft(".bmark", o(scale=0.4, rotation=-120), o(scale=1, rotation=0, duration=0.5, ease="back.out(1.6)"), VBRAND)
 c.ft(".bname", o(opacity=0, y=30), o(opacity=1, y=0, duration=0.3, ease="power3.out"), VBRAND + 0.15)
 
-# ----------------------------------------------------------------- sound (no voice: room left for the narrator)
+# ----------------------------------------------------------------- captions: the voiceover, word by word (the opening question is the big title instead)
+CAPS = [("rhb", 0, 3, {2: "acc"}), ("rhb", 4, 7, {7: "acc"}), ("rhb", 8, 11, {9: "acc", 11: "acc"}), ("rhb", 12, 16, {15: "acc", 16: "acc"}),
+        ("lhb", 0, 4, {3: "acc"}), ("lhb", 5, 6, {}), ("lhb", 7, 9, {9: "acc"}),
+        ("adj", 0, 4, {4: "acc"}), ("adj", 5, 8, {7: "acc", 8: "acc"}), ("adj", 9, 11, {10: "acc", 11: "acc"}), ("adj", 12, 17, {14: "acc", 15: "acc", 16: "acc", 17: "acc"}),
+        ("why", 0, 3, {3: "acc"}),
+        ("look", 0, 3, {1: "acc"}), ("look", 4, 6, {6: "acc"}), ("look", 7, 10, {8: "acc", 10: "acc"}), ("look", 11, 13, {13: "acc"}), ("look", 14, 17, {17: "acc"}),
+        ("frame", 0, 2, {1: "acc"}), ("frame", 3, 6, {4: "acc"}), ("frame", 7, 10, {9: "acc"}), ("frame", 11, 15, {15: "acc"}),
+        ("level", 0, 3, {2: "acc", 3: "acc"}), ("level", 4, 7, {}), ("level", 8, 10, {8: "acc"}),
+        ("end", 0, 3, {3: "acc"}), ("end", 4, 7, {6: "acc", 7: "acc"})]
+for k, (lid, i0, i1, acc) in enumerate(CAPS):
+    ln = LN(lid); wd = ln["words"]
+    start = wd[i0]["t0"] - 0.06
+    if k + 1 < len(CAPS) and CAPS[k + 1][0] == lid: end = wd[CAPS[k + 1][1]]["t0"] - 0.06
+    elif IDX[lid] + 1 < len(TMJ["lines"]): end = min(ln["t1"] + 0.35, TMJ["lines"][IDX[lid] + 1]["t0"] - 0.1)
+    else: end = min(ln["t1"] + 0.3, VBRAND - 0.02)
+    cid = f"cap{k}"; sp = []
+    for n in range(i0, i1 + 1):
+        w = wd[n]["w"]; w = w.rstrip(",:") if n == i1 and i1 > i0 else w
+        w = w.replace("'", "’")
+        sp.append(f'<span class="cw{(" " + acc[n]) if n in acc else ""}" id="{cid}w{n - i0}">{esc(w)}</span>')
+    c.clip(cid, start, end, f'<div class="cap" style="top:300px"><span class="cl">{" ".join(sp)}</span></div>', cls="layer", style="z-index:20")
+    for n in range(i0, i1 + 1): c.ft(f"#{cid}w{n - i0}", o(opacity=0, y=34, filter="blur(10px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.15, ease="power3.out"), wd[n]["t0"] - 0.04)
+
+# ----------------------------------------------------------------- sound
 def cue(n, t, db=0.0):
     if t is not None and 0 <= t < D: c.cue(n, t, db)
 for t_ in CUTS: cue("whoosh", t_, -12)
 cue("riser-s", 0.0, -8)
-for tt in [0.08, 4.0, 5.08, 14.08, 23.08, 38.7]: cue("impact", tt, -6)
+for tt in [0.08, VFRZ, S["rhb"] + 0.1, W("lhb", "steps"), S["look"] + 0.05, S["end"] + 0.15]: cue("impact", tt, -6)
 FLs = {k: v["flight"] for k, v in PI_.items()}
-for vc, k in [(V_IN, "inR"), (V_OUT, "outR"), (V4[0], "inR"), (V4[1], "outR"), (V5[0], "edgeR"), (V5[1], "edgeL")]:
+for vc, k in [(V2, "inR"), (V4, "outR"), (V5, "inR"), (V6, "outR"), (V8a, "edgeR"), (V8b, "edgeL")]:
     cue("whoosh", vc - FLs[k], -10); cue("glove", vc, -1); cue("tick", vc - 0.03, -8)
-cue("glove", V_SP, 0); cue("whoosh", V_SP - 0.43, -9)
-cue("whoosh", vat(A3, -FLs["edgeR"]), -10); cue("glove", V4[2], 0); cue("tick", V4[2] - 0.05, -6)
-cue("popup", 14.9, -8); cue("whoosh", VTOSS, -9); cue("glove", VTOSS + 0.75, -5)
+cue("glove", V_SP, 0); cue("whoosh", V_SP - FLs["outR"], -9)
+cue("whoosh", vat(A3, -FLs["edgeR"]), -10); cue("glove", VC, 0); cue("tick", VC - 0.05, -6)
+cue("popup", W("lhb", "that"), -8); cue("whoosh", VTOSS, -9); cue("glove", VTOSS + 0.75, -5)
 cue("riser-m", VBRAND - 1.0, -10); cue("impact", VBRAND, -4)
-CRACKS = []
 LEVEL = {"impact": -3.0, "hit": -5.0, "whoosh": -6.0, "glove": -1.0, "tick": -6.0, "popup": -8.0, "riser-m": -7.0, "riser-s": -7.0, "tap": -3.0}
 
 def mixdown():
@@ -162,17 +206,25 @@ def mixdown():
         if i < 0: x = x[-i:]; i = 0
         if j > i: fx[i:j] += x[: j - i] * 10 ** ((LEVEL.get(name, -8.0) + gdb) / 20)
     crowd = read(os.path.join(HERE, "assets", "sfx", "crowd.wav")); crowd = np.concatenate([crowd] * (n // len(crowd) + 1))[:n]
-    fx += crowd * 10 ** (-27 / 20)                                             # stadium ambience
+    fx += crowd * 10 ** (-30 / 20)                                             # stadium ambience
+    # the music bed, ducked under the voice
     bedp = os.path.join(HERE, "assets", "bed.wav"); make_bed(bedp, D, VBRAND, style="glow", seed=101)
     bed = read(bedp)[:n]; bed = np.pad(bed, ((0, n - len(bed)), (0, 0)))
     ramp = np.clip(np.arange(n) / SR / 3.0, 0.5, 1.0)[:, None]
-    full = (fx + bed * ramp * 10 ** (-16 / 20)) * 10 ** (-6 / 20)
+    vo = read(os.path.join(HERE, "assets", "vo", "vo.wav"))[:n]; vo = np.pad(vo, ((0, n - len(vo)), (0, 0)))
+    env = np.convolve(np.abs(vo).mean(1), np.ones(int(0.12 * SR)) / int(0.12 * SR), "same")
+    duck = 10 ** (-7 * np.clip(env / 0.05, 0, 1) / 20)                         # up to 7 dB under the voice
+    duck = np.convolve(duck, np.ones(int(0.08 * SR)) / int(0.08 * SR), "same")
+    music = bed * ramp * duck[:, None] * 10 ** (-17 / 20)
+    full = (fx + music) * 10 ** (-6 / 20) + vo
     def wav(path, x):
         w = wave.open(path, "wb"); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
         w.writeframes((np.clip(x * 0.5, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
-    pre = os.path.join(HERE, ".pre.wav"); wav(pre, full)
-    m = master(pre, os.path.join(HERE, "assets", "mix.wav"), target=-20.0)    # low: headroom for a voice recorded on top
-    os.remove(pre)
+    pre, pfx = os.path.join(HERE, ".pre.wav"), os.path.join(HERE, ".fx.wav")
+    wav(pre, full); wav(pfx, (fx + bed * ramp * 10 ** (-17 / 20)) * 10 ** (-6 / 20))
+    m = master(pre, os.path.join(HERE, "assets", "mix.wav"))
+    master(pre, os.path.join(HERE, "assets", "mix-novo.wav"), fx_path=pfx)       # music + effects at the same level, without the voice
+    os.remove(pre); os.remove(pfx)
     return m
 
 def crack(rng):
@@ -346,15 +398,9 @@ if __name__ == "__main__":
         '<script src="assets/vendor/gsap.min.js"></script>\n    ' + HEAD + f'\n    <script>window.__CC = {json.dumps(cc)}; window.__PLAY = {json.dumps(P)};</script>')
     h = h.replace("</body>", '  <script type="module" src="./assets/field.js"></script>\n  </body>')
     open(os.path.join(HERE, "index.html"), "w").write(h)
-    scenes = [("0.0", "5.0", "The hook: a right-handed hitter steps in (catcher and umpire get set), then a left-handed hitter; freeze", "WHY DOES CATCHER POSITIONING CHANGE WITH THE HITTER?"),
-              ("5.0", "14.0", "Right-handed hitter: from above (batter, catcher, umpire in the slot); over the umpire's shoulder, an inside pitch (9.7) and an outside pitch (13.0)", "THE HITTER CHANGES THE VIEW"),
-              ("14.0", "23.0", "Left-handed hitter: he steps in, the umpire moves to the other slot; then right vs left side by side (catch at 21.0)", "OPPOSITE SIDE. DIFFERENT ANGLE."),
-              ("23.0", "33.0", "The adjustment: 1 inside (catch 25.4), 2 outside (28.7), 3 on the edge, slowed (32.0); where it crossed vs where it was caught", "POSITIONING + PRESENTATION"),
-              ("33.0", "41.3", "The takeaway: an edge pitch to each hitter (35.0, 37.8), the throw back to the pitcher (39.7)", "ELITE CATCHERS READ THE ENTIRE FIELD. (from 38.7)"),
-              ("41.3", f"{D:.1f}", "End card", "BASEBALL DECODED")]
-    lines = ["# Scene timing for the voiceover", "", f"The video is {D:.1f} s. Record each part of the narration inside its scene (times in seconds).", "",
-             "| From | To | Scene | On screen |", "|---|---|---|---|"] + [f"| {a} | {b} | {d} | {t} |" for a, b, d, t in scenes]
-    open(os.path.join(HERE, "CUES.md"), "w").write("\n".join(lines) + "\n")
+    cues = ["# Voiceover cue sheet", "", f"When each line starts, to land on its shots (the video is {D:.1f} s). Record your own read over assets/mix-novo.wav to these times.", "",
+            "| Line | Starts |", "|---|---|"] + [f"| {x['text']} | {x['t0']:.1f} s |" for x in TMJ["lines"]]
+    open(os.path.join(HERE, "CUES.md"), "w").write("\n".join(cues) + "\n")
     if "--nomix" not in sys.argv:
         m = mixdown(); print(f"index.html: {D}s, {len(SHOTS)} shots; {len(c.cues)} sounds; {m['lufs']} LUFS / {m['true_peak']} dBTP")
     else: print(f"index.html: {D}s, {len(SHOTS)} shots")

@@ -1,0 +1,695 @@
+{
+ "duration": 40.34,
+ "lines": [
+  {
+   "i": 0,
+   "id": "q",
+   "text": "Did you know a catcher\u2019s positioning can change depending on which side of the plate the hitter stands?",
+   "spoken": "Did you know a catcher's positioning can change depending on which side of the plate the hitter stands?",
+   "t0": 0.25,
+   "t1": 4.918,
+   "words": [
+    {
+     "w": "Did",
+     "t0": 0.259,
+     "t1": 0.359
+    },
+    {
+     "w": "you",
+     "t0": 0.384,
+     "t1": 0.459
+    },
+    {
+     "w": "know",
+     "t0": 0.509,
+     "t1": 0.784
+    },
+    {
+     "w": "a",
+     "t0": 0.784,
+     "t1": 0.784
+    },
+    {
+     "w": "catcher's",
+     "t0": 0.834,
+     "t1": 1.209
+    },
+    {
+     "w": "positioning",
+     "t0": 1.259,
+     "t1": 1.734
+    },
+    {
+     "w": "can",
+     "t0": 1.784,
+     "t1": 1.884
+    },
+    {
+     "w": "change",
+     "t0": 1.934,
+     "t1": 2.284
+    },
+    {
+     "w": "depending",
+     "t0": 2.334,
+     "t1": 2.734
+    },
+    {
+     "w": "on",
+     "t0": 2.809,
+     "t1": 2.859
+    },
+    {
+     "w": "which",
+     "t0": 2.909,
+     "t1": 3.084
+    },
+    {
+     "w": "side",
+     "t0": 3.134,
+     "t1": 3.359
+    },
+    {
+     "w": "of",
+     "t0": 3.384,
+     "t1": 3.459
+    },
+    {
+     "w": "the",
+     "t0": 3.459,
+     "t1": 3.509
+    },
+    {
+     "w": "plate",
+     "t0": 3.559,
+     "t1": 4.034
+    },
+    {
+     "w": "the",
+     "t0": 4.109,
+     "t1": 4.159
+    },
+    {
+     "w": "hitter",
+     "t0": 4.209,
+     "t1": 4.384
+    },
+    {
+     "w": "stands?",
+     "t0": 4.434,
+     "t1": 4.926
+    }
+   ]
+  },
+  {
+   "i": 1,
+   "id": "rhb",
+   "text": "When a right-handed hitter steps into the box, the umpire and catcher have a particular viewing angle.",
+   "spoken": "When a right-handed hitter steps into the box, the umpire and catcher have a particular viewing angle.",
+   "t0": 5.268,
+   "t1": 10.415,
+   "words": [
+    {
+     "w": "When",
+     "t0": 5.287,
+     "t1": 5.462
+    },
+    {
+     "w": "a",
+     "t0": 5.462,
+     "t1": 5.462
+    },
+    {
+     "w": "right-handed",
+     "t0": 5.537,
+     "t1": 6.162
+    },
+    {
+     "w": "hitter",
+     "t0": 6.212,
+     "t1": 6.462
+    },
+    {
+     "w": "steps",
+     "t0": 6.512,
+     "t1": 6.762
+    },
+    {
+     "w": "into",
+     "t0": 6.812,
+     "t1": 6.912
+    },
+    {
+     "w": "the",
+     "t0": 6.937,
+     "t1": 6.987
+    },
+    {
+     "w": "box,",
+     "t0": 7.037,
+     "t1": 7.637
+    },
+    {
+     "w": "the",
+     "t0": 7.762,
+     "t1": 7.862
+    },
+    {
+     "w": "umpire",
+     "t0": 7.962,
+     "t1": 8.362
+    },
+    {
+     "w": "and",
+     "t0": 8.412,
+     "t1": 8.487
+    },
+    {
+     "w": "catcher",
+     "t0": 8.537,
+     "t1": 8.962
+    },
+    {
+     "w": "have",
+     "t0": 9.012,
+     "t1": 9.187
+    },
+    {
+     "w": "a",
+     "t0": 9.187,
+     "t1": 9.187
+    },
+    {
+     "w": "particular",
+     "t0": 9.237,
+     "t1": 9.712
+    },
+    {
+     "w": "viewing",
+     "t0": 9.762,
+     "t1": 10.062
+    },
+    {
+     "w": "angle.",
+     "t0": 10.162,
+     "t1": 10.441
+    }
+   ]
+  },
+  {
+   "i": 2,
+   "id": "lhb",
+   "text": "But when a left-handed hitter steps up, that angle changes.",
+   "spoken": "But when a left-handed hitter steps up, that angle changes.",
+   "t0": 10.715,
+   "t1": 13.739,
+   "words": [
+    {
+     "w": "But",
+     "t0": 10.73,
+     "t1": 10.83
+    },
+    {
+     "w": "when",
+     "t0": 10.855,
+     "t1": 11.005
+    },
+    {
+     "w": "a",
+     "t0": 11.005,
+     "t1": 11.005
+    },
+    {
+     "w": "left-handed",
+     "t0": 11.055,
+     "t1": 11.605
+    },
+    {
+     "w": "hitter",
+     "t0": 11.655,
+     "t1": 11.83
+    },
+    {
+     "w": "steps",
+     "t0": 11.88,
+     "t1": 12.13
+    },
+    {
+     "w": "up,",
+     "t0": 12.205,
+     "t1": 12.505
+    },
+    {
+     "w": "that",
+     "t0": 12.63,
+     "t1": 12.73
+    },
+    {
+     "w": "angle",
+     "t0": 12.855,
+     "t1": 13.105
+    },
+    {
+     "w": "changes.",
+     "t0": 13.155,
+     "t1": 13.755
+    }
+   ]
+  },
+  {
+   "i": 3,
+   "id": "adj",
+   "text": "The catcher has to adjust to the hitter\u2019s position, the pitch location, and the umpire\u2019s line of sight.",
+   "spoken": "The catcher has to adjust to the hitter's position, the pitch location, and the umpire's line of sight.",
+   "t0": 14.089,
+   "t1": 19.08,
+   "words": [
+    {
+     "w": "The",
+     "t0": 14.127,
+     "t1": 14.177
+    },
+    {
+     "w": "catcher",
+     "t0": 14.227,
+     "t1": 14.552
+    },
+    {
+     "w": "has",
+     "t0": 14.602,
+     "t1": 14.752
+    },
+    {
+     "w": "to",
+     "t0": 14.802,
+     "t1": 14.877
+    },
+    {
+     "w": "adjust",
+     "t0": 14.927,
+     "t1": 15.252
+    },
+    {
+     "w": "to",
+     "t0": 15.277,
+     "t1": 15.327
+    },
+    {
+     "w": "the",
+     "t0": 15.352,
+     "t1": 15.402
+    },
+    {
+     "w": "hitter's",
+     "t0": 15.452,
+     "t1": 15.677
+    },
+    {
+     "w": "position,",
+     "t0": 15.727,
+     "t1": 16.352
+    },
+    {
+     "w": "the",
+     "t0": 16.477,
+     "t1": 16.527
+    },
+    {
+     "w": "pitch",
+     "t0": 16.577,
+     "t1": 16.802
+    },
+    {
+     "w": "location,",
+     "t0": 16.852,
+     "t1": 17.627
+    },
+    {
+     "w": "and",
+     "t0": 17.752,
+     "t1": 17.827
+    },
+    {
+     "w": "the",
+     "t0": 17.852,
+     "t1": 17.927
+    },
+    {
+     "w": "umpire's",
+     "t0": 18.027,
+     "t1": 18.477
+    },
+    {
+     "w": "line",
+     "t0": 18.527,
+     "t1": 18.702
+    },
+    {
+     "w": "of",
+     "t0": 18.727,
+     "t1": 18.777
+    },
+    {
+     "w": "sight.",
+     "t0": 18.852,
+     "t1": 19.135
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "id": "why",
+   "text": "Why does this matter?",
+   "spoken": "Why does this matter?",
+   "t0": 19.48,
+   "t1": 20.495,
+   "words": [
+    {
+     "w": "Why",
+     "t0": 19.52,
+     "t1": 19.695
+    },
+    {
+     "w": "does",
+     "t0": 19.745,
+     "t1": 19.92
+    },
+    {
+     "w": "this",
+     "t0": 19.97,
+     "t1": 20.12
+    },
+    {
+     "w": "matter?",
+     "t0": 20.17,
+     "t1": 20.6
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "id": "look",
+   "text": "Because catchers want to give the umpire the clearest possible look at the pitch while receiving it smoothly.",
+   "spoken": "Because catchers want to give the umpire the clearest possible look at the pitch while receiving it smoothly.",
+   "t0": 20.745,
+   "t1": 25.591,
+   "words": [
+    {
+     "w": "Because",
+     "t0": 20.761,
+     "t1": 20.986
+    },
+    {
+     "w": "catchers",
+     "t0": 21.036,
+     "t1": 21.436
+    },
+    {
+     "w": "want",
+     "t0": 21.486,
+     "t1": 21.636
+    },
+    {
+     "w": "to",
+     "t0": 21.661,
+     "t1": 21.711
+    },
+    {
+     "w": "give",
+     "t0": 21.736,
+     "t1": 21.836
+    },
+    {
+     "w": "the",
+     "t0": 21.861,
+     "t1": 21.936
+    },
+    {
+     "w": "umpire",
+     "t0": 22.036,
+     "t1": 22.411
+    },
+    {
+     "w": "the",
+     "t0": 22.461,
+     "t1": 22.511
+    },
+    {
+     "w": "clearest",
+     "t0": 22.561,
+     "t1": 22.911
+    },
+    {
+     "w": "possible",
+     "t0": 22.961,
+     "t1": 23.386
+    },
+    {
+     "w": "look",
+     "t0": 23.436,
+     "t1": 23.586
+    },
+    {
+     "w": "at",
+     "t0": 23.611,
+     "t1": 23.661
+    },
+    {
+     "w": "the",
+     "t0": 23.686,
+     "t1": 23.736
+    },
+    {
+     "w": "pitch",
+     "t0": 23.786,
+     "t1": 24.286
+    },
+    {
+     "w": "while",
+     "t0": 24.361,
+     "t1": 24.486
+    },
+    {
+     "w": "receiving",
+     "t0": 24.536,
+     "t1": 24.961
+    },
+    {
+     "w": "it",
+     "t0": 24.986,
+     "t1": 25.036
+    },
+    {
+     "w": "smoothly.",
+     "t0": 25.111,
+     "t1": 25.641
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "id": "frame",
+   "text": "On borderline pitches, good framing can also help the umpire recognize the pitch as a strike.",
+   "spoken": "On borderline pitches, good framing can also help the umpire recognize the pitch as a strike.",
+   "t0": 25.941,
+   "t1": 30.899,
+   "words": [
+    {
+     "w": "On",
+     "t0": 26.01,
+     "t1": 26.06
+    },
+    {
+     "w": "borderline",
+     "t0": 26.11,
+     "t1": 26.61
+    },
+    {
+     "w": "pitches,",
+     "t0": 26.66,
+     "t1": 27.31
+    },
+    {
+     "w": "good",
+     "t0": 27.435,
+     "t1": 27.61
+    },
+    {
+     "w": "framing",
+     "t0": 27.685,
+     "t1": 28.06
+    },
+    {
+     "w": "can",
+     "t0": 28.11,
+     "t1": 28.185
+    },
+    {
+     "w": "also",
+     "t0": 28.285,
+     "t1": 28.535
+    },
+    {
+     "w": "help",
+     "t0": 28.585,
+     "t1": 28.735
+    },
+    {
+     "w": "the",
+     "t0": 28.76,
+     "t1": 28.835
+    },
+    {
+     "w": "umpire",
+     "t0": 28.96,
+     "t1": 29.31
+    },
+    {
+     "w": "recognize",
+     "t0": 29.36,
+     "t1": 29.91
+    },
+    {
+     "w": "the",
+     "t0": 29.935,
+     "t1": 29.985
+    },
+    {
+     "w": "pitch",
+     "t0": 30.035,
+     "t1": 30.285
+    },
+    {
+     "w": "as",
+     "t0": 30.335,
+     "t1": 30.46
+    },
+    {
+     "w": "a",
+     "t0": 30.46,
+     "t1": 30.46
+    },
+    {
+     "w": "strike.",
+     "t0": 30.51,
+     "t1": 30.901
+    }
+   ]
+  },
+  {
+   "i": 7,
+   "id": "level",
+   "text": "At the highest level, catching isn\u2019t just about stopping the baseball.",
+   "spoken": "At the highest level, catching isn't just about stopping the baseball.",
+   "t0": 31.349,
+   "t1": 34.703,
+   "words": [
+    {
+     "w": "At",
+     "t0": 31.401,
+     "t1": 31.476
+    },
+    {
+     "w": "the",
+     "t0": 31.501,
+     "t1": 31.551
+    },
+    {
+     "w": "highest",
+     "t0": 31.601,
+     "t1": 31.951
+    },
+    {
+     "w": "level,",
+     "t0": 32.001,
+     "t1": 32.451
+    },
+    {
+     "w": "catching",
+     "t0": 32.576,
+     "t1": 32.951
+    },
+    {
+     "w": "isn't",
+     "t0": 33.026,
+     "t1": 33.201
+    },
+    {
+     "w": "just",
+     "t0": 33.251,
+     "t1": 33.476
+    },
+    {
+     "w": "about",
+     "t0": 33.501,
+     "t1": 33.701
+    },
+    {
+     "w": "stopping",
+     "t0": 33.751,
+     "t1": 34.101
+    },
+    {
+     "w": "the",
+     "t0": 34.126,
+     "t1": 34.176
+    },
+    {
+     "w": "baseball.",
+     "t0": 34.226,
+     "t1": 34.763
+    }
+   ]
+  },
+  {
+   "i": 8,
+   "id": "end",
+   "text": "It\u2019s about understanding everything happening around home plate.",
+   "spoken": "It's about understanding everything happening around home plate.",
+   "t0": 34.853,
+   "t1": 37.742,
+   "words": [
+    {
+     "w": "It's",
+     "t0": 34.887,
+     "t1": 35.012
+    },
+    {
+     "w": "about",
+     "t0": 35.037,
+     "t1": 35.262
+    },
+    {
+     "w": "understanding",
+     "t0": 35.337,
+     "t1": 35.987
+    },
+    {
+     "w": "everything",
+     "t0": 36.112,
+     "t1": 36.462
+    },
+    {
+     "w": "happening",
+     "t0": 36.512,
+     "t1": 36.887
+    },
+    {
+     "w": "around",
+     "t0": 36.937,
+     "t1": 37.162
+    },
+    {
+     "w": "home",
+     "t0": 37.212,
+     "t1": 37.462
+    },
+    {
+     "w": "plate.",
+     "t0": 37.512,
+     "t1": 37.78
+    }
+   ]
+  }
+ ]
+}

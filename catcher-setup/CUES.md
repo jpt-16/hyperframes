@@ -1,12 +1,15 @@
-# Scene timing for the voiceover
+# Voiceover cue sheet
 
-The video is 43.5 s. Record each part of the narration inside its scene (times in seconds).
+When each line starts, to land on its shots (the video is 40.3 s). Record your own read over assets/mix-novo.wav to these times.
 
-| From | To | Scene | On screen |
-|---|---|---|---|
-| 0.0 | 5.0 | The hook: a right-handed hitter steps in (catcher and umpire get set), then a left-handed hitter; freeze | WHY DOES CATCHER POSITIONING CHANGE WITH THE HITTER? |
-| 5.0 | 14.0 | Right-handed hitter: from above (batter, catcher, umpire in the slot); over the umpire's shoulder, an inside pitch (9.7) and an outside pitch (13.0) | THE HITTER CHANGES THE VIEW |
-| 14.0 | 23.0 | Left-handed hitter: he steps in, the umpire moves to the other slot; then right vs left side by side (catch at 21.0) | OPPOSITE SIDE. DIFFERENT ANGLE. |
-| 23.0 | 33.0 | The adjustment: 1 inside (catch 25.4), 2 outside (28.7), 3 on the edge, slowed (32.0); where it crossed vs where it was caught | POSITIONING + PRESENTATION |
-| 33.0 | 41.3 | The takeaway: an edge pitch to each hitter (35.0, 37.8), the throw back to the pitcher (39.7) | ELITE CATCHERS READ THE ENTIRE FIELD. (from 38.7) |
-| 41.3 | 43.5 | End card | BASEBALL DECODED |
+| Line | Starts |
+|---|---|
+| Did you know a catcher’s positioning can change depending on which side of the plate the hitter stands? | 0.2 s |
+| When a right-handed hitter steps into the box, the umpire and catcher have a particular viewing angle. | 5.3 s |
+| But when a left-handed hitter steps up, that angle changes. | 10.7 s |
+| The catcher has to adjust to the hitter’s position, the pitch location, and the umpire’s line of sight. | 14.1 s |
+| Why does this matter? | 19.5 s |
+| Because catchers want to give the umpire the clearest possible look at the pitch while receiving it smoothly. | 20.7 s |
+| On borderline pitches, good framing can also help the umpire recognize the pitch as a strike. | 25.9 s |
+| At the highest level, catching isn’t just about stopping the baseball. | 31.3 s |
+| It’s about understanding everything happening around home plate. | 34.9 s |
