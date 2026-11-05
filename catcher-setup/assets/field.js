@@ -408,13 +408,20 @@ function solveFor(tgt) {
   SOLVE.set(key, r); return r;
 }
 const catchPt = (k) => V(PI_[k].end);
-const setupPt = (k, s) => { const e = catchPt(k); return e.clone().add(v3(s.miss?.[0] ?? -0.12 * Math.sign(e.x || 1), s.miss?.[1] ?? 0.18, 0)); };   // the target he gave: the pitch misses it a little
+// This catcher sets up on the inside part of the plate for every pitch (the hitter's side: -x for a right-handed hitter),
+// and on a pitch away from that he catches it and brings the glove back toward the plate (backX, over ~0.25 s after the catch).
+const inSign = (s) => (s.lhb ? 1 : -1);
+const setupPt = (k, s) => { const e = catchPt(k); return v3(0.42 * inSign(s), e.y + 0.12, e.z); };
+const backX = (k, s) => { const e = catchPt(k); return Math.sign(e.x) === inSign(s) ? 0 : -0.3 * Math.sign(e.x); };
+const backU = (t) => smooth((t - 0.05) / 0.25);
+const heldPt = (k, s, t) => catchPt(k).add(v3(backX(k, s) * backU(t), 0, 0));
 function catcherAt(t, s) {
   const k = s.pitch ?? "mid", mid = solveFor(catchPt("mid").add(v3(0, 0.2, 0))), set = solveFor(setupPt(k, s)), got = solveFor(catchPt(k));
   // centered, then shifting to the target late (s.setup), then to the ball in the last 0.12 s
   const a = s.setup ?? -9, u1 = smooth((t - a) / 0.35), u2 = smooth((t + 0.12) / 0.12);
   const lerpR = (p, q, u) => ({ f: lerp(p.f, q.f, u), x: lerp(p.x, q.x, u), z: lerp(p.z, q.z, u) });
   let r = lerpR(lerpR(mid, set, u1), got, u2);
+  if (s.pitch != null && t > 0) r = { ...r, x: r.x + backX(k, s) * backU(t) };   // brings it back toward the plate
   let q = { ...C_SET, shL: [r.f, 18, 0] }, pos = v3(r.x, 0, r.z);
   if (s.toss != null && t > s.toss - 0.9) {                       // up out of the crouch, the throw back to the pitcher
     q = keyed([[s.toss - 0.9, q], [s.toss - 0.4, C_UP], [s.toss - 0.12, C_TOSS], [s.toss + 0.12, C_TOSS2], [s.toss + 0.8, C_UP]], t);
@@ -512,7 +519,7 @@ function setScene(t, s) {
   const marks = s.marks != null && t > s.marks && live, tf = tFront(k);
   CROSS.visible = CROSSD.visible = marks && t > tf; if (CROSS.visible) { const f = V(P.front); CROSS.position.copy(f).add(v3(0, 0, 0.02)); CROSSD.position.copy(f).add(v3(0, 0, 0.01)); }
   GLOVEM.visible = LINK.visible = marks && t > 0.02 && (s.toss == null || t < s.toss - 0.9);
-  if (GLOVEM.visible) { const g = catchPt(k); GLOVEM.position.copy(g).add(v3(0, 0, 0.3)); GLOVEM.lookAt(g.clone().add(v3(0, 0, 5))); bar(LINK, V(P.front), g); }
+  if (GLOVEM.visible) { const g = heldPt(k, s, t); GLOVEM.position.copy(g).add(v3(0, 0, 0.3)); GLOVEM.lookAt(g.clone().add(v3(0, 0, 5))); bar(LINK, V(P.front), g); }
   for (const [n, [, Pl, m]] of Object.entries(RINGS)) { m.visible = !!s.rings?.includes(n); if (m.visible) { const q2 = wpos(Pl.pelvis); m.position.set(q2.x, 0.1, q2.z); m.material.opacity = 0.7 + 0.25 * Math.sin(t * 9); } }
 }
 let TOSS0 = null;

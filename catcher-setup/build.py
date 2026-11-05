@@ -6,8 +6,8 @@
     npx --yes hyperframes@0.8.154 render . -o renders/catcher-setup.mp4 --video-bitrate 16M
 
 The same catcher and plate umpire throughout. The umpire works from the slot: between the catcher and the batter, on the
-batter's side, so he moves across when a left-handed hitter steps in. The catcher sets up to the pitch that was called
-(inside, outside, on the edge), late, then takes the glove to the ball with a small move and holds it. Two marks keep
+batter's side, so he moves across when a left-handed hitter steps in. The catcher sets up on the inside part of the
+plate for every pitch, then takes the glove to the ball and, on a pitch away from him, brings it back toward the plate. Two marks keep
 the pitch's location apart from the glove's: where the ball crossed the front of the plate (the zone, where the call is
 made) and where it was caught, 3.6 ft behind it.
 """
@@ -113,7 +113,7 @@ def note(nid, t0, t1, text, top=1560):
 def card(cid, t0, t1, n, text):
     c.clip(cid, t0, t1, f'<div class="nc" id="{cid}x"><i>{n}</i><b>{text}</b></div>', cls="layer", style="z-index:13")
     c.ft(f"#{cid}x", o(opacity=0, x=-60), o(opacity=1, x=0, duration=0.24, ease="power3.out"), t0)
-def marks(pid, vcatch, t1, cross="Crossed the zone", glove="Caught here"):
+def marks(pid, vcatch, t1, cross="Crossed the zone", glove="Caught here"):   # glove: where the glove ends up
     pinl(pid + "a", vcatch - 0.02, t1, cross, "cross", "yl sm"); pinl(pid + "b", vcatch + 0.08, t1, glove, "glove", "cy sm")
 
 # ----------------------------------------------------------------- 1 the hook (the question is the big title instead of captions)
@@ -126,7 +126,7 @@ pinl("pb", W("rhb", "hitter"), A2 - 0.02, "Batter", "batter", "")
 pinl("pu", W("rhb", "umpire"), A2 - 0.02, "Umpire: in the slot", "ump", "cy")
 pinl("pc", W("rhb", "catcher"), A2 - 0.02, "Catcher", "catcher", "yl")
 pinl("peye", W("rhb", "particular"), S["lhb"] - 0.02, "Umpire’s view", "eye", "cy sm")
-marks("m1", V2, S["lhb"] - 0.02)
+marks("m1", V2, S["lhb"] - 0.02, "Crossed here", "Caught here")
 # 3 the left-handed hitter
 title("t3", W("lhb", "steps"), S["adj"] - 0.02, [("Opposite side.", False), ("Different angle.", True)], TT, "hk2")
 pinl("pb2", W("lhb", "left-handed"), S["adj"] - 0.02, "Left-handed hitter", "batter", "")
@@ -136,20 +136,20 @@ c.clip("splt", S["adj"], A4, """<div class="seam"></div>
   <div class="half t"><span class="hlab yl" id="hs1">Right-handed hitter</span></div>
   <div class="half b"><span class="hlab yl" id="hs2">Left-handed hitter</span></div>""", cls="layer", style="z-index:11")
 pop("#hs1", S["adj"] + 0.05, 10); pop("#hs2", S["adj"] + 0.15, 10)
-pinl("pset", W("adj", "location"), V4 - 0.1, "Sets up outside", "catcher", "yl")
-note("n4", A4 + 0.1, S["why"] - 0.02, "He sets up for the pitch that’s called: <b>inside, outside or on the edge</b>, depending on the hitter and the situation", 1640)
-marks("m2", V4, S["why"] - 0.02)
+pinl("pset", W("adj", "location"), V4 - 0.1, "Sets up inside", "catcher", "yl")
+note("n4", A4 + 0.1, S["why"] - 0.02, "This catcher sets up <b>inside</b> on every pitch, then brings outside pitches <b>back toward the plate</b>. It’s one approach: setups vary by catcher and situation.", 1640)
+marks("m2", V4, S["why"] - 0.02, "Crossed here", "Brought back")
 # 5 why it matters: a clear look, a smooth catch
 title("t4", S["look"] + 0.05, V5 - 0.1, [("Positioning", False), ("+ presentation", True)], TT, "hk2")
 card("k1", S["look"] + 0.05, A6 - 0.02, "1", "Inside"); card("k2", A6 + 0.05, S["frame"] - 0.02, "2", "Outside")
-marks("m3", V5, A6 - 0.02); marks("m4", V6, S["frame"] - 0.02)
+marks("m3", V5, A6 - 0.02, "Crossed here", "Caught here"); marks("m4", V6, S["frame"] - 0.02, "Crossed here", "Brought back")
 # 6 borderline pitches
 card("k3", S["frame"] + 0.05, S["level"] - 0.02, "3", "On the edge")
-marks("m5", VC, S["level"] - 0.02, "Crossed the edge", "Caught off the plate")
-note("n5", VC + 0.15, S["level"] - 0.02, "The call is made where the pitch <b>crosses the zone</b>, not where it’s caught. A clean, quiet catch helps the umpire see it.", 1640)
+marks("m5", VC, S["level"] - 0.02, "Crossed the edge", "Glove ends over the plate")
+note("n5", VC + 0.15, S["level"] - 0.02, "The call is made where the pitch <b>crosses the zone</b>. Bringing the glove back toward the plate can make an edge pitch <b>look</b> more like a strike.", 1640)
 # 7 the takeaway
 chip("r1", S["level"] + 0.1, A8 - 0.02, "Right-handed hitter · on the edge", 1560); chip("r2", A8 + 0.1, S["end"] - 0.02, "Left-handed hitter · on the edge", 1560, "lb")
-pinl("pq1", V8a + 0.1, A8 - 0.02, "Quiet glove", "glove", "cy sm"); pinl("pq2", V8b + 0.1, S["end"] - 0.02, "Quiet glove", "glove", "cy sm")
+pinl("pq1", V8a + 0.1, A8 - 0.02, "Brought back", "glove", "cy sm"); pinl("pq2", V8b + 0.1, S["end"] - 0.02, "Brought back", "glove", "cy sm")
 title("t5", S["end"] + 0.15, VBRAND - 0.02, [("Elite catchers read", False), ("the entire field.", True)], 1480, "hk2")
 c.clip("brand", VBRAND, D, """<div class="brand" id="brx"><div class="bmark"><svg viewBox="0 0 100 100" width="150" height="150"><circle cx="50" cy="50" r="44" fill="#f4f2ec" stroke="#05080d" stroke-width="3"/>
   <path d="M26 16 C40 34 40 66 26 84" fill="none" stroke="#ff6a3d" stroke-width="4" stroke-dasharray="6 5"/><path d="M74 16 C60 34 60 66 74 84" fill="none" stroke="#ff6a3d" stroke-width="4" stroke-dasharray="6 5"/></svg></div>
