@@ -10,3 +10,4 @@ index.html
 .cache/
 assets/vo/*.wav
 assets/bed.wav
+*.full.wav
