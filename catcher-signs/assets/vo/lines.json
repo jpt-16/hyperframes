@@ -1,0 +1,1109 @@
+[
+ {
+  "i": 0,
+  "id": "q",
+  "text": "Before PitchCom, calling one pitch could involve an entire secret code.",
+  "spoken": "Before Pitch Com, calling one pitch could involve an entire secret code.",
+  "dur": 2.795,
+  "words": [
+   {
+    "w": "Before",
+    "start": 0.015,
+    "end": 0.215
+   },
+   {
+    "w": "Pitch",
+    "start": 0.24,
+    "end": 0.365
+   },
+   {
+    "w": "Com,",
+    "start": 0.39,
+    "end": 0.765
+   },
+   {
+    "w": "calling",
+    "start": 0.865,
+    "end": 1.065
+   },
+   {
+    "w": "one",
+    "start": 1.09,
+    "end": 1.19
+   },
+   {
+    "w": "pitch",
+    "start": 1.215,
+    "end": 1.34
+   },
+   {
+    "w": "could",
+    "start": 1.365,
+    "end": 1.44
+   },
+   {
+    "w": "involve",
+    "start": 1.465,
+    "end": 1.815
+   },
+   {
+    "w": "an",
+    "start": 1.815,
+    "end": 1.84
+   },
+   {
+    "w": "entire",
+    "start": 1.865,
+    "end": 2.215
+   },
+   {
+    "w": "secret",
+    "start": 2.265,
+    "end": 2.465
+   },
+   {
+    "w": "code.",
+    "start": 2.515,
+    "end": 2.795
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "century",
+  "text": "For over a century, catchers communicated with pitchers using hand signals hidden between their legs.",
+  "spoken": "For over a century, catchers communicated with pitchers using hand signals hidden between their legs.",
+  "dur": 3.968,
+  "words": [
+   {
+    "w": "For",
+    "start": 0.015,
+    "end": 0.115
+   },
+   {
+    "w": "over",
+    "start": 0.165,
+    "end": 0.34
+   },
+   {
+    "w": "a",
+    "start": 0.34,
+    "end": 0.34
+   },
+   {
+    "w": "century,",
+    "start": 0.39,
+    "end": 0.815
+   },
+   {
+    "w": "catchers",
+    "start": 0.94,
+    "end": 1.215
+   },
+   {
+    "w": "communicated",
+    "start": 1.265,
+    "end": 1.715
+   },
+   {
+    "w": "with",
+    "start": 1.74,
+    "end": 1.815
+   },
+   {
+    "w": "pitchers",
+    "start": 1.865,
+    "end": 2.165
+   },
+   {
+    "w": "using",
+    "start": 2.19,
+    "end": 2.39
+   },
+   {
+    "w": "hand",
+    "start": 2.44,
+    "end": 2.64
+   },
+   {
+    "w": "signals",
+    "start": 2.69,
+    "end": 3.015
+   },
+   {
+    "w": "hidden",
+    "start": 3.065,
+    "end": 3.215
+   },
+   {
+    "w": "between",
+    "start": 3.24,
+    "end": 3.49
+   },
+   {
+    "w": "their",
+    "start": 3.515,
+    "end": 3.59
+   },
+   {
+    "w": "legs.",
+    "start": 3.64,
+    "end": 3.968
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "fingers",
+  "text": "One finger might mean a fastball, two might mean a curveball, and three might mean a slider.",
+  "spoken": "One finger might mean a fastball, two might mean a curveball, and three might mean a slider.",
+  "dur": 3.605,
+  "words": [
+   {
+    "w": "One",
+    "start": 0.044,
+    "end": 0.169
+   },
+   {
+    "w": "finger",
+    "start": 0.219,
+    "end": 0.419
+   },
+   {
+    "w": "might",
+    "start": 0.444,
+    "end": 0.569
+   },
+   {
+    "w": "mean",
+    "start": 0.594,
+    "end": 0.769
+   },
+   {
+    "w": "a",
+    "start": 0.769,
+    "end": 0.769
+   },
+   {
+    "w": "fastball,",
+    "start": 0.819,
+    "end": 1.394
+   },
+   {
+    "w": "two",
+    "start": 1.494,
+    "end": 1.594
+   },
+   {
+    "w": "might",
+    "start": 1.619,
+    "end": 1.744
+   },
+   {
+    "w": "mean",
+    "start": 1.769,
+    "end": 1.944
+   },
+   {
+    "w": "a",
+    "start": 1.944,
+    "end": 1.944
+   },
+   {
+    "w": "curveball,",
+    "start": 1.994,
+    "end": 2.444
+   },
+   {
+    "w": "and",
+    "start": 2.494,
+    "end": 2.569
+   },
+   {
+    "w": "three",
+    "start": 2.644,
+    "end": 2.794
+   },
+   {
+    "w": "might",
+    "start": 2.819,
+    "end": 2.944
+   },
+   {
+    "w": "mean",
+    "start": 2.969,
+    "end": 3.144
+   },
+   {
+    "w": "a",
+    "start": 3.144,
+    "end": 3.144
+   },
+   {
+    "w": "slider.",
+    "start": 3.194,
+    "end": 3.605
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "problem",
+  "text": "But there was a problem.",
+  "spoken": "But there was a problem.",
+  "dur": 0.96,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.037,
+    "end": 0.137
+   },
+   {
+    "w": "there",
+    "start": 0.162,
+    "end": 0.237
+   },
+   {
+    "w": "was",
+    "start": 0.237,
+    "end": 0.387
+   },
+   {
+    "w": "a",
+    "start": 0.387,
+    "end": 0.387
+   },
+   {
+    "w": "problem.",
+    "start": 0.437,
+    "end": 0.96
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "steal",
+  "text": "The opposing team could sometimes steal those signs, especially when a runner reached second base and could see the catcher\u2019s signals.",
+  "spoken": "The opposing team could sometimes steal those signs, especially when a runner reached second base and could see the catcher's signals.",
+  "dur": 4.928,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.015,
+    "end": 0.065
+   },
+   {
+    "w": "opposing",
+    "start": 0.09,
+    "end": 0.365
+   },
+   {
+    "w": "team",
+    "start": 0.415,
+    "end": 0.59
+   },
+   {
+    "w": "could",
+    "start": 0.615,
+    "end": 0.69
+   },
+   {
+    "w": "sometimes",
+    "start": 0.74,
+    "end": 1.04
+   },
+   {
+    "w": "steal",
+    "start": 1.09,
+    "end": 1.315
+   },
+   {
+    "w": "those",
+    "start": 1.34,
+    "end": 1.49
+   },
+   {
+    "w": "signs,",
+    "start": 1.54,
+    "end": 2.065
+   },
+   {
+    "w": "especially",
+    "start": 2.165,
+    "end": 2.565
+   },
+   {
+    "w": "when",
+    "start": 2.59,
+    "end": 2.715
+   },
+   {
+    "w": "a",
+    "start": 2.715,
+    "end": 2.715
+   },
+   {
+    "w": "runner",
+    "start": 2.765,
+    "end": 2.94
+   },
+   {
+    "w": "reached",
+    "start": 2.99,
+    "end": 3.165
+   },
+   {
+    "w": "second",
+    "start": 3.215,
+    "end": 3.39
+   },
+   {
+    "w": "base",
+    "start": 3.415,
+    "end": 3.815
+   },
+   {
+    "w": "and",
+    "start": 3.865,
+    "end": 3.94
+   },
+   {
+    "w": "could",
+    "start": 3.965,
+    "end": 4.04
+   },
+   {
+    "w": "see",
+    "start": 4.09,
+    "end": 4.19
+   },
+   {
+    "w": "the",
+    "start": 4.215,
+    "end": 4.265
+   },
+   {
+    "w": "catcher's",
+    "start": 4.315,
+    "end": 4.59
+   },
+   {
+    "w": "signals.",
+    "start": 4.64,
+    "end": 4.928
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "systems",
+  "text": "So teams developed different systems to hide their calls.",
+  "spoken": "So teams developed different systems to hide their calls.",
+  "dur": 2.197,
+  "words": [
+   {
+    "w": "So",
+    "start": 0.04,
+    "end": 0.14
+   },
+   {
+    "w": "teams",
+    "start": 0.19,
+    "end": 0.465
+   },
+   {
+    "w": "developed",
+    "start": 0.49,
+    "end": 0.715
+   },
+   {
+    "w": "different",
+    "start": 0.74,
+    "end": 0.94
+   },
+   {
+    "w": "systems",
+    "start": 0.99,
+    "end": 1.34
+   },
+   {
+    "w": "to",
+    "start": 1.365,
+    "end": 1.415
+   },
+   {
+    "w": "hide",
+    "start": 1.44,
+    "end": 1.59
+   },
+   {
+    "w": "their",
+    "start": 1.615,
+    "end": 1.69
+   },
+   {
+    "w": "calls.",
+    "start": 1.74,
+    "end": 2.197
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "seq",
+  "text": "Sometimes, the catcher would use a specific sign sequence, where only the first, second, or third sign actually mattered.",
+  "spoken": "Sometimes, the catcher would use a specific sign sequence, where only the first, second, or third sign actually mattered.",
+  "dur": 4.629,
+  "words": [
+   {
+    "w": "Sometimes,",
+    "start": 0.019,
+    "end": 0.344
+   },
+   {
+    "w": "the",
+    "start": 0.394,
+    "end": 0.444
+   },
+   {
+    "w": "catcher",
+    "start": 0.469,
+    "end": 0.694
+   },
+   {
+    "w": "would",
+    "start": 0.719,
+    "end": 0.794
+   },
+   {
+    "w": "use",
+    "start": 0.819,
+    "end": 0.994
+   },
+   {
+    "w": "a",
+    "start": 0.994,
+    "end": 0.994
+   },
+   {
+    "w": "specific",
+    "start": 1.019,
+    "end": 1.269
+   },
+   {
+    "w": "sign",
+    "start": 1.319,
+    "end": 1.469
+   },
+   {
+    "w": "sequence,",
+    "start": 1.494,
+    "end": 1.944
+   },
+   {
+    "w": "where",
+    "start": 2.019,
+    "end": 2.119
+   },
+   {
+    "w": "only",
+    "start": 2.169,
+    "end": 2.294
+   },
+   {
+    "w": "the",
+    "start": 2.319,
+    "end": 2.369
+   },
+   {
+    "w": "first,",
+    "start": 2.444,
+    "end": 2.819
+   },
+   {
+    "w": "second,",
+    "start": 2.969,
+    "end": 3.294
+   },
+   {
+    "w": "or",
+    "start": 3.369,
+    "end": 3.444
+   },
+   {
+    "w": "third",
+    "start": 3.494,
+    "end": 3.694
+   },
+   {
+    "w": "sign",
+    "start": 3.744,
+    "end": 3.919
+   },
+   {
+    "w": "actually",
+    "start": 4.019,
+    "end": 4.244
+   },
+   {
+    "w": "mattered.",
+    "start": 4.294,
+    "end": 4.629
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "ind",
+  "text": "Other teams used an indicator sign, or even changed the system depending on the inning or number of outs.",
+  "spoken": "Other teams used an indicator sign, or even changed the system depending on the inning or number of outs.",
+  "dur": 4.288,
+  "words": [
+   {
+    "w": "Other",
+    "start": 0.044,
+    "end": 0.144
+   },
+   {
+    "w": "teams",
+    "start": 0.194,
+    "end": 0.444
+   },
+   {
+    "w": "used",
+    "start": 0.494,
+    "end": 0.719
+   },
+   {
+    "w": "an",
+    "start": 0.719,
+    "end": 0.744
+   },
+   {
+    "w": "indicator",
+    "start": 0.819,
+    "end": 1.119
+   },
+   {
+    "w": "sign,",
+    "start": 1.169,
+    "end": 1.619
+   },
+   {
+    "w": "or",
+    "start": 1.719,
+    "end": 1.819
+   },
+   {
+    "w": "even",
+    "start": 1.894,
+    "end": 2.019
+   },
+   {
+    "w": "changed",
+    "start": 2.069,
+    "end": 2.319
+   },
+   {
+    "w": "the",
+    "start": 2.344,
+    "end": 2.394
+   },
+   {
+    "w": "system",
+    "start": 2.444,
+    "end": 2.769
+   },
+   {
+    "w": "depending",
+    "start": 2.794,
+    "end": 3.069
+   },
+   {
+    "w": "on",
+    "start": 3.119,
+    "end": 3.169
+   },
+   {
+    "w": "the",
+    "start": 3.169,
+    "end": 3.244
+   },
+   {
+    "w": "inning",
+    "start": 3.319,
+    "end": 3.519
+   },
+   {
+    "w": "or",
+    "start": 3.569,
+    "end": 3.644
+   },
+   {
+    "w": "number",
+    "start": 3.669,
+    "end": 3.844
+   },
+   {
+    "w": "of",
+    "start": 3.869,
+    "end": 3.919
+   },
+   {
+    "w": "outs.",
+    "start": 4.019,
+    "end": 4.288
+   }
+  ]
+ },
+ {
+  "i": 8,
+  "id": "goal",
+  "text": "The goal was simple: make the signs look random to the other team while keeping them understandable to the pitcher.",
+  "spoken": "The goal was simple: make the signs look random to the other team while keeping them understandable to the pitcher.",
+  "dur": 4.011,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.04,
+    "end": 0.09
+   },
+   {
+    "w": "goal",
+    "start": 0.14,
+    "end": 0.34
+   },
+   {
+    "w": "was",
+    "start": 0.365,
+    "end": 0.44
+   },
+   {
+    "w": "simple:",
+    "start": 0.49,
+    "end": 0.915
+   },
+   {
+    "w": "make",
+    "start": 1.015,
+    "end": 1.14
+   },
+   {
+    "w": "the",
+    "start": 1.165,
+    "end": 1.215
+   },
+   {
+    "w": "signs",
+    "start": 1.265,
+    "end": 1.49
+   },
+   {
+    "w": "look",
+    "start": 1.515,
+    "end": 1.615
+   },
+   {
+    "w": "random",
+    "start": 1.665,
+    "end": 1.89
+   },
+   {
+    "w": "to",
+    "start": 1.915,
+    "end": 1.94
+   },
+   {
+    "w": "the",
+    "start": 1.94,
+    "end": 2.04
+   },
+   {
+    "w": "other",
+    "start": 2.09,
+    "end": 2.165
+   },
+   {
+    "w": "team",
+    "start": 2.215,
+    "end": 2.515
+   },
+   {
+    "w": "while",
+    "start": 2.54,
+    "end": 2.665
+   },
+   {
+    "w": "keeping",
+    "start": 2.715,
+    "end": 2.915
+   },
+   {
+    "w": "them",
+    "start": 2.94,
+    "end": 3.04
+   },
+   {
+    "w": "understandable",
+    "start": 3.09,
+    "end": 3.54
+   },
+   {
+    "w": "to",
+    "start": 3.565,
+    "end": 3.615
+   },
+   {
+    "w": "the",
+    "start": 3.64,
+    "end": 3.69
+   },
+   {
+    "w": "pitcher.",
+    "start": 3.715,
+    "end": 4.011
+   }
+  ]
+ },
+ {
+  "i": 9,
+  "id": "then",
+  "text": "Then came PitchCom.",
+  "spoken": "Then came Pitch Com.",
+  "dur": 0.939,
+  "words": [
+   {
+    "w": "Then",
+    "start": 0.062,
+    "end": 0.162
+   },
+   {
+    "w": "came",
+    "start": 0.187,
+    "end": 0.312
+   },
+   {
+    "w": "Pitch",
+    "start": 0.337,
+    "end": 0.462
+   },
+   {
+    "w": "Com.",
+    "start": 0.512,
+    "end": 0.939
+   }
+  ]
+ },
+ {
+  "i": 10,
+  "id": "intro",
+  "text": "Introduced in MLB in 2022, it allowed catchers to press buttons on a wrist device and send the pitch call directly to a receiver in the pitcher\u2019s cap.",
+  "spoken": "Introduced in M L B in twenty twenty-two, it allowed catchers to press buttons on a wrist device and send the pitch call directly to a receiver in the pitcher's cap.",
+  "dur": 6.699,
+  "words": [
+   {
+    "w": "Introduced",
+    "start": 0.044,
+    "end": 0.419
+   },
+   {
+    "w": "in",
+    "start": 0.469,
+    "end": 0.544
+   },
+   {
+    "w": "M",
+    "start": 0.694,
+    "end": 0.844
+   },
+   {
+    "w": "L",
+    "start": 0.944,
+    "end": 1.044
+   },
+   {
+    "w": "B",
+    "start": 1.094,
+    "end": 1.294
+   },
+   {
+    "w": "in",
+    "start": 1.344,
+    "end": 1.394
+   },
+   {
+    "w": "twenty",
+    "start": 1.419,
+    "end": 1.619
+   },
+   {
+    "w": "twenty-two,",
+    "start": 1.644,
+    "end": 2.294
+   },
+   {
+    "w": "it",
+    "start": 2.394,
+    "end": 2.444
+   },
+   {
+    "w": "allowed",
+    "start": 2.469,
+    "end": 2.669
+   },
+   {
+    "w": "catchers",
+    "start": 2.719,
+    "end": 3.019
+   },
+   {
+    "w": "to",
+    "start": 3.044,
+    "end": 3.094
+   },
+   {
+    "w": "press",
+    "start": 3.119,
+    "end": 3.269
+   },
+   {
+    "w": "buttons",
+    "start": 3.319,
+    "end": 3.569
+   },
+   {
+    "w": "on",
+    "start": 3.619,
+    "end": 3.719
+   },
+   {
+    "w": "a",
+    "start": 3.719,
+    "end": 3.719
+   },
+   {
+    "w": "wrist",
+    "start": 3.769,
+    "end": 3.894
+   },
+   {
+    "w": "device",
+    "start": 3.919,
+    "end": 4.444
+   },
+   {
+    "w": "and",
+    "start": 4.519,
+    "end": 4.594
+   },
+   {
+    "w": "send",
+    "start": 4.644,
+    "end": 4.769
+   },
+   {
+    "w": "the",
+    "start": 4.794,
+    "end": 4.844
+   },
+   {
+    "w": "pitch",
+    "start": 4.869,
+    "end": 4.994
+   },
+   {
+    "w": "call",
+    "start": 5.044,
+    "end": 5.194
+   },
+   {
+    "w": "directly",
+    "start": 5.219,
+    "end": 5.519
+   },
+   {
+    "w": "to",
+    "start": 5.569,
+    "end": 5.669
+   },
+   {
+    "w": "a",
+    "start": 5.669,
+    "end": 5.669
+   },
+   {
+    "w": "receiver",
+    "start": 5.694,
+    "end": 6.044
+   },
+   {
+    "w": "in",
+    "start": 6.069,
+    "end": 6.119
+   },
+   {
+    "w": "the",
+    "start": 6.119,
+    "end": 6.169
+   },
+   {
+    "w": "pitcher's",
+    "start": 6.194,
+    "end": 6.444
+   },
+   {
+    "w": "cap.",
+    "start": 6.494,
+    "end": 6.699
+   }
+  ]
+ },
+ {
+  "i": 11,
+  "id": "nomore",
+  "text": "No more complicated finger sequences. No more worrying about a runner at second stealing the signs.",
+  "spoken": "No more complicated finger sequences. No more worrying about a runner at second stealing the signs.",
+  "dur": 3.925,
+  "words": [
+   {
+    "w": "No",
+    "start": 0.044,
+    "end": 0.169
+   },
+   {
+    "w": "more",
+    "start": 0.169,
+    "end": 0.294
+   },
+   {
+    "w": "complicated",
+    "start": 0.344,
+    "end": 0.744
+   },
+   {
+    "w": "finger",
+    "start": 0.794,
+    "end": 0.969
+   },
+   {
+    "w": "sequences.",
+    "start": 1.019,
+    "end": 1.644
+   },
+   {
+    "w": "No",
+    "start": 1.769,
+    "end": 1.894
+   },
+   {
+    "w": "more",
+    "start": 1.894,
+    "end": 2.044
+   },
+   {
+    "w": "worrying",
+    "start": 2.094,
+    "end": 2.319
+   },
+   {
+    "w": "about",
+    "start": 2.344,
+    "end": 2.544
+   },
+   {
+    "w": "a",
+    "start": 2.544,
+    "end": 2.544
+   },
+   {
+    "w": "runner",
+    "start": 2.594,
+    "end": 2.744
+   },
+   {
+    "w": "at",
+    "start": 2.769,
+    "end": 2.819
+   },
+   {
+    "w": "second",
+    "start": 2.869,
+    "end": 3.069
+   },
+   {
+    "w": "stealing",
+    "start": 3.119,
+    "end": 3.394
+   },
+   {
+    "w": "the",
+    "start": 3.419,
+    "end": 3.469
+   },
+   {
+    "w": "signs.",
+    "start": 3.519,
+    "end": 3.925
+   }
+  ]
+ },
+ {
+  "i": 12,
+  "id": "end",
+  "text": "A century of hand signals, replaced by a few buttons.",
+  "spoken": "A century of hand signals, replaced by a few buttons.",
+  "dur": 2.261,
+  "words": [
+   {
+    "w": "A",
+    "start": 0.04,
+    "end": 0.065
+   },
+   {
+    "w": "century",
+    "start": 0.115,
+    "end": 0.34
+   },
+   {
+    "w": "of",
+    "start": 0.365,
+    "end": 0.415
+   },
+   {
+    "w": "hand",
+    "start": 0.465,
+    "end": 0.64
+   },
+   {
+    "w": "signals,",
+    "start": 0.69,
+    "end": 1.115
+   },
+   {
+    "w": "replaced",
+    "start": 1.19,
+    "end": 1.465
+   },
+   {
+    "w": "by",
+    "start": 1.49,
+    "end": 1.64
+   },
+   {
+    "w": "a",
+    "start": 1.64,
+    "end": 1.64
+   },
+   {
+    "w": "few",
+    "start": 1.665,
+    "end": 1.79
+   },
+   {
+    "w": "buttons.",
+    "start": 1.815,
+    "end": 2.261
+   }
+  ]
+ }
+]
