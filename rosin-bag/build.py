@@ -75,7 +75,7 @@ RULE = dict(act="rules", cam="bag", c0=[0.0, 1.35, 1.45], c1=[0.0, 1.28, 1.3], l
 shot(A8, S["end"], "bag", [A8, S["end"]], [0, S["end"] - A8], mode="split", top=dict(RULE), bot=dict(RULE, illegal=1))
 # 8 "So next time you see a pitcher reach for that little white bag (he does), remember: it's not just a habit. It's part of controlling the baseball (the pitch)."
 A9 = W("end", "remember") - 0.15; VREL = W("end", "controlling"); A10 = W("end", "baseball") + 0.3
-rate(S["end"], A9, "bag", on(W("end", "reach"), PK_GRAB, S["end"]), c0=[9.0, 3.0, 5.5], c1=[8.4, 2.9, 5.1], l=[-0.6, 1.8, 0.4], f0=32, **PICK)
+rate(S["end"], A9, "bag", on(W("end", "reach"), PK_GRAB, S["end"]), c0=[13.0, 4.6, 8.5], c1=[12.2, 4.4, 8.0], l=[-0.6, 2.4, 0.4], l1=[-0.8, 2.2, 0.6], f0=36, f1=34, **PICK)
 rate(A9, A10, "world", on(VREL, 0.0, A9), act="pitch", kind="end", streak=1, c0=[1.4, 9.6, -85.0], c1=[1.2, 9.3, -83.0], l=[0.0, 3.2, -28.0], f0=19)
 VBRAND = round(LN("end")["t1"] + 1.05, 2)
 rate(A10, D, "bag", on(A10, 1.0, A10), act="rest", kind="end", c0=[0.95, 0.38, -1.25], c1=[0.8, 0.34, -1.05], l=[-0.05, 0.12, 0.3], f0=36, bokeh=16, **CLOSE)
