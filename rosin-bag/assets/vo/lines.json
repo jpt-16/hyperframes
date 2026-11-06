@@ -1,0 +1,739 @@
+[
+ {
+  "i": 0,
+  "id": "q",
+  "text": "Have you ever noticed that little white bag sitting behind the pitcher\u2019s mound?",
+  "spoken": "Have you ever noticed that little white bag sitting behind the pitcher's mound?",
+  "dur": 2.987,
+  "words": [
+   {
+    "w": "Have",
+    "start": 0.044,
+    "end": 0.144
+   },
+   {
+    "w": "you",
+    "start": 0.169,
+    "end": 0.244
+   },
+   {
+    "w": "ever",
+    "start": 0.319,
+    "end": 0.419
+   },
+   {
+    "w": "noticed",
+    "start": 0.469,
+    "end": 0.694
+   },
+   {
+    "w": "that",
+    "start": 0.719,
+    "end": 0.894
+   },
+   {
+    "w": "little",
+    "start": 0.944,
+    "end": 1.094
+   },
+   {
+    "w": "white",
+    "start": 1.144,
+    "end": 1.294
+   },
+   {
+    "w": "bag",
+    "start": 1.344,
+    "end": 1.744
+   },
+   {
+    "w": "sitting",
+    "start": 1.844,
+    "end": 1.994
+   },
+   {
+    "w": "behind",
+    "start": 2.019,
+    "end": 2.269
+   },
+   {
+    "w": "the",
+    "start": 2.294,
+    "end": 2.344
+   },
+   {
+    "w": "pitcher's",
+    "start": 2.369,
+    "end": 2.619
+   },
+   {
+    "w": "mound?",
+    "start": 2.669,
+    "end": 2.987
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "what",
+  "text": "That\u2019s a rosin bag, and it\u2019s actually more important than you might think.",
+  "spoken": "That's a rosin bag, and it's actually more important than you might think.",
+  "dur": 3.008,
+  "words": [
+   {
+    "w": "That's",
+    "start": 0.044,
+    "end": 0.219
+   },
+   {
+    "w": "a",
+    "start": 0.219,
+    "end": 0.219
+   },
+   {
+    "w": "rosin",
+    "start": 0.269,
+    "end": 0.519
+   },
+   {
+    "w": "bag,",
+    "start": 0.569,
+    "end": 1.069
+   },
+   {
+    "w": "and",
+    "start": 1.194,
+    "end": 1.269
+   },
+   {
+    "w": "it's",
+    "start": 1.294,
+    "end": 1.369
+   },
+   {
+    "w": "actually",
+    "start": 1.494,
+    "end": 1.719
+   },
+   {
+    "w": "more",
+    "start": 1.744,
+    "end": 1.869
+   },
+   {
+    "w": "important",
+    "start": 1.894,
+    "end": 2.269
+   },
+   {
+    "w": "than",
+    "start": 2.294,
+    "end": 2.369
+   },
+   {
+    "w": "you",
+    "start": 2.394,
+    "end": 2.469
+   },
+   {
+    "w": "might",
+    "start": 2.494,
+    "end": 2.619
+   },
+   {
+    "w": "think.",
+    "start": 2.669,
+    "end": 3.008
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "use",
+  "text": "Pitchers use rosin to help manage moisture on their hands and improve their grip on the baseball.",
+  "spoken": "Pitchers use rosin to help manage moisture on their hands and improve their grip on the baseball.",
+  "dur": 3.84,
+  "words": [
+   {
+    "w": "Pitchers",
+    "start": 0.044,
+    "end": 0.344
+   },
+   {
+    "w": "use",
+    "start": 0.394,
+    "end": 0.544
+   },
+   {
+    "w": "rosin",
+    "start": 0.594,
+    "end": 0.894
+   },
+   {
+    "w": "to",
+    "start": 0.919,
+    "end": 0.969
+   },
+   {
+    "w": "help",
+    "start": 0.994,
+    "end": 1.144
+   },
+   {
+    "w": "manage",
+    "start": 1.194,
+    "end": 1.394
+   },
+   {
+    "w": "moisture",
+    "start": 1.444,
+    "end": 1.694
+   },
+   {
+    "w": "on",
+    "start": 1.744,
+    "end": 1.794
+   },
+   {
+    "w": "their",
+    "start": 1.819,
+    "end": 1.894
+   },
+   {
+    "w": "hands",
+    "start": 1.919,
+    "end": 2.444
+   },
+   {
+    "w": "and",
+    "start": 2.519,
+    "end": 2.594
+   },
+   {
+    "w": "improve",
+    "start": 2.619,
+    "end": 2.894
+   },
+   {
+    "w": "their",
+    "start": 2.919,
+    "end": 2.994
+   },
+   {
+    "w": "grip",
+    "start": 3.044,
+    "end": 3.219
+   },
+   {
+    "w": "on",
+    "start": 3.269,
+    "end": 3.319
+   },
+   {
+    "w": "the",
+    "start": 3.319,
+    "end": 3.369
+   },
+   {
+    "w": "baseball.",
+    "start": 3.394,
+    "end": 3.84
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "sweat",
+  "text": "When your hands get sweaty, gripping a baseball consistently becomes much harder.",
+  "spoken": "When your hands get sweaty, gripping a baseball consistently becomes much harder.",
+  "dur": 3.307,
+  "words": [
+   {
+    "w": "When",
+    "start": 0.044,
+    "end": 0.144
+   },
+   {
+    "w": "your",
+    "start": 0.169,
+    "end": 0.244
+   },
+   {
+    "w": "hands",
+    "start": 0.294,
+    "end": 0.544
+   },
+   {
+    "w": "get",
+    "start": 0.569,
+    "end": 0.644
+   },
+   {
+    "w": "sweaty,",
+    "start": 0.694,
+    "end": 1.219
+   },
+   {
+    "w": "gripping",
+    "start": 1.344,
+    "end": 1.594
+   },
+   {
+    "w": "a",
+    "start": 1.594,
+    "end": 1.594
+   },
+   {
+    "w": "baseball",
+    "start": 1.644,
+    "end": 1.994
+   },
+   {
+    "w": "consistently",
+    "start": 2.019,
+    "end": 2.519
+   },
+   {
+    "w": "becomes",
+    "start": 2.544,
+    "end": 2.744
+   },
+   {
+    "w": "much",
+    "start": 2.769,
+    "end": 2.894
+   },
+   {
+    "w": "harder.",
+    "start": 2.944,
+    "end": 3.307
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "absorb",
+  "text": "Rosin helps absorb moisture, giving pitchers a more reliable feel for the ball.",
+  "spoken": "Rosin helps absorb moisture, giving pitchers a more reliable feel for the ball.",
+  "dur": 3.499,
+  "words": [
+   {
+    "w": "Rosin",
+    "start": 0.073,
+    "end": 0.298
+   },
+   {
+    "w": "helps",
+    "start": 0.323,
+    "end": 0.473
+   },
+   {
+    "w": "absorb",
+    "start": 0.498,
+    "end": 0.798
+   },
+   {
+    "w": "moisture,",
+    "start": 0.848,
+    "end": 1.423
+   },
+   {
+    "w": "giving",
+    "start": 1.548,
+    "end": 1.698
+   },
+   {
+    "w": "pitchers",
+    "start": 1.748,
+    "end": 2.073
+   },
+   {
+    "w": "a",
+    "start": 2.073,
+    "end": 2.073
+   },
+   {
+    "w": "more",
+    "start": 2.098,
+    "end": 2.223
+   },
+   {
+    "w": "reliable",
+    "start": 2.248,
+    "end": 2.548
+   },
+   {
+    "w": "feel",
+    "start": 2.623,
+    "end": 2.798
+   },
+   {
+    "w": "for",
+    "start": 2.848,
+    "end": 2.923
+   },
+   {
+    "w": "the",
+    "start": 2.923,
+    "end": 2.973
+   },
+   {
+    "w": "ball.",
+    "start": 3.023,
+    "end": 3.499
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "matters",
+  "text": "And that matters because even a small difference in grip can affect how a pitcher controls a pitch.",
+  "spoken": "And that matters because even a small difference in grip can affect how a pitcher controls a pitch.",
+  "dur": 3.989,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.048,
+    "end": 0.123
+   },
+   {
+    "w": "that",
+    "start": 0.148,
+    "end": 0.273
+   },
+   {
+    "w": "matters",
+    "start": 0.323,
+    "end": 0.573
+   },
+   {
+    "w": "because",
+    "start": 0.598,
+    "end": 0.898
+   },
+   {
+    "w": "even",
+    "start": 0.998,
+    "end": 1.173
+   },
+   {
+    "w": "a",
+    "start": 1.173,
+    "end": 1.173
+   },
+   {
+    "w": "small",
+    "start": 1.248,
+    "end": 1.473
+   },
+   {
+    "w": "difference",
+    "start": 1.523,
+    "end": 1.773
+   },
+   {
+    "w": "in",
+    "start": 1.798,
+    "end": 1.848
+   },
+   {
+    "w": "grip",
+    "start": 1.898,
+    "end": 2.348
+   },
+   {
+    "w": "can",
+    "start": 2.423,
+    "end": 2.498
+   },
+   {
+    "w": "affect",
+    "start": 2.523,
+    "end": 2.748
+   },
+   {
+    "w": "how",
+    "start": 2.773,
+    "end": 2.923
+   },
+   {
+    "w": "a",
+    "start": 2.923,
+    "end": 2.923
+   },
+   {
+    "w": "pitcher",
+    "start": 2.973,
+    "end": 3.198
+   },
+   {
+    "w": "controls",
+    "start": 3.223,
+    "end": 3.623
+   },
+   {
+    "w": "a",
+    "start": 3.623,
+    "end": 3.623
+   },
+   {
+    "w": "pitch.",
+    "start": 3.673,
+    "end": 3.989
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "rules",
+  "text": "But here\u2019s something important: rosin isn\u2019t allowed to be mixed with foreign substances like sunscreen to create an illegal grip-enhancing mixture.",
+  "spoken": "But here's something important: rosin isn't allowed to be mixed with foreign substances like sunscreen to create an illegal grip enhancing mixture.",
+  "dur": 6.229,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.023,
+    "end": 0.123
+   },
+   {
+    "w": "here's",
+    "start": 0.148,
+    "end": 0.298
+   },
+   {
+    "w": "something",
+    "start": 0.348,
+    "end": 0.573
+   },
+   {
+    "w": "important:",
+    "start": 0.623,
+    "end": 1.323
+   },
+   {
+    "w": "rosin",
+    "start": 1.473,
+    "end": 1.723
+   },
+   {
+    "w": "isn't",
+    "start": 1.773,
+    "end": 1.898
+   },
+   {
+    "w": "allowed",
+    "start": 1.923,
+    "end": 2.173
+   },
+   {
+    "w": "to",
+    "start": 2.198,
+    "end": 2.248
+   },
+   {
+    "w": "be",
+    "start": 2.248,
+    "end": 2.348
+   },
+   {
+    "w": "mixed",
+    "start": 2.423,
+    "end": 2.648
+   },
+   {
+    "w": "with",
+    "start": 2.673,
+    "end": 2.748
+   },
+   {
+    "w": "foreign",
+    "start": 2.823,
+    "end": 3.023
+   },
+   {
+    "w": "substances",
+    "start": 3.073,
+    "end": 3.473
+   },
+   {
+    "w": "like",
+    "start": 3.498,
+    "end": 3.623
+   },
+   {
+    "w": "sunscreen",
+    "start": 3.673,
+    "end": 4.298
+   },
+   {
+    "w": "to",
+    "start": 4.373,
+    "end": 4.423
+   },
+   {
+    "w": "create",
+    "start": 4.473,
+    "end": 4.773
+   },
+   {
+    "w": "an",
+    "start": 4.773,
+    "end": 4.798
+   },
+   {
+    "w": "illegal",
+    "start": 4.848,
+    "end": 5.123
+   },
+   {
+    "w": "grip",
+    "start": 5.173,
+    "end": 5.398
+   },
+   {
+    "w": "enhancing",
+    "start": 5.448,
+    "end": 5.798
+   },
+   {
+    "w": "mixture.",
+    "start": 5.823,
+    "end": 6.229
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "end",
+  "text": "So next time you see a pitcher reach for that little white bag, remember: it\u2019s not just a habit. It\u2019s part of controlling the baseball.",
+  "spoken": "So next time you see a pitcher reach for that little white bag, remember: it's not just a habit. It's part of controlling the baseball.",
+  "dur": 5.675,
+  "words": [
+   {
+    "w": "So",
+    "start": 0.09,
+    "end": 0.19
+   },
+   {
+    "w": "next",
+    "start": 0.215,
+    "end": 0.365
+   },
+   {
+    "w": "time",
+    "start": 0.39,
+    "end": 0.54
+   },
+   {
+    "w": "you",
+    "start": 0.565,
+    "end": 0.64
+   },
+   {
+    "w": "see",
+    "start": 0.69,
+    "end": 0.84
+   },
+   {
+    "w": "a",
+    "start": 0.84,
+    "end": 0.84
+   },
+   {
+    "w": "pitcher",
+    "start": 0.89,
+    "end": 1.115
+   },
+   {
+    "w": "reach",
+    "start": 1.165,
+    "end": 1.315
+   },
+   {
+    "w": "for",
+    "start": 1.34,
+    "end": 1.44
+   },
+   {
+    "w": "that",
+    "start": 1.465,
+    "end": 1.565
+   },
+   {
+    "w": "little",
+    "start": 1.59,
+    "end": 1.74
+   },
+   {
+    "w": "white",
+    "start": 1.79,
+    "end": 1.94
+   },
+   {
+    "w": "bag,",
+    "start": 1.99,
+    "end": 2.39
+   },
+   {
+    "w": "remember:",
+    "start": 2.515,
+    "end": 3.04
+   },
+   {
+    "w": "it's",
+    "start": 3.19,
+    "end": 3.265
+   },
+   {
+    "w": "not",
+    "start": 3.29,
+    "end": 3.44
+   },
+   {
+    "w": "just",
+    "start": 3.465,
+    "end": 3.665
+   },
+   {
+    "w": "a",
+    "start": 3.665,
+    "end": 3.665
+   },
+   {
+    "w": "habit.",
+    "start": 3.715,
+    "end": 4.165
+   },
+   {
+    "w": "It's",
+    "start": 4.265,
+    "end": 4.34
+   },
+   {
+    "w": "part",
+    "start": 4.39,
+    "end": 4.54
+   },
+   {
+    "w": "of",
+    "start": 4.565,
+    "end": 4.615
+   },
+   {
+    "w": "controlling",
+    "start": 4.64,
+    "end": 5.04
+   },
+   {
+    "w": "the",
+    "start": 5.065,
+    "end": 5.115
+   },
+   {
+    "w": "baseball.",
+    "start": 5.14,
+    "end": 5.675
+   }
+  ]
+ }
+]

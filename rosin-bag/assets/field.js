@@ -111,13 +111,13 @@ const dirtDetail = canvasTex(512, 512, (g, w) => {
   for (let k = 0; k < 20000; k++) { const v = 70 + rnd() * 110; g.fillStyle = `rgb(${v},${v},${v})`; g.fillRect(rnd() * w, rnd() * w, 1 + rnd() * 2, 1 + rnd() * 2); }
 }, { srgb: false, repeat: [90, 90] });
 const dirt = new THREE.Mesh(new THREE.PlaneGeometry(D0.size, D0.size),
-  new THREE.MeshStandardMaterial({ map: dirtTex, bumpMap: dirtDetail, bumpScale: 0.8, roughness: 1, transparent: true, depthWrite: false }));
+  new THREE.MeshStandardMaterial({ map: dirtTex, bumpMap: dirtDetail, bumpScale: 0.25, roughness: 1, transparent: true, depthWrite: false }));
 dirt.rotation.x = -Math.PI / 2; dirt.position.set(D0.x + D0.size / 2, 0.03, D0.z + D0.size / 2); dirt.receiveShadow = true;
 scene.add(dirt);
 
 // mound: a low dome of the same dirt
 const moundGeo = new THREE.LatheGeometry([v3(0, MOUND_H, 0), v3(2.5, MOUND_H, 0), v3(5.5, 0.45, 0), v3(9, 0.0, 0)].map((p) => new THREE.Vector2(p.x, p.y)), 48);
-const dirtMat = new THREE.MeshStandardMaterial({ color: 0xa6683f, roughness: 1, bumpMap: dirtDetail, bumpScale: 0.6 });
+const dirtMat = new THREE.MeshStandardMaterial({ color: 0xa6683f, roughness: 1, bumpMap: dirtDetail, bumpScale: 0.2 });
 const mound = new THREE.Mesh(moundGeo, dirtMat); mound.position.copy(MOUND); mound.receiveShadow = true; scene.add(mound);
 
 // chalk: foul lines, batter's boxes, catcher's box
@@ -723,7 +723,7 @@ const BAT_TAKE = { ...BAT_SET, twist: 26, pelvisTwist: -8, hipL: [30, 18], knL: 
 // ------------------------------------------------------------------ the acts (play time t), what each shot shows
 // pick: he walks back off the rubber to the bag, bends, picks it up, holds it, squeezes it (a puff), drops it, rubs his fingertips.
 const PK = { walk: 0, bend: 1.15, grab: 1.7, up: 2.35, sq0: 3.35, sq1: 3.8, drop: 4.05, rub0: 4.25, rub1: 5.6 };
-const WALK_FROM = v3(0.3, 0, -60.9);
+const WALK_FROM = v3(3.2, 0, -59.6);
 let PICK_ROOT = null;                                             // where he stands to reach the bag (found at load)
 function placePicker() {
   pitcher.root.position.set(0, 0, 0); pitcher.root.rotation.y = Math.PI * 0.94; applyPose(pitcher, P_BEND); handOnPitcher(true); applyHand(BAG_HOLD);
@@ -746,9 +746,10 @@ function setSkin({ wet = 0, dust = 0, goo = 0 }) {
 function actPick(t, s) {
   const wet0 = s.wet0 ?? 0;
   let pos, yaw = PICK_YAW, q, hq = RELAX, bagHeld = false, sq = 0;
-  if (t < PK.bend) {                                             // walking back to the bag
+  if (t < 0) { pos = WALK_FROM.clone(); pos.y = moundY(pos.x, pos.z); q = { ...STAND, nod: 10, shR: [30, 12, 20], elR: 60 }; yaw = yawTo(WALK_FROM, PICK_ROOT); }   // standing on the back of the mound
+  else if (t < PK.bend) {                                        // walking back to the bag
     const u = clamp(t / PK.bend, 0, 1); pos = WALK_FROM.clone().lerp(PICK_ROOT, smooth(u)); pos.y = moundY(pos.x, pos.z);
-    q = P_WALK(t * 7.5); yaw = lerp(Math.PI * 1.0, PICK_YAW, smooth(u));
+    q = P_WALK(t * 7.5); yaw = lerp(yawTo(WALK_FROM, PICK_ROOT), PICK_YAW, smooth((u - 0.6) / 0.4));
   } else {
     pos = PICK_ROOT.clone();
     q = keyed([[PK.bend, P_WALK(PK.bend * 7.5)], [PK.grab, P_BEND], [PK.grab + 0.12, P_BEND], [PK.up, P_RISE]], t);
@@ -924,7 +925,7 @@ const $ = (id) => document.getElementById(id);
 const PINT = {
   bag: () => (BAG.parent === scene ? BAG.position.clone() : BAG.getWorldPosition(v3())).add(v3(0, 0.12, 0)),
   tipI: () => wpos(HAND.F.I.tip), tipM: () => wpos(HAND.F.M.tip), tipT: () => wpos(HAND.F.T.tip),
-  ball: () => BB.getWorldPosition(v3()).add(v3(0, 0.16, 0)), rubber: () => v3(0, MOUND_H + 0.3, RUBBER_Z), bottle: () => BOTTLE.getWorldPosition(v3()).add(v3(0, 0.6, 0)),
+  ball: () => BB.getWorldPosition(v3()).add(v3(0, 0.16, 0)), rubber: () => v3(0, MOUND_H + 0.3, RUBBER_Z), bottle: () => BOTTLE.getWorldPosition(v3()).add(v3(0, 0.42, 0)),
   pitcher: () => headTop(pitcher),
 };
 function pin(id, p) {                                            // x is clamped so the label stays on screen

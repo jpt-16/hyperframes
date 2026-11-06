@@ -1,10 +1,15 @@
 # "Why pitchers use the rosin bag"
 
-A 44.5 s vertical (1080×1920, 30 fps) 3D baseball breakdown for Baseball Decoded: what the rosin bag is, why pitchers use it, and where the line is between legal rosin and illegal foreign substances.
+A 38.6 s vertical (1080×1920, 30 fps) 3D baseball breakdown for Baseball Decoded: what the rosin bag is, why pitchers use it, and where the line is between legal rosin and illegal foreign substances.
 
-- **No voiceover**, per the brief. `CUES.md` lists each scene's start and end so you can record narration over it.
-- **Sound:** a `make_bed` bed (style "pulse"), whooshes, the cloth squeeze of the bag, footsteps on the mound, glove pops and stadium ambience.
-- **Mix:** mastered to −20 LUFS so there is room for a voice on top. The same mix is in `assets/mix.wav`.
+- **Voiceover:**
+  - Your script, voiced with HyperFrames' local Kokoro TTS (voice `am_michael`, 1.4×). The text is in `transcript.txt`.
+  - Shots, word-by-word captions, pins and titles are keyed to its words. The opening question is covered by the big hook title instead of captions.
+  - `CUES.md` lists when each line starts, so you can record your own read over `assets/mix-novo.wav`.
+- **Sound:** a `make_bed` bed (style "pulse") ducked up to 7 dB under the voice, plus whooshes, the cloth squeeze of the bag, footsteps on the mound, glove pops and stadium ambience.
+- **Mixes:**
+  - `assets/mix.wav` is mastered to about −14 LUFS.
+  - `assets/mix-novo.wav` is the music and effects without the voice.
 - **One pitcher throughout:** white home uniform and navy undershirt, the same as the other Baseball Decoded videos.
 - **New close-up kit** (`assets/field.js`):
   - **The hand:** a palm with a jointed thumb and four fingers, three bones each. Fingers are solved at load to wrap the ball or the bag: each joint, from the knuckle out, bends until it touches the surface. The thumb is aimed at its contact point with the pad facing the object.
@@ -16,8 +21,10 @@ A 44.5 s vertical (1080×1920, 30 fps) 3D baseball breakdown for Baseball Decode
   - **The background:** an out-of-focus stadium behind the close-ups, a key, rim and fill light for them, and a soft yellow outline on the fingers that matter for each grip.
 
 ```bash
-python3 tools/physics.py   # fastball, curveball, changeup and the last pitch -> assets/play.json
-python3 build.py           # index.html + assets/mix.wav + CUES.md
+python3 tools/physics.py                                       # fastball, curveball, changeup and the last pitch -> assets/play.json
+export HYPERFRAMES_PYTHON=<python with kokoro-onnx, soundfile, onnx>
+$HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # voiceover + per-word timing
+python3 build.py                                               # index.html + assets/mix.wav (+ mix-novo.wav) + CUES.md
 npx --yes hyperframes@0.8.154 render . -o renders/rosin-bag.mp4 --video-bitrate 16M
 ```
 
@@ -53,12 +60,14 @@ All four are right-handed, from the stretch, released 6.0 ft high and 1.9 ft to 
 
 ## Shots
 
-| Time | Shot | On screen |
-|---|---|---|
-| 0–5 s | Low behind the bag: his cleats step in; he crouches and picks it up; a quick zoom on his hand; he squeezes it (a puff of dust), drops it and rubs his fingertips | **WHAT IS THIS LITTLE WHITE BAG?**; "Rosin bag" |
-| 5–13 s | On the rubber, the ball out in front; close on his fingers on the seams; sweat beads up; the ball shifts in his fingers; he resets his grip | **MOISTURE MAKES GRIP HARDER**; "Sweat on the fingertips", "The ball shifts in his fingers", "He has to reset his grip" |
-| 13–23 s | Back to the bag; tossing it in his palm, the dust coats his fingertips and the sweat dries; he rubs it in; grips the seams again, dry | **BETTER MOISTURE CONTROL. MORE CONSISTENT GRIP.**; the two-step card; "Dry fingertips: the grip feels the same from pitch to pitch." |
-| 23–33 s | For each of fastball, curveball and changeup: the grip close, with the key fingers outlined; the release, slowed and tracked; the ball to the catcher | **EVERY FINGER MATTERS**; the grip and release labels; "Rosin doesn't add speed or movement…" |
-| 33–39 s | The bag behind the rubber; split screen: rosin-dusted fingers by the bag (legal) vs. fingers with a rosin and sunscreen paste and the bottle (illegal) | **LEGAL ROSIN. ILLEGAL FOREIGN SUBSTANCES.**; ✓ / ✕ labels; the rules note |
-| 39–43 s | Behind the pitcher: a 95 mph fastball to the catcher; then the bag on the mound, dust in the light | **NOW YOU KNOW.** |
-| 43–44.5 s | Baseball Decoded end card | |
+| Time | Script | Shot | On screen |
+|---|---|---|---|
+| 0–3.5 s | "Have you ever noticed that little white bag…" | Low behind the bag on the mound, the rubber beyond; his cleats walk in | **WHAT IS THIS LITTLE WHITE BAG?** |
+| 3.5–6.8 s | "That's a rosin bag, and it's actually more important than you might think." | He crouches and picks it up on "rosin bag"; a quick zoom; he squeezes it (a puff of dust) | "Rosin bag" |
+| 6.8–10.9 s | "Pitchers use rosin to help manage moisture on their hands and improve their grip…" | He rubs the rosin into his fingertips; the grip on the seams, the key fingers outlined | "Rosin on the fingertips", "Grip" |
+| 10.9–14.5 s | "When your hands get sweaty, gripping a baseball consistently becomes much harder." | On the rubber with the ball; close on his fingers: sweat beads, and on "consistently" the ball shifts | **MOISTURE MAKES GRIP HARDER**; "Sweat on the fingertips", "The ball shifts in his fingers" |
+| 14.5–18.3 s | "Rosin helps absorb moisture, giving pitchers a more reliable feel for the ball." | Tossing the bag in his palm, the dust coats his fingertips and the sweat dries; he rubs it in; grips the ball again, dry | **BETTER MOISTURE CONTROL. MORE CONSISTENT GRIP.**; the two-step card |
+| 18.3–23.9 s | "And that matters because even a small difference in grip can affect how a pitcher controls a pitch." | Fastball, curveball, changeup: the grip close, the release slowed, the ball to the catcher | **EVERY FINGER MATTERS**; the pitch cards; "Rosin doesn't add speed or movement…" |
+| 23.9–30.6 s | "But here's something important: rosin isn't allowed to be mixed with foreign substances like sunscreen…" | The bag behind the rubber; split: rosin-dusted fingers (legal) vs. a rosin and sunscreen paste with the bottle (illegal) | **LEGAL ROSIN. ILLEGAL FOREIGN SUBSTANCES.**; ✓ / ✕; the rules note |
+| 30.6–36.1 s | "So next time you see a pitcher reach for that little white bag, remember… It's part of controlling the baseball." | He reaches for the bag on "reach"; from behind the mound, a 95 mph fastball released on "controlling" | |
+| 36.1–38.6 s | (end) | The bag on the mound, dust in the light; the end card | **NOW YOU KNOW.**, then Baseball Decoded |

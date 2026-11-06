@@ -1,13 +1,14 @@
-# Scene timing for the voiceover
+# Voiceover cue sheet
 
-The video is 44.5 s. Record each part of the narration inside its scene (times in seconds).
+When each line starts, to land on its shots (the video is 38.6 s). Record your own read over assets/mix-novo.wav to these times.
 
-| From | To | Scene | On screen |
-|---|---|---|---|
-| 0.0 | 5.0 | The hook: the bag on the mound, close; he walks over and picks it up; zoom in; he squeezes it and rubs his fingertips | WHAT IS THIS LITTLE WHITE BAG? |
-| 5.0 | 13.0 | The problem: the ball in his hand; in on his fingers on the seams; sweat beads up; the ball shifts; he resets his grip | MOISTURE MAKES GRIP HARDER |
-| 13.0 | 23.0 | How rosin works: back to the bag; rosin dust onto his fingertips as the sweat dries; he rubs it in; grips the seams again | BETTER MOISTURE CONTROL. MORE CONSISTENT GRIP. |
-| 23.0 | 33.0 | Why grip matters: fastball (23.0), curveball (26.3), changeup (29.7): the grip close, the release slowed, the ball on its way | EVERY FINGER MATTERS |
-| 33.0 | 39.0 | The rules: the bag behind the rubber; split: legal rosin (top) vs rosin mixed with sunscreen (bottom) | LEGAL ROSIN. ILLEGAL FOREIGN SUBSTANCES. |
-| 39.0 | 43.0 | The ending: he delivers (release 41.1); the bag behind the mound | NOW YOU KNOW. (from 41.6) |
-| 43.0 | 44.5 | End card | BASEBALL DECODED |
+| Line | Starts |
+|---|---|
+| Have you ever noticed that little white bag sitting behind the pitcher’s mound? | 0.2 s |
+| That’s a rosin bag, and it’s actually more important than you might think. | 3.6 s |
+| Pitchers use rosin to help manage moisture on their hands and improve their grip on the baseball. | 6.8 s |
+| When your hands get sweaty, gripping a baseball consistently becomes much harder. | 10.9 s |
+| Rosin helps absorb moisture, giving pitchers a more reliable feel for the ball. | 14.5 s |
+| And that matters because even a small difference in grip can affect how a pitcher controls a pitch. | 18.3 s |
+| But here’s something important: rosin isn’t allowed to be mixed with foreign substances like sunscreen to create an illegal grip-enhancing mixture. | 24.0 s |
+| So next time you see a pitcher reach for that little white bag, remember: it’s not just a habit. It’s part of controlling the baseball. | 30.6 s |

@@ -1,7 +1,8 @@
-"""'Why pitchers use the rosin bag' (1080x1920, music + effects; the narration is recorded separately).
+"""'Why pitchers use the rosin bag' (1080x1920), cut to the voiceover (tools/vo.py + tools/assemble.py).
 
     python3 tools/physics.py        # the pitches -> assets/play.json
-    python3 build.py                # index.html + assets/mix.wav (music + effects, mastered low for a voice on top) + CUES.md
+    $HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # voiceover + per-word timing
+    python3 build.py                # index.html + assets/mix.wav (+ mix-novo.wav without the voice) + CUES.md
     npx --yes hyperframes@0.8.154 render . -o renders/rosin-bag.mp4 --video-bitrate 16M
 
 One pitcher throughout (white home uniform, navy undershirt). Close-ups use a jointed hand whose fingers are solved to
@@ -17,47 +18,67 @@ from audio import SR, make_bed
 
 P = json.load(open(os.path.join(HERE, "assets", "play.json")))
 PI_ = P["pitches"]
-D = 44.5
+TMJ = json.load(open(os.path.join(HERE, "assets", "vo", "timing.json")))
+IDX = {x["id"]: k for k, x in enumerate(TMJ["lines"])}
+LN = lambda lid: TMJ["lines"][IDX[lid]]
+def W(lid, word, end=False, nth=0):
+    hits = [w for w in LN(lid)["words"] if w["w"].strip(".,!?:").lower() == word.lower()]
+    return hits[nth]["t1" if end else "t0"]
+D = TMJ["duration"]
+S = {x["id"]: x["t0"] - 0.08 for x in TMJ["lines"]}
 Y, CYAN, WHITE, HOT, MUTED, GREEN, RED = "#FFD84D", "#56D1FF", "#F4F6F8", "#FF6A3D", "#AEB8C6", "#3DD68C", "#FF4D4D"
 
-# ----------------------------------------------------------------- shots (video time v) and the play time each one shows
+# ----------------------------------------------------------------- shots (video time v) and the play time each one shows, keyed to the voiceover
 SHOTS = []
 def shot(a, b, cam, vs, ts, speed="rt", **kw):
     SHOTS.append(dict(a=round(a, 4), b=round(b, 4), cam=cam, vs=[round(x, 4) for x in vs], ts=[round(x, 4) for x in ts], speed=speed, **kw))
 def rate(a, b, cam, t0, r=1.0, speed="rt", **kw): shot(a, b, cam, [a, b], [t0, t0 + (b - a) * r], speed, **kw)
+def on(v, t, a, r=1.0): return t - (v - a) * r            # the play time at video time a, if play time t falls at video time v
 CLOSE = dict(close=1)
-# 1 the hook (0-5): the bag on the mound, close; his cleats come into view; he picks it up; quick zoom; squeeze; he rubs his fingertips
-rate(0.0, 1.6, "bag", 0.0, act="pick", k="s1", c0=[0.45, 0.22, -1.8], c1=[0.35, 0.2, -1.5], l=[-0.15, 0.3, 1.0], f0=34, f1=30, bokeh=0, **CLOSE)
-rate(1.6, 2.6, "bag", 1.6, act="pick", k="s1", c0=[9.0, 3.0, 5.5], c1=[11.0, 4.2, 7.0], l=[-0.6, 1.8, 0.4], l1=[-0.9, 3.2, 0.9], f0=30, f1=32)
-rate(2.6, 3.2, "zoomHand", 2.6, act="pick", k="s1", dFar=9, c1=[1.1, 1.2, 2.2], l=[0.0, 0.22, 0.09], f0=34, f1=26, bokeh=0)
-rate(3.2, 5.0, "rig", 3.2, act="pick", k="s1", c0=[1.1, 1.2, 2.2], c1=[0.95, 1.1, 1.9], l=[0.0, 0.22, 0.09], f0=26, bokeh=8, **CLOSE)
-VSQ = 3.35
-# 2 the problem (5-13): the ball in his hand; in on his fingers on the seams; sweat beads; the ball shifts; he regrips
-rate(5.0, 6.6, "world", 0.0, act="hold", c0=[-8.0, 6.3, -52.5], c1=[-6.8, 6.0, -54.0], l=[-0.4, 4.5, -60.0], f0=28, f1=25)
-rate(6.6, 10.2, "rig", 1.6, act="hold", c0=[-1.5, 0.8, 0.7], c1=[-1.3, 0.75, 0.6], l=[0.03, 0.43, 0.15], f0=26, bokeh=8, **CLOSE)
-rate(10.2, 13.0, "rig", 5.2, act="hold", c0=[1.4, 0.9, -0.6], c1=[1.25, 0.85, -0.5], l=[0.03, 0.43, 0.15], f0=26, bokeh=8, **CLOSE)
-V_WET, V_SLIP, V_REGRIP = 6.6 + 0.4, 6.6 + (3.7 - 1.6), 10.2 + (5.6 - 5.2)
-# 3 how rosin works (13-23): back to the bag; dust onto the fingertips, the sweat goes; he rubs them; grips the seams again
-S3 = dict(act="pick", k="s3", wet0=1, bounce=1, dryAt=2.8, dustAt=2.6)
-rate(13.0, 14.5, "bag", 0.6, c0=[9.5, 3.4, 6.0], c1=[9.0, 3.2, 5.6], l=[-0.9, 2.2, 1.2], f0=38, **S3)
-rate(14.5, 17.4, "rig", 2.1, c0=[1.1, 1.2, 2.2], c1=[0.95, 1.1, 1.9], l=[0.0, 0.22, 0.09], f0=26, bokeh=8, **CLOSE, **S3)
-rate(17.4, 18.8, "rig", 4.25, c0=[0.7, 1.9, 1.2], c1=[0.62, 1.8, 1.05], l=[0.05, 0.5, 0.06], f0=26, bokeh=8, **CLOSE, **S3)
-rate(18.8, 23.0, "rig", 0.0, act="hold", dry=1, c0=[-1.5, 0.8, 0.7], c1=[-1.3, 0.75, 0.6], l=[0.03, 0.43, 0.15], f0=26, bokeh=8, **CLOSE)
-# 4 why grip matters (23-33): fastball, curveball, changeup: the grip, close; the release, slowed; the ball on its way
-V4 = [23.0, 26.33, 29.67]
+PICK = dict(act="pick", k="s1")
+PK_GRAB, PK_SQ, PK_RUB = 1.7, 3.35, 4.25
+# 1 "Have you ever noticed that little white bag sitting behind the pitcher's mound?": the bag, low; he walks back off the rubber toward it
+A1 = S["what"]; T_ARRIVE = 1.15
+rate(0.0, A1, "bag", on(A1, T_ARRIVE + 0.05, 0.0), c0=[0.45, 0.22, -1.8], c1=[0.33, 0.2, -1.45], l=[-0.15, 0.3, 1.0], f0=34, f1=30, bokeh=0, **PICK, **CLOSE)
+# 2 "That's a rosin bag (he picks it up), and it's actually more important (a quick zoom) than you might think (he squeezes it)."
+A2 = W("what", "and") - 0.05; A3 = W("what", "important") + 0.1
+rate(A1, A2, "bag", on(W("what", "rosin"), PK_GRAB, A1), c0=[9.0, 3.0, 5.5], c1=[10.0, 3.8, 6.3], l=[-0.6, 1.8, 0.4], l1=[-0.8, 2.8, 0.8], f0=30, f1=31, **PICK)
+rate(A2, A3, "zoomHand", on(W("what", "rosin"), PK_GRAB, A2), dFar=9, c1=[1.1, 1.2, 2.2], l=[0.0, 0.22, 0.09], f0=34, f1=26, bokeh=0, **PICK)
+VSQ = W("what", "might") - 0.05
+rate(A3, S["use"], "rig", on(VSQ, PK_SQ, A3), c0=[1.1, 1.2, 2.2], c1=[0.95, 1.1, 1.9], l=[0.0, 0.22, 0.09], f0=26, bokeh=8, **PICK, **CLOSE)
+# 3 "Pitchers use rosin to help manage moisture on their hands (he rubs it in) and improve their grip on the baseball (the grip, dry)."
+A4 = W("use", "and") - 0.1
+rate(S["use"], A4, "rig", on(S["use"], PK_RUB - 0.1, S["use"]), c0=[0.7, 1.9, 1.2], c1=[0.62, 1.8, 1.05], l=[0.05, 0.5, 0.06], f0=26, bokeh=8, **PICK, **CLOSE)
+rate(A4, S["sweat"], "rig", 0.0, act="hold", dry=1, hl="IM", c0=[-1.5, 0.8, 0.7], c1=[-1.3, 0.75, 0.6], l=[0.03, 0.43, 0.15], f0=26, bokeh=8, **CLOSE)
+# 4 "When your hands get sweaty (sweat beads), gripping a baseball consistently (it shifts) becomes much harder."
+A5 = W("sweat", "gripping") - 0.1
+rate(S["sweat"], A5, "world", on(W("sweat", "sweaty"), 1.6, S["sweat"]), c0=[-8.0, 6.3, -52.5], c1=[-6.8, 6.0, -54.0], l=[-0.4, 4.5, -60.0], f0=28, f1=25, act="hold")
+rate(A5, S["absorb"], "rig", on(W("sweat", "consistently"), 3.7, A5), c0=[-1.5, 0.8, 0.7], c1=[-1.3, 0.75, 0.6], l=[0.03, 0.43, 0.15], f0=26, bokeh=8, act="hold", **CLOSE)
+V_WET, V_SLIP = A5, W("sweat", "consistently")
+# 5 "Rosin helps absorb moisture (dust onto the fingertips, the sweat dries), giving pitchers a more reliable feel (he rubs it in) for the ball (grips it again)."
+S3 = dict(act="pick", k="s3", wet0=1, bounce=1)
+A6 = W("absorb", "giving") - 0.05; A7 = W("absorb", "feel") - 0.1
+rate(S["absorb"], A6, "rig", 2.35, c0=[1.1, 1.2, 2.2], c1=[0.95, 1.1, 1.9], l=[0.0, 0.22, 0.09], f0=26, bokeh=8, **CLOSE, **S3)
+rate(A6, A7, "rig", PK_RUB, c0=[0.7, 1.9, 1.2], c1=[0.62, 1.8, 1.05], l=[0.05, 0.5, 0.06], f0=26, bokeh=8, **CLOSE, **S3)
+rate(A7, S["matters"], "rig", 0.0, act="hold", dry=1, c0=[1.4, 0.9, -0.6], c1=[1.25, 0.85, -0.5], l=[0.03, 0.43, 0.15], f0=26, bokeh=8, **CLOSE)
+# 6 "And that matters because even a small difference in grip can affect how a pitcher controls a pitch": fastball, curveball, changeup
+V4 = [S["matters"] + i * (S["rules"] - S["matters"]) / 3 for i in range(4)]
 for i, k in enumerate(["fb", "cb", "ch"]):
-    a = V4[i]
-    rate(a, a + 1.0, "rig", 0.0, act="hold", dry=1, kind=k, hl=["IM", "MT", "IT"][i], c0=[-1.5, 0.8, 0.7], c1=[-1.35, 0.76, 0.62], l=[0.03, 0.42, 0.14], f0=26, bokeh=8, **CLOSE)
-    shot(a + 1.0, a + 2.6, "track", [a + 1.0, a + 2.6], [-0.42, 0.07], speed="slow", act="pitch", kind=k, hl=["IM", "MT", "IT"][i], off=[-4.5, 0.8, 2.2], f0=28, bokeh=0, **CLOSE)
-    rate(a + 2.6, V4[i + 1] if i < 2 else 33.0, "ball", 0.07, r=0.7, act="pitch", kind=k, c0=[-1.4, 6.6, -63.5], c1=[-1.3, 6.5, -63.0], l=[0, 2.6, 0], f0=22)
-# 5 the rules (33-39): the bag behind the rubber; legal rosin vs. rosin mixed with sunscreen
-rate(33.0, 34.6, "bag", 0.0, act="rules", noHand=1, c0=[0.8, 1.1, -3.0], c1=[0.65, 1.0, -2.6], l=[-0.35, 0.3, 1.5], f0=34, bokeh=0, **CLOSE)
+    a, b = V4[i], V4[i + 1]; g, rl = a + 0.62, a + 0.62 + 0.85
+    rate(a, g, "rig", 0.0, act="hold", dry=1, kind=k, hl=["IM", "MT", "IT"][i], c0=[-1.5, 0.8, 0.7], c1=[-1.35, 0.76, 0.62], l=[0.03, 0.42, 0.14], f0=26, bokeh=8, **CLOSE)
+    shot(g, rl, "track", [g, rl], [-0.28, 0.05], speed="slow", act="pitch", kind=k, hl=["IM", "MT", "IT"][i], off=[-4.5, 0.8, 2.2], f0=28, bokeh=0, **CLOSE)
+    rate(rl, b, "ball", 0.05, r=0.9, act="pitch", kind=k, c0=[-1.4, 6.6, -63.5], c1=[-1.3, 6.5, -63.0], l=[0, 2.6, 0], f0=22)
+# 7 "But here's something important: rosin isn't allowed to be mixed with foreign substances like sunscreen…": the bag behind the rubber; legal vs. illegal
+A8 = W("rules", "rosin") - 0.1
+rate(S["rules"], A8, "bag", 0.0, act="rules", noHand=1, c0=[0.8, 1.1, -3.0], c1=[0.65, 1.0, -2.6], l=[-0.35, 0.3, 1.5], f0=34, bokeh=0, **CLOSE)
 RULE = dict(act="rules", cam="bag", c0=[0.0, 1.35, 1.45], c1=[0.0, 1.28, 1.3], l=[0.0, 0.3, 0.0], f0=30, bokeh=6, close=1)
-shot(34.6, 39.0, "bag", [34.6, 39.0], [0, 4.4], mode="split", top=dict(RULE), bot=dict(RULE, illegal=1))
-# 6 the ending (39-44.5): he delivers; the bag behind the mound; now you know; the end card
-rate(39.0, 41.5, "world", -2.1, act="pitch", kind="end", streak=1, c0=[1.4, 9.6, -85.0], c1=[1.2, 9.3, -83.0], l=[0.0, 3.2, -28.0], f0=19)
-rate(41.5, D, "bag", 1.0, act="rest", kind="end", c0=[0.95, 0.38, -1.25], c1=[0.8, 0.34, -1.05], l=[-0.05, 0.12, 0.3], f0=36, bokeh=16, **CLOSE)
-VBRAND = 43.0
+shot(A8, S["end"], "bag", [A8, S["end"]], [0, S["end"] - A8], mode="split", top=dict(RULE), bot=dict(RULE, illegal=1))
+# 8 "So next time you see a pitcher reach for that little white bag (he does), remember: it's not just a habit. It's part of controlling the baseball (the pitch)."
+A9 = W("end", "remember") - 0.15; VREL = W("end", "controlling"); A10 = W("end", "baseball") + 0.3
+rate(S["end"], A9, "bag", on(W("end", "reach"), PK_GRAB, S["end"]), c0=[9.0, 3.0, 5.5], c1=[8.4, 2.9, 5.1], l=[-0.6, 1.8, 0.4], f0=32, **PICK)
+rate(A9, A10, "world", on(VREL, 0.0, A9), act="pitch", kind="end", streak=1, c0=[1.4, 9.6, -85.0], c1=[1.2, 9.3, -83.0], l=[0.0, 3.2, -28.0], f0=19)
+VBRAND = round(LN("end")["t1"] + 1.05, 2)
+rate(A10, D, "bag", on(A10, 1.0, A10), act="rest", kind="end", c0=[0.95, 0.38, -1.25], c1=[0.8, 0.34, -1.05], l=[-0.05, 0.12, 0.3], f0=36, bokeh=16, **CLOSE)
 for x, y in zip(SHOTS, SHOTS[1:]): assert abs(x["b"] - y["a"]) < 1e-3 and x["b"] > x["a"], (x, y)
 CUTS = [x["a"] for x in SHOTS[1:]]
 
@@ -67,7 +88,7 @@ c.clip("fieldl", 0, D, '<canvas id="field-gl" width="1080" height="1920" data-la
 c.clip("shade", 0, D, '<div class="shade-top"></div><div class="shade-bot"></div>', cls="layer", style="z-index:2")
 c.clip("spdc", 0, D, '<div class="spd" id="spd"></div>', cls="layer", style="z-index:30")
 c.clip("flash", 0, D, '<div class="flash" id="flash"></div>', cls="layer", style="z-index:40")
-for f in [5.0, 13.0, 23.0, 33.0, 39.0, VBRAND]:
+for f in [S["sweat"], S["absorb"], S["matters"], S["rules"], S["end"], VBRAND]:
     c.set("#flash", '{"opacity":0.45}', f); c.to("#flash", o(opacity=0, duration=0.14, ease="power2.out"), f + 0.001)
 
 def pop(sel, t, dy=24):
@@ -90,46 +111,41 @@ def card(cid, t0, t1, n, text, top=1380):
     c.clip(cid, t0, t1, f'<div class="nc" id="{cid}x" style="top:{top}px"><i>{n}</i><b>{text}</b></div>', cls="layer", style="z-index:13")
     c.ft(f"#{cid}x", o(opacity=0, x=-60), o(opacity=1, x=0, duration=0.24, ease="power3.out"), t0)
 
-# ----------------------------------------------------------------- 1 the hook
-title("hook", 0.1, 4.98, [("What is this", False), ("little white bag?", True)])
-pinl("pbag", 0.5, 1.58, "Rosin bag", "bag", "")
-# 2 the problem
-title("t2", 5.1, 12.98, [("Moisture makes", False), ("grip harder", True)])
-pinl("pwet", V_WET, V_SLIP - 0.05, "Sweat on the fingertips", "tipM", "cy sm")
-pinl("pslip", V_SLIP + 0.1, 10.18, "The ball shifts in his fingers", "ball", "sm")
-pinl("preg", V_REGRIP, 12.98, "He has to reset his grip", "tipI", "yl sm")
-# 3 how rosin works
-title("t3", 13.1, 22.98, [("Better moisture control.", False), ("More consistent grip.", True)])
-c.clip("steps", 14.9, 18.78, """<div class="howto" id="howx"><div class="hrow" id="h1"><i>1</i><span>Sweat leaves the fingertips <b>slick</b></span></div>
+# ----------------------------------------------------------------- 1 the hook (the question is the big title instead of captions)
+BAND = 1150                                                  # scene titles: a band below the action, under the captions at the top
+title("hook", 0.1, A1 - 0.02, [("What is this", False), ("little white bag?", True)])
+pinl("pbag", W("what", "rosin"), A2 - 0.02, "Rosin bag", "bag", "")
+# 3 rosin, grip
+pinl("pdust", W("use", "moisture"), A4 - 0.02, "Rosin on the fingertips", "tipI", "sm")
+pinl("pgrip", W("use", "grip") - 0.1, S["sweat"] - 0.02, "Grip", "tipI", "yl sm")
+# 4 the problem
+title("t2", S["sweat"] + 0.05, A5 + 1.2, [("Moisture makes", False), ("grip harder", True)], BAND, "hk2 band")
+pinl("pwet", A5 + 0.3, V_SLIP - 0.05, "Sweat on the fingertips", "tipM", "cy sm")
+pinl("pslip", V_SLIP + 0.1, S["absorb"] - 0.02, "The ball shifts in his fingers", "ball", "sm")
+# 5 how rosin works
+title("t3", S["absorb"] + 0.05, A6 + 0.4, [("Better moisture control.", False), ("More consistent grip.", True)], BAND, "hk2 band")
+c.clip("steps", A6 + 0.45, S["matters"] - 0.02, """<div class="howto" id="howx"><div class="hrow" id="h1"><i>1</i><span>Sweat leaves the fingertips <b>slick</b></span></div>
   <div class="hrow" id="h2"><i>2</i><span>Rosin powder <b>dries</b> them and adds a little <b>tack</b></span></div></div>""", cls="layer", style="z-index:13")
-pop("#h1", 14.9, 12); pop("#h2", 16.1, 12)
-pinl("pdust", 15.9, 17.38, "Rosin on the fingertips", "tipI", "sm")
-pinl("prub", 17.5, 18.78, "Worked in", "tipT", "sm")
-note("n3", 19.3, 22.98, "Dry fingertips: the grip feels the <b>same</b> from pitch to pitch.")
-# 4 why grip matters
-title("t4", 23.1, 32.98, [("Every finger", False), ("matters", True)])
+pop("#h1", A6 + 0.45, 12); pop("#h2", A6 + 0.95, 12)
+# 6 why grip matters
+title("t4", S["matters"] + 0.05, S["matters"] + 1.7, [("Every finger", False), ("matters", True)], BAND, "hk2 band")
 NAMES = [("1", "Four-seam fastball"), ("2", "Curveball"), ("3", "Changeup")]
-GRIPN = [("Index and middle across the seams", "tipI"), ("Middle finger along a seam", "tipM"), ("Thumb and index circle: ball deeper in the hand", "ball")]
-RELN = ["Backspin off the fingertips", "Fingers pull down over the front: topspin", "Less speed off a deeper grip"]
-for i, a in enumerate(V4):
-    card(f"k{i}", a + 0.05, a + 3.3 if i < 2 else 32.98, *NAMES[i])
-    pinl(f"pg{i}", a + 0.2, a + 0.98, GRIPN[i][0], GRIPN[i][1], "yl sm")
-    pinl(f"pr{i}", a + 1.5, a + 2.58, RELN[i], "tipM", "sm")
-note("n4", 23.4, 32.98, "Rosin doesn’t add speed or movement. It helps every grip <b>feel the same</b>.", 1660)
-# 5 the rules
-pinl("pbag2", 33.2, 34.58, "Rosin bag", "bag", "")
-pinl("prub2", 33.5, 34.58, "Behind the rubber", "rubber", "cy sm")
-c.clip("splt", 34.6, 39.0, """<div class="seam"></div>
+for i, a in enumerate(V4[:3]): card(f"k{i}", max(a + 0.05, S["matters"] + 1.72) if i == 0 else a + 0.05, V4[i + 1] - 0.02, *NAMES[i])
+note("n4", S["matters"] + 1.75, S["rules"] - 0.02, "Rosin doesn’t add speed or movement. It helps every grip <b>feel the same</b>.", 1660)
+# 7 the rules
+pinl("pbag2", S["rules"] + 0.2, A8 - 0.02, "Rosin bag", "bag", "")
+pinl("prub2", S["rules"] + 0.5, A8 - 0.02, "Behind the rubber", "rubber", "cy sm")
+c.clip("splt", A8, S["end"], """<div class="seam"></div>
   <div class="half t"><span class="vd ok" id="vd1"><i>✓</i>Legal: the rosin bag</span></div>
   <div class="half b"><span class="vd no" id="vd2"><i>✕</i>Illegal: rosin + sunscreen</span></div>""", cls="layer", style="z-index:11")
-pop("#vd1", 34.7, 10); pop("#vd2", 35.4, 10)
-title("t5", 34.65, 38.98, [("Legal rosin.", False), ("Illegal foreign substances.", True)], 860, "hk2 band")
-pinl("pt1", 35.0, 38.98, "Rosin dust", "tipI", "sm", "t")
-pinl("pt2", 35.6, 38.98, "Sunscreen", "bottle", "sm", "b")
-pinl("pt3", 36.0, 38.98, "Sticky mix on the fingers", "tipM", "sm", "b")
-note("n5", 36.4, 38.98, "MLB allows the rosin bag. Mixing rosin with a <b>foreign substance</b> like sunscreen to improve grip is <b>not allowed</b>.", 1700)
-# 6 the ending
-title("t6", 41.6, VBRAND - 0.02, [("Now you know.", True)], 820, "hk2 big")
+pop("#vd1", A8 + 0.1, 10); pop("#vd2", W("rules", "mixed"), 10)
+title("t5", A8 + 0.05, S["end"] - 0.02, [("Legal rosin.", False), ("Illegal foreign substances.", True)], 860, "hk2 band")
+pinl("pt1", A8 + 0.4, S["end"] - 0.02, "Rosin dust", "tipI", "sm", "t")
+pinl("pt2", W("rules", "sunscreen"), S["end"] - 0.02, "Sunscreen", "bottle", "sm", "b")
+pinl("pt3", W("rules", "mixture"), S["end"] - 0.02, "Sticky mix on the fingers", "tipM", "sm", "b")
+note("n5", W("rules", "foreign"), S["end"] - 0.02, "MLB allows the rosin bag. Mixing rosin with a <b>foreign substance</b> like sunscreen to improve grip is <b>not allowed</b>.", 1600)
+# 8 the ending
+title("t6", A10 + 0.15, VBRAND - 0.02, [("Now you know.", True)], 820, "hk2 big")
 c.clip("brand", VBRAND, D, """<div class="brand" id="brx"><div class="bmark"><svg viewBox="0 0 100 100" width="150" height="150"><circle cx="50" cy="50" r="44" fill="#f4f2ec" stroke="#05080d" stroke-width="3"/>
   <path d="M26 16 C40 34 40 66 26 84" fill="none" stroke="#ff6a3d" stroke-width="4" stroke-dasharray="6 5"/><path d="M74 16 C60 34 60 66 74 84" fill="none" stroke="#ff6a3d" stroke-width="4" stroke-dasharray="6 5"/></svg></div>
   <div class="bname"><span>Baseball</span><em>Decoded</em></div></div>""", cls="layer", style="z-index:24")
@@ -137,19 +153,47 @@ c.ft("#brx", o(opacity=0), o(opacity=1, duration=0.2), VBRAND)
 c.ft(".bmark", o(scale=0.4, rotation=-120), o(scale=1, rotation=0, duration=0.5, ease="back.out(1.6)"), VBRAND)
 c.ft(".bname", o(opacity=0, y=30), o(opacity=1, y=0, duration=0.3, ease="power3.out"), VBRAND + 0.15)
 
-# ----------------------------------------------------------------- sound (no voice: room left for the narrator)
+# ----------------------------------------------------------------- captions: the voiceover, word by word (the opening question is the big title instead)
+CAPS = [("what", 0, 3, {2: "acc", 3: "acc"}), ("what", 4, 8, {7: "acc"}), ("what", 9, 12, {}),
+        ("use", 0, 4, {2: "acc"}), ("use", 5, 9, {6: "acc"}), ("use", 10, 16, {13: "acc"}),
+        ("sweat", 0, 4, {4: "acc"}), ("sweat", 5, 8, {8: "acc"}), ("sweat", 9, 11, {11: "acc"}),
+        ("absorb", 0, 3, {2: "acc", 3: "acc"}), ("absorb", 4, 8, {8: "acc"}), ("absorb", 9, 12, {9: "acc"}),
+        ("matters", 0, 3, {2: "acc"}), ("matters", 4, 9, {6: "acc", 9: "acc"}), ("matters", 10, 13, {}), ("matters", 14, 17, {15: "acc"}),
+        ("rules", 0, 3, {3: "acc"}), ("rules", 4, 6, {5: "acc", 6: "acc"}), ("rules", 7, 11, {11: "acc", 12: "acc"}), ("rules", 12, 14, {14: "acc"}), ("rules", 15, 21, {18: "acc"}),
+        ("end", 0, 6, {}), ("end", 7, 12, {9: "acc", 10: "acc", 11: "acc"}), ("end", 13, 18, {16: "acc", 17: "acc", 18: "acc"}), ("end", 19, 24, {22: "acc"})]
+for k, (lid, i0, i1, acc) in enumerate(CAPS):
+    ln = LN(lid); wd = ln["words"]; i1 = min(i1, len(wd) - 1)
+    start = wd[i0]["t0"] - 0.06
+    if k + 1 < len(CAPS) and CAPS[k + 1][0] == lid: end = wd[CAPS[k + 1][1]]["t0"] - 0.06
+    elif IDX[lid] + 1 < len(TMJ["lines"]): end = min(ln["t1"] + 0.35, TMJ["lines"][IDX[lid] + 1]["t0"] - 0.1)
+    else: end = min(ln["t1"] + 0.3, A10 + 0.1)
+    cid = f"cap{k}"; sp = []
+    for n in range(i0, i1 + 1):
+        w = wd[n]["w"]; w = w.rstrip(",:") if n == i1 and i1 > i0 else w
+        w = w.replace("'", "’")
+        sp.append(f'<span class="cw{(" " + acc[n]) if n in acc else ""}" id="{cid}w{n - i0}">{esc(w)}</span>')
+    c.clip(cid, start, end, f'<div class="cap" style="top:300px"><span class="cl">{" ".join(sp)}</span></div>', cls="layer", style="z-index:20")
+    for n in range(i0, i1 + 1): c.ft(f"#{cid}w{n - i0}", o(opacity=0, y=34, filter="blur(10px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.15, ease="power3.out"), wd[n]["t0"] - 0.04)
+
+# ----------------------------------------------------------------- sound
 def cue(n, t, db=0.0):
     if t is not None and 0 <= t < D: c.cue(n, t, db)
 for t_ in CUTS: cue("whoosh", t_, -13)
 cue("riser-s", 0.0, -8)
-for tt in [0.1, 5.1, 13.1, 23.1, 34.65, 41.6]: cue("impact", tt, -6)
-STEPS = [0.15 + 0.42 * i for i in range(3)] + [13.1, 13.5]                    # footsteps on the dirt
-PUFFS = [VSQ + 0.1] + [14.5 + 0.25 + 0.42 * i for i in range(4)]
-THUDS = [4.05 + 0.36]
-for a in V4: cue("whoosh", a + 1.0 + 0.42 / 0.49 * 1.6, -8)
-for a, k in zip(V4, ["fb", "cb", "ch"]): cue("glove", a + 2.6 + (PI_[k]["flight"] - 0.07) / 0.7, -2)
-REL_END = 39.0 + 2.1
-cue("whoosh", REL_END, -6); cue("glove", REL_END + PI_["end"]["flight"], 0)
+for tt in [0.1, S["sweat"] + 0.05, S["absorb"] + 0.05, S["matters"] + 0.05, A8 + 0.05, A10 + 0.15]: cue("impact", tt, -6)
+def vt_of(sh, t):      # video time at play time t in a shot
+    vs, ts = sh["vs"], sh["ts"]
+    for i in range(1, len(vs)):
+        if min(ts[i - 1], ts[i]) <= t <= max(ts[i - 1], ts[i]) and ts[i] != ts[i - 1]: return vs[i - 1] + (t - ts[i - 1]) / (ts[i] - ts[i - 1]) * (vs[i] - vs[i - 1])
+V_WALK = A1 - (T_ARRIVE + 0.05)                                            # he starts walking (play time 0 of the pick)
+STEPS = [V_WALK + x for x in (0.15, 0.55, 0.95)] + [S["end"] + 0.1, S["end"] + 0.45]
+PUFFS = [VSQ + 0.1] + [S["absorb"] + 0.05 + 0.42 * i for i in range(3)]
+THUDS = [VSQ + (4.05 - PK_SQ) + 0.36]                                     # the bag lands back on the mound
+for i, k in enumerate(["fb", "cb", "ch"]):
+    rl = V4[i] + 0.62
+    cue("whoosh", rl + 0.28 / 0.33 * 0.85, -8)
+    cue("glove", rl + 0.85 + (PI_[k]["flight"] - 0.05) / 0.9, -2)
+cue("whoosh", VREL, -6); cue("glove", VREL + PI_["end"]["flight"], 0)
 cue("riser-m", VBRAND - 1.0, -10); cue("impact", VBRAND, -4)
 LEVEL = {"impact": -3.0, "whoosh": -6.0, "glove": -1.0, "tick": -6.0, "popup": -8.0, "riser-m": -7.0, "riser-s": -7.0, "tap": -3.0}
 
@@ -180,17 +224,24 @@ def mixdown():
     for vt, fn, g in [(v, cloth, -16) for v in PUFFS] + [(v, step, -18) for v in STEPS] + [(v, step, -14) for v in THUDS]:
         x = fn(rng); i = int(vt * SR); j = min(n, i + len(x)); fx[i:j] += x[: j - i] * 10 ** (g / 20)
     crowd = read(os.path.join(HERE, "assets", "sfx", "crowd.wav")); crowd = np.concatenate([crowd] * (n // len(crowd) + 1))[:n]
-    fx += crowd * 10 ** (-27 / 20)
+    fx += crowd * 10 ** (-30 / 20)
     bedp = os.path.join(HERE, "assets", "bed.wav"); make_bed(bedp, D, VBRAND, style="pulse", seed=121)
     bed = read(bedp)[:n]; bed = np.pad(bed, ((0, n - len(bed)), (0, 0)))
     ramp = np.clip(np.arange(n) / SR / 3.0, 0.5, 1.0)[:, None]
-    full = (fx + bed * ramp * 10 ** (-16 / 20)) * 10 ** (-6 / 20)
+    vo = read(os.path.join(HERE, "assets", "vo", "vo.wav"))[:n]; vo = np.pad(vo, ((0, n - len(vo)), (0, 0)))
+    env = np.convolve(np.abs(vo).mean(1), np.ones(int(0.12 * SR)) / int(0.12 * SR), "same")
+    duck = 10 ** (-7 * np.clip(env / 0.05, 0, 1) / 20)
+    duck = np.convolve(duck, np.ones(int(0.08 * SR)) / int(0.08 * SR), "same")
+    music = bed * ramp * duck[:, None] * 10 ** (-17 / 20)
+    full = (fx + music) * 10 ** (-6 / 20) + vo
     def wav(path, x):
         w = wave.open(path, "wb"); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
         w.writeframes((np.clip(x * 0.5, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
-    pre = os.path.join(HERE, ".pre.wav"); wav(pre, full)
-    m = master(pre, os.path.join(HERE, "assets", "mix.wav"), target=-20.0)
-    os.remove(pre)
+    pre, pfx = os.path.join(HERE, ".pre.wav"), os.path.join(HERE, ".fx.wav")
+    wav(pre, full); wav(pfx, (fx + bed * ramp * 10 ** (-17 / 20)) * 10 ** (-6 / 20))
+    m = master(pre, os.path.join(HERE, "assets", "mix.wav"))
+    master(pre, os.path.join(HERE, "assets", "mix-novo.wav"), fx_path=pfx)
+    os.remove(pre); os.remove(pfx)
     return m
 
 # ----------------------------------------------------------------- CSS
@@ -349,21 +400,14 @@ CSS += f"""
 """
 
 HEAD = '<script type="importmap">{"imports":{"three":"./assets/vendor/three.module.min.js"}}</script>'
-SCENES = [("0.0", "5.0", "The hook: the bag on the mound, close; he walks over and picks it up; zoom in; he squeezes it and rubs his fingertips", "WHAT IS THIS LITTLE WHITE BAG?"),
-          ("5.0", "13.0", "The problem: the ball in his hand; in on his fingers on the seams; sweat beads up; the ball shifts; he resets his grip", "MOISTURE MAKES GRIP HARDER"),
-          ("13.0", "23.0", "How rosin works: back to the bag; rosin dust onto his fingertips as the sweat dries; he rubs it in; grips the seams again", "BETTER MOISTURE CONTROL. MORE CONSISTENT GRIP."),
-          ("23.0", "33.0", "Why grip matters: fastball (23.0), curveball (26.3), changeup (29.7): the grip close, the release slowed, the ball on its way", "EVERY FINGER MATTERS"),
-          ("33.0", "39.0", "The rules: the bag behind the rubber; split: legal rosin (top) vs rosin mixed with sunscreen (bottom)", "LEGAL ROSIN. ILLEGAL FOREIGN SUBSTANCES."),
-          ("39.0", "43.0", "The ending: he delivers (release 41.1); the bag behind the mound", "NOW YOU KNOW. (from 41.6)"),
-          ("43.0", f"{D:.1f}", "End card", "BASEBALL DECODED")]
 if __name__ == "__main__":
     cc = {"duration": D, "shots": {"list": SHOTS}, "pins": PINS}
     h = c.page(CSS, "Why pitchers use the rosin bag", script=True).replace('<script src="assets/gsap.min.js"></script>',
         '<script src="assets/vendor/gsap.min.js"></script>\n    ' + HEAD + f'\n    <script>window.__CC = {json.dumps(cc)}; window.__PLAY = {json.dumps(P)};</script>')
     h = h.replace("</body>", '  <script type="module" src="./assets/field.js"></script>\n  </body>')
     open(os.path.join(HERE, "index.html"), "w").write(h)
-    lines = ["# Scene timing for the voiceover", "", f"The video is {D:.1f} s. Record each part of the narration inside its scene (times in seconds).", "",
-             "| From | To | Scene | On screen |", "|---|---|---|---|"] + [f"| {a} | {b} | {d} | {t} |" for a, b, d, t in SCENES]
+    lines = ["# Voiceover cue sheet", "", f"When each line starts, to land on its shots (the video is {D:.1f} s). Record your own read over assets/mix-novo.wav to these times.", "",
+             "| Line | Starts |", "|---|---|"] + [f"| {x['text']} | {x['t0']:.1f} s |" for x in TMJ["lines"]]
     open(os.path.join(HERE, "CUES.md"), "w").write("\n".join(lines) + "\n")
     if "--nomix" not in sys.argv:
         m = mixdown(); print(f"index.html: {D}s, {len(SHOTS)} shots; {len(c.cues)} sounds; {m['lufs']} LUFS / {m['true_peak']} dBTP")
