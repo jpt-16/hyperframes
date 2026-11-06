@@ -154,12 +154,11 @@ c.clip("lens", A4, S["systems"], '<div class="lens"></div><div class="lenstag">R
 title("t2", S["systems"] + 0.05, S["seq"] - 0.02, [("Change the", False), ("sequence", True)])
 seqrow("sq0", S["systems"], S["seq"] - 0.02, [x[0] for x in SYS], [x[1] for x in SYS], 1500)
 # 6 three systems, one sequence
-for i, (lab, res) in enumerate([("System A: 1st sign is live", "→ 2 = Curveball"), ("System B: 2nd sign is live", "→ 1 = Fastball"), ("System C: 3rd sign is live", "→ 3 = Slider")]):
+for i, (lab, res) in enumerate([("Example A: 1st sign is live", "→ 2 = Curveball"), ("Example B: 2nd sign is live", "→ 1 = Fastball"), ("Example C: 3rd sign is live", "→ 3 = Slider")]):
     c.clip(f"pl{i}", S["seq"] + 0.05, S["ind"] - 0.02, f'<div class="plab" style="top:{i * 640 + 24}px" id="pl{i}x">{lab}</div>', cls="layer", style="z-index:15")
     pop(f"#pl{i}x", S["seq"] + 0.1 + 0.12 * i, 10)
     seqrow(f"sq{i + 1}", S["seq"], S["ind"] - 0.02, SQT, [2, 1, 3], i * 640 + 520, live=(i, LIVE3[i]), result=res)
 c.clip("seams", S["seq"], S["ind"] - 0.02, '<div class="hseam" style="top:638px"></div><div class="hseam" style="top:1278px"></div>', cls="layer", style="z-index:16")
-note("nsys", LIVE3[2] + 0.3, S["ind"] - 0.02, "Example systems: each team made its own.", 1180, "background:rgba(6,10,18,.92)")
 # 7 the indicator; changing systems
 title("t3", W("ind", "indicator") - 0.05, A5 - 0.02, [("Use an", False), ("indicator", True)])
 seqrow("sqi", S["ind"], A5 - 0.02, [x[0] for x in IND], [x[1] for x in IND], 1500, live=(2, IND[2][0] + 0.15), result="→ 2 = Curveball")
