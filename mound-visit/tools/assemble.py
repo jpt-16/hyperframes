@@ -4,7 +4,7 @@ import json, os, subprocess, wave
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); VO = os.path.join(HERE, "..", "assets", "vo")
 SR = 48000
-GAP_AFTER = {"q": 0.4, "century": 0.25, "fingers": 0.35, "problem": 0.15, "steal": 0.3, "systems": 0.15, "seq": 0.25, "ind": 0.25, "goal": 0.45, "then": 0.25, "intro": 0.3, "nomore": 0.35, "end": 2.2}   # a beat at each scene change; the end leaves room for the end card
+GAP_AFTER = {"q": 0.35, "first": 0.25, "list": 0.2, "instead": 0.2, "ask": 0.3, "simple": 0.15, "quote": 0.35, "command": 0.25, "frus": 0.3, "tip": 0.3, "big": 0.15, "fix": 0.25, "trust": 0.3, "because": 0.15, "end": 2.0}   # a beat at each scene change; the end leaves room for the end card
 START = 0.25
 
 def load(path):

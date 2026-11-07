@@ -1,0 +1,1112 @@
+[
+ {
+  "i": 0,
+  "id": "q",
+  "text": "When a pitcher starts struggling, what should a catcher say during a mound visit?",
+  "spoken": "When a pitcher starts struggling, what should a catcher say during a mound visit?",
+  "dur": 2.987,
+  "words": [
+   {
+    "w": "When",
+    "start": 0.04,
+    "end": 0.19
+   },
+   {
+    "w": "a",
+    "start": 0.19,
+    "end": 0.19
+   },
+   {
+    "w": "pitcher",
+    "start": 0.215,
+    "end": 0.415
+   },
+   {
+    "w": "starts",
+    "start": 0.44,
+    "end": 0.64
+   },
+   {
+    "w": "struggling,",
+    "start": 0.665,
+    "end": 1.165
+   },
+   {
+    "w": "what",
+    "start": 1.24,
+    "end": 1.34
+   },
+   {
+    "w": "should",
+    "start": 1.365,
+    "end": 1.515
+   },
+   {
+    "w": "a",
+    "start": 1.515,
+    "end": 1.515
+   },
+   {
+    "w": "catcher",
+    "start": 1.565,
+    "end": 1.84
+   },
+   {
+    "w": "say",
+    "start": 1.915,
+    "end": 2.065
+   },
+   {
+    "w": "during",
+    "start": 2.09,
+    "end": 2.315
+   },
+   {
+    "w": "a",
+    "start": 2.315,
+    "end": 2.315
+   },
+   {
+    "w": "mound",
+    "start": 2.365,
+    "end": 2.59
+   },
+   {
+    "w": "visit?",
+    "start": 2.615,
+    "end": 2.987
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "first",
+  "text": "The first thing? Don\u2019t make it worse.",
+  "spoken": "The first thing? Don't make it worse.",
+  "dur": 1.451,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.04,
+    "end": 0.09
+   },
+   {
+    "w": "first",
+    "start": 0.14,
+    "end": 0.29
+   },
+   {
+    "w": "thing?",
+    "start": 0.315,
+    "end": 0.54
+   },
+   {
+    "w": "Don't",
+    "start": 0.615,
+    "end": 0.765
+   },
+   {
+    "w": "make",
+    "start": 0.79,
+    "end": 0.915
+   },
+   {
+    "w": "it",
+    "start": 0.94,
+    "end": 0.99
+   },
+   {
+    "w": "worse.",
+    "start": 1.04,
+    "end": 1.451
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "list",
+  "text": "A catcher shouldn\u2019t walk to the mound and start listing everything the pitcher is doing wrong.",
+  "spoken": "A catcher shouldn't walk to the mound and start listing everything the pitcher is doing wrong.",
+  "dur": 3.285,
+  "words": [
+   {
+    "w": "A",
+    "start": 0.001,
+    "end": 0.026
+   },
+   {
+    "w": "catcher",
+    "start": 0.076,
+    "end": 0.351
+   },
+   {
+    "w": "shouldn't",
+    "start": 0.401,
+    "end": 0.576
+   },
+   {
+    "w": "walk",
+    "start": 0.601,
+    "end": 0.726
+   },
+   {
+    "w": "to",
+    "start": 0.751,
+    "end": 0.801
+   },
+   {
+    "w": "the",
+    "start": 0.826,
+    "end": 0.876
+   },
+   {
+    "w": "mound",
+    "start": 0.901,
+    "end": 1.351
+   },
+   {
+    "w": "and",
+    "start": 1.401,
+    "end": 1.476
+   },
+   {
+    "w": "start",
+    "start": 1.501,
+    "end": 1.676
+   },
+   {
+    "w": "listing",
+    "start": 1.701,
+    "end": 2.001
+   },
+   {
+    "w": "everything",
+    "start": 2.076,
+    "end": 2.301
+   },
+   {
+    "w": "the",
+    "start": 2.326,
+    "end": 2.376
+   },
+   {
+    "w": "pitcher",
+    "start": 2.426,
+    "end": 2.651
+   },
+   {
+    "w": "is",
+    "start": 2.676,
+    "end": 2.726
+   },
+   {
+    "w": "doing",
+    "start": 2.776,
+    "end": 2.951
+   },
+   {
+    "w": "wrong.",
+    "start": 3.001,
+    "end": 3.285
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "instead",
+  "text": "Instead, they need to figure out what\u2019s happening.",
+  "spoken": "Instead, they need to figure out what's happening.",
+  "dur": 1.792,
+  "words": [
+   {
+    "w": "Instead,",
+    "start": 0.044,
+    "end": 0.419
+   },
+   {
+    "w": "they",
+    "start": 0.469,
+    "end": 0.544
+   },
+   {
+    "w": "need",
+    "start": 0.569,
+    "end": 0.694
+   },
+   {
+    "w": "to",
+    "start": 0.719,
+    "end": 0.769
+   },
+   {
+    "w": "figure",
+    "start": 0.819,
+    "end": 1.019
+   },
+   {
+    "w": "out",
+    "start": 1.069,
+    "end": 1.144
+   },
+   {
+    "w": "what's",
+    "start": 1.169,
+    "end": 1.269
+   },
+   {
+    "w": "happening.",
+    "start": 1.294,
+    "end": 1.792
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "ask",
+  "text": "Is the pitcher rushing? Losing confidence? Missing his spots? Or just struggling to get ahead?",
+  "spoken": "Is the pitcher rushing? Losing confidence? Missing his spots? Or just struggling to get ahead?",
+  "dur": 3.883,
+  "words": [
+   {
+    "w": "Is",
+    "start": 0.044,
+    "end": 0.119
+   },
+   {
+    "w": "the",
+    "start": 0.144,
+    "end": 0.194
+   },
+   {
+    "w": "pitcher",
+    "start": 0.244,
+    "end": 0.469
+   },
+   {
+    "w": "rushing?",
+    "start": 0.519,
+    "end": 0.894
+   },
+   {
+    "w": "Losing",
+    "start": 0.994,
+    "end": 1.219
+   },
+   {
+    "w": "confidence?",
+    "start": 1.269,
+    "end": 1.794
+   },
+   {
+    "w": "Missing",
+    "start": 1.894,
+    "end": 2.094
+   },
+   {
+    "w": "his",
+    "start": 2.119,
+    "end": 2.194
+   },
+   {
+    "w": "spots?",
+    "start": 2.244,
+    "end": 2.694
+   },
+   {
+    "w": "Or",
+    "start": 2.769,
+    "end": 2.844
+   },
+   {
+    "w": "just",
+    "start": 2.869,
+    "end": 3.019
+   },
+   {
+    "w": "struggling",
+    "start": 3.069,
+    "end": 3.344
+   },
+   {
+    "w": "to",
+    "start": 3.369,
+    "end": 3.419
+   },
+   {
+    "w": "get",
+    "start": 3.444,
+    "end": 3.519
+   },
+   {
+    "w": "ahead?",
+    "start": 3.544,
+    "end": 3.883
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "simple",
+  "text": "Sometimes, the best thing to say is simple:",
+  "spoken": "Sometimes, the best thing to say is simple:",
+  "dur": 1.579,
+  "words": [
+   {
+    "w": "Sometimes,",
+    "start": 0.065,
+    "end": 0.415
+   },
+   {
+    "w": "the",
+    "start": 0.465,
+    "end": 0.515
+   },
+   {
+    "w": "best",
+    "start": 0.54,
+    "end": 0.665
+   },
+   {
+    "w": "thing",
+    "start": 0.69,
+    "end": 0.79
+   },
+   {
+    "w": "to",
+    "start": 0.815,
+    "end": 0.865
+   },
+   {
+    "w": "say",
+    "start": 0.915,
+    "end": 1.04
+   },
+   {
+    "w": "is",
+    "start": 1.065,
+    "end": 1.115
+   },
+   {
+    "w": "simple:",
+    "start": 1.165,
+    "end": 1.579
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "quote",
+  "text": "\u201cTake a breath. Slow everything down. We\u2019ve got this.\u201d",
+  "spoken": "Take a breath. Slow everything down. We've got this.",
+  "dur": 2.027,
+  "words": [
+   {
+    "w": "Take",
+    "start": 0.062,
+    "end": 0.237
+   },
+   {
+    "w": "a",
+    "start": 0.237,
+    "end": 0.237
+   },
+   {
+    "w": "breath.",
+    "start": 0.287,
+    "end": 0.462
+   },
+   {
+    "w": "Slow",
+    "start": 0.537,
+    "end": 0.687
+   },
+   {
+    "w": "everything",
+    "start": 0.737,
+    "end": 0.962
+   },
+   {
+    "w": "down.",
+    "start": 0.987,
+    "end": 1.337
+   },
+   {
+    "w": "We've",
+    "start": 1.412,
+    "end": 1.512
+   },
+   {
+    "w": "got",
+    "start": 1.537,
+    "end": 1.687
+   },
+   {
+    "w": "this.",
+    "start": 1.712,
+    "end": 2.027
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "command",
+  "text": "If the pitcher is struggling with command, the catcher can remind him to focus on one target instead of trying to be perfect.",
+  "spoken": "If the pitcher is struggling with command, the catcher can remind him to focus on one target instead of trying to be perfect.",
+  "dur": 4.928,
+  "words": [
+   {
+    "w": "If",
+    "start": 0.044,
+    "end": 0.094
+   },
+   {
+    "w": "the",
+    "start": 0.119,
+    "end": 0.169
+   },
+   {
+    "w": "pitcher",
+    "start": 0.219,
+    "end": 0.469
+   },
+   {
+    "w": "is",
+    "start": 0.519,
+    "end": 0.569
+   },
+   {
+    "w": "struggling",
+    "start": 0.619,
+    "end": 0.919
+   },
+   {
+    "w": "with",
+    "start": 0.944,
+    "end": 1.019
+   },
+   {
+    "w": "command,",
+    "start": 1.044,
+    "end": 1.619
+   },
+   {
+    "w": "the",
+    "start": 1.719,
+    "end": 1.769
+   },
+   {
+    "w": "catcher",
+    "start": 1.819,
+    "end": 2.069
+   },
+   {
+    "w": "can",
+    "start": 2.094,
+    "end": 2.169
+   },
+   {
+    "w": "remind",
+    "start": 2.194,
+    "end": 2.494
+   },
+   {
+    "w": "him",
+    "start": 2.519,
+    "end": 2.619
+   },
+   {
+    "w": "to",
+    "start": 2.644,
+    "end": 2.694
+   },
+   {
+    "w": "focus",
+    "start": 2.744,
+    "end": 3.019
+   },
+   {
+    "w": "on",
+    "start": 3.069,
+    "end": 3.119
+   },
+   {
+    "w": "one",
+    "start": 3.169,
+    "end": 3.294
+   },
+   {
+    "w": "target",
+    "start": 3.344,
+    "end": 3.794
+   },
+   {
+    "w": "instead",
+    "start": 3.869,
+    "end": 4.094
+   },
+   {
+    "w": "of",
+    "start": 4.119,
+    "end": 4.169
+   },
+   {
+    "w": "trying",
+    "start": 4.194,
+    "end": 4.394
+   },
+   {
+    "w": "to",
+    "start": 4.419,
+    "end": 4.469
+   },
+   {
+    "w": "be",
+    "start": 4.469,
+    "end": 4.519
+   },
+   {
+    "w": "perfect.",
+    "start": 4.569,
+    "end": 4.928
+   }
+  ]
+ },
+ {
+  "i": 8,
+  "id": "frus",
+  "text": "If he\u2019s getting frustrated, bring his attention back to the next pitch. Not the last one.",
+  "spoken": "If he's getting frustrated, bring his attention back to the next pitch. Not the last one.",
+  "dur": 3.456,
+  "words": [
+   {
+    "w": "If",
+    "start": 0.044,
+    "end": 0.094
+   },
+   {
+    "w": "he's",
+    "start": 0.119,
+    "end": 0.219
+   },
+   {
+    "w": "getting",
+    "start": 0.244,
+    "end": 0.394
+   },
+   {
+    "w": "frustrated,",
+    "start": 0.444,
+    "end": 0.944
+   },
+   {
+    "w": "bring",
+    "start": 1.044,
+    "end": 1.169
+   },
+   {
+    "w": "his",
+    "start": 1.194,
+    "end": 1.269
+   },
+   {
+    "w": "attention",
+    "start": 1.294,
+    "end": 1.594
+   },
+   {
+    "w": "back",
+    "start": 1.644,
+    "end": 1.794
+   },
+   {
+    "w": "to",
+    "start": 1.819,
+    "end": 1.869
+   },
+   {
+    "w": "the",
+    "start": 1.894,
+    "end": 1.944
+   },
+   {
+    "w": "next",
+    "start": 1.969,
+    "end": 2.119
+   },
+   {
+    "w": "pitch.",
+    "start": 2.144,
+    "end": 2.569
+   },
+   {
+    "w": "Not",
+    "start": 2.694,
+    "end": 2.819
+   },
+   {
+    "w": "the",
+    "start": 2.844,
+    "end": 2.894
+   },
+   {
+    "w": "last",
+    "start": 2.919,
+    "end": 3.119
+   },
+   {
+    "w": "one.",
+    "start": 3.144,
+    "end": 3.456
+   }
+  ]
+ },
+ {
+  "i": 9,
+  "id": "tip",
+  "text": "And if the pitcher is tipping his pitches or changing his mechanics, that\u2019s when the catcher can communicate a specific adjustment.",
+  "spoken": "And if the pitcher is tipping his pitches or changing his mechanics, that's when the catcher can communicate a specific adjustment.",
+  "dur": 4.885,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.023,
+    "end": 0.098
+   },
+   {
+    "w": "if",
+    "start": 0.123,
+    "end": 0.173
+   },
+   {
+    "w": "the",
+    "start": 0.198,
+    "end": 0.248
+   },
+   {
+    "w": "pitcher",
+    "start": 0.298,
+    "end": 0.523
+   },
+   {
+    "w": "is",
+    "start": 0.548,
+    "end": 0.623
+   },
+   {
+    "w": "tipping",
+    "start": 0.673,
+    "end": 0.848
+   },
+   {
+    "w": "his",
+    "start": 0.873,
+    "end": 0.948
+   },
+   {
+    "w": "pitches",
+    "start": 0.998,
+    "end": 1.348
+   },
+   {
+    "w": "or",
+    "start": 1.398,
+    "end": 1.573
+   },
+   {
+    "w": "changing",
+    "start": 1.648,
+    "end": 1.948
+   },
+   {
+    "w": "his",
+    "start": 1.973,
+    "end": 2.048
+   },
+   {
+    "w": "mechanics,",
+    "start": 2.073,
+    "end": 2.698
+   },
+   {
+    "w": "that's",
+    "start": 2.798,
+    "end": 2.948
+   },
+   {
+    "w": "when",
+    "start": 2.973,
+    "end": 3.048
+   },
+   {
+    "w": "the",
+    "start": 3.073,
+    "end": 3.123
+   },
+   {
+    "w": "catcher",
+    "start": 3.173,
+    "end": 3.473
+   },
+   {
+    "w": "can",
+    "start": 3.498,
+    "end": 3.573
+   },
+   {
+    "w": "communicate",
+    "start": 3.598,
+    "end": 4.098
+   },
+   {
+    "w": "a",
+    "start": 4.098,
+    "end": 4.098
+   },
+   {
+    "w": "specific",
+    "start": 4.123,
+    "end": 4.448
+   },
+   {
+    "w": "adjustment.",
+    "start": 4.473,
+    "end": 4.885
+   }
+  ]
+ },
+ {
+  "i": 10,
+  "id": "big",
+  "text": "But here\u2019s the biggest thing:",
+  "spoken": "But here's the biggest thing:",
+  "dur": 1.109,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.037,
+    "end": 0.137
+   },
+   {
+    "w": "here's",
+    "start": 0.162,
+    "end": 0.337
+   },
+   {
+    "w": "the",
+    "start": 0.362,
+    "end": 0.412
+   },
+   {
+    "w": "biggest",
+    "start": 0.462,
+    "end": 0.662
+   },
+   {
+    "w": "thing:",
+    "start": 0.712,
+    "end": 1.109
+   }
+  ]
+ },
+ {
+  "i": 11,
+  "id": "fix",
+  "text": "A good catcher doesn\u2019t try to fix everything in one conversation.",
+  "spoken": "A good catcher doesn't try to fix everything in one conversation.",
+  "dur": 2.496,
+  "words": [
+   {
+    "w": "A",
+    "start": 0.023,
+    "end": 0.048
+   },
+   {
+    "w": "good",
+    "start": 0.098,
+    "end": 0.198
+   },
+   {
+    "w": "catcher",
+    "start": 0.248,
+    "end": 0.623
+   },
+   {
+    "w": "doesn't",
+    "start": 0.673,
+    "end": 0.848
+   },
+   {
+    "w": "try",
+    "start": 0.873,
+    "end": 1.023
+   },
+   {
+    "w": "to",
+    "start": 1.048,
+    "end": 1.098
+   },
+   {
+    "w": "fix",
+    "start": 1.148,
+    "end": 1.298
+   },
+   {
+    "w": "everything",
+    "start": 1.373,
+    "end": 1.648
+   },
+   {
+    "w": "in",
+    "start": 1.673,
+    "end": 1.723
+   },
+   {
+    "w": "one",
+    "start": 1.773,
+    "end": 1.873
+   },
+   {
+    "w": "conversation.",
+    "start": 1.898,
+    "end": 2.496
+   }
+  ]
+ },
+ {
+  "i": 12,
+  "id": "trust",
+  "text": "They give their pitcher confidence, a clear plan, and a reason to trust the next pitch.",
+  "spoken": "They give their pitcher confidence, a clear plan, and a reason to trust the next pitch.",
+  "dur": 3.413,
+  "words": [
+   {
+    "w": "They",
+    "start": 0.04,
+    "end": 0.115
+   },
+   {
+    "w": "give",
+    "start": 0.165,
+    "end": 0.265
+   },
+   {
+    "w": "their",
+    "start": 0.29,
+    "end": 0.365
+   },
+   {
+    "w": "pitcher",
+    "start": 0.415,
+    "end": 0.615
+   },
+   {
+    "w": "confidence,",
+    "start": 0.665,
+    "end": 1.365
+   },
+   {
+    "w": "a",
+    "start": 1.365,
+    "end": 1.365
+   },
+   {
+    "w": "clear",
+    "start": 1.415,
+    "end": 1.615
+   },
+   {
+    "w": "plan,",
+    "start": 1.665,
+    "end": 2.115
+   },
+   {
+    "w": "and",
+    "start": 2.19,
+    "end": 2.315
+   },
+   {
+    "w": "a",
+    "start": 2.315,
+    "end": 2.315
+   },
+   {
+    "w": "reason",
+    "start": 2.34,
+    "end": 2.54
+   },
+   {
+    "w": "to",
+    "start": 2.565,
+    "end": 2.615
+   },
+   {
+    "w": "trust",
+    "start": 2.665,
+    "end": 2.84
+   },
+   {
+    "w": "the",
+    "start": 2.865,
+    "end": 2.915
+   },
+   {
+    "w": "next",
+    "start": 2.94,
+    "end": 3.09
+   },
+   {
+    "w": "pitch.",
+    "start": 3.115,
+    "end": 3.413
+   }
+  ]
+ },
+ {
+  "i": 13,
+  "id": "because",
+  "text": "Because sometimes, the most important part of a mound visit isn\u2019t what the catcher says.",
+  "spoken": "Because sometimes, the most important part of a mound visit isn't what the catcher says.",
+  "dur": 3.477,
+  "words": [
+   {
+    "w": "Because",
+    "start": 0.04,
+    "end": 0.215
+   },
+   {
+    "w": "sometimes,",
+    "start": 0.265,
+    "end": 0.865
+   },
+   {
+    "w": "the",
+    "start": 0.94,
+    "end": 0.99
+   },
+   {
+    "w": "most",
+    "start": 1.015,
+    "end": 1.165
+   },
+   {
+    "w": "important",
+    "start": 1.215,
+    "end": 1.515
+   },
+   {
+    "w": "part",
+    "start": 1.565,
+    "end": 1.79
+   },
+   {
+    "w": "of",
+    "start": 1.79,
+    "end": 1.84
+   },
+   {
+    "w": "a",
+    "start": 1.84,
+    "end": 1.84
+   },
+   {
+    "w": "mound",
+    "start": 1.89,
+    "end": 2.115
+   },
+   {
+    "w": "visit",
+    "start": 2.165,
+    "end": 2.465
+   },
+   {
+    "w": "isn't",
+    "start": 2.54,
+    "end": 2.69
+   },
+   {
+    "w": "what",
+    "start": 2.715,
+    "end": 2.79
+   },
+   {
+    "w": "the",
+    "start": 2.815,
+    "end": 2.865
+   },
+   {
+    "w": "catcher",
+    "start": 2.915,
+    "end": 3.14
+   },
+   {
+    "w": "says.",
+    "start": 3.19,
+    "end": 3.477
+   }
+  ]
+ },
+ {
+  "i": 14,
+  "id": "end",
+  "text": "It\u2019s how they get their pitcher to believe in himself again.",
+  "spoken": "It's how they get their pitcher to believe in himself again.",
+  "dur": 2.005,
+  "words": [
+   {
+    "w": "It's",
+    "start": 0.023,
+    "end": 0.098
+   },
+   {
+    "w": "how",
+    "start": 0.123,
+    "end": 0.248
+   },
+   {
+    "w": "they",
+    "start": 0.273,
+    "end": 0.348
+   },
+   {
+    "w": "get",
+    "start": 0.373,
+    "end": 0.448
+   },
+   {
+    "w": "their",
+    "start": 0.473,
+    "end": 0.548
+   },
+   {
+    "w": "pitcher",
+    "start": 0.598,
+    "end": 0.948
+   },
+   {
+    "w": "to",
+    "start": 0.998,
+    "end": 1.048
+   },
+   {
+    "w": "believe",
+    "start": 1.073,
+    "end": 1.298
+   },
+   {
+    "w": "in",
+    "start": 1.323,
+    "end": 1.373
+   },
+   {
+    "w": "himself",
+    "start": 1.398,
+    "end": 1.648
+   },
+   {
+    "w": "again.",
+    "start": 1.673,
+    "end": 2.005
+   }
+  ]
+ }
+]

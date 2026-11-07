@@ -1,9 +1,9 @@
-"""Voiceover for the catcher-signs video, with HyperFrames' built-in Kokoro TTS, plus the time each word is spoken.
+"""Voiceover for the mound-visit video, with HyperFrames' built-in Kokoro TTS, plus the time each word is spoken.
 
     export HYPERFRAMES_PYTHON=<python with kokoro-onnx + soundfile + onnx>
     $HYPERFRAMES_PYTHON tools/vo.py
 
-1. Each script line is spoken by `hyperframes tts` (local Kokoro model, voice am_michael, speed 1.65).
+1. Each script line is spoken by `hyperframes tts` (local Kokoro model, voice am_michael, speed 1.55).
 2. Word timings come from the same model: a copy of HyperFrames' kokoro-v1.0.onnx with its internal
    per-phoneme duration tensor exposed as an output (weights untouched). kokoro-onnx's create_timed()
    with no inserted pauses reproduces the CLI audio sample for sample, so its phoneme times are the
@@ -19,24 +19,26 @@ CACHE = os.path.join(HERE, "..", ".cache")
 HF_TTS = os.path.expanduser("~/.cache/hyperframes/tts")
 MODEL, VOICES = os.path.join(HF_TTS, "models", "kokoro-v1.0.onnx"), os.path.join(HF_TTS, "voices", "voices-v1.0.bin")
 TIMED = os.path.join(CACHE, "kokoro-v1.0-timed.onnx")
-VOICE, SPEED = "am_michael", 1.65
+VOICE, SPEED = "am_michael", 1.55
 
 # (caption = the script exactly as written, spoken = what the voice reads)
 # Numbers are spelled out for the voice so Kokoro reads them cleanly; the captions keep the script's numerals.
 LINES = [   # (id, caption, spoken)
-    ('q', 'Before PitchCom, calling one pitch could involve an entire secret code.', 'Before Pitch Com, calling one pitch could involve an entire secret code.'),
-    ('century', 'For over a century, catchers communicated with pitchers using hand signals hidden between their legs.', None),
-    ('fingers', 'One finger might mean a fastball, two might mean a curveball, and three might mean a slider.', None),
-    ('problem', 'But there was a problem.', None),
-    ('steal', 'The opposing team could sometimes steal those signs, especially when a runner reached second base and could see the catcher’s signals.', "The opposing team could sometimes steal those signs, especially when a runner reached second base and could see the catcher's signals."),
-    ('systems', 'So teams developed different systems to hide their calls.', None),
-    ('seq', 'Sometimes, the catcher would use a specific sign sequence, where only the first, second, or third sign actually mattered.', None),
-    ('ind', 'Other teams used an indicator sign, or even changed the system depending on the inning or number of outs.', None),
-    ('goal', 'The goal was simple: make the signs look random to the other team while keeping them understandable to the pitcher.', None),
-    ('then', 'Then came PitchCom.', 'Then came Pitch Com.'),
-    ('intro', 'Introduced in MLB in 2022, it allowed catchers to press buttons on a wrist device and send the pitch call directly to a receiver in the pitcher’s cap.', "Introduced in M L B in twenty twenty-two, it allowed catchers to press buttons on a wrist device and send the pitch call directly to a receiver in the pitcher's cap."),
-    ('nomore', 'No more complicated finger sequences. No more worrying about a runner at second stealing the signs.', None),
-    ('end', 'A century of hand signals, replaced by a few buttons.', None),
+    ('q', 'When a pitcher starts struggling, what should a catcher say during a mound visit?', None),
+    ('first', 'The first thing? Don’t make it worse.', "The first thing? Don't make it worse."),
+    ('list', 'A catcher shouldn’t walk to the mound and start listing everything the pitcher is doing wrong.', "A catcher shouldn't walk to the mound and start listing everything the pitcher is doing wrong."),
+    ('instead', 'Instead, they need to figure out what’s happening.', "Instead, they need to figure out what's happening."),
+    ('ask', 'Is the pitcher rushing? Losing confidence? Missing his spots? Or just struggling to get ahead?', None),
+    ('simple', 'Sometimes, the best thing to say is simple:', None),
+    ('quote', '“Take a breath. Slow everything down. We’ve got this.”', "Take a breath. Slow everything down. We've got this."),
+    ('command', 'If the pitcher is struggling with command, the catcher can remind him to focus on one target instead of trying to be perfect.', None),
+    ('frus', 'If he’s getting frustrated, bring his attention back to the next pitch. Not the last one.', "If he's getting frustrated, bring his attention back to the next pitch. Not the last one."),
+    ('tip', 'And if the pitcher is tipping his pitches or changing his mechanics, that’s when the catcher can communicate a specific adjustment.', "And if the pitcher is tipping his pitches or changing his mechanics, that's when the catcher can communicate a specific adjustment."),
+    ('big', 'But here’s the biggest thing:', "But here's the biggest thing:"),
+    ('fix', 'A good catcher doesn’t try to fix everything in one conversation.', "A good catcher doesn't try to fix everything in one conversation."),
+    ('trust', 'They give their pitcher confidence, a clear plan, and a reason to trust the next pitch.', None),
+    ('because', 'Because sometimes, the most important part of a mound visit isn’t what the catcher says.', "Because sometimes, the most important part of a mound visit isn't what the catcher says."),
+    ('end', 'It’s how they get their pitcher to believe in himself again.', "It's how they get their pitcher to believe in himself again."),
 ]
 
 def timed_model():
