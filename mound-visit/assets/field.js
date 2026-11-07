@@ -682,6 +682,8 @@ function setScene(t, s) {
   let bq = BAT_SET;
   if (t < 1.4) bq = keyed([[EV.hit - 0.25, BAT_SET], [EV.hit, BAT_SWING], [EV.hit + 0.4, { ...BAT_SWING, twist: -90 }]], t);
   if (t > EV.newb0) { const [p, yw, q] = walkTo(batter, v3(-6.5, 0, 9), v3(-3.0, 0, -0.9), EV.newb0, EV.newb1, t); batter.root.position.copy(p); if (yw != null) batter.root.rotation.y = yw; bq = q ?? BAT_SET; }
+  if (!s.vision && t >= 3.6 && t < 5.4) {                          // he steps out of the box while the catcher goes out (only seen in this shot)
+    batter.root.position.set(-7.5, 0, 3.5); batter.root.rotation.y = yawTo(v3(-7.5, 0, 3.5), MOUND); bq = { ...STAND, lean: 2 }; }
   applyPose(batter, bq);
   // pitcher and catcher
   let pq = P_LOOKIN, ppos = RUB.clone().add(v3(0, 0, 0.6)), pyaw = 0, cq = C_SET, cpos = v3(0.15, 0, 3.0), cyaw = Math.PI, mask = 0;

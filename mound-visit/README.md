@@ -37,6 +37,8 @@ python3 build.py                                               # index.html + as
 npx --yes hyperframes@0.8.154 render . -o renders/mound-visit.mp4 --video-bitrate 16M
 ```
 
+This video was rendered with `tools/render_chunks.js` instead: it renders 3-second chunks that survive a container restart. Join the chunks and add `assets/mix.wav` with ffmpeg's concat demuxer.
+
 ## Accuracy notes
 
 - **Don't make it worse:** while the script says a catcher shouldn't list everything that's wrong, a struck-out bubble labeled "✕ Not this" shows that kind of list.
