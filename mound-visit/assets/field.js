@@ -786,7 +786,7 @@ const PINT = { pitcher: () => headTop(pitcher), catcher: () => headTop(C), pmout
 function pin(id, p, rect) {
   const el = $(id); if (!el || !p) return;
   const q = p.clone().project(cam), [x0, y0, w, h] = rect;
-  el.style.left = `${clamp(x0 + (q.x + 1) / 2 * w, x0 + 220, x0 + w - 220).toFixed(1)}px`; el.style.top = `${(y0 + (1 - q.y) / 2 * h).toFixed(1)}px`;
+  el.style.left = `${clamp(x0 + (q.x + 1) / 2 * w, x0 + 270, x0 + w - 270).toFixed(1)}px`; el.style.top = `${(y0 + (1 - q.y) / 2 * h).toFixed(1)}px`;
 }
 function view(c, s, aspect) { frame(cam, c[0], c[1], c[2], aspect); setBokeh(s.bokeh ?? 0); closeLights(!!s.close, c[1]); }
 function renderAt(v) {
