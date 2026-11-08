@@ -70,7 +70,7 @@ The other pitches:
 - **What choking up is:** moving the hands higher on the handle. Here both hands move 2 in, and the knob shows below the bottom hand.
 - **Shorter effective length:** the bar from the bottom hand to the end of the bat gets about 2 in shorter, as labeled ("≈ 2 in shorter").
 - **Control, not speed:**
-  - The titles say "More control" and "Quicker barrel adjustments".
+  - The title says "More control".
   - An on-screen note says: "Choking up doesn't automatically add bat speed or guarantee contact. It can make the bat easier to control."
   - The swing is the same speed with either grip.
 - **The tradeoff:**
