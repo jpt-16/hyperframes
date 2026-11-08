@@ -1,0 +1,1043 @@
+[
+ {
+  "i": 0,
+  "id": "q",
+  "text": "Is choking up on the bat actually worth it?",
+  "spoken": "Is choking up on the bat actually worth it?",
+  "dur": 1.835,
+  "words": [
+   {
+    "w": "Is",
+    "start": 0.069,
+    "end": 0.119
+   },
+   {
+    "w": "choking",
+    "start": 0.144,
+    "end": 0.369
+   },
+   {
+    "w": "up",
+    "start": 0.419,
+    "end": 0.469
+   },
+   {
+    "w": "on",
+    "start": 0.494,
+    "end": 0.544
+   },
+   {
+    "w": "the",
+    "start": 0.544,
+    "end": 0.594
+   },
+   {
+    "w": "bat",
+    "start": 0.644,
+    "end": 0.919
+   },
+   {
+    "w": "actually",
+    "start": 1.044,
+    "end": 1.294
+   },
+   {
+    "w": "worth",
+    "start": 1.344,
+    "end": 1.494
+   },
+   {
+    "w": "it?",
+    "start": 1.544,
+    "end": 1.835
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "dep",
+  "text": "The answer depends on the hitter and the situation.",
+  "spoken": "The answer depends on the hitter and the situation.",
+  "dur": 2.24,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.044,
+    "end": 0.094
+   },
+   {
+    "w": "answer",
+    "start": 0.219,
+    "end": 0.419
+   },
+   {
+    "w": "depends",
+    "start": 0.444,
+    "end": 0.719
+   },
+   {
+    "w": "on",
+    "start": 0.769,
+    "end": 0.819
+   },
+   {
+    "w": "the",
+    "start": 0.819,
+    "end": 0.869
+   },
+   {
+    "w": "hitter",
+    "start": 0.919,
+    "end": 1.269
+   },
+   {
+    "w": "and",
+    "start": 1.344,
+    "end": 1.419
+   },
+   {
+    "w": "the",
+    "start": 1.444,
+    "end": 1.494
+   },
+   {
+    "w": "situation.",
+    "start": 1.544,
+    "end": 2.24
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "what",
+  "text": "When a hitter chokes up, they move their hands higher on the handle, shortening the effective length of the bat.",
+  "spoken": "When a hitter chokes up, they move their hands higher on the handle, shortening the effective length of the bat.",
+  "dur": 4.075,
+  "words": [
+   {
+    "w": "When",
+    "start": 0.023,
+    "end": 0.173
+   },
+   {
+    "w": "a",
+    "start": 0.173,
+    "end": 0.173
+   },
+   {
+    "w": "hitter",
+    "start": 0.198,
+    "end": 0.373
+   },
+   {
+    "w": "chokes",
+    "start": 0.423,
+    "end": 0.623
+   },
+   {
+    "w": "up,",
+    "start": 0.698,
+    "end": 0.948
+   },
+   {
+    "w": "they",
+    "start": 1.023,
+    "end": 1.098
+   },
+   {
+    "w": "move",
+    "start": 1.123,
+    "end": 1.248
+   },
+   {
+    "w": "their",
+    "start": 1.273,
+    "end": 1.348
+   },
+   {
+    "w": "hands",
+    "start": 1.398,
+    "end": 1.648
+   },
+   {
+    "w": "higher",
+    "start": 1.698,
+    "end": 1.948
+   },
+   {
+    "w": "on",
+    "start": 1.973,
+    "end": 2.023
+   },
+   {
+    "w": "the",
+    "start": 2.023,
+    "end": 2.073
+   },
+   {
+    "w": "handle,",
+    "start": 2.123,
+    "end": 2.573
+   },
+   {
+    "w": "shortening",
+    "start": 2.723,
+    "end": 3.048
+   },
+   {
+    "w": "the",
+    "start": 3.073,
+    "end": 3.123
+   },
+   {
+    "w": "effective",
+    "start": 3.148,
+    "end": 3.448
+   },
+   {
+    "w": "length",
+    "start": 3.498,
+    "end": 3.648
+   },
+   {
+    "w": "of",
+    "start": 3.673,
+    "end": 3.723
+   },
+   {
+    "w": "the",
+    "start": 3.723,
+    "end": 3.773
+   },
+   {
+    "w": "bat.",
+    "start": 3.823,
+    "end": 4.075
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "ctrl",
+  "text": "This can make the bat feel easier to control and help a hitter get the barrel through the zone more consistently.",
+  "spoken": "This can make the bat feel easier to control and help a hitter get the barrel through the zone more consistently.",
+  "dur": 4.587,
+  "words": [
+   {
+    "w": "This",
+    "start": 0.048,
+    "end": 0.123
+   },
+   {
+    "w": "can",
+    "start": 0.148,
+    "end": 0.223
+   },
+   {
+    "w": "make",
+    "start": 0.248,
+    "end": 0.373
+   },
+   {
+    "w": "the",
+    "start": 0.398,
+    "end": 0.448
+   },
+   {
+    "w": "bat",
+    "start": 0.473,
+    "end": 0.623
+   },
+   {
+    "w": "feel",
+    "start": 0.673,
+    "end": 0.873
+   },
+   {
+    "w": "easier",
+    "start": 0.973,
+    "end": 1.198
+   },
+   {
+    "w": "to",
+    "start": 1.223,
+    "end": 1.273
+   },
+   {
+    "w": "control",
+    "start": 1.298,
+    "end": 1.648
+   },
+   {
+    "w": "and",
+    "start": 1.673,
+    "end": 1.748
+   },
+   {
+    "w": "help",
+    "start": 1.798,
+    "end": 2.348
+   },
+   {
+    "w": "a",
+    "start": 2.348,
+    "end": 2.348
+   },
+   {
+    "w": "hitter",
+    "start": 2.398,
+    "end": 2.798
+   },
+   {
+    "w": "get",
+    "start": 2.873,
+    "end": 2.948
+   },
+   {
+    "w": "the",
+    "start": 2.973,
+    "end": 3.023
+   },
+   {
+    "w": "barrel",
+    "start": 3.073,
+    "end": 3.273
+   },
+   {
+    "w": "through",
+    "start": 3.323,
+    "end": 3.423
+   },
+   {
+    "w": "the",
+    "start": 3.448,
+    "end": 3.498
+   },
+   {
+    "w": "zone",
+    "start": 3.548,
+    "end": 3.823
+   },
+   {
+    "w": "more",
+    "start": 3.873,
+    "end": 3.998
+   },
+   {
+    "w": "consistently.",
+    "start": 4.023,
+    "end": 4.587
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "use",
+  "text": "It can be especially useful when facing high velocity, protecting with two strikes, or trying to make consistent contact.",
+  "spoken": "It can be especially useful when facing high velocity, protecting with two strikes, or trying to make consistent contact.",
+  "dur": 5.013,
+  "words": [
+   {
+    "w": "It",
+    "start": 0.026,
+    "end": 0.076
+   },
+   {
+    "w": "can",
+    "start": 0.101,
+    "end": 0.176
+   },
+   {
+    "w": "be",
+    "start": 0.201,
+    "end": 0.276
+   },
+   {
+    "w": "especially",
+    "start": 0.301,
+    "end": 0.701
+   },
+   {
+    "w": "useful",
+    "start": 0.751,
+    "end": 1.001
+   },
+   {
+    "w": "when",
+    "start": 1.026,
+    "end": 1.101
+   },
+   {
+    "w": "facing",
+    "start": 1.151,
+    "end": 1.376
+   },
+   {
+    "w": "high",
+    "start": 1.426,
+    "end": 1.601
+   },
+   {
+    "w": "velocity,",
+    "start": 1.626,
+    "end": 2.226
+   },
+   {
+    "w": "protecting",
+    "start": 2.326,
+    "end": 2.651
+   },
+   {
+    "w": "with",
+    "start": 2.676,
+    "end": 2.751
+   },
+   {
+    "w": "two",
+    "start": 2.801,
+    "end": 2.901
+   },
+   {
+    "w": "strikes,",
+    "start": 2.951,
+    "end": 3.476
+   },
+   {
+    "w": "or",
+    "start": 3.576,
+    "end": 3.651
+   },
+   {
+    "w": "trying",
+    "start": 3.676,
+    "end": 3.876
+   },
+   {
+    "w": "to",
+    "start": 3.901,
+    "end": 3.951
+   },
+   {
+    "w": "make",
+    "start": 3.976,
+    "end": 4.101
+   },
+   {
+    "w": "consistent",
+    "start": 4.126,
+    "end": 4.501
+   },
+   {
+    "w": "contact.",
+    "start": 4.526,
+    "end": 5.013
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "but",
+  "text": "But there\u2019s a tradeoff.",
+  "spoken": "But there's a tradeoff.",
+  "dur": 1.045,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.04,
+    "end": 0.14
+   },
+   {
+    "w": "there's",
+    "start": 0.165,
+    "end": 0.34
+   },
+   {
+    "w": "a",
+    "start": 0.34,
+    "end": 0.34
+   },
+   {
+    "w": "tradeoff.",
+    "start": 0.39,
+    "end": 1.04
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "lev",
+  "text": "Choking up reduces some of the leverage and reach you get from holding the bat at the very bottom.",
+  "spoken": "Choking up reduces some of the leverage and reach you get from holding the bat at the very bottom.",
+  "dur": 3.989,
+  "words": [
+   {
+    "w": "Choking",
+    "start": 0.065,
+    "end": 0.315
+   },
+   {
+    "w": "up",
+    "start": 0.39,
+    "end": 0.565
+   },
+   {
+    "w": "reduces",
+    "start": 0.615,
+    "end": 0.965
+   },
+   {
+    "w": "some",
+    "start": 1.015,
+    "end": 1.115
+   },
+   {
+    "w": "of",
+    "start": 1.14,
+    "end": 1.19
+   },
+   {
+    "w": "the",
+    "start": 1.19,
+    "end": 1.24
+   },
+   {
+    "w": "leverage",
+    "start": 1.29,
+    "end": 1.74
+   },
+   {
+    "w": "and",
+    "start": 1.79,
+    "end": 1.865
+   },
+   {
+    "w": "reach",
+    "start": 1.915,
+    "end": 2.065
+   },
+   {
+    "w": "you",
+    "start": 2.09,
+    "end": 2.165
+   },
+   {
+    "w": "get",
+    "start": 2.215,
+    "end": 2.315
+   },
+   {
+    "w": "from",
+    "start": 2.34,
+    "end": 2.44
+   },
+   {
+    "w": "holding",
+    "start": 2.49,
+    "end": 2.715
+   },
+   {
+    "w": "the",
+    "start": 2.74,
+    "end": 2.79
+   },
+   {
+    "w": "bat",
+    "start": 2.84,
+    "end": 3.215
+   },
+   {
+    "w": "at",
+    "start": 3.265,
+    "end": 3.315
+   },
+   {
+    "w": "the",
+    "start": 3.34,
+    "end": 3.39
+   },
+   {
+    "w": "very",
+    "start": 3.44,
+    "end": 3.615
+   },
+   {
+    "w": "bottom.",
+    "start": 3.665,
+    "end": 3.989
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "why",
+  "text": "So why don\u2019t all hitters do it?",
+  "spoken": "So why don't all hitters do it?",
+  "dur": 1.429,
+  "words": [
+   {
+    "w": "So",
+    "start": 0.112,
+    "end": 0.212
+   },
+   {
+    "w": "why",
+    "start": 0.262,
+    "end": 0.362
+   },
+   {
+    "w": "don't",
+    "start": 0.387,
+    "end": 0.537
+   },
+   {
+    "w": "all",
+    "start": 0.612,
+    "end": 0.687
+   },
+   {
+    "w": "hitters",
+    "start": 0.737,
+    "end": 0.937
+   },
+   {
+    "w": "do",
+    "start": 0.987,
+    "end": 1.087
+   },
+   {
+    "w": "it?",
+    "start": 1.112,
+    "end": 1.412
+   }
+  ]
+ },
+ {
+  "i": 8,
+  "id": "bal",
+  "text": "Because hitting isn\u2019t just about making contact. It\u2019s about finding the right balance between bat speed, control, power, and timing.",
+  "spoken": "Because hitting isn't just about making contact. It's about finding the right balance between bat speed, control, power, and timing.",
+  "dur": 5.632,
+  "words": [
+   {
+    "w": "Because",
+    "start": 0.001,
+    "end": 0.151
+   },
+   {
+    "w": "hitting",
+    "start": 0.201,
+    "end": 0.376
+   },
+   {
+    "w": "isn't",
+    "start": 0.426,
+    "end": 0.551
+   },
+   {
+    "w": "just",
+    "start": 0.576,
+    "end": 0.726
+   },
+   {
+    "w": "about",
+    "start": 0.751,
+    "end": 0.901
+   },
+   {
+    "w": "making",
+    "start": 0.926,
+    "end": 1.126
+   },
+   {
+    "w": "contact.",
+    "start": 1.176,
+    "end": 1.876
+   },
+   {
+    "w": "It's",
+    "start": 2.001,
+    "end": 2.076
+   },
+   {
+    "w": "about",
+    "start": 2.101,
+    "end": 2.251
+   },
+   {
+    "w": "finding",
+    "start": 2.301,
+    "end": 2.526
+   },
+   {
+    "w": "the",
+    "start": 2.551,
+    "end": 2.601
+   },
+   {
+    "w": "right",
+    "start": 2.651,
+    "end": 2.776
+   },
+   {
+    "w": "balance",
+    "start": 2.826,
+    "end": 3.076
+   },
+   {
+    "w": "between",
+    "start": 3.101,
+    "end": 3.301
+   },
+   {
+    "w": "bat",
+    "start": 3.351,
+    "end": 3.501
+   },
+   {
+    "w": "speed,",
+    "start": 3.551,
+    "end": 4.001
+   },
+   {
+    "w": "control,",
+    "start": 4.101,
+    "end": 4.651
+   },
+   {
+    "w": "power,",
+    "start": 4.751,
+    "end": 5.076
+   },
+   {
+    "w": "and",
+    "start": 5.126,
+    "end": 5.201
+   },
+   {
+    "w": "timing.",
+    "start": 5.251,
+    "end": 5.632
+   }
+  ]
+ },
+ {
+  "i": 9,
+  "id": "some",
+  "text": "Some hitters choke up with two strikes. Others do it on nearly every pitch.",
+  "spoken": "Some hitters choke up with two strikes. Others do it on nearly every pitch.",
+  "dur": 2.987,
+  "words": [
+   {
+    "w": "Some",
+    "start": 0.09,
+    "end": 0.19
+   },
+   {
+    "w": "hitters",
+    "start": 0.215,
+    "end": 0.415
+   },
+   {
+    "w": "choke",
+    "start": 0.44,
+    "end": 0.59
+   },
+   {
+    "w": "up",
+    "start": 0.64,
+    "end": 0.69
+   },
+   {
+    "w": "with",
+    "start": 0.715,
+    "end": 0.79
+   },
+   {
+    "w": "two",
+    "start": 0.84,
+    "end": 0.94
+   },
+   {
+    "w": "strikes.",
+    "start": 0.99,
+    "end": 1.515
+   },
+   {
+    "w": "Others",
+    "start": 1.665,
+    "end": 1.815
+   },
+   {
+    "w": "do",
+    "start": 1.865,
+    "end": 1.965
+   },
+   {
+    "w": "it",
+    "start": 1.99,
+    "end": 2.04
+   },
+   {
+    "w": "on",
+    "start": 2.115,
+    "end": 2.165
+   },
+   {
+    "w": "nearly",
+    "start": 2.19,
+    "end": 2.39
+   },
+   {
+    "w": "every",
+    "start": 2.465,
+    "end": 2.565
+   },
+   {
+    "w": "pitch.",
+    "start": 2.615,
+    "end": 2.987
+   }
+  ]
+ },
+ {
+  "i": 10,
+  "id": "never",
+  "text": "And some never need to change their grip at all.",
+  "spoken": "And some never need to change their grip at all.",
+  "dur": 2.005,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.069,
+    "end": 0.144
+   },
+   {
+    "w": "some",
+    "start": 0.194,
+    "end": 0.419
+   },
+   {
+    "w": "never",
+    "start": 0.494,
+    "end": 0.669
+   },
+   {
+    "w": "need",
+    "start": 0.694,
+    "end": 0.819
+   },
+   {
+    "w": "to",
+    "start": 0.844,
+    "end": 0.894
+   },
+   {
+    "w": "change",
+    "start": 0.919,
+    "end": 1.144
+   },
+   {
+    "w": "their",
+    "start": 1.169,
+    "end": 1.244
+   },
+   {
+    "w": "grip",
+    "start": 1.294,
+    "end": 1.444
+   },
+   {
+    "w": "at",
+    "start": 1.469,
+    "end": 1.519
+   },
+   {
+    "w": "all.",
+    "start": 1.644,
+    "end": 2.005
+   }
+  ]
+ },
+ {
+  "i": 11,
+  "id": "bottom",
+  "text": "The bottom line? Choking up can be worth it if it helps you make better contact without sacrificing too much power.",
+  "spoken": "The bottom line? Choking up can be worth it if it helps you make better contact without sacrificing too much power.",
+  "dur": 4.608,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.044,
+    "end": 0.094
+   },
+   {
+    "w": "bottom",
+    "start": 0.144,
+    "end": 0.369
+   },
+   {
+    "w": "line?",
+    "start": 0.394,
+    "end": 0.894
+   },
+   {
+    "w": "Choking",
+    "start": 1.019,
+    "end": 1.244
+   },
+   {
+    "w": "up",
+    "start": 1.294,
+    "end": 1.344
+   },
+   {
+    "w": "can",
+    "start": 1.369,
+    "end": 1.444
+   },
+   {
+    "w": "be",
+    "start": 1.469,
+    "end": 1.544
+   },
+   {
+    "w": "worth",
+    "start": 1.594,
+    "end": 1.744
+   },
+   {
+    "w": "it",
+    "start": 1.769,
+    "end": 1.819
+   },
+   {
+    "w": "if",
+    "start": 1.869,
+    "end": 1.919
+   },
+   {
+    "w": "it",
+    "start": 1.944,
+    "end": 1.994
+   },
+   {
+    "w": "helps",
+    "start": 2.019,
+    "end": 2.169
+   },
+   {
+    "w": "you",
+    "start": 2.194,
+    "end": 2.269
+   },
+   {
+    "w": "make",
+    "start": 2.294,
+    "end": 2.419
+   },
+   {
+    "w": "better",
+    "start": 2.469,
+    "end": 2.619
+   },
+   {
+    "w": "contact",
+    "start": 2.669,
+    "end": 3.194
+   },
+   {
+    "w": "without",
+    "start": 3.244,
+    "end": 3.419
+   },
+   {
+    "w": "sacrificing",
+    "start": 3.469,
+    "end": 3.919
+   },
+   {
+    "w": "too",
+    "start": 3.969,
+    "end": 4.069
+   },
+   {
+    "w": "much",
+    "start": 4.094,
+    "end": 4.194
+   },
+   {
+    "w": "power.",
+    "start": 4.244,
+    "end": 4.608
+   }
+  ]
+ },
+ {
+  "i": 12,
+  "id": "not",
+  "text": "It\u2019s not about swinging harder.",
+  "spoken": "It's not about swinging harder.",
+  "dur": 1.301,
+  "words": [
+   {
+    "w": "It's",
+    "start": 0.065,
+    "end": 0.14
+   },
+   {
+    "w": "not",
+    "start": 0.165,
+    "end": 0.29
+   },
+   {
+    "w": "about",
+    "start": 0.315,
+    "end": 0.465
+   },
+   {
+    "w": "swinging",
+    "start": 0.515,
+    "end": 0.74
+   },
+   {
+    "w": "harder.",
+    "start": 0.79,
+    "end": 1.29
+   }
+  ]
+ },
+ {
+  "i": 13,
+  "id": "ctl",
+  "text": "It\u2019s about controlling the barrel.",
+  "spoken": "It's about controlling the barrel.",
+  "dur": 1.344,
+  "words": [
+   {
+    "w": "It's",
+    "start": 0.065,
+    "end": 0.14
+   },
+   {
+    "w": "about",
+    "start": 0.165,
+    "end": 0.315
+   },
+   {
+    "w": "controlling",
+    "start": 0.34,
+    "end": 0.69
+   },
+   {
+    "w": "the",
+    "start": 0.715,
+    "end": 0.765
+   },
+   {
+    "w": "barrel.",
+    "start": 0.815,
+    "end": 1.34
+   }
+  ]
+ }
+]

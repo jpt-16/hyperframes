@@ -1,13 +1,20 @@
-# Scene timing for the voiceover
+# Voiceover cue sheet
 
-The video is 50.0 s. Record each part of the narration inside its scene (times in seconds).
+When each line starts, to land on its shots (the video is 45.8 s). Record your own read over assets/mix-novo.wav to these times.
 
-| From | To | Scene | On screen |
-|---|---|---|---|
-| 0.0 | 4.0 | The hook: he steps in, normal grip; extreme close on the hands; they slide up the handle (2.9–3.5) | IS CHOKING UP ACTUALLY WORTH IT? |
-| 4.0 | 12.0 | Split screen: the same batter, full grip and choked up; the hands, close; the bat with the effective-length bar shrinking (10.0–10.9) | SHORTER EFFECTIVE BAT LENGTH (from 9.5) |
-| 12.0 | 22.0 | 99 mph; the controlled swing in slow motion with its bat path; the hands; the contact point; up and in, a quick adjustment (from 20.0) | MORE CONTROL (13.5) · QUICKER BARREL ADJUSTMENTS (20.0) |
-| 22.0 | 32.0 | Overhead at contact: the reach of each grip; a pitch away, each grip (full: line drive; choked: off the end); a pitch inside (full: in on the hands; choked: line drive) | MORE CONTROL VS. MORE REACH |
-| 32.0 | 42.0 | Two strikes: he chokes up, fights off a slider (foul); 100 mph: fouled straight back; full count: he chokes up, hard grounder up the middle | TWO STRIKES (32.1) · HIGH VELOCITY (35.5) · BETTER CONTACT (38.8) |
-| 42.0 | 47.8 | The line drive into left-center; the bat finishing its swing in slow motion | IT'S NOT ABOUT SWINGING HARDER. (42.1) · IT'S ABOUT CONTROLLING THE BARREL. (44.5) |
-| 47.8 | 50.0 | End card | BASEBALL DECODED |
+| Line | Starts |
+|---|---|
+| Is choking up on the bat actually worth it? | 0.2 s |
+| The answer depends on the hitter and the situation. | 2.1 s |
+| When a hitter chokes up, they move their hands higher on the handle, shortening the effective length of the bat. | 4.5 s |
+| This can make the bat feel easier to control and help a hitter get the barrel through the zone more consistently. | 8.8 s |
+| It can be especially useful when facing high velocity, protecting with two strikes, or trying to make consistent contact. | 13.5 s |
+| But there’s a tradeoff. | 18.7 s |
+| Choking up reduces some of the leverage and reach you get from holding the bat at the very bottom. | 19.8 s |
+| So why don’t all hitters do it? | 24.0 s |
+| Because hitting isn’t just about making contact. It’s about finding the right balance between bat speed, control, power, and timing. | 25.4 s |
+| Some hitters choke up with two strikes. Others do it on nearly every pitch. | 31.3 s |
+| And some never need to change their grip at all. | 34.4 s |
+| The bottom line? Choking up can be worth it if it helps you make better contact without sacrificing too much power. | 36.5 s |
+| It’s not about swinging harder. | 41.4 s |
+| It’s about controlling the barrel. | 42.6 s |

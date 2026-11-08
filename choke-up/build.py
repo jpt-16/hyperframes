@@ -1,7 +1,9 @@
-"""'Is choking up actually worth it?' (1080x1920, music + effects; the narration is recorded separately).
+"""'Is choking up actually worth it?' (1080x1920), cut to the voiceover.
 
-    python3 tools/physics.py        # the pitches and batted balls -> assets/play.json
-    python3 build.py                # index.html + assets/mix.wav (music + effects, mastered low for a voice on top) + CUES.md
+    python3 tools/physics.py                                       # the pitches and batted balls -> assets/play.json
+    export HYPERFRAMES_PYTHON=<python with kokoro-onnx, soundfile, onnx>
+    $HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # voiceover + per-word timing
+    python3 build.py                # index.html + assets/mix.wav (+ mix-novo.wav without the voice) + CUES.md
     npx --yes hyperframes@0.8.154 render . -o renders/choke-up.mp4 --video-bitrate 16M
 
 One batter (same model and uniform throughout), one bat, a two-hand grip that slides up the handle. Each at-bat is a
@@ -18,7 +20,15 @@ from audio import SR, make_bed
 
 P = json.load(open(os.path.join(HERE, "assets", "play.json")))
 PI_, HI_ = P["pitches"], P["hits"]
-D = 50.0
+TMJ = json.load(open(os.path.join(HERE, "assets", "vo", "timing.json")))
+IDX = {x["id"]: k for k, x in enumerate(TMJ["lines"])}
+LN = lambda lid: TMJ["lines"][IDX[lid]]
+def W(lid, word, end=False, nth=0):
+    hits = [w for w in LN(lid)["words"] if w["w"].strip(".,!?:").lower() == word.lower()]
+    return hits[nth]["t1" if end else "t0"]
+D = TMJ["duration"]
+S = {x["id"]: x["t0"] - 0.08 for x in TMJ["lines"]}
+VBRAND = round(LN("ctl")["t1"] + 0.2, 3)
 Y, CYAN, WHITE, HOT, MUTED, GREEN, RED = "#FFD84D", "#56D1FF", "#F4F6F8", "#FF6A3D", "#AEB8C6", "#3DD68C", "#FF4D4D"
 HM_FULL, CHK = 0.158 + 0.125, 0.167                       # the middle of the hands above the knob; choking up moves them 2 in
 D_SWEET_FULL, D_SWEET_CHOKE = round(2.30 - HM_FULL, 3), round(2.30 - HM_FULL - CHK, 3)   # hands -> sweet spot
@@ -39,58 +49,57 @@ TOPP, BOTP = [0, 0, 1080, 960], [0, 960, 1080, 960]
 def ab(pk, rel, hit=None, D=D_SWEET_CHOKE, swing=True): return dict(pk=pk, rel=rel, hit=hit, D=D, swing=swing)
 TC = lambda pk: PI_[pk]["t_contact"]
 CLOSE = dict(cam="obj", o="bat", lo="bat", bokeh=2.4, close=1, fore=1)
-# 1 the hook: he steps in, normal grip; extreme close on the hands; they slide up the handle
-live(0.0, 1.5, "world", walk=[0.0, 1.05], c0=[3.4, 3.8, -6.0], c1=[2.9, 3.7, -5.4], l=[-3.6, 3.6, 1.6], f0=40)
-live(1.5, 2.6, **CLOSE, c0=[1.65, 0.4, 0.3], c1=[1.45, 0.38, 0.24], l=[0.0, 0.3, 0.0], f0=30)
-CH1 = [[2.85, 0.0], [3.45, 1.0]]
-live(2.6, 4.0, **CLOSE, cht=CH1, c0=[1.6, 0.55, -0.4], c1=[1.5, 0.55, -0.36], l=[0.0, 0.36, 0.0], f0=30)
-# 2 what choking up does: split screen, the same batter with each grip; the hands close; the effective length
 PFULL, PCHOKE = dict(choke=0, rect=L), dict(choke=1, rect=R)
-live(4.0, 7.2, "world", panes=[PFULL, PCHOKE], c0=[9.0, 4.6, 0.6], c1=[8.2, 4.6, 0.6], l=[-3.1, 4.3, 0.45], f0=40)
-live(7.2, 9.4, **dict(CLOSE, bokeh=4.5), panes=[PFULL, PCHOKE], c0=[2.6, 0.45, -0.75], c1=[2.4, 0.45, -0.7], l=[0.0, 0.34, 0.0], f0=34)
-CH2 = [[10.0, 0.0], [10.9, 1.0]]
-live(9.4, 12.0, "obj", o="bat", lo="bat", bokeh=9, close=1, fore=1, nobody=1, len=1, cht=CH2, c0=[6.0, 1.45, -0.4], c1=[5.6, 1.45, -0.35], l=[0.2, 1.72, 0.0], f0=33)
-# 3 the advantages: 99 mph; the controlled swing in slow motion; the hands; the contact point; a quick adjustment up and in
-A3 = ab("mid", 13.2, "ld_mid")
-live(12.0, 13.35, "world", ab=A3, choke=1, streak=1, c0=[-3.6, 8.0, -76.0], c1=[-3.4, 7.8, -75.0], l=[0.0, 3.8, -20.0], f0=22)
-S3 = 0.18
-shot(13.35, 16.8, "world", [13.35, 16.8], [13.35, 13.35 + 3.45 * S3], speed="slow", ab=A3, choke=1, ghost=0.016, c0=[2.8, 3.4, -8.6], c1=[2.5, 3.3, -8.0], l=[-1.6, 3.0, -1.6], f0=34)
-shot(16.8, 18.4, "world", [16.8, 18.4], [13.45, 13.45 + 1.6 * 0.19], speed="slow", ab=A3, choke=1, ghost=0.016, close=1, c0=[2.2, 4.0, -6.8], c1=[2.0, 3.95, -6.4], l=[-2.0, 3.5, -0.8], f0=30)
-CP3 = PI_["mid"]["contact"]
-shot(18.4, 20.0, "world", [18.4, 20.0], [13.2 + TC("mid") - 0.03, 13.2 + TC("mid") + 0.05], speed="slow", ab=A3, choke=1, close=1,
-     c0=[CP3[0] + 1.5, CP3[1] + 0.5, CP3[2] - 1.6], c1=[CP3[0] + 1.3, CP3[1] + 0.45, CP3[2] - 1.4], l=CP3, f0=30)
-A3E = ab("hin", 20.55, "ld_hin")
-shot(20.0, 22.0, "world", [20.0, 22.0], [20.25, 21.25], speed="slow", ab=A3E, choke=1, streak=1, c0=[1.6, 8.4, 12.0], c1=[1.5, 8.2, 11.5], l=[-1.8, 3.0, -3.0], f0=34)
-# 4 the tradeoff: reach (overhead, frozen at contact) on a pitch away; then away and inside, each grip
-A4 = ab("away", 23.0, None, D_SWEET_FULL)
-FZ = 23.0 + TC("away")
-shot(22.0, 24.6, "world", [22.0, 24.6], [FZ, FZ], speed="freeze", ab=A4, panes=[dict(PFULL, reach=0, rect=TOPP), dict(PCHOKE, reach=1, rect=BOTP)], up=[0, 0, -1], c0=[-1.3, 15.0, -1.4], c1=[-1.3, 13.6, -1.4], l=[-1.3, 0.0, -1.401], f0=30)
-A4A = ab("away", 25.1, None, D_SWEET_FULL)
-UMP = dict(c0=[2.4, 8.6, 12.5], c1=[2.3, 8.4, 12.0], l=[-0.8, 2.8, -6.0], f0=34, streak=1)
 BEH = dict(c0=[-2.2, 7.4, 10.8], c1=[-2.1, 7.6, 11.2], l=[-0.6, 2.6, -16.0], f0=40, streak=1)
-shot(24.6, 27.6, "world", [24.6, 27.6], [24.85, 24.85 + 3.0 * 0.6], speed="slow", ab=A4A, panes=[dict(PFULL, rect=TOPP, ab=dict(A4A, hit="away_full")), dict(PCHOKE, rect=BOTP, ab=dict(A4A, hit="away_choke"))], **BEH)
-A4B = ab("in", 28.0, None, D_SWEET_CHOKE)
-shot(27.6, 32.0, "world", [27.6, 32.0], [27.75, 27.75 + 4.4 * 0.6], speed="slow", ab=A4B, panes=[dict(PFULL, rect=TOPP, ab=dict(A4B, hit="in_full")), dict(PCHOKE, rect=BOTP, ab=dict(A4B, hit="in_choke"))], **BEH)
-# 5 when hitters use it: two strikes; high velocity; a tough at-bat
-CH5A = [[32.35, 0.0], [32.95, 1.0]]
-live(32.0, 33.4, "world", cht=CH5A, c0=[6.5, 5.0, 1.2], c1=[6.0, 4.95, 1.1], l=[-3.0, 4.4, 0.5], f0=30)
-A5A = ab("sl", 33.6, "foul_sl")
 CF = dict(c0=[-3.0, 9.0, -112.0], c1=[-3.0, 9.0, -110.0], l=[-0.9, 3.2, 0.0], f0=7.5, f1=7.2)
-live(33.4, 35.4, "world", ab=A5A, choke=1, **CF)
-A5B = ab("fire", 36.45, "foul_back")
-live(35.4, 36.6, "world", ab=A5B, choke=1, c0=[-4.4, 4.7, 4.2], c1=[-4.3, 4.65, 4.0], l=[0.0, 5.4, -60.0], f0=14)
-live(36.6, 38.7, "world", ab=A5B, choke=1, **BEH)
-CH5C = [[39.0, 0.0], [39.6, 1.0]]
-live(38.7, 40.0, "world", cht=CH5C, c0=[7.5, 4.8, -5.0], c1=[7.0, 4.7, -4.6], l=[-3.0, 4.2, 0.5], f0=28)
-A5C = ab("late", 40.3, "gb_late")
-live(40.0, 42.0, "world", ab=A5C, choke=1, **CF)
-# 6 the takeaway: the line drive; the bat finishing its swing in slow motion
-A6 = ab("final", 42.6, "ld_final", D_SWEET_CHOKE)
-live(42.0, 44.4, "follow", ab=A6, choke=1, streak=1, c0=[-4.8, 4.5, 6.0], c1=[-4.9, 5.0, 6.6], l=[0.0, 3.6, -40.0], f0=32, f1=40, lag=0.6, fw=0.8)
-shot(44.4, 47.8, "world", [44.4, 47.8], [42.6 + TC("final") - 0.08, 42.6 + TC("final") + 0.72], speed="slow", ab=A6, choke=1, ghost=0.02,
-     c0=[3.4, 1.8, -10.0], c1=[3.0, 1.7, -9.2], l=[-2.6, 4.4, -0.4], f0=36)
-live(47.8, D, "world", ab=A6, choke=1, c0=[3.0, 1.7, -9.2], c1=[2.9, 1.7, -9.0], l=[-2.6, 4.4, -0.4], f0=36)
-VBRAND = 47.8
+# 1 "Is choking up on the bat actually worth it? The answer depends…": he steps in; the hands, normal grip
+A1 = S["dep"]
+live(0.0, A1, "world", walk=[0.0, 1.05], c0=[3.4, 3.8, -6.0], c1=[2.9, 3.7, -5.4], l=[-3.6, 3.6, 1.6], f0=40)
+A2 = S["what"]
+live(A1, A2, **CLOSE, c0=[1.65, 0.4, 0.3], c1=[1.45, 0.38, 0.24], l=[0.0, 0.3, 0.0], f0=30)
+# 2 "…move their hands higher on the handle, shortening the effective length of the bat."
+A3 = W("what", "shortening") - 0.1
+CH1 = [[W("what", "hands"), 0.0], [W("what", "handle") + 0.15, 1.0]]
+live(A2, A3, **CLOSE, cht=CH1, c0=[1.6, 0.55, -0.4], c1=[1.5, 0.55, -0.36], l=[0.0, 0.36, 0.0], f0=30)
+CH2 = [[W("what", "shortening") + 0.05, 0.0], [W("what", "length") + 0.1, 1.0]]
+live(A3, S["ctrl"], "obj", o="bat", lo="bat", bokeh=9, close=1, fore=1, nobody=1, len=1, cht=CH2, c0=[6.6, 1.45, -0.45], c1=[6.2, 1.45, -0.4], l=[0.2, 1.95, 0.0], f0=34)
+# 3 "This can make the bat feel easier to control… the barrel through the zone…": 99 mph; the swing in slow motion
+A4 = W("ctrl", "feel") - 0.05
+REL3 = A4 - 0.15
+P3 = ab("mid", REL3, "ld_mid")
+live(S["ctrl"], A4, "world", ab=P3, choke=1, streak=1, c0=[-3.6, 8.0, -76.0], c1=[-3.4, 7.8, -75.2], l=[0.0, 3.8, -20.0], f0=22)
+S3 = 0.221 / (W("ctrl", "barrel") - 0.08 - A4)                 # contact lands on "barrel"
+shot(A4, S["use"], "world", [A4, S["use"]], [A4, A4 + (S["use"] - A4) * S3], speed="slow", ab=P3, choke=1, ghost=0.016, c0=[2.8, 3.4, -8.6], c1=[2.5, 3.3, -8.0], l=[-1.6, 3.0, -1.6], f0=34)
+# 4 "…especially useful when facing high velocity, protecting with two strikes, or trying to make consistent contact."
+B1 = W("use", "protecting") - 0.1
+P4 = ab("fire", W("use", "high") - TC("fire") + 0.02, "foul_back")
+live(S["use"], B1, "world", ab=P4, choke=1, **BEH)
+B2 = W("use", "or") - 0.05
+live(B1, B2, "world", cht=[[W("use", "protecting") + 0.1, 0.0], [W("use", "strikes") + 0.05, 1.0]], c0=[6.5, 5.0, 1.2], c1=[6.0, 4.95, 1.1], l=[-3.0, 4.4, 0.5], f0=30)
+P5 = ab("late", W("use", "consistent") - TC("late"), "gb_late")
+live(B2, S["but"], "world", ab=P5, choke=1, **CF)
+# 5 "But there's a tradeoff. …reduces some of the leverage and reach…": the reach, frozen; a pitch away, each grip
+P6 = ab("away", 0.0, None, D_SWEET_FULL)
+C1 = W("lev", "holding") - 0.1
+shot(S["but"], C1, "world", [S["but"], C1], [TC("away"), TC("away")], speed="freeze", ab=P6, panes=[dict(PFULL, reach=0, rect=TOPP), dict(PCHOKE, reach=1, rect=BOTP)], up=[0, 0, -1], c0=[-1.3, 15.0, -1.4], c1=[-1.3, 13.4, -1.4], l=[-1.3, 0.0, -1.401], f0=30)
+P7 = ab("away", C1 + 0.1, None, D_SWEET_FULL)
+shot(C1, S["why"], "world", [C1, S["why"]], [C1 - 0.25, C1 - 0.25 + (S["why"] - C1) * 0.6], speed="slow", ab=P7, panes=[dict(PFULL, rect=TOPP, ab=dict(P7, hit="away_full")), dict(PCHOKE, rect=BOTP, ab=dict(P7, hit="away_choke"))], **BEH)
+# 6 "So why don't all hitters do it? Because hitting isn't just about making contact…": a pitch inside, each grip; the balance
+C2 = W("bal", "it's") - 0.1
+P8 = ab("in", S["why"] + 0.2, None, D_SWEET_CHOKE)
+shot(S["why"], C2, "world", [S["why"], C2], [S["why"] + 0.05, S["why"] + 0.05 + (C2 - S["why"]) * 0.6], speed="slow", ab=P8, panes=[dict(PFULL, rect=TOPP, ab=dict(P8, hit="in_full")), dict(PCHOKE, rect=BOTP, ab=dict(P8, hit="in_choke"))], **BEH)
+live(C2, S["some"], "world", choke=1, c0=[6.8, 5.0, 1.4], c1=[5.4, 4.9, 1.1], l=[-3.0, 4.4, 0.5], f0=32, f1=30)
+# 7 "Some hitters choke up with two strikes. Others do it on nearly every pitch. And some never need to change their grip at all."
+live(S["some"], S["never"], "world", panes=[dict(PFULL, cht=[[W("some", "two"), 0.0], [W("some", "strikes") + 0.2, 1.0]]), dict(PCHOKE)], c0=[9.0, 4.6, 0.6], c1=[8.2, 4.6, 0.6], l=[-3.1, 4.3, 0.45], f0=40)
+live(S["never"], S["bottom"], **CLOSE, choke=0, c0=[1.55, 0.45, 0.35], c1=[1.4, 0.42, 0.3], l=[0.0, 0.3, 0.0], f0=30)
+# 8 "The bottom line? …make better contact without sacrificing too much power.": the line drive
+P9 = ab("final", W("bottom", "contact") - TC("final"), "ld_final", D_SWEET_CHOKE)
+E1 = S["not"] - 0.4
+live(S["bottom"], E1, "follow", ab=P9, choke=1, streak=1, c0=[-4.8, 4.5, 6.0], c1=[-4.9, 5.0, 6.6], l=[0.0, 3.6, -40.0], f0=32, f1=40, lag=0.6, fw=0.8)
+# 9 "It's not about swinging harder. It's about controlling the barrel.": the bat finishing its swing, slow motion
+TCF = P9["rel"] + TC("final")
+shot(E1, VBRAND, "world", [E1, VBRAND], [TCF - 0.08, TCF + 0.7], speed="slow", ab=P9, choke=1, ghost=0.02, c0=[3.4, 1.8, -10.0], c1=[3.0, 1.7, -9.2], l=[-2.6, 4.4, -0.4], f0=36)
+live(VBRAND, D, "world", ab=P9, choke=1, c0=[3.0, 1.7, -9.2], c1=[2.9, 1.7, -9.0], l=[-2.6, 4.4, -0.4], f0=36)
 for x, y in zip(SHOTS, SHOTS[1:]): assert abs(x["b"] - y["a"]) < 1e-3 and x["b"] > x["a"], (x, y)
 CUTS = [x["a"] for x in SHOTS[1:]]
 CONTACTS = []                                              # (video time, kind) of each contact the viewer sees
@@ -107,7 +116,7 @@ c.clip("fieldl", 0, D, '<canvas id="field-gl" width="1080" height="1920" data-la
 c.clip("shade", 0, D, '<div class="shade-top"></div><div class="shade-bot"></div>', cls="layer", style="z-index:3")
 c.clip("spdc", 0, D, '<div class="spd" id="spd"></div>', cls="layer", style="z-index:30")
 c.clip("flash", 0, D, '<div class="flash" id="flash"></div>', cls="layer", style="z-index:40")
-for f in [1.5, 2.6, 4.0, 9.4, 12.0, 22.0, 32.0, 35.4, 38.7, 42.0, VBRAND]:
+for f in [S['dep'], S['ctrl'], S['but'], S['some'], VBRAND]:
     c.set("#flash", '{"opacity":0.45}', f); c.to("#flash", o(opacity=0, duration=0.14, ease="power2.out"), f + 0.001)
 
 def pop(sel, t, dy=24):
@@ -136,52 +145,56 @@ def panesTB(pid, t0, t1, a, b):
 def tag(tid, t0, t1, text, cls=""):
     c.clip(tid, t0, t1, f'<div class="tagc {cls}" id="{tid}x">{text}</div>', cls="layer", style="z-index:16"); pop(f"#{tid}x", t0, 10)
 
-# 1 the hook
-title("t1", 0.15, 3.95, [("Is choking up", False), ("actually worth it?", True)], 230, "hk2 big2")
-pinl("pn1", 1.65, 2.58, "Normal grip: hands at the knob", "bottom", "yl sm")
-pinl("pn2", 3.5, 3.98, "Hands up the handle", "bottom", "cy sm")
-# 2 what it does
-panes2("pa", 4.0, 9.38, "Full grip", "Choked up", 140)
-pinl("pk1", 7.45, 9.38, "Hands at the knob", "bottom", "yl sm", 0)
-pinl("pk2", 7.6, 9.38, "Knob showing", "knob", "cy sm", 1)
-title("t2", 9.5, 11.98, [("Shorter effective", False), ("bat length", True)])
-pinl("pl1", 9.7, 11.98, "Effective length", "lenmid", "cy sm")
-pinl("pl2", 11.0, 11.98, "≈ 2 in shorter", "bottom", "sm")
-# 3 the advantages
-chip("rad", 12.25, 13.33, '<span class="radar">99</span> MPH', 1500, "rd")
-title("t3", 13.45, 17.98, [("More", False), ("control", True)])
-pinl("ph3", 16.95, 18.38, "Hands stay compact", "hands", "sm")
-pinl("pb3", 17.4, 18.38, "Bat path", "end", "yl sm")
-pinl("pc3", 18.75, 19.98, "Contact point", "ball", "cy sm")
-title("t3b", 20.05, 21.98, [("Quicker barrel", False), ("adjustments", True)])
-note("n3", 18.5, 21.98, "Choking up doesn’t automatically add bat speed or guarantee contact. It can make the bat <b>easier to control</b>.", 1700)
-# 4 the tradeoff
-title("t4", 22.1, 24.58, [("More control", False), ("vs. more reach", True)], 852, "band")
-chip("t4s", 24.6, 31.98, 'More control <span class="vsd">vs.</span> <b class="y">more reach</b>', 70, "hdr")
-panesTB("pt", 22.0, 31.98, "Full grip", "Choked up")
-pinl("pr1", 22.4, 24.58, "Barrel on the ball", "ball", "yl sm", 0)
-pinl("pr2", 22.55, 24.58, "End of the bat", "ball", "cy sm", 1)
-chip("tg1", 24.7, 27.58, "Pitch away", 918, "seamc")
-pinl("po1", vt(25.1 + TC("away")) + 0.4, 27.58, "Barrel: line drive", "ball", "yl sm", 0)
-pinl("po2", vt(25.1 + TC("away")) + 0.5, 27.58, "Off the end: soft grounder", "ball", "cy sm", 1)
-chip("tg2", 27.7, 31.98, "Pitch inside", 918, "seamc")
-pinl("po3", vt(28.0 + TC("in")) + 0.4, 29.9, "In on the hands: soft grounder", "ball", "yl sm", 0)
-pinl("po4", vt(28.0 + TC("in")) + 0.5, 29.9, "Barrel: line drive", "ball", "cy sm", 1)
-note("n4", 29.9, 31.98, "Neither grip wins every pitch. It depends on the <b>hitter</b>, the <b>pitch</b> and the <b>situation</b>.", 1760)
-# 5 when hitters use it
-title("t5a", 32.1, 35.38, [("Two strikes", True)])
-chip("cnt1", 32.2, 35.38, 'Count <b class="y">0–2</b>', 1500)
-pinl("pg5", 32.95, 33.38, "Chokes up", "hands", "cy sm")
-note("n5", 33.5, 35.38, "Some hitters choke up with two strikes to protect the plate. Many don’t.", 1700)
-title("t5b", 35.5, 38.68, [("High velocity", True)])
-chip("rad2", vt(36.45) + 0.05, 38.68, '<span class="radar">100</span> MPH', 1500, "rd")
-title("t5c", 38.8, 41.98, [("Better contact", True)])
-chip("cnt3", 38.9, 41.98, 'Count <b class="y">3–2</b>', 1500)
-pinl("pg6", 39.6, 39.98, "Chokes up", "hands", "cy sm")
-note("n5c", 40.2, 41.98, "The goal, not a guarantee.", 1700)
-# 6 the takeaway
-title("t6", 42.1, 44.38, [("It’s not about", False), ("swinging harder.", True)])
-title("t7", 44.5, VBRAND - 0.02, [("It’s about controlling", False), ("the barrel.", True)])
+BAND = 560                                                        # scene titles sit in a band under the captions
+def band(tid, t0, t1, lines): title(tid, t0, t1, lines, BAND, "band")
+def quad(qid, t0, t1, items, top=1380):
+    sp = "".join(f'<span id="{qid}{i}">{tx}</span>' for i, (_, tx) in enumerate(items))
+    c.clip(qid, t0, t1, f'<div class="quad" style="top:{top}px">{sp}</div>', cls="layer", style="z-index:13")
+    for i, (t, _) in enumerate(items): pop(f"#{qid}{i}", t, 14)
+
+# 1 the hook (the opening line is this title instead of captions)
+title("t1", 0.1, S["dep"] + 0.02, [("Is choking up", False), ("actually worth it?", True)], 230, "hk2 big2")
+pinl("pn1", S["dep"] + 0.3, S["what"] - 0.02, "Normal grip: hands at the knob", "bottom", "yl sm")
+pinl("pn2", W("what", "handle"), W("what", "shortening") - 0.12, "Hands up the handle", "bottom", "cy sm")
+band("b1", W("what", "shortening") - 0.03, S["ctrl"] - 0.02, [("Shorter effective", False), ("bat length", True)])
+pinl("pl1", W("what", "effective"), S["ctrl"] - 0.02, "Effective length", "lenmid", "cy sm")
+pinl("pl2", W("what", "length") + 0.15, S["ctrl"] - 0.02, "≈ 2 in shorter", "bottom", "sm")
+# 3 control
+chip("rad", S["ctrl"] + 0.1, A4 - 0.02, '<span class="radar">99</span> MPH', 1500, "rd")
+band("b2", W("ctrl", "control") - 0.03, S["use"] - 0.02, [("More control", True)])
+pinl("pb3", W("ctrl", "barrel") + 0.25, S["use"] - 0.02, "Bat path", "end", "yl sm")
+note("n3", W("ctrl", "help"), S["use"] - 0.02, "Choking up doesn’t automatically add bat speed or guarantee contact. It can make the bat <b>easier to control</b>.", 1700)
+# 4 when it helps
+band("b3", W("use", "high") - 0.03, B1 - 0.02, [("High velocity", True)])
+chip("rad2", P4["rel"] + 0.05, B1 - 0.02, '<span class="radar">100</span> MPH', 1500, "rd")
+band("b4", W("use", "two") - 0.03, B2 - 0.02, [("Two strikes", True)])
+chip("cnt1", B1 + 0.05, B2 - 0.02, 'Count <b class="y">0–2</b>', 1500)
+band("b5", W("use", "consistent") - 0.03, S["but"] - 0.02, [("Better contact", True)])
+note("n5", W("use", "contact"), S["but"] - 0.02, "The goal, not a guarantee.", 1700)
+# 5 the tradeoff
+panesTB("pt", S["but"], C2 - 0.02, "Full grip", "Choked up")
+title("t4", W("but", "tradeoff") - 0.03, C1 - 0.02, [("More control", False), ("vs. more reach", True)], 852, "band")
+pinl("pr1", W("lev", "reach"), C1 - 0.02, "Barrel on the ball", "ball", "yl sm", 0)
+pinl("pr2", W("lev", "reach") + 0.1, C1 - 0.02, "End of the bat", "ball", "cy sm", 1)
+chip("tg1", C1 + 0.05, S["why"] - 0.02, "Pitch away", 918, "seamc")
+pinl("po1", vt(P7["rel"] + TC("away")) + 0.35, S["why"] - 0.02, "Barrel: line drive", "ball", "yl sm", 0)
+pinl("po2", vt(P7["rel"] + TC("away")) + 0.45, S["why"] - 0.02, "Off the end: soft grounder", "ball", "cy sm", 1)
+chip("tg2", S["why"] + 0.05, C2 - 0.02, "Pitch inside", 918, "seamc")
+pinl("po3", vt(P8["rel"] + TC("in")) + 0.35, C2 - 0.02, "In on the hands", "ball", "yl sm", 0)
+pinl("po4", vt(P8["rel"] + TC("in")) + 0.45, C2 - 0.02, "Barrel: line drive", "ball", "cy sm", 1)
+note("n4", W("bal", "contact"), C2 - 0.02, "Neither grip wins every pitch. It depends on the <b>hitter</b>, the <b>pitch</b> and the <b>situation</b>.", 1760)
+band("b6", W("bal", "balance") - 0.03, S["some"] - 0.02, [("Find the balance", True)])
+quad("q1", W("bal", "bat") - 0.03, S["some"] - 0.02, [(W("bal", "bat") - 0.03, "Bat speed"), (W("bal", "control") - 0.03, "Control"), (W("bal", "power") - 0.03, "Power"), (W("bal", "timing") - 0.03, "Timing")])
+# 7 who does it
+panes2("pa", S["some"], S["never"] - 0.02, "Two strikes", "Every pitch", 1240)
+pinl("pg7", W("some", "strikes") + 0.2, S["never"] - 0.02, "Chokes up", "bottom", "cy sm", 0)
+pinl("pn7", W("never", "never"), S["bottom"] - 0.02, "Full grip, every pitch", "bottom", "yl sm")
+# 8 the bottom line
+band("b8", W("bottom", "line"), E1 - 0.02, [("The bottom line", True)])
+note("n8", W("bottom", "without"), E1 - 0.02, "Worth it if it helps him make better contact without giving up too much power.", 1700)
+# 9 the takeaway: the last two lines are these titles instead of captions
+title("t6", S["not"] + 0.05, S["ctl"] + 0.02, [("It’s not about", False), ("swinging harder.", True)], 300)
+title("t7", S["ctl"] + 0.05, VBRAND - 0.02, [("It’s about controlling", False), ("the barrel.", True)], 300)
 c.clip("brand", VBRAND, D, """<div class="brand" id="brx"><div class="bmark"><svg viewBox="0 0 100 100" width="150" height="150"><circle cx="50" cy="50" r="44" fill="#f4f2ec" stroke="#05080d" stroke-width="3"/>
   <path d="M26 16 C40 34 40 66 26 84" fill="none" stroke="#ff6a3d" stroke-width="4" stroke-dasharray="6 5"/><path d="M74 16 C60 34 60 66 74 84" fill="none" stroke="#ff6a3d" stroke-width="4" stroke-dasharray="6 5"/></svg></div>
   <div class="bname"><span>Baseball</span><em>Decoded</em></div></div>""", cls="layer", style="z-index:24")
@@ -189,19 +202,46 @@ c.ft("#brx", o(opacity=0), o(opacity=1, duration=0.2), VBRAND)
 c.ft(".bmark", o(scale=0.4, rotation=-120), o(scale=1, rotation=0, duration=0.5, ease="back.out(1.6)"), VBRAND)
 c.ft(".bname", o(opacity=0, y=30), o(opacity=1, y=0, duration=0.3, ease="power3.out"), VBRAND + 0.15)
 
-# ----------------------------------------------------------------- sound (no voice: room left for the narrator)
+# ----------------------------------------------------------------- captions: the voiceover, word by word
+CAPS = [("dep", 0, 2, {2: "acc"}), ("dep", 3, 8, {5: "acc", 8: "acc"}),
+        ("what", 0, 4, {3: "acc", 4: "acc"}), ("what", 5, 9, {8: "acc", 9: "acc"}), ("what", 10, 12, {12: "acc"}), ("what", 13, 16, {15: "acc", 16: "acc"}), ("what", 17, 19, {}),
+        ("ctrl", 0, 5, {}), ("ctrl", 6, 8, {6: "acc", 8: "acc"}), ("ctrl", 9, 12, {}), ("ctrl", 13, 18, {15: "acc"}), ("ctrl", 19, 20, {20: "acc"}),
+        ("use", 0, 4, {4: "acc"}), ("use", 5, 8, {7: "acc", 8: "acc"}), ("use", 9, 12, {11: "acc", 12: "acc"}), ("use", 13, 16, {}), ("use", 17, 18, {17: "acc", 18: "acc"}),
+        ("but", 0, 3, {3: "acc"}),
+        ("lev", 0, 3, {2: "acc"}), ("lev", 4, 8, {6: "acc", 8: "acc"}), ("lev", 9, 14, {}), ("lev", 15, 18, {18: "acc"}),
+        ("why", 0, 6, {1: "acc"}),
+        ("bal", 0, 3, {}), ("bal", 4, 6, {6: "acc"}), ("bal", 7, 12, {12: "acc"}), ("bal", 13, 15, {14: "acc", 15: "acc"}), ("bal", 16, 19, {16: "acc", 17: "acc", 19: "acc"}),
+        ("some", 0, 3, {}), ("some", 4, 6, {5: "acc", 6: "acc"}), ("some", 7, 9, {}), ("some", 10, 13, {11: "acc", 12: "acc", 13: "acc"}),
+        ("never", 0, 4, {2: "acc"}), ("never", 5, 9, {7: "acc"}),
+        ("bottom", 0, 2, {1: "acc", 2: "acc"}), ("bottom", 3, 8, {7: "acc"}), ("bottom", 9, 15, {14: "acc", 15: "acc"}), ("bottom", 16, 20, {20: "acc"})]
+for k, (lid, i0, i1, acc) in enumerate(CAPS):
+    ln = LN(lid); wd = ln["words"]; i1 = min(i1, len(wd) - 1)
+    start = wd[i0]["t0"] - 0.06
+    if k + 1 < len(CAPS) and CAPS[k + 1][0] == lid: end = wd[CAPS[k + 1][1]]["t0"] - 0.06
+    elif IDX[lid] + 1 < len(TMJ["lines"]): end = min(ln["t1"] + 0.35, TMJ["lines"][IDX[lid] + 1]["t0"] - 0.1)
+    else: end = min(ln["t1"] + 0.3, VBRAND - 0.02)
+    cid = f"cap{k}"; sp = []
+    for n in range(i0, i1 + 1):
+        w = wd[n]["w"]
+        w = w.rstrip(",:") if n == i1 and i1 > i0 else w
+        w = w.replace("'", "’")
+        sp.append(f'<span class="cw{(" " + acc[n]) if n in acc else ""}" id="{cid}w{n - i0}">{esc(w)}</span>')
+    c.clip(cid, start, end, f'<div class="cap" style="top:300px"><span class="cl">{" ".join(sp)}</span></div>', cls="layer", style="z-index:20")
+    for n in range(i0, i1 + 1):
+        c.ft(f"#{cid}w{n - i0}", o(opacity=0, y=34, filter="blur(10px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.15, ease="power3.out"), wd[n]["t0"] - 0.04)
+
+# ----------------------------------------------------------------- sound
 def cue(n, t, db=0.0):
     if t is not None and 0 <= t < D: c.cue(n, t, db)
 for t_ in CUTS: cue("whoosh", t_, -13)
-cue("riser-s", 0.0, -8)
-for tt in [0.15, 9.5, 13.45, 22.1, 32.1, 35.5, 38.8, 42.1, 44.5]: cue("impact", tt, -6)
-for tt in [2.85, 10.0, 32.35, 39.0]: cue("tap", tt + 0.1, -10)            # the hands sliding on the handle
-for a_, s_ in [(A3, None), (A3E, None), (A4A, None), (A4B, None), (A5A, None), (A5B, None), (A5C, None), (A6, None)]:
+cue("riser-s", 0.0, -8); cue("impact", 0.1, -6)
+for tt in [W("what", "shortening"), W("ctrl", "control"), W("but", "tradeoff"), W("bal", "balance"), S["not"] + 0.05, S["ctl"] + 0.05]: cue("impact", tt - 0.03, -6)
+for ch in [CH1, CH2]: cue("tap", ch[0][0] + 0.1, -10)                  # the hands sliding on the handle
+for a_ in [P3, P4, P5, P7, P8, P9]:
     cue("whoosh", vt(a_["rel"]), -8)
-CRACKS = [(t_, sp) for t_, sp in CONTACTS]
+CRACKS = list(CONTACTS)
 cue("riser-m", VBRAND - 1.0, -10); cue("impact", VBRAND, -4)
 LEVEL = {"impact": -3.0, "whoosh": -6.0, "glove": -1.0, "tick": -6.0, "popup": -8.0, "riser-m": -7.0, "riser-s": -7.0, "tap": -3.0}
-
 def crack(rng, slow=False):
     """Ash bat on a ball: a hard broadband click and a short wooden ring (lower and longer in slow motion)."""
     k = 0.55 if slow else 1.0
@@ -228,13 +268,20 @@ def mixdown():
     bedp = os.path.join(HERE, "assets", "bed.wav"); make_bed(bedp, D, VBRAND, style="pulse", seed=151)
     bed = read(bedp)[:n]; bed = np.pad(bed, ((0, n - len(bed)), (0, 0)))
     ramp = np.clip(np.arange(n) / SR / 3.0, 0.5, 1.0)[:, None]
-    full = (fx + bed * ramp * 10 ** (-16 / 20)) * 10 ** (-6 / 20)
+    vo = read(os.path.join(HERE, "assets", "vo", "vo.wav"))[:n]; vo = np.pad(vo, ((0, n - len(vo)), (0, 0)))
+    env = np.convolve(np.abs(vo).mean(1), np.ones(int(0.12 * SR)) / int(0.12 * SR), "same")
+    duck = 10 ** (-7 * np.clip(env / 0.05, 0, 1) / 20)
+    duck = np.convolve(duck, np.ones(int(0.08 * SR)) / int(0.08 * SR), "same")
+    music = bed * ramp * duck[:, None] * 10 ** (-17 / 20)
+    full = (fx + music) * 10 ** (-6 / 20) + vo
     def wav(path, x):
         w = wave.open(path, "wb"); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
         w.writeframes((np.clip(x * 0.5, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
-    pre = os.path.join(HERE, ".pre.wav"); wav(pre, full)
-    m = master(pre, os.path.join(HERE, "assets", "mix.wav"), target=-20.0)
-    os.remove(pre)
+    pre, pfx = os.path.join(HERE, ".pre.wav"), os.path.join(HERE, ".fx.wav")
+    wav(pre, full); wav(pfx, (fx + bed * ramp * 10 ** (-17 / 20)) * 10 ** (-6 / 20))
+    m = master(pre, os.path.join(HERE, "assets", "mix.wav"))
+    master(pre, os.path.join(HERE, "assets", "mix-novo.wav"), fx_path=pfx)
+    os.remove(pre); os.remove(pfx)
     return m
 
 # ----------------------------------------------------------------- CSS
@@ -416,24 +463,20 @@ CSS += f"""
 .chip.hdr {{ font-size:52px; padding:8px 22px; }} .chip .vsd {{ color:{MUTED}; }}
 .chip.rd {{ color:#fff; }} .chip .radar {{ color:{Y}; font-size:84px; vertical-align:-4px; }}
 .pin.cy span {{ background:{CYAN}; }}
+.ttl.band {{ font-size:88px; padding:18px 30px 22px; }}
+.quad {{ position:absolute; left:60px; right:60px; display:grid; grid-template-columns:1fr 1fr; gap:14px; }}
+.quad span {{ display:grid; place-items:center; padding:14px 10px; border-radius:14px; background:rgba(6,10,18,.88); border-bottom:5px solid {Y}; {BC} font-size:56px; color:#fff; }}
 """
 
 HEAD = '<script type="importmap">{"imports":{"three":"./assets/vendor/three.module.min.js"}}</script>'
-SCENES = [("0.0", "4.0", "The hook: he steps in, normal grip; extreme close on the hands; they slide up the handle (2.9–3.5)", "IS CHOKING UP ACTUALLY WORTH IT?"),
-          ("4.0", "12.0", "Split screen: the same batter, full grip and choked up; the hands, close; the bat with the effective-length bar shrinking (10.0–10.9)", "SHORTER EFFECTIVE BAT LENGTH (from 9.5)"),
-          ("12.0", "22.0", "99 mph; the controlled swing in slow motion with its bat path; the hands; the contact point; up and in, a quick adjustment (from 20.0)", "MORE CONTROL (13.5) · QUICKER BARREL ADJUSTMENTS (20.0)"),
-          ("22.0", "32.0", "Overhead at contact: the reach of each grip; a pitch away, each grip (full: line drive; choked: off the end); a pitch inside (full: in on the hands; choked: line drive)", "MORE CONTROL VS. MORE REACH"),
-          ("32.0", "42.0", "Two strikes: he chokes up, fights off a slider (foul); 100 mph: fouled straight back; full count: he chokes up, hard grounder up the middle", "TWO STRIKES (32.1) · HIGH VELOCITY (35.5) · BETTER CONTACT (38.8)"),
-          ("42.0", "47.8", "The line drive into left-center; the bat finishing its swing in slow motion", "IT'S NOT ABOUT SWINGING HARDER. (42.1) · IT'S ABOUT CONTROLLING THE BARREL. (44.5)"),
-          ("47.8", f"{D:.1f}", "End card", "BASEBALL DECODED")]
 if __name__ == "__main__":
     cc = {"duration": D, "shots": {"list": SHOTS}, "pins": PINS}
     h = c.page(CSS, "Is choking up actually worth it?", script=True).replace('<script src="assets/gsap.min.js"></script>',
         '<script src="assets/vendor/gsap.min.js"></script>\n    ' + HEAD + f'\n    <script>window.__CC = {json.dumps(cc)}; window.__PLAY = {json.dumps(P)};</script>')
     h = h.replace("</body>", '  <script type="module" src="./assets/field.js"></script>\n  </body>')
     open(os.path.join(HERE, "index.html"), "w").write(h)
-    lines = ["# Scene timing for the voiceover", "", f"The video is {D:.1f} s. Record each part of the narration inside its scene (times in seconds).", "",
-             "| From | To | Scene | On screen |", "|---|---|---|---|"] + [f"| {a} | {b} | {d} | {t} |" for a, b, d, t in SCENES]
+    lines = ["# Voiceover cue sheet", "", f"When each line starts, to land on its shots (the video is {D:.1f} s). Record your own read over assets/mix-novo.wav to these times.", "",
+             "| Line | Starts |", "|---|---|"] + [f"| {x['text']} | {x['t0']:.1f} s |" for x in TMJ["lines"]]
     open(os.path.join(HERE, "CUES.md"), "w").write("\n".join(lines) + "\n")
     if "--nomix" not in sys.argv:
         m = mixdown(); print(f"index.html: {D}s, {len(SHOTS)} shots; {len(c.cues)} sounds; contacts {[round(x, 2) for x, _ in CONTACTS]}; {m['lufs']} LUFS / {m['true_peak']} dBTP")
