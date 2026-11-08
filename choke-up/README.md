@@ -1,10 +1,17 @@
 # "Is choking up actually worth it?"
 
-A 50 s vertical (1080×1920, 30 fps) 3D baseball breakdown for Baseball Decoded: what choking up does, what it gives a hitter, what it costs, and when hitters use it.
+A 45.8 s vertical (1080×1920, 30 fps) 3D baseball breakdown for Baseball Decoded: what choking up does, what it gives a hitter, what it costs, and when hitters use it.
 
-- **No voiceover**, per the brief. `CUES.md` lists each scene's start and end so you can record narration over it.
-- **Sound:** a `make_bed` bed (style "pulse"), bat cracks (lower and longer in slow motion), the hands sliding on the handle, whooshes and stadium ambience.
-- **Mix:** mastered to −20 LUFS so there is room for a voice on top, in `assets/mix.wav`.
+- **Voiceover:**
+  - Your script, voiced with HyperFrames' local Kokoro TTS (voice `am_michael`, 1.45×). The text is in `transcript.txt`.
+  - Shots, word-by-word captions, the grip slides and the titles are keyed to its words.
+  - The opening question is covered by the big hook title instead of captions. The last two lines ("It's not about swinging harder." / "It's about controlling the barrel.") are the closing titles instead of captions.
+  - `CUES.md` lists when each line starts, so you can record your own read over `assets/mix-novo.wav`.
+- **Layout:** captions at the top; scene titles in a dark band just under them; pane labels, pins and notes around the batter.
+- **Sound:** a `make_bed` bed (style "pulse") ducked up to 7 dB under the voice, bat cracks (lower and longer in slow motion), the hands sliding on the handle, whooshes and stadium ambience.
+- **Mixes:**
+  - `assets/mix.wav` is mastered to about −14 LUFS.
+  - `assets/mix-novo.wav` is the music and effects without the voice.
 - **One batter throughout:** the same model, uniform (gray road jersey, red helmet) and bat in every shot, on the same field, players and workflow as the other Baseball Decoded videos.
 - **New in this project:**
   - **The bat:** a 34 in maple bat with a resampled lathe profile (knob, handle, taper, barrel, cupped end). It has a wood-grain texture, a natural handle with pine tar, and a dark barrel.
@@ -19,8 +26,10 @@ A 50 s vertical (1080×1920, 30 fps) 3D baseball breakdown for Baseball Decoded:
     - a flash at contact.
 
 ```bash
-python3 tools/physics.py   # the pitches and batted balls -> assets/play.json
-python3 build.py           # index.html + assets/mix.wav + CUES.md
+python3 tools/physics.py                                       # the pitches and batted balls -> assets/play.json
+export HYPERFRAMES_PYTHON=<python with kokoro-onnx, soundfile, onnx>
+$HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # voiceover + per-word timing
+python3 build.py                                               # index.html + assets/mix.wav (+ mix-novo.wav) + CUES.md
 npx --yes hyperframes@0.8.154 render . -o renders/choke-up.mp4 --video-bitrate 16M
 ```
 
@@ -51,11 +60,10 @@ The other pitches:
 
 | Scene | Pitch | Result |
 |---|---|---|
-| Scene 3 | 99 mph down the middle; 99 mph up and in | Liners to center and left-center |
-| Scene 5, two strikes | 86 mph slider low and away | 68 mph foul down the right-field line |
-| Scene 5, high velocity | 100 mph | Fouled straight back |
-| Scene 5, full count | 91 mph | 92 mph grounder up the middle |
-| Scene 6 | 95 mph | 104 mph line drive at 16° into left-center |
+| "…easier to control…" | 99 mph down the middle | Liner to center |
+| "…high velocity…" | 100 mph | Fouled straight back |
+| "…consistent contact." | 91 mph | 92 mph grounder up the middle |
+| "…better contact…" | 95 mph | 104 mph line drive at 16° into left-center |
 
 ## Accuracy notes
 
@@ -69,30 +77,26 @@ The other pitches:
   - The overhead freeze shows the end of the bat reaching less far when choked up.
   - On the pitch away the full grip's extra reach finds the barrel; on the pitch inside the choked-up grip does.
   - The note says: "Neither grip wins every pitch. It depends on the hitter, the pitch and the situation."
-- **Two strikes:** "Some hitters choke up with two strikes to protect the plate. Many don't."
+- **Who does it:** following the script, a split shows one hitter choking up with two strikes and another choked up on every pitch, then a full grip, unchanged.
 - **"Better contact"** is labeled "The goal, not a guarantee."
+- **The bottom line:** "Worth it if it helps him make better contact without giving up too much power."
 
 ## Shots
 
-| Time | Shot | On screen |
-|---|---|---|
-| 0–1.5 s | He steps into the box | **IS CHOKING UP ACTUALLY WORTH IT?** |
-| 1.5–2.6 s | Extreme close on the hands: normal grip, the bottom hand against the knob | "Normal grip: hands at the knob" |
-| 2.6–4.0 s | The hands slide up the handle; the knob shows | "Hands up the handle" |
-| 4.0–7.2 s | Split: the same batter, full grip and choked up | Full grip / Choked up |
-| 7.2–9.4 s | Split: the hands, close | "Hands at the knob" / "Knob showing" |
-| 9.4–12.0 s | The bat alone; the hands slide up and the effective-length bar shrinks | **SHORTER EFFECTIVE BAT LENGTH**; "≈ 2 in shorter" |
-| 12.0–13.35 s | Behind the pitcher: 99 mph | 99 MPH |
-| 13.35–16.8 s | Slow motion: the controlled swing with its bat path, contact | **MORE CONTROL** |
-| 16.8–18.4 s | Replay on the hands and the bat path | "Hands stay compact", "Bat path" |
-| 18.4–20.0 s | The contact point, very slow | "Contact point" |
-| 20.0–22.0 s | Up and in at 99 mph: the barrel still gets there | **QUICKER BARREL ADJUSTMENTS**; the note on bat speed |
-| 22.0–24.6 s | Overhead, frozen at contact on a pitch away: the reach of each grip | **MORE CONTROL VS. MORE REACH**; "Barrel on the ball" / "End of the bat" |
-| 24.6–27.6 s | Top and bottom: pitch away (full grip: liner; choked up: soft grounder) | Pitch away |
-| 27.6–32.0 s | Top and bottom: pitch inside (full grip: soft grounder; choked up: liner) | Pitch inside; "Neither grip wins every pitch…" |
-| 32.0–35.4 s | Two strikes: he chokes up; a slider low and away, fouled off | **TWO STRIKES**; Count 0–2 |
-| 35.4–38.7 s | 100 mph; fouled straight back | **HIGH VELOCITY**; 100 MPH |
-| 38.7–42.0 s | Full count: he chokes up; a hard grounder up the middle | **BETTER CONTACT**; Count 3–2; "The goal, not a guarantee." |
-| 42.0–44.4 s | Behind him: the line drive into left-center | **IT'S NOT ABOUT SWINGING HARDER.** |
-| 44.4–47.8 s | Low angle, slow motion: the bat finishes its swing | **IT'S ABOUT CONTROLLING THE BARREL.** |
-| 47.8–50.0 s | Baseball Decoded end card | |
+| Time | Script | Shot | On screen |
+|---|---|---|---|
+| 0–2.1 s | "Is choking up on the bat actually worth it?" | He steps into the box | **IS CHOKING UP ACTUALLY WORTH IT?** |
+| 2.1–4.4 s | "The answer depends on the hitter and the situation." | Extreme close on the hands: normal grip | "Normal grip: hands at the knob" |
+| 4.4–7.1 s | "When a hitter chokes up, they move their hands higher on the handle…" | The hands slide up the handle on "hands higher"; the knob shows | "Hands up the handle" |
+| 7.1–8.7 s | "…shortening the effective length of the bat." | The bat alone; the effective-length bar shrinks on "shortening" | **SHORTER EFFECTIVE BAT LENGTH**; "≈ 2 in shorter" |
+| 8.7–13.4 s | "This can make the bat feel easier to control… the barrel through the zone…" | 99 mph; the swing in slow motion with its bat path, contact on "barrel" | **MORE CONTROL**; the note on bat speed |
+| 13.4–18.7 s | "…facing high velocity, protecting with two strikes, or trying to make consistent contact." | 100 mph fouled back; he chokes up at 0–2; a hard grounder up the middle | **HIGH VELOCITY**, **TWO STRIKES**, **BETTER CONTACT** ("The goal, not a guarantee.") |
+| 18.7–22.2 s | "But there's a tradeoff. Choking up reduces some of the leverage and reach…" | Top and bottom, overhead, frozen at contact on a pitch away: the reach of each grip | **MORE CONTROL VS. MORE REACH**; "Barrel on the ball" / "End of the bat" |
+| 22.2–24.0 s | "…from holding the bat at the very bottom." | The pitch away, each grip: liner vs. soft grounder | Pitch away |
+| 24.0–27.3 s | "So why don't all hitters do it? Because hitting isn't just about making contact." | A pitch inside, each grip: soft grounder vs. liner | Pitch inside; "Neither grip wins every pitch…" |
+| 27.3–31.3 s | "It's about finding the right balance between bat speed, control, power, and timing." | The batter in his stance, pushing in | **FIND THE BALANCE**; Bat speed / Control / Power / Timing |
+| 31.3–34.3 s | "Some hitters choke up with two strikes. Others do it on nearly every pitch." | Split: one chokes up on "two strikes"; the other is choked up already | Two strikes / Every pitch |
+| 34.3–36.5 s | "And some never need to change their grip at all." | The hands, close: full grip | "Full grip, every pitch" |
+| 36.5–41.0 s | "The bottom line? Choking up can be worth it if it helps you make better contact without sacrificing too much power." | Behind him: the line drive into left-center, contact on "contact" | **THE BOTTOM LINE**; the note |
+| 41.0–43.8 s | "It's not about swinging harder. It's about controlling the barrel." | Low angle, slow motion: the bat finishes its swing | **IT'S NOT ABOUT SWINGING HARDER.** / **IT'S ABOUT CONTROLLING THE BARREL.** |
+| 43.8–45.8 s | (end) | Baseball Decoded end card | |
