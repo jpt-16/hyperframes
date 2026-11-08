@@ -10,7 +10,7 @@ const srv = http.createServer((q, r) => { let f = path.join(root, decodeURICompo
 (async () => {
   const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1080, height: 1920 } });
   p.on('pageerror', (e) => console.log('pageerror:', e.message.slice(0, 300)));
-  await p.goto(`http://localhost:${port}/`, { waitUntil: 'domcontentloaded' }); await p.waitForFunction(() => window.__fieldRender && window.__timelines && window.__timelines.main);
+  await p.goto(`http://localhost:${port}/`, { waitUntil: 'domcontentloaded' }); for (let i = 0; i < 360 && !(await p.evaluate(() => !!(window.__fieldRender && window.__timelines && window.__timelines.main))); i++) await p.waitForTimeout(500);
   await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(1500);
   await p.evaluate(() => { document.querySelectorAll('audio').forEach((a) => a.remove());
     window.__go = (t) => { for (const el of document.querySelectorAll('.clip')) { const s = +el.dataset.start, d = +el.dataset.duration; el.style.visibility = t >= s && t < s + d ? 'visible' : 'hidden'; }
