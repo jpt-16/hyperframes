@@ -1,10 +1,18 @@
 # "Pitch tipping": what if the hitter knew the pitch before it was thrown?
 
-A 55.6 s vertical (1080×1920, 30 fps) 3D baseball breakdown for Baseball Decoded: how pitchers tip pitches, how teams find the pattern, how the information gets to the hitter, and what it's worth.
+A 52.5 s vertical (1080×1920, 30 fps) 3D baseball breakdown for Baseball Decoded: how pitchers tip pitches, how teams find the pattern, how the information gets to the hitter, and what it's worth.
 
-- **No voiceover**, per the brief. `CUES.md` lists each scene's start and end so you can record narration over it.
-- **Sound:** a `make_bed` bed (style "pulse"), whooshes, impacts on the titles, soft ticks as the catcher's signs flash, glove pops, the bat crack (low and long, in slow motion) and stadium ambience.
-- **Mix:** mastered to −20 LUFS so there is room for a voice on top, in `assets/mix.wav`.
+- **Voiceover:**
+  - Your script, voiced with HyperFrames' local Kokoro TTS (voice `am_michael`, 1.6×). The text is in `transcript.txt`.
+  - Shots, freezes, rings, signs, word-by-word captions and titles are keyed to its words.
+  - The opening question is covered by the hook title, and the last line ("It's knowing which pitch is coming.") is the closing title instead of captions.
+  - `CUES.md` lists when each line starts, so you can record your own read over `assets/mix-novo.wav`.
+- **Slider, as in the script:** the breaking pitch in every example, in the pitch log and in the payoff is a slider (86 mph, sweeping away from a right-handed hitter), compared with a fastball.
+- **Layout:** captions at the top; scene titles in a band under them (at the seam in the top/bottom splits); in the splits the top pane is framed low so the captions don't cover the glove.
+- **Sound:** a `make_bed` bed (style "pulse") ducked up to 7 dB under the voice, whooshes, impacts on the titles, soft ticks as the catcher's signs flash, glove pops, the bat crack (low and long, in slow motion) and stadium ambience.
+- **Mixes:**
+  - `assets/mix.wav` is mastered to about −14 LUFS.
+  - `assets/mix-novo.wav` is the music and effects without the voice.
 - **One cast throughout:** the same pitcher (white home uniform), batter (gray road uniform, red helmet, black batting gloves), catcher and umpire, on the same field as the other Baseball Decoded videos.
 - **New in this project:**
   - **The tells:** built into the pitcher's set and delivery.
@@ -13,7 +21,7 @@ A 55.6 s vertical (1080×1920, 30 fps) 3D baseball breakdown for Baseball Decode
     - How long he holds the set.
     - A yellow ring finds the glove in any camera.
   - **The scouting room:** a second 3D scene with a hitting coach, two hitters at a table, a laptop and a video wall.
-    - The wall plays two live renders of the same pitcher on a loop: the clip before the fastball above the one before the curveball.
+    - The wall plays two live renders of the same pitcher on a loop: the clip before the fastball above the one before the slider.
     - Beside them is a pitch log whose matching rows light up one by one.
   - **The signs:**
     - The catcher's jointed hand flashes finger signs between his thighs, seen through a runner's-view lens.
@@ -22,8 +30,10 @@ A 55.6 s vertical (1080×1920, 30 fps) 3D baseball breakdown for Baseball Decode
   - **The close-up of the ball in the pitcher's hand:** his fingers are solved at load to wrap a stitched baseball in a four-seam grip.
 
 ```bash
-python3 tools/physics.py   # the fastball, the curveball, the batted ball -> assets/play.json
-python3 build.py           # index.html + assets/mix.wav + CUES.md
+python3 tools/physics.py                                       # the fastball, the slider, the batted ball -> assets/play.json
+export HYPERFRAMES_PYTHON=<python with kokoro-onnx, soundfile, onnx>
+$HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # voiceover + per-word timing
+python3 build.py                                               # index.html + assets/mix.wav (+ mix-novo.wav) + CUES.md
 npx --yes hyperframes@0.8.154 render . -o renders/tipping.mp4 --video-bitrate 16M
 ```
 
@@ -34,14 +44,14 @@ This video was rendered with `tools/render_chunks.js` instead. It renders 3-seco
 | | Speed | Spin | Crosses the front of the plate |
 |---|---|---|---|
 | Fastball | 94 mph | 2,300 rpm backspin | (+0.20, 2.80) ft after 0.401 s |
-| Curveball | 79 mph | 2,600 rpm topspin | (−0.10, 2.00) ft after 0.478 s |
+| Slider | 86 mph | 2,500 rpm, glove-side sweep | (+0.35, 2.20) ft after 0.438 s |
 
-The payoff: the curveball is barreled for a 101 mph line drive at 15° into left-center, landing about 300 ft out.
+The payoff: the slider is barreled for a 101 mph line drive at 15° into right-center, landing about 300 ft out.
 
 ## Accuracy notes
 
 - **The tells are hypothetical:**
-  - All three are made-up examples for this one pitcher, labeled "Before the fastball" and "Before the curveball".
+  - All three are made-up examples for this one pitcher, labeled "Before the fastball" and "Before the slider".
   - An on-screen note says: "Hypothetical examples for one pitcher. Real tells vary, and no single move always means one pitch."
   - Nothing says a glove position always means a particular pitch.
 - **The examples cover what the brief lists:**
@@ -49,41 +59,34 @@ The payoff: the curveball is barreled for a 101 mph line drive at 15° into left
   - **Hand movement:** the glove flares while he changes his grip.
   - **Delivery timing:** 0.9 s vs. 1.8 s in the set, with timer bars.
 - **Patterns, not single clips:**
-  - The scouting room compares two clips, then a pitch log of eight pitches. The pin reads "Hands at the chest → curveball, every time in this log".
+  - The scouting room compares two clips, then a pitch log of eight pitches. The pin reads "Hands at the chest → slider, every time in this log".
   - The note reads: "Teams look for a move that repeats, not one clip."
 - **Reading signs:**
-  - The runner at second reads the catcher's sequence. The pin reads "Second sign is live: 2 = curveball (this example)".
+  - The runner at second reads the catcher's sequence. The pin reads "Second sign is live: 2 = slider (this example)".
   - He relays it with a prearranged signal (a hand to the helmet), and the batter sees it.
 - **Systems vary:**
   - A different team's coach uses a different signal from the dugout.
   - The note reads: "Every team sets its own signals, and changes them."
 - **No electronics:** the note says "Reading signs by sight is part of the game. Using electronics to steal them is against MLB rules." No device appears in the relay.
-- **The payoff** shows the batter spotting the tell (the ring and "Hands at the chest: curveball coming"), then waiting on the curveball and barreling it.
+- **The payoff** shows the batter spotting the tell (the ring and "Hands at the chest: slider coming"), then waiting on the slider and barreling it.
 
 ## Shots
 
-| Time | Shot | On screen |
+| Script | Shot | On screen |
 |---|---|---|
-| 0–1.6 s | On the mound, side on: he looks in and comes set, hands at the chest | **WHAT IF THE HITTER KNEW THE PITCH BEFORE IT WAS THROWN?** |
-| 1.6–2.5 s | Over the batter's shoulder, looking out at him | |
-| 2.5–3.15 s | The delivery | |
-| 3.15–5.0 s | Frozen at the stride, just before release; the camera pushes into his glove | "The glove"; Freeze |
-| 5.0–9.0 s | Top and bottom: coming set before a fastball (belt) and a curveball (chest), then a freeze | **GLOVE POSITION**; "Hands at the belt" / "Hands at the chest"; the hypothetical note |
-| 9.0–13.0 s | Close on the glove: before the curveball it flares as he changes his grip (slowed, then frozen) | **HAND MOVEMENT**; "Glove stays still" / "Glove flares as he changes his grip" |
-| 13.0–17.0 s | Full delivery, each: 0.9 s in the set before the fastball, 1.8 s before the curveball | **DELIVERY TIMING**; timer bars |
-| 17.0–19.4 s | The scouting room: the wall, the table, the hitters | **STUDY THE VIDEO** |
-| 19.4–22.0 s | The wall: both clips, rings on the glove | **FIND THE PATTERN**; "Before the fastball: hands at the belt" / "Before the curveball: hands at the chest" |
-| 22.0–24.4 s | The pitch log: the curveball rows light up one by one | "Hands at the chest → curveball, every time in this log" |
-| 24.4–27.0 s | The hitters: one leans in and points, the other nods; the coach turns to the wall | "There it is"; "Teams look for a move that repeats, not one clip." |
-| 27.0–29.4 s | Behind the runner at second, looking in | **RECOGNIZE IT** |
-| 29.4–31.6 s | The runner's view: the catcher's signs, 1-2-3 | "Second sign is live: 2 = curveball (this example)" |
-| 31.6–33.4 s | The runner: hand to the helmet | **RELAY IT**; "Prearranged signal: hand to the helmet" |
-| 33.4–35.0 s | Over the batter's shoulder to second; he gets it | "Got it" |
-| 35.0–37.3 s | Another team's coach on the dugout rail: a touch of the cap, a swipe of the arm | "Another team: a signal from the dugout"; "Every team sets its own signals, and changes them." |
-| 37.3–39.0 s | High behind home: the batter digs in | **USE THE ADVANTAGE**; the note on electronics |
-| 39.0–42.25 s | The batter's eyes: the hands come set at the chest; the delivery | Ring; "Hands at the chest: curveball coming" |
-| 42.25–44.65 s | Slow motion: he waits on the curveball and barrels it | |
-| 44.65–49.0 s | The line drive into left-center | **KNOWING THE PITCH CHANGES EVERYTHING** |
-| 49.0–51.8 s | He walks back up the mound, looking in at the catcher | **THE BEST PITCHERS DON'T GIVE ANYTHING AWAY.** |
-| 51.8–53.8 s | The ball in his hand, close | |
-| 53.8–55.6 s | Baseball Decoded end card | |
+| "Have you ever wondered how a hitter can know what pitch is coming…" | On the mound he looks in and comes set; over the batter's shoulder; the delivery, frozen before release; the camera pushes into the glove | **WHAT IF THE HITTER KNEW THE PITCH BEFORE IT WAS THROWN?**; "The glove" |
+| "It's called tipping pitches… without even realizing it." | The pitch goes on, the pitcher none the wiser | **TIPPING PITCHES** |
+| "…a slightly different glove position, hand movement, or setup…" | Top/bottom: hands at the belt before the fastball, at the chest before the slider (freeze on "glove"); then close: the glove flares as he changes his grip (freeze) | **GLOVE POSITION**, **HAND MOVEMENT**; the hypothetical note |
+| "…like a change in delivery timing…" | Full delivery, each: 0.9 s in the set before the fastball, 1.8 s before the slider | **DELIVERY TIMING**; timer bars |
+| "…or how they handle the ball." | The ball in his hand, close | "The grip, hidden until the last moment" |
+| "But here's where it gets interesting. Teams study video and look for patterns." | The scouting room | **STUDY THE VIDEO** |
+| "If they notice the pitcher consistently doing something different before throwing a slider compared to a fastball…" | The video wall: both clips, rings on the glove | **FIND THE PATTERN**; "Before the fastball…" / "Before the slider…" |
+| "…they can start recognizing the tell." | The pitch log lights up the slider rows | "Hands at the chest → slider, every time in this log" |
+| "And once they figure it out, that information can spread throughout the team." | The hitters: one leans in and points, the other nods | "There it is"; "Teams look for a move that repeats, not one clip." |
+| "A runner at second base might recognize the catcher's signs and relay information to the hitter." | Behind the runner; the runner's view of the signs; hand to the helmet; over the batter's shoulder, he gets it | **RECOGNIZE IT**, **RELAY IT**; the pins |
+| "Coaches and teammates can also communicate through prearranged signals." | Another team's coach on the dugout rail: cap, then arm | "Another team: a signal from the dugout"; the note on signals and electronics |
+| "The challenge is making sure the pitcher doesn't realize they've been figured out." | The batter's eyes: the pitcher comes set, hands at the chest | **USE THE ADVANTAGE**; "Hands at the chest: slider coming" |
+| "Because if a hitter knows what's coming, even a fraction of a second earlier, it can completely change the at-bat." | Slow motion: contact on "earlier"; the line drive | **KNOWING THE PITCH CHANGES EVERYTHING** |
+| "And that's why pitchers work so hard to make every pitch look exactly the same." | He walks back up the mound, looking in | **THE BEST PITCHERS DON'T GIVE ANYTHING AWAY.** |
+| "In baseball, sometimes the biggest advantage isn't having a better pitch." | The ball in his hand, close | |
+| "It's knowing which pitch is coming." | (the same) | **IT'S KNOWING WHICH PITCH IS COMING.**, then the Baseball Decoded end card |
