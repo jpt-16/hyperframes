@@ -869,7 +869,7 @@ const SCREEN = new THREE.Group(); SCREEN.position.set(0, 7.4, -5.9); ROOM.add(SC
 let LOG_HL = -1;
 const logCanvas = document.createElement("canvas"); logCanvas.width = 1024; logCanvas.height = 1792;
 const logTex = new THREE.CanvasTexture(logCanvas); logTex.colorSpace = THREE.SRGBColorSpace;
-const LOG = [["Chest", "CB"], ["Belt", "FB"], ["Belt", "FB"], ["Chest", "CB"], ["Belt", "FB"], ["Chest", "CB"], ["Belt", "FB"], ["Chest", "CB"]];
+const LOG = [["Chest", "SL"], ["Belt", "FB"], ["Belt", "FB"], ["Chest", "SL"], ["Belt", "FB"], ["Chest", "SL"], ["Belt", "FB"], ["Chest", "SL"]];
 function drawLog(hl) {                                              // hl: how far the highlight has run down the log (0..1)
   const g = logCanvas.getContext("2d"), w = logCanvas.width, h = logCanvas.height;
   g.fillStyle = "#0b1018"; g.fillRect(0, 0, w, h);
@@ -877,12 +877,12 @@ function drawLog(hl) {                                              // hl: how f
   g.font = "700 40px Inter, Arial, sans-serif"; g.fillText("HANDS AT THE SET", 230, 176); g.fillText("PITCH", 760, 176);
   const y0 = 220, rh = (h - y0 - 40) / LOG.length;
   LOG.forEach(([gl, pt], i) => {
-    const cy = y0 + rh * (i + 0.5), on = pt === "CB" && hl > (i + 0.5) / LOG.length;
+    const cy = y0 + rh * (i + 0.5), on = pt === "SL" && hl > (i + 0.5) / LOG.length;
     g.fillStyle = on ? "rgba(255,216,77,.16)" : "#141b27"; g.beginPath(); g.roundRect(40, cy - rh / 2 + 10, w - 80, rh - 20, 22); g.fill();
     if (on) { g.strokeStyle = "#ffd84d"; g.lineWidth = 8; g.stroke(); }
     g.textAlign = "left"; g.fillStyle = "#7f8a9a"; g.font = "800 50px Inter, Arial, sans-serif"; g.fillText(`#${i + 1}`, 80, cy + 18);
     g.fillStyle = gl === "Chest" ? "#ffd84d" : "#e9edf3"; g.font = "800 62px Inter, Arial, sans-serif"; g.fillText(gl, 230, cy + 22);
-    g.fillStyle = pt === "CB" ? "#ff6a3d" : "#56d1ff"; g.font = "900 74px Inter, Arial, sans-serif"; g.fillText(pt, 760, cy + 26);
+    g.fillStyle = pt === "SL" ? "#ff6a3d" : "#56d1ff"; g.font = "900 74px Inter, Arial, sans-serif"; g.fillText(pt, 760, cy + 26);
   });
   logTex.needsUpdate = true;
 }
@@ -912,7 +912,7 @@ function renderClips(t, s) {
   const tells = s.clips ?? [{ glove: "lo", hold: 0.9 }, { glove: "hi", hold: 0.9 }];
   tells.forEach((tl, i) => {
     const tc = ((t % CLIP_L) + CLIP_L) % CLIP_L, rel = 0.55 + (tl.hold ?? 0.9) + 1.05;
-    setScene(tc, { ab: { pk: i ? "cb" : "fb", rel, swing: false, tell: tl }, streak: 1 });
+    setScene(tc, { ab: { pk: i ? "sl" : "fb", rel, swing: false, tell: tl }, streak: 1 });
     frame(clipCam, v3(-15.5, 5.6, -56.5), v3(0, 4.6, -60.4), 24, 16 / 9);
     tellRing(s.ring && (s.ring === "both" || s.ring === i) ? smooth((tc - 0.6) / 0.3) * (1 - smooth((tc - rel - 0.2) / 0.3)) : 0, clipCam);
     renderer.setRenderTarget(RT[i]); renderer.setScissorTest(false); renderer.setViewport(0, 0, 960, 540); renderer.render(scene, clipCam);

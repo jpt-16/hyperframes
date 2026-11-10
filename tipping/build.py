@@ -1,11 +1,13 @@
-"""'Pitch tipping' (1080x1920, music + effects; the narration is recorded separately).
+"""'Pitch tipping' (1080x1920), cut to the voiceover.
 
-    python3 tools/physics.py        # the fastball, the curveball, the batted ball -> assets/play.json
-    python3 build.py                # index.html + assets/mix.wav (music + effects, mastered low for a voice on top) + CUES.md
+    python3 tools/physics.py                                       # the fastball, the slider, the batted ball -> assets/play.json
+    export HYPERFRAMES_PYTHON=<python with kokoro-onnx, soundfile, onnx>
+    $HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # voiceover + per-word timing
+    python3 build.py                # index.html + assets/mix.wav (+ mix-novo.wav without the voice) + CUES.md
     npx --yes hyperframes@0.8.154 render . -o renders/tipping.mp4 --video-bitrate 16M
 
 One pitcher, batter and catcher throughout. The tells are hypothetical examples for this one pitcher: where his hands
-come set, the glove flaring while he changes grip, how long he holds the set. The scouting room is its own 3D scene; its
+come set, the glove flaring while he changes grip, how long he holds the set, before a fastball and a slider. The scouting room is its own 3D scene; its
 video wall plays two live renders of the same pitcher.
 """
 import json, os, sys, wave
@@ -18,7 +20,15 @@ from audio import SR, make_bed
 
 P = json.load(open(os.path.join(HERE, "assets", "play.json")))
 PI_ = P["pitches"]
-D = 55.6
+TMJ = json.load(open(os.path.join(HERE, "assets", "vo", "timing.json")))
+IDX = {x["id"]: k for k, x in enumerate(TMJ["lines"])}
+LN = lambda lid: TMJ["lines"][IDX[lid]]
+def W(lid, word, end=False, nth=0):
+    hits = [w for w in LN(lid)["words"] if w["w"].strip(".,!?:").lower() == word.lower()]
+    return hits[nth]["t1" if end else "t0"]
+D = TMJ["duration"]
+S = {x["id"]: x["t0"] - 0.08 for x in TMJ["lines"]}
+VBRAND = round(LN("end")["t1"] + 0.25, 3)
 Y, CYAN, WHITE, HOT, MUTED, GREEN, RED = "#FFD84D", "#56D1FF", "#F4F6F8", "#FF6A3D", "#AEB8C6", "#3DD68C", "#FF4D4D"
 D_SWEET = round(2.30 - 0.283, 3)
 TC = lambda pk: PI_[pk]["t_contact"]
@@ -35,51 +45,65 @@ def vt(play):
 TOPP, BOTP = [0, 0, 1080, 960], [0, 960, 1080, 960]
 def ab(pk, rel, tell, hit=None, swing=False): return dict(pk=pk, rel=rel, tell=tell, hit=hit, swing=swing, D=D_SWEET)
 def pset(t_set, **tell): return dict(tell, rel=t_set + 1.05 + 30, hold=30)      # comes set at t_set and stays there
-# 1 the hook: on the mound; the batter looks out; the delivery, frozen before release; into the glove
-H_REL = 3.45
-AH = ab("cb", H_REL, dict(glove="hi", hold=1.0))
-live(0.0, 1.6, "world", ab=AH, c0=[-12.0, 5.2, -57.4], c1=[-11.2, 5.1, -57.8], l=[0.0, 4.6, -60.4], f0=30)
-live(1.6, 2.5, "world", ab=AH, c0=[-3.3, 7.0, 3.2], c1=[-3.3, 6.95, 2.9], l=[0.0, 5.0, -60.4], f0=14)
+# 1 "Have you ever wondered how a hitter can know what pitch is coming…": on the mound; the batter looks out; frozen before release
+H_REL = 3.3
+AH = ab("sl", H_REL, dict(glove="hi", hold=1.0))
+live(0.0, 1.4, "world", ab=AH, c0=[-12.0, 5.2, -57.4], c1=[-11.2, 5.1, -57.8], l=[0.0, 4.6, -60.4], f0=30)
+live(1.4, 2.2, "world", ab=AH, c0=[-3.3, 7.0, 3.2], c1=[-3.3, 6.95, 2.9], l=[0.0, 5.0, -60.4], f0=14)
 FRZ = H_REL - 0.3
-live(2.5, FRZ, "world", ab=AH, c0=[-1.6, 7.0, 9.5], c1=[-1.6, 7.0, 9.3], l=[0.0, 5.0, -58.0], f0=12)
-shot(FRZ, 5.0, "aim", [FRZ, 5.0], [FRZ, FRZ], speed="freeze", ab=AH, ring=[[FRZ + 0.1, 0.0], [FRZ + 0.3, 1.0]], lo="glove", l=[0, 0, 0], c0=[-9.0, 5.4, -46.0], f0=16, f1=7.0)
-# 2 three tells (hypothetical, this pitcher): split top/bottom, the same pitcher before a fastball and a curveball
+live(2.2, FRZ, "world", ab=AH, c0=[-1.6, 7.0, 9.5], c1=[-1.6, 7.0, 9.3], l=[0.0, 5.0, -58.0], f0=12)
+A1 = W("name", "sometimes") + 0.1
+shot(FRZ, A1, "aim", [FRZ, A1], [FRZ, FRZ], speed="freeze", ab=AH, ring=[[FRZ + 0.1, 0.0], [FRZ + 0.3, 1.0]], lo="glove", l=[0, 0, 0], c0=[-9.0, 5.4, -46.0], f0=16, f1=7.0)
+# "…pitchers give away their biggest secret without even realizing it.": the pitch goes on, the pitcher none the wiser
+shot(A1, S["glove"], "world", [A1, S["glove"]], [FRZ, FRZ + (S["glove"] - A1)], ab=AH, ring=[[FRZ, 1.0], [FRZ + 0.6, 0.0]], c0=[-14.0, 5.4, -54.0], c1=[-13.0, 5.3, -53.0], l=[0.0, 4.4, -58.0], f0=30)
+# 2 "…a slightly different glove position, hand movement, or setup…": three tells, top and bottom (hypothetical, this pitcher)
 SIDE = dict(c0=[-11.5, 5.4, -58.4], c1=[-11.0, 5.35, -58.6], l=[0.0, 4.6, -60.4], f0=22)
-E1 = 5.6
-shot(5.0, 9.0, "world", [5.0, 6.4, 9.0], [5.0, 6.4, 6.4], panes=[dict(rect=TOPP, pset=pset(E1, glove="lo")), dict(rect=BOTP, pset=pset(E1, glove="hi"))], ring=[[6.3, 0.0], [6.5, 1.0]], **SIDE)
-E2 = 9.45
+B1 = W("glove", "hand") - 0.1
+E1 = S["glove"] + 0.45; F1 = W("glove", "glove")
+shot(S["glove"], B1, "world", [S["glove"], F1, B1], [S["glove"], F1, F1], panes=[dict(rect=TOPP, pset=pset(E1, glove="lo"), l=[0.0, 5.9, -60.4]), dict(rect=BOTP, pset=pset(E1, glove="hi"))], ring=[[F1 - 0.1, 0.0], [F1 + 0.1, 1.0]], **SIDE)
+E2 = B1 + 0.35; F2 = E2 + 0.55; B2 = S["subtle"] + 0.05
 CLOSEG = dict(c0=[-9.6, 5.9, -58.2], c1=[-9.0, 5.85, -58.4], l=[0.0, 5.3, -60.4], f0=22)
-shot(9.0, 13.0, "world", [9.0, 11.2, 13.0], [9.0, 10.0, 10.0], panes=[dict(rect=TOPP, pset=pset(E2, glove="hi")), dict(rect=BOTP, pset=pset(E2, glove="hi", flare=1))], ring=[[9.95, 0.0], [10.0, 1.0]], **CLOSEG)
-E3 = 13.4
-A3F, A3C = ab("fb", E3 + 1.05 + 0.9, dict(glove="hi", hold=0.9)), ab("cb", E3 + 1.05 + 1.8, dict(glove="hi", hold=1.8))
-live(13.0, 17.0, "world", panes=[dict(rect=TOPP, ab=A3F), dict(rect=BOTP, ab=A3C)], c0=[-19.0, 5.0, -54.5], c1=[-18.4, 5.0, -55.0], l=[0.0, 4.2, -58.6], f0=28)
-# 3 the scouting room: the video wall plays both pitches on a loop
-live(17.0, 19.4, "world", room=1, c0=[6.5, 7.6, 17.5], c1=[5.6, 7.5, 16.0], l=[-1.0, 4.8, -4.0], f0=46)
-live(19.4, 22.0, "world", room=1, ring="both", c0=[-1.6, 7.4, 3.8], c1=[-1.6, 7.4, 3.2], l=[-1.6, 7.4, -5.9], f0=44)
-live(22.0, 24.4, "world", room=1, ring="both", loghl=[22.3, 23.9], c0=[3.55, 7.4, 2.6], c1=[3.55, 7.4, 2.2], l=[3.55, 7.4, -5.9], f0=50)
-live(24.4, 27.0, "world", room=1, ring="both", loghl=[0, 0.01], recog=24.8, cpoint=24.6, c0=[10.0, 6.4, 4.2], c1=[9.2, 6.3, 4.6], l=[-1.5, 4.6, 5.6], f0=44)
-# 4 relaying it: the runner at second reads the catcher's signs and signals the batter; another team's signal from the dugout
-SG = [[27.4, 3], [27.9, 1], [28.4, 2], [28.9, 4], [29.6, 1], [30.2, 2], [30.8, 3]]
-live(27.0, 29.4, "world", runner=1, signs=SG, c0=[-7.3, 7.4, -136.0], c1=[-7.25, 7.3, -135.0], l=[0.0, 2.6, 0.0], f0=22, f1=19)
-live(29.4, 31.6, "aim", runner=1, signs=SG, lens=1, lo="chand", l=[0, 0.25, 0], c0=[-6.3, 5.5, -121.6], f0=2.4, f1=2.1)
-RS = [32.1, 32.9]
-live(31.6, 33.4, "world", runner=1, rsig=RS, c0=[-17.0, 4.6, -113.0], c1=[-16.4, 4.6, -113.6], l=[-6.5, 4.2, -122.5], f0=18)
-live(33.4, 35.0, "world", runner=1, bnod=33.9, c0=[-3.3, 7.0, 3.2], c1=[-3.3, 6.95, 2.9], l=[-6.5, 4.0, -122.5], f0=11)
-CS = 35.5
-live(35.0, 37.3, "obj", o="croot", lo="croot", csig=[CS], c0=[1.4, 5.6, 10.5], c1=[1.2, 5.5, 9.8], l=[0.0, 5.0, 0.0], f0=22)
-live(37.3, 39.0, "world", runner=1, c0=[1.6, 8.4, 12.0], c1=[1.5, 8.2, 11.5], l=[-1.8, 3.0, -3.0], f0=34)
-# 5 the payoff: from the batter's eyes, the tell; the curveball, seen early, barreled; the ball to the outfield
-P_REL = 42.2
-A5 = ab("cb", P_REL, dict(glove="hi", hold=1.1), "ld_cb", True)
-live(39.0, 42.25, "world", ab=A5, ring=[[40.1, 0.0], [40.4, 1.0], [41.1, 1.0], [41.35, 0.0]], streak=1, c0=[-3.9, 5.95, 1.9], c1=[-3.85, 5.95, 1.7], l=[0.0, 5.0, -58.0], f0=13, f1=12)
-SL5 = 0.25
-shot(42.25, 44.65, "world", [42.25, 44.65], [42.25, 42.25 + 2.4 * SL5], speed="slow", ab=A5, ghost=0.018, c0=[2.8, 3.4, -8.6], c1=[2.5, 3.3, -8.0], l=[-1.6, 3.0, -1.6], f0=34)
-shot(44.65, 49.0, "follow", [44.65, 49.0], [42.75, 47.1], ab=A5, streak=1, c0=[-4.8, 4.5, 6.0], c1=[-4.9, 5.2, 6.8], l=[0.0, 3.6, -40.0], f0=32, f1=42, lag=0.5, fw=0.85)
-# 6 the final shot: back up the mound, looking in; the ball in his hand
-live(49.0, 51.8, "world", walkback=[49.0, 51.2], c0=[2.6, 4.4, -44.0], c1=[2.2, 4.5, -45.5], l=[0.4, 5.0, -61.0], f0=24)
+shot(B1, B2, "world", [B1, B1 + 0.55 + 0.45 * 2.0, B2], [B1, F2, F2], panes=[dict(rect=TOPP, pset=pset(E2, glove="hi"), l=[0.0, 6.2, -60.4]), dict(rect=BOTP, pset=pset(E2, glove="hi", flare=1))], ring=[[F2 - 0.05, 0.0], [F2, 1.0]], **CLOSEG)
+# "Sometimes, the difference is even more subtle, like a change in delivery timing…"
+E3 = B2 + 0.2; B3 = W("subtle", "how") - 0.1
+A3F, A3C = ab("fb", E3 + 1.05 + 0.9, dict(glove="hi", hold=0.9)), ab("sl", E3 + 1.05 + 1.8, dict(glove="hi", hold=1.8))
+live(B2, B3, "world", panes=[dict(rect=TOPP, ab=A3F, l=[0.0, 5.4, -58.6]), dict(rect=BOTP, ab=A3C)], c0=[-19.0, 5.0, -54.5], c1=[-18.4, 5.0, -55.0], l=[0.0, 4.2, -58.6], f0=28)
+# "…or how they handle the ball."
 HB = [24.0, 9.0, 28.0]
-live(51.8, 53.8, "world", ballhand=1, bokeh=2.6, close=1, c0=[HB[0] + 0.35, HB[1] + 0.5, HB[2] + 1.55], c1=[HB[0] + 0.25, HB[1] + 0.48, HB[2] + 1.3], l=[HB[0], HB[1] + 0.42, HB[2]], f0=30, roll=2.4)
-VBRAND = 53.8
+BALLCAM = dict(ballhand=1, bokeh=2.6, close=1, c0=[HB[0] + 0.35, HB[1] + 0.5, HB[2] + 1.55], c1=[HB[0] + 0.25, HB[1] + 0.48, HB[2] + 1.3], l=[HB[0], HB[1] + 0.42, HB[2]], f0=30, roll=2.4)
+live(B3, S["but"], "world", **BALLCAM)
+# 3 "But here's where it gets interesting. Teams study video and look for patterns.": the scouting room
+live(S["but"], S["notice"], "world", room=1, c0=[6.5, 7.6, 17.5], c1=[5.6, 7.5, 16.0], l=[-1.0, 4.8, -4.0], f0=46)
+C1 = W("notice", "they", nth=1) - 0.1
+live(S["notice"], C1, "world", room=1, ring="both", c0=[-1.6, 7.4, 3.8], c1=[-1.6, 7.4, 3.2], l=[-1.6, 7.4, -5.9], f0=44)
+LOGHL = [C1 + 0.1, W("notice", "tell") + 0.1]
+live(C1, S["spread"], "world", room=1, ring="both", loghl=LOGHL, c0=[3.55, 7.4, 2.6], c1=[3.55, 7.4, 2.3], l=[3.55, 7.4, -5.9], f0=50)
+live(S["spread"], S["runner"], "world", room=1, ring="both", loghl=[0, 0.01], recog=W("spread", "figure"), cpoint=S["spread"] + 0.1, c0=[10.0, 6.4, 4.2], c1=[9.2, 6.3, 4.6], l=[-1.5, 4.6, 5.6], f0=44)
+# 4 "A runner at second base might recognize the catcher's signs and relay information to the hitter."
+SG = [[S["runner"] + 0.2, 3], [S["runner"] + 0.7, 1], [W("runner", "catcher's") - 0.3, 1], [W("runner", "catcher's") + 0.2, 2], [W("runner", "and") - 0.05, 3]]
+D1 = W("runner", "recognize") - 0.1
+live(S["runner"], D1, "world", runner=1, signs=SG, c0=[-7.3, 7.4, -136.0], c1=[-7.25, 7.3, -135.0], l=[0.0, 2.6, 0.0], f0=22, f1=19)
+D2 = W("runner", "relay") - 0.15
+live(D1, D2, "aim", runner=1, signs=SG, lens=1, lo="chand", l=[0, 0.25, 0], c0=[-6.3, 5.5, -121.6], f0=2.4, f1=2.1)
+D3 = W("runner", "to") - 0.05
+live(D2, D3, "world", runner=1, rsig=[D2 + 0.15, D3 - 0.05], c0=[-17.0, 4.6, -113.0], c1=[-16.4, 4.6, -113.6], l=[-6.5, 4.2, -122.5], f0=18)
+live(D3, S["coach"], "world", runner=1, bnod=W("runner", "hitter"), c0=[-3.3, 7.0, 3.2], c1=[-3.3, 6.95, 2.9], l=[-6.5, 4.0, -122.5], f0=11)
+# "Coaches and teammates can also communicate through prearranged signals."
+live(S["coach"], S["chal"], "obj", o="croot", lo="croot", csig=[W("coach", "communicate") - 0.1], c0=[1.4, 5.6, 10.5], c1=[1.2, 5.5, 9.8], l=[0.0, 5.0, 0.0], f0=22)
+# 5 "The challenge is making sure the pitcher doesn't realize… Because if a hitter knows what's coming…": the batter's eyes; the slider
+P_REL = W("because", "even") + 0.05
+A5 = ab("sl", P_REL, dict(glove="hi", hold=1.1), "ld_sl", True)
+G1 = P_REL + 0.06
+live(S["chal"], G1, "world", ab=A5, ring=[[P_REL - 2.1, 0.0], [P_REL - 1.85, 1.0], [P_REL - 1.2, 1.0], [P_REL - 1.0, 0.0]], streak=1, c0=[-3.9, 5.95, 1.9], c1=[-3.85, 5.95, 1.7], l=[0.0, 5.0, -58.0], f0=13, f1=12)
+SL5 = (TC("sl") - 0.01) / (W("because", "earlier") - G1)          # contact lands on "earlier"
+G2 = W("because", "completely")
+shot(G1, G2, "world", [G1, G2], [P_REL + 0.01, P_REL + 0.01 + (G2 - G1) * SL5], speed="slow", ab=A5, ghost=0.018, c0=[2.8, 3.4, -8.6], c1=[2.5, 3.3, -8.0], l=[-1.6, 3.0, -1.6], f0=34)
+T2 = P_REL + 0.01 + (G2 - G1) * SL5
+G3 = S["same"] + 0.6
+shot(G2, G3, "follow", [G2, G3], [T2, T2 + (G3 - G2)], ab=A5, streak=1, c0=[-4.8, 4.5, 6.0], c1=[-4.9, 5.2, 6.8], l=[0.0, 3.6, -40.0], f0=32, f1=42, lag=0.5, fw=0.85)
+# 6 "…pitchers work so hard to make every pitch look exactly the same.": back up the mound, looking in; the ball in his hand
+live(G3, S["adv"], "world", walkback=[G3, G3 + 2.1], c0=[2.6, 4.4, -44.0], c1=[2.2, 4.5, -45.5], l=[0.4, 5.0, -61.0], f0=24)
+live(S["adv"], VBRAND, "world", **BALLCAM)
 live(VBRAND, D, "world", walkback=[0, 0.1], c0=[2.6, 4.4, -44.0], l=[0.4, 5.0, -61.0], f0=24)
 for x, y in zip(SHOTS, SHOTS[1:]): assert abs(x["b"] - y["a"]) < 1e-3 and x["b"] > x["a"], (x, y)
 CUTS = [x["a"] for x in SHOTS[1:]]
@@ -90,7 +114,7 @@ c.clip("fieldl", 0, D, '<canvas id="field-gl" width="1080" height="1920" data-la
 c.clip("shade", 0, D, '<div class="shade-top"></div><div class="shade-bot"></div>', cls="layer", style="z-index:3")
 c.clip("spdc", 0, D, '<div class="spd" id="spd"></div>', cls="layer", style="z-index:30")
 c.clip("flash", 0, D, '<div class="flash" id="flash"></div>', cls="layer", style="z-index:40")
-for f in [5.0, 9.0, 13.0, 17.0, 27.0, 39.0, 49.0, VBRAND]:
+for f in [S['glove'], S['but'], S['runner'], S['chal'], VBRAND]:
     c.set("#flash", '{"opacity":0.45}', f); c.to("#flash", o(opacity=0, duration=0.14, ease="power2.out"), f + 0.001)
 
 def pop(sel, t, dy=24):
@@ -129,47 +153,53 @@ def tag(tid, t0, t1, text, cls=""):
     c.clip(tid, t0, t1, f'<div class="tagc {cls}" id="{tid}x">{text}</div>', cls="layer", style="z-index:16"); pop(f"#{tid}x", t0, 10)
 
 
-# 1 the hook
-title("t1", 0.1, 4.95, [("What if the hitter", False), ("knew the pitch", False), ("before it was thrown?", True)], 200, "hk2 h3")
-pinl("ph1", FRZ + 0.35, 4.98, "The glove", "glove", "yl sm")
+BAND = 560                                                        # scene titles sit in a band under the captions
+def band(tid, t0, t1, lines): title(tid, t0, t1, lines, BAND, "band")
+
+# 1 the hook (the opening question is this title instead of captions)
+title("t1", 0.1, S["name"] + 0.02, [("What if the hitter", False), ("knew the pitch", False), ("before it was thrown?", True)], 200, "hk2 h3")
+pinl("ph1", FRZ + 0.35, A1 - 0.02, "The glove", "glove", "yl sm")
+band("b0", W("name", "tipping") - 0.03, S["glove"] - 0.02, [("Tipping pitches", True)])
 # 2 three tells (hypothetical examples, one pitcher)
-panesTB("pp", 5.0, 16.98, "Before the fastball", "Before the curveball")
-title("e1", 5.1, 8.98, [("Glove position", True)], 852, "band")
-pinl("pe1a", 6.45, 8.98, "Hands at the belt", "glove", "sm", 0)
-pinl("pe1b", 6.55, 8.98, "Hands at the chest", "glove", "yl sm", 1)
-frz("fz1", 6.4, 8.98)
-title("e2", 9.1, 12.98, [("Hand movement", True)], 852, "band")
-pinl("pe2a", 10.4, 12.98, "Glove stays still", "glove", "sm", 0)
-pinl("pe2b", 10.5, 12.98, "Glove flares as he changes his grip", "glove", "yl sm", 1)
-frz("fz2", 11.2, 12.98)
-title("e3", 13.1, 16.98, [("Delivery timing", True)], 852, "band")
-tbar("tb1", 13.1, 16.98, 760, E3, E3 + 0.9, "0.9 s")
-tbar("tb2", 13.1, 16.98, 1720, E3, E3 + 1.8, "1.8 s", "yl")
-note("n2", 5.3, 12.98, "Hypothetical examples for one pitcher. Real tells vary, and no single move always means one pitch.", 1760)
+panesTB("pp", S["glove"], B3 - 0.02, "Before the fastball", "Before the slider")
+title("e1", W("glove", "glove") - 0.03, B1 - 0.02, [("Glove position", True)], 852, "band")
+pinl("pe1a", F1 + 0.05, B1 - 0.02, "Hands at the belt", "glove", "sm", 0)
+pinl("pe1b", F1 + 0.15, B1 - 0.02, "Hands at the chest", "glove", "yl sm", 1)
+frz("fz1", F1, B1 - 0.02)
+title("e2", W("glove", "hand") - 0.03, B2 - 0.02, [("Hand movement", True)], 852, "band")
+pinl("pe2a", B1 + 0.9, B2 - 0.02, "Glove stays still", "glove", "sm", 0)
+pinl("pe2b", B1 + 1.0, B2 - 0.02, "Glove flares as he changes his grip", "glove", "yl sm", 1)
+frz("fz2", B1 + 1.45, B2 - 0.02)
+title("e3", B2 + 0.05, B3 - 0.02, [("Delivery timing", True)], 852, "band")
+tbar("tb1", B2 + 0.05, B3 - 0.02, 760, E3, E3 + 0.9, "0.9 s")
+tbar("tb2", B2 + 0.05, B3 - 0.02, 1720, E3, E3 + 1.8, "1.8 s", "yl")
+note("n2", S["glove"] + 0.4, B2 - 0.02, "Hypothetical examples for one pitcher. Real tells vary, and no single move always means one pitch.", 1760)
+pinl("pbh", B3 + 0.15, S["but"] - 0.02, "The grip, hidden until the last moment", "ball", "sm")
 # 3 the scouting room
-title("t3a", 17.1, 19.98, [("Study the video", True)], 110)
-title("t3b", 20.05, 26.98, [("Find the pattern", True)], 110)
-pinl("ps1", 19.6, 21.98, "Before the fastball: hands at the belt", "scrA", "sm")
-pinl("ps2", 19.75, 21.98, "Before the curveball: hands at the chest", "scrB", "yl sm")
-pinl("ps3", 22.45, 24.38, "Hands at the chest → curveball, every time in this log", "scrLog", "yl sm")
-pinl("ps4", 24.95, 26.98, "There it is", "rp2", "cy sm")
-note("n3", 24.6, 26.98, "Teams look for a move that <b>repeats</b>, not one clip.", 1700)
+band("t3a", W("study", "study") - 0.03, S["notice"] - 0.02, [("Study the video", True)])
+band("t3b", S["notice"] + 0.03, C1 - 0.02, [("Find the pattern", True)])
+band("t3c", S["spread"] + 0.03, S["runner"] - 0.02, [("Find the pattern", True)])
+pinl("ps1", S["notice"] + 0.3, C1 - 0.02, "Before the fastball: hands at the belt", "scrA", "sm")
+pinl("ps2", W("notice", "slider") - 0.05, C1 - 0.02, "Before the slider: hands at the chest", "scrB", "yl sm")
+pinl("ps3", W("notice", "recognizing") - 0.05, S["spread"] - 0.02, "Hands at the chest → slider, every time in this log", "scrLog", "yl sm")
+pinl("ps4", W("spread", "figure") + 0.1, S["runner"] - 0.02, "There it is", "rp2", "cy sm")
+note("n3", W("spread", "that"), S["runner"] - 0.02, "Teams look for a move that <b>repeats</b>, not one clip.", 1700)
 # 4 relaying it
-title("t4a", 27.1, 31.55, [("Recognize it", True)], 230)
-c.clip("lens", 29.4, 31.58, '<div class="lens"></div><div class="lenstag">Runner’s view</div>', cls="layer", style="z-index:4")
-pinl("pr1", 30.25, 31.58, "Second sign is live: 2 = curveball (this example)", "chand", "yl sm")
-title("t4b", 31.7, 34.98, [("Relay it", True)], 230)
-pinl("pr2", 32.15, 33.38, "Prearranged signal: hand to the helmet", "runner", "yl sm")
-pinl("pr3", 33.95, 34.98, "Got it", "bhead", "cy sm")
-pinl("pr4", 35.4, 37.28, "Another team: a signal from the dugout", "coach", "sm")
-note("n4", 35.6, 37.28, "Every team sets its own signals, and changes them.", 1700)
-title("t4c", 37.4, 38.98, [("Use the advantage", True)], 230)
-note("n4b", 37.45, 38.98, "Reading signs by sight is part of the game. Using electronics to steal them is against MLB rules.", 1700)
+band("t4a", W("runner", "recognize") - 0.03, D2 - 0.02, [("Recognize it", True)])
+c.clip("lens", D1, D2 - 0.02, '<div class="lens"></div><div class="lenstag">Runner’s view</div>', cls="layer", style="z-index:4")
+pinl("pr1", W("runner", "catcher's") + 0.25, D2 - 0.02, "Second sign is live: 2 = slider (this example)", "chand", "yl sm")
+band("t4b", W("runner", "relay") - 0.03, S["coach"] - 0.02, [("Relay it", True)])
+pinl("pr2", D2 + 0.2, D3 - 0.02, "Prearranged signal: hand to the helmet", "runner", "yl sm")
+pinl("pr3", W("runner", "hitter"), S["coach"] - 0.02, "Got it", "bhead", "cy sm")
+pinl("pr4", S["coach"] + 0.3, S["chal"] - 0.02, "Another team: a signal from the dugout", "coach", "sm")
+note("n4", W("coach", "prearranged"), S["chal"] - 0.02, "Every team sets its own signals, and changes them. Using electronics to steal signs is against MLB rules.", 1700)
 # 5 the payoff
-pinl("p5", 40.45, 41.3, "Hands at the chest: curveball coming", "glove", "yl sm")
-title("t5", 44.75, 48.95, [("Knowing the pitch", False), ("changes everything", True)], 230)
-# 6 the final shot
-title("t6", 49.1, VBRAND - 0.02, [("The best pitchers", False), ("don’t give", False), ("anything away.", True)], 230)
+band("t5a", S["chal"] + 0.05, G1 - 0.02, [("Use the advantage", True)])
+pinl("p5", P_REL - 1.8, P_REL - 1.05, "Hands at the chest: slider coming", "glove", "yl sm")
+band("t5b", G2 + 0.03, G3 - 0.02, [("Knowing the pitch", False), ("changes everything", True)])
+# 6 the final shot (the last line is the closing title instead of captions)
+band("t6", W("same", "every") - 0.03, S["end"] - 0.02, [("The best pitchers", False), ("don’t give anything away.", True)])
+title("t7", S["end"] + 0.05, VBRAND - 0.02, [("It’s knowing which", False), ("pitch is coming.", True)], 300)
 c.clip("brand", VBRAND, D, """<div class="brand" id="brx"><div class="bmark"><svg viewBox="0 0 100 100" width="150" height="150"><circle cx="50" cy="50" r="44" fill="#f4f2ec" stroke="#05080d" stroke-width="3"/>
   <path d="M26 16 C40 34 40 66 26 84" fill="none" stroke="#ff6a3d" stroke-width="4" stroke-dasharray="6 5"/><path d="M74 16 C60 34 60 66 74 84" fill="none" stroke="#ff6a3d" stroke-width="4" stroke-dasharray="6 5"/></svg></div>
   <div class="bname"><span>Baseball</span><em>Decoded</em></div></div>""", cls="layer", style="z-index:24")
@@ -177,16 +207,48 @@ c.ft("#brx", o(opacity=0), o(opacity=1, duration=0.2), VBRAND)
 c.ft(".bmark", o(scale=0.4, rotation=-120), o(scale=1, rotation=0, duration=0.5, ease="back.out(1.6)"), VBRAND)
 c.ft(".bname", o(opacity=0, y=30), o(opacity=1, y=0, duration=0.3, ease="power3.out"), VBRAND + 0.15)
 
-# ----------------------------------------------------------------- sound (no voice: room left for the narrator)
+# ----------------------------------------------------------------- captions: the voiceover, word by word
+DISP = {("because", 19): "at-bat.", ("because", 20): ""}
+CAPS = [("name", 0, 3, {2: "acc", 3: "acc"}), ("name", 4, 8, {7: "acc", 8: "acc"}), ("name", 9, 11, {11: "acc"}), ("name", 12, 15, {14: "acc"}),
+        ("glove", 0, 4, {}), ("glove", 5, 8, {7: "acc", 8: "acc"}), ("glove", 9, 12, {9: "acc", 10: "acc", 12: "acc"}), ("glove", 13, 18, {16: "acc"}),
+        ("subtle", 0, 2, {}), ("subtle", 3, 6, {6: "acc"}), ("subtle", 7, 12, {11: "acc", 12: "acc"}), ("subtle", 13, 18, {16: "acc", 18: "acc"}),
+        ("but", 0, 5, {5: "acc"}),
+        ("study", 0, 2, {1: "acc", 2: "acc"}), ("study", 3, 6, {6: "acc"}),
+        ("notice", 0, 5, {5: "acc"}), ("notice", 6, 8, {8: "acc"}), ("notice", 9, 12, {12: "acc"}), ("notice", 13, 16, {16: "acc"}), ("notice", 17, 22, {22: "acc"}),
+        ("spread", 0, 5, {3: "acc", 5: "acc"}), ("spread", 6, 9, {9: "acc"}), ("spread", 10, 12, {12: "acc"}),
+        ("runner", 0, 4, {1: "acc", 3: "acc", 4: "acc"}), ("runner", 5, 9, {6: "acc", 9: "acc"}), ("runner", 10, 15, {11: "acc"}),
+        ("coach", 0, 2, {}), ("coach", 3, 6, {5: "acc"}), ("coach", 7, 8, {7: "acc", 8: "acc"}),
+        ("chal", 0, 4, {1: "acc"}), ("chal", 5, 8, {8: "acc"}), ("chal", 9, 12, {11: "acc", 12: "acc"}),
+        ("because", 0, 6, {4: "acc", 6: "acc"}), ("because", 7, 13, {9: "acc", 13: "acc"}), ("because", 14, 20, {16: "acc", 17: "acc"}),
+        ("same", 0, 6, {6: "acc"}), ("same", 7, 10, {9: "acc", 10: "acc"}), ("same", 11, 14, {12: "acc", 14: "acc"}),
+        ("adv", 0, 1, {}), ("adv", 2, 5, {5: "acc"}), ("adv", 6, 10, {9: "acc", 10: "acc"})]
+for k, (lid, i0, i1, acc) in enumerate(CAPS):
+    ln = LN(lid); wd = ln["words"]; i1 = min(i1, len(wd) - 1)
+    start = wd[i0]["t0"] - 0.06
+    if k + 1 < len(CAPS) and CAPS[k + 1][0] == lid: end = wd[CAPS[k + 1][1]]["t0"] - 0.06
+    elif IDX[lid] + 1 < len(TMJ["lines"]): end = min(ln["t1"] + 0.35, TMJ["lines"][IDX[lid] + 1]["t0"] - 0.1)
+    else: end = min(ln["t1"] + 0.3, VBRAND - 0.02)
+    cid = f"cap{k}"; sp = []
+    for n in range(i0, i1 + 1):
+        w = DISP.get((lid, n), wd[n]["w"])
+        if not w: continue
+        w = w.rstrip(",:") if n == i1 and i1 > i0 else w
+        w = w.replace("'", "’")
+        sp.append(f'<span class="cw{(" " + acc[n]) if n in acc else ""}" id="{cid}w{n - i0}">{esc(w)}</span>')
+    c.clip(cid, start, end, f'<div class="cap" style="top:300px"><span class="cl">{" ".join(sp)}</span></div>', cls="layer", style="z-index:20")
+    for n in range(i0, i1 + 1):
+        if DISP.get((lid, n), wd[n]["w"]): c.ft(f"#{cid}w{n - i0}", o(opacity=0, y=34, filter="blur(10px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.15, ease="power3.out"), wd[n]["t0"] - 0.04)
+
+# ----------------------------------------------------------------- sound
 def cue(n, t, db=0.0):
     if t is not None and 0 <= t < D: c.cue(n, t, db)
 for t_ in CUTS: cue("whoosh", t_, -13)
 cue("riser-s", 0.0, -8)
-for tt in [0.1, FRZ, 5.1, 9.1, 13.1, 17.1, 20.05, 27.1, 31.7, 37.4, 44.75, 49.1]: cue("impact", tt, -6)
+for tt in [0.1, FRZ, W("glove", "glove"), W("glove", "hand"), B2 + 0.05, W("study", "study"), C1, W("runner", "recognize"), W("runner", "relay"), S["chal"] + 0.05, G2, W("same", "every"), S["end"] + 0.05]: cue("impact", tt - 0.03, -6)
 for t_, n in SG: cue("tick", t_, -16)
-for a_ in [A3F, A3C, A5]: cue("whoosh", vt(a_["rel"]), -8)
-for a_ in [A3F, A3C]: cue("glove", vt(a_["rel"] + PI_[a_["pk"]]["flight"]), -2)
-CRACKS = [(vt(P_REL + TC("cb")), True)]
+for a_ in [AH, A3F, A3C, A5]: cue("whoosh", vt(a_["rel"]), -8)
+for a_ in [AH, A3F, A3C]: cue("glove", vt(a_["rel"] + PI_[a_["pk"]]["flight"]), -2)
+CRACKS = [(vt(P_REL + TC("sl")), True)]
 cue("riser-m", VBRAND - 1.0, -10); cue("impact", VBRAND, -4)
 LEVEL = {"impact": -3.0, "whoosh": -6.0, "glove": -1.0, "tick": -6.0, "popup": -8.0, "riser-m": -7.0, "riser-s": -7.0, "tap": -3.0}
 def crack(rng, slow=False):
@@ -215,13 +277,20 @@ def mixdown():
     bedp = os.path.join(HERE, "assets", "bed.wav"); make_bed(bedp, D, VBRAND, style="pulse", seed=171)
     bed = read(bedp)[:n]; bed = np.pad(bed, ((0, n - len(bed)), (0, 0)))
     ramp = np.clip(np.arange(n) / SR / 3.0, 0.5, 1.0)[:, None]
-    full = (fx + bed * ramp * 10 ** (-16 / 20)) * 10 ** (-6 / 20)
+    vo = read(os.path.join(HERE, "assets", "vo", "vo.wav"))[:n]; vo = np.pad(vo, ((0, n - len(vo)), (0, 0)))
+    env = np.convolve(np.abs(vo).mean(1), np.ones(int(0.12 * SR)) / int(0.12 * SR), "same")
+    duck = 10 ** (-7 * np.clip(env / 0.05, 0, 1) / 20)
+    duck = np.convolve(duck, np.ones(int(0.08 * SR)) / int(0.08 * SR), "same")
+    music = bed * ramp * duck[:, None] * 10 ** (-17 / 20)
+    full = (fx + music) * 10 ** (-6 / 20) + vo
     def wav(path, x):
         w = wave.open(path, "wb"); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
         w.writeframes((np.clip(x * 0.5, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
-    pre = os.path.join(HERE, ".pre.wav"); wav(pre, full)
-    m = master(pre, os.path.join(HERE, "assets", "mix.wav"), target=-20.0)
-    os.remove(pre)
+    pre, pfx = os.path.join(HERE, ".pre.wav"), os.path.join(HERE, ".fx.wav")
+    wav(pre, full); wav(pfx, (fx + bed * ramp * 10 ** (-17 / 20)) * 10 ** (-6 / 20))
+    m = master(pre, os.path.join(HERE, "assets", "mix.wav"))
+    master(pre, os.path.join(HERE, "assets", "mix-novo.wav"), fx_path=pfx)
+    os.remove(pre); os.remove(pfx)
     return m
 
 # ----------------------------------------------------------------- CSS
@@ -393,7 +462,7 @@ CSS += f"""
 """
 
 CSS += f"""
-.ttl.hk2 {{ font-size:112px; }} .ttl.big2 {{ font-size:124px; }} .ttl.h3 {{ font-size:104px; }}
+.ttl.hk2 {{ font-size:112px; }} .ttl.band {{ font-size:88px; padding:18px 30px 22px; }} .ttl.big2 {{ font-size:124px; }} .ttl.h3 {{ font-size:104px; }}
 .frz {{ position:absolute; right:44px; top:150px; padding:8px 16px; border-radius:8px; background:rgba(6,10,18,.8); {MONO} font-size:22px; letter-spacing:.14em; color:{CYAN}; }}
 .frz::before {{ content:"❚❚ "; }}
 .tbar {{ position:absolute; left:48px; width:520px; display:grid; grid-template-columns:1fr auto; gap:6px 14px; align-items:center; padding:12px 18px; border-radius:14px; background:rgba(6,10,18,.88); }}
@@ -414,23 +483,14 @@ CSS += f"""
 """
 
 HEAD = '<script type="importmap">{"imports":{"three":"./assets/vendor/three.module.min.js"}}</script>'
-SCENES = [("0.0", "5.0", "On the mound, he looks in and comes set; the batter looks out; the delivery, frozen before release; the camera pushes into his glove", "WHAT IF THE HITTER KNEW THE PITCH BEFORE IT WAS THROWN?"),
-          ("5.0", "9.0", "Example 1, split top/bottom: where his hands come set before a fastball (belt) and a curveball (chest); freeze", "GLOVE POSITION"),
-          ("9.0", "13.0", "Example 2: close on the glove at the set; before the curveball it flares while he changes his grip; freeze", "HAND MOVEMENT"),
-          ("13.0", "17.0", "Example 3: how long he holds the set: 0.9 s before the fastball, 1.8 s before the curveball (timer bars)", "DELIVERY TIMING"),
-          ("17.0", "27.0", "The scouting room: a coach and two hitters; the video wall plays both pitches; the pitch log lights up the pattern; a hitter points it out", "STUDY THE VIDEO (17.1) · FIND THE PATTERN (20.1)"),
-          ("27.0", "39.0", "Runner at second reads the catcher's signs (runner's view 29.4); hand to the helmet (32.1); the batter gets it (33.9); another team's coach signals from the dugout (35.5)", "RECOGNIZE IT (27.1) · RELAY IT (31.7) · USE THE ADVANTAGE (37.4)"),
-          ("39.0", "49.0", "From the batter's eyes: the tell; the curveball, barreled in slow motion (contact 43.9); the line drive into left-center", "KNOWING THE PITCH CHANGES EVERYTHING (from 44.8)"),
-          ("49.0", "53.8", "Back up the mound, looking in; the ball in his hand, close", "THE BEST PITCHERS DON'T GIVE ANYTHING AWAY."),
-          ("53.8", f"{D:.1f}", "End card", "BASEBALL DECODED")]
 if __name__ == "__main__":
     cc = {"duration": D, "shots": {"list": SHOTS}, "pins": PINS}
     h = c.page(CSS, "Pitch tipping", script=True).replace('<script src="assets/gsap.min.js"></script>',
         '<script src="assets/vendor/gsap.min.js"></script>\n    ' + HEAD + f'\n    <script>window.__CC = {json.dumps(cc)}; window.__PLAY = {json.dumps(P)};</script>')
     h = h.replace("</body>", '  <script type="module" src="./assets/field.js"></script>\n  </body>')
     open(os.path.join(HERE, "index.html"), "w").write(h)
-    lines = ["# Scene timing for the voiceover", "", f"The video is {D:.1f} s. Record each part of the narration inside its scene (times in seconds).", "",
-             "| From | To | Scene | On screen |", "|---|---|---|---|"] + [f"| {a} | {b} | {d} | {t} |" for a, b, d, t in SCENES]
+    lines = ["# Voiceover cue sheet", "", f"When each line starts, to land on its shots (the video is {D:.1f} s). Record your own read over assets/mix-novo.wav to these times.", "",
+             "| Line | Starts |", "|---|---|"] + [f"| {x['text']} | {x['t0']:.1f} s |" for x in TMJ["lines"]]
     open(os.path.join(HERE, "CUES.md"), "w").write("\n".join(lines) + "\n")
     if "--nomix" not in sys.argv:
         m = mixdown(); print(f"index.html: {D}s, {len(SHOTS)} shots; {len(c.cues)} sounds; {m['lufs']} LUFS / {m['true_peak']} dBTP")

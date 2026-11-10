@@ -81,10 +81,10 @@ def samples(T, P, hz=HZ):
 
 PITCHES = {   # mph, rpm, spin efficiency, lift direction, target (x, y) at the front of the plate, contact depth z
     "fb": (94, 2300, 0.9, (-0.2, 1, 0), (0.2, 2.8), PLATE_FRONT - 1.3),      # the fastball in the examples and the scouting clips
-    "cb": (79, 2600, 0.85, (0.35, -1, 0), (-0.1, 2.0), PLATE_FRONT - 1.6),    # the curveball: the payoff (and the clips)
+    "sl": (86, 2500, 0.55, (1, -0.35, 0), (0.35, 2.2), PLATE_FRONT - 1.2),    # the slider: sweeps away from a right-handed hitter (the clips and the payoff)
 }
 HITS = {   # pitch, exit mph, launch angle, spray angle, seconds of flight to keep
-    "ld_cb": ("cb", 101, 15, -18, 4.0),        # sat on the curveball: a line drive into left-center
+    "ld_sl": ("sl", 101, 15, 8, 4.0),          # sat on the slider: a line drive into right-center
 }
 if __name__ == "__main__":
     out = {"pitches": {}, "hits": {}, "release": RELEASE.tolist(), "plate_front": PLATE_FRONT,

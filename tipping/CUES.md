@@ -1,15 +1,21 @@
-# Scene timing for the voiceover
+# Voiceover cue sheet
 
-The video is 55.6 s. Record each part of the narration inside its scene (times in seconds).
+When each line starts, to land on its shots (the video is 52.5 s). Record your own read over assets/mix-novo.wav to these times.
 
-| From | To | Scene | On screen |
-|---|---|---|---|
-| 0.0 | 5.0 | On the mound, he looks in and comes set; the batter looks out; the delivery, frozen before release; the camera pushes into his glove | WHAT IF THE HITTER KNEW THE PITCH BEFORE IT WAS THROWN? |
-| 5.0 | 9.0 | Example 1, split top/bottom: where his hands come set before a fastball (belt) and a curveball (chest); freeze | GLOVE POSITION |
-| 9.0 | 13.0 | Example 2: close on the glove at the set; before the curveball it flares while he changes his grip; freeze | HAND MOVEMENT |
-| 13.0 | 17.0 | Example 3: how long he holds the set: 0.9 s before the fastball, 1.8 s before the curveball (timer bars) | DELIVERY TIMING |
-| 17.0 | 27.0 | The scouting room: a coach and two hitters; the video wall plays both pitches; the pitch log lights up the pattern; a hitter points it out | STUDY THE VIDEO (17.1) · FIND THE PATTERN (20.1) |
-| 27.0 | 39.0 | Runner at second reads the catcher's signs (runner's view 29.4); hand to the helmet (32.1); the batter gets it (33.9); another team's coach signals from the dugout (35.5) | RECOGNIZE IT (27.1) · RELAY IT (31.7) · USE THE ADVANTAGE (37.4) |
-| 39.0 | 49.0 | From the batter's eyes: the tell; the curveball, barreled in slow motion (contact 43.9); the line drive into left-center | KNOWING THE PITCH CHANGES EVERYTHING (from 44.8) |
-| 49.0 | 53.8 | Back up the mound, looking in; the ball in his hand, close | THE BEST PITCHERS DON'T GIVE ANYTHING AWAY. |
-| 53.8 | 55.6 | End card | BASEBALL DECODED |
+| Line | Starts |
+|---|---|
+| Have you ever wondered how a hitter can know what pitch is coming before the pitcher even throws it? | 0.2 s |
+| It’s called tipping pitches, and sometimes pitchers give away their biggest secret without even realizing it. | 3.8 s |
+| A pitcher might use a slightly different glove position, hand movement, or setup depending on which pitch they’re throwing. | 8.2 s |
+| Sometimes, the difference is even more subtle, like a change in delivery timing or how they handle the ball. | 13.0 s |
+| But here’s where it gets interesting. | 17.7 s |
+| Teams study video and look for patterns. | 19.1 s |
+| If they notice the pitcher consistently doing something different before throwing a slider compared to a fastball, they can start recognizing the tell. | 20.8 s |
+| And once they figure it out, that information can spread throughout the team. | 26.4 s |
+| A runner at second base might recognize the catcher’s signs and relay information to the hitter. | 29.4 s |
+| Coaches and teammates can also communicate through prearranged signals. | 33.1 s |
+| The challenge is making sure the pitcher doesn’t realize they’ve been figured out. | 36.2 s |
+| Because if a hitter knows what’s coming, even a fraction of a second earlier, it can completely change the at-bat. | 39.1 s |
+| And that’s why pitchers work so hard to make every pitch look exactly the same. | 43.6 s |
+| In baseball, sometimes the biggest advantage isn’t having a better pitch. | 46.6 s |
+| It’s knowing which pitch is coming. | 49.5 s |

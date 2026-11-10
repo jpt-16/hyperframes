@@ -1,0 +1,1202 @@
+[
+ {
+  "i": 0,
+  "id": "q",
+  "text": "Have you ever wondered how a hitter can know what pitch is coming before the pitcher even throws it?",
+  "spoken": "Have you ever wondered how a hitter can know what pitch is coming before the pitcher even throws it?",
+  "dur": 3.307,
+  "words": [
+   {
+    "w": "Have",
+    "start": 0.0,
+    "end": 0.073
+   },
+   {
+    "w": "you",
+    "start": 0.098,
+    "end": 0.173
+   },
+   {
+    "w": "ever",
+    "start": 0.248,
+    "end": 0.373
+   },
+   {
+    "w": "wondered",
+    "start": 0.423,
+    "end": 0.773
+   },
+   {
+    "w": "how",
+    "start": 0.823,
+    "end": 0.973
+   },
+   {
+    "w": "a",
+    "start": 0.973,
+    "end": 0.973
+   },
+   {
+    "w": "hitter",
+    "start": 1.023,
+    "end": 1.198
+   },
+   {
+    "w": "can",
+    "start": 1.223,
+    "end": 1.298
+   },
+   {
+    "w": "know",
+    "start": 1.348,
+    "end": 1.523
+   },
+   {
+    "w": "what",
+    "start": 1.548,
+    "end": 1.623
+   },
+   {
+    "w": "pitch",
+    "start": 1.673,
+    "end": 1.798
+   },
+   {
+    "w": "is",
+    "start": 1.823,
+    "end": 1.873
+   },
+   {
+    "w": "coming",
+    "start": 1.923,
+    "end": 2.098
+   },
+   {
+    "w": "before",
+    "start": 2.123,
+    "end": 2.323
+   },
+   {
+    "w": "the",
+    "start": 2.348,
+    "end": 2.398
+   },
+   {
+    "w": "pitcher",
+    "start": 2.448,
+    "end": 2.723
+   },
+   {
+    "w": "even",
+    "start": 2.773,
+    "end": 2.898
+   },
+   {
+    "w": "throws",
+    "start": 2.948,
+    "end": 3.198
+   },
+   {
+    "w": "it?",
+    "start": 3.223,
+    "end": 3.307
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "name",
+  "text": "It\u2019s called tipping pitches, and sometimes pitchers give away their biggest secret without even realizing it.",
+  "spoken": "It's called tipping pitches, and sometimes pitchers give away their biggest secret without even realizing it.",
+  "dur": 4.117,
+  "words": [
+   {
+    "w": "It's",
+    "start": 0.019,
+    "end": 0.094
+   },
+   {
+    "w": "called",
+    "start": 0.119,
+    "end": 0.269
+   },
+   {
+    "w": "tipping",
+    "start": 0.319,
+    "end": 0.494
+   },
+   {
+    "w": "pitches,",
+    "start": 0.519,
+    "end": 1.019
+   },
+   {
+    "w": "and",
+    "start": 1.119,
+    "end": 1.194
+   },
+   {
+    "w": "sometimes",
+    "start": 1.244,
+    "end": 1.569
+   },
+   {
+    "w": "pitchers",
+    "start": 1.619,
+    "end": 1.869
+   },
+   {
+    "w": "give",
+    "start": 1.894,
+    "end": 1.994
+   },
+   {
+    "w": "away",
+    "start": 2.019,
+    "end": 2.219
+   },
+   {
+    "w": "their",
+    "start": 2.244,
+    "end": 2.319
+   },
+   {
+    "w": "biggest",
+    "start": 2.369,
+    "end": 2.569
+   },
+   {
+    "w": "secret",
+    "start": 2.619,
+    "end": 3.044
+   },
+   {
+    "w": "without",
+    "start": 3.094,
+    "end": 3.294
+   },
+   {
+    "w": "even",
+    "start": 3.344,
+    "end": 3.469
+   },
+   {
+    "w": "realizing",
+    "start": 3.519,
+    "end": 3.944
+   },
+   {
+    "w": "it.",
+    "start": 3.969,
+    "end": 4.117
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "glove",
+  "text": "A pitcher might use a slightly different glove position, hand movement, or setup depending on which pitch they\u2019re throwing.",
+  "spoken": "A pitcher might use a slightly different glove position, hand movement, or setup depending on which pitch they're throwing.",
+  "dur": 4.672,
+  "words": [
+   {
+    "w": "A",
+    "start": 0.0,
+    "end": 0.023
+   },
+   {
+    "w": "pitcher",
+    "start": 0.073,
+    "end": 0.298
+   },
+   {
+    "w": "might",
+    "start": 0.323,
+    "end": 0.448
+   },
+   {
+    "w": "use",
+    "start": 0.498,
+    "end": 0.698
+   },
+   {
+    "w": "a",
+    "start": 0.698,
+    "end": 0.698
+   },
+   {
+    "w": "slightly",
+    "start": 0.773,
+    "end": 1.023
+   },
+   {
+    "w": "different",
+    "start": 1.073,
+    "end": 1.298
+   },
+   {
+    "w": "glove",
+    "start": 1.348,
+    "end": 1.473
+   },
+   {
+    "w": "position,",
+    "start": 1.498,
+    "end": 1.998
+   },
+   {
+    "w": "hand",
+    "start": 2.098,
+    "end": 2.298
+   },
+   {
+    "w": "movement,",
+    "start": 2.323,
+    "end": 2.698
+   },
+   {
+    "w": "or",
+    "start": 2.773,
+    "end": 2.873
+   },
+   {
+    "w": "setup",
+    "start": 2.948,
+    "end": 3.348
+   },
+   {
+    "w": "depending",
+    "start": 3.423,
+    "end": 3.698
+   },
+   {
+    "w": "on",
+    "start": 3.748,
+    "end": 3.798
+   },
+   {
+    "w": "which",
+    "start": 3.823,
+    "end": 3.948
+   },
+   {
+    "w": "pitch",
+    "start": 3.998,
+    "end": 4.123
+   },
+   {
+    "w": "they're",
+    "start": 4.148,
+    "end": 4.248
+   },
+   {
+    "w": "throwing.",
+    "start": 4.298,
+    "end": 4.672
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "subtle",
+  "text": "Sometimes, the difference is even more subtle, like a change in delivery timing or how they handle the ball.",
+  "spoken": "Sometimes, the difference is even more subtle, like a change in delivery timing or how they handle the ball.",
+  "dur": 4.544,
+  "words": [
+   {
+    "w": "Sometimes,",
+    "start": 0.065,
+    "end": 0.465
+   },
+   {
+    "w": "the",
+    "start": 0.515,
+    "end": 0.565
+   },
+   {
+    "w": "difference",
+    "start": 0.615,
+    "end": 0.865
+   },
+   {
+    "w": "is",
+    "start": 0.89,
+    "end": 0.94
+   },
+   {
+    "w": "even",
+    "start": 1.015,
+    "end": 1.14
+   },
+   {
+    "w": "more",
+    "start": 1.165,
+    "end": 1.29
+   },
+   {
+    "w": "subtle,",
+    "start": 1.365,
+    "end": 1.79
+   },
+   {
+    "w": "like",
+    "start": 1.865,
+    "end": 2.04
+   },
+   {
+    "w": "a",
+    "start": 2.04,
+    "end": 2.04
+   },
+   {
+    "w": "change",
+    "start": 2.09,
+    "end": 2.415
+   },
+   {
+    "w": "in",
+    "start": 2.44,
+    "end": 2.49
+   },
+   {
+    "w": "delivery",
+    "start": 2.515,
+    "end": 2.79
+   },
+   {
+    "w": "timing",
+    "start": 2.84,
+    "end": 3.29
+   },
+   {
+    "w": "or",
+    "start": 3.34,
+    "end": 3.54
+   },
+   {
+    "w": "how",
+    "start": 3.59,
+    "end": 3.715
+   },
+   {
+    "w": "they",
+    "start": 3.74,
+    "end": 3.815
+   },
+   {
+    "w": "handle",
+    "start": 3.865,
+    "end": 4.065
+   },
+   {
+    "w": "the",
+    "start": 4.09,
+    "end": 4.14
+   },
+   {
+    "w": "ball.",
+    "start": 4.19,
+    "end": 4.544
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "but",
+  "text": "But here\u2019s where it gets interesting.",
+  "spoken": "But here's where it gets interesting.",
+  "dur": 1.387,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.037,
+    "end": 0.137
+   },
+   {
+    "w": "here's",
+    "start": 0.187,
+    "end": 0.412
+   },
+   {
+    "w": "where",
+    "start": 0.437,
+    "end": 0.537
+   },
+   {
+    "w": "it",
+    "start": 0.562,
+    "end": 0.612
+   },
+   {
+    "w": "gets",
+    "start": 0.637,
+    "end": 0.762
+   },
+   {
+    "w": "interesting.",
+    "start": 0.837,
+    "end": 1.387
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "study",
+  "text": "Teams study video and look for patterns.",
+  "spoken": "Teams study video and look for patterns.",
+  "dur": 1.621,
+  "words": [
+   {
+    "w": "Teams",
+    "start": 0.04,
+    "end": 0.215
+   },
+   {
+    "w": "study",
+    "start": 0.24,
+    "end": 0.39
+   },
+   {
+    "w": "video",
+    "start": 0.415,
+    "end": 0.69
+   },
+   {
+    "w": "and",
+    "start": 0.715,
+    "end": 0.79
+   },
+   {
+    "w": "look",
+    "start": 0.815,
+    "end": 0.915
+   },
+   {
+    "w": "for",
+    "start": 0.94,
+    "end": 1.04
+   },
+   {
+    "w": "patterns.",
+    "start": 1.065,
+    "end": 1.621
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "notice",
+  "text": "If they notice the pitcher consistently doing something different before throwing a slider compared to a fastball, they can start recognizing the tell.",
+  "spoken": "If they notice the pitcher consistently doing something different before throwing a slider compared to a fastball, they can start recognizing the tell.",
+  "dur": 5.397,
+  "words": [
+   {
+    "w": "If",
+    "start": 0.044,
+    "end": 0.094
+   },
+   {
+    "w": "they",
+    "start": 0.119,
+    "end": 0.194
+   },
+   {
+    "w": "notice",
+    "start": 0.244,
+    "end": 0.419
+   },
+   {
+    "w": "the",
+    "start": 0.444,
+    "end": 0.494
+   },
+   {
+    "w": "pitcher",
+    "start": 0.544,
+    "end": 0.819
+   },
+   {
+    "w": "consistently",
+    "start": 0.869,
+    "end": 1.319
+   },
+   {
+    "w": "doing",
+    "start": 1.369,
+    "end": 1.544
+   },
+   {
+    "w": "something",
+    "start": 1.594,
+    "end": 1.794
+   },
+   {
+    "w": "different",
+    "start": 1.844,
+    "end": 2.094
+   },
+   {
+    "w": "before",
+    "start": 2.119,
+    "end": 2.344
+   },
+   {
+    "w": "throwing",
+    "start": 2.419,
+    "end": 2.694
+   },
+   {
+    "w": "a",
+    "start": 2.694,
+    "end": 2.694
+   },
+   {
+    "w": "slider",
+    "start": 2.769,
+    "end": 3.019
+   },
+   {
+    "w": "compared",
+    "start": 3.044,
+    "end": 3.269
+   },
+   {
+    "w": "to",
+    "start": 3.294,
+    "end": 3.394
+   },
+   {
+    "w": "a",
+    "start": 3.394,
+    "end": 3.394
+   },
+   {
+    "w": "fastball,",
+    "start": 3.444,
+    "end": 4.094
+   },
+   {
+    "w": "they",
+    "start": 4.169,
+    "end": 4.244
+   },
+   {
+    "w": "can",
+    "start": 4.269,
+    "end": 4.344
+   },
+   {
+    "w": "start",
+    "start": 4.369,
+    "end": 4.544
+   },
+   {
+    "w": "recognizing",
+    "start": 4.594,
+    "end": 4.994
+   },
+   {
+    "w": "the",
+    "start": 5.019,
+    "end": 5.069
+   },
+   {
+    "w": "tell.",
+    "start": 5.119,
+    "end": 5.397
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "spread",
+  "text": "And once they figure it out, that information can spread throughout the team.",
+  "spoken": "And once they figure it out, that information can spread throughout the team.",
+  "dur": 2.752,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.019,
+    "end": 0.094
+   },
+   {
+    "w": "once",
+    "start": 0.119,
+    "end": 0.244
+   },
+   {
+    "w": "they",
+    "start": 0.269,
+    "end": 0.344
+   },
+   {
+    "w": "figure",
+    "start": 0.394,
+    "end": 0.569
+   },
+   {
+    "w": "it",
+    "start": 0.594,
+    "end": 0.644
+   },
+   {
+    "w": "out,",
+    "start": 0.719,
+    "end": 1.019
+   },
+   {
+    "w": "that",
+    "start": 1.094,
+    "end": 1.169
+   },
+   {
+    "w": "information",
+    "start": 1.219,
+    "end": 1.619
+   },
+   {
+    "w": "can",
+    "start": 1.644,
+    "end": 1.719
+   },
+   {
+    "w": "spread",
+    "start": 1.769,
+    "end": 1.969
+   },
+   {
+    "w": "throughout",
+    "start": 2.019,
+    "end": 2.219
+   },
+   {
+    "w": "the",
+    "start": 2.244,
+    "end": 2.294
+   },
+   {
+    "w": "team.",
+    "start": 2.344,
+    "end": 2.752
+   }
+  ]
+ },
+ {
+  "i": 8,
+  "id": "runner",
+  "text": "A runner at second base might recognize the catcher\u2019s signs and relay information to the hitter.",
+  "spoken": "A runner at second base might recognize the catcher's signs and relay information to the hitter.",
+  "dur": 3.691,
+  "words": [
+   {
+    "w": "A",
+    "start": 0.023,
+    "end": 0.073
+   },
+   {
+    "w": "runner",
+    "start": 0.123,
+    "end": 0.273
+   },
+   {
+    "w": "at",
+    "start": 0.298,
+    "end": 0.348
+   },
+   {
+    "w": "second",
+    "start": 0.398,
+    "end": 0.573
+   },
+   {
+    "w": "base",
+    "start": 0.598,
+    "end": 0.898
+   },
+   {
+    "w": "might",
+    "start": 0.948,
+    "end": 1.073
+   },
+   {
+    "w": "recognize",
+    "start": 1.123,
+    "end": 1.473
+   },
+   {
+    "w": "the",
+    "start": 1.498,
+    "end": 1.548
+   },
+   {
+    "w": "catcher's",
+    "start": 1.598,
+    "end": 1.873
+   },
+   {
+    "w": "signs",
+    "start": 1.923,
+    "end": 2.423
+   },
+   {
+    "w": "and",
+    "start": 2.498,
+    "end": 2.573
+   },
+   {
+    "w": "relay",
+    "start": 2.623,
+    "end": 2.798
+   },
+   {
+    "w": "information",
+    "start": 2.848,
+    "end": 3.223
+   },
+   {
+    "w": "to",
+    "start": 3.248,
+    "end": 3.298
+   },
+   {
+    "w": "the",
+    "start": 3.323,
+    "end": 3.373
+   },
+   {
+    "w": "hitter.",
+    "start": 3.423,
+    "end": 3.691
+   }
+  ]
+ },
+ {
+  "i": 9,
+  "id": "coach",
+  "text": "Coaches and teammates can also communicate through prearranged signals.",
+  "spoken": "Coaches and teammates can also communicate through prearranged signals.",
+  "dur": 2.731,
+  "words": [
+   {
+    "w": "Coaches",
+    "start": 0.062,
+    "end": 0.387
+   },
+   {
+    "w": "and",
+    "start": 0.412,
+    "end": 0.487
+   },
+   {
+    "w": "teammates",
+    "start": 0.537,
+    "end": 1.012
+   },
+   {
+    "w": "can",
+    "start": 1.062,
+    "end": 1.137
+   },
+   {
+    "w": "also",
+    "start": 1.212,
+    "end": 1.412
+   },
+   {
+    "w": "communicate",
+    "start": 1.437,
+    "end": 1.812
+   },
+   {
+    "w": "through",
+    "start": 1.862,
+    "end": 1.962
+   },
+   {
+    "w": "prearranged",
+    "start": 2.012,
+    "end": 2.387
+   },
+   {
+    "w": "signals.",
+    "start": 2.437,
+    "end": 2.731
+   }
+  ]
+ },
+ {
+  "i": 10,
+  "id": "chal",
+  "text": "The challenge is making sure the pitcher doesn\u2019t realize they\u2019ve been figured out.",
+  "spoken": "The challenge is making sure the pitcher doesn't realize they've been figured out.",
+  "dur": 2.773,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.04,
+    "end": 0.09
+   },
+   {
+    "w": "challenge",
+    "start": 0.14,
+    "end": 0.44
+   },
+   {
+    "w": "is",
+    "start": 0.465,
+    "end": 0.515
+   },
+   {
+    "w": "making",
+    "start": 0.54,
+    "end": 0.74
+   },
+   {
+    "w": "sure",
+    "start": 0.79,
+    "end": 0.89
+   },
+   {
+    "w": "the",
+    "start": 0.915,
+    "end": 0.965
+   },
+   {
+    "w": "pitcher",
+    "start": 1.015,
+    "end": 1.265
+   },
+   {
+    "w": "doesn't",
+    "start": 1.315,
+    "end": 1.49
+   },
+   {
+    "w": "realize",
+    "start": 1.54,
+    "end": 1.965
+   },
+   {
+    "w": "they've",
+    "start": 1.99,
+    "end": 2.09
+   },
+   {
+    "w": "been",
+    "start": 2.115,
+    "end": 2.215
+   },
+   {
+    "w": "figured",
+    "start": 2.265,
+    "end": 2.44
+   },
+   {
+    "w": "out.",
+    "start": 2.515,
+    "end": 2.773
+   }
+  ]
+ },
+ {
+  "i": 11,
+  "id": "because",
+  "text": "Because if a hitter knows what\u2019s coming, even a fraction of a second earlier, it can completely change the at-bat.",
+  "spoken": "Because if a hitter knows what's coming, even a fraction of a second earlier, it can completely change the at bat.",
+  "dur": 4.245,
+  "words": [
+   {
+    "w": "Because",
+    "start": 0.019,
+    "end": 0.194
+   },
+   {
+    "w": "if",
+    "start": 0.219,
+    "end": 0.319
+   },
+   {
+    "w": "a",
+    "start": 0.319,
+    "end": 0.319
+   },
+   {
+    "w": "hitter",
+    "start": 0.369,
+    "end": 0.544
+   },
+   {
+    "w": "knows",
+    "start": 0.594,
+    "end": 0.794
+   },
+   {
+    "w": "what's",
+    "start": 0.819,
+    "end": 0.919
+   },
+   {
+    "w": "coming,",
+    "start": 0.969,
+    "end": 1.394
+   },
+   {
+    "w": "even",
+    "start": 1.544,
+    "end": 1.719
+   },
+   {
+    "w": "a",
+    "start": 1.719,
+    "end": 1.719
+   },
+   {
+    "w": "fraction",
+    "start": 1.769,
+    "end": 2.069
+   },
+   {
+    "w": "of",
+    "start": 2.069,
+    "end": 2.119
+   },
+   {
+    "w": "a",
+    "start": 2.119,
+    "end": 2.119
+   },
+   {
+    "w": "second",
+    "start": 2.169,
+    "end": 2.344
+   },
+   {
+    "w": "earlier,",
+    "start": 2.444,
+    "end": 2.844
+   },
+   {
+    "w": "it",
+    "start": 2.944,
+    "end": 2.994
+   },
+   {
+    "w": "can",
+    "start": 3.019,
+    "end": 3.094
+   },
+   {
+    "w": "completely",
+    "start": 3.119,
+    "end": 3.469
+   },
+   {
+    "w": "change",
+    "start": 3.519,
+    "end": 3.794
+   },
+   {
+    "w": "the",
+    "start": 3.819,
+    "end": 3.869
+   },
+   {
+    "w": "at",
+    "start": 3.919,
+    "end": 3.969
+   },
+   {
+    "w": "bat.",
+    "start": 3.994,
+    "end": 4.245
+   }
+  ]
+ },
+ {
+  "i": 12,
+  "id": "same",
+  "text": "And that\u2019s why pitchers work so hard to make every pitch look exactly the same.",
+  "spoken": "And that's why pitchers work so hard to make every pitch look exactly the same.",
+  "dur": 2.923,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.019,
+    "end": 0.094
+   },
+   {
+    "w": "that's",
+    "start": 0.119,
+    "end": 0.319
+   },
+   {
+    "w": "why",
+    "start": 0.369,
+    "end": 0.494
+   },
+   {
+    "w": "pitchers",
+    "start": 0.544,
+    "end": 0.794
+   },
+   {
+    "w": "work",
+    "start": 0.819,
+    "end": 0.944
+   },
+   {
+    "w": "so",
+    "start": 0.994,
+    "end": 1.094
+   },
+   {
+    "w": "hard",
+    "start": 1.119,
+    "end": 1.294
+   },
+   {
+    "w": "to",
+    "start": 1.319,
+    "end": 1.369
+   },
+   {
+    "w": "make",
+    "start": 1.394,
+    "end": 1.544
+   },
+   {
+    "w": "every",
+    "start": 1.619,
+    "end": 1.719
+   },
+   {
+    "w": "pitch",
+    "start": 1.769,
+    "end": 1.944
+   },
+   {
+    "w": "look",
+    "start": 1.969,
+    "end": 2.069
+   },
+   {
+    "w": "exactly",
+    "start": 2.094,
+    "end": 2.394
+   },
+   {
+    "w": "the",
+    "start": 2.419,
+    "end": 2.469
+   },
+   {
+    "w": "same.",
+    "start": 2.519,
+    "end": 2.923
+   }
+  ]
+ },
+ {
+  "i": 13,
+  "id": "adv",
+  "text": "In baseball, sometimes the biggest advantage isn\u2019t having a better pitch.",
+  "spoken": "In baseball, sometimes the biggest advantage isn't having a better pitch.",
+  "dur": 2.773,
+  "words": [
+   {
+    "w": "In",
+    "start": 0.044,
+    "end": 0.094
+   },
+   {
+    "w": "baseball,",
+    "start": 0.119,
+    "end": 0.619
+   },
+   {
+    "w": "sometimes",
+    "start": 0.719,
+    "end": 1.044
+   },
+   {
+    "w": "the",
+    "start": 1.069,
+    "end": 1.119
+   },
+   {
+    "w": "biggest",
+    "start": 1.169,
+    "end": 1.369
+   },
+   {
+    "w": "advantage",
+    "start": 1.394,
+    "end": 1.819
+   },
+   {
+    "w": "isn't",
+    "start": 1.869,
+    "end": 1.994
+   },
+   {
+    "w": "having",
+    "start": 2.019,
+    "end": 2.244
+   },
+   {
+    "w": "a",
+    "start": 2.244,
+    "end": 2.244
+   },
+   {
+    "w": "better",
+    "start": 2.294,
+    "end": 2.444
+   },
+   {
+    "w": "pitch.",
+    "start": 2.494,
+    "end": 2.773
+   }
+  ]
+ },
+ {
+  "i": 14,
+  "id": "end",
+  "text": "It\u2019s knowing which pitch is coming.",
+  "spoken": "It's knowing which pitch is coming.",
+  "dur": 1.216,
+  "words": [
+   {
+    "w": "It's",
+    "start": 0.062,
+    "end": 0.137
+   },
+   {
+    "w": "knowing",
+    "start": 0.162,
+    "end": 0.337
+   },
+   {
+    "w": "which",
+    "start": 0.362,
+    "end": 0.487
+   },
+   {
+    "w": "pitch",
+    "start": 0.537,
+    "end": 0.662
+   },
+   {
+    "w": "is",
+    "start": 0.687,
+    "end": 0.737
+   },
+   {
+    "w": "coming.",
+    "start": 0.787,
+    "end": 1.216
+   }
+  ]
+ }
+]
