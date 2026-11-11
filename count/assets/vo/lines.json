@@ -1,0 +1,923 @@
+[
+ {
+  "i": 0,
+  "id": "q",
+  "text": "Why can the exact same pitch be an easy take in one count\u2026 but a must-swing in another?",
+  "spoken": "Why can the exact same pitch be an easy take in one count, but a must swing in another?",
+  "dur": 3.392,
+  "words": [
+   {
+    "w": "Why",
+    "start": 0.044,
+    "end": 0.169
+   },
+   {
+    "w": "can",
+    "start": 0.194,
+    "end": 0.269
+   },
+   {
+    "w": "the",
+    "start": 0.294,
+    "end": 0.344
+   },
+   {
+    "w": "exact",
+    "start": 0.369,
+    "end": 0.644
+   },
+   {
+    "w": "same",
+    "start": 0.694,
+    "end": 0.819
+   },
+   {
+    "w": "pitch",
+    "start": 0.869,
+    "end": 1.044
+   },
+   {
+    "w": "be",
+    "start": 1.069,
+    "end": 1.194
+   },
+   {
+    "w": "an",
+    "start": 1.194,
+    "end": 1.219
+   },
+   {
+    "w": "easy",
+    "start": 1.294,
+    "end": 1.444
+   },
+   {
+    "w": "take",
+    "start": 1.494,
+    "end": 1.644
+   },
+   {
+    "w": "in",
+    "start": 1.669,
+    "end": 1.719
+   },
+   {
+    "w": "one",
+    "start": 1.744,
+    "end": 1.844
+   },
+   {
+    "w": "count,",
+    "start": 1.894,
+    "end": 2.344
+   },
+   {
+    "w": "but",
+    "start": 2.419,
+    "end": 2.569
+   },
+   {
+    "w": "a",
+    "start": 2.569,
+    "end": 2.569
+   },
+   {
+    "w": "must",
+    "start": 2.594,
+    "end": 2.719
+   },
+   {
+    "w": "swing",
+    "start": 2.794,
+    "end": 2.994
+   },
+   {
+    "w": "in",
+    "start": 3.019,
+    "end": 3.069
+   },
+   {
+    "w": "another?",
+    "start": 3.094,
+    "end": 3.392
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "a02",
+  "text": "With two strikes, the pitcher has the advantage.",
+  "spoken": "With two strikes, the pitcher has the advantage.",
+  "dur": 1.707,
+  "words": [
+   {
+    "w": "With",
+    "start": 0.04,
+    "end": 0.115
+   },
+   {
+    "w": "two",
+    "start": 0.165,
+    "end": 0.265
+   },
+   {
+    "w": "strikes,",
+    "start": 0.29,
+    "end": 0.59
+   },
+   {
+    "w": "the",
+    "start": 0.64,
+    "end": 0.69
+   },
+   {
+    "w": "pitcher",
+    "start": 0.715,
+    "end": 0.94
+   },
+   {
+    "w": "has",
+    "start": 0.965,
+    "end": 1.065
+   },
+   {
+    "w": "the",
+    "start": 1.09,
+    "end": 1.14
+   },
+   {
+    "w": "advantage.",
+    "start": 1.165,
+    "end": 1.707
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "b02",
+  "text": "They can expand the zone, throw breaking balls off the plate, and make the hitter protect against more possibilities.",
+  "spoken": "They can expand the zone, throw breaking balls off the plate, and make the hitter protect against more possibilities.",
+  "dur": 4.544,
+  "words": [
+   {
+    "w": "They",
+    "start": 0.04,
+    "end": 0.115
+   },
+   {
+    "w": "can",
+    "start": 0.14,
+    "end": 0.215
+   },
+   {
+    "w": "expand",
+    "start": 0.24,
+    "end": 0.59
+   },
+   {
+    "w": "the",
+    "start": 0.615,
+    "end": 0.665
+   },
+   {
+    "w": "zone,",
+    "start": 0.715,
+    "end": 1.19
+   },
+   {
+    "w": "throw",
+    "start": 1.315,
+    "end": 1.465
+   },
+   {
+    "w": "breaking",
+    "start": 1.49,
+    "end": 1.715
+   },
+   {
+    "w": "balls",
+    "start": 1.765,
+    "end": 2.015
+   },
+   {
+    "w": "off",
+    "start": 2.09,
+    "end": 2.14
+   },
+   {
+    "w": "the",
+    "start": 2.165,
+    "end": 2.215
+   },
+   {
+    "w": "plate,",
+    "start": 2.265,
+    "end": 2.69
+   },
+   {
+    "w": "and",
+    "start": 2.79,
+    "end": 2.865
+   },
+   {
+    "w": "make",
+    "start": 2.89,
+    "end": 3.015
+   },
+   {
+    "w": "the",
+    "start": 3.04,
+    "end": 3.09
+   },
+   {
+    "w": "hitter",
+    "start": 3.14,
+    "end": 3.315
+   },
+   {
+    "w": "protect",
+    "start": 3.34,
+    "end": 3.615
+   },
+   {
+    "w": "against",
+    "start": 3.64,
+    "end": 3.815
+   },
+   {
+    "w": "more",
+    "start": 3.84,
+    "end": 3.965
+   },
+   {
+    "w": "possibilities.",
+    "start": 3.99,
+    "end": 4.544
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "a30",
+  "text": "But at 3-0, everything changes.",
+  "spoken": "But at three and oh, everything changes.",
+  "dur": 1.579,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.015,
+    "end": 0.115
+   },
+   {
+    "w": "at",
+    "start": 0.14,
+    "end": 0.19
+   },
+   {
+    "w": "three",
+    "start": 0.24,
+    "end": 0.39
+   },
+   {
+    "w": "and",
+    "start": 0.415,
+    "end": 0.49
+   },
+   {
+    "w": "oh,",
+    "start": 0.565,
+    "end": 0.715
+   },
+   {
+    "w": "everything",
+    "start": 0.815,
+    "end": 1.04
+   },
+   {
+    "w": "changes.",
+    "start": 1.065,
+    "end": 1.579
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "b30",
+  "text": "The hitter can be much more selective because one ball means a walk.",
+  "spoken": "The hitter can be much more selective because one ball means a walk.",
+  "dur": 2.645,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.04,
+    "end": 0.09
+   },
+   {
+    "w": "hitter",
+    "start": 0.115,
+    "end": 0.29
+   },
+   {
+    "w": "can",
+    "start": 0.315,
+    "end": 0.39
+   },
+   {
+    "w": "be",
+    "start": 0.415,
+    "end": 0.49
+   },
+   {
+    "w": "much",
+    "start": 0.515,
+    "end": 0.64
+   },
+   {
+    "w": "more",
+    "start": 0.665,
+    "end": 0.79
+   },
+   {
+    "w": "selective",
+    "start": 0.84,
+    "end": 1.315
+   },
+   {
+    "w": "because",
+    "start": 1.365,
+    "end": 1.64
+   },
+   {
+    "w": "one",
+    "start": 1.69,
+    "end": 1.79
+   },
+   {
+    "w": "ball",
+    "start": 1.84,
+    "end": 1.99
+   },
+   {
+    "w": "means",
+    "start": 2.015,
+    "end": 2.215
+   },
+   {
+    "w": "a",
+    "start": 2.215,
+    "end": 2.215
+   },
+   {
+    "w": "walk.",
+    "start": 2.265,
+    "end": 2.645
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "c30",
+  "text": "The pitcher has very little room for error.",
+  "spoken": "The pitcher has very little room for error.",
+  "dur": 1.771,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.0,
+    "end": 0.048
+   },
+   {
+    "w": "pitcher",
+    "start": 0.073,
+    "end": 0.323
+   },
+   {
+    "w": "has",
+    "start": 0.348,
+    "end": 0.573
+   },
+   {
+    "w": "very",
+    "start": 0.648,
+    "end": 0.823
+   },
+   {
+    "w": "little",
+    "start": 0.848,
+    "end": 0.998
+   },
+   {
+    "w": "room",
+    "start": 1.048,
+    "end": 1.173
+   },
+   {
+    "w": "for",
+    "start": 1.198,
+    "end": 1.298
+   },
+   {
+    "w": "error.",
+    "start": 1.398,
+    "end": 1.771
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "a11",
+  "text": "At 1-1, neither side has a major advantage.",
+  "spoken": "At one and one, neither side has a major advantage.",
+  "dur": 2.219,
+  "words": [
+   {
+    "w": "At",
+    "start": 0.044,
+    "end": 0.094
+   },
+   {
+    "w": "one",
+    "start": 0.144,
+    "end": 0.244
+   },
+   {
+    "w": "and",
+    "start": 0.269,
+    "end": 0.344
+   },
+   {
+    "w": "one,",
+    "start": 0.369,
+    "end": 0.669
+   },
+   {
+    "w": "neither",
+    "start": 0.769,
+    "end": 0.944
+   },
+   {
+    "w": "side",
+    "start": 1.019,
+    "end": 1.244
+   },
+   {
+    "w": "has",
+    "start": 1.269,
+    "end": 1.394
+   },
+   {
+    "w": "a",
+    "start": 1.394,
+    "end": 1.394
+   },
+   {
+    "w": "major",
+    "start": 1.444,
+    "end": 1.644
+   },
+   {
+    "w": "advantage.",
+    "start": 1.669,
+    "end": 2.219
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "b11",
+  "text": "The next pitch can shift the entire at-bat.",
+  "spoken": "The next pitch can shift the entire at bat.",
+  "dur": 1.6,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.062,
+    "end": 0.112
+   },
+   {
+    "w": "next",
+    "start": 0.137,
+    "end": 0.287
+   },
+   {
+    "w": "pitch",
+    "start": 0.312,
+    "end": 0.437
+   },
+   {
+    "w": "can",
+    "start": 0.462,
+    "end": 0.537
+   },
+   {
+    "w": "shift",
+    "start": 0.612,
+    "end": 0.737
+   },
+   {
+    "w": "the",
+    "start": 0.762,
+    "end": 0.812
+   },
+   {
+    "w": "entire",
+    "start": 0.837,
+    "end": 1.112
+   },
+   {
+    "w": "at",
+    "start": 1.137,
+    "end": 1.187
+   },
+   {
+    "w": "bat.",
+    "start": 1.212,
+    "end": 1.6
+   }
+  ]
+ },
+ {
+  "i": 8,
+  "id": "c11",
+  "text": "A strike creates 1-2, while a ball creates 2-1.",
+  "spoken": "A strike creates one and two, while a ball creates two and one.",
+  "dur": 2.411,
+  "words": [
+   {
+    "w": "A",
+    "start": 0.04,
+    "end": 0.065
+   },
+   {
+    "w": "strike",
+    "start": 0.115,
+    "end": 0.29
+   },
+   {
+    "w": "creates",
+    "start": 0.315,
+    "end": 0.54
+   },
+   {
+    "w": "one",
+    "start": 0.565,
+    "end": 0.665
+   },
+   {
+    "w": "and",
+    "start": 0.69,
+    "end": 0.765
+   },
+   {
+    "w": "two,",
+    "start": 0.815,
+    "end": 1.115
+   },
+   {
+    "w": "while",
+    "start": 1.19,
+    "end": 1.365
+   },
+   {
+    "w": "a",
+    "start": 1.365,
+    "end": 1.365
+   },
+   {
+    "w": "ball",
+    "start": 1.415,
+    "end": 1.59
+   },
+   {
+    "w": "creates",
+    "start": 1.615,
+    "end": 1.84
+   },
+   {
+    "w": "two",
+    "start": 1.89,
+    "end": 1.99
+   },
+   {
+    "w": "and",
+    "start": 2.015,
+    "end": 2.09
+   },
+   {
+    "w": "one.",
+    "start": 2.115,
+    "end": 2.411
+   }
+  ]
+ },
+ {
+  "i": 9,
+  "id": "a32",
+  "text": "And at a full count, every pitch matters.",
+  "spoken": "And at a full count, every pitch matters.",
+  "dur": 1.557,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.044,
+    "end": 0.119
+   },
+   {
+    "w": "at",
+    "start": 0.144,
+    "end": 0.219
+   },
+   {
+    "w": "a",
+    "start": 0.219,
+    "end": 0.219
+   },
+   {
+    "w": "full",
+    "start": 0.269,
+    "end": 0.419
+   },
+   {
+    "w": "count,",
+    "start": 0.469,
+    "end": 0.744
+   },
+   {
+    "w": "every",
+    "start": 0.844,
+    "end": 0.944
+   },
+   {
+    "w": "pitch",
+    "start": 0.969,
+    "end": 1.094
+   },
+   {
+    "w": "matters.",
+    "start": 1.119,
+    "end": 1.557
+   }
+  ]
+ },
+ {
+  "i": 10,
+  "id": "b32",
+  "text": "The hitter has to protect the strike zone, while the pitcher has to throw a strike without giving up a good opportunity to hit.",
+  "spoken": "The hitter has to protect the strike zone, while the pitcher has to throw a strike without giving up a good opportunity to hit.",
+  "dur": 4.416,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.04,
+    "end": 0.09
+   },
+   {
+    "w": "hitter",
+    "start": 0.14,
+    "end": 0.315
+   },
+   {
+    "w": "has",
+    "start": 0.34,
+    "end": 0.415
+   },
+   {
+    "w": "to",
+    "start": 0.44,
+    "end": 0.49
+   },
+   {
+    "w": "protect",
+    "start": 0.515,
+    "end": 0.765
+   },
+   {
+    "w": "the",
+    "start": 0.79,
+    "end": 0.84
+   },
+   {
+    "w": "strike",
+    "start": 0.89,
+    "end": 1.09
+   },
+   {
+    "w": "zone,",
+    "start": 1.14,
+    "end": 1.615
+   },
+   {
+    "w": "while",
+    "start": 1.69,
+    "end": 1.815
+   },
+   {
+    "w": "the",
+    "start": 1.84,
+    "end": 1.89
+   },
+   {
+    "w": "pitcher",
+    "start": 1.94,
+    "end": 2.165
+   },
+   {
+    "w": "has",
+    "start": 2.19,
+    "end": 2.265
+   },
+   {
+    "w": "to",
+    "start": 2.29,
+    "end": 2.34
+   },
+   {
+    "w": "throw",
+    "start": 2.39,
+    "end": 2.565
+   },
+   {
+    "w": "a",
+    "start": 2.565,
+    "end": 2.565
+   },
+   {
+    "w": "strike",
+    "start": 2.615,
+    "end": 2.94
+   },
+   {
+    "w": "without",
+    "start": 2.965,
+    "end": 3.14
+   },
+   {
+    "w": "giving",
+    "start": 3.165,
+    "end": 3.315
+   },
+   {
+    "w": "up",
+    "start": 3.365,
+    "end": 3.465
+   },
+   {
+    "w": "a",
+    "start": 3.465,
+    "end": 3.465
+   },
+   {
+    "w": "good",
+    "start": 3.515,
+    "end": 3.615
+   },
+   {
+    "w": "opportunity",
+    "start": 3.64,
+    "end": 4.065
+   },
+   {
+    "w": "to",
+    "start": 4.09,
+    "end": 4.14
+   },
+   {
+    "w": "hit.",
+    "start": 4.19,
+    "end": 4.416
+   }
+  ]
+ },
+ {
+  "i": 11,
+  "id": "e1",
+  "text": "That\u2019s what makes baseball so strategic.",
+  "spoken": "That's what makes baseball so strategic.",
+  "dur": 1.557,
+  "words": [
+   {
+    "w": "That's",
+    "start": 0.04,
+    "end": 0.19
+   },
+   {
+    "w": "what",
+    "start": 0.215,
+    "end": 0.29
+   },
+   {
+    "w": "makes",
+    "start": 0.315,
+    "end": 0.465
+   },
+   {
+    "w": "baseball",
+    "start": 0.49,
+    "end": 0.79
+   },
+   {
+    "w": "so",
+    "start": 0.84,
+    "end": 0.94
+   },
+   {
+    "w": "strategic.",
+    "start": 0.965,
+    "end": 1.557
+   }
+  ]
+ },
+ {
+  "i": 12,
+  "id": "e2",
+  "text": "The count doesn\u2019t just track balls and strikes.",
+  "spoken": "The count doesn't just track balls and strikes.",
+  "dur": 1.792,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.04,
+    "end": 0.09
+   },
+   {
+    "w": "count",
+    "start": 0.14,
+    "end": 0.315
+   },
+   {
+    "w": "doesn't",
+    "start": 0.34,
+    "end": 0.515
+   },
+   {
+    "w": "just",
+    "start": 0.54,
+    "end": 0.69
+   },
+   {
+    "w": "track",
+    "start": 0.715,
+    "end": 0.865
+   },
+   {
+    "w": "balls",
+    "start": 0.915,
+    "end": 1.14
+   },
+   {
+    "w": "and",
+    "start": 1.165,
+    "end": 1.24
+   },
+   {
+    "w": "strikes.",
+    "start": 1.29,
+    "end": 1.792
+   }
+  ]
+ },
+ {
+  "i": 13,
+  "id": "e3",
+  "text": "It changes the leverage of every pitch.",
+  "spoken": "It changes the leverage of every pitch.",
+  "dur": 1.472,
+  "words": [
+   {
+    "w": "It",
+    "start": 0.065,
+    "end": 0.115
+   },
+   {
+    "w": "changes",
+    "start": 0.14,
+    "end": 0.415
+   },
+   {
+    "w": "the",
+    "start": 0.44,
+    "end": 0.49
+   },
+   {
+    "w": "leverage",
+    "start": 0.54,
+    "end": 0.765
+   },
+   {
+    "w": "of",
+    "start": 0.79,
+    "end": 0.865
+   },
+   {
+    "w": "every",
+    "start": 0.94,
+    "end": 1.04
+   },
+   {
+    "w": "pitch.",
+    "start": 1.09,
+    "end": 1.472
+   }
+  ]
+ }
+]

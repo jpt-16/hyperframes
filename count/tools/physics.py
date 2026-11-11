@@ -80,7 +80,7 @@ def samples(T, P, hz=HZ):
     return {"t0": 0.0, "hz": hz, "dur": round(float(T[-1]), 4), "p": [[round(float(np.interp(x, T, P[:, k])), 3) for k in range(3)] for x in tt]}
 
 PITCHES = {   # mph, rpm, spin efficiency, lift direction, target (x, y) at the front of the plate, contact depth z
-    "hook": (95, 2350, 0.9, (-0.2, 1, 0), (0.05, 2.6), PLATE_FRONT - 1.3),     # the hook: a 95 mph fastball down the middle
+    "hook": (95, 2350, 0.9, (-0.2, 1, 0), (0.78, 2.45), PLATE_FRONT - 1.3),   # the hook: a 95 mph fastball on the outside edge (a borderline strike)
     "sl02": (85, 2500, 0.55, (1, -0.35, 0), (1.12, 1.45), PLATE_FRONT - 0.6), # 0-2: a slider, low and just off the outside corner
     "fb30": (93, 2300, 0.9, (-0.2, 1, 0), (1.02, 2.55), PLATE_FRONT - 0.5),   # 3-0: a fastball just off the outside corner (ball four)
     "st11": (94, 2300, 0.9, (-0.2, 1, 0), (0.35, 2.75), PLATE_FRONT - 1.2),   # 1-1: a strike, on the outer half

@@ -1,7 +1,9 @@
-"""'The count' (1080x1920, music + effects; the narration is recorded separately).
+"""'The count' (1080x1920), cut to the voiceover ("How counts create leverage").
 
     python3 tools/physics.py        # the pitches and the foul ball -> assets/play.json
-    python3 build.py                # index.html + assets/mix.wav (music + effects, mastered low for a voice on top) + CUES.md
+    export HYPERFRAMES_PYTHON=<python with kokoro-onnx, soundfile, onnx>
+    $HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # voiceover + per-word timing
+    python3 build.py                # index.html + assets/mix.wav (+ mix-novo.wav) + CUES.md
     npx --yes hyperframes@0.8.154 render . -o renders/count.mp4 --video-bitrate 16M
 
 One pitcher, batter, catcher and umpire throughout. Every count is on the center-field board (B / S / O lights and the
@@ -18,7 +20,14 @@ from audio import SR, make_bed
 
 P = json.load(open(os.path.join(HERE, "assets", "play.json")))
 PI_ = P["pitches"]
-D = 40.5
+TMJ = json.load(open(os.path.join(HERE, "assets", "vo", "timing.json")))
+IDX = {x["id"]: k for k, x in enumerate(TMJ["lines"])}
+LN = lambda lid: TMJ["lines"][IDX[lid]]
+def W(lid, word, end=False, nth=0):
+    hits = [w for w in LN(lid)["words"] if w["w"].strip(".,!?:").lower() == word.lower()]
+    return hits[nth]["t1" if end else "t0"]
+D = TMJ["duration"]
+S = {x["id"]: x["t0"] - 0.08 for x in TMJ["lines"]}
 Y, CYAN, WHITE, HOT, MUTED, GREEN, RED = "#FFD84D", "#56D1FF", "#F4F6F8", "#FF6A3D", "#AEB8C6", "#3DD68C", "#FF4D4D"
 D_SWEET = round(2.30 - 0.283, 3)
 TC = lambda pk: PI_[pk]["t_contact"]
@@ -38,60 +47,87 @@ def vt(play, after=0.0):
     return None
 TOPP, BOTP = [0, 0, 1080, 960], [0, 960, 1080, 960]
 def ab(pk, rel, hold=1.0, hit=None, swing=False, check=None): return dict(pk=pk, rel=rel, tell=dict(glove="hi", hold=hold), hit=hit, swing=swing, check=check, D=D_SWEET)
-BOARDCAM = dict(c0=[-30.0, 20.0, -170.0], c1=[-36.0, 24.0, -196.0], l=[-70.0, 62.0, -432.0], f0=27, f1=22)
+BOARDCAM = dict(c0=[-30.0, 20.0, -170.0], c1=[-36.0, 24.0, -196.0], l=[-70.0, 74.0, -432.0], f0=27, f1=22)   # the board sits low, under the scene title
 UMPV = dict(c0=[-0.4, 8.6, 12.5], c1=[-0.4, 8.5, 12.0], l=[-0.7, 2.3, -3.0], f0=24)
-UMPVF = dict(c0=[-0.4, 7.8, 12.5], c1=[-0.4, 7.7, 11.8], l=[-0.6, 2.7, -3.0], f0=46)
+UMPVF = dict(c0=[-0.4, 7.8, 12.5], c1=[-0.4, 7.7, 11.8], l=[-0.6, 3.7, -3.0], f0=46)
 CF = dict(c0=[-3.0, 9.0, -112.0], c1=[-3.0, 9.0, -110.0], l=[-0.9, 3.2, 0.0], f0=7.5, f1=7.2)
-# 1 the hook: a 95 mph fastball, frozen just before it reaches the hitter; the same pitch at 0-2 and at 3-0
+# 1 the hook: "Why can the exact same pitch be an easy take in one count… but a must-swing in another?"
+#   a 95 mph fastball on the outside edge, frozen just before it reaches the hitter; the same pitch at 3-0 (top) and 0-2 (bottom)
+V1, V2, V3, V4, V5, V6 = 0.0, S["a02"], S["a30"], S["a11"], S["a32"], S["e1"]
 BD = [[0, -1, 0, 1, "95"]]
-HR = 1.6; AH = ab("hook", HR, hold=0.7)
-live(0.0, 1.65, "world", ab=AH, streak=1, board=[[0, 0, 0, 1]], c0=[-2.4, 6.6, -70.0], c1=[-2.2, 6.4, -69.0], l=[0.0, 4.0, -20.0], f0=26)
+HR = 1.25; AH = ab("hook", HR, hold=0.7)
+live(0.0, 1.38, "world", ab=AH, streak=1, c0=[-2.4, 6.6, -70.0], c1=[-2.2, 6.4, -69.0], l=[0.0, 4.0, -20.0], f0=26)
 FZ = HR + 0.3
-live(1.65, FZ, "world", ab=AH, streak=1, c0=[5.2, 3.3, -4.0], c1=[5.0, 3.3, -3.2], l=[0.0, 4.2, -40.0], f0=30)
-shot(FZ, 4.2, "world", [FZ, 4.2], [FZ, FZ], speed="freeze", ab=AH, zone=1, panes=[dict(rect=TOPP), dict(rect=BOTP)], c0=[1.6, 6.4, 10.5], c1=[1.4, 6.2, 9.8], l=[-0.4, 3.0, -8.0], f0=30)
-# 2 0-2: the board; a slider just off the plate; he has to start the swing and holds up; the zone, slowed
+live(1.38, FZ, "world", ab=AH, streak=1, c0=[5.2, 3.3, -4.0], c1=[5.0, 3.3, -3.2], l=[0.0, 4.2, -40.0], f0=30)
+HKL = [-0.2, 2.6, -8.0]                                             # the panes are framed low so the bugs and the band sit above the zone
+shot(FZ, V2, "world", [FZ, V2], [FZ, FZ], speed="freeze", ab=AH, zone=1, panes=[dict(rect=TOPP), dict(rect=BOTP)], c0=[1.6, 6.4, 10.5], c1=[1.4, 6.2, 9.8], l=HKL, f0=30)
+# 2 0-2: "With two strikes, the pitcher has the advantage. They can expand the zone, throw breaking balls off the plate,
+#   and make the hitter protect against more possibilities."
 BD = [[0, 0, 2, 1, ""]]
-live(4.2, 5.4, "world", board=[[4.2, 0, 2, 1]], **BOARDCAM)
-R2 = 6.9; A2 = ab("sl02", R2, swing=True, check=0.1)
-live(5.4, 7.85, "world", ab=A2, **CF)
-shot(7.85, 10.2, "world", [7.85, 10.2], [R2 + 0.2, R2 + 0.2 + 2.35 * 0.3], speed="slow", ab=A2, zone=1, mark=1, c0=[2.4, 7.0, 12.5], c1=[2.2, 6.9, 11.8], l=[0.0, 2.6, -3.0], f0=40)
-# 3 3-0: the board; a fastball just off the plate, taken; ball four; he drops the bat and jogs to first
+B2 = S["b02"] - 0.05
+live(V2, B2, "world", **BOARDCAM)
+C2 = W("b02", "throw") - 0.08
+R2 = W("b02", "plate") - FRONT("sl02"); A2 = ab("sl02", R2, swing=True, check=0.1)
+CHASE2 = W("b02", "expand")
+live(B2, C2, "world", ab=A2, zone=1, chase=CHASE2, **UMPVF)
+D2 = W("b02", "and") - 0.1
+live(C2, D2, "world", ab=A2, zone=1, chase=0, **CF)
+S2 = 0.3
+shot(D2, V3, "world", [D2, V3], [R2 + 0.2, R2 + 0.2 + (V3 - D2) * S2], speed="slow", ab=A2, zone=1, mark=1, chase=0, c0=[2.4, 7.0, 12.5], c1=[2.2, 6.9, 11.8], l=[0.0, 2.6, -3.0], f0=40)
+# 3 3-0: "But at 3-0, everything changes. The hitter can be much more selective because one ball means a walk.
+#   The pitcher has very little room for error."
 BD = [[0, 3, 0, 1, ""]]
-live(10.2, 11.0, "world", board=[[10.2, 3, 0, 1]], **BOARDCAM)
-R3 = 12.6; A3 = ab("fb30", R3)
-live(11.0, 13.4, "world", ab=A3, zone=1, mark=1, **UMPVF)
-live(13.4, 14.6, "world", board=[[13.4, 3, 0, 1], [13.75, 4, 0, 1, "BALL FOUR"]], **BOARDCAM)
+B3 = S["b30"] - 0.3
+live(V3, B3, "world", **BOARDCAM)
+R3 = W("b30", "walk", end=True) + 0.05 - FRONT("fb30"); A3 = ab("fb30", R3, hold=1.6)
+C3 = R3 + FRONT("fb30") + 0.4
+live(B3, C3, "world", ab=A3, zone=1, mark=1, **UMPVF)
+D3 = C3 + 0.65
+live(C3, D3, "world", board=[[C3, 3, 0, 1], [C3 + 0.25, 4, 0, 1, "BALL FOUR"]], **BOARDCAM)
 BD = [[0, 4, 0, 1, "BALL FOUR"]]
-live(14.6, 17.2, "world", ab=A3, bwalk=[14.7, 17.9], c0=[-24.0, 7.5, 10.0], c1=[-21.0, 7.2, 6.0], l=[10.0, 2.4, -14.0], f0=32)
-# 4 1-1: the board; the same pitch moment, two outcomes: a strike (1-2) and a ball (2-1)
+live(D3, V4, "world", ab=A3, bwalk=[D3 - 0.05, D3 + 2.4], c0=[-14.0, 6.0, 8.0], c1=[-13.0, 6.0, 6.0], l=[1.0, 3.0, -3.0], l1=[9.0, 3.0, -11.0], f0=36)
+# 4 1-1: "At 1-1, neither side has a major advantage. The next pitch can shift the entire at-bat.
+#   A strike creates 1-2, while a ball creates 2-1."   Top: a called strike on "strike"; bottom: a ball on "ball".
 BD = [[0, 1, 1, 1, ""]]
-live(17.2, 18.2, "world", board=[[17.2, 1, 1, 1]], **BOARDCAM)
-R4 = 20.0
-A4S, A4B = ab("st11", R4), ab("bl11", R4)
-shot(18.2, 25.2, "world", [18.2, 19.7, 21.9, 25.2], [18.2, 19.7, 20.6, 23.9], speed="rt", zone=1, mark=1,
-     panes=[dict(rect=TOPP, ab=A4S, ucall=R4 + FRONT("st11") + 0.15), dict(rect=BOTP, ab=A4B)], **UMPV)
-# 5 3-2: the board; he comes set (a long hold); the hitter's hands; the pitch from the hitter's eyes; fouled back to stay alive
+B4 = W("a11", "neither") - 0.1
+live(V4, B4, "world", **BOARDCAM)
+CR4S, CR4B = W("c11", "strike") + 0.02, W("c11", "ball") + 0.02
+A4S, A4B = ab("st11", CR4S - FRONT("st11")), ab("bl11", CR4B - FRONT("bl11"))
+P4L = [-0.3, 2.7, -3.0]                                             # framed low: the bug and the meter above, the zone in the middle
+shot(B4, V5, "world", [B4, V5], [B4, V5], zone=1, mark=1,
+     panes=[dict(rect=TOPP, ab=A4S, ucall=CR4S + 0.15), dict(rect=BOTP, ab=A4B)], **dict(UMPV, l=P4L))
+# 5 3-2: "And at a full count, every pitch matters. The hitter has to protect the strike zone, while the pitcher has to
+#   throw a strike without giving up a good opportunity to hit."   The pitch is on the corner; he protects and fouls it back.
 BD = [[0, 3, 2, 1, "FULL COUNT"]]
-live(25.2, 26.2, "world", board=[[25.2, 3, 2, 1, "FULL COUNT"]], **BOARDCAM)
-R5 = 31.4; A5 = ab("fb32", R5, hold=2.2, hit="foul32", swing=True)
-live(26.2, 28.4, "world", ab=A5, c0=[-9.0, 3.2, -48.0], c1=[-8.4, 3.4, -50.0], l=[0.0, 5.4, -60.4], f0=26, f1=22)
-live(28.4, 30.0, "obj", ab=A5, o="bat", lo="bat", bokeh=2.4, close=1, fore=1, c0=[1.65, 0.4, 0.3], c1=[1.45, 0.38, 0.24], l=[0.0, 0.3, 0.0], f0=30)
-live(30.0, 31.6, "world", ab=A5, streak=1, c0=[-3.3, 7.0, 3.2], c1=[-3.3, 6.95, 2.9], l=[0.0, 5.0, -60.4], f0=14, f1=16)
-S5 = 0.3
-shot(31.6, 33.0, "world", [31.6, 33.0], [R5 + 0.05, R5 + 0.05 + 1.4 * S5], speed="slow", ab=A5, ghost=0.016, zone=1, c0=[2.8, 3.4, -8.6], c1=[2.5, 3.3, -8.0], l=[-1.6, 3.0, -1.6], f0=34)
-T5 = R5 + 0.05 + 1.4 * S5
-shot(33.0, 34.2, "world", [33.0, 34.2], [T5 - 0.1, T5 + 0.42], speed="slow", ab=A5, streak=1, c0=[5.0, 3.0, -22.0], c1=[5.0, 3.6, -23.5], l=[-1.0, 9.5, 8.0], f0=56)
-# 6 the four counts, quickly; then the stadium
+B5 = S["a32"] + 1.6
+live(V5, B5, "world", **BOARDCAM)
+C5 = W("b32", "hitter") - 0.05
+R5 = W("b32", "pitcher") + 0.45; A5 = ab("fb32", R5, hold=2.0, hit="foul32", swing=True)
+live(B5, C5, "world", ab=A5, c0=[-9.0, 3.2, -48.0], c1=[-8.4, 3.4, -50.0], l=[0.0, 5.4, -60.4], f0=26, f1=22)
+D5 = W("b32", "while") - 0.08
+live(C5, D5, "obj", ab=A5, o="bat", lo="bat", bokeh=2.4, close=1, fore=1, c0=[1.65, 0.4, 0.3], c1=[1.45, 0.38, 0.24], l=[0.0, 0.3, 0.0], f0=30)
+E5 = R5 + 0.22
+live(D5, E5, "world", ab=A5, streak=1, c0=[-3.3, 7.0, 3.2], c1=[-3.3, 6.95, 2.9], l=[0.0, 5.0, -60.4], f0=14, f1=16)
+S5 = 0.3; F5 = W("b32", "hit") + 0.35
+shot(E5, F5, "world", [E5, F5], [R5 + 0.22, R5 + 0.22 + (F5 - E5) * S5], speed="slow", ab=A5, ghost=0.016, zone=1, mark=1, c0=[1.4, 7.0, 12.0], c1=[1.2, 6.9, 11.2], l=[-0.4, 3.9, -3.0], f0=40)
+T5 = R5 + 0.22 + (F5 - E5) * S5
+shot(F5, V6, "world", [F5, V6], [R5 + TC("fb32") - 0.08, R5 + TC("fb32") - 0.08 + (V6 - F5) * 0.33], speed="slow", ab=A5, streak=1, c0=[5.0, 3.0, -22.0], c1=[5.0, 3.6, -23.5], l=[-1.0, 9.5, 8.0], f0=56)
+# 6 "That's what makes baseball so strategic." the four counts, quickly; "The count doesn't just track balls and strikes."
+#   the board; "It changes the leverage of every pitch." wide over the stadium; the closing title and the logo
+MT = [V6 + 0.6 * k for k in range(5)]
 BD = [[0, 0, 2, 1, ""]]
-shot(34.2, 34.8, "world", [34.2, 34.8], [R2 + TC("sl02") - 0.1, R2 + TC("sl02") - 0.1], speed="freeze", ab=A2, **dict(CF, f0=7.0))
+shot(MT[0], MT[1], "world", [MT[0], MT[1]], [R2 + TC("sl02") - 0.1] * 2, speed="freeze", ab=A2, zone=1, chase=0, **dict(CF, f0=7.0))
 BD = [[0, 3, 0, 1, ""]]
-shot(34.8, 35.4, "world", [34.8, 35.4], [R3 + 0.5, R3 + 0.5], speed="freeze", ab=A3, zone=1, mark=1, **UMPVF)
+shot(MT[1], MT[2], "world", [MT[1], MT[2]], [R3 + 0.5] * 2, speed="freeze", ab=A3, zone=1, mark=1, **UMPVF)
 BD = [[0, 1, 1, 1, ""]]
-shot(35.4, 36.0, "world", [35.4, 36.0], [R4 + 0.6, R4 + 0.6], speed="freeze", ab=A4S, zone=1, mark=1, ucall=R4 + FRONT("st11") + 0.15, **UMPVF)
+shot(MT[2], MT[3], "world", [MT[2], MT[3]], [CR4S + 0.45] * 2, speed="freeze", ab=A4S, zone=1, mark=1, ucall=CR4S + 0.15, **UMPVF)
 BD = [[0, 3, 2, 1, "FULL COUNT"]]
-shot(36.0, 36.6, "world", [36.0, 36.6], [R5 + TC("fb32") + 0.01, R5 + TC("fb32") + 0.01], speed="freeze", ab=A5, ghost=0.016, c0=[2.8, 3.4, -8.6], l=[-1.6, 3.0, -1.6], f0=34)
-VBRAND = 38.7
-live(36.6, D, "world", board=[[36.6, 3, 2, 1, "FULL COUNT"]], c0=[14.0, 58.0, 92.0], c1=[10.0, 78.0, 128.0], l=[0.0, 0.0, -150.0], f0=42, f1=46)
+shot(MT[3], MT[4], "world", [MT[3], MT[4]], [R5 + TC("fb32") + 0.01] * 2, speed="freeze", ab=A5, ghost=0.016, c0=[2.8, 3.4, -8.6], l=[-1.6, 3.0, -1.6], f0=34)
+G6 = S["e3"] - 0.05
+live(MT[4], G6, "world", **BOARDCAM)
+VEND = LN("e3")["t1"] + 0.15; VBRAND = round(VEND + 1.2, 3)
+live(G6, D, "world", c0=[14.0, 58.0, 92.0], c1=[10.0, 78.0, 128.0], l=[0.0, 0.0, -150.0], f0=42, f1=46)
+
 for x, y in zip(SHOTS, SHOTS[1:]): assert abs(x["b"] - y["a"]) < 1e-3 and x["b"] > x["a"], (x, y)
 CUTS = [x["a"] for x in SHOTS[1:]]
 
@@ -101,7 +137,7 @@ c.clip("fieldl", 0, D, '<canvas id="field-gl" width="1080" height="1920" data-la
 c.clip("shade", 0, D, '<div class="shade-top"></div><div class="shade-bot"></div>', cls="layer", style="z-index:3")
 c.clip("spdc", 0, D, '<div class="spd" id="spd"></div>', cls="layer", style="z-index:30")
 c.clip("flash", 0, D, '<div class="flash" id="flash"></div>', cls="layer", style="z-index:40")
-for f in [4.2, 10.2, 17.2, 25.2, 34.2, 34.8, 35.4, 36.0, 36.6]:
+for f in [V2, V3, V4, V5] + MT + [G6]:
     c.set("#flash", '{"opacity":0.45}', f); c.to("#flash", o(opacity=0, duration=0.14, ease="power2.out"), f + 0.001)
 
 def pop(sel, t, dy=24):
@@ -152,52 +188,56 @@ def meter(mid, t0, t1, p0, p1=None, tch=None, top=1560, label=""):
     c.clip(mid, t0, t1, f'<div class="meter" style="top:{top}px"><span class="pl">Pitcher</span><div class="tr"><div class="mk" id="{mid}m" style="left:{p0 * 100:.0f}%"></div></div><span class="hl">Hitter</span>{f"<em>{label}</em>" if label else ""}</div>', cls="layer", style="z-index:17")
     pop(f"#{mid}m", t0 + 0.05, 6)
     if p1 is not None: c.to(f"#{mid}m", o(left=f"{p1 * 100:.0f}%", duration=0.45, ease="power3.inOut"), tch)
+BAND = 560                                                        # scene titles sit in a band under the captions
+def band(tid, t0, t1, lines): title(tid, t0, t1, lines, BAND, "band")
 def stamp(sid, t0, t1, big, small):
     c.clip(sid, t0, t1, f'<div class="stampc" id="{sid}x"><b>{big}</b><span>{small}</span></div>', cls="layer", style="z-index:21")
     c.ft(f"#{sid}x", o(opacity=0, scale=1.25), o(opacity=1, scale=1, duration=0.18, ease="power3.out"), t0)
 
-# 1 the hook
+# 1 the hook (the hook title stands in for the question's captions)
 title("t1", 0.1, FZ - 0.02, [("95 mph", True)], 240, "hk2")
-# (no count bug in the first two hook shots: the pitch has no count yet)
-panesTB("pp", FZ, 4.18, "", "")
-bug("g1a", FZ + 0.05, 4.18, 0, 2, 1, 60, "Pitcher’s count"); bug("g1b", FZ + 0.12, 4.18, 3, 0, 1, 1020, "Hitter’s count")
-title("t1b", FZ + 0.15, 4.18, [("Same pitch.", False), ("Different advantage.", True)], 852, "band")
+panesTB("pp", FZ, V2 - 0.02, "", "")
+bug("g1a", FZ + 0.05, V2 - 0.02, 3, 0, 1, 60, "Easy take"); bug("g1b", W("q", "must") - 0.1, V2 - 0.02, 0, 2, 1, 1020, "Must swing")
+title("t1b", FZ + 0.15, V2 - 0.02, [("Same pitch.", False), ("Different advantage.", True)], 852, "band")
+pinl("p1", FZ + 0.4, V2 - 0.02, "On the edge: a strike", "zone", "sm", 0)
 # 2 0-2
-title("t2", 4.3, 10.18, [("0-2: Pitcher’s", False), ("advantage", True)], 240)
-bug("g2", 5.4, 10.18, 0, 2, 1)
-meter("m2", 5.5, 10.18, 0.18)
-pinl("p2a", vt(R2 + TC("sl02") - 0.1, 5.4), 7.83, "He starts the swing… and holds up", "batter", "sm")
-pinl("p2b", vt(R2 + FRONT("sl02"), 7.85) + 0.1, 10.18, "Just off the plate", "mark", "gr sm")
-note("n2", 8.1, 10.18, "<b>Hitter:</b> anything close could be strike three, so he has to protect the zone.<br><b>Pitcher:</b> can work just off the plate and try to get a chase.", 1680)
+band("t2", V2 + 0.05, V3 - 0.02, [("0-2: Pitcher’s", False), ("advantage", True)])
+bug("g2", B2, V3 - 0.02, 0, 2, 1)
+meter("m2", W("a02", "advantage") - 0.05, V3 - 0.02, 0.5, 0.18, W("a02", "advantage") + 0.1)
+pinl("p2c", CHASE2 + 0.1, C2 - 0.02, "Chase zone", "chase", "rd sm")
+pinl("p2a", vt(R2 + TC("sl02") - 0.05, C2), D2 - 0.02, "He starts the swing… and holds up", "batter", "sm")
+pinl("p2b", vt(R2 + FRONT("sl02"), D2) + 0.1, V3 - 0.02, "Just off the plate", "mark", "gr sm")
+note("n2", W("b02", "protect") - 0.1, V3 - 0.02, "<b>Hitter:</b> anything close could be strike three, so he has to protect.<br><b>Pitcher:</b> can work off the plate and try to get a chase.", 1680)
 # 3 3-0
-title("t3", 10.3, 17.18, [("3-0: Hitter’s", False), ("advantage", True)], 240)
-bug("g3", 11.0, 13.38, 3, 0, 1)
-meter("m3", 11.05, 17.18, 0.85)
-chip("c3", 11.1, 12.55, "One more ball is a walk", 1450, "rd")
-pinl("p3", vt(R3 + FRONT("fb30"), 11.0) + 0.1, 13.38, "Ball four: just off the plate", "mark", "gr sm")
-bug("g3b", 13.75, 17.18, 4, 0, 1)
-note("n3", 14.7, 17.18, "At 3-0 the pitcher can’t afford another ball, so the hitter can wait for a strike he likes.", 1700)
+band("t3", V3 + 0.05, V4 - 0.02, [("3-0: Hitter’s", False), ("advantage", True)])
+bug("g3", V3 + 0.05, C3 + 0.23, 3, 0, 1)
+meter("m3", W("a30", "everything") - 0.05, V4 - 0.02, 0.5, 0.85, W("a30", "changes"))
+chip("c3", W("b30", "one") - 0.05, C3 - 0.02, "One more ball is a walk", 1450, "rd")
+pinl("p3", vt(R3 + FRONT("fb30"), B3) + 0.1, C3 - 0.02, "Ball four: just off the plate", "mark", "gr sm")
+bug("g3b", C3 + 0.25, V4 - 0.02, 4, 0, 1)
+note("n3", W("c30", "very") - 0.1, V4 - 0.02, "At 3-0 the pitcher can’t afford another ball, so the hitter can wait for a strike he likes.", 1700)
 # 4 1-1
-title("t4", 17.3, 18.18, [("1-1", True)], 240, "hk2 big1")
-bug("g4", 17.25, 18.18, 1, 1, 1)
-CR4 = vt(R4 + FRONT("st11"), 18.2)
-bug("g4a", 18.25, CR4 + 0.4, 1, 1, 1, 60); bug("g4b", 18.3, CR4 + 0.4, 1, 1, 1, 1020)
-bug("g4c", CR4 + 0.42, 25.18, 1, 2, 1, 60, "Strike: pitcher ahead"); bug("g4d", CR4 + 0.5, 25.18, 2, 1, 1, 1020, "Ball: hitter ahead")
-panesTB("pq", 18.2, 25.18, "", "")
-title("t4b", 18.3, 25.18, [("1-1: The next pitch", False), ("changes everything", True)], 852, "band")
-meter("m4a", 18.4, 25.18, 0.5, 0.3, CR4 + 0.45, 780); meter("m4b", 18.45, 25.18, 0.5, 0.68, CR4 + 0.5, 1740)
-pinl("p4a", CR4 + 0.1, 25.18, "Strike", "mark", "sm", 0); pinl("p4b", CR4 + 0.15, 25.18, "Ball", "mark", "gr sm", 1)
+title("t4", V4 + 0.05, B4 - 0.02, [("1-1", True)], 560, "hk2 big1")
+bug("g4", V4 + 0.05, B4 - 0.02, 1, 1, 1)
+bug("g4a", B4 + 0.05, CR4S + 0.3, 1, 1, 1, 60); bug("g4b", B4 + 0.1, CR4B + 0.3, 1, 1, 1, 1020)
+bug("g4c", CR4S + 0.32, V5 - 0.02, 1, 2, 1, 60, "Strike: pitcher ahead"); bug("g4d", CR4B + 0.32, V5 - 0.02, 2, 1, 1, 1020, "Ball: hitter ahead")
+panesTB("pq", B4, V5 - 0.02, "", "")
+title("t4b", B4 + 0.1, V5 - 0.02, [("1-1: The next pitch", False), ("changes everything", True)], 852, "band")
+meter("m4a", B4 + 0.2, V5 - 0.02, 0.5, 0.3, CR4S + 0.35, 780); meter("m4b", B4 + 0.25, V5 - 0.02, 0.5, 0.68, CR4B + 0.35, 1740)
+pinl("p4a", CR4S + 0.1, V5 - 0.02, "Strike", "mark", "sm", 0); pinl("p4b", CR4B + 0.1, V5 - 0.02, "Ball", "mark", "gr sm", 1)
 # 5 3-2
-title("t5", 25.3, 34.18, [("3-2: Every pitch", False), ("matters", True)], 240)
-bug("g5", 26.2, 34.18, 3, 2, 1)
-meter("m5", 26.3, 30.0, 0.5, label="Both under pressure")
-note("n5", 26.4, 29.98, "<b>Hitter:</b> a strike he takes is strike three.<br><b>Pitcher:</b> a ball is ball four.", 1700)
-pinl("p5", vt(R5 + TC("fb32"), 31.6) + 0.15, 32.98, "Fouled off: he stays alive", "batter", "yl sm")
-chip("c5", 33.1, 34.18, "Foul with two strikes: still <b class=\"y\">3-2</b>", 1500)
-# 6 the four counts
-stamp("s1", 34.2, 34.78, "0-2", "Pitcher’s advantage"); stamp("s2", 34.8, 35.38, "3-0", "Hitter’s advantage")
-stamp("s3", 35.4, 35.98, "1-1", "Up for grabs"); stamp("s4", 36.0, 36.58, "3-2", "Every pitch matters")
-title("t6", 36.75, VBRAND - 0.02, [("The count is more", False), ("than a number.", True)], 300)
+band("t5", V5 + 0.05, V6 - 0.02, [("3-2: Every pitch", False), ("matters", True)])
+bug("g5", B5, V6 - 0.02, 3, 2, 1)
+meter("m5", B5 + 0.1, D5 - 0.02, 0.5, label="Both under pressure")
+note("n5", B5 + 0.2, D5 - 0.02, "<b>Hitter:</b> a strike he takes is strike three.<br><b>Pitcher:</b> a ball is ball four.", 1700)
+pinl("p5a", vt(R5 + FRONT("fb32"), E5) + 0.1, F5 - 0.02, "On the corner: a strike, but hard to hit", "mark", "sm")
+chip("p5", vt(R5 + TC("fb32"), E5) + 0.2, F5 - 0.02, "He protects: <b class=\"y\">fouled off</b>", 1500)
+chip("c5", F5 + 0.1, V6 - 0.02, "Foul with two strikes: still <b class=\"y\">3-2</b>", 1500)
+# 6 the four counts; the board; the stadium
+stamp("s1", MT[0], MT[1] - 0.02, "0-2", "Pitcher’s advantage"); stamp("s2", MT[1], MT[2] - 0.02, "3-0", "Hitter’s advantage")
+stamp("s3", MT[2], MT[3] - 0.02, "1-1", "Up for grabs"); stamp("s4", MT[3], MT[4] - 0.02, "3-2", "Every pitch matters")
+title("t6", VEND, VBRAND - 0.02, [("The count is more", False), ("than a number.", True)], 300)
+
 c.clip("brand", VBRAND, D, """<div class="brand ov" id="brx"><div class="bmark"><svg viewBox="0 0 100 100" width="150" height="150"><circle cx="50" cy="50" r="44" fill="#f4f2ec" stroke="#05080d" stroke-width="3"/>
   <path d="M26 16 C40 34 40 66 26 84" fill="none" stroke="#ff6a3d" stroke-width="4" stroke-dasharray="6 5"/><path d="M74 16 C60 34 60 66 74 84" fill="none" stroke="#ff6a3d" stroke-width="4" stroke-dasharray="6 5"/></svg></div>
   <div class="bname"><span>Baseball</span><em>Decoded</em></div></div>""", cls="layer", style="z-index:24")
@@ -205,16 +245,52 @@ c.ft("#brx", o(opacity=0), o(opacity=1, duration=0.3), VBRAND)
 c.ft(".bmark", o(scale=0.4, rotation=-120), o(scale=1, rotation=0, duration=0.5, ease="back.out(1.6)"), VBRAND)
 c.ft(".bname", o(opacity=0, y=30), o(opacity=1, y=0, duration=0.3, ease="power3.out"), VBRAND + 0.15)
 
-# ----------------------------------------------------------------- sound (no voice: room left for the narrator)
+
+# ----------------------------------------------------------------- captions: the voiceover, word by word (the question in the hook is covered by the hook title)
+DISP = {("a30", 2): "3-0,", ("a30", 3): "", ("a30", 4): "", ("a11", 1): "1-1,", ("a11", 2): "", ("a11", 3): "", ("b11", 7): "at-bat.", ("b11", 8): "",
+        ("c11", 3): "1-2,", ("c11", 4): "", ("c11", 5): "", ("c11", 10): "2-1.", ("c11", 11): "", ("c11", 12): ""}
+A_ = "acc"
+CAPS = [("a02", 0, 2, {1: A_, 2: A_}), ("a02", 3, 7, {7: A_}),
+        ("b02", 0, 4, {2: A_, 4: A_}), ("b02", 5, 7, {6: A_, 7: A_}), ("b02", 8, 10, {10: A_}), ("b02", 11, 15, {15: A_}), ("b02", 16, 18, {}),
+        ("a30", 0, 4, {2: A_}), ("a30", 5, 6, {6: A_}),
+        ("b30", 0, 6, {6: A_}), ("b30", 7, 12, {9: A_, 12: A_}),
+        ("c30", 0, 2, {}), ("c30", 3, 7, {4: A_, 5: A_}),
+        ("a11", 0, 3, {1: A_}), ("a11", 4, 9, {8: A_, 9: A_}),
+        ("b11", 0, 4, {4: A_}), ("b11", 5, 8, {7: A_}),
+        ("c11", 0, 5, {1: A_, 3: A_}), ("c11", 6, 12, {8: A_, 10: A_}),
+        ("a32", 0, 4, {3: A_, 4: A_}), ("a32", 5, 7, {7: A_}),
+        ("b32", 0, 4, {4: A_}), ("b32", 5, 7, {6: A_, 7: A_}), ("b32", 8, 12, {}), ("b32", 13, 15, {15: A_}), ("b32", 16, 19, {}), ("b32", 20, 23, {20: A_, 21: A_}),
+        ("e1", 0, 3, {}), ("e1", 4, 5, {5: A_}),
+        ("e2", 0, 3, {1: A_}), ("e2", 4, 7, {5: A_, 7: A_}),
+        ("e3", 0, 3, {3: A_}), ("e3", 4, 6, {5: A_, 6: A_})]
+for k, (lid, i0, i1, acc) in enumerate(CAPS):
+    ln = LN(lid); wd = ln["words"]; i1 = min(i1, len(wd) - 1)
+    start = wd[i0]["t0"] - 0.06
+    if k + 1 < len(CAPS) and CAPS[k + 1][0] == lid: end = wd[CAPS[k + 1][1]]["t0"] - 0.06
+    elif IDX[lid] + 1 < len(TMJ["lines"]): end = min(ln["t1"] + 0.35, TMJ["lines"][IDX[lid] + 1]["t0"] - 0.1)
+    else: end = min(ln["t1"] + 0.3, VEND - 0.02)
+    cid = f"cap{k}"; sp = []
+    for n in range(i0, i1 + 1):
+        w = DISP.get((lid, n), wd[n]["w"])
+        if not w: continue
+        w = w.rstrip(",:") if n == i1 and i1 > i0 else w
+        w = w.replace("'", "’")
+        sp.append(f'<span class="cw{(" " + acc[n]) if n in acc else ""}" id="{cid}w{n - i0}">{esc(w)}</span>')
+    c.clip(cid, start, end, f'<div class="cap" style="top:300px"><span class="cl">{" ".join(sp)}</span></div>', cls="layer", style="z-index:20")
+    for n in range(i0, i1 + 1):
+        if DISP.get((lid, n), wd[n]["w"]): c.ft(f"#{cid}w{n - i0}", o(opacity=0, y=34, filter="blur(10px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.15, ease="power3.out"), wd[n]["t0"] - 0.04)
+
+# ----------------------------------------------------------------- sound
 def cue(n, t, db=0.0):
     if t is not None and 0 <= t < D: c.cue(n, t, db)
 for t_ in CUTS: cue("whoosh", t_, -13)
 cue("riser-s", 0.0, -8)
-for tt in [0.1, FZ, 4.3, 10.3, 17.3, 18.3, 25.3, 34.2, 34.8, 35.4, 36.0, 36.75]: cue("impact", tt, -6)
-for tt in [4.25, 10.25, 13.75, 17.25, 25.25, CR4 + 0.42]: cue("tick", tt, -8)
-for a_, after in [(AH, 0), (A2, 5.4), (A3, 11.0), (A4S, 18.2), (A5, 30.0)]: cue("whoosh", vt(a_["rel"], after), -8)
-for a_, after in [(A2, 7.85), (A3, 11.0), (A4S, 18.2)]: cue("glove", vt(a_["rel"] + PI_[a_["pk"]]["flight"], after), -1)
-CRACKS = [(vt(R5 + TC("fb32"), 31.6), True)]
+for tt in [0.1, FZ, V2 + 0.05, V3 + 0.05, V4 + 0.05, B4 + 0.1, V5 + 0.05] + MT[:4] + [VEND]: cue("impact", tt, -6)
+for tt in [V2 + 0.05, V3 + 0.05, C3 + 0.25, V4 + 0.05, V5 + 0.05, CR4S + 0.32, CR4B + 0.32, G6 + 0.05]: cue("tick", tt, -8)
+cue("popup", CHASE2, -4)
+for a_, after in [(AH, 0), (A2, C2), (A3, B3), (A4S, B4), (A4B, B4), (A5, D5)]: cue("whoosh", vt(a_["rel"], after), -8)
+for a_, after in [(A2, D2), (A3, B3), (A4S, B4), (A4B, B4)]: cue("glove", vt(a_["rel"] + PI_[a_["pk"]]["flight"], after), -1)
+CRACKS = [(vt(R5 + TC("fb32"), E5), True)]
 cue("riser-m", VBRAND - 1.0, -10); cue("impact", VBRAND, -4)
 LEVEL = {"impact": -3.0, "whoosh": -6.0, "glove": -1.0, "tick": -6.0, "popup": -8.0, "riser-m": -7.0, "riser-s": -7.0, "tap": -3.0}
 def crack(rng, slow=False):
@@ -243,13 +319,20 @@ def mixdown():
     bedp = os.path.join(HERE, "assets", "bed.wav"); make_bed(bedp, D, VBRAND, style="pulse", seed=181)
     bed = read(bedp)[:n]; bed = np.pad(bed, ((0, n - len(bed)), (0, 0)))
     ramp = np.clip(np.arange(n) / SR / 3.0, 0.5, 1.0)[:, None]
-    full = (fx + bed * ramp * 10 ** (-16 / 20)) * 10 ** (-6 / 20)
+    vo = read(os.path.join(HERE, "assets", "vo", "vo.wav"))[:n]; vo = np.pad(vo, ((0, n - len(vo)), (0, 0)))
+    env = np.convolve(np.abs(vo).mean(1), np.ones(int(0.12 * SR)) / int(0.12 * SR), "same")
+    duck = 10 ** (-7 * np.clip(env / 0.05, 0, 1) / 20)
+    duck = np.convolve(duck, np.ones(int(0.08 * SR)) / int(0.08 * SR), "same")
+    music = bed * ramp * duck[:, None] * 10 ** (-17 / 20)
+    full = (fx + music) * 10 ** (-6 / 20) + vo
     def wav(path, x):
         w = wave.open(path, "wb"); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
         w.writeframes((np.clip(x * 0.5, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
-    pre = os.path.join(HERE, ".pre.wav"); wav(pre, full)
-    m = master(pre, os.path.join(HERE, "assets", "mix.wav"), target=-20.0)
-    os.remove(pre)
+    pre, pfx = os.path.join(HERE, ".pre.wav"), os.path.join(HERE, ".fx.wav")
+    wav(pre, full); wav(pfx, (fx + bed * ramp * 10 ** (-17 / 20)) * 10 ** (-6 / 20))
+    m = master(pre, os.path.join(HERE, "assets", "mix.wav"))
+    master(pre, os.path.join(HERE, "assets", "mix-novo.wav"), fx_path=pfx)
+    os.remove(pre); os.remove(pfx)
     return m
 
 # ----------------------------------------------------------------- CSS
@@ -455,25 +538,31 @@ CSS += f"""
 .chip.seamc {{ background:{WHITE}; color:#05080d; font-size:50px; padding:6px 24px; z-index:20; }}
 .chip.hdr {{ font-size:52px; padding:8px 22px; }} .chip .vsd {{ color:{MUTED}; }}
 .chip.rd {{ color:#fff; }} .chip .radar {{ color:{Y}; font-size:84px; vertical-align:-4px; }}
-.pin.cy span {{ background:{CYAN}; }}
+.pin.cy span {{ background:{CYAN}; }} .pin.rd span {{ background:{HOT}; color:#fff; }}
+.cap {{ position:absolute; left:52px; right:40px; }}
+.cap .cl {{ display:block; {BC} font-size:88px; line-height:.96; color:#fff; text-shadow:0 6px 28px rgba(0,0,0,.8), 0 2px 4px rgba(0,0,0,.7); }}
+.cap .cw {{ display:inline-block; }} .cap .cw.acc {{ color:{HOT}; }}
 """
 
 HEAD = '<script type="importmap">{"imports":{"three":"./assets/vendor/three.module.min.js"}}</script>'
-SCENES = [("0.0", "4.2", "A 95 mph fastball, frozen just before it reaches the hitter; split: the same pitch at 0-2 and at 3-0", "SAME PITCH. DIFFERENT ADVANTAGE."),
-          ("4.2", "10.2", "The board: 0-2; a slider just off the plate; he starts the swing and holds up; the zone and where it crossed, slowed", "0-2: PITCHER'S ADVANTAGE"),
-          ("10.2", "17.2", "The board: 3-0; a fastball just off the plate, taken; the board: ball four, walk; he drops the bat and jogs to first", "3-0: HITTER'S ADVANTAGE"),
-          ("17.2", "25.2", "The board: 1-1; split: the same pitch moment, a strike (1-2) and a ball (2-1)", "1-1: THE NEXT PITCH CHANGES EVERYTHING"),
-          ("25.2", "34.2", "The board: 3-2, full count; he comes set and holds; the hitter's hands; the pitch from his eyes; fouled back", "3-2: EVERY PITCH MATTERS"),
-          ("34.2", "36.6", "The four counts, one after another", "0-2 · 3-0 · 1-1 · 3-2"),
-          ("36.6", f"{D:.1f}", "Wide over the stadium; Baseball Decoded", "THE COUNT IS MORE THAN A NUMBER.")]
+SCENES = [(0.0, V2, "the hook", "A 95 mph fastball on the outside edge, frozen just before it reaches the hitter; split: the same pitch at 3-0 (easy take) and 0-2 (must swing)"),
+          (V2, V3, "0-2", "The board; the chase zone; a slider just off the plate, he starts the swing and holds up; slowed, with the zone"),
+          (V3, V4, "3-0", "The board; a fastball just off the plate, taken; the board: ball four, walk; he drops the bat and jogs to first"),
+          (V4, V5, "1-1", "The board; split: a called strike (1-2) on top, a ball (2-1) below"),
+          (V5, V6, "3-2", "The board; he comes set; the hitter's hands; the pitch on the corner; he fouls it back"),
+          (V6, D, "the takeaway", "The four counts; the board; wide over the stadium; Baseball Decoded")]
 if __name__ == "__main__":
     cc = {"duration": D, "shots": {"list": SHOTS}, "pins": PINS}
     h = c.page(CSS, "The count", script=True).replace('<script src="assets/gsap.min.js"></script>',
         '<script src="assets/vendor/gsap.min.js"></script>\n    ' + HEAD + f'\n    <script>window.__CC = {json.dumps(cc)}; window.__PLAY = {json.dumps(P)};</script>')
     h = h.replace("</body>", '  <script type="module" src="./assets/field.js"></script>\n  </body>')
     open(os.path.join(HERE, "index.html"), "w").write(h)
-    lines = ["# Scene timing for the voiceover", "", f"The video is {D:.1f} s. Record each part of the narration inside its scene (times in seconds).", "",
-             "| From | To | Scene | On screen |", "|---|---|---|---|"] + [f"| {a} | {b} | {d} | {t} |" for a, b, d, t in SCENES]
+    lines = ["# Voiceover cues", "", f"The video is {D:.1f} s. To record your own read over `assets/mix-novo.wav`, start each line at its time (seconds).", "",
+             "| Start | End | Scene | Line |", "|---|---|---|---|"]
+    for a, b, name, desc in SCENES:
+        for ln in TMJ["lines"]:
+            if a - 0.01 <= ln["t0"] < b: lines.append(f"| {ln['t0']:.2f} | {ln['t1']:.2f} | {name} | {ln['text']} |")
+    lines += ["", "## Scenes", "", "| From | To | Scene | Shots |", "|---|---|---|---|"] + [f"| {a:.2f} | {b:.2f} | {n} | {d} |" for a, b, n, d in SCENES]
     open(os.path.join(HERE, "CUES.md"), "w").write("\n".join(lines) + "\n")
     if "--nomix" not in sys.argv:
         m = mixdown(); print(f"index.html: {D}s, {len(SHOTS)} shots; {len(c.cues)} sounds; {m['lufs']} LUFS / {m['true_peak']} dBTP")

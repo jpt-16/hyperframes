@@ -933,6 +933,15 @@ const ZONE = new THREE.Group(); scene.add(ZONE); ZONE.visible = false;
 }
 const MARK = new THREE.Mesh(new THREE.CircleGeometry(BALL_R, 32), glowM(0xff4d4d, 0.9)); MARK.material.side = THREE.DoubleSide; scene.add(MARK); MARK.visible = false;
 const MARKR = new THREE.Mesh(new THREE.RingGeometry(BALL_R * 1.15, BALL_R * 1.45, 32), glowM(0xffffff, 0.9)); MARKR.material.side = THREE.DoubleSide; scene.add(MARKR); MARKR.visible = false;
+// the chase zone: where a pitcher expands to when he's ahead (just off the plate and below the knees), drawn around the zone
+const CXP = 0.45, CYP = 0.4, ZCY = (ZY0 + ZY1) / 2;
+const CHASE = new THREE.Group(); CHASE.position.set(0, ZCY, PLATE_F - 0.01); scene.add(CHASE); CHASE.visible = false;
+{
+  const m = glowM(0xff6a3d, 0.95), w = 0.035, hx = ZX, hy = (ZY1 - ZY0) / 2;
+  const bar = (x, y, sx, sy) => { const b = new THREE.Mesh(new THREE.BoxGeometry(sx, sy, w), m); b.position.set(x, y, 0); CHASE.add(b); };
+  bar(-hx, 0, w, 2 * hy + w); bar(hx, 0, w, 2 * hy + w); bar(0, -hy, 2 * hx, w); bar(0, hy, 2 * hx, w);
+  const fill = new THREE.Mesh(new THREE.PlaneGeometry(2 * hx, 2 * hy), glowM(0xff6a3d, 0.10)); fill.material.side = THREE.DoubleSide; fill.position.z = -0.02; CHASE.add(fill);
+}
 const inZone = (p) => Math.abs(p[0]) <= ZX && p[1] >= ZY0 - BALL_R && p[1] <= ZY1 + BALL_R;
 
 // the center-field video board: the line score, the batter, and the count (balls, strikes, outs) as lights and as numbers
@@ -1035,6 +1044,8 @@ function setScene(t, s) {
   if (s.ucall) applyPose(ump, keyed([[s.ucall - 0.05, U_SET], [s.ucall + 0.25, U_STRIKE], [s.ucall + 0.9, U_STRIKE], [s.ucall + 1.4, U_SET]], t));
   if (s.board) { let cur = s.board[0]; for (const e of s.board) if (t >= e[0]) cur = e; drawBoard(cur[1], cur[2], cur[3], cur[4] ?? ""); }
   ZONE.visible = !!s.zone; MARK.visible = MARKR.visible = false;
+  CHASE.visible = s.chase !== undefined && t >= s.chase;
+  if (CHASE.visible) { const g = smooth((t - s.chase) / 0.5); CHASE.scale.set(1 + g * CXP / ZX, 1 + g * CYP / ((ZY1 - ZY0) / 2), 1); }
   if (s.mark && ab) {
     const Pp = PI_[ab.pk], k = t - ab.rel;
     if (k >= Pp.front) { const ok = inZone(Pp.cross); MARK.visible = MARKR.visible = true; MARK.material.color.set(ok ? 0xff4d4d : 0x3dd68c);
@@ -1127,7 +1138,7 @@ function shotAt(v) {
 const $ = (id) => document.getElementById(id);
 const PINT = { batter: () => headTop(batter), hands: () => batPt(CUR.hm ?? 0.3), knob: () => batPt(-0.02), bottom: () => batPt(GL.position.y - 0.14), top: () => batPt(GRt.position.y + 0.14),
   sweet: () => batPt(SWEET), end: () => batPt(BAT_LEN), lenmid: () => { BAT.updateMatrixWorld(true); return BAT.localToWorld(v3(0, (BAT_LEN + GL.position.y) / 2 + 0.3, -0.42)); },
-  ball: () => BB.position.clone(), pitcher: () => headTop(pitcher), plate: () => v3(0, 0, -0.7), mark: () => MARK.position.clone().add(v3(0, 0.42, 0)), zone: () => v3(0, ZY1 + 0.35, PLATE_F), ump: () => headTop(ump),
+  ball: () => BB.position.clone(), pitcher: () => headTop(pitcher), plate: () => v3(0, 0, -0.7), mark: () => MARK.position.clone().add(v3(0, 0.42, 0)), zone: () => v3(0, ZY1 + 0.35, PLATE_F), chase: () => v3(0, ZY1 + CYP + 0.35, PLATE_F), ump: () => headTop(ump),
   glove: () => wpos(pitcher.handL).add(v3(0, 0.95, 0)), runner: () => headTop(R), coach: () => headTop(COACH), chand: () => wpos(HAND.wrist).add(v3(0, 0.55, 0)),
   bhead: () => headTop(batter), scrA: () => SCREEN.localToWorld(v3(-1.6, 3.35, 0.05)), scrB: () => SCREEN.localToWorld(v3(-1.6, -0.25, 0.05)), scrLog: () => SCREEN.localToWorld(v3(3.55, 3.55, 0.05)), rp2: () => headTop(RP2), rcoach: () => headTop(RCOACH) };
 function pin(id, p, rect) {
