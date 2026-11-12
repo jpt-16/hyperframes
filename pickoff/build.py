@@ -1,7 +1,9 @@
-"""'Pickoff throw out of play: one base or two?' (1080x1920, music + effects; no narration).
+"""'Pickoff throw out of play: one base or two?' (1080x1920), cut to the voiceover.
 
-    python3 tools/physics.py        # the field model -> assets/play.json
-    python3 build.py                # index.html + assets/mix.wav (music + effects, mastered low for a voice on top) + CUES.md
+    python3 tools/physics.py                                       # the field model -> assets/play.json
+    export HYPERFRAMES_PYTHON=<python with kokoro-onnx, soundfile, onnx>
+    $HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # voiceover + per-word timing
+    python3 build.py                                               # index.html + assets/mix.wav (+ mix-novo.wav) + CUES.md
     npx --yes hyperframes@0.8.154 render . -o renders/pickoff.mp4 --video-bitrate 16M
 
 A right-handed pitcher in the set, a runner on first. The same wild pickoff throw goes into the first-base dugout twice:
@@ -19,7 +21,14 @@ from mix import read, master, ANCHOR
 from audio import SR, make_bed
 
 P = json.load(open(os.path.join(HERE, "assets", "play.json")))
-D = 38.0
+TM = json.load(open(os.path.join(HERE, "assets", "vo", "timing.json")))
+IDX = {x["id"]: k for k, x in enumerate(TM["lines"])}
+LN = lambda lid: TM["lines"][IDX[lid]]
+def W(lid, word, end=False, nth=0):
+    hits = [w for w in LN(lid)["words"] if w["w"].strip(".,!?:").lower() == word.lower()]
+    return hits[nth]["t1" if end else "t0"]
+D = TM["duration"]
+S = {x["id"]: x["t0"] - 0.08 for x in TM["lines"]}
 Y, CYAN, WHITE, HOT, MUTED, GREEN, RED = "#FFD84D", "#56D1FF", "#F4F6F8", "#FF6A3D", "#AEB8C6", "#3DD68C", "#FF4D4D"
 T_TURN0, T_OFF0, T_OFF1, T_TH, T_DEAD, T_AWARD = -0.62, -1.32, -0.98, 0.9, 1.35, 2.45   # mirror assets/field.js
 
@@ -44,48 +53,62 @@ AWARD = dict(c0=[86.0, 13.0, -47.0], c1=[84.0, 12.5, -49.0], l=[28.0, 1.0, -100.
 AT2 = dict(c0=[-16.0, 6.0, -110.0], c1=[-15.0, 5.8, -111.0], l=[2.0, 3.0, -127.0], f0=36)
 AT3 = dict(c0=[-45.0, 6.0, -45.0], c1=[-46.0, 5.8, -46.5], l=[-62.0, 3.0, -67.0], f0=40)
 
-# ----------------------------------------------------------------- 1 the hook (0-4): his feet on the rubber; the runner's lead; the move; freeze before the throw
-rt(0.0, 1.15, "world", -3.6, play="on", leadAt=-2.75, c0=[-7.0, 2.6, -57.0], c1=[-4.6, 1.8, -58.2], l=[0.1, 0.9, -59.5], f0=44, f1=36)
-rt(1.15, 1.95, "world", -2.45, play="on", leadAt=-2.75, c0=[61.0, 3.4, -47.0], c1=[60.0, 3.2, -48.5], l=[58.0, 2.8, -70.0], f0=36)
-VFZ = 2.9; TFZ = -0.06
-rt(1.95, VFZ, "world", TFZ - (VFZ - 1.95), play="on", leadAt=-2.75, **BEHIND)
-V1 = 4.0
+# ----------------------------------------------------------------- 1 the hook: "One tiny step can cost a team an ENTIRE extra base."
+#   his feet on the rubber; the runner's lead; the sudden move; frozen just before the throw, the camera pushing in on his feet
+V1, V2, V3, V4 = S["a1"], S["b1"], S["w1"], S["p1"]
+rt(0.0, 1.0, "world", -3.6, play="on", leadAt=-2.75, c0=[-7.0, 2.6, -57.0], c1=[-4.8, 1.85, -58.1], l=[0.1, 0.9, -59.5], f0=44, f1=37)
+rt(1.0, 1.75, "world", -2.6, play="on", leadAt=-2.75, c0=[61.0, 3.4, -47.0], c1=[60.0, 3.2, -48.5], l=[58.0, 2.8, -70.0], f0=36)
+VFZ = round(W("h1", "base", end=True) + 0.05, 3); TFZ = -0.06
+rt(1.75, VFZ, "world", TFZ - (VFZ - 1.75), play="on", leadAt=-2.75, **BEHIND)
 shot(VFZ, V1, "world", [VFZ, V1], [TFZ, TFZ], play="on", leadAt=-2.75, rub=-9, pivr=-9, c0=BEHIND["c1"], c1=[-5.0, 2.6, -62.4], l=BEHIND["l"], l1=[0.6, 1.0, -60.6], f0=40, f1=32)
 
-# ----------------------------------------------------------------- 2 one base (4-12): he stays on the rubber
-V2 = 12.0
-rt(V1, 5.0, "world", -1.72, play="on", c0=[73.0, 5.0, -74.0], c1=[71.5, 4.9, -73.6], l=[20.0, 3.6, -63.0], f0=30)
-S2F = 6.75
-shot(5.0, 7.25, "world", [5.0, S2F, 7.25], [-0.74, 0.0, 0.0], play="on", rub=-0.6, pivr=-0.6, arStep=-0.5, **FEET_ON)
-rt(7.25, 8.45, "follow", 0.0, play="on", fo="ball", fw=0.25, **THROW)
-rt(8.45, 9.15, "world", 0.52, play="on", **DUGCAM())
-rt(9.15, 10.75, "world", 1.0, play="on", **UMP)
-rt(10.75, 11.35, "world", 2.6, play="on", arAdv=2.35, **AWARD)
-rt(11.35, V2, "world", 7.55, play="on", arAdv=-9, **AT2)
+# ----------------------------------------------------------------- 2 one base: "Watch what happens here. The pitcher keeps his pivot foot on the rubber, steps toward first,
+#   and makes a pickoff throw. But the ball sails into the dugout. The runner is awarded just ONE base."
+B2 = W("a2", "the") - 0.05
+rt(V1, B2, "world", -1.2 - (B2 - V1), play="on", c0=[73.0, 5.0, -74.0], c1=[71.5, 4.9, -73.6], l=[20.0, 3.6, -63.0], f0=30)
+V2REL = W("a2", "throw") + 0.06; C2 = V2REL + 0.45                          # the release lands on "throw", then a short hold
+shot(B2, C2, "world", [B2, W("a2", "rubber") + 0.25, W("a2", "steps") + 0.4, V2REL, C2], [-1.2, -0.62, -0.3, 0.0, 0.0], play="on", rub=-1.0, pivr=-1.0, arStep=-0.5, **FEET_ON)
+D2 = W("a3", "into") + 0.21                                                 # the ball reaches the dugout on "dugout"
+rt(C2, D2, "follow", 0.0, play="on", fo="ball", fw=0.25, **THROW)
+E2 = S["a4"] - 0.06
+rt(D2, E2, "world", 0.75, play="on", **DUGCAM())
+F2 = W("a4", "awarded") + 0.25
+rt(E2, F2, "world", 1.25, play="on", **UMP)
+G2 = W("a4", "base") + 0.25
+rt(F2, G2, "world", 2.5, play="on", arAdv=2.35, **AWARD)
+rt(G2, V2, "world", 7.6, play="on", arAdv=-9, **AT2)
 
-# ----------------------------------------------------------------- 3 two bases (12-22): he steps backward off the rubber first
-V3 = 22.0
-rt(V2, 13.1, "world", -3.1, play="off", c0=[-30.0, 24.0, -42.0], c1=[-28.0, 23.0, -43.5], l=[36.0, 0.0, -66.0], f0=40)
-S3F = 14.9
-shot(13.1, 16.0, "world", [13.1, S3F, 16.0], [-1.46, -0.9, -0.9], play="off", rub=-9, pivr=-9, arBack=-1.3, gap=-0.95, **FEET_OFF)
-rt(16.0, 17.1, "world", -0.92, play="off", pivr=-9, **BEHIND)
-rt(17.1, 18.2, "follow", 0.1, play="off", fo="ball", fw=0.25, **THROW)
-rt(18.2, 18.9, "world", 0.52, play="off", **DUGCAM())
-rt(18.9, 20.5, "world", 1.0, play="off", **UMP)
-rt(20.5, 21.1, "world", 2.6, play="off", arAdv=2.35, **AWARD)
-rt(21.1, V3, "world", 12.0, play="off", arAdv=-9, **AT3)
+# ----------------------------------------------------------------- 3 two bases: "Now watch the difference. Before throwing, the pitcher legally steps backward off the rubber
+#   with his pivot foot. He then throws the ball away, and it goes out of play. This time, the runner gets TWO bases."
+B3 = S["b2"] - 0.02
+rt(V2, B3, "world", -1.6 - (B3 - V2), play="off", c0=[-30.0, 24.0, -42.0], c1=[-28.0, 23.0, -43.5], l=[36.0, 0.0, -66.0], f0=40)
+S3A, S3B = W("b2", "steps") - 0.05, W("b2", "off") + 0.05                   # the pivot foot lifts on "steps", lands behind the rubber on "off"
+C3 = S["b3"] - 0.08
+shot(B3, C3, "world", [B3, S3A, S3B, C3], [-1.6, -1.32, -0.9, -0.9], play="off", rub=-9, pivr=-9, arBack=-1.3, gap=-0.95, **FEET_OFF)
+V3REL = W("b3", "away")
+D3 = V3REL + 0.2
+rt(C3, D3, "world", -(V3REL - C3), play="off", pivr=-9, **BEHIND)
+E3 = W("b3", "play") + 0.05
+rt(D3, E3, "follow", D3 - V3REL, play="off", fo="ball", fw=0.25, **THROW)
+F3 = S["b4"] - 0.02
+rt(E3, F3, "world", max(0.8, 0.9 - 0.3), play="off", **DUGCAM())
+G3 = W("b4", "two") - 0.05
+rt(F3, G3, "world", 1.3, play="off", **UMP)
+H3 = W("b4", "bases") + 0.45
+rt(G3, H3, "world", 2.5, play="off", arAdv=2.35, **AWARD)
+rt(H3, V3, "world", 12.0, play="off", arAdv=-9, **AT3)
 
-# ----------------------------------------------------------------- 4 why the rule changes (22-32): side by side, the pivot foot lit
-V4 = 32.0
+# ----------------------------------------------------------------- 4 why: "It's because once the pitcher legally disengages the rubber, the rule treats him as an infielder for
+#   that throw. So a wild throw off the rubber is treated like a wild throw by another infielder."   side by side, the pivot foot lit
 SPL = dict(c0=[0.8, 5.6, -48.6], c1=[0.8, 5.0, -50.4], l=[0.8, 1.9, -61.0], f0=62, f1=58)
-S4F = 25.2
+S4F = W("w1", "rubber") + 0.3
 shot(V3, V4, "world", [V3, V4], [0, 0], panes=[dict(rect=LR[0], play="on", vs=[V3, S4F, V4], ts=[-0.78, 0.0, 0.0], rub=-9, pivr=-9),
                                               dict(rect=LR[1], play="off", vs=[V3, S4F, V4], ts=[-1.42, 0.0, 0.0], rub=-9, pivr=-9, gap=-0.95)], **SPL)
 
-# ----------------------------------------------------------------- 5 the ending (32-38): where each runner ends up
-VBRAND = 36.3
-shot(V4, D, "world", [V4, D], [0, 0], panes=[dict(rect=LR[0], play="on", vs=[V4, D], ts=[9.0, 15.0], arAdv=-9, c0=[26.0, 12.0, -96.0], c1=[22.0, 10.5, -100.0], l=[2.0, 3.0, -126.0], f0=56),
-                                            dict(rect=LR[1], play="off", vs=[V4, D], ts=[13.4, 19.4], arAdv=-9, c0=[-36.0, 12.0, -38.0], c1=[-40.0, 10.5, -42.0], l=[-62.0, 3.0, -66.0], f0=56)], c0=[0, 0, 0], l=[0, 0, -1])
+# ----------------------------------------------------------------- 5 payoff: "Same pitcher. Same target. Different foot position. And that one detail changes the entire base award."
+VEND = round(LN("p2")["t1"] + 0.1, 3); VBRAND = round(VEND + 1.25, 3)
+shot(V4, D, "world", [V4, D], [0, 0], panes=[dict(rect=LR[0], play="on", vs=[V4, D], ts=[9.0, 9.0 + D - V4], arAdv=-9, c0=[26.0, 12.0, -96.0], c1=[22.0, 10.5, -100.0], l=[2.0, 3.0, -126.0], f0=56),
+                                            dict(rect=LR[1], play="off", vs=[V4, D], ts=[13.4, 13.4 + D - V4], arAdv=-9, c0=[-36.0, 12.0, -38.0], c1=[-40.0, 10.5, -42.0], l=[-62.0, 3.0, -66.0], f0=56)], c0=[0, 0, 0], l=[0, 0, -1])
 for x, y in zip(SHOTS, SHOTS[1:]): assert abs(x["b"] - y["a"]) < 1e-3 and x["b"] > x["a"], (x, y)
 CUTS = [x["a"] for x in SHOTS[1:]]
 
@@ -170,54 +193,79 @@ def award(aid, t0, t1, n, frm, to, top=1500, pane=None):
     c.clip(aid, t0, t1, f'<div class="award" id="{aid}x" style="top:{top}px;left:{left}">{svg}<div><b>{n} base{"s" if n > 1 else ""}</b><span>awarded</span></div></div>', cls="layer", style="z-index:17")
     pop(f"#{aid}x", t0, 14)
 
-# 1 the hook
+# 1 the hook (captions carry the line; the hook title flashes on the freeze)
 big("hq", VFZ + 0.02, V1 - 0.02, '<span>One step</span><span>= <em>one extra base?</em></span>', 470)
-pinl("ph1", 0.25, 1.13, "His pivot foot, on the rubber", "pivot", "cy sm")
-pinl("ph2", 1.25, 1.93, "The runner takes his lead", "runner", "yl sm")
+pinl("ph1", 0.3, 0.98, "His pivot foot, on the rubber", "pivot", "cy sm")
+pinl("ph2", 1.05, 1.73, "The runner takes his lead", "runner", "yl sm")
 
 # 2 one base
-band("t2", V1 + 0.05, 9.13, [("1 · Stays on the rubber", True)])
-pinl("p2a", 5.1, 7.23, "Pivot foot: on the rubber", "pivot", "cy sm")
-pinl("p2b", 5.75, 7.23, "Steps directly toward first", "rubber", "sm")
-note("n2", S2F - 0.15, 7.23, "He throws <b>while his pivot foot is touching the rubber</b>: it's the pitcher's throw.", 1430)
-pinl("p2c", 7.75, 8.43, "Over the first baseman…", "b1", "sm")
-pinl("p2d", 8.5, 9.13, "…into the dugout", "dugout", "rd sm")
-stamp("s2", 9.35, 10.2, "Dead ball", "Out of play")
-big("a2", 10.5, V2 - 0.02, '<span>1 base</span><span><em>awarded</em></span>', 330, "sm")
-award("w2", 10.55, V2 - 0.02, 1, 1, 2, 1480)
+band("t2", V1 + 0.05, D2 - 0.02, [("1 · Stays on the rubber", True)])
+pinl("p2a", W("a2", "pivot") - 0.05, C2 - 0.02, "Pivot foot: on the rubber", "pivot", "cy sm")
+pinl("p2b", W("a2", "steps") - 0.05, C2 - 0.02, "Steps directly toward first", "rubber", "sm")
+pinl("p2c", C2 + 0.3, D2 - 0.02, "Over the first baseman…", "b1", "sm")
+stamp("s2", E2 + 0.15, F2 - 0.02, "Dead ball", "Out of play")
+big("a2", W("a4", "one") - 0.05, V2 - 0.02, '<span>1 base</span><span><em>awarded</em></span>', 560, "sm")
+award("w2", W("a4", "one"), V2 - 0.02, 1, 1, 2, 1480)
 
 # 3 two bases
-band("t3", V2 + 0.05, 18.88, [("2 · Disengages the rubber", True)])
-chip("c3", V2 + 0.15, 13.08, "Same pitcher · same runner · same throw", 1500)
-pinl("p3a", 13.2, S3F - 0.02, "Pivot foot steps <b>back</b> off the rubber", "pivot", "sm")
-pinl("p3b", S3F, 16.0 - 0.02, "Off the rubber, behind it", "gap", "rd sm")
-note("n3", S3F, 16.0 - 0.02, "The <b>pivot foot</b> steps backward first. Only then does he step toward first and throw.", 1430)
-pinl("p3c", 16.05, 17.08, "Now he throws", "pitcher", "sm")
-pinl("p3d", 18.25, 18.88, "…into the dugout", "dugout", "rd sm")
-stamp("s3", 19.15, 20.0, "Dead ball", "Out of play")
-big("a3", 20.3, V3 - 0.02, '<span>2 bases</span><span><em>awarded</em></span>', 330, "sm")
-award("w3", 20.35, V3 - 0.02, 2, 1, 3, 1480)
+band("t3", V2 + 0.05, F3 - 0.02, [("2 · Disengages the rubber", True)])
+chip("c3", V2 + 0.15, B3 - 0.02, "Same pitcher · same runner · same throw", 1500)
+chip("p3a", W("b2", "steps") - 0.1, S3B, "Pivot foot steps <b class=\"y\">back</b> off the rubber", 1440)
+pinl("p3b", S3B + 0.02, C3 - 0.02, "Off the rubber, behind it", "gap", "rd sm")
+pinl("p3c", C3 + 0.05, D3 - 0.02, "Now he throws", "pitcher", "sm")
+stamp("s3", F3 + 0.1, G3 - 0.02, "Dead ball", "Out of play")
+big("a3", W("b4", "two") - 0.05, V3 - 0.02, '<span>2 bases</span><span><em>awarded</em></span>', 560, "sm")
+award("w3", W("b4", "two"), V3 - 0.02, 2, 1, 3, 1480)
 
-# 4 why the rule changes
+# 4 why
 c.clip("vs4", V3, V4, '<div class="vseam"></div>', cls="layer", style="z-index:11")
-band("t4", V3 + 0.05, V4 - 0.02, [("Why the rule changes", True)], 70)
-plabel("l4a", V3 + 0.15, V4 - 0.02, 270, 250, "Pitcher", "cy")
-plabel("l4b", V3 + 0.25, V4 - 0.02, 810, 250, "Now treated as<br>an infielder<br>for the throw", "or")
-pinl("p4a", 22.6, V4 - 0.02, "On the rubber", "pivot", "cy sm", 0)
-pinl("p4b", 22.7, V4 - 0.02, "Off the rubber", "pivot", "rd sm", 1)
-RULE4 = 26.0
-plabel("r4a", RULE4, V4 - 0.02, 270, 1290, "Throw out of play<br><b>1 base</b>", "rule")
-plabel("r4b", RULE4 + 0.15, V4 - 0.02, 810, 1290, "Wild throw out of play<br><b>2 bases</b>", "rule or")
-award("w4a", RULE4 + 0.5, V4 - 0.02, 1, 1, 2, 1530, 0); award("w4b", RULE4 + 0.65, V4 - 0.02, 2, 1, 3, 1530, 1)
-note("n4", 27.2, V4 - 0.02, "Pivot foot touching the rubber: a <b>pitcher's</b> throw. Stepped backward off it: an <b>infielder's</b> throw.<br><i>MLB Official Baseball Rules 5.06(b)(4)(H), 5.07(e), 5.06(b)(4)(G)</i>", 1770)
+band("t4", V3 + 0.05, V4 - 0.02, [("Why the rule changes", True)], 60)
+plabel("l4a", V3 + 0.2, V4 - 0.02, 270, 470, "Pitcher", "cy")
+plabel("l4b", W("w1", "treats") - 0.05, V4 - 0.02, 810, 470, "Now treated as<br>an infielder<br>for the throw", "or")
+pinl("p4a", V3 + 0.4, V4 - 0.02, "On the rubber", "pivot", "cy sm", 0)
+pinl("p4b", W("w1", "disengages") - 0.05, V4 - 0.02, "Off the rubber", "pivot", "rd sm", 1)
+plabel("r4a", W("w2", "wild") - 0.05, V4 - 0.02, 270, 1290, "Throw out of play<br><b>1 base</b>", "rule")
+plabel("r4b", W("w2", "wild", nth=1) - 0.05, V4 - 0.02, 810, 1290, "Wild throw out of play<br><b>2 bases</b>", "rule or")
+award("w4a", W("w2", "rubber"), V4 - 0.02, 1, 1, 2, 1530, 0); award("w4b", W("w2", "infielder"), V4 - 0.02, 2, 1, 3, 1530, 1)
+note("n4", W("w2", "infielder") + 0.3, V4 - 0.02, "<i>MLB Official Baseball Rules 5.06(b)(4)(H), 5.07(e), 5.06(b)(4)(G)</i>", 1770)
 
-# 5 the ending
+# 5 payoff
 c.clip("vs5", V4, D, '<div class="vseam"></div>', cls="layer", style="z-index:11")
 pinl("p5a", V4 + 0.3, VBRAND - 0.02, "Ends at second", "base2", "yl sm", 0)
 pinl("p5b", V4 + 0.4, VBRAND - 0.02, "Ends at third", "base3", "yl sm", 1)
-plabel("l5a", V4 + 0.1, VBRAND - 0.02, 270, 1540, "On the rubber<br><b>1 base</b>", "rule")
-plabel("l5b", V4 + 0.2, VBRAND - 0.02, 810, 1540, "Off the rubber<br><b>2 bases</b>", "rule or")
-title("t5", V4 + 0.6, VBRAND - 0.02, [("Same throw.", False), ("Different rule.", True)], 250)
+plabel("l5a", W("p1", "different") - 0.05, VBRAND - 0.02, 270, 1540, "On the rubber<br><b>1 base</b>", "rule")
+plabel("l5b", W("p1", "foot") - 0.05, VBRAND - 0.02, 810, 1540, "Off the rubber<br><b>2 bases</b>", "rule or")
+title("t5", VEND, VBRAND - 0.02, [("Same throw.", False), ("Different rule.", True)], 300)
+
+# ----------------------------------------------------------------- captions: the voiceover, word by word
+A_ = "acc"
+CAPS = [("h1", 0, 2, {2: A_}), ("h1", 3, 6, {4: A_}), ("h1", 7, 10, {8: A_, 9: A_, 10: A_}),
+        ("a1", 0, 3, {}),
+        ("a2", 0, 3, {2: A_}), ("a2", 4, 8, {4: A_, 8: A_}), ("a2", 9, 11, {9: A_, 11: A_}), ("a2", 12, 16, {15: A_, 16: A_}),
+        ("a3", 0, 3, {3: A_}), ("a3", 4, 6, {6: A_}),
+        ("a4", 0, 3, {3: A_}), ("a4", 4, 6, {5: A_, 6: A_}),
+        ("b1", 0, 3, {3: A_}),
+        ("b2", 0, 1, {1: A_}), ("b2", 2, 4, {4: A_}), ("b2", 5, 9, {5: A_, 6: A_, 7: A_, 9: A_}), ("b2", 10, 13, {12: A_, 13: A_}),
+        ("b3", 0, 5, {2: A_, 5: A_}), ("b3", 6, 11, {9: A_, 10: A_, 11: A_}),
+        ("b4", 0, 1, {}), ("b4", 2, 6, {5: A_, 6: A_}),
+        ("w1", 0, 1, {}), ("w1", 2, 4, {4: A_}), ("w1", 5, 8, {6: A_}), ("w1", 9, 12, {11: A_}), ("w1", 13, 18, {15: A_}),
+        ("w2", 0, 4, {2: A_, 3: A_}), ("w2", 5, 7, {7: A_}), ("w2", 8, 12, {8: A_}), ("w2", 13, 15, {15: A_}),
+        ("p1", 0, 1, {1: A_}), ("p1", 2, 3, {3: A_}), ("p1", 4, 6, {5: A_, 6: A_}),
+        ("p2", 0, 3, {3: A_}), ("p2", 4, 8, {6: A_, 7: A_, 8: A_})]
+for k, (lid, i0, i1, acc) in enumerate(CAPS):
+    ln = LN(lid); wd = ln["words"]; i1 = min(i1, len(wd) - 1)
+    start = wd[i0]["t0"] - 0.06
+    if k + 1 < len(CAPS) and CAPS[k + 1][0] == lid: end = wd[CAPS[k + 1][1]]["t0"] - 0.06
+    elif IDX[lid] + 1 < len(TM["lines"]): end = min(ln["t1"] + 0.35, TM["lines"][IDX[lid] + 1]["t0"] - 0.1)
+    else: end = min(ln["t1"] + 0.3, VEND - 0.02)
+    if lid == "h1": end = min(end, VFZ - 0.02)
+    cid = f"cap{k}"; sp = []
+    for n in range(i0, i1 + 1):
+        w = wd[n]["w"]; w = w.rstrip(",:") if n == i1 and i1 > i0 else w
+        w = w.replace("'", "’")
+        sp.append(f'<span class="cw{(" " + acc[n]) if n in acc else ""}" id="{cid}w{n - i0}">{esc(w)}</span>')
+    c.clip(cid, start, end, f'<div class="cap" style="top:300px"><span class="cl">{" ".join(sp)}</span></div>', cls="layer", style="z-index:20")
+    for n in range(i0, i1 + 1): c.ft(f"#{cid}w{n - i0}", o(opacity=0, y=34, filter="blur(10px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.15, ease="power3.out"), wd[n]["t0"] - 0.04)
 
 c.clip("brand", VBRAND, D, """<div class="brand ov" id="brx"><div class="bmark"><svg viewBox="0 0 100 100" width="150" height="150"><circle cx="50" cy="50" r="44" fill="#f4f2ec" stroke="#05080d" stroke-width="3"/>
   <path d="M26 16 C40 34 40 66 26 84" fill="none" stroke="#ff6a3d" stroke-width="4" stroke-dasharray="6 5"/><path d="M74 16 C60 34 60 66 74 84" fill="none" stroke="#ff6a3d" stroke-width="4" stroke-dasharray="6 5"/></svg></div>
@@ -226,13 +274,13 @@ c.ft("#brx", o(opacity=0), o(opacity=1, duration=0.3), VBRAND)
 c.ft(".bmark", o(scale=0.4, rotation=-120), o(scale=1, rotation=0, duration=0.5, ease="back.out(1.6)"), VBRAND)
 c.ft(".bname", o(opacity=0, y=30), o(opacity=1, y=0, duration=0.3, ease="power3.out"), VBRAND + 0.15)
 
-# ----------------------------------------------------------------- sound (no voice: room left for a narrator)
+# ----------------------------------------------------------------- sound
 def cue(n, t, db=0.0):
     if t is not None and 0 <= t < D: c.cue(n, t, db)
 for t_ in CUTS: cue("whoosh", t_, -13)
 cue("riser-s", 0.0, -8); cue("riser-m", VFZ - 0.9, -9)
-for tt in [VFZ, V1 + 0.05, 9.35, 10.5, V2 + 0.05, 19.15, 20.3, V3 + 0.05, RULE4, V4 + 0.6]: cue("impact", tt, -6)
-for tt in [0.3, 1.25, 5.1, 5.75, 13.2, S3F, 22.6, 22.7]: cue("tick", tt, -10)
+for tt in [VFZ, V1 + 0.05, E2 + 0.15, W("a4", "one") - 0.05, V2 + 0.05, F3 + 0.1, W("b4", "two") - 0.05, V3 + 0.05, W("w2", "wild") - 0.05, VEND]: cue("impact", tt, -6)
+for tt in [0.3, 1.05, W("a2", "pivot") - 0.05, W("a2", "steps") - 0.05, W("b2", "steps") - 0.1, S3B, V3 + 0.4, W("w1", "disengages") - 0.05]: cue("tick", tt, -10)
 # the throws (release whoosh), the ball hitting the dugout wall, the runner's dive
 for sh in SHOTS:
     if "panes" in sh: continue
@@ -267,16 +315,23 @@ def mixdown():
         x = crack(rng, sp); i = int(vt_ * SR); j = min(n, i + len(x)); fx[i:j] += x[: j - i] * 10 ** (-4 / 20)
     crowd = read(os.path.join(HERE, "assets", "sfx", "crowd.wav")); crowd = np.concatenate([crowd] * (n // len(crowd) + 1))[:n]
     fx += crowd * 10 ** (-26 / 20)
-    bedp = os.path.join(HERE, "assets", "bed.wav"); make_bed(bedp, D, VBRAND, style="pulse", seed=181)
+    bedp = os.path.join(HERE, "assets", "bed.wav"); make_bed(bedp, D, VBRAND, style="pulse", seed=191)
     bed = read(bedp)[:n]; bed = np.pad(bed, ((0, n - len(bed)), (0, 0)))
     ramp = np.clip(np.arange(n) / SR / 3.0, 0.5, 1.0)[:, None]
-    full = (fx + bed * ramp * 10 ** (-16 / 20)) * 10 ** (-6 / 20)
+    vo = read(os.path.join(HERE, "assets", "vo", "vo.wav"))[:n]; vo = np.pad(vo, ((0, n - len(vo)), (0, 0)))
+    env = np.convolve(np.abs(vo).mean(1), np.ones(int(0.12 * SR)) / int(0.12 * SR), "same")
+    duck = 10 ** (-7 * np.clip(env / 0.05, 0, 1) / 20)
+    duck = np.convolve(duck, np.ones(int(0.08 * SR)) / int(0.08 * SR), "same")
+    music = bed * ramp * duck[:, None] * 10 ** (-17 / 20)
+    full = (fx + music) * 10 ** (-6 / 20) + vo
     def wav(path, x):
         w = wave.open(path, "wb"); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
         w.writeframes((np.clip(x * 0.5, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
-    pre = os.path.join(HERE, ".pre.wav"); wav(pre, full)
-    m = master(pre, os.path.join(HERE, "assets", "mix.wav"), target=-20.0)
-    os.remove(pre)
+    pre, pfx = os.path.join(HERE, ".pre.wav"), os.path.join(HERE, ".fx.wav")
+    wav(pre, full); wav(pfx, (fx + bed * ramp * 10 ** (-17 / 20)) * 10 ** (-6 / 20))
+    m = master(pre, os.path.join(HERE, "assets", "mix.wav"))
+    master(pre, os.path.join(HERE, "assets", "mix-novo.wav"), fx_path=pfx)
+    os.remove(pre); os.remove(pfx)
     return m
 
 # ----------------------------------------------------------------- CSS
@@ -492,6 +547,9 @@ CSS += f"""
 .award {{ position:absolute; transform:translateX(-50%); display:flex; align-items:center; gap:18px; padding:12px 26px 12px 14px; border-radius:18px; background:rgba(6,10,18,.88); }}
 .award div {{ display:grid; {BC} line-height:.95; }} .award b {{ font-size:70px; color:{Y}; white-space:nowrap; }} .award span {{ font-size:36px; color:#dfe5ec; }}
 .stampc {{ top:760px; }} .stampc b {{ font-size:220px; color:#fff; }} .stampc span {{ color:{RED}; }}
+.cap {{ position:absolute; left:52px; right:40px; }}
+.cap .cl {{ display:block; {BC} font-size:88px; line-height:.96; color:#fff; text-shadow:0 6px 28px rgba(0,0,0,.8), 0 2px 4px rgba(0,0,0,.7); }}
+.cap .cw {{ display:inline-block; }} .cap .cw.acc {{ color:{HOT}; }}
 .note i {{ display:block; margin-top:6px; font-style:normal; font-size:22px; color:{MUTED}; font-weight:700; }}
 """
 
@@ -508,8 +566,12 @@ if __name__ == "__main__":
         '<script src="assets/vendor/gsap.min.js"></script>\n    ' + HEAD + f'\n    <script>window.__CC = {json.dumps(cc)}; window.__PLAY = {json.dumps(P)};</script>')
     h = h.replace("</body>", '  <script type="module" src="./assets/field.js"></script>\n  </body>')
     open(os.path.join(HERE, "index.html"), "w").write(h)
-    lines = ["# Scene timing", "", f"The video is {D:.1f} s, music and effects only. Record a narration inside each scene (times in seconds).", "",
-             "| From | To | Scene | Shots | On screen |", "|---|---|---|---|---|"] + [f"| {a:.1f} | {b:.1f} | {n} | {d} | {t} |" for a, b, n, d, t in SCENES]
+    lines = ["# Voiceover cues", "", f"The video is {D:.1f} s. To record your own read over `assets/mix-novo.wav`, start each line at its time (seconds).", "",
+             "| Start | End | Scene | Line |", "|---|---|---|---|"]
+    for a, b, name, desc, _ in SCENES:
+        for ln in TM["lines"]:
+            if a - 0.01 <= ln["t0"] < b: lines.append(f"| {ln['t0']:.2f} | {ln['t1']:.2f} | {name} | {ln['text']} |")
+    lines += ["", "## Scenes", "", "| From | To | Scene | Shots | On screen |", "|---|---|---|---|---|"] + [f"| {a:.2f} | {b:.2f} | {n} | {d} | {t} |" for a, b, n, d, t in SCENES]
     open(os.path.join(HERE, "CUES.md"), "w").write("\n".join(lines) + "\n")
     if "--nomix" not in sys.argv:
         m = mixdown(); print(f"index.html: {D}s, {len(SHOTS)} shots; {len(c.cues)} sounds; {m['lufs']} LUFS / {m['true_peak']} dBTP")

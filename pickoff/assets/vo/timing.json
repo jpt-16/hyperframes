@@ -1,0 +1,805 @@
+{
+ "duration": 38.41,
+ "lines": [
+  {
+   "i": 0,
+   "id": "h1",
+   "text": "One tiny step can cost a team an ENTIRE extra base.",
+   "spoken": "One tiny step can cost a team an entire extra base.",
+   "t0": 0.3,
+   "t1": 2.607,
+   "words": [
+    {
+     "w": "One",
+     "t0": 0.328,
+     "t1": 0.428
+    },
+    {
+     "w": "tiny",
+     "t0": 0.478,
+     "t1": 0.653
+    },
+    {
+     "w": "step",
+     "t0": 0.678,
+     "t1": 0.828
+    },
+    {
+     "w": "can",
+     "t0": 0.853,
+     "t1": 0.928
+    },
+    {
+     "w": "cost",
+     "t0": 0.953,
+     "t1": 1.153
+    },
+    {
+     "w": "a",
+     "t0": 1.153,
+     "t1": 1.153
+    },
+    {
+     "w": "team",
+     "t0": 1.203,
+     "t1": 1.628
+    },
+    {
+     "w": "an",
+     "t0": 1.628,
+     "t1": 1.653
+    },
+    {
+     "w": "entire",
+     "t0": 1.678,
+     "t1": 2.028
+    },
+    {
+     "w": "extra",
+     "t0": 2.103,
+     "t1": 2.253
+    },
+    {
+     "w": "base.",
+     "t0": 2.278,
+     "t1": 2.627
+    }
+   ]
+  },
+  {
+   "i": 1,
+   "id": "a1",
+   "text": "Watch what happens here.",
+   "spoken": "Watch what happens here.",
+   "t0": 4.0,
+   "t1": 4.87,
+   "words": [
+    {
+     "w": "Watch",
+     "t0": 4.054,
+     "t1": 4.23
+    },
+    {
+     "w": "what",
+     "t0": 4.254,
+     "t1": 4.33
+    },
+    {
+     "w": "happens",
+     "t0": 4.354,
+     "t1": 4.604
+    },
+    {
+     "w": "here.",
+     "t0": 4.63,
+     "t1": 5.004
+    }
+   ]
+  },
+  {
+   "i": 2,
+   "id": "a2",
+   "text": "The pitcher keeps his pivot foot on the rubber, steps toward first, and makes a pickoff throw.",
+   "spoken": "The pitcher keeps his pivot foot on the rubber, steps toward first, and makes a pickoff throw.",
+   "t0": 5.07,
+   "t1": 8.524,
+   "words": [
+    {
+     "w": "The",
+     "t0": 5.093,
+     "t1": 5.143
+    },
+    {
+     "w": "pitcher",
+     "t0": 5.193,
+     "t1": 5.418
+    },
+    {
+     "w": "keeps",
+     "t0": 5.468,
+     "t1": 5.618
+    },
+    {
+     "w": "his",
+     "t0": 5.643,
+     "t1": 5.718
+    },
+    {
+     "w": "pivot",
+     "t0": 5.768,
+     "t1": 5.918
+    },
+    {
+     "w": "foot",
+     "t0": 5.993,
+     "t1": 6.118
+    },
+    {
+     "w": "on",
+     "t0": 6.168,
+     "t1": 6.218
+    },
+    {
+     "w": "the",
+     "t0": 6.218,
+     "t1": 6.268
+    },
+    {
+     "w": "rubber,",
+     "t0": 6.318,
+     "t1": 6.693
+    },
+    {
+     "w": "steps",
+     "t0": 6.818,
+     "t1": 6.968
+    },
+    {
+     "w": "toward",
+     "t0": 6.993,
+     "t1": 7.193
+    },
+    {
+     "w": "first,",
+     "t0": 7.268,
+     "t1": 7.518
+    },
+    {
+     "w": "and",
+     "t0": 7.568,
+     "t1": 7.643
+    },
+    {
+     "w": "makes",
+     "t0": 7.668,
+     "t1": 7.868
+    },
+    {
+     "w": "a",
+     "t0": 7.868,
+     "t1": 7.868
+    },
+    {
+     "w": "pickoff",
+     "t0": 7.918,
+     "t1": 8.193
+    },
+    {
+     "w": "throw.",
+     "t0": 8.243,
+     "t1": 8.573
+    }
+   ]
+  },
+  {
+   "i": 3,
+   "id": "a3",
+   "text": "But the ball sails into the dugout.",
+   "spoken": "But the ball sails into the dugout.",
+   "t0": 8.774,
+   "t1": 10.048,
+   "words": [
+    {
+     "w": "But",
+     "t0": 8.792,
+     "t1": 8.892
+    },
+    {
+     "w": "the",
+     "t0": 8.917,
+     "t1": 8.967
+    },
+    {
+     "w": "ball",
+     "t0": 9.017,
+     "t1": 9.167
+    },
+    {
+     "w": "sails",
+     "t0": 9.242,
+     "t1": 9.492
+    },
+    {
+     "w": "into",
+     "t0": 9.542,
+     "t1": 9.642
+    },
+    {
+     "w": "the",
+     "t0": 9.667,
+     "t1": 9.717
+    },
+    {
+     "w": "dugout.",
+     "t0": 9.767,
+     "t1": 10.203
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "id": "a4",
+   "text": "The runner is awarded just ONE base.",
+   "spoken": "The runner is awarded just one base.",
+   "t0": 10.498,
+   "t1": 11.989,
+   "words": [
+    {
+     "w": "The",
+     "t0": 10.536,
+     "t1": 10.586
+    },
+    {
+     "w": "runner",
+     "t0": 10.636,
+     "t1": 10.861
+    },
+    {
+     "w": "is",
+     "t0": 10.911,
+     "t1": 10.961
+    },
+    {
+     "w": "awarded",
+     "t0": 10.986,
+     "t1": 11.286
+    },
+    {
+     "w": "just",
+     "t0": 11.336,
+     "t1": 11.486
+    },
+    {
+     "w": "one",
+     "t0": 11.536,
+     "t1": 11.636
+    },
+    {
+     "w": "base.",
+     "t0": 11.661,
+     "t1": 12.092
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "id": "b1",
+   "text": "Now watch the difference.",
+   "spoken": "Now watch the difference.",
+   "t0": 12.7,
+   "t1": 13.627,
+   "words": [
+    {
+     "w": "Now",
+     "t0": 12.755,
+     "t1": 12.88
+    },
+    {
+     "w": "watch",
+     "t0": 12.93,
+     "t1": 13.105
+    },
+    {
+     "w": "the",
+     "t0": 13.13,
+     "t1": 13.18
+    },
+    {
+     "w": "difference.",
+     "t0": 13.205,
+     "t1": 13.755
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "id": "b2",
+   "text": "Before throwing, the pitcher legally steps backward off the rubber with his pivot foot.",
+   "spoken": "Before throwing, the pitcher legally steps backward off the rubber with his pivot foot.",
+   "t0": 13.826,
+   "t1": 16.958,
+   "words": [
+    {
+     "w": "Before",
+     "t0": 13.829,
+     "t1": 14.029
+    },
+    {
+     "w": "throwing,",
+     "t0": 14.104,
+     "t1": 14.629
+    },
+    {
+     "w": "the",
+     "t0": 14.704,
+     "t1": 14.754
+    },
+    {
+     "w": "pitcher",
+     "t0": 14.779,
+     "t1": 15.004
+    },
+    {
+     "w": "legally",
+     "t0": 15.054,
+     "t1": 15.279
+    },
+    {
+     "w": "steps",
+     "t0": 15.304,
+     "t1": 15.479
+    },
+    {
+     "w": "backward",
+     "t0": 15.529,
+     "t1": 15.829
+    },
+    {
+     "w": "off",
+     "t0": 15.904,
+     "t1": 15.954
+    },
+    {
+     "w": "the",
+     "t0": 15.979,
+     "t1": 16.029
+    },
+    {
+     "w": "rubber",
+     "t0": 16.079,
+     "t1": 16.279
+    },
+    {
+     "w": "with",
+     "t0": 16.304,
+     "t1": 16.379
+    },
+    {
+     "w": "his",
+     "t0": 16.404,
+     "t1": 16.479
+    },
+    {
+     "w": "pivot",
+     "t0": 16.529,
+     "t1": 16.704
+    },
+    {
+     "w": "foot.",
+     "t0": 16.779,
+     "t1": 17.01
+    }
+   ]
+  },
+  {
+   "i": 7,
+   "id": "b3",
+   "text": "He then throws the ball away, and it goes out of play.",
+   "spoken": "He then throws the ball away, and it goes out of play.",
+   "t0": 17.308,
+   "t1": 19.43,
+   "words": [
+    {
+     "w": "He",
+     "t0": 17.312,
+     "t1": 17.387
+    },
+    {
+     "w": "then",
+     "t0": 17.412,
+     "t1": 17.512
+    },
+    {
+     "w": "throws",
+     "t0": 17.587,
+     "t1": 17.837
+    },
+    {
+     "w": "the",
+     "t0": 17.862,
+     "t1": 17.912
+    },
+    {
+     "w": "ball",
+     "t0": 17.962,
+     "t1": 18.112
+    },
+    {
+     "w": "away,",
+     "t0": 18.137,
+     "t1": 18.537
+    },
+    {
+     "w": "and",
+     "t0": 18.612,
+     "t1": 18.687
+    },
+    {
+     "w": "it",
+     "t0": 18.712,
+     "t1": 18.762
+    },
+    {
+     "w": "goes",
+     "t0": 18.787,
+     "t1": 18.937
+    },
+    {
+     "w": "out",
+     "t0": 18.987,
+     "t1": 19.087
+    },
+    {
+     "w": "of",
+     "t0": 19.087,
+     "t1": 19.112
+    },
+    {
+     "w": "play.",
+     "t0": 19.162,
+     "t1": 19.469
+    }
+   ]
+  },
+  {
+   "i": 8,
+   "id": "b4",
+   "text": "This time, the runner gets TWO bases.",
+   "spoken": "This time, the runner gets two bases.",
+   "t0": 19.98,
+   "t1": 21.403,
+   "words": [
+    {
+     "w": "This",
+     "t0": 20.008,
+     "t1": 20.108
+    },
+    {
+     "w": "time,",
+     "t0": 20.134,
+     "t1": 20.384
+    },
+    {
+     "w": "the",
+     "t0": 20.434,
+     "t1": 20.484
+    },
+    {
+     "w": "runner",
+     "t0": 20.534,
+     "t1": 20.708
+    },
+    {
+     "w": "gets",
+     "t0": 20.734,
+     "t1": 20.858
+    },
+    {
+     "w": "two",
+     "t0": 20.908,
+     "t1": 21.008
+    },
+    {
+     "w": "bases.",
+     "t0": 21.034,
+     "t1": 21.584
+    }
+   ]
+  },
+  {
+   "i": 9,
+   "id": "w1",
+   "text": "It\u2019s because once the pitcher legally disengages the rubber, the rule treats him as an infielder for that throw.",
+   "spoken": "It's because once the pitcher legally disengages the rubber, the rule treats him as an infielder for that throw.",
+   "t0": 22.4,
+   "t1": 26.539,
+   "words": [
+    {
+     "w": "It's",
+     "t0": 22.361,
+     "t1": 22.416
+    },
+    {
+     "w": "because",
+     "t0": 22.441,
+     "t1": 22.666
+    },
+    {
+     "w": "once",
+     "t0": 22.716,
+     "t1": 22.841
+    },
+    {
+     "w": "the",
+     "t0": 22.866,
+     "t1": 22.916
+    },
+    {
+     "w": "pitcher",
+     "t0": 22.966,
+     "t1": 23.216
+    },
+    {
+     "w": "legally",
+     "t0": 23.291,
+     "t1": 23.541
+    },
+    {
+     "w": "disengages",
+     "t0": 23.566,
+     "t1": 24.041
+    },
+    {
+     "w": "the",
+     "t0": 24.066,
+     "t1": 24.116
+    },
+    {
+     "w": "rubber,",
+     "t0": 24.166,
+     "t1": 24.591
+    },
+    {
+     "w": "the",
+     "t0": 24.691,
+     "t1": 24.741
+    },
+    {
+     "w": "rule",
+     "t0": 24.791,
+     "t1": 24.991
+    },
+    {
+     "w": "treats",
+     "t0": 25.041,
+     "t1": 25.241
+    },
+    {
+     "w": "him",
+     "t0": 25.266,
+     "t1": 25.391
+    },
+    {
+     "w": "as",
+     "t0": 25.441,
+     "t1": 25.541
+    },
+    {
+     "w": "an",
+     "t0": 25.541,
+     "t1": 25.566
+    },
+    {
+     "w": "infielder",
+     "t0": 25.591,
+     "t1": 25.966
+    },
+    {
+     "w": "for",
+     "t0": 25.991,
+     "t1": 26.091
+    },
+    {
+     "w": "that",
+     "t0": 26.116,
+     "t1": 26.216
+    },
+    {
+     "w": "throw.",
+     "t0": 26.266,
+     "t1": 26.585
+    }
+   ]
+  },
+  {
+   "i": 10,
+   "id": "w2",
+   "text": "So a wild throw off the rubber is treated like a wild throw by another infielder.",
+   "spoken": "So a wild throw off the rubber is treated like a wild throw by another infielder.",
+   "t0": 26.789,
+   "t1": 30.168,
+   "words": [
+    {
+     "w": "So",
+     "t0": 26.84,
+     "t1": 26.99
+    },
+    {
+     "w": "a",
+     "t0": 26.99,
+     "t1": 26.99
+    },
+    {
+     "w": "wild",
+     "t0": 27.04,
+     "t1": 27.29
+    },
+    {
+     "w": "throw",
+     "t0": 27.34,
+     "t1": 27.565
+    },
+    {
+     "w": "off",
+     "t0": 27.665,
+     "t1": 27.715
+    },
+    {
+     "w": "the",
+     "t0": 27.74,
+     "t1": 27.79
+    },
+    {
+     "w": "rubber",
+     "t0": 27.84,
+     "t1": 27.99
+    },
+    {
+     "w": "is",
+     "t0": 28.015,
+     "t1": 28.065
+    },
+    {
+     "w": "treated",
+     "t0": 28.115,
+     "t1": 28.365
+    },
+    {
+     "w": "like",
+     "t0": 28.39,
+     "t1": 28.565
+    },
+    {
+     "w": "a",
+     "t0": 28.565,
+     "t1": 28.565
+    },
+    {
+     "w": "wild",
+     "t0": 28.615,
+     "t1": 28.865
+    },
+    {
+     "w": "throw",
+     "t0": 28.915,
+     "t1": 29.365
+    },
+    {
+     "w": "by",
+     "t0": 29.44,
+     "t1": 29.54
+    },
+    {
+     "w": "another",
+     "t0": 29.565,
+     "t1": 29.74
+    },
+    {
+     "w": "infielder.",
+     "t0": 29.765,
+     "t1": 30.274
+    }
+   ]
+  },
+  {
+   "i": 11,
+   "id": "p1",
+   "text": "Same pitcher. Same target. Different foot position.",
+   "spoken": "Same pitcher. Same target. Different foot position.",
+   "t0": 31.6,
+   "t1": 33.598,
+   "words": [
+    {
+     "w": "Same",
+     "t0": 31.643,
+     "t1": 31.768
+    },
+    {
+     "w": "pitcher.",
+     "t0": 31.793,
+     "t1": 32.143
+    },
+    {
+     "w": "Same",
+     "t0": 32.268,
+     "t1": 32.418
+    },
+    {
+     "w": "target.",
+     "t0": 32.468,
+     "t1": 32.793
+    },
+    {
+     "w": "Different",
+     "t0": 32.868,
+     "t1": 33.068
+    },
+    {
+     "w": "foot",
+     "t0": 33.118,
+     "t1": 33.218
+    },
+    {
+     "w": "position.",
+     "t0": 33.243,
+     "t1": 33.643
+    }
+   ]
+  },
+  {
+   "i": 12,
+   "id": "p2",
+   "text": "And that one detail changes the entire base award.",
+   "spoken": "And that one detail changes the entire base award.",
+   "t0": 33.848,
+   "t1": 35.912,
+   "words": [
+    {
+     "w": "And",
+     "t0": 33.857,
+     "t1": 33.932
+    },
+    {
+     "w": "that",
+     "t0": 33.957,
+     "t1": 34.107
+    },
+    {
+     "w": "one",
+     "t0": 34.107,
+     "t1": 34.207
+    },
+    {
+     "w": "detail",
+     "t0": 34.232,
+     "t1": 34.607
+    },
+    {
+     "w": "changes",
+     "t0": 34.657,
+     "t1": 34.932
+    },
+    {
+     "w": "the",
+     "t0": 34.957,
+     "t1": 35.007
+    },
+    {
+     "w": "entire",
+     "t0": 35.032,
+     "t1": 35.357
+    },
+    {
+     "w": "base",
+     "t0": 35.407,
+     "t1": 35.582
+    },
+    {
+     "w": "award.",
+     "t0": 35.607,
+     "t1": 36.053
+    }
+   ]
+  }
+ ]
+}

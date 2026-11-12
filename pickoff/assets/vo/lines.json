@@ -1,0 +1,789 @@
+[
+ {
+  "i": 0,
+  "id": "h1",
+  "text": "One tiny step can cost a team an ENTIRE extra base.",
+  "spoken": "One tiny step can cost a team an entire extra base.",
+  "dur": 2.347,
+  "words": [
+   {
+    "w": "One",
+    "start": 0.048,
+    "end": 0.148
+   },
+   {
+    "w": "tiny",
+    "start": 0.198,
+    "end": 0.373
+   },
+   {
+    "w": "step",
+    "start": 0.398,
+    "end": 0.548
+   },
+   {
+    "w": "can",
+    "start": 0.573,
+    "end": 0.648
+   },
+   {
+    "w": "cost",
+    "start": 0.673,
+    "end": 0.873
+   },
+   {
+    "w": "a",
+    "start": 0.873,
+    "end": 0.873
+   },
+   {
+    "w": "team",
+    "start": 0.923,
+    "end": 1.348
+   },
+   {
+    "w": "an",
+    "start": 1.348,
+    "end": 1.373
+   },
+   {
+    "w": "entire",
+    "start": 1.398,
+    "end": 1.748
+   },
+   {
+    "w": "extra",
+    "start": 1.823,
+    "end": 1.973
+   },
+   {
+    "w": "base.",
+    "start": 1.998,
+    "end": 2.347
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "a1",
+  "text": "Watch what happens here.",
+  "spoken": "Watch what happens here.",
+  "dur": 1.045,
+  "words": [
+   {
+    "w": "Watch",
+    "start": 0.09,
+    "end": 0.265
+   },
+   {
+    "w": "what",
+    "start": 0.29,
+    "end": 0.365
+   },
+   {
+    "w": "happens",
+    "start": 0.39,
+    "end": 0.64
+   },
+   {
+    "w": "here.",
+    "start": 0.665,
+    "end": 1.04
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "a2",
+  "text": "The pitcher keeps his pivot foot on the rubber, steps toward first, and makes a pickoff throw.",
+  "spoken": "The pitcher keeps his pivot foot on the rubber, steps toward first, and makes a pickoff throw.",
+  "dur": 3.52,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.04,
+    "end": 0.09
+   },
+   {
+    "w": "pitcher",
+    "start": 0.14,
+    "end": 0.365
+   },
+   {
+    "w": "keeps",
+    "start": 0.415,
+    "end": 0.565
+   },
+   {
+    "w": "his",
+    "start": 0.59,
+    "end": 0.665
+   },
+   {
+    "w": "pivot",
+    "start": 0.715,
+    "end": 0.865
+   },
+   {
+    "w": "foot",
+    "start": 0.94,
+    "end": 1.065
+   },
+   {
+    "w": "on",
+    "start": 1.115,
+    "end": 1.165
+   },
+   {
+    "w": "the",
+    "start": 1.165,
+    "end": 1.215
+   },
+   {
+    "w": "rubber,",
+    "start": 1.265,
+    "end": 1.64
+   },
+   {
+    "w": "steps",
+    "start": 1.765,
+    "end": 1.915
+   },
+   {
+    "w": "toward",
+    "start": 1.94,
+    "end": 2.14
+   },
+   {
+    "w": "first,",
+    "start": 2.215,
+    "end": 2.465
+   },
+   {
+    "w": "and",
+    "start": 2.515,
+    "end": 2.59
+   },
+   {
+    "w": "makes",
+    "start": 2.615,
+    "end": 2.815
+   },
+   {
+    "w": "a",
+    "start": 2.815,
+    "end": 2.815
+   },
+   {
+    "w": "pickoff",
+    "start": 2.865,
+    "end": 3.14
+   },
+   {
+    "w": "throw.",
+    "start": 3.19,
+    "end": 3.52
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "a3",
+  "text": "But the ball sails into the dugout.",
+  "spoken": "But the ball sails into the dugout.",
+  "dur": 1.451,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.04,
+    "end": 0.14
+   },
+   {
+    "w": "the",
+    "start": 0.165,
+    "end": 0.215
+   },
+   {
+    "w": "ball",
+    "start": 0.265,
+    "end": 0.415
+   },
+   {
+    "w": "sails",
+    "start": 0.49,
+    "end": 0.74
+   },
+   {
+    "w": "into",
+    "start": 0.79,
+    "end": 0.89
+   },
+   {
+    "w": "the",
+    "start": 0.915,
+    "end": 0.965
+   },
+   {
+    "w": "dugout.",
+    "start": 1.015,
+    "end": 1.451
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "a4",
+  "text": "The runner is awarded just ONE base.",
+  "spoken": "The runner is awarded just one base.",
+  "dur": 1.6,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.044,
+    "end": 0.094
+   },
+   {
+    "w": "runner",
+    "start": 0.144,
+    "end": 0.369
+   },
+   {
+    "w": "is",
+    "start": 0.419,
+    "end": 0.469
+   },
+   {
+    "w": "awarded",
+    "start": 0.494,
+    "end": 0.794
+   },
+   {
+    "w": "just",
+    "start": 0.844,
+    "end": 0.994
+   },
+   {
+    "w": "one",
+    "start": 1.044,
+    "end": 1.144
+   },
+   {
+    "w": "base.",
+    "start": 1.169,
+    "end": 1.6
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "b1",
+  "text": "Now watch the difference.",
+  "spoken": "Now watch the difference.",
+  "dur": 1.067,
+  "words": [
+   {
+    "w": "Now",
+    "start": 0.065,
+    "end": 0.19
+   },
+   {
+    "w": "watch",
+    "start": 0.24,
+    "end": 0.415
+   },
+   {
+    "w": "the",
+    "start": 0.44,
+    "end": 0.49
+   },
+   {
+    "w": "difference.",
+    "start": 0.515,
+    "end": 1.065
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "b2",
+  "text": "Before throwing, the pitcher legally steps backward off the rubber with his pivot foot.",
+  "spoken": "Before throwing, the pitcher legally steps backward off the rubber with his pivot foot.",
+  "dur": 3.2,
+  "words": [
+   {
+    "w": "Before",
+    "start": 0.019,
+    "end": 0.219
+   },
+   {
+    "w": "throwing,",
+    "start": 0.294,
+    "end": 0.819
+   },
+   {
+    "w": "the",
+    "start": 0.894,
+    "end": 0.944
+   },
+   {
+    "w": "pitcher",
+    "start": 0.969,
+    "end": 1.194
+   },
+   {
+    "w": "legally",
+    "start": 1.244,
+    "end": 1.469
+   },
+   {
+    "w": "steps",
+    "start": 1.494,
+    "end": 1.669
+   },
+   {
+    "w": "backward",
+    "start": 1.719,
+    "end": 2.019
+   },
+   {
+    "w": "off",
+    "start": 2.094,
+    "end": 2.144
+   },
+   {
+    "w": "the",
+    "start": 2.169,
+    "end": 2.219
+   },
+   {
+    "w": "rubber",
+    "start": 2.269,
+    "end": 2.469
+   },
+   {
+    "w": "with",
+    "start": 2.494,
+    "end": 2.569
+   },
+   {
+    "w": "his",
+    "start": 2.594,
+    "end": 2.669
+   },
+   {
+    "w": "pivot",
+    "start": 2.719,
+    "end": 2.894
+   },
+   {
+    "w": "foot.",
+    "start": 2.969,
+    "end": 3.2
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "b3",
+  "text": "He then throws the ball away, and it goes out of play.",
+  "spoken": "He then throws the ball away, and it goes out of play.",
+  "dur": 2.176,
+  "words": [
+   {
+    "w": "He",
+    "start": 0.019,
+    "end": 0.094
+   },
+   {
+    "w": "then",
+    "start": 0.119,
+    "end": 0.219
+   },
+   {
+    "w": "throws",
+    "start": 0.294,
+    "end": 0.544
+   },
+   {
+    "w": "the",
+    "start": 0.569,
+    "end": 0.619
+   },
+   {
+    "w": "ball",
+    "start": 0.669,
+    "end": 0.819
+   },
+   {
+    "w": "away,",
+    "start": 0.844,
+    "end": 1.244
+   },
+   {
+    "w": "and",
+    "start": 1.319,
+    "end": 1.394
+   },
+   {
+    "w": "it",
+    "start": 1.419,
+    "end": 1.469
+   },
+   {
+    "w": "goes",
+    "start": 1.494,
+    "end": 1.644
+   },
+   {
+    "w": "out",
+    "start": 1.694,
+    "end": 1.794
+   },
+   {
+    "w": "of",
+    "start": 1.794,
+    "end": 1.819
+   },
+   {
+    "w": "play.",
+    "start": 1.869,
+    "end": 2.176
+   }
+  ]
+ },
+ {
+  "i": 8,
+  "id": "b4",
+  "text": "This time, the runner gets TWO bases.",
+  "spoken": "This time, the runner gets two bases.",
+  "dur": 1.621,
+  "words": [
+   {
+    "w": "This",
+    "start": 0.044,
+    "end": 0.144
+   },
+   {
+    "w": "time,",
+    "start": 0.169,
+    "end": 0.419
+   },
+   {
+    "w": "the",
+    "start": 0.469,
+    "end": 0.519
+   },
+   {
+    "w": "runner",
+    "start": 0.569,
+    "end": 0.744
+   },
+   {
+    "w": "gets",
+    "start": 0.769,
+    "end": 0.894
+   },
+   {
+    "w": "two",
+    "start": 0.944,
+    "end": 1.044
+   },
+   {
+    "w": "bases.",
+    "start": 1.069,
+    "end": 1.619
+   }
+  ]
+ },
+ {
+  "i": 9,
+  "id": "w1",
+  "text": "It\u2019s because once the pitcher legally disengages the rubber, the rule treats him as an infielder for that throw.",
+  "spoken": "It's because once the pitcher legally disengages the rubber, the rule treats him as an infielder for that throw.",
+  "dur": 4.224,
+  "words": [
+   {
+    "w": "It's",
+    "start": 0.0,
+    "end": 0.055
+   },
+   {
+    "w": "because",
+    "start": 0.08,
+    "end": 0.305
+   },
+   {
+    "w": "once",
+    "start": 0.355,
+    "end": 0.48
+   },
+   {
+    "w": "the",
+    "start": 0.505,
+    "end": 0.555
+   },
+   {
+    "w": "pitcher",
+    "start": 0.605,
+    "end": 0.855
+   },
+   {
+    "w": "legally",
+    "start": 0.93,
+    "end": 1.18
+   },
+   {
+    "w": "disengages",
+    "start": 1.205,
+    "end": 1.68
+   },
+   {
+    "w": "the",
+    "start": 1.705,
+    "end": 1.755
+   },
+   {
+    "w": "rubber,",
+    "start": 1.805,
+    "end": 2.23
+   },
+   {
+    "w": "the",
+    "start": 2.33,
+    "end": 2.38
+   },
+   {
+    "w": "rule",
+    "start": 2.43,
+    "end": 2.63
+   },
+   {
+    "w": "treats",
+    "start": 2.68,
+    "end": 2.88
+   },
+   {
+    "w": "him",
+    "start": 2.905,
+    "end": 3.03
+   },
+   {
+    "w": "as",
+    "start": 3.08,
+    "end": 3.18
+   },
+   {
+    "w": "an",
+    "start": 3.18,
+    "end": 3.205
+   },
+   {
+    "w": "infielder",
+    "start": 3.23,
+    "end": 3.605
+   },
+   {
+    "w": "for",
+    "start": 3.63,
+    "end": 3.73
+   },
+   {
+    "w": "that",
+    "start": 3.755,
+    "end": 3.855
+   },
+   {
+    "w": "throw.",
+    "start": 3.905,
+    "end": 4.224
+   }
+  ]
+ },
+ {
+  "i": 10,
+  "id": "w2",
+  "text": "So a wild throw off the rubber is treated like a wild throw by another infielder.",
+  "spoken": "So a wild throw off the rubber is treated like a wild throw by another infielder.",
+  "dur": 3.499,
+  "words": [
+   {
+    "w": "So",
+    "start": 0.065,
+    "end": 0.215
+   },
+   {
+    "w": "a",
+    "start": 0.215,
+    "end": 0.215
+   },
+   {
+    "w": "wild",
+    "start": 0.265,
+    "end": 0.515
+   },
+   {
+    "w": "throw",
+    "start": 0.565,
+    "end": 0.79
+   },
+   {
+    "w": "off",
+    "start": 0.89,
+    "end": 0.94
+   },
+   {
+    "w": "the",
+    "start": 0.965,
+    "end": 1.015
+   },
+   {
+    "w": "rubber",
+    "start": 1.065,
+    "end": 1.215
+   },
+   {
+    "w": "is",
+    "start": 1.24,
+    "end": 1.29
+   },
+   {
+    "w": "treated",
+    "start": 1.34,
+    "end": 1.59
+   },
+   {
+    "w": "like",
+    "start": 1.615,
+    "end": 1.79
+   },
+   {
+    "w": "a",
+    "start": 1.79,
+    "end": 1.79
+   },
+   {
+    "w": "wild",
+    "start": 1.84,
+    "end": 2.09
+   },
+   {
+    "w": "throw",
+    "start": 2.14,
+    "end": 2.59
+   },
+   {
+    "w": "by",
+    "start": 2.665,
+    "end": 2.765
+   },
+   {
+    "w": "another",
+    "start": 2.79,
+    "end": 2.965
+   },
+   {
+    "w": "infielder.",
+    "start": 2.99,
+    "end": 3.499
+   }
+  ]
+ },
+ {
+  "i": 11,
+  "id": "p1",
+  "text": "Same pitcher. Same target. Different foot position.",
+  "spoken": "Same pitcher. Same target. Different foot position.",
+  "dur": 2.069,
+  "words": [
+   {
+    "w": "Same",
+    "start": 0.069,
+    "end": 0.194
+   },
+   {
+    "w": "pitcher.",
+    "start": 0.219,
+    "end": 0.569
+   },
+   {
+    "w": "Same",
+    "start": 0.694,
+    "end": 0.844
+   },
+   {
+    "w": "target.",
+    "start": 0.894,
+    "end": 1.219
+   },
+   {
+    "w": "Different",
+    "start": 1.294,
+    "end": 1.494
+   },
+   {
+    "w": "foot",
+    "start": 1.544,
+    "end": 1.644
+   },
+   {
+    "w": "position.",
+    "start": 1.669,
+    "end": 2.069
+   }
+  ]
+ },
+ {
+  "i": 12,
+  "id": "p2",
+  "text": "And that one detail changes the entire base award.",
+  "spoken": "And that one detail changes the entire base award.",
+  "dur": 2.219,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.023,
+    "end": 0.098
+   },
+   {
+    "w": "that",
+    "start": 0.123,
+    "end": 0.273
+   },
+   {
+    "w": "one",
+    "start": 0.273,
+    "end": 0.373
+   },
+   {
+    "w": "detail",
+    "start": 0.398,
+    "end": 0.773
+   },
+   {
+    "w": "changes",
+    "start": 0.823,
+    "end": 1.098
+   },
+   {
+    "w": "the",
+    "start": 1.123,
+    "end": 1.173
+   },
+   {
+    "w": "entire",
+    "start": 1.198,
+    "end": 1.523
+   },
+   {
+    "w": "base",
+    "start": 1.573,
+    "end": 1.748
+   },
+   {
+    "w": "award.",
+    "start": 1.773,
+    "end": 2.219
+   }
+  ]
+ }
+]
