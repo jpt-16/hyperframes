@@ -1,13 +1,24 @@
 # "One step = one extra base?" A pickoff throw out of play
 
-A 38.0 s vertical (1080×1920, 30 fps) 3D baseball breakdown for Baseball Decoded. The same wild pickoff throw goes into the first-base dugout twice. With the pitcher's pivot foot on the rubber, the runner gets one base. After the pivot foot steps backward off the rubber, he gets two.
+A 38.4 s vertical (1080×1920, 30 fps) 3D baseball breakdown for Baseball Decoded. The same wild pickoff throw goes into the first-base dugout twice. With the pitcher's pivot foot on the rubber, the runner gets one base. After the pivot foot steps backward off the rubber, he gets two.
 
 - **Framework:** the same three.js field, players, dugouts, seats and HyperFrames workflow as `balk`, `lefty` and the other Baseball Decoded videos.
-- **No voiceover:** the brief didn't include a script.
-  - `assets/mix.wav` is music and effects only, at about −20 LUFS, so a narration can sit on top.
-  - `CUES.md` lists each scene's start and end times.
+- **Voiceover:**
+  - Your script, voiced with HyperFrames' local Kokoro TTS (voice `am_michael`, 1.5×). The text is in `transcript.txt`.
+  - Word-by-word captions at the top. The words you capitalized (ENTIRE, ONE, TWO) are highlighted.
+  - Each scene starts at or within 0.7 s of its time in your script.
+  - Shots, freezes, labels and the base awards are keyed to the words:
+    - The release freezes on "throw".
+    - The pivot foot lifts on "steps" and lands behind the rubber on "off".
+    - The ball reaches the dugout on "dugout" and on "out of play".
+    - "1 base" / "2 bases" land on "one" / "two".
+  - `CUES.md` lists when each line starts, so you can record your own read over `assets/mix-novo.wav`.
+- **Layout:** captions at the top, the scenario title in a band at the bottom, labels and award cards between them.
 - **One cast throughout:** the same right-handed pitcher (white home uniform), runner (gray road uniform, red helmet), first baseman, first-base umpire, catcher, batter and plate umpire, on the same field.
-- **Sound:** a `make_bed` bed (style "pulse"), whooshes on the cuts and the throws, impacts on the titles, ticks on the labels, the ball hitting the dugout wall, a riser into the freeze, and crowd ambience.
+- **Sound:** a `make_bed` bed (style "pulse") ducked up to 7 dB under the voice, whooshes on the cuts and the throws, impacts on the titles, ticks on the labels, the ball hitting the dugout wall, a riser into the freeze, and crowd ambience.
+- **Mixes:**
+  - `assets/mix.wav` is mastered to about −14 LUFS.
+  - `assets/mix-novo.wav` is the music and effects without the voice.
 - **New in this project:**
   - **Leg IK for the pitcher:** each foot is placed exactly (the ball of the foot, the way the toes point, how far the heel is up), and a two-bone solve bends the hip, knee and ankle to reach it.
     - The pivot foot can turn on the rubber without leaving it, or step back off it to a set spot behind it.
@@ -22,8 +33,10 @@ A 38.0 s vertical (1080×1920, 30 fps) 3D baseball breakdown for Baseball Decode
   - **The first-base dugout:** the throw clears the rail and hits the back wall inside it, then drops to the floor.
 
 ```bash
-python3 tools/physics.py   # the field model -> assets/play.json
-python3 build.py           # index.html + assets/mix.wav + CUES.md
+python3 tools/physics.py                                       # the field model -> assets/play.json
+export HYPERFRAMES_PYTHON=<python with kokoro-onnx, soundfile, onnx>
+$HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # voiceover + per-word timing
+python3 build.py                                               # index.html + assets/mix.wav (+ mix-novo.wav) + CUES.md
 npx --yes hyperframes@0.8.154 render . -o renders/pickoff.mp4 --video-bitrate 16M
 ```
 
@@ -63,23 +76,24 @@ To make that path possible, this ballpark's first-base dugout runs from about 51
 
 ## Shots
 
-| Time | Scene | Shot | On screen |
+| Time | Script | Shot | On screen |
 |---|---|---|---|
-| 0–1.15 s | Hook | Low on his feet in the set, pushing in: the pivot foot on the rubber | "His pivot foot, on the rubber" |
-| 1.15–1.95 s | Hook | The runner shuffles out to his lead, the first baseman holding him | "The runner takes his lead" |
-| 1.95–2.9 s | Hook | Behind the mound: the sudden pickoff move | |
-| 2.9–4.0 s | Hook | Frozen just before the throw; the camera zooms down to his feet | **ONE STEP = ONE EXTRA BASE?** |
-| 4.0–5.0 s | One base | Behind the runner: the pitcher in the set | **1 · STAYS ON THE RUBBER** |
-| 5.0–7.25 s | One base | Low on the feet, slow motion, then frozen at the release: the pivot foot on the rubber, the free foot stepping toward first | "Pivot foot: on the rubber"; "Steps directly toward first" |
-| 7.25–8.45 s | One base | The throw sails over the leaping first baseman as the runner dives back | "Over the first baseman…" |
-| 8.45–9.15 s | One base | At the dugout: the ball goes in | "…into the dugout" |
-| 9.15–10.75 s | One base | The umpire: arms up, then points to second | **DEAD BALL** |
-| 10.75–12.0 s | One base | The runner trots to second | **1 BASE AWARDED** |
-| 12.0–13.1 s | Two bases | High behind the mound: the same setup | "Same pitcher · same runner · same throw"; **2 · DISENGAGES THE RUBBER** |
-| 13.1–16.0 s | Two bases | Above the rubber, slow motion, then frozen: the pivot foot steps back off it | "Pivot foot steps back off the rubber"; "Off the rubber, behind it" |
-| 16.0–17.1 s | Two bases | Behind the mound: off the rubber, he throws | "Now he throws" |
-| 17.1–18.9 s | Two bases | The same throw into the dugout | "…into the dugout" |
-| 18.9–20.5 s | Two bases | The umpire: arms up, then points to third | **DEAD BALL** |
-| 20.5–22.0 s | Two bases | The runner trots to second, rounds it and goes to third | **2 BASES AWARDED** |
-| 22.0–32.0 s | Why | Side by side at the release, both pivot feet lit | **WHY THE RULE CHANGES**; PITCHER / NOW TREATED AS AN INFIELDER FOR THE THROW; the base awards |
-| 32.0–38.0 s | Ending | Side by side: one runner on second, the other on third; Baseball Decoded | **SAME THROW. DIFFERENT RULE.** |
+| 0–1.0 s | "One tiny step…" | Low on his feet in the set, pushing in: the pivot foot on the rubber | "His pivot foot, on the rubber" |
+| 1.0–1.75 s | "…can cost a team…" | The runner shuffles out to his lead | "The runner takes his lead" |
+| 1.75–2.68 s | "…an ENTIRE extra base." | Behind the mound: the sudden pickoff move | |
+| 2.68–3.92 s | (pause) | Frozen just before the throw; the camera zooms down to his feet | **ONE STEP = ONE EXTRA BASE?** |
+| 3.92–5.04 s | "Watch what happens here." | Behind the runner: the pitcher in the set | **1 · STAYS ON THE RUBBER** |
+| 5.04–8.75 s | "The pitcher keeps his pivot foot on the rubber, steps toward first, and makes a pickoff throw." | Low on the feet, slow motion: the free foot steps toward first; frozen at the release on "throw", the pivot foot still on the rubber | "Pivot foot: on the rubber"; "Steps directly toward first" |
+| 8.75–9.75 s | "But the ball sails into the dugout." | The throw sails over the leaping first baseman as the runner dives back | "Over the first baseman…" |
+| 9.75–10.36 s | (the same) | At the dugout: the ball goes in | |
+| 10.36–11.24 s | "The runner is awarded…" | The umpire: arms up | **DEAD BALL** |
+| 11.24–12.62 s | "…just ONE base." | The runner trots to second, arriving on the bag | **1 BASE AWARDED** |
+| 12.62–13.73 s | "Now watch the difference." | High behind the mound: the same setup | "Same pitcher · same runner · same throw"; **2 · DISENGAGES THE RUBBER** |
+| 13.73–17.15 s | "Before throwing, the pitcher legally steps backward off the rubber with his pivot foot." | Above the rubber, slow motion: the pivot foot lifts on "steps" and lands behind the rubber on "off"; frozen | "Pivot foot steps back off the rubber"; "Off the rubber, behind it" |
+| 17.15–18.34 s | "He then throws the ball away…" | Behind the mound: off the rubber, he throws (release on "away") | "Now he throws" |
+| 18.34–19.88 s | "…and it goes out of play." | The same throw, over the first baseman and into the dugout; then at the dugout | |
+| 19.88–20.86 s | "This time, the runner gets…" | The umpire: arms up | **DEAD BALL** |
+| 20.86–22.32 s | "…TWO bases." | The runner trots to second, rounds it and goes to third | **2 BASES AWARDED** |
+| 22.32–31.52 s | "It's because once the pitcher legally disengages the rubber… treated like a wild throw by another infielder." | Side by side at the release, both pivot feet lit | **WHY THE RULE CHANGES**; PITCHER / NOW TREATED AS AN INFIELDER FOR THE THROW (on "treats"); the base awards; the rule numbers |
+| 31.52–36.01 s | "Same pitcher. Same target. Different foot position. And that one detail changes the entire base award." | Side by side: one runner on second, the other on third | "On the rubber: 1 base" / "Off the rubber: 2 bases" |
+| 36.01–38.41 s | (end) | (the same) | **SAME THROW. DIFFERENT RULE.**, then Baseball Decoded at 37.26 s |
