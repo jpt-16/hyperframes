@@ -3,11 +3,24 @@
 A 36.0 s vertical (1080×1920, 30 fps) 3D baseball breakdown for Baseball Decoded. A changeup comes out of the same delivery as a 95 mph fastball, arrives later, and the hitter's swing gets there first.
 
 - **Framework:** the same three.js field, players, bat, gloved hands, split-screen renderer and HyperFrames workflow as `count`, `choke-up` and the other Baseball Decoded videos.
-- **No voiceover:** the brief didn't include a script.
-  - `assets/mix.wav` is music and effects only, at about −20 LUFS, so a narration can sit on top.
-  - `CUES.md` lists each scene's start and end times.
+- **Voiceover:**
+  - Your script ("Why changeups are so hard to hit"), voiced with HyperFrames' local Kokoro TTS (voice `am_michael`, 1.5×). The text is in `transcript.txt`.
+  - Word-by-word captions at the top. "95 mph" is spoken as words, and the captions keep the numerals.
+  - Each scene starts at or within 0.1 s of its time in your script. The video is 36.0 s.
+  - Shots and graphics are keyed to the words:
+    - The release, side by side, on "hand".
+    - The close release on "release"; "Different speed." on "difference".
+    - The fastball reaches the plate on "sooner", with the changeup still coming; it arrives on "actually does".
+    - The freeze, with the bat in the zone and the ball still coming, on "difference" in "recognize the difference".
+    - The ball reaches the mitt on "time" in "the wrong time".
+  - The hook line builds as captions, then lands as the title on the split screen.
+  - `CUES.md` lists when each line starts, so you can record your own read over `assets/mix-novo.wav`.
+- **Layout:** captions at the top; titles in a band at the seam of the splits (or at the bottom); pane labels at the top of each pane.
 - **One cast throughout:** the same right-handed pitcher (white home uniform) and right-handed hitter (gray road uniform, red helmet, black batting gloves), with the same catcher and umpire, on the same field.
-- **Sound:** a `make_bed` bed (style "pulse"), whooshes on the cuts, the releases and the swings, glove pops, the bat crack on the barreled fastball, impacts on the titles, and stadium ambience.
+- **Sound:** a `make_bed` bed (style "pulse") ducked up to 7 dB under the voice, whooshes on the cuts, the releases and the swings, glove pops, the bat crack on the barreled fastball, impacts on the titles, and stadium ambience.
+- **Mixes:**
+  - `assets/mix.wav` is mastered to about −14 LUFS.
+  - `assets/mix-novo.wav` is the music and effects without the voice.
 - **New in this project:**
   - **One delivery for both pitches:** the pitcher's animation is literally the same function of time for the fastball and the changeup. Only the ball's flight differs.
   - **The arm path:** a trail of where his throwing hand has been over the last half second, cyan for the fastball and orange for the changeup. The two arcs match.
@@ -18,8 +31,10 @@ A 36.0 s vertical (1080×1920, 30 fps) 3D baseball breakdown for Baseball Decode
   - **The radar reading** on the center-field board: "95 · FASTBALL", "85 · CHANGEUP", "84 · CHANGEUP".
 
 ```bash
-python3 tools/physics.py   # the fastball, the changeups, the line drive -> assets/play.json
-python3 build.py           # index.html + assets/mix.wav + CUES.md
+python3 tools/physics.py                                       # the fastball, the changeups, the line drive -> assets/play.json
+export HYPERFRAMES_PYTHON=<python with kokoro-onnx, soundfile, onnx>
+$HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # voiceover + per-word timing
+python3 build.py                                               # index.html + assets/mix.wav (+ mix-novo.wav) + CUES.md
 npx --yes hyperframes@0.8.154 render . -o renders/changeup.mp4 --video-bitrate 16M
 ```
 
@@ -54,20 +69,20 @@ Every pitch is simulated with gravity, drag and spin lift. All three are release
 
 ## Shots
 
-| Time | Scene | Shot | On screen |
+| Time | Script | Shot | On screen |
 |---|---|---|---|
-| 0–0.72 s | Hook | His gloved hands on the bat, close, against a blurred stadium | |
-| 0.72–1.36 s | Hook | Over his shoulder: the pitcher, a 95 mph fastball | |
-| 1.36–1.72 s | Hook | Low beside the plate: it pops into the mitt | "95 mph" |
-| 1.72–2.72 s | Hook | From center field: the same pitcher, a changeup; he swings early and misses | "85 mph · changeup"; "Swings early" |
-| 2.72–4.0 s | Hook | Top/bottom, frozen at the same moment of the same swing: on time for the fastball, the changeup still coming | **THIS PITCH MAKES 95 MPH LOOK EVEN FASTER.** |
-| 4.0–7.3 s | Deception | Side by side, straight behind the pitcher, slowed at the release; arm-path trails | **SAME ARM ACTION.**; "Same arm path" |
-| 7.3–11.0 s | Deception | Top/bottom, the throwing arm at the release (slowed, frozen); then each ball leaves at its speed | "Same release"; **DIFFERENT SPEED.**; "95 mph" / "85 mph"; the note |
-| 11.0–17.2 s | Speed difference | Top/bottom, the race camera, slowed; frozen when the fastball reaches the plate | Speed bars (0.40 s / 0.44 s); "Already there" / "Still about 5 ft away"; **THE CHANGEUP ARRIVES LATER.** |
-| 17.2–20.0 s | Speed difference | Top/bottom, close beside the plate: the same swing barrels the fastball and misses the changeup | "On time: barreled" / "Same swing: too early" |
-| 20.0–22.15 s | Hitter's problem | Close on the hitter as he tracks the changeup in | "Tracking a fastball-looking pitch" |
-| 22.15–27.2 s | Hitter's problem | Over the umpire, slowed; frozen as the bat reaches the zone; the ball crosses after it | **THE HITTER SWINGS TOO EARLY.**; "Bat: already in the zone"; "Ball: still coming"; "Crosses after the bat" |
-| 27.2–29.0 s | Hitter's problem | Beside the plate, slowed, with the bat path | |
-| 29.0–31.5 s | Payoff | Over his shoulder, then from center field: an 84 mph changeup; fooled, way out in front | "84 mph · changeup"; "Way out in front" |
-| 31.5–33.3 s | Payoff | Close on the mitt, slowed: the ball arrives | **IT'S NOT ABOUT POWER. IT'S ABOUT TIMING.** |
-| 33.3–36.0 s | Payoff | Wide over the stadium; Baseball Decoded | |
+| 0–0.46 s | "This pitch…" | His gloved hands on the bat, close, against a blurred stadium | |
+| 0.46–1.17 s | "…makes a 95 mph…" | Over his shoulder: the pitcher, a 95 mph fastball | |
+| 1.17–1.51 s | "…fastball…" | Low beside the plate: it pops into the mitt | "95 mph" |
+| 1.51–2.35 s | "…look even…" | From center field: the same pitcher, a changeup; he swings early and misses | "85 mph · changeup"; "Swings early" |
+| 2.35–3.12 s | "…faster." | Top/bottom, frozen at the same moment of the same swing: on time for the fastball, the changeup still coming | **THIS PITCH MAKES 95 MPH LOOK EVEN FASTER.** |
+| 3.12–7.13 s | "A changeup is designed to look almost identical to a fastball coming out of the pitcher's hand." | Side by side, straight behind the pitcher, slowed; the release on "hand"; arm-path trails | "Same arm path" |
+| 7.13–10.92 s | "Same arm action. Similar release. But there's one major difference: the speed." | Top/bottom, the throwing arm, slowed; the release on "release"; each ball leaves at its own speed | **SAME ARM ACTION.**, then **DIFFERENT SPEED.** on "difference"; "Same release"; the speeds on "speed" |
+| 10.92–15.31 s | "Because the changeup travels slower, the hitter's brain expects the ball to arrive sooner than it actually does." | Top/bottom, the race camera, slowed: the fastball reaches the plate on "sooner" (frozen); the changeup arrives on "actually does" | Speed bars (0.40 s / 0.44 s); "Already there" / "Still about 5 ft away"; **THE CHANGEUP ARRIVES LATER.** |
+| 15.31–19.92 s | "The hitter commits to the swing too early, and the ball is still traveling toward the plate." | Top/bottom, close beside the plate, slowed: the same swing barrels the fastball and misses the changeup | "On time: barreled" / "Same swing: too early" |
+| 19.92–23.0 s | "The best changeups disguise themselves until the last possible moment." | Close on the hitter as a changeup comes in; he swings through it | "It looks like a fastball…" |
+| 23.0–26.75 s | "If a hitter can't recognize the difference early enough, their timing is completely disrupted." | Over the umpire: frozen on "difference" as the bat reaches the zone; the ball crosses after it | **THE HITTER SWINGS TOO EARLY.**; "Bat: already in the zone"; "Ball: still coming"; "Crosses after the bat" |
+| 26.75–28.92 s | (pause) | Beside the plate, slowed, with the bat path | |
+| 28.92–31.58 s | "That's the secret of the changeup. It doesn't have to overpower a hitter." | Over his shoulder, then from center field, slowed: an 84 mph changeup; fooled, way out in front | "84 mph · changeup"; "Way out in front" |
+| 31.58–33.65 s | "It just has to make them swing at the wrong time." | Close on the mitt, slowed: the ball arrives on "time" | |
+| 33.47–35.97 s | (end) | Wide over the stadium | **IT'S NOT ABOUT POWER. IT'S ABOUT TIMING.**, then Baseball Decoded at 34.72 s |
