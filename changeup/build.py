@@ -1,7 +1,9 @@
-"""'The changeup' (1080x1920, music + effects; no narration).
+"""'The changeup' (1080x1920), cut to the voiceover ("Why changeups are so hard to hit").
 
-    python3 tools/physics.py        # the fastball, the changeups, the line drive -> assets/play.json
-    python3 build.py                # index.html + assets/mix.wav (music + effects, mastered low for a voice on top) + CUES.md
+    python3 tools/physics.py                                       # the fastball, the changeups, the line drive -> assets/play.json
+    export HYPERFRAMES_PYTHON=<python with kokoro-onnx, soundfile, onnx>
+    $HYPERFRAMES_PYTHON tools/vo.py && python3 tools/assemble.py   # voiceover + per-word timing
+    python3 build.py                                               # index.html + assets/mix.wav (+ mix-novo.wav) + CUES.md
     npx --yes hyperframes@0.8.154 render . -o renders/changeup.mp4 --video-bitrate 16M
 
 One right-handed pitcher and one right-handed hitter throughout. The fastball (95 mph) and the changeup (85 mph) come out
@@ -20,7 +22,14 @@ from audio import SR, make_bed
 
 P = json.load(open(os.path.join(HERE, "assets", "play.json")))
 PI_ = P["pitches"]
-D = 36.0
+TM = json.load(open(os.path.join(HERE, "assets", "vo", "timing.json")))
+IDX = {x["id"]: k for k, x in enumerate(TM["lines"])}
+LN = lambda lid: TM["lines"][IDX[lid]]
+def W(lid, word, end=False, nth=0):
+    hits = [w for w in LN(lid)["words"] if w["w"].strip(".,!?:").lower() == word.lower()]
+    return hits[nth]["t1" if end else "t0"]
+D = TM["duration"]
+S = {x["id"]: x["t0"] - 0.08 for x in TM["lines"]}
 Y, CYAN, WHITE, HOT, MUTED, GREEN, RED = "#FFD84D", "#56D1FF", "#F4F6F8", "#FF6A3D", "#AEB8C6", "#3DD68C", "#FF4D4D"
 D_SWEET = round(2.30 - 0.283, 3)
 TC = lambda pk: PI_[pk]["t_contact"]
@@ -53,60 +62,77 @@ SIDEN = dict(c0=[13.0, 4.0, -5.0], c1=[12.5, 3.9, -4.6], l=[-0.6, 3.2, -1.6], f0
 MITT = dict(c0=[3.05, 2.34, -1.62], c1=[2.65, 2.24, -1.02], l=[0.35, 2.09, 1.68], f0=26)                       # low, beside the plate, on the mitt
 MITTC = dict(c0=[3.2, 1.6, -1.2], c1=[2.8, 1.5, -0.6], l=[0.5, 1.35, 2.1], f0=26)
 
-# ----------------------------------------------------------------- 1 the hook (0-4): his hands; a 95 mph fastball; a changeup, swung through early; side by side
-V1 = 4.0
-R1 = 1.12; A1 = ab("fb", R1)
+# ----------------------------------------------------------------- 1 the hook: "This pitch makes a 95 mph fastball look even faster."
+#   his hands; a 95 mph fastball into the mitt; a changeup, swung through early; split: the same swing against each
+V1, V2, V3, V4 = S["d1"], S["t1"], S["w1"], S["p1"]
+R1 = W("h1", "pitch") + 0.45; A1 = ab("fb", R1)
 BD = FBB
-live(0.0, 0.72, "obj", ab=A1, **HANDS)
-live(0.72, 1.36, "world", ab=A1, streak=1, **OVER)
-live(1.36, 1.72, "world", ab=A1, **MITT)
-R2 = 2.06; A2 = ab("ch", R2, swing=True, sw="fb")
+H2 = R1 - 0.4
+live(0.0, H2, "obj", ab=A1, **HANDS)
+H3 = R1 + FLIGHT("fb") - 0.12
+live(H2, H3, "world", ab=A1, streak=1, **OVER)
+H4 = R1 + FLIGHT("fb") + 0.22
+live(H3, H4, "world", ab=A1, **MITT)
+R2 = H4 + 0.25; A2 = ab("ch", R2, swing=True, sw="fb")
 BD = CHB
-live(1.72, 2.72, "world", ab=A2, **CF)
+H5 = R2 + FLIGHT("ch") + 0.12
+live(H4, H5, "world", ab=A2, **CF)
 TS1 = TC("fb")                                                      # the moment his swing meets the fastball
-shot(2.72, V1, "world", [2.72, V1], [TS1, TS1], ghost=0.014, zone=1, panes=[dict(rect=TOPP, ab=ab("fb", 0.0, swing=True), lab="fb"), dict(rect=BOTP, ab=ab("ch", 0.0, swing=True, sw="fb"), lab="ch")],
+shot(H5, V1, "world", [H5, V1], [TS1, TS1], ghost=0.014, zone=1, panes=[dict(rect=TOPP, ab=ab("fb", 0.0, swing=True), lab="fb"), dict(rect=BOTP, ab=ab("ch", 0.0, swing=True, sw="fb"), lab="ch")],
      c0=[9.5, 4.6, -6.5], c1=[9.0, 4.4, -6.0], l=[-0.4, 3.0, -2.6], f0=34)
 
-# ----------------------------------------------------------------- 2 the deception (4-11): side by side, the same delivery; straight behind him, then the arm at release
-V2 = 11.0
-RS2 = 6.15
-DLV = [V1, 5.3, 6.65, 7.3]; DLT = [RS2 - 1.65, RS2 - 0.5, RS2 + 0.18, RS2 + 0.75]
+# ----------------------------------------------------------------- 2 the deception: "A changeup is designed to look almost identical to a fastball coming out of the pitcher's hand.
+#   Same arm action. Similar release. But there's one major difference: the speed."
+RS2 = W("d1", "hand") + 0.05                                        # side by side, straight behind him: the release on "hand"
+B2 = S["d2"] - 0.02
+DLV = [V1, W("d1", "identical"), RS2, B2]; DLT = [RS2 - 1.6, RS2 - 0.45, RS2, RS2 + 0.3]
 BD = None
-shot(V1, 7.3, "world", [V1, 7.3], [0, 0], panes=[dict(rect=LR[0], ab=ab("fb", RS2), vs=DLV, ts=DLT, trail="#56d1ff", streak=1), dict(rect=LR[1], ab=ab("ch", RS2), vs=DLV, ts=DLT, trail="#ff6a3d", streak=1)], **BEHINDP)
-ARV = [7.3, 9.3, 9.95, 11.0]; ART = [RS2 - 0.62, RS2 + 0.0, RS2 + 0.0, RS2 + 0.2]
-shot(7.3, V2, "world", [7.3, V2], [0, 0], panes=[dict(rect=TOPP, ab=ab("fb", RS2), vs=ARV, ts=ART, trail="#56d1ff"), dict(rect=BOTP, ab=ab("ch", RS2), vs=ARV, ts=ART, trail="#ff6a3d")], **ARM)
+shot(V1, B2, "world", [V1, B2], [0, 0], panes=[dict(rect=LR[0], ab=ab("fb", RS2), vs=DLV, ts=DLT, trail="#56d1ff", streak=1), dict(rect=LR[1], ab=ab("ch", RS2), vs=DLV, ts=DLT, trail="#ff6a3d", streak=1)], **BEHINDP)
+VREL2 = W("d2", "release") + 0.1                                    # then the arm, close: the release on "release"; each ball leaves at its own speed
+ARV = [B2, VREL2, V2]; ART = [RS2 - 0.62, RS2, RS2 + 0.32]
+shot(B2, V2, "world", [B2, V2], [0, 0], panes=[dict(rect=TOPP, ab=ab("fb", RS2), vs=ARV, ts=ART, trail="#56d1ff"), dict(rect=BOTP, ab=ab("ch", RS2), vs=ARV, ts=ART, trail="#ff6a3d")], **ARM)
 
-# ----------------------------------------------------------------- 3 the speed difference (11-20): both pitches side by side, slowed; the fastball gets there first
-V3 = 20.0
-RS3 = 12.0
-VF3 = 15.3                                                          # the fastball reaches the front of the plate
-SPV = [V2, 11.9, VF3, 16.5, 17.2]; SPT = [RS3 - 0.9, RS3, RS3 + FRONT("fb"), RS3 + FRONT("fb"), RS3 + FRONT("ch") + 0.02]
-SPV2 = [17.2, 20.0]; SPT2 = [RS3 + FRONT("fb") - 0.05, RS3 + FRONT("fb") - 0.05 + 2.8 * 0.22]
+# ----------------------------------------------------------------- 3 the timing: "Because the changeup travels slower, the hitter's brain expects the ball to arrive sooner than it actually does.
+#   The hitter commits to the swing too early, and the ball is still traveling toward the plate."
+RS3 = V2 + 0.95
+VF3 = W("t1", "sooner") + 0.05                                      # the fastball reaches the plate on "sooner"; frozen; the changeup comes in on "actually does"
+VC3 = W("t1", "does") + 0.25
+SPV = [V2, RS3, VF3, W("t1", "actually") - 0.1, VC3]; SPT = [RS3 - 0.95, RS3, RS3 + FRONT("fb"), RS3 + FRONT("fb"), RS3 + FRONT("ch") + 0.02]
+B3 = S["t2"] - 0.02
+SPV2 = [B3, V3]; SPT2 = [RS3 + FRONT("fb") - 0.12, RS3 + FRONT("fb") - 0.12 + (V3 - B3) * 0.2]
 def pair(rect_top, rect_bot, vs, ts, **kw):
     return [dict(rect=rect_top, ab=ab("fb", RS3, swing=True, hit="ld"), vs=vs, ts=ts, lab="fb", **kw), dict(rect=rect_bot, ab=ab("ch", RS3, swing=True, sw="fb"), vs=vs, ts=ts, lab="ch", **kw)]
-shot(V2, 17.2, "race", [V2, 17.2], [0, 0], panes=pair(TOPP, BOTP, SPV, SPT, streak=1), rel0=RS3, lead="fb", cx=10.0, cy=4.4, ly=3.6, lz=-0.5, zstop=-3.5, f0=42)
-shot(17.2, V3, "world", [17.2, V3], [0, 0], panes=pair(TOPP, BOTP, SPV2, SPT2, ghost=0.016, zone=1), **SIDEN)
+shot(V2, B3, "race", [V2, B3], [0, 0], panes=pair(TOPP, BOTP, SPV, SPT, streak=1), rel0=RS3, lead="fb", cx=10.0, cy=4.4, ly=3.6, lz=-0.5, zstop=-3.5, f0=42)
+shot(B3, V3, "world", [B3, V3], [0, 0], panes=pair(TOPP, BOTP, SPV2, SPT2, ghost=0.016, zone=1), **SIDEN)
 
-# ----------------------------------------------------------------- 4 the hitter's problem (20-29): he tracks it; his swing gets there first; frozen; the ball comes through after
-V4 = 29.0
-R4 = 21.5; A4 = ab("ch", R4, swing=True, sw="fb")
+# ----------------------------------------------------------------- 4 why it works: "The best changeups disguise themselves until the last possible moment.
+#   If a hitter can't recognize the difference early enough, their timing is completely disrupted."
+R4 = W("w1", "last") - FLIGHT("ch") + 0.3; A4 = ab("ch", R4, swing=True, sw="fb")
 BD = CHB
-live(V3, 22.15, "world", ab=A4, track=1, c0=[1.2, 5.1, -8.6], c1=[0.9, 5.0, -7.8], l=[-2.4, 5.0, -0.6], f0=26, f1=22)
-VZ4 = 25.0                                                           # frozen as the bat reaches the hitting zone: the changeup isn't there yet
-SW4 = R4 + TC("fb")
-shot(22.15, 27.2, "world", [22.15, 23.2, VZ4, 26.3, 27.2], [R4 + 0.0, R4 + 0.2, SW4, SW4, R4 + FRONT("ch") + 0.1], ab=A4, ghost=0.014, zone=1, mark=1, **UMPVF)
-shot(27.2, V4, "world", [27.2, V4], [R4 + 0.15, R4 + 0.15 + 1.8 * 0.3], ghost=0.014, zone=1, ab=A4, **SIDEN)
+B4 = S["w2"] - 0.02
+live(V3, B4, "world", ab=A4, track=1, **dict(c0=[1.2, 5.1, -8.6], c1=[0.9, 5.0, -7.8], l=[-2.4, 5.0, -0.6], f0=26, f1=22))
+R4b = B4 + 0.75; A4b = ab("ch", R4b, swing=True, sw="fb")           # the same changeup again, over the umpire: frozen as the bat reaches the zone on "difference"
+SW4 = R4b + TC("fb")
+VZ4 = W("w2", "difference"); VZ4e = W("w2", "timing") - 0.1
+C4 = W("w2", "disrupted") + 0.6
+shot(B4, C4, "world", [B4, B4 + 0.75, VZ4, VZ4e, C4], [R4b - 0.75, R4b, SW4, SW4, R4b + FRONT("ch") + 0.25], ab=A4b, ghost=0.014, zone=1, mark=1, **UMPVF)
+shot(C4, V4, "world", [C4, V4], [R4b + 0.15, R4b + 0.15 + (V4 - C4) * 0.3], ghost=0.014, zone=1, ab=A4b, **SIDEN)
 
-# ----------------------------------------------------------------- 5 the payoff (29-36): another changeup; completely fooled; into the mitt
-R5 = 30.0; A5 = ab("ch2", R5, swing=True, sw="fb", early=0.05, lunge=1.0)
+# ----------------------------------------------------------------- 5 the payoff: "That's the secret of the changeup. It doesn't have to overpower a hitter.
+#   It just has to make them swing at the wrong time."   another changeup; fooled, way out in front; into the mitt on "time"
+R5 = W("p1", "secret") + 0.15; A5 = ab("ch2", R5, swing=True, sw="fb", early=0.05, lunge=1.0)
 BD = [[0, -1, 0, 1, "84|CHANGEUP"]]
-live(V4, 30.85, "world", ab=A5, streak=1, **OVER)
-live(30.85, 31.5, "world", ab=A5, **CF)
-MV = [31.5, 33.3]; MT = [R5 + FLIGHT("ch2") - 0.2, R5 + FLIGHT("ch2") + 0.25]
-shot(31.5, 33.3, "world", MV, MT, ab=A5, streak=1, **MITTC)
-VMITT = vat(MV, MT, R5 + FLIGHT("ch2"))
-VBRAND = 34.7
-live(33.3, D, "world", ab=A5, c0=[14.0, 58.0, 92.0], c1=[10.0, 74.0, 122.0], l=[0.0, 0.0, -150.0], f0=42, f1=46)
+B5 = R5 + 0.3
+live(V4, B5, "world", ab=A5, streak=1, **OVER)
+C5 = S["p3"] - 0.02
+CF5 = R5 + 0.2                                                       # from center field, slowed: the swing and miss under "overpower a hitter"
+shot(B5, C5, "world", [B5, C5], [CF5, CF5 + (C5 - B5) * 0.3], ab=A5, **CF)
+VMITT = W("p3", "time")
+MV = [C5, VMITT, VMITT + 0.6]; MT = [R5 + FLIGHT("ch2") - 0.25, R5 + FLIGHT("ch2"), R5 + FLIGHT("ch2") + 0.15]
+D5 = VMITT + 0.6
+shot(C5, D5, "world", MV, MT, ab=A5, streak=1, **MITTC)
+VEND = round(LN("p3")["t1"] + 0.1, 3); VBRAND = round(VEND + 1.25, 3)
+live(D5, D, "world", ab=A5, c0=[14.0, 58.0, 92.0], c1=[10.0, 74.0, 122.0], l=[0.0, 0.0, -150.0], f0=42, f1=46)
 for x, y in zip(SHOTS, SHOTS[1:]): assert abs(x["b"] - y["a"]) < 1e-3 and x["b"] > x["a"], (x, y)
 CUTS = [x["a"] for x in SHOTS[1:]]
 
@@ -116,7 +142,7 @@ c.clip("fieldl", 0, D, '<canvas id="field-gl" width="1080" height="1920" data-la
 c.clip("shade", 0, D, '<div class="shade-top"></div><div class="shade-bot"></div>', cls="layer", style="z-index:3")
 c.clip("spdc", 0, D, '<div class="spd" id="spd"></div>', cls="layer", style="z-index:30")
 c.clip("flash", 0, D, '<div class="flash" id="flash"></div>', cls="layer", style="z-index:40")
-for f in [1.72, 2.72, V1, 7.3, V2, V3, VZ4, V4, 31.5]:
+for f in [H4, H5, V1, B2, V2, V3, VZ4, V4, C5]:
     c.set("#flash", '{"opacity":0.45}', f); c.to("#flash", o(opacity=0, duration=0.14, ease="power2.out"), f + 0.001)
 
 def pop(sel, t, dy=24):
@@ -181,50 +207,79 @@ def speedbar(bid, t0, t1, top, fill0, fill1, mph, secs, cls=""):
     c.clip(bid, t0, t1, f'<div class="sbar {cls}" style="top:{top}px"><i>{mph} mph</i><div class="tb"><span id="{bid}f"></span></div><b id="{bid}l">{secs:.2f} s</b></div>', cls="layer", style="z-index:16")
     c.ft(f"#{bid}f", o(width="0%"), o(width="100%", duration=fill1 - fill0, ease="none"), fill0)
     c.ft(f"#{bid}l", o(opacity=0, scale=0.6), o(opacity=1, scale=1, duration=0.2, ease="back.out(2)"), fill1)
+BAND = 1640
+def band(tid, t0, t1, lines, top=None): title(tid, t0, t1, lines, BAND if top is None else top, "band")
 
-# 1 the hook
-chip("h95", 1.38, 1.7, '<b class="y">95</b> mph', 1450)
-chip("h85", 2.1, 2.7, '<b class="y">85</b> mph · changeup', 1450)
-pinl("hsw", 2.38, 2.7, "Swings early", "batter", "sm")
-panesTB("hp", 2.72, V1 - 0.02, "", "")
-plab("hla", 2.75, V1 - 0.02, 300, 60, "Fastball · <b>95</b>", "cy"); plab("hlb", 2.8, V1 - 0.02, 300, 1125, "Changeup · <b>85</b>", "or")
-pinl("hpa", 2.85, V1 - 0.02, "On time", "bball", "cy sm", 0); pinl("hpb", 2.9, V1 - 0.02, "Still coming", "bball", "sm", 1)
-title("t1", 2.74, V1 - 0.02, [("This pitch makes", False), ("95 mph look even faster.", True)], 852, "band")
+# 1 the hook (captions carry the line; it lands as the title on the split)
+chip("h95", H3 + 0.03, H4 - 0.02, '<b class="y">95</b> mph', 1450)
+chip("h85", H4 + 0.3, H5 - 0.02, '<b class="y">85</b> mph · changeup', 1450)
+pinl("hsw", R2 + TC("fb") - 0.12, H5 - 0.02, "Swings early", "batter", "sm")
+panesTB("hp", H5, V1 - 0.02, "", "")
+plab("hla", H5 + 0.02, V1 - 0.02, 300, 60, "Fastball · <b>95</b>", "cy"); plab("hlb", H5 + 0.05, V1 - 0.02, 300, 1125, "Changeup · <b>85</b>", "or")
+pinl("hpa", H5 + 0.1, V1 - 0.02, "On time", "bball", "cy sm", 0); pinl("hpb", H5 + 0.15, V1 - 0.02, "Still coming", "bball", "sm", 1)
+title("t1", H5 + 0.02, V1 - 0.02, [("This pitch makes", False), ("95 mph look even faster.", True)], 852, "band")
 
 # 2 the deception
-c.clip("vs2", V1, 7.3, '<div class="vseam"></div>', cls="layer", style="z-index:11")
-plab("l2a", V1 + 0.1, 7.28, 270, 470, "Fastball", "cy"); plab("l2b", V1 + 0.15, 7.28, 810, 470, "Changeup", "or")
-panesTB("pp2", 7.3, V2 - 0.02, "", "")
-plab("l2c", 7.32, V2 - 0.02, 300, 60, "Fastball", "cy"); plab("l2d", 7.34, V2 - 0.02, 300, 1125, "Changeup", "or")
-title("t2", V1 + 0.05, 7.28, [("Same arm action.", True)], 250, "hk2")
-title("t2b", 7.3, 9.93, [("Same arm action.", True)], 852, "band")
-title("t2c", 9.95, V2 - 0.02, [("Same arm action.", False), ("Different speed.", True)], 852, "band")
-pinl("p2a", 5.3, 7.28, "Same arm path", "phand", "cy sm", 0); pinl("p2b", 5.35, 7.28, "Same arm path", "phand", "sm", 1)
-pinl("p2c", 8.0, 9.93, "Same release", "phand", "cy sm", 0); pinl("p2d", 8.05, 9.93, "Same release", "phand", "sm", 1)
-pinl("p2e", 10.0, V2 - 0.02, "95 mph", "bball", "cy sm", 0); pinl("p2f", 10.05, V2 - 0.02, "85 mph", "bball", "sm", 1)
-note("n2", 7.4, V2 - 0.02, "To the hitter, both start the same way. Only the grip, hidden in his hand, takes speed off the changeup.", 1760)
+c.clip("vs2", V1, B2, '<div class="vseam"></div>', cls="layer", style="z-index:11")
+plab("l2a", V1 + 0.1, B2 - 0.02, 270, 470, "Fastball", "cy"); plab("l2b", V1 + 0.15, B2 - 0.02, 810, 470, "Changeup", "or")
+pinl("p2a", W("d1", "identical") - 0.05, B2 - 0.02, "Same arm path", "phand", "cy sm", 0); pinl("p2b", W("d1", "identical"), B2 - 0.02, "Same arm path", "phand", "sm", 1)
+panesTB("pp2", B2, V2 - 0.02, "", "")
+plab("l2c", B2 + 0.02, W("d3", "speed") - 0.06, 300, 60, "Fastball", "cy"); plab("l2d", B2 + 0.04, W("d3", "speed") - 0.06, 300, 1125, "Changeup", "or")
+plab("l2e", W("d3", "speed") - 0.04, V2 - 0.02, 300, 60, "Fastball · <b>95</b>", "cy"); plab("l2f", W("d3", "speed"), V2 - 0.02, 300, 1125, "Changeup · <b>85</b>", "or")
+title("t2b", W("d2", "same") - 0.04, W("d3", "difference") - 0.06, [("Same arm action.", True)], 852, "band")
+title("t2c", W("d3", "difference") - 0.04, V2 - 0.02, [("Same arm action.", False), ("Different speed.", True)], 852, "band")
+pinl("p2c", W("d2", "release") - 0.05, W("d3", "speed") - 0.06, "Same release", "phand", "cy sm", 0); pinl("p2d", W("d2", "release"), W("d3", "speed") - 0.06, "Same release", "phand", "sm", 1)
 
-# 3 the speed difference
+# 3 the timing
 panesTB("pp3", V2, V3 - 0.02, "", "")
 plab("l3a", V2 + 0.1, V3 - 0.02, 300, 60, "Fastball · <b>95</b>", "cy"); plab("l3b", V2 + 0.15, V3 - 0.02, 300, 1125, "Changeup · <b>85</b>", "or")
-VC3 = vat(SPV, SPT, RS3 + FRONT("ch"))
-speedbar("sb1", V2 + 0.3, V3 - 0.02, 715, vat(SPV, SPT, RS3), VF3, 95, FRONT("fb"), "cy")
-speedbar("sb2", V2 + 0.35, V3 - 0.02, 1780, vat(SPV, SPT, RS3), VC3, 85, FRONT("ch"), "or")
-pinl("p3a", VF3, 17.18, "Already there", "bball", "cy sm", 0); pinl("p3b", VF3 + 0.05, 17.18, "Still about 5 ft away", "bball", "sm", 1)
-title("t3", VF3 + 0.1, V3 - 0.02, [("The changeup", False), ("arrives later.", True)], 852, "band")
-pinl("p3c", 17.6, V3 - 0.02, "On time: barreled", "batter", "cy sm", 0); pinl("p3d", 17.65, V3 - 0.02, "Same swing: too early", "batter", "sm", 1)
+speedbar("sb1", V2 + 0.3, B3 - 0.02, 715, RS3, VF3, 95, FRONT("fb"), "cy")
+speedbar("sb2", V2 + 0.35, B3 - 0.02, 1780, RS3, VC3, 85, FRONT("ch"), "or")
+pinl("p3a", VF3, B3 - 0.02, "Already there", "bball", "cy sm", 0); pinl("p3b", VF3 + 0.05, W("t1", "actually") - 0.1, "Still about 5 ft away", "bball", "sm", 1)
+title("t3", VF3 + 0.05, V3 - 0.02, [("The changeup", False), ("arrives later.", True)], 852, "band")
+chip("p3c", W("t2", "commits") - 0.05, V3 - 0.02, "<span class=\"cyt\">On time:</span> barreled", 640); chip("p3d", W("t2", "commits"), V3 - 0.02, "<span class=\"ort\">Same swing:</span> too early", 1700)
 
-# 4 the hitter's problem
-pinl("p4a", V3 + 0.25, 22.13, "Tracking a fastball-looking pitch", "batter", "cy sm")
-title("t4", 23.2, V4 - 0.02, [("The hitter swings", False), ("too early.", True)], 250, "hk2")
-pinl("p4b", VZ4 - 0.3, 26.28, "Bat: already in the zone", "sweet", "yl sm")
-pinl("p4c", VZ4, 26.28, "Ball: still coming", "bball", "sm")
-pinl("p4d", 26.6, 27.18, "Crosses after the bat", "mark", "sm")
+# 4 why it works
+chip("p4a", V3 + 0.3, B4 - 0.02, "It looks like a fastball…", 1500)
+band("t4", B4 + 0.05, V4 - 0.02, [("The hitter swings", False), ("too early.", True)])
+pinl("p4b", VZ4 - 0.2, VZ4e, "Bat: already in the zone", "sweet", "yl sm")
+pinl("p4c", VZ4, VZ4e, "Ball: still coming", "bball", "sm")
+VX4 = vat([B4, B4 + 0.75, VZ4, VZ4e, C4], [R4b - 0.75, R4b, SW4, SW4, R4b + FRONT("ch") + 0.25], R4b + FRONT("ch"))
+pinl("p4d", VX4 + 0.05, C4 - 0.02, "Crosses after the bat", "mark", "sm")
 
 # 5 the payoff
-chip("c5", V4 + 0.25, 30.83, '<b class="y">84</b> mph · changeup', 1450)
-pinl("p5a", 30.95, 31.48, "Way out in front", "batter", "sm")
-title("t5", 31.6, VBRAND - 0.02, [("It's not about power.", False), ("It's about timing.", True)], 250, "hk2")
+chip("c5", V4 + 0.2, C5 - 0.02, '<b class="y">84</b> mph · changeup', 1450)
+pinl("p5a", B5 + (R5 + TC("fb") - 0.05 - CF5) / 0.3, C5 - 0.02, "Way out in front", "batter", "sm")
+title("t5", VEND, VBRAND - 0.02, [("It's not about power.", False), ("It's about timing.", True)], 300, "hk2")
+
+# ----------------------------------------------------------------- captions: the voiceover, word by word
+A_ = "acc"
+DISP = {("h1", 4): "95", ("h1", 5): "mph"}
+CAPS = [("h1", 0, 2, {1: A_}), ("h1", 3, 6, {4: A_, 5: A_}), ("h1", 7, 9, {9: A_}),
+        ("d1", 0, 3, {1: A_}), ("d1", 4, 7, {7: A_}), ("d1", 8, 10, {10: A_}), ("d1", 11, 15, {15: A_}),
+        ("d2", 0, 2, {0: A_, 1: A_}), ("d2", 3, 4, {4: A_}),
+        ("d3", 0, 4, {3: A_, 4: A_}), ("d3", 5, 6, {6: A_}),
+        ("t1", 0, 4, {2: A_, 4: A_}), ("t1", 5, 9, {7: A_}), ("t1", 10, 13, {12: A_, 13: A_}), ("t1", 14, 17, {16: A_}),
+        ("t2", 0, 2, {2: A_}), ("t2", 3, 7, {6: A_, 7: A_}), ("t2", 8, 13, {12: A_, 13: A_}), ("t2", 14, 16, {16: A_}),
+        ("w1", 0, 3, {3: A_}), ("w1", 4, 9, {7: A_, 9: A_}),
+        ("w2", 0, 4, {4: A_}), ("w2", 5, 8, {6: A_, 7: A_}), ("w2", 9, 13, {10: A_, 13: A_}),
+        ("p1", 0, 5, {2: A_, 5: A_}),
+        ("p2", 0, 6, {4: A_}),
+        ("p3", 0, 5, {}), ("p3", 6, 10, {6: A_, 9: A_, 10: A_})]
+for k, (lid, i0, i1, acc) in enumerate(CAPS):
+    ln = LN(lid); wd = ln["words"]; i1 = min(i1, len(wd) - 1)
+    start = wd[i0]["t0"] - 0.06
+    if k + 1 < len(CAPS) and CAPS[k + 1][0] == lid: end = wd[CAPS[k + 1][1]]["t0"] - 0.06
+    elif IDX[lid] + 1 < len(TM["lines"]): end = min(ln["t1"] + 0.35, TM["lines"][IDX[lid] + 1]["t0"] - 0.1)
+    else: end = min(ln["t1"] + 0.3, VEND - 0.02)
+    if lid == "h1": end = min(end, H5 - 0.02)
+    cid = f"cap{k}"; sp = []
+    for n in range(i0, i1 + 1):
+        w = DISP.get((lid, n), wd[n]["w"]); w = w.rstrip(",:") if n == i1 and i1 > i0 else w
+        w = w.replace("'", "’")
+        sp.append(f'<span class="cw{(" " + acc[n]) if n in acc else ""}" id="{cid}w{n - i0}">{esc(w)}</span>')
+    c.clip(cid, start, end, f'<div class="cap" style="top:300px"><span class="cl">{" ".join(sp)}</span></div>', cls="layer", style="z-index:20")
+    for n in range(i0, i1 + 1): c.ft(f"#{cid}w{n - i0}", o(opacity=0, y=34, filter="blur(10px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.15, ease="power3.out"), wd[n]["t0"] - 0.04)
 
 c.clip("brand", VBRAND, D, """<div class="brand ov" id="brx"><div class="bmark"><svg viewBox="0 0 100 100" width="150" height="150"><circle cx="50" cy="50" r="44" fill="#f4f2ec" stroke="#05080d" stroke-width="3"/>
   <path d="M26 16 C40 34 40 66 26 84" fill="none" stroke="#ff6a3d" stroke-width="4" stroke-dasharray="6 5"/><path d="M74 16 C60 34 60 66 74 84" fill="none" stroke="#ff6a3d" stroke-width="4" stroke-dasharray="6 5"/></svg></div>
@@ -233,12 +288,12 @@ c.ft("#brx", o(opacity=0), o(opacity=1, duration=0.3), VBRAND)
 c.ft(".bmark", o(scale=0.4, rotation=-120), o(scale=1, rotation=0, duration=0.5, ease="back.out(1.6)"), VBRAND)
 c.ft(".bname", o(opacity=0, y=30), o(opacity=1, y=0, duration=0.3, ease="power3.out"), VBRAND + 0.15)
 
-# ----------------------------------------------------------------- sound (no voice: room left for a narrator)
+# ----------------------------------------------------------------- sound
 def cue(n, t, db=0.0):
     if t is not None and 0 <= t < D: c.cue(n, t, db)
 for t_ in CUTS: cue("whoosh", t_, -13)
 cue("riser-s", 0.0, -8)
-for tt in [2.74, V1 + 0.05, 9.95, VF3 + 0.1, 23.2, VZ4, 31.6]: cue("impact", tt, -6)
+for tt in [H5, W("d2", "same") - 0.04, W("d3", "difference") - 0.04, VF3 + 0.05, B4 + 0.05, VZ4, VEND]: cue("impact", tt, -6)
 def pv(sh, t):                                                      # video time of play time t in a shot (its first pane's clock for split screens)
     p = sh["panes"][0] if "panes" in sh else sh
     v = vat(p.get("vs", sh["vs"]), p.get("ts", sh["ts"]), t)
@@ -286,13 +341,20 @@ def mixdown():
     bedp = os.path.join(HERE, "assets", "bed.wav"); make_bed(bedp, D, VBRAND, style="pulse", seed=203)
     bed = read(bedp)[:n]; bed = np.pad(bed, ((0, n - len(bed)), (0, 0)))
     ramp = np.clip(np.arange(n) / SR / 3.0, 0.5, 1.0)[:, None]
-    full = (fx + bed * ramp * 10 ** (-16 / 20)) * 10 ** (-6 / 20)
+    vo = read(os.path.join(HERE, "assets", "vo", "vo.wav"))[:n]; vo = np.pad(vo, ((0, n - len(vo)), (0, 0)))
+    env = np.convolve(np.abs(vo).mean(1), np.ones(int(0.12 * SR)) / int(0.12 * SR), "same")
+    duck = 10 ** (-7 * np.clip(env / 0.05, 0, 1) / 20)
+    duck = np.convolve(duck, np.ones(int(0.08 * SR)) / int(0.08 * SR), "same")
+    music = bed * ramp * duck[:, None] * 10 ** (-17 / 20)
+    full = (fx + music) * 10 ** (-6 / 20) + vo
     def wav(path, x):
         w = wave.open(path, "wb"); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
         w.writeframes((np.clip(x * 0.5, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
-    pre = os.path.join(HERE, ".pre.wav"); wav(pre, full)
-    m = master(pre, os.path.join(HERE, "assets", "mix.wav"), target=-20.0)
-    os.remove(pre)
+    pre, pfx = os.path.join(HERE, ".pre.wav"), os.path.join(HERE, ".fx.wav")
+    wav(pre, full); wav(pfx, (fx + bed * ramp * 10 ** (-17 / 20)) * 10 ** (-6 / 20))
+    m = master(pre, os.path.join(HERE, "assets", "mix.wav"))
+    master(pre, os.path.join(HERE, "assets", "mix-novo.wav"), fx_path=pfx)
+    os.remove(pre); os.remove(pfx)
     return m
 
 # ----------------------------------------------------------------- CSS
@@ -322,6 +384,7 @@ html, body {{ width:1080px; height:1920px; overflow:hidden; background:#05080d; 
 .cap {{ position:absolute; left:52px; right:40px; }}
 .cap .cl {{ display:block; {BC} font-size:88px; line-height:.96; color:#fff; text-shadow:0 6px 28px rgba(0,0,0,.8), 0 2px 4px rgba(0,0,0,.7); }}
 .cap .cw {{ display:inline-block; }} .cap .cw.acc {{ color:{HOT}; }}
+.chip .cyt {{ color:{CYAN}; }} .chip .ort {{ color:{HOT}; }}
 .yl {{ color:{Y}; }} .hot {{ color:{HOT}; }} .wh {{ color:#eef2f7; }}
 .pt {{ position:absolute; left:52px; right:60px; {BC} font-size:104px; line-height:.95; color:#fff; text-shadow:0 6px 28px rgba(0,0,0,.85), 0 2px 4px rgba(0,0,0,.7); }}
 .pt.sm {{ font-size:84px; }} .pt em {{ font-style:normal; color:{HOT}; }}
@@ -503,6 +566,10 @@ CSS += f"""
 .bigt em {{ font-style:normal; color:{HOT}; }}
 .plb {{ position:absolute; transform:translateX(-50%); padding:10px 22px; border-radius:14px; background:rgba(6,10,18,.88); border:3px solid {CYAN}; {BC} font-size:54px; line-height:1.0; color:{CYAN}; white-space:nowrap; }}
 .plb.or {{ border-color:{HOT}; color:{HOT}; }} .plb b {{ color:#fff; }}
+.cap {{ position:absolute; left:52px; right:40px; }}
+.cap .cl {{ display:block; {BC} font-size:88px; line-height:.96; color:#fff; text-shadow:0 6px 28px rgba(0,0,0,.8), 0 2px 4px rgba(0,0,0,.7); }}
+.cap .cw {{ display:inline-block; }} .cap .cw.acc {{ color:{HOT}; }}
+.chip .cyt {{ color:{CYAN}; }} .chip .ort {{ color:{HOT}; }}
 .sbar {{ position:absolute; left:50px; right:50px; display:grid; grid-template-columns:auto 1fr auto; gap:18px; align-items:center; padding:12px 20px; border-radius:14px; background:rgba(6,10,18,.86); }}
 .sbar i {{ font-style:normal; {BC} font-size:46px; color:#fff; }} .sbar .tb {{ height:20px; border-radius:10px; background:#26303f; overflow:hidden; }}
 .sbar .tb span {{ display:block; height:100%; width:0; background:{CYAN}; }} .sbar.or .tb span {{ background:{HOT}; }}
@@ -513,8 +580,8 @@ CSS += f"""
 HEAD = '<script type="importmap">{"imports":{"three":"./assets/vendor/three.module.min.js"}}</script>'
 SCENES = [(0.0, V1, "The hook", "His hands on the bat; a 95 mph fastball into the mitt; a changeup, swung through early; split: the same swing against each", "THIS PITCH MAKES 95 MPH LOOK EVEN FASTER."),
           (V1, V2, "The deception", "Side by side, straight behind the pitcher: the same delivery, the same arm path; then the arm at release", "SAME ARM ACTION. DIFFERENT SPEED."),
-          (V2, V3, "The speed difference", "Both pitches side by side, slowed, from the side: the fastball gets there first; the changeup is still about 5 ft away; the same swing barrels one and misses the other", "THE CHANGEUP ARRIVES LATER."),
-          (V3, V4, "The hitter's problem", "He tracks it; his swing gets to the zone first; frozen; the ball crosses after the bat", "THE HITTER SWINGS TOO EARLY."),
+          (V2, V3, "The timing", "Both pitches side by side, slowed, from the side: the fastball gets there first; the changeup is still about 5 ft away; the same swing barrels one and misses the other", "THE CHANGEUP ARRIVES LATER."),
+          (V3, V4, "Why it works", "He tracks it; his swing gets to the zone first; frozen; the ball crosses after the bat", "THE HITTER SWINGS TOO EARLY."),
           (V4, D, "The payoff", "Another changeup: fooled, way out in front; into the mitt; Baseball Decoded", "IT'S NOT ABOUT POWER. IT'S ABOUT TIMING.")]
 if __name__ == "__main__":
     cc = {"duration": D, "shots": {"list": SHOTS}, "pins": PINS}
@@ -522,8 +589,12 @@ if __name__ == "__main__":
         '<script src="assets/vendor/gsap.min.js"></script>\n    ' + HEAD + f'\n    <script>window.__CC = {json.dumps(cc)}; window.__PLAY = {json.dumps(P)};</script>')
     h = h.replace("</body>", '  <script type="module" src="./assets/field.js"></script>\n  </body>')
     open(os.path.join(HERE, "index.html"), "w").write(h)
-    lines = ["# Scene timing", "", f"The video is {D:.1f} s, music and effects only. Record a narration inside each scene (times in seconds).", "",
-             "| From | To | Scene | Shots | On screen |", "|---|---|---|---|---|"] + [f"| {a:.1f} | {b:.1f} | {n} | {d} | {t} |" for a, b, n, d, t in SCENES]
+    lines = ["# Voiceover cues", "", f"The video is {D:.1f} s. To record your own read over `assets/mix-novo.wav`, start each line at its time (seconds).", "",
+             "| Start | End | Scene | Line |", "|---|---|---|---|"]
+    for a, b, name, desc, _ in SCENES:
+        for ln in TM["lines"]:
+            if a - 0.01 <= ln["t0"] < b: lines.append(f"| {ln['t0']:.2f} | {ln['t1']:.2f} | {name} | {ln['text']} |")
+    lines += ["", "## Scenes", "", "| From | To | Scene | Shots | On screen |", "|---|---|---|---|---|"] + [f"| {a:.2f} | {b:.2f} | {n} | {d} | {t} |" for a, b, n, d, t in SCENES]
     open(os.path.join(HERE, "CUES.md"), "w").write("\n".join(lines) + "\n")
     if "--nomix" not in sys.argv:
         m = mixdown(); print(f"index.html: {D}s, {len(SHOTS)} shots; {len(c.cues)} sounds; {m['lufs']} LUFS / {m['true_peak']} dBTP")

@@ -1,0 +1,711 @@
+[
+ {
+  "i": 0,
+  "id": "h1",
+  "text": "This pitch makes a 95 mph fastball look even faster.",
+  "spoken": "This pitch makes a ninety-five mile-per-hour fastball look even faster.",
+  "dur": 2.88,
+  "words": [
+   {
+    "w": "This",
+    "start": 0.044,
+    "end": 0.119
+   },
+   {
+    "w": "pitch",
+    "start": 0.144,
+    "end": 0.269
+   },
+   {
+    "w": "makes",
+    "start": 0.294,
+    "end": 0.494
+   },
+   {
+    "w": "a",
+    "start": 0.494,
+    "end": 0.494
+   },
+   {
+    "w": "ninety-five",
+    "start": 0.544,
+    "end": 1.044
+   },
+   {
+    "w": "mile-per-hour",
+    "start": 1.094,
+    "end": 1.519
+   },
+   {
+    "w": "fastball",
+    "start": 1.569,
+    "end": 1.894
+   },
+   {
+    "w": "look",
+    "start": 1.919,
+    "end": 2.044
+   },
+   {
+    "w": "even",
+    "start": 2.119,
+    "end": 2.244
+   },
+   {
+    "w": "faster.",
+    "start": 2.294,
+    "end": 2.869
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "d1",
+  "text": "A changeup is designed to look almost identical to a fastball coming out of the pitcher\u2019s hand.",
+  "spoken": "A changeup is designed to look almost identical to a fastball coming out of the pitcher's hand.",
+  "dur": 3.861,
+  "words": [
+   {
+    "w": "A",
+    "start": 0.001,
+    "end": 0.026
+   },
+   {
+    "w": "changeup",
+    "start": 0.076,
+    "end": 0.526
+   },
+   {
+    "w": "is",
+    "start": 0.576,
+    "end": 0.626
+   },
+   {
+    "w": "designed",
+    "start": 0.651,
+    "end": 1.001
+   },
+   {
+    "w": "to",
+    "start": 1.026,
+    "end": 1.076
+   },
+   {
+    "w": "look",
+    "start": 1.101,
+    "end": 1.201
+   },
+   {
+    "w": "almost",
+    "start": 1.276,
+    "end": 1.551
+   },
+   {
+    "w": "identical",
+    "start": 1.626,
+    "end": 2.051
+   },
+   {
+    "w": "to",
+    "start": 2.101,
+    "end": 2.201
+   },
+   {
+    "w": "a",
+    "start": 2.201,
+    "end": 2.201
+   },
+   {
+    "w": "fastball",
+    "start": 2.276,
+    "end": 2.776
+   },
+   {
+    "w": "coming",
+    "start": 2.826,
+    "end": 2.976
+   },
+   {
+    "w": "out",
+    "start": 3.026,
+    "end": 3.126
+   },
+   {
+    "w": "of",
+    "start": 3.126,
+    "end": 3.151
+   },
+   {
+    "w": "the",
+    "start": 3.176,
+    "end": 3.226
+   },
+   {
+    "w": "pitcher's",
+    "start": 3.251,
+    "end": 3.501
+   },
+   {
+    "w": "hand.",
+    "start": 3.526,
+    "end": 3.861
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "d2",
+  "text": "Same arm action. Similar release.",
+  "spoken": "Same arm action. Similar release.",
+  "dur": 1.643,
+  "words": [
+   {
+    "w": "Same",
+    "start": 0.069,
+    "end": 0.194
+   },
+   {
+    "w": "arm",
+    "start": 0.269,
+    "end": 0.369
+   },
+   {
+    "w": "action.",
+    "start": 0.469,
+    "end": 0.769
+   },
+   {
+    "w": "Similar",
+    "start": 0.894,
+    "end": 1.119
+   },
+   {
+    "w": "release.",
+    "start": 1.144,
+    "end": 1.643
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "d3",
+  "text": "But there\u2019s one major difference: the speed.",
+  "spoken": "But there's one major difference: the speed.",
+  "dur": 1.749,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.04,
+    "end": 0.14
+   },
+   {
+    "w": "there's",
+    "start": 0.165,
+    "end": 0.265
+   },
+   {
+    "w": "one",
+    "start": 0.315,
+    "end": 0.415
+   },
+   {
+    "w": "major",
+    "start": 0.44,
+    "end": 0.615
+   },
+   {
+    "w": "difference:",
+    "start": 0.64,
+    "end": 1.04
+   },
+   {
+    "w": "the",
+    "start": 1.115,
+    "end": 1.165
+   },
+   {
+    "w": "speed.",
+    "start": 1.215,
+    "end": 1.749
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "t1",
+  "text": "Because the changeup travels slower, the hitter\u2019s brain expects the ball to arrive sooner than it actually does.",
+  "spoken": "Because the changeup travels slower, the hitter's brain expects the ball to arrive sooner than it actually does.",
+  "dur": 4.181,
+  "words": [
+   {
+    "w": "Because",
+    "start": 0.0,
+    "end": 0.148
+   },
+   {
+    "w": "the",
+    "start": 0.173,
+    "end": 0.223
+   },
+   {
+    "w": "changeup",
+    "start": 0.273,
+    "end": 0.573
+   },
+   {
+    "w": "travels",
+    "start": 0.598,
+    "end": 0.823
+   },
+   {
+    "w": "slower,",
+    "start": 0.898,
+    "end": 1.423
+   },
+   {
+    "w": "the",
+    "start": 1.523,
+    "end": 1.573
+   },
+   {
+    "w": "hitter's",
+    "start": 1.623,
+    "end": 1.823
+   },
+   {
+    "w": "brain",
+    "start": 1.873,
+    "end": 2.073
+   },
+   {
+    "w": "expects",
+    "start": 2.098,
+    "end": 2.373
+   },
+   {
+    "w": "the",
+    "start": 2.398,
+    "end": 2.448
+   },
+   {
+    "w": "ball",
+    "start": 2.498,
+    "end": 2.673
+   },
+   {
+    "w": "to",
+    "start": 2.698,
+    "end": 2.748
+   },
+   {
+    "w": "arrive",
+    "start": 2.798,
+    "end": 3.048
+   },
+   {
+    "w": "sooner",
+    "start": 3.123,
+    "end": 3.348
+   },
+   {
+    "w": "than",
+    "start": 3.373,
+    "end": 3.448
+   },
+   {
+    "w": "it",
+    "start": 3.473,
+    "end": 3.523
+   },
+   {
+    "w": "actually",
+    "start": 3.623,
+    "end": 3.848
+   },
+   {
+    "w": "does.",
+    "start": 3.873,
+    "end": 4.181
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "t2",
+  "text": "The hitter commits to the swing too early, and the ball is still traveling toward the plate.",
+  "spoken": "The hitter commits to the swing too early, and the ball is still traveling toward the plate.",
+  "dur": 3.349,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.044,
+    "end": 0.094
+   },
+   {
+    "w": "hitter",
+    "start": 0.144,
+    "end": 0.319
+   },
+   {
+    "w": "commits",
+    "start": 0.369,
+    "end": 0.569
+   },
+   {
+    "w": "to",
+    "start": 0.594,
+    "end": 0.644
+   },
+   {
+    "w": "the",
+    "start": 0.669,
+    "end": 0.719
+   },
+   {
+    "w": "swing",
+    "start": 0.769,
+    "end": 0.994
+   },
+   {
+    "w": "too",
+    "start": 1.044,
+    "end": 1.144
+   },
+   {
+    "w": "early,",
+    "start": 1.244,
+    "end": 1.644
+   },
+   {
+    "w": "and",
+    "start": 1.769,
+    "end": 1.844
+   },
+   {
+    "w": "the",
+    "start": 1.869,
+    "end": 1.919
+   },
+   {
+    "w": "ball",
+    "start": 1.969,
+    "end": 2.194
+   },
+   {
+    "w": "is",
+    "start": 2.219,
+    "end": 2.269
+   },
+   {
+    "w": "still",
+    "start": 2.294,
+    "end": 2.419
+   },
+   {
+    "w": "traveling",
+    "start": 2.469,
+    "end": 2.744
+   },
+   {
+    "w": "toward",
+    "start": 2.769,
+    "end": 2.969
+   },
+   {
+    "w": "the",
+    "start": 2.994,
+    "end": 3.044
+   },
+   {
+    "w": "plate.",
+    "start": 3.094,
+    "end": 3.349
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "w1",
+  "text": "The best changeups disguise themselves until the last possible moment.",
+  "spoken": "The best changeups disguise themselves until the last possible moment.",
+  "dur": 2.987,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.044,
+    "end": 0.094
+   },
+   {
+    "w": "best",
+    "start": 0.144,
+    "end": 0.269
+   },
+   {
+    "w": "changeups",
+    "start": 0.294,
+    "end": 0.619
+   },
+   {
+    "w": "disguise",
+    "start": 0.644,
+    "end": 0.994
+   },
+   {
+    "w": "themselves",
+    "start": 1.019,
+    "end": 1.619
+   },
+   {
+    "w": "until",
+    "start": 1.694,
+    "end": 1.869
+   },
+   {
+    "w": "the",
+    "start": 1.894,
+    "end": 1.944
+   },
+   {
+    "w": "last",
+    "start": 1.994,
+    "end": 2.219
+   },
+   {
+    "w": "possible",
+    "start": 2.269,
+    "end": 2.544
+   },
+   {
+    "w": "moment.",
+    "start": 2.569,
+    "end": 2.987
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "w2",
+  "text": "If a hitter can\u2019t recognize the difference early enough, their timing is completely disrupted.",
+  "spoken": "If a hitter can't recognize the difference early enough, their timing is completely disrupted.",
+  "dur": 3.563,
+  "words": [
+   {
+    "w": "If",
+    "start": 0.044,
+    "end": 0.169
+   },
+   {
+    "w": "a",
+    "start": 0.169,
+    "end": 0.169
+   },
+   {
+    "w": "hitter",
+    "start": 0.219,
+    "end": 0.394
+   },
+   {
+    "w": "can't",
+    "start": 0.444,
+    "end": 0.594
+   },
+   {
+    "w": "recognize",
+    "start": 0.644,
+    "end": 1.019
+   },
+   {
+    "w": "the",
+    "start": 1.044,
+    "end": 1.094
+   },
+   {
+    "w": "difference",
+    "start": 1.119,
+    "end": 1.369
+   },
+   {
+    "w": "early",
+    "start": 1.469,
+    "end": 1.619
+   },
+   {
+    "w": "enough,",
+    "start": 1.644,
+    "end": 2.094
+   },
+   {
+    "w": "their",
+    "start": 2.169,
+    "end": 2.244
+   },
+   {
+    "w": "timing",
+    "start": 2.294,
+    "end": 2.569
+   },
+   {
+    "w": "is",
+    "start": 2.594,
+    "end": 2.644
+   },
+   {
+    "w": "completely",
+    "start": 2.669,
+    "end": 3.044
+   },
+   {
+    "w": "disrupted.",
+    "start": 3.069,
+    "end": 3.563
+   }
+  ]
+ },
+ {
+  "i": 8,
+  "id": "p1",
+  "text": "That\u2019s the secret of the changeup.",
+  "spoken": "That's the secret of the changeup.",
+  "dur": 1.237,
+  "words": [
+   {
+    "w": "That's",
+    "start": 0.065,
+    "end": 0.19
+   },
+   {
+    "w": "the",
+    "start": 0.215,
+    "end": 0.265
+   },
+   {
+    "w": "secret",
+    "start": 0.34,
+    "end": 0.565
+   },
+   {
+    "w": "of",
+    "start": 0.59,
+    "end": 0.64
+   },
+   {
+    "w": "the",
+    "start": 0.64,
+    "end": 0.69
+   },
+   {
+    "w": "changeup.",
+    "start": 0.715,
+    "end": 1.237
+   }
+  ]
+ },
+ {
+  "i": 9,
+  "id": "p2",
+  "text": "It doesn\u2019t have to overpower a hitter.",
+  "spoken": "It doesn't have to overpower a hitter.",
+  "dur": 1.408,
+  "words": [
+   {
+    "w": "It",
+    "start": 0.044,
+    "end": 0.094
+   },
+   {
+    "w": "doesn't",
+    "start": 0.119,
+    "end": 0.294
+   },
+   {
+    "w": "have",
+    "start": 0.319,
+    "end": 0.419
+   },
+   {
+    "w": "to",
+    "start": 0.444,
+    "end": 0.494
+   },
+   {
+    "w": "overpower",
+    "start": 0.544,
+    "end": 0.969
+   },
+   {
+    "w": "a",
+    "start": 0.969,
+    "end": 0.969
+   },
+   {
+    "w": "hitter.",
+    "start": 1.019,
+    "end": 1.408
+   }
+  ]
+ },
+ {
+  "i": 10,
+  "id": "p3",
+  "text": "It just has to make them swing at the wrong time.",
+  "spoken": "It just has to make them swing at the wrong time.",
+  "dur": 1.963,
+  "words": [
+   {
+    "w": "It",
+    "start": 0.044,
+    "end": 0.094
+   },
+   {
+    "w": "just",
+    "start": 0.119,
+    "end": 0.269
+   },
+   {
+    "w": "has",
+    "start": 0.294,
+    "end": 0.369
+   },
+   {
+    "w": "to",
+    "start": 0.394,
+    "end": 0.444
+   },
+   {
+    "w": "make",
+    "start": 0.469,
+    "end": 0.594
+   },
+   {
+    "w": "them",
+    "start": 0.619,
+    "end": 0.744
+   },
+   {
+    "w": "swing",
+    "start": 0.819,
+    "end": 0.994
+   },
+   {
+    "w": "at",
+    "start": 1.019,
+    "end": 1.069
+   },
+   {
+    "w": "the",
+    "start": 1.094,
+    "end": 1.144
+   },
+   {
+    "w": "wrong",
+    "start": 1.194,
+    "end": 1.369
+   },
+   {
+    "w": "time.",
+    "start": 1.419,
+    "end": 1.963
+   }
+  ]
+ }
+]
