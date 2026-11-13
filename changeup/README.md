@@ -6,7 +6,7 @@ A 36.0 s vertical (1080×1920, 30 fps) 3D baseball breakdown for Baseball Decode
 - **Voiceover:**
   - Your script ("Why changeups are so hard to hit"), voiced with HyperFrames' local Kokoro TTS (voice `am_michael`, 1.5×). The text is in `transcript.txt`.
   - Word-by-word captions at the top. "95 mph" is spoken as words, and the captions keep the numerals.
-  - Each scene starts at or within 0.1 s of its time in your script. The video is 36.0 s.
+  - The deception starts at 3.1 s, about a second before 0:04, because the hook line takes under 3 s to say. The other scenes start within 0.1 s of their times in your script. The video is 36.0 s.
   - Shots and graphics are keyed to the words:
     - The release, side by side, on "hand".
     - The close release on "release"; "Different speed." on "difference".
