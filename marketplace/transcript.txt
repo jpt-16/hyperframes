@@ -1,0 +1,19 @@
+The hardest app to build isn’t necessarily the one with the most complicated code.
+It’s the one that needs two completely different groups of people to succeed.
+And this is a problem companies like Uber and DoorDash had to solve.
+Think about it.
+Customers won’t use Uber if there are no drivers.
+And drivers won’t join Uber if there are no customers.
+It’s the same problem with DoorDash.
+No restaurants means no customers, and no customers means no reason for restaurants to join.
+So how did they solve it?
+They didn’t try to take over the entire country on day one.
+They focused on one city, built up enough supply and demand to make the platform useful, proved the model worked, and then expanded into new markets.
+Now think about an app like DetailDash.
+It’s essentially DoorDash for car detailing.
+It connects people who want their cars detailed with detailers who want more customers.
+But building the app is only half the battle.
+You need enough detailers in an area to attract customers, and enough customers to make joining worthwhile for detailers.
+That’s why the smartest way to build a marketplace isn’t to launch everywhere.
+It’s to dominate one market first.
+Then expand.

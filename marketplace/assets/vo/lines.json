@@ -1,0 +1,1208 @@
+[
+ {
+  "i": 0,
+  "id": "h1",
+  "text": "The hardest app to build isn\u2019t necessarily the one with the most complicated code.",
+  "spoken": "The hardest app to build isn't necessarily the one with the most complicated code.",
+  "dur": 3.179,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.015,
+    "end": 0.065
+   },
+   {
+    "w": "hardest",
+    "start": 0.115,
+    "end": 0.365
+   },
+   {
+    "w": "app",
+    "start": 0.465,
+    "end": 0.515
+   },
+   {
+    "w": "to",
+    "start": 0.54,
+    "end": 0.59
+   },
+   {
+    "w": "build",
+    "start": 0.615,
+    "end": 0.99
+   },
+   {
+    "w": "isn't",
+    "start": 1.065,
+    "end": 1.19
+   },
+   {
+    "w": "necessarily",
+    "start": 1.215,
+    "end": 1.69
+   },
+   {
+    "w": "the",
+    "start": 1.715,
+    "end": 1.765
+   },
+   {
+    "w": "one",
+    "start": 1.815,
+    "end": 2.04
+   },
+   {
+    "w": "with",
+    "start": 2.065,
+    "end": 2.14
+   },
+   {
+    "w": "the",
+    "start": 2.14,
+    "end": 2.19
+   },
+   {
+    "w": "most",
+    "start": 2.215,
+    "end": 2.39
+   },
+   {
+    "w": "complicated",
+    "start": 2.44,
+    "end": 2.84
+   },
+   {
+    "w": "code.",
+    "start": 2.89,
+    "end": 3.179
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "h2",
+  "text": "It\u2019s the one that needs two completely different groups of people to succeed.",
+  "spoken": "It's the one that needs two completely different groups of people to succeed.",
+  "dur": 2.347,
+  "words": [
+   {
+    "w": "It's",
+    "start": 0.04,
+    "end": 0.115
+   },
+   {
+    "w": "the",
+    "start": 0.14,
+    "end": 0.19
+   },
+   {
+    "w": "one",
+    "start": 0.215,
+    "end": 0.315
+   },
+   {
+    "w": "that",
+    "start": 0.34,
+    "end": 0.415
+   },
+   {
+    "w": "needs",
+    "start": 0.44,
+    "end": 0.59
+   },
+   {
+    "w": "two",
+    "start": 0.64,
+    "end": 0.74
+   },
+   {
+    "w": "completely",
+    "start": 0.765,
+    "end": 1.115
+   },
+   {
+    "w": "different",
+    "start": 1.165,
+    "end": 1.365
+   },
+   {
+    "w": "groups",
+    "start": 1.39,
+    "end": 1.565
+   },
+   {
+    "w": "of",
+    "start": 1.59,
+    "end": 1.64
+   },
+   {
+    "w": "people",
+    "start": 1.665,
+    "end": 1.84
+   },
+   {
+    "w": "to",
+    "start": 1.865,
+    "end": 1.915
+   },
+   {
+    "w": "succeed.",
+    "start": 1.94,
+    "end": 2.347
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "u1",
+  "text": "And this is a problem companies like Uber and DoorDash had to solve.",
+  "spoken": "And this is a problem companies like Uber and Door Dash had to solve.",
+  "dur": 2.709,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.019,
+    "end": 0.094
+   },
+   {
+    "w": "this",
+    "start": 0.119,
+    "end": 0.244
+   },
+   {
+    "w": "is",
+    "start": 0.269,
+    "end": 0.369
+   },
+   {
+    "w": "a",
+    "start": 0.369,
+    "end": 0.369
+   },
+   {
+    "w": "problem",
+    "start": 0.419,
+    "end": 0.669
+   },
+   {
+    "w": "companies",
+    "start": 0.694,
+    "end": 1.019
+   },
+   {
+    "w": "like",
+    "start": 1.044,
+    "end": 1.169
+   },
+   {
+    "w": "Uber",
+    "start": 1.219,
+    "end": 1.569
+   },
+   {
+    "w": "and",
+    "start": 1.619,
+    "end": 1.694
+   },
+   {
+    "w": "Door",
+    "start": 1.744,
+    "end": 1.894
+   },
+   {
+    "w": "Dash",
+    "start": 1.944,
+    "end": 2.169
+   },
+   {
+    "w": "had",
+    "start": 2.194,
+    "end": 2.294
+   },
+   {
+    "w": "to",
+    "start": 2.294,
+    "end": 2.344
+   },
+   {
+    "w": "solve.",
+    "start": 2.394,
+    "end": 2.709
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "u2",
+  "text": "Think about it.",
+  "spoken": "Think about it.",
+  "dur": 0.704,
+  "words": [
+   {
+    "w": "Think",
+    "start": 0.083,
+    "end": 0.208
+   },
+   {
+    "w": "about",
+    "start": 0.233,
+    "end": 0.408
+   },
+   {
+    "w": "it.",
+    "start": 0.433,
+    "end": 0.683
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "u3",
+  "text": "Customers won\u2019t use Uber if there are no drivers.",
+  "spoken": "Customers won't use Uber if there are no drivers.",
+  "dur": 1.984,
+  "words": [
+   {
+    "w": "Customers",
+    "start": 0.037,
+    "end": 0.412
+   },
+   {
+    "w": "won't",
+    "start": 0.462,
+    "end": 0.587
+   },
+   {
+    "w": "use",
+    "start": 0.637,
+    "end": 0.762
+   },
+   {
+    "w": "Uber",
+    "start": 0.812,
+    "end": 1.087
+   },
+   {
+    "w": "if",
+    "start": 1.112,
+    "end": 1.162
+   },
+   {
+    "w": "there",
+    "start": 1.187,
+    "end": 1.262
+   },
+   {
+    "w": "are",
+    "start": 1.287,
+    "end": 1.362
+   },
+   {
+    "w": "no",
+    "start": 1.387,
+    "end": 1.487
+   },
+   {
+    "w": "drivers.",
+    "start": 1.537,
+    "end": 1.984
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "u4",
+  "text": "And drivers won\u2019t join Uber if there are no customers.",
+  "spoken": "And drivers won't join Uber if there are no customers.",
+  "dur": 2.155,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.019,
+    "end": 0.094
+   },
+   {
+    "w": "drivers",
+    "start": 0.119,
+    "end": 0.444
+   },
+   {
+    "w": "won't",
+    "start": 0.494,
+    "end": 0.619
+   },
+   {
+    "w": "join",
+    "start": 0.669,
+    "end": 0.869
+   },
+   {
+    "w": "Uber",
+    "start": 0.919,
+    "end": 1.194
+   },
+   {
+    "w": "if",
+    "start": 1.244,
+    "end": 1.294
+   },
+   {
+    "w": "there",
+    "start": 1.319,
+    "end": 1.394
+   },
+   {
+    "w": "are",
+    "start": 1.419,
+    "end": 1.494
+   },
+   {
+    "w": "no",
+    "start": 1.519,
+    "end": 1.619
+   },
+   {
+    "w": "customers.",
+    "start": 1.669,
+    "end": 2.155
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "d1",
+  "text": "It\u2019s the same problem with DoorDash.",
+  "spoken": "It's the same problem with Door Dash.",
+  "dur": 1.365,
+  "words": [
+   {
+    "w": "It's",
+    "start": 0.04,
+    "end": 0.115
+   },
+   {
+    "w": "the",
+    "start": 0.14,
+    "end": 0.19
+   },
+   {
+    "w": "same",
+    "start": 0.24,
+    "end": 0.365
+   },
+   {
+    "w": "problem",
+    "start": 0.39,
+    "end": 0.64
+   },
+   {
+    "w": "with",
+    "start": 0.665,
+    "end": 0.74
+   },
+   {
+    "w": "Door",
+    "start": 0.79,
+    "end": 0.94
+   },
+   {
+    "w": "Dash.",
+    "start": 0.965,
+    "end": 1.365
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "d2",
+  "text": "No restaurants means no customers, and no customers means no reason for restaurants to join.",
+  "spoken": "No restaurants means no customers, and no customers means no reason for restaurants to join.",
+  "dur": 3.776,
+  "words": [
+   {
+    "w": "No",
+    "start": 0.044,
+    "end": 0.169
+   },
+   {
+    "w": "restaurants",
+    "start": 0.219,
+    "end": 0.594
+   },
+   {
+    "w": "means",
+    "start": 0.644,
+    "end": 0.819
+   },
+   {
+    "w": "no",
+    "start": 0.869,
+    "end": 0.994
+   },
+   {
+    "w": "customers,",
+    "start": 1.044,
+    "end": 1.569
+   },
+   {
+    "w": "and",
+    "start": 1.669,
+    "end": 1.744
+   },
+   {
+    "w": "no",
+    "start": 1.769,
+    "end": 1.894
+   },
+   {
+    "w": "customers",
+    "start": 1.944,
+    "end": 2.244
+   },
+   {
+    "w": "means",
+    "start": 2.269,
+    "end": 2.444
+   },
+   {
+    "w": "no",
+    "start": 2.494,
+    "end": 2.619
+   },
+   {
+    "w": "reason",
+    "start": 2.669,
+    "end": 2.894
+   },
+   {
+    "w": "for",
+    "start": 2.919,
+    "end": 3.019
+   },
+   {
+    "w": "restaurants",
+    "start": 3.044,
+    "end": 3.369
+   },
+   {
+    "w": "to",
+    "start": 3.394,
+    "end": 3.444
+   },
+   {
+    "w": "join.",
+    "start": 3.469,
+    "end": 3.776
+   }
+  ]
+ },
+ {
+  "i": 8,
+  "id": "s1",
+  "text": "So how did they solve it?",
+  "spoken": "So how did they solve it?",
+  "dur": 1.088,
+  "words": [
+   {
+    "w": "So",
+    "start": 0.083,
+    "end": 0.183
+   },
+   {
+    "w": "how",
+    "start": 0.233,
+    "end": 0.358
+   },
+   {
+    "w": "did",
+    "start": 0.383,
+    "end": 0.483
+   },
+   {
+    "w": "they",
+    "start": 0.508,
+    "end": 0.583
+   },
+   {
+    "w": "solve",
+    "start": 0.658,
+    "end": 0.833
+   },
+   {
+    "w": "it?",
+    "start": 0.858,
+    "end": 1.088
+   }
+  ]
+ },
+ {
+  "i": 9,
+  "id": "s2",
+  "text": "They didn\u2019t try to take over the entire country on day one.",
+  "spoken": "They didn't try to take over the entire country on day one.",
+  "dur": 2.24,
+  "words": [
+   {
+    "w": "They",
+    "start": 0.015,
+    "end": 0.09
+   },
+   {
+    "w": "didn't",
+    "start": 0.115,
+    "end": 0.265
+   },
+   {
+    "w": "try",
+    "start": 0.29,
+    "end": 0.44
+   },
+   {
+    "w": "to",
+    "start": 0.465,
+    "end": 0.515
+   },
+   {
+    "w": "take",
+    "start": 0.54,
+    "end": 0.665
+   },
+   {
+    "w": "over",
+    "start": 0.715,
+    "end": 0.815
+   },
+   {
+    "w": "the",
+    "start": 0.84,
+    "end": 0.89
+   },
+   {
+    "w": "entire",
+    "start": 0.915,
+    "end": 1.19
+   },
+   {
+    "w": "country",
+    "start": 1.24,
+    "end": 1.565
+   },
+   {
+    "w": "on",
+    "start": 1.64,
+    "end": 1.69
+   },
+   {
+    "w": "day",
+    "start": 1.715,
+    "end": 1.865
+   },
+   {
+    "w": "one.",
+    "start": 1.915,
+    "end": 2.24
+   }
+  ]
+ },
+ {
+  "i": 10,
+  "id": "s3",
+  "text": "They focused on one city, built up enough supply and demand to make the platform useful, proved the model worked, and then expanded into new markets.",
+  "spoken": "They focused on one city, built up enough supply and demand to make the platform useful, proved the model worked, and then expanded into new markets.",
+  "dur": 6.016,
+  "words": [
+   {
+    "w": "They",
+    "start": 0.015,
+    "end": 0.09
+   },
+   {
+    "w": "focused",
+    "start": 0.14,
+    "end": 0.415
+   },
+   {
+    "w": "on",
+    "start": 0.465,
+    "end": 0.515
+   },
+   {
+    "w": "one",
+    "start": 0.565,
+    "end": 0.69
+   },
+   {
+    "w": "city,",
+    "start": 0.74,
+    "end": 1.065
+   },
+   {
+    "w": "built",
+    "start": 1.19,
+    "end": 1.34
+   },
+   {
+    "w": "up",
+    "start": 1.39,
+    "end": 1.44
+   },
+   {
+    "w": "enough",
+    "start": 1.465,
+    "end": 1.59
+   },
+   {
+    "w": "supply",
+    "start": 1.615,
+    "end": 1.94
+   },
+   {
+    "w": "and",
+    "start": 1.965,
+    "end": 2.04
+   },
+   {
+    "w": "demand",
+    "start": 2.065,
+    "end": 2.34
+   },
+   {
+    "w": "to",
+    "start": 2.365,
+    "end": 2.415
+   },
+   {
+    "w": "make",
+    "start": 2.44,
+    "end": 2.565
+   },
+   {
+    "w": "the",
+    "start": 2.59,
+    "end": 2.64
+   },
+   {
+    "w": "platform",
+    "start": 2.665,
+    "end": 2.965
+   },
+   {
+    "w": "useful,",
+    "start": 3.015,
+    "end": 3.44
+   },
+   {
+    "w": "proved",
+    "start": 3.54,
+    "end": 3.715
+   },
+   {
+    "w": "the",
+    "start": 3.74,
+    "end": 3.79
+   },
+   {
+    "w": "model",
+    "start": 3.815,
+    "end": 4.015
+   },
+   {
+    "w": "worked,",
+    "start": 4.065,
+    "end": 4.515
+   },
+   {
+    "w": "and",
+    "start": 4.615,
+    "end": 4.69
+   },
+   {
+    "w": "then",
+    "start": 4.715,
+    "end": 4.815
+   },
+   {
+    "w": "expanded",
+    "start": 4.865,
+    "end": 5.215
+   },
+   {
+    "w": "into",
+    "start": 5.265,
+    "end": 5.39
+   },
+   {
+    "w": "new",
+    "start": 5.44,
+    "end": 5.54
+   },
+   {
+    "w": "markets.",
+    "start": 5.565,
+    "end": 6.016
+   }
+  ]
+ },
+ {
+  "i": 11,
+  "id": "k1",
+  "text": "Now think about an app like DetailDash.",
+  "spoken": "Now think about an app like Detail Dash.",
+  "dur": 1.685,
+  "words": [
+   {
+    "w": "Now",
+    "start": 0.04,
+    "end": 0.14
+   },
+   {
+    "w": "think",
+    "start": 0.19,
+    "end": 0.315
+   },
+   {
+    "w": "about",
+    "start": 0.34,
+    "end": 0.54
+   },
+   {
+    "w": "an",
+    "start": 0.54,
+    "end": 0.565
+   },
+   {
+    "w": "app",
+    "start": 0.665,
+    "end": 0.74
+   },
+   {
+    "w": "like",
+    "start": 0.765,
+    "end": 0.89
+   },
+   {
+    "w": "Detail",
+    "start": 0.94,
+    "end": 1.24
+   },
+   {
+    "w": "Dash.",
+    "start": 1.29,
+    "end": 1.685
+   }
+  ]
+ },
+ {
+  "i": 12,
+  "id": "k2",
+  "text": "It\u2019s essentially DoorDash for car detailing.",
+  "spoken": "It's essentially Door Dash for car detailing.",
+  "dur": 1.749,
+  "words": [
+   {
+    "w": "It's",
+    "start": 0.019,
+    "end": 0.094
+   },
+   {
+    "w": "essentially",
+    "start": 0.119,
+    "end": 0.444
+   },
+   {
+    "w": "Door",
+    "start": 0.494,
+    "end": 0.644
+   },
+   {
+    "w": "Dash",
+    "start": 0.694,
+    "end": 0.944
+   },
+   {
+    "w": "for",
+    "start": 0.969,
+    "end": 1.069
+   },
+   {
+    "w": "car",
+    "start": 1.094,
+    "end": 1.244
+   },
+   {
+    "w": "detailing.",
+    "start": 1.269,
+    "end": 1.749
+   }
+  ]
+ },
+ {
+  "i": 13,
+  "id": "k3",
+  "text": "It connects people who want their cars detailed with detailers who want more customers.",
+  "spoken": "It connects people who want their cars detailed with detailers who want more customers.",
+  "dur": 3.157,
+  "words": [
+   {
+    "w": "It",
+    "start": 0.019,
+    "end": 0.069
+   },
+   {
+    "w": "connects",
+    "start": 0.094,
+    "end": 0.294
+   },
+   {
+    "w": "people",
+    "start": 0.319,
+    "end": 0.494
+   },
+   {
+    "w": "who",
+    "start": 0.519,
+    "end": 0.619
+   },
+   {
+    "w": "want",
+    "start": 0.644,
+    "end": 0.794
+   },
+   {
+    "w": "their",
+    "start": 0.819,
+    "end": 0.894
+   },
+   {
+    "w": "cars",
+    "start": 0.944,
+    "end": 1.269
+   },
+   {
+    "w": "detailed",
+    "start": 1.319,
+    "end": 1.719
+   },
+   {
+    "w": "with",
+    "start": 1.744,
+    "end": 1.819
+   },
+   {
+    "w": "detailers",
+    "start": 1.869,
+    "end": 2.219
+   },
+   {
+    "w": "who",
+    "start": 2.244,
+    "end": 2.344
+   },
+   {
+    "w": "want",
+    "start": 2.369,
+    "end": 2.519
+   },
+   {
+    "w": "more",
+    "start": 2.544,
+    "end": 2.669
+   },
+   {
+    "w": "customers.",
+    "start": 2.694,
+    "end": 3.157
+   }
+  ]
+ },
+ {
+  "i": 14,
+  "id": "c1",
+  "text": "But building the app is only half the battle.",
+  "spoken": "But building the app is only half the battle.",
+  "dur": 1.493,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.037,
+    "end": 0.137
+   },
+   {
+    "w": "building",
+    "start": 0.187,
+    "end": 0.362
+   },
+   {
+    "w": "the",
+    "start": 0.387,
+    "end": 0.437
+   },
+   {
+    "w": "app",
+    "start": 0.562,
+    "end": 0.637
+   },
+   {
+    "w": "is",
+    "start": 0.662,
+    "end": 0.712
+   },
+   {
+    "w": "only",
+    "start": 0.762,
+    "end": 0.887
+   },
+   {
+    "w": "half",
+    "start": 0.937,
+    "end": 1.062
+   },
+   {
+    "w": "the",
+    "start": 1.087,
+    "end": 1.137
+   },
+   {
+    "w": "battle.",
+    "start": 1.162,
+    "end": 1.493
+   }
+  ]
+ },
+ {
+  "i": 15,
+  "id": "c2",
+  "text": "You need enough detailers in an area to attract customers, and enough customers to make joining worthwhile for detailers.",
+  "spoken": "You need enough detailers in an area to attract customers, and enough customers to make joining worthwhile for detailers.",
+  "dur": 4.459,
+  "words": [
+   {
+    "w": "You",
+    "start": 0.019,
+    "end": 0.094
+   },
+   {
+    "w": "need",
+    "start": 0.119,
+    "end": 0.244
+   },
+   {
+    "w": "enough",
+    "start": 0.269,
+    "end": 0.394
+   },
+   {
+    "w": "detailers",
+    "start": 0.444,
+    "end": 0.844
+   },
+   {
+    "w": "in",
+    "start": 0.869,
+    "end": 0.969
+   },
+   {
+    "w": "an",
+    "start": 0.969,
+    "end": 0.994
+   },
+   {
+    "w": "area",
+    "start": 1.094,
+    "end": 1.269
+   },
+   {
+    "w": "to",
+    "start": 1.294,
+    "end": 1.344
+   },
+   {
+    "w": "attract",
+    "start": 1.369,
+    "end": 1.619
+   },
+   {
+    "w": "customers,",
+    "start": 1.669,
+    "end": 2.219
+   },
+   {
+    "w": "and",
+    "start": 2.319,
+    "end": 2.394
+   },
+   {
+    "w": "enough",
+    "start": 2.419,
+    "end": 2.569
+   },
+   {
+    "w": "customers",
+    "start": 2.619,
+    "end": 2.919
+   },
+   {
+    "w": "to",
+    "start": 2.944,
+    "end": 2.994
+   },
+   {
+    "w": "make",
+    "start": 3.019,
+    "end": 3.144
+   },
+   {
+    "w": "joining",
+    "start": 3.194,
+    "end": 3.419
+   },
+   {
+    "w": "worthwhile",
+    "start": 3.444,
+    "end": 3.794
+   },
+   {
+    "w": "for",
+    "start": 3.819,
+    "end": 3.919
+   },
+   {
+    "w": "detailers.",
+    "start": 3.969,
+    "end": 4.459
+   }
+  ]
+ },
+ {
+  "i": 16,
+  "id": "e1",
+  "text": "That\u2019s why the smartest way to build a marketplace isn\u2019t to launch everywhere.",
+  "spoken": "That's why the smartest way to build a marketplace isn't to launch everywhere.",
+  "dur": 2.901,
+  "words": [
+   {
+    "w": "That's",
+    "start": 0.037,
+    "end": 0.162
+   },
+   {
+    "w": "why",
+    "start": 0.212,
+    "end": 0.337
+   },
+   {
+    "w": "the",
+    "start": 0.362,
+    "end": 0.412
+   },
+   {
+    "w": "smartest",
+    "start": 0.487,
+    "end": 0.787
+   },
+   {
+    "w": "way",
+    "start": 0.812,
+    "end": 0.962
+   },
+   {
+    "w": "to",
+    "start": 0.987,
+    "end": 1.037
+   },
+   {
+    "w": "build",
+    "start": 1.062,
+    "end": 1.237
+   },
+   {
+    "w": "a",
+    "start": 1.237,
+    "end": 1.237
+   },
+   {
+    "w": "marketplace",
+    "start": 1.262,
+    "end": 1.912
+   },
+   {
+    "w": "isn't",
+    "start": 1.987,
+    "end": 2.112
+   },
+   {
+    "w": "to",
+    "start": 2.137,
+    "end": 2.187
+   },
+   {
+    "w": "launch",
+    "start": 2.212,
+    "end": 2.412
+   },
+   {
+    "w": "everywhere.",
+    "start": 2.487,
+    "end": 2.901
+   }
+  ]
+ },
+ {
+  "i": 17,
+  "id": "e2",
+  "text": "It\u2019s to dominate one market first.",
+  "spoken": "It's to dominate one market first.",
+  "dur": 1.323,
+  "words": [
+   {
+    "w": "It's",
+    "start": 0.019,
+    "end": 0.094
+   },
+   {
+    "w": "to",
+    "start": 0.119,
+    "end": 0.169
+   },
+   {
+    "w": "dominate",
+    "start": 0.219,
+    "end": 0.519
+   },
+   {
+    "w": "one",
+    "start": 0.569,
+    "end": 0.669
+   },
+   {
+    "w": "market",
+    "start": 0.694,
+    "end": 0.894
+   },
+   {
+    "w": "first.",
+    "start": 0.944,
+    "end": 1.323
+   }
+  ]
+ },
+ {
+  "i": 18,
+  "id": "e3",
+  "text": "Then expand.",
+  "spoken": "Then expand.",
+  "dur": 0.747,
+  "words": [
+   {
+    "w": "Then",
+    "start": 0.062,
+    "end": 0.162
+   },
+   {
+    "w": "expand.",
+    "start": 0.187,
+    "end": 0.747
+   }
+  ]
+ }
+]
