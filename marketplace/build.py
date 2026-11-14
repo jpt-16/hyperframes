@@ -177,14 +177,14 @@ CAPS = [("h1", 5, 9, {}), ("h1", 10, 13, {12: A_, 13: A_}),
         ("c1", 0, 3, {}), ("c1", 4, 8, {6: A_}),
         ("c2", 0, 3, {3: A_}), ("c2", 4, 9, {9: A_}), ("c2", 10, 12, {12: A_}), ("c2", 13, 18, {15: A_}),
         ("e1", 0, 4, {3: A_}), ("e1", 5, 8, {8: A_}), ("e1", 9, 12, {12: A_}),
-        ("e2", 0, 5, {2: A_, 3: A_, 4: A_}),
-        ("e3", 0, 1, {1: A_})]
+        ("e2", 0, 2, {2: A_})]                                            # "one market first. Then expand." is the title
 for k, (lid, i0, i1, acc) in enumerate(CAPS):
     ln = LN(lid); wd = ln["words"]; i1 = min(i1, len(wd) - 1)
     start = wd[i0]["t0"] - 0.08
     if k + 1 < len(CAPS) and CAPS[k + 1][0] == lid: end = wd[CAPS[k + 1][1]]["t0"] - 0.08
     elif IDX[lid] + 1 < len(TM["lines"]): end = min(ln["t1"] + 0.3, TM["lines"][IDX[lid] + 1]["t0"] - 0.1)
     else: end = ln["t1"] + 0.45
+    if lid == "e2": end = W("e2", "one") - 0.04                                # the title takes over
     cid = f"cap{k}"; sp = []
     for n in range(i0, i1 + 1):
         w = DISP.get((lid, n), wd[n]["w"])
@@ -195,14 +195,13 @@ for k, (lid, i0, i1, acc) in enumerate(CAPS):
     for n in range(i0, i1 + 1):
         if DISP.get((lid, n), wd[n]["w"]): c.ft(f"#{cid}w{n - i0}", o(opacity=0.32), o(opacity=1, duration=0.12, ease="power2.out"), wd[n]["t0"] - 0.05)
 
-# ----------------------------------------------------------------- the end card: the line, then the JT Builds Co mark
+# ----------------------------------------------------------------- the payoff: the last line lands as the title, word for word with the voice
 VEND = END1 + 0.15
-c.clip("endshade", END1, D, '<div class="endshade" id="endshadex"></div>', cls="layer", style="z-index:5")
-c.ft("#endshadex", o(opacity=0), o(opacity=1, duration=0.4), END1)
-n_ = title("endt", VEND, D, [("One market first.", False), ("Then expand.", True)], 190, "end")
-for i in range(n_): c.ft(f"#endt{i}", o(opacity=0, y=36, filter="blur(10px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.22, ease="power3.out"), VEND + 0.09 * i + (0.25 if i >= 3 else 0))
-c.clip("brand", VEND + 0.9, D, '<div class="brand" id="brandx"><img src="assets/jt-mark.png" alt=""><span><b>BUILDS</b> CO.</span></div>', cls="layer", style="z-index:24")
-c.ft("#brandx", o(opacity=0, y=16), o(opacity=1, y=0, duration=0.3, ease="power2.out"), VEND + 0.9)
+TT = W("e2", "one") - 0.06
+c.clip("endshade", TT - 0.2, D, '<div class="endshade" id="endshadex"></div>', cls="layer", style="z-index:5")
+c.ft("#endshadex", o(opacity=0), o(opacity=1, duration=0.4), TT - 0.2)
+n_ = title("endt", TT, D, [("One market first.", False), ("Then expand.", True)], 190, "end")
+for i in range(n_): c.ft(f"#endt{i}", o(opacity=0, y=36, filter="blur(10px)"), o(opacity=1, y=0, filter="blur(0px)", duration=0.22, ease="power3.out"), [W("e2", "one"), W("e2", "market"), W("e2", "first"), W("e3", "Then"), W("e3", "expand")][i] - 0.06)
 
 # ----------------------------------------------------------------- sound
 def cue(n, t, db=0.0):
@@ -221,7 +220,7 @@ cue("riser-m", M4 + 0.9, -9)                                          # the netw
 cue("popup", V5 + 0.3, -6); cue("tap", TAP + 0.05, -2); cue("popup", NOTE + 0.05, -3)
 for k in range(5): cue("tap", TB + 0.2 * k, -10); cue("tap", TA + 0.18 * k, -11)
 cue("riser-m", E["c2"] + 0.3, -10)
-cue("riser-l", END1, -9); cue("land", VEND, -3)
+cue("land", TT, -7); cue("land", W("e3", "Then"), -4); cue("riser-l", END1, -10); cue("land", VEND, -9)
 LEVEL = {"whoosh": -6.0, "popup": -8.0, "tap": -4.0, "land": -4.0, "bubble": -6.0, "riser-m": -7.0, "riser-s": -7.0, "riser-l": -7.0}
 VBRAND = VEND
 def mixdown():
@@ -271,9 +270,7 @@ html, body {{ width:1080px; height:1920px; overflow:hidden; background:{BG}; }}
 .ttl.end {{ justify-items:center; text-align:center; font-size:84px; text-transform:uppercase; letter-spacing:-.01em; }}
 .cap {{ position:absolute; left:70px; right:70px; top:1492px; display:flex; justify-content:center; text-align:center; }}
 .cap .cl {{ display:inline-block; padding:10px 26px 14px; border-radius:22px; background:rgba(10,9,8,.6); {MONT} font-weight:700; font-size:52px; line-height:1.18; letter-spacing:-.01em; color:{WHITE}; text-shadow:0 2px 10px rgba(0,0,0,.6); text-wrap:balance; }}
-.endshade {{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(8,7,6,.9) 0%, rgba(8,7,6,.7) 20%, rgba(8,7,6,0) 34%, rgba(8,7,6,0) 76%, rgba(8,7,6,.75) 86%, rgba(8,7,6,.92) 100%); }}
-.brand {{ position:absolute; left:0; right:0; top:1590px; display:flex; justify-content:center; align-items:center; gap:16px; {MONT} font-weight:800; font-size:34px; letter-spacing:.22em; color:{GREY}; }}
-.brand img {{ width:54px; height:45px; }} .brand b {{ color:{WHITE}; font-weight:800; }}
+.endshade {{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(8,7,6,.9) 0%, rgba(8,7,6,.7) 20%, rgba(8,7,6,0) 34%, rgba(8,7,6,0) 80%, rgba(8,7,6,.7) 100%); }}
 .cap .cw {{ display:inline-block; }} .cap .cw.acc {{ color:{AMBER}; }}
 """
 
@@ -283,7 +280,7 @@ SCENES = [(0.0, V1, "The hook", "A giant phone on a dark stage: code on its scre
           (K4, V5, "The solution", "The city lights up with connections; a dark map of the US seen from the west coast; one city lights; into that city as activity builds; back out as the network spreads", "none"),
           (V5, V6, "DetailDash", "The DetailDash app: detailers near you, a booking; a detailing bay with a car being polished and the customer on their phone; the detailer's phone gets the booking", "app screens only"),
           (V6, V7, "The challenge", "The stage again: the DetailDash map with zero detailers and zero customers; detailers light up, then customers, then bookings connect and count up", "app screens only"),
-          (V7, D, "The close", "The city from above: one neighbourhood fills with connections, then the network expands; a phone showing the DetailDash marketplace; JT Builds Co.", "ONE MARKET FIRST. THEN EXPAND.")]
+          (V7, D, "The close", "The city from above: one neighbourhood fills with connections, then the network expands; a phone showing the DetailDash marketplace", "ONE MARKET FIRST. THEN EXPAND.")]
 def write_cues():
     lines = ["# Voiceover cues", "", f"The video is {D:.1f} s. To record your own read over `assets/mix-novo.wav`, start each line at its time (seconds).", "",
              "| Start | End | Scene | Line |", "|---|---|---|---|"]

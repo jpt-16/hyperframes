@@ -8,8 +8,8 @@ This is a JT Builds video. It shares no sets, characters, cameras or graphics wi
   - Charcoal sets with mirror floors, bloom and filmic tone mapping.
   - People are matte scale figures at real human proportions (1.75 m), not photoreal characters.
   - **One colour rule carries the story:** the demand side (customers, riders) is ivory, and the supply side (drivers, cooks, detailers) is amber. Every scene, map pin and app screen uses it.
-  - Palette and type are the JT Builds Co. brand: charcoal, white, amber accent, Montserrat.
-- **Text on screen:** the hook title ("The hardest app to build") for the first 3.5 s, word-by-word captions in a lower pill, and the closing line "ONE MARKET FIRST. THEN EXPAND." with the JT Builds Co. mark. Everything else is told by the picture or by the app screens.
+  - Charcoal, white and one amber accent, set in Montserrat.
+- **Text on screen:** the hook title ("The hardest app to build") for the first 3.5 s, word-by-word captions in a lower pill, and the closing line "ONE MARKET FIRST. THEN EXPAND.", which lands word for word with the voice and holds to the end. There is no logo. Everything else is told by the picture or by the app screens.
 - **Voiceover:**
   - Your script, voiced with HyperFrames' local Kokoro TTS (voice `am_michael`, 1.7×). The text is in `transcript.txt`.
   - The speech alone runs about 43 s at that speed. With pauses for the ride and the orders to connect, and 2.5 s for the end card, the video is 51.3 s.
@@ -20,6 +20,7 @@ This is a JT Builds video. It shares no sets, characters, cameras or graphics wi
     - The one city lights on "one city".
     - The booking is tapped on "car detailing".
     - Detailers light on "detailers" and customers on "enough customers".
+    - The last line is not captioned: "one market first" and "then expand" land as the title as they are said.
   - `CUES.md` lists when each line starts, so you can record your own read over `assets/mix-novo.wav`.
 - **Scenes** (times in `CUES.md`):
   1. **Hook:** a 9 m phone on a dark stage, customers on the left and providers on the right, an empty marketplace between them. Links try to cross and fail. The camera dives into the screen.

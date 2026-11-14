@@ -34,4 +34,4 @@ The video is 51.3 s. To record your own read over `assets/mix-novo.wav`, start e
 | 20.60 | 30.64 | The solution | The city lights up with connections; a dark map of the US seen from the west coast; one city lights; into that city as activity builds; back out as the network spreads | none |
 | 30.64 | 37.33 | DetailDash | The DetailDash app: detailers near you, a booking; a detailing bay with a car being polished and the customer on their phone; the detailer's phone gets the booking | app screens only |
 | 37.33 | 43.66 | The challenge | The stage again: the DetailDash map with zero detailers and zero customers; detailers light up, then customers, then bookings connect and count up | app screens only |
-| 43.66 | 51.32 | The close | The city from above: one neighbourhood fills with connections, then the network expands; a phone showing the DetailDash marketplace; JT Builds Co. | ONE MARKET FIRST. THEN EXPAND. |
+| 43.66 | 51.32 | The close | The city from above: one neighbourhood fills with connections, then the network expands; a phone showing the DetailDash marketplace | ONE MARKET FIRST. THEN EXPAND. |
