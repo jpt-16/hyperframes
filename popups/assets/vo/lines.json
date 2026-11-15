@@ -1,0 +1,687 @@
+[
+ {
+  "i": 0,
+  "id": "h1",
+  "text": "Catching a pop-up might be one of the hardest plays for a catcher.",
+  "spoken": "Catching a pop-up might be one of the hardest plays for a catcher.",
+  "dur": 2.667,
+  "words": [
+   {
+    "w": "Catching",
+    "start": 0.044,
+    "end": 0.369
+   },
+   {
+    "w": "a",
+    "start": 0.369,
+    "end": 0.369
+   },
+   {
+    "w": "pop-up",
+    "start": 0.419,
+    "end": 0.894
+   },
+   {
+    "w": "might",
+    "start": 0.944,
+    "end": 1.069
+   },
+   {
+    "w": "be",
+    "start": 1.094,
+    "end": 1.169
+   },
+   {
+    "w": "one",
+    "start": 1.194,
+    "end": 1.294
+   },
+   {
+    "w": "of",
+    "start": 1.319,
+    "end": 1.369
+   },
+   {
+    "w": "the",
+    "start": 1.369,
+    "end": 1.419
+   },
+   {
+    "w": "hardest",
+    "start": 1.469,
+    "end": 1.744
+   },
+   {
+    "w": "plays",
+    "start": 1.794,
+    "end": 2.069
+   },
+   {
+    "w": "for",
+    "start": 2.094,
+    "end": 2.194
+   },
+   {
+    "w": "a",
+    "start": 2.194,
+    "end": 2.194
+   },
+   {
+    "w": "catcher.",
+    "start": 2.219,
+    "end": 2.667
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "d1",
+  "text": "The ball can drift toward the dugout, backstop, or even toward the mound.",
+  "spoken": "The ball can drift toward the dugout, backstop, or even toward the mound.",
+  "dur": 2.987,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.044,
+    "end": 0.094
+   },
+   {
+    "w": "ball",
+    "start": 0.144,
+    "end": 0.319
+   },
+   {
+    "w": "can",
+    "start": 0.344,
+    "end": 0.419
+   },
+   {
+    "w": "drift",
+    "start": 0.469,
+    "end": 0.619
+   },
+   {
+    "w": "toward",
+    "start": 0.644,
+    "end": 0.844
+   },
+   {
+    "w": "the",
+    "start": 0.869,
+    "end": 0.919
+   },
+   {
+    "w": "dugout,",
+    "start": 0.969,
+    "end": 1.244
+   },
+   {
+    "w": "backstop,",
+    "start": 1.294,
+    "end": 1.894
+   },
+   {
+    "w": "or",
+    "start": 2.019,
+    "end": 2.094
+   },
+   {
+    "w": "even",
+    "start": 2.169,
+    "end": 2.294
+   },
+   {
+    "w": "toward",
+    "start": 2.319,
+    "end": 2.519
+   },
+   {
+    "w": "the",
+    "start": 2.544,
+    "end": 2.594
+   },
+   {
+    "w": "mound.",
+    "start": 2.619,
+    "end": 2.987
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "d2",
+  "text": "The catcher has to judge its direction while moving around the plate.",
+  "spoken": "The catcher has to judge its direction while moving around the plate.",
+  "dur": 2.752,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.065,
+    "end": 0.115
+   },
+   {
+    "w": "catcher",
+    "start": 0.165,
+    "end": 0.44
+   },
+   {
+    "w": "has",
+    "start": 0.465,
+    "end": 0.54
+   },
+   {
+    "w": "to",
+    "start": 0.565,
+    "end": 0.615
+   },
+   {
+    "w": "judge",
+    "start": 0.665,
+    "end": 0.865
+   },
+   {
+    "w": "its",
+    "start": 0.89,
+    "end": 0.965
+   },
+   {
+    "w": "direction",
+    "start": 0.99,
+    "end": 1.49
+   },
+   {
+    "w": "while",
+    "start": 1.565,
+    "end": 1.69
+   },
+   {
+    "w": "moving",
+    "start": 1.74,
+    "end": 1.94
+   },
+   {
+    "w": "around",
+    "start": 1.965,
+    "end": 2.19
+   },
+   {
+    "w": "the",
+    "start": 2.215,
+    "end": 2.265
+   },
+   {
+    "w": "plate.",
+    "start": 2.315,
+    "end": 2.752
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "g1",
+  "text": "They also have to deal with their gear, avoid obstacles, and position themselves underneath the ball.",
+  "spoken": "They also have to deal with their gear, avoid obstacles, and position themselves underneath the ball.",
+  "dur": 4.032,
+  "words": [
+   {
+    "w": "They",
+    "start": 0.044,
+    "end": 0.119
+   },
+   {
+    "w": "also",
+    "start": 0.194,
+    "end": 0.394
+   },
+   {
+    "w": "have",
+    "start": 0.419,
+    "end": 0.519
+   },
+   {
+    "w": "to",
+    "start": 0.544,
+    "end": 0.594
+   },
+   {
+    "w": "deal",
+    "start": 0.644,
+    "end": 0.794
+   },
+   {
+    "w": "with",
+    "start": 0.819,
+    "end": 0.894
+   },
+   {
+    "w": "their",
+    "start": 0.919,
+    "end": 0.994
+   },
+   {
+    "w": "gear,",
+    "start": 1.044,
+    "end": 1.444
+   },
+   {
+    "w": "avoid",
+    "start": 1.569,
+    "end": 1.844
+   },
+   {
+    "w": "obstacles,",
+    "start": 1.944,
+    "end": 2.469
+   },
+   {
+    "w": "and",
+    "start": 2.569,
+    "end": 2.644
+   },
+   {
+    "w": "position",
+    "start": 2.669,
+    "end": 2.944
+   },
+   {
+    "w": "themselves",
+    "start": 2.969,
+    "end": 3.319
+   },
+   {
+    "w": "underneath",
+    "start": 3.369,
+    "end": 3.619
+   },
+   {
+    "w": "the",
+    "start": 3.644,
+    "end": 3.694
+   },
+   {
+    "w": "ball.",
+    "start": 3.744,
+    "end": 4.032
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "p1",
+  "text": "And here\u2019s something people don\u2019t think about: these plays are surprisingly difficult to practice.",
+  "spoken": "And here's something people don't think about: these plays are surprisingly difficult to practice.",
+  "dur": 3.712,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.048,
+    "end": 0.123
+   },
+   {
+    "w": "here's",
+    "start": 0.148,
+    "end": 0.298
+   },
+   {
+    "w": "something",
+    "start": 0.348,
+    "end": 0.548
+   },
+   {
+    "w": "people",
+    "start": 0.598,
+    "end": 0.798
+   },
+   {
+    "w": "don't",
+    "start": 0.823,
+    "end": 0.973
+   },
+   {
+    "w": "think",
+    "start": 1.023,
+    "end": 1.148
+   },
+   {
+    "w": "about:",
+    "start": 1.173,
+    "end": 1.623
+   },
+   {
+    "w": "these",
+    "start": 1.748,
+    "end": 1.898
+   },
+   {
+    "w": "plays",
+    "start": 1.948,
+    "end": 2.223
+   },
+   {
+    "w": "are",
+    "start": 2.248,
+    "end": 2.323
+   },
+   {
+    "w": "surprisingly",
+    "start": 2.373,
+    "end": 2.898
+   },
+   {
+    "w": "difficult",
+    "start": 2.948,
+    "end": 3.173
+   },
+   {
+    "w": "to",
+    "start": 3.198,
+    "end": 3.248
+   },
+   {
+    "w": "practice.",
+    "start": 3.273,
+    "end": 3.712
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "p2",
+  "text": "Every pop-up is different.",
+  "spoken": "Every pop-up is different.",
+  "dur": 1.131,
+  "words": [
+   {
+    "w": "Every",
+    "start": 0.115,
+    "end": 0.215
+   },
+   {
+    "w": "pop-up",
+    "start": 0.265,
+    "end": 0.515
+   },
+   {
+    "w": "is",
+    "start": 0.54,
+    "end": 0.59
+   },
+   {
+    "w": "different.",
+    "start": 0.64,
+    "end": 1.131
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "p3",
+  "text": "The ball can drift in completely different directions, and the catcher has to react instantly.",
+  "spoken": "The ball can drift in completely different directions, and the catcher has to react instantly.",
+  "dur": 3.712,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.044,
+    "end": 0.094
+   },
+   {
+    "w": "ball",
+    "start": 0.144,
+    "end": 0.319
+   },
+   {
+    "w": "can",
+    "start": 0.344,
+    "end": 0.419
+   },
+   {
+    "w": "drift",
+    "start": 0.469,
+    "end": 0.719
+   },
+   {
+    "w": "in",
+    "start": 0.744,
+    "end": 0.794
+   },
+   {
+    "w": "completely",
+    "start": 0.819,
+    "end": 1.219
+   },
+   {
+    "w": "different",
+    "start": 1.269,
+    "end": 1.469
+   },
+   {
+    "w": "directions,",
+    "start": 1.494,
+    "end": 2.119
+   },
+   {
+    "w": "and",
+    "start": 2.219,
+    "end": 2.294
+   },
+   {
+    "w": "the",
+    "start": 2.319,
+    "end": 2.369
+   },
+   {
+    "w": "catcher",
+    "start": 2.419,
+    "end": 2.694
+   },
+   {
+    "w": "has",
+    "start": 2.719,
+    "end": 2.819
+   },
+   {
+    "w": "to",
+    "start": 2.844,
+    "end": 2.894
+   },
+   {
+    "w": "react",
+    "start": 2.944,
+    "end": 3.219
+   },
+   {
+    "w": "instantly.",
+    "start": 3.294,
+    "end": 3.712
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "p4",
+  "text": "You can\u2019t perfectly recreate every game situation in practice.",
+  "spoken": "You can't perfectly recreate every game situation in practice.",
+  "dur": 2.603,
+  "words": [
+   {
+    "w": "You",
+    "start": 0.048,
+    "end": 0.123
+   },
+   {
+    "w": "can't",
+    "start": 0.148,
+    "end": 0.298
+   },
+   {
+    "w": "perfectly",
+    "start": 0.348,
+    "end": 0.623
+   },
+   {
+    "w": "recreate",
+    "start": 0.673,
+    "end": 1.173
+   },
+   {
+    "w": "every",
+    "start": 1.273,
+    "end": 1.398
+   },
+   {
+    "w": "game",
+    "start": 1.448,
+    "end": 1.623
+   },
+   {
+    "w": "situation",
+    "start": 1.673,
+    "end": 2.073
+   },
+   {
+    "w": "in",
+    "start": 2.098,
+    "end": 2.148
+   },
+   {
+    "w": "practice.",
+    "start": 2.173,
+    "end": 2.603
+   }
+  ]
+ },
+ {
+  "i": 8,
+  "id": "e1",
+  "text": "So catching a pop-up isn\u2019t just about catching a ball.",
+  "spoken": "So catching a pop-up isn't just about catching a ball.",
+  "dur": 2.453,
+  "words": [
+   {
+    "w": "So",
+    "start": 0.065,
+    "end": 0.165
+   },
+   {
+    "w": "catching",
+    "start": 0.215,
+    "end": 0.54
+   },
+   {
+    "w": "a",
+    "start": 0.54,
+    "end": 0.54
+   },
+   {
+    "w": "pop-up",
+    "start": 0.59,
+    "end": 1.065
+   },
+   {
+    "w": "isn't",
+    "start": 1.14,
+    "end": 1.265
+   },
+   {
+    "w": "just",
+    "start": 1.315,
+    "end": 1.465
+   },
+   {
+    "w": "about",
+    "start": 1.49,
+    "end": 1.64
+   },
+   {
+    "w": "catching",
+    "start": 1.69,
+    "end": 1.965
+   },
+   {
+    "w": "a",
+    "start": 1.965,
+    "end": 1.965
+   },
+   {
+    "w": "ball.",
+    "start": 2.015,
+    "end": 2.453
+   }
+  ]
+ },
+ {
+  "i": 9,
+  "id": "e2",
+  "text": "It\u2019s about finding it, getting into position, and making the play in seconds.",
+  "spoken": "It's about finding it, getting into position, and making the play in seconds.",
+  "dur": 3.029,
+  "words": [
+   {
+    "w": "It's",
+    "start": 0.026,
+    "end": 0.101
+   },
+   {
+    "w": "about",
+    "start": 0.126,
+    "end": 0.276
+   },
+   {
+    "w": "finding",
+    "start": 0.351,
+    "end": 0.626
+   },
+   {
+    "w": "it,",
+    "start": 0.676,
+    "end": 0.876
+   },
+   {
+    "w": "getting",
+    "start": 0.976,
+    "end": 1.126
+   },
+   {
+    "w": "into",
+    "start": 1.176,
+    "end": 1.276
+   },
+   {
+    "w": "position,",
+    "start": 1.301,
+    "end": 1.776
+   },
+   {
+    "w": "and",
+    "start": 1.851,
+    "end": 1.926
+   },
+   {
+    "w": "making",
+    "start": 1.951,
+    "end": 2.151
+   },
+   {
+    "w": "the",
+    "start": 2.176,
+    "end": 2.226
+   },
+   {
+    "w": "play",
+    "start": 2.276,
+    "end": 2.476
+   },
+   {
+    "w": "in",
+    "start": 2.501,
+    "end": 2.551
+   },
+   {
+    "w": "seconds.",
+    "start": 2.626,
+    "end": 3.029
+   }
+  ]
+ }
+]
