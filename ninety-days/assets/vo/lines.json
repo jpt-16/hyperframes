@@ -1,0 +1,781 @@
+[
+ {
+  "i": 0,
+  "id": "h1",
+  "text": "What would happen if an MLB hitter stopped swinging a bat for three entire months?",
+  "spoken": "What would happen if an MLB hitter stopped swinging a bat for three entire months?",
+  "dur": 3.243,
+  "words": [
+   {
+    "w": "What",
+    "start": 0.048,
+    "end": 0.148
+   },
+   {
+    "w": "would",
+    "start": 0.173,
+    "end": 0.248
+   },
+   {
+    "w": "happen",
+    "start": 0.273,
+    "end": 0.523
+   },
+   {
+    "w": "if",
+    "start": 0.573,
+    "end": 0.673
+   },
+   {
+    "w": "an",
+    "start": 0.673,
+    "end": 0.823
+   },
+   {
+    "w": "MLB",
+    "start": 0.923,
+    "end": 1.223
+   },
+   {
+    "w": "hitter",
+    "start": 1.248,
+    "end": 1.423
+   },
+   {
+    "w": "stopped",
+    "start": 1.473,
+    "end": 1.673
+   },
+   {
+    "w": "swinging",
+    "start": 1.723,
+    "end": 1.998
+   },
+   {
+    "w": "a",
+    "start": 1.998,
+    "end": 1.998
+   },
+   {
+    "w": "bat",
+    "start": 2.048,
+    "end": 2.223
+   },
+   {
+    "w": "for",
+    "start": 2.248,
+    "end": 2.348
+   },
+   {
+    "w": "three",
+    "start": 2.423,
+    "end": 2.573
+   },
+   {
+    "w": "entire",
+    "start": 2.598,
+    "end": 2.873
+   },
+   {
+    "w": "months?",
+    "start": 2.923,
+    "end": 3.243
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "w1",
+  "text": "At first, probably not much.",
+  "spoken": "At first, probably not much.",
+  "dur": 1.323,
+  "words": [
+   {
+    "w": "At",
+    "start": 0.09,
+    "end": 0.14
+   },
+   {
+    "w": "first,",
+    "start": 0.19,
+    "end": 0.44
+   },
+   {
+    "w": "probably",
+    "start": 0.49,
+    "end": 0.74
+   },
+   {
+    "w": "not",
+    "start": 0.765,
+    "end": 0.89
+   },
+   {
+    "w": "much.",
+    "start": 0.915,
+    "end": 1.323
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "w2",
+  "text": "Years of experience don\u2019t suddenly disappear.",
+  "spoken": "Years of experience don't suddenly disappear.",
+  "dur": 1.941,
+  "words": [
+   {
+    "w": "Years",
+    "start": 0.048,
+    "end": 0.223
+   },
+   {
+    "w": "of",
+    "start": 0.248,
+    "end": 0.298
+   },
+   {
+    "w": "experience",
+    "start": 0.323,
+    "end": 0.823
+   },
+   {
+    "w": "don't",
+    "start": 0.873,
+    "end": 1.023
+   },
+   {
+    "w": "suddenly",
+    "start": 1.098,
+    "end": 1.298
+   },
+   {
+    "w": "disappear.",
+    "start": 1.323,
+    "end": 1.941
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "w3",
+  "text": "His swing mechanics and muscle memory are still there.",
+  "spoken": "His swing mechanics and muscle memory are still there.",
+  "dur": 2.347,
+  "words": [
+   {
+    "w": "His",
+    "start": 0.044,
+    "end": 0.119
+   },
+   {
+    "w": "swing",
+    "start": 0.169,
+    "end": 0.344
+   },
+   {
+    "w": "mechanics",
+    "start": 0.369,
+    "end": 0.744
+   },
+   {
+    "w": "and",
+    "start": 0.769,
+    "end": 0.844
+   },
+   {
+    "w": "muscle",
+    "start": 0.894,
+    "end": 1.094
+   },
+   {
+    "w": "memory",
+    "start": 1.119,
+    "end": 1.469
+   },
+   {
+    "w": "are",
+    "start": 1.544,
+    "end": 1.619
+   },
+   {
+    "w": "still",
+    "start": 1.669,
+    "end": 1.844
+   },
+   {
+    "w": "there.",
+    "start": 1.894,
+    "end": 2.347
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "m1",
+  "text": "But hitting isn\u2019t just about knowing how to swing.",
+  "spoken": "But hitting isn't just about knowing how to swing.",
+  "dur": 2.027,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.019,
+    "end": 0.119
+   },
+   {
+    "w": "hitting",
+    "start": 0.169,
+    "end": 0.469
+   },
+   {
+    "w": "isn't",
+    "start": 0.544,
+    "end": 0.669
+   },
+   {
+    "w": "just",
+    "start": 0.694,
+    "end": 0.844
+   },
+   {
+    "w": "about",
+    "start": 0.869,
+    "end": 1.019
+   },
+   {
+    "w": "knowing",
+    "start": 1.069,
+    "end": 1.269
+   },
+   {
+    "w": "how",
+    "start": 1.294,
+    "end": 1.394
+   },
+   {
+    "w": "to",
+    "start": 1.419,
+    "end": 1.469
+   },
+   {
+    "w": "swing.",
+    "start": 1.544,
+    "end": 2.027
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "m2",
+  "text": "It\u2019s about timing a pitch, recognizing its movement, and coordinating your entire body to make contact.",
+  "spoken": "It's about timing a pitch, recognizing its movement, and coordinating your entire body to make contact.",
+  "dur": 4.395,
+  "words": [
+   {
+    "w": "It's",
+    "start": 0.026,
+    "end": 0.101
+   },
+   {
+    "w": "about",
+    "start": 0.126,
+    "end": 0.276
+   },
+   {
+    "w": "timing",
+    "start": 0.326,
+    "end": 0.601
+   },
+   {
+    "w": "a",
+    "start": 0.601,
+    "end": 0.601
+   },
+   {
+    "w": "pitch,",
+    "start": 0.651,
+    "end": 1.076
+   },
+   {
+    "w": "recognizing",
+    "start": 1.201,
+    "end": 1.601
+   },
+   {
+    "w": "its",
+    "start": 1.626,
+    "end": 1.701
+   },
+   {
+    "w": "movement,",
+    "start": 1.751,
+    "end": 2.151
+   },
+   {
+    "w": "and",
+    "start": 2.251,
+    "end": 2.326
+   },
+   {
+    "w": "coordinating",
+    "start": 2.376,
+    "end": 2.901
+   },
+   {
+    "w": "your",
+    "start": 2.926,
+    "end": 3.001
+   },
+   {
+    "w": "entire",
+    "start": 3.026,
+    "end": 3.376
+   },
+   {
+    "w": "body",
+    "start": 3.426,
+    "end": 3.651
+   },
+   {
+    "w": "to",
+    "start": 3.676,
+    "end": 3.726
+   },
+   {
+    "w": "make",
+    "start": 3.751,
+    "end": 3.876
+   },
+   {
+    "w": "contact.",
+    "start": 3.901,
+    "end": 4.395
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "s1",
+  "text": "Without actually swinging, that timing and coordination could become less sharp.",
+  "spoken": "Without actually swinging, that timing and coordination could become less sharp.",
+  "dur": 3.136,
+  "words": [
+   {
+    "w": "Without",
+    "start": 0.044,
+    "end": 0.219
+   },
+   {
+    "w": "actually",
+    "start": 0.319,
+    "end": 0.544
+   },
+   {
+    "w": "swinging,",
+    "start": 0.619,
+    "end": 1.094
+   },
+   {
+    "w": "that",
+    "start": 1.169,
+    "end": 1.269
+   },
+   {
+    "w": "timing",
+    "start": 1.319,
+    "end": 1.619
+   },
+   {
+    "w": "and",
+    "start": 1.644,
+    "end": 1.719
+   },
+   {
+    "w": "coordination",
+    "start": 1.769,
+    "end": 2.244
+   },
+   {
+    "w": "could",
+    "start": 2.269,
+    "end": 2.344
+   },
+   {
+    "w": "become",
+    "start": 2.369,
+    "end": 2.544
+   },
+   {
+    "w": "less",
+    "start": 2.569,
+    "end": 2.669
+   },
+   {
+    "w": "sharp.",
+    "start": 2.744,
+    "end": 3.136
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "s2",
+  "text": "Even an elite hitter could struggle to adjust to major-league velocity and breaking pitches when he first returns.",
+  "spoken": "Even an elite hitter could struggle to adjust to major-league velocity and breaking pitches when he first returns.",
+  "dur": 4.736,
+  "words": [
+   {
+    "w": "Even",
+    "start": 0.098,
+    "end": 0.273
+   },
+   {
+    "w": "an",
+    "start": 0.273,
+    "end": 0.298
+   },
+   {
+    "w": "elite",
+    "start": 0.348,
+    "end": 0.573
+   },
+   {
+    "w": "hitter",
+    "start": 0.623,
+    "end": 0.798
+   },
+   {
+    "w": "could",
+    "start": 0.848,
+    "end": 0.923
+   },
+   {
+    "w": "struggle",
+    "start": 0.973,
+    "end": 1.198
+   },
+   {
+    "w": "to",
+    "start": 1.223,
+    "end": 1.273
+   },
+   {
+    "w": "adjust",
+    "start": 1.298,
+    "end": 1.698
+   },
+   {
+    "w": "to",
+    "start": 1.748,
+    "end": 1.823
+   },
+   {
+    "w": "major-league",
+    "start": 1.898,
+    "end": 2.373
+   },
+   {
+    "w": "velocity",
+    "start": 2.398,
+    "end": 2.823
+   },
+   {
+    "w": "and",
+    "start": 2.848,
+    "end": 2.923
+   },
+   {
+    "w": "breaking",
+    "start": 2.973,
+    "end": 3.198
+   },
+   {
+    "w": "pitches",
+    "start": 3.223,
+    "end": 3.748
+   },
+   {
+    "w": "when",
+    "start": 3.798,
+    "end": 3.873
+   },
+   {
+    "w": "he",
+    "start": 3.898,
+    "end": 3.973
+   },
+   {
+    "w": "first",
+    "start": 4.023,
+    "end": 4.173
+   },
+   {
+    "w": "returns.",
+    "start": 4.198,
+    "end": 4.736
+   }
+  ]
+ },
+ {
+  "i": 8,
+  "id": "g1",
+  "text": "He wouldn\u2019t suddenly forget how to hit.",
+  "spoken": "He wouldn't suddenly forget how to hit.",
+  "dur": 1.493,
+  "words": [
+   {
+    "w": "He",
+    "start": 0.065,
+    "end": 0.14
+   },
+   {
+    "w": "wouldn't",
+    "start": 0.165,
+    "end": 0.34
+   },
+   {
+    "w": "suddenly",
+    "start": 0.39,
+    "end": 0.615
+   },
+   {
+    "w": "forget",
+    "start": 0.665,
+    "end": 0.865
+   },
+   {
+    "w": "how",
+    "start": 0.89,
+    "end": 0.99
+   },
+   {
+    "w": "to",
+    "start": 1.015,
+    "end": 1.065
+   },
+   {
+    "w": "hit.",
+    "start": 1.115,
+    "end": 1.493
+   }
+  ]
+ },
+ {
+  "i": 9,
+  "id": "g2",
+  "text": "But he\u2019d likely need time in the batting cage and against live pitching to get his timing back.",
+  "spoken": "But he'd likely need time in the batting cage and against live pitching to get his timing back.",
+  "dur": 3.797,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.019,
+    "end": 0.119
+   },
+   {
+    "w": "he'd",
+    "start": 0.144,
+    "end": 0.244
+   },
+   {
+    "w": "likely",
+    "start": 0.269,
+    "end": 0.469
+   },
+   {
+    "w": "need",
+    "start": 0.494,
+    "end": 0.619
+   },
+   {
+    "w": "time",
+    "start": 0.669,
+    "end": 0.944
+   },
+   {
+    "w": "in",
+    "start": 0.969,
+    "end": 1.019
+   },
+   {
+    "w": "the",
+    "start": 1.019,
+    "end": 1.069
+   },
+   {
+    "w": "batting",
+    "start": 1.094,
+    "end": 1.294
+   },
+   {
+    "w": "cage",
+    "start": 1.319,
+    "end": 1.819
+   },
+   {
+    "w": "and",
+    "start": 1.894,
+    "end": 1.969
+   },
+   {
+    "w": "against",
+    "start": 1.994,
+    "end": 2.194
+   },
+   {
+    "w": "live",
+    "start": 2.244,
+    "end": 2.444
+   },
+   {
+    "w": "pitching",
+    "start": 2.494,
+    "end": 2.869
+   },
+   {
+    "w": "to",
+    "start": 2.919,
+    "end": 2.969
+   },
+   {
+    "w": "get",
+    "start": 2.994,
+    "end": 3.069
+   },
+   {
+    "w": "his",
+    "start": 3.094,
+    "end": 3.169
+   },
+   {
+    "w": "timing",
+    "start": 3.219,
+    "end": 3.469
+   },
+   {
+    "w": "back.",
+    "start": 3.494,
+    "end": 3.797
+   }
+  ]
+ },
+ {
+  "i": 10,
+  "id": "e1",
+  "text": "Because at the major-league level, even a fraction of a second can make the difference between a home run and a strikeout.",
+  "spoken": "Because at the major-league level, even a fraction of a second can make the difference between a home run and a strikeout.",
+  "dur": 4.757,
+  "words": [
+   {
+    "w": "Because",
+    "start": 0.044,
+    "end": 0.319
+   },
+   {
+    "w": "at",
+    "start": 0.369,
+    "end": 0.419
+   },
+   {
+    "w": "the",
+    "start": 0.444,
+    "end": 0.494
+   },
+   {
+    "w": "major-league",
+    "start": 0.544,
+    "end": 0.994
+   },
+   {
+    "w": "level,",
+    "start": 1.019,
+    "end": 1.394
+   },
+   {
+    "w": "even",
+    "start": 1.544,
+    "end": 1.719
+   },
+   {
+    "w": "a",
+    "start": 1.719,
+    "end": 1.719
+   },
+   {
+    "w": "fraction",
+    "start": 1.769,
+    "end": 2.069
+   },
+   {
+    "w": "of",
+    "start": 2.069,
+    "end": 2.119
+   },
+   {
+    "w": "a",
+    "start": 2.119,
+    "end": 2.119
+   },
+   {
+    "w": "second",
+    "start": 2.194,
+    "end": 2.494
+   },
+   {
+    "w": "can",
+    "start": 2.544,
+    "end": 2.619
+   },
+   {
+    "w": "make",
+    "start": 2.644,
+    "end": 2.769
+   },
+   {
+    "w": "the",
+    "start": 2.794,
+    "end": 2.844
+   },
+   {
+    "w": "difference",
+    "start": 2.894,
+    "end": 3.144
+   },
+   {
+    "w": "between",
+    "start": 3.169,
+    "end": 3.469
+   },
+   {
+    "w": "a",
+    "start": 3.469,
+    "end": 3.469
+   },
+   {
+    "w": "home",
+    "start": 3.519,
+    "end": 3.769
+   },
+   {
+    "w": "run",
+    "start": 3.819,
+    "end": 4.069
+   },
+   {
+    "w": "and",
+    "start": 4.119,
+    "end": 4.244
+   },
+   {
+    "w": "a",
+    "start": 4.244,
+    "end": 4.244
+   },
+   {
+    "w": "strikeout.",
+    "start": 4.269,
+    "end": 4.757
+   }
+  ]
+ }
+]
