@@ -1,9 +1,9 @@
-"""Voiceover for the A-Rod vs. Teacherman video, with HyperFrames' built-in Kokoro TTS, plus the time each word is spoken.
+"""Voiceover for "What actually creates bat speed?", with HyperFrames' built-in Kokoro TTS, plus the time each word is spoken.
 
     export HYPERFRAMES_PYTHON=<python with kokoro-onnx + soundfile + onnx>
     $HYPERFRAMES_PYTHON tools/vo.py
 
-1. Each script line is spoken by `hyperframes tts` (local Kokoro model, voice am_michael, speed 1.6).
+1. Each script line is spoken by `hyperframes tts` (local Kokoro model, voice am_michael, speed 1.38).
 2. Word timings come from the same model: a copy of HyperFrames' kokoro-v1.0.onnx with its internal
    per-phoneme duration tensor exposed as an output (weights untouched). kokoro-onnx's create_timed()
    with no inserted pauses reproduces the CLI audio sample for sample, so its phoneme times are the
@@ -19,20 +19,23 @@ CACHE = os.path.join(HERE, "..", ".cache")
 HF_TTS = os.path.expanduser("~/.cache/hyperframes/tts")
 MODEL, VOICES = os.path.join(HF_TTS, "models", "kokoro-v1.0.onnx"), os.path.join(HF_TTS, "voices", "voices-v1.0.bin")
 TIMED = os.path.join(CACHE, "kokoro-v1.0-timed.onnx")
-VOICE, SPEED = "am_michael", 1.6
+VOICE, SPEED = "am_michael", 1.38
 
 # (caption = the script exactly as written, spoken = what the voice reads; None = the same with plain apostrophes)
 LINES = [   # (id, caption, spoken)
-    ('h1', 'A-Rod says to swing the knob toward the ball.', None),
-    ('h2', 'But Teacherman argues there’s something very different happening in his actual swing.', None),
-    ('a1', 'A-Rod has publicly described his hitting approach using a downward, punching-like cue, emphasizing the knob and hands moving toward the baseball.', None),
-    ('t1', 'But Teacherman challenges the idea that the hitter should literally move the knob straight toward the ball.', None),
-    ('t2', 'His philosophy focuses on loading around the rear hip, creating stretch against the rear leg, and quickly launching the barrel into a rearward arc.', None),
-    ('i1', 'And here’s where it gets interesting.', None),
-    ('i2', 'Teacherman’s argument is that what elite hitters actually do can be different from how they describe their own swings.', None),
-    ('i3', 'A hitter might feel like they’re driving the knob toward the ball, while their actual movement involves a much more complex sequence of the rear leg, hip, hands, and barrel.', None),
-    ('e1', 'So is A-Rod’s description the best way to teach hitting, or does his actual swing reveal something different?', None),
-    ('e2', 'That’s the debate.', None),
+    ('h1', 'Bat speed isn’t created by the arms alone.', None),
+    ('h2', 'It’s the result of how the entire body works together.', None),
+    ('g1', 'It starts with how the hitter interacts with the ground.', None),
+    ('g2', 'Ground reaction forces help support and generate the movements that contribute to the swing.', None),
+    ('p1', 'As the swing develops, the pelvis and torso rotate in a coordinated sequence.', None),
+    ('p2', 'Their timing and rotational acceleration help create the conditions for the upper body to accelerate the bat.', None),
+    ('a1', 'But the lower body doesn’t create bat speed by itself.', None),
+    ('a2', 'The arms and hands play a major role in accelerating the barrel and controlling its path through the hitting zone.', None),
+    ('w1', 'Bat speed comes from the coordination of all these movements.', None),
+    ('w2', 'It’s not one muscle, one body part, or one coaching cue.', None),
+    ('w3', 'It’s the entire movement working together.', None),
+    ('e1', 'And this is just the beginning.', None),
+    ('e2', 'Follow along for our baseball biomechanics series.', None),
 ]
 
 def timed_model():

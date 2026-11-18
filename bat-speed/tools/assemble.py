@@ -4,8 +4,8 @@ import json, os, subprocess, wave
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); VO = os.path.join(HERE, "..", "assets", "vo")
 SR = 48000
-GAP_AFTER = {"h1": 0.2, "h2": 0.3, "a1": 0.35, "t1": 0.2, "t2": 0.4, "i1": 0.25, "i2": 0.2, "i3": 0.4, "e1": 0.3, "e2": 2.7}
-AT = {"t1": 12.0, "i1": 22.0}                       # scene starts: each scene's first line starts no earlier than its time in the script
+GAP_AFTER = {"h1": 0.12, "h2": 0.35, "g1": 0.15, "g2": 0.35, "p1": 0.2, "p2": 0.35, "a1": 0.15, "a2": 0.4, "w1": 0.15, "w2": 0.2, "w3": 0.45, "e1": 0.12, "e2": 1.4}
+AT = {"g1": 4.9, "p1": 12.2, "a1": 21.4, "w1": 29.0, "e1": 37.6}   # scene starts: room for the visuals (the home run carries in silence before the outro)
 START = 0.2
 
 def load(path):

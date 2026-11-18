@@ -346,6 +346,7 @@ const OD = v3(33, 0, 5);
 for (const x of [OD.x, -OD.x]) { const m = new THREE.Mesh(new THREE.RingGeometry(2.3, 2.55, 40), chalk); m.rotation.x = -Math.PI / 2; m.position.set(x, 0.05, OD.z); scene.add(m); }
 
 
+const N_PARK = scene.children.length;                               // everything before the cast is the ballpark (hidden in the lab)
 // ------------------------------------------------------------------ the cast
 // the defense (white): a right-handed pitcher in the stretch, catcher, infield; a runner on first and a right-handed batter (dark); umpires (black)
 const pitcher = makePlayer(KIT.home, { glove: true });
@@ -671,7 +672,7 @@ function setLen(hBottomEdge, off = 0.26) {                         // two bars b
   lenCur.scale.y = BAT_LEN - hBottomEdge; lenCur.position.set(0, (BAT_LEN + hBottomEdge) / 2, -off - 0.1);
   tA.position.set(0, 0.035, -off); tB.position.set(0, hBottomEdge, -off - 0.1); tC.position.set(0, BAT_LEN, -off - 0.05);
 }
-const GHOSTS = []; for (let i = 0; i < 7; i++) { const m = new THREE.Mesh(batGeo, glowM(0xffd84d, 0.2 * (1 - i / 8))); m.visible = false; scene.add(m); GHOSTS.push(m); }
+const GHOSTS = []; for (let i = 0; i < 7; i++) { const m = new THREE.Mesh(batGeo, glowM(0xffd84d, 0.5 * (1 - i / 9))); m.visible = false; scene.add(m); GHOSTS.push(m); }
 const REACH = [0xffd84d, 0x56d1ff].map((c) => { const m = new THREE.Mesh(new THREE.RingGeometry(1, 1.025, 96, 1, -0.75, 1.5), glowM(c, 0.95)); m.material.side = THREE.DoubleSide; m.visible = false; scene.add(m); return m; });
 const FLASH = new THREE.Sprite(new THREE.SpriteMaterial({ map: dotTex, color: 0xfff4d6, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0 })); scene.add(FLASH);
 
@@ -1179,7 +1180,7 @@ function shotAt(v) {
 // Hitter frame: a = toward the pitcher (his lead side), b = toward the plate (his chest), y up.
 const HK = {
   A: { jersey: 0xf0f1f3, pants: 0xe0e2e6, cap: 0x1b2a4a, skin: 0xa77857, fore: 0xa77857, glove: 0x1b2a4a, strap: 0xdfe3ea, glow: 0x56d1ff },
-  B: { jersey: 0x2b2f37, pants: 0x8b929c, cap: 0xb8322a, skin: 0x6e4a37, fore: 0x17191d, glove: 0x17191d, strap: 0xc4352d, glow: 0xff6a3d },
+  B: { jersey: 0xf0f1f3, pants: 0xe0e2e6, cap: 0x1b2a4a, skin: 0xa77857, fore: 0xa77857, glove: 0x1b2a4a, strap: 0xdfe3ea, glow: 0xffd84d },   // bat speed: the one hitter, white kit
 };
 function dressHitter(who) {
   const k = HK[who], m = batter.mats;
@@ -1256,8 +1257,12 @@ const BODY = {   // shoulders = pelvisTwist + twist (positive: open toward the p
   A: [[-1.0, ST], [-0.32, { drop: -0.38, shift: -0.2, lean: 18, side: 1, twist: -10, pelvisTwist: -8 }], [-0.2, { drop: -0.42, shift: 0.06, lean: 19, side: 2, twist: -16, pelvisTwist: -2 }],
       [-0.08, { drop: -0.46, shift: 0.3, lean: 21, side: 6, twist: -36, pelvisTwist: 38 }], [0, { drop: -0.55, shift: 0.5, lean: 22, side: 16, twist: 0, pelvisTwist: 66 }], [0.12, FOLLOW_], [0.6, FINISH_]],
   B: [[-1.0, ST], [-0.32, { drop: -0.56, shift: -0.4, lean: 25, side: 4, twist: -6, pelvisTwist: -20 }], [-0.2, { drop: -0.54, shift: -0.04, lean: 24, side: 5, twist: -14, pelvisTwist: -10 }],
-      [-0.12, { drop: -0.52, shift: 0.18, lean: 24, side: 8, twist: -34, pelvisTwist: 20 }], [0, { drop: -0.58, shift: 0.48, lean: 23, side: 18, twist: -2, pelvisTwist: 68 }], [0.12, FOLLOW_], [0.6, FINISH_]],
+      [-0.12, { drop: -0.52, shift: 0.18, lean: 24, side: 8, twist: -40, pelvisTwist: 30 }], [-0.05, { drop: -0.56, shift: 0.38, lean: 23.5, side: 14, twist: -20, pelvisTwist: 58 }],
+      [0, { drop: -0.58, shift: 0.48, lean: 23, side: 18, twist: 0, pelvisTwist: 72 }], [0.12, FOLLOW_], [0.6, FINISH_]],
 };
+// bat speed: from the end of the load on, the body moves on a smooth curve through its keys (no stop at each key), so the
+// pelvis reaches its fastest turn just before the torso does: the sequence the video shows.
+const BODY_SMOOTH = new Set(["B"]);
 // the hands (middle of the grip), in the hitter frame [a, y, b], or "H0" = where they are at contact
 const HANDS_K = {
   A: [[-1.0, [-0.6, 4.62, 0.62]], [-0.32, [-0.85, 4.75, 0.55]], [-0.2, [-0.85, 4.7, 0.6]], [-0.08, "drive"], [0, "H0"], [0.12, "fol"], [0.6, [0.05, 5.35, -0.55]]],
@@ -1278,6 +1283,10 @@ const POLE_K = {
 const ROOT0 = v3(-3.15, 0, 0.15), ROOT = { A: ROOT0.clone(), B: ROOT0.clone() };
 function bodyAt(w, k) {                                             // body numbers at k (eased between keys)
   const K = BODY[w]; if (k <= K[0][0]) return { ...K[0][1] };
+  if (BODY_SMOOTH.has(w) && k > K[1][0]) {
+    const out = {}; for (const key of Object.keys(K[1][1])) out[key] = herm(K.slice(1).map(([kk, q]) => [kk, v3(q[key] ?? 0, 0, 0)]), k).x;
+    return out;
+  }
   for (let i = 1; i < K.length; i++) if (k <= K[i][0]) return mixPose(K[i - 1][1], K[i][1], (i <= 2 ? easeIO : smooth)((k - K[i - 1][0]) / (K[i][0] - K[i - 1][0])));
   return { ...K.at(-1)[1] };
 }
@@ -1379,11 +1388,12 @@ const KNOBHL = new THREE.Sprite(new THREE.SpriteMaterial({ map: dotTex, color: 0
 const BGLOW = new THREE.Sprite(new THREE.SpriteMaterial({ map: dotTex, color: 0xfff4d6, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: false, opacity: 0 }));
 BGLOW.scale.setScalar(0.035); BGLOW.renderOrder = 9; scene.add(BGLOW);                        // keeps a far ball visible: a glow of constant size on screen
 const winOp = (v, w, fin = 0.2, fout = 0.25) => (!w ? 0 : smooth((v - w[0]) / fin) * (1 - smooth((v - (w[1] ?? 1e9)) / fout)));
-const GHOST_C = { A: 0x56d1ff, B: 0xff6a3d };
+const GHOST_C = { A: 0x56d1ff, B: 0xffd84d };
 
 // ------------------------------------------------------------------ the scene for one shot (or one pane) at play time t, video time v
 // s.hit = { who, rel (release time), hit (batted ball id) }; s.who alone = that hitter in his stance
 function setSceneH(t, s, v) {
+  setLab(!!s.lab);
   for (const [k, p] of Object.entries(HD)) { const [x, z] = homeD[k]; p.root.position.set(x, 0, z); p.root.rotation.y = Math.atan2(-x, -z); applyPose(p, READY); }
   B1F.root.position.set(56, 0, -78); B1F.root.rotation.y = Math.atan2(-56, 78); applyPose(B1F, READY);
   U1.root.position.set(70, 0, -56); U1.root.rotation.y = Math.atan2(-70, 56); applyPose(U1, { drop: -0.7, lean: 26, nod: -6, hipL: [40, 16], hipR: [40, 16], knL: 48, knR: 48, shL: [30, 12, 0], elL: 50, shR: [30, 12, 0], elR: 50 });
@@ -1411,6 +1421,7 @@ function setSceneH(t, s, v) {
     if (kr > -0.6 && kr < TCON + 0.02) look = BB.position.clone();
     BGLOW.position.copy(BB.position); BGLOW.material.opacity = s.bglow ? 0.9 * smooth((kr - TCON - 0.05) / 0.2) : 0;
   }
+  if (s.noball) { BB.visible = false; STREAK.forEach((m) => (m.visible = false)); FLASH.material.opacity = 0; BGLOW.material.opacity = 0; look = s.look ? A(s.look) : CP.clone(); }
   // the bat path behind the swing: translucent copies of the bat a few hundredths of a second back
   GHOSTS.forEach((m) => (m.visible = false));
   if (s.ghost && hs) for (let i = 0; i < GHOSTS.length; i++) {
@@ -1448,15 +1459,172 @@ function setSceneH(t, s, v) {
   KNOBHL.material.color.copy(glowC); KNOBHL.material.opacity = 0.9 * Math.max(knobOp, handOp * 0.6);
   ROT.visible = !!s.rot && winOp(v, s.rot) > 0.01;
   if (ROT.visible) { const o = winOp(v, s.rot); ROT_ARC.material.opacity = ROT_HEAD.material.opacity = 0.9 * o; ROT_ARC.material.color.copy(glowC); ROT_HEAD.material.color.copy(glowC); }
+  setXray(s, v, k); const g_ = setGRF(s, v, k); SUP = g_.rear / Math.max(1e-3, g_.rear + g_.lead); KNOW = k;
   BAT.visible = true; batter.root.visible = true;
 }
+let SUP = 0.5, KNOW = -1;
 const PINH = { knob: () => batPt(0.02), hands: () => batPt(HM), hipR: () => wpos(batter.hipR), knee: () => wpos(batter.knR), barrel: () => batPt(2.4), tip: () => batPt(BAT_LEN),
-  ball: () => BB.position.clone(), head: () => headTop(batter), pelvis: () => wpos(batter.pelvis), contact: () => CP.clone() };
+  ball: () => BB.position.clone(), head: () => headTop(batter), pelvis: () => wpos(batter.pelvis), contact: () => CP.clone(),
+  chest: () => wpos(batter.neck).add(v3(0, -0.5, 0)), footR: () => wpos(batter.ftR).add(v3(0, 0.6, 0)), footL: () => wpos(batter.ftL).add(v3(0, 0.6, 0)), elbow: () => wpos(batter.elR) };
 CAMS.hfollow = (u, t, s) => { const c = mixV(A(s.c0), A(s.c1 ?? s.c0), easeIO(u)), l0 = A(s.l), kk = t - s.hit.rel - TCON;
   const w = smooth(kk / (s.lag ?? 0.35)); return [c, l0.lerp(BB.position.clone(), w * (s.fw ?? 1)), lerp(s.f0 ?? 36, s.f1 ?? s.f0 ?? 36, easeIO(u))]; };
 
 // ------------------------------------------------------------------ DOM overlays fed from the same clock
 const $ = (id) => document.getElementById(id);
+
+// ================================================================== bat speed: the lab, the x-ray, ground reaction forces, the sequence
+// One hitter (swing "B": a load into the rear hip, a stride, the pelvis then the torso turning, the arms and hands delivering the barrel).
+// The ballpark is hidden for the lab shots: a dark capture stage with a force plate under each foot.
+// Colors per segment: legs/ground amber, pelvis orange, torso cyan, arms/hands green, the bat gold.
+const SEGC = { legs: 0xffb547, pelvis: 0xff6a3d, torso: 0x56d1ff, arms: 0x3dd68c, bat: 0xffd84d };
+const PARK = scene.children.slice(0, N_PARK).filter((o) => !o.isLight && o !== cam);
+const CASTP = [pitcher, C, ump, U1, B1F, ...Object.values(HD), ...bench].map((p) => p.root);
+const SKY0 = scene.background, FOG0 = { c: scene.fog.color.clone(), n: scene.fog.near, f: scene.fog.far };
+const LAB = new THREE.Group(); LAB.visible = false; scene.add(LAB);
+{
+  const gridTex = canvasTex(1024, 1024, (g, w, h) => {
+    g.fillStyle = "#0a0e15"; g.fillRect(0, 0, w, h);
+    for (let i = 0; i <= 32; i++) { const x = i / 32 * w; g.strokeStyle = i % 4 ? "rgba(120,150,190,.13)" : "rgba(140,175,220,.32)"; g.lineWidth = i % 4 ? 1.5 : 3;
+      g.beginPath(); g.moveTo(x, 0); g.lineTo(x, h); g.stroke(); g.beginPath(); g.moveTo(0, x); g.lineTo(w, x); g.stroke(); }
+  }, { repeat: [3, 3] });
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(192, 192), new THREE.MeshStandardMaterial({ map: gridTex, roughness: 0.55, metalness: 0.1, envMap: ENV, envMapIntensity: 0.4 }));
+  floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; floor.position.set(-3, 0.002, 0); LAB.add(floor);
+  // capture cameras on stands in a ring, each with a lit ring
+  for (let i = 0; i < 10; i++) {
+    const a = i / 10 * Math.PI * 2 + 0.2, r = 19, x = -3 + Math.cos(a) * r, z = Math.sin(a) * r;
+    const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 9, 8), new THREE.MeshStandardMaterial({ color: 0x1a1f28, roughness: 0.6 })); pole.position.set(x, 4.5, z); LAB.add(pole);
+    const body = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.45, 0.7), new THREE.MeshStandardMaterial({ color: 0x20262f, roughness: 0.4 })); body.position.set(x, 9.1, z); body.lookAt(-3, 3, 0); LAB.add(body);
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(0.2, 0.05, 8, 24), glowM(0xff4d4d, 0.9)); ring.position.copy(body.position).add(v3(-3 - x, 3 - 9.1, -z).normalize().multiplyScalar(0.38)); ring.lookAt(-3, 3, 0); LAB.add(ring);
+  }
+  // a soft floor glow under the hitter
+  const pool = new THREE.Mesh(new THREE.CircleGeometry(14, 64), new THREE.MeshBasicMaterial({ map: dotTex, color: 0x5a7aa8, transparent: true, opacity: 0.35, depthWrite: false })); pool.rotation.x = -Math.PI / 2; pool.position.set(-3, 0.01, 0); LAB.add(pool);
+}
+const LABFILL = new THREE.HemisphereLight(0x9fb8e0, 0x10141c, 0); scene.add(LABFILL);
+function setLab(on) {
+  LAB.visible = on; for (const o of PARK) o.visible = !on; for (const o of CASTP) o.visible = !on;
+  scene.background = on ? new THREE.Color(0x06090f) : SKY0;
+  if (on) { scene.fog.color.set(0x06090f); scene.fog.near = 40; scene.fog.far = 140; } else { scene.fog.color.copy(FOG0.c); scene.fog.near = FOG0.n; scene.fog.far = FOG0.f; }
+  LABFILL.intensity = on ? 0.9 : 0;
+}
+// force plates: one under the rear foot, one where the stride lands
+const PLATES = {};
+for (const [key, a, b] of [["rear", -1.25 + 0.4, 0.05], ["lead", 2.0 - 0.35, 0.02]]) {
+  const g = new THREE.Group();
+  const top = new THREE.Mesh(roundBox(2.0, 0.14, 3.0, 0.05, 4), new THREE.MeshStandardMaterial({ color: 0x2a313c, roughness: 0.35, metalness: 0.6, envMap: ENV, envMapIntensity: 0.6 })); top.position.y = 0.07; top.receiveShadow = true; g.add(top);
+  const edge = new THREE.Mesh(new THREE.EdgesGeometry(new THREE.BoxGeometry(2.04, 0.16, 3.04)), new THREE.LineBasicMaterial({ color: SEGC.legs, transparent: true, opacity: 0.6, toneMapped: false })); edge.position.y = 0.07; g.add(edge);
+  const glow = new THREE.Mesh(new THREE.PlaneGeometry(3.2, 4.2), new THREE.MeshBasicMaterial({ map: dotTex, color: SEGC.legs, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending, toneMapped: false })); glow.rotation.x = -Math.PI / 2; glow.position.y = 0.16; g.add(glow);
+  PLATES[key] = { g, a, b, edge, glow }; LAB.add(g);
+}
+// ground reaction force arrows: a shaft and a head, from the ground under each foot
+function makeForce() {
+  const g = new THREE.Group(); g.visible = false; scene.add(g);
+  const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.09, 1, 14), glowM(SEGC.legs, 0.95)), head = new THREE.Mesh(new THREE.ConeGeometry(0.26, 0.55, 20), glowM(SEGC.legs, 0.95));
+  const halo = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.24, 1, 14), glowM(SEGC.legs, 0.18)); halo.material.blending = THREE.AdditiveBlending;
+  for (const m of [shaft, head, halo]) { m.renderOrder = 9; m.material.depthTest = false; g.add(m); }
+  return { g, set(base, dir, len, op) {
+    g.visible = op > 0.01 && len > 0.05; if (!g.visible) return;
+    const u = dir.clone().normalize(), q = new THREE.Quaternion().setFromUnitVectors(v3(0, 1, 0), u), L = Math.max(0.1, len - 0.5);
+    shaft.scale.set(1, L, 1); shaft.position.copy(base).addScaledVector(u, L / 2); shaft.quaternion.copy(q);
+    halo.scale.set(1, L, 1); halo.position.copy(shaft.position); halo.quaternion.copy(q);
+    head.position.copy(base).addScaledVector(u, L + 0.27); head.quaternion.copy(q);
+    shaft.material.opacity = head.material.opacity = 0.95 * op; halo.material.opacity = 0.2 * op; } };
+}
+const F_REAR = makeForce(), F_LEAD = makeForce();
+// how the support is shared (qualitative, relative to standing): the load onto the rear leg, the stride lands at k = -0.22,
+// the lead leg takes over and braking builds into contact. Directions: the rear leg pushes toward the pitcher; the lead leg braces against it.
+function grfAt(k) {
+  const land = smooth((k + 0.24) / 0.16), air = k > -0.75 && k < -0.22;
+  const rear = k < -0.75 ? lerp(0.55, 0.62, smooth((k + 1.0) / 0.25)) : lerp(lerp(0.62, 1.0, smooth((k + 0.75) / 0.25)), lerp(0.55, 0.18, smooth((k + 0.1) / 0.3)), land);
+  const lead = air ? 0.45 * (1 - smooth((k + 0.75) / 0.08)) : k < -0.75 ? 0.45 : lerp(0, 1.25 - 0.35 * smooth((k - 0.02) / 0.3), land) * (1 - 0.0);
+  const push = smooth((k + 0.6) / 0.3) * (1 - smooth((k + 0.02) / 0.2)), brake = land * (1 - 0.5 * smooth((k - 0.05) / 0.3));
+  return { rear, lead, push, brake };
+}
+// the x-ray: the uniform goes translucent and the segments glow underneath
+const XMATS = []; batter.root.traverse((o) => { if (o.isMesh && !XMATS.includes(o.material)) XMATS.push(o.material); });
+for (const m of [gloveM, strapM, armM]) if (!XMATS.includes(m)) XMATS.push(m);
+function makeBone(c, r) { const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, 1, 12), glowM(c, 0.95)); m.material.depthTest = false; m.renderOrder = 10; m.visible = false; scene.add(m); return m; }
+function makeJoint(c, r) { const m = new THREE.Mesh(new THREE.SphereGeometry(r, 16, 12), glowM(c, 0.95)); m.material.depthTest = false; m.renderOrder = 11; m.visible = false; scene.add(m); return m; }
+const BONES = {
+  legs: [makeBone(SEGC.legs, 0.07), makeBone(SEGC.legs, 0.07), makeBone(SEGC.legs, 0.06), makeBone(SEGC.legs, 0.06), makeBone(SEGC.legs, 0.05), makeBone(SEGC.legs, 0.05)],
+  pelvis: [makeBone(SEGC.pelvis, 0.11), makeBone(SEGC.pelvis, 0.3)],
+  torso: [makeBone(SEGC.torso, 0.1), makeBone(SEGC.torso, 0.11), makeBone(SEGC.torso, 0.3)],
+  arms: [makeBone(SEGC.arms, 0.07), makeBone(SEGC.arms, 0.07), makeBone(SEGC.arms, 0.06), makeBone(SEGC.arms, 0.06)],
+};
+const JOINTS = { legs: [0, 1, 2, 3].map(() => makeJoint(SEGC.legs, 0.13)), pelvis: [0, 1].map(() => makeJoint(SEGC.pelvis, 0.16)), torso: [0, 1, 2].map(() => makeJoint(SEGC.torso, 0.15)), arms: [0, 1, 2, 3].map(() => makeJoint(SEGC.arms, 0.12)) };
+for (const k of ["pelvis", "torso"]) { BONES[k][BONES[k].length - 1].material.blending = THREE.AdditiveBlending; }   // the halos on the hip and shoulder lines
+function setBone(m, a, b, op) {
+  m.visible = op > 0.01; if (!m.visible) return;
+  const d = b.clone().sub(a); m.position.copy(a).addScaledVector(d, 0.5); m.scale.set(1, d.length(), 1); m.quaternion.setFromUnitVectors(v3(0, 1, 0), d.normalize());
+  m.material.opacity = (m.geometry.parameters.radiusTop > 0.2 ? 0.16 : 0.95) * op;
+}
+const ext = (a, b, f) => { const m = a.clone().add(b).multiplyScalar(0.5); return [m.clone().lerp(a, f), m.clone().lerp(b, f)]; };
+const SEP = new THREE.Mesh(new THREE.BufferGeometry(), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, depthWrite: false, depthTest: false, side: THREE.DoubleSide, toneMapped: false })); SEP.renderOrder = 8; scene.add(SEP);
+const BARC = new THREE.Color();
+function setXray(s, v, k) {
+  const xo = winOp(v, s.xray, s.xin ?? 0.4, 0.3);
+  for (const m of XMATS) { m.transparent = xo > 0.01; m.opacity = 1 - 0.87 * xo; m.depthWrite = xo < 0.5; }
+  const sg = s.seg ?? {}, any = Object.keys(sg).length > 0;
+  const lit = (key) => (any ? 0.22 + 0.78 * winOp(v, sg[key], 0.12) : 1) * xo;
+  const P = batter, W_ = (o) => wpos(o);
+  const toe = (f) => { f.updateWorldMatrix(true, false); return f.localToWorld(v3(0, -0.12, 0.72)); };
+  const hipL = W_(P.hipL), hipR = W_(P.hipR), knL = W_(P.knL), knR = W_(P.knR), ftL = W_(P.ftL), ftR = W_(P.ftR);
+  const shL = W_(P.shL), shR = W_(P.shR), elL = W_(P.elL), elR = W_(P.elR), hdL = W_(P.handL), hdR = W_(P.handR), pc = W_(P.pelvis), nk = W_(P.neck);
+  const lo = lit("legs"); [[hipL, knL], [hipR, knR], [knL, ftL], [knR, ftR], [ftL, toe(P.ftL)], [ftR, toe(P.ftR)]].forEach(([a, b], i) => setBone(BONES.legs[i], a, b, lo));
+  [knL, knR, ftL, ftR].forEach((p, i) => { JOINTS.legs[i].visible = lo > 0.01; JOINTS.legs[i].position.copy(p); JOINTS.legs[i].material.opacity = 0.95 * lo; });
+  const po = lit("pelvis"), [pa, pb] = ext(hipL, hipR, 1.9);
+  setBone(BONES.pelvis[0], pa, pb, po); setBone(BONES.pelvis[1], pa, pb, po);
+  [hipL, hipR].forEach((p, i) => { JOINTS.pelvis[i].visible = po > 0.01; JOINTS.pelvis[i].position.copy(p); JOINTS.pelvis[i].material.opacity = 0.95 * po; });
+  const to = lit("torso"), [sa, sb] = ext(shL, shR, 1.6);
+  setBone(BONES.torso[0], pc, nk, to); setBone(BONES.torso[1], sa, sb, to); setBone(BONES.torso[2], sa, sb, to);
+  [shL, shR, nk].forEach((p, i) => { JOINTS.torso[i].visible = to > 0.01; JOINTS.torso[i].position.copy(p); JOINTS.torso[i].material.opacity = 0.95 * to; });
+  const ao = lit("arms"); [[shL, elL], [shR, elR], [elL, hdL], [elR, hdR]].forEach(([a, b], i) => setBone(BONES.arms[i], a, b, ao));
+  [elL, elR, hdL, hdR].forEach((p, i) => { JOINTS.arms[i].visible = ao > 0.01; JOINTS.arms[i].position.copy(p); JOINTS.arms[i].material.opacity = 0.95 * ao; });
+  // the bat glows gold with the x-ray or on its own cue
+  const bo = Math.max(lit("bat"), winOp(v, s.batglow, 0.15));
+  barrelHL.material.color.set(SEGC.bat); barrelHL.material.opacity = Math.max(barrelHL.material.opacity, 0.5 * bo);
+  // hip-shoulder separation: the wedge between the hip line and the shoulder line, seen from above
+  const so = winOp(v, s.sep, 0.2);
+  SEP.visible = so > 0.01;
+  if (SEP.visible) {
+    const ang = (a, b) => Math.atan2(b.z - a.z, b.x - a.x), a0 = ang(hipR, hipL), a1 = ang(shR, shL);
+    let d = a1 - a0; while (d > Math.PI) d -= 2 * Math.PI; while (d < -Math.PI) d += 2 * Math.PI;
+    const c = pc.clone(), y = shL.y * 0.5 + pc.y * 0.5, R0 = 2.6, pts = [];
+    for (let i = 0; i <= 24; i++) { const a = a0 + d * i / 24; for (const sgn of [1, -1]) pts.push([c.x + sgn * Math.cos(a) * R0, y, c.z + sgn * Math.sin(a) * R0]); }
+    const pos = [], P2 = (q) => pos.push(...q);
+    for (const sgn of [0, 1]) for (let i = 0; i < 24; i++) { P2([c.x, y, c.z]); P2(pts[i * 2 + sgn]); P2(pts[(i + 1) * 2 + sgn]); }
+    SEP.geometry.dispose(); SEP.geometry = new THREE.BufferGeometry(); SEP.geometry.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+    SEP.material.opacity = 0.32 * so;
+  }
+}
+function setGRF(s, v, k) {
+  const go = winOp(v, s.grf, 0.3), f = grfAt(k), lab = !!s.lab;
+  const R_ = ROOT.B, ft = feetAt("B", k);
+  for (const [key, P] of Object.entries(PLATES)) { P.g.position.copy(HB(R_, P.a, 0, P.b)); P.g.rotation.y = Math.PI / 2; P.g.visible = lab;
+    const load = key === "rear" ? f.rear : f.lead; P.glow.material.opacity = 0.55 * go * clamp(load, 0, 1.2); P.edge.material.opacity = 0.35 + 0.6 * go * clamp(load, 0, 1); }
+  const pz = v3(0, 0, -1), base = (fb) => v3(fb.ball.x, 0.18, fb.ball.z + 0.2);
+  const dR = v3(0, 1, 0).addScaledVector(pz, 0.55 * f.push), dL = v3(0, 1, 0).addScaledVector(pz, -0.6 * f.brake);
+  F_REAR.set(base(ft.rear), dR, 3.4 * f.rear, go); F_LEAD.set(base(ft.lead), dL, 3.4 * f.lead * (ft.lead.ball.y < 0.05 ? 1 : 0), go);
+  return f;
+}
+// the rotation traces: how fast the pelvis and the torso are turning through the swing (from the same keyed body: no measured data)
+const TRK0 = -0.34, TRK1 = 0.1;
+const TRACE = (() => { const n = 160, pel = [], tor = [];
+  for (let i = 0; i <= n; i++) { const k = lerp(TRK0, TRK1, i / n), h = 0.004, a = bodyAt("B", k - h), b = bodyAt("B", k + h);
+    pel.push((b.pelvisTwist - a.pelvisTwist) / (2 * h)); tor.push(((b.pelvisTwist + b.twist) - (a.pelvisTwist + a.twist)) / (2 * h)); }
+  const mx = Math.max(...pel, ...tor); return { n, pel: pel.map((x) => x / mx), tor: tor.map((x) => x / mx) }; })();
+function drawTrace(k) {
+  const cv = $("trace"); if (!cv) return; const g = cv.getContext("2d"), w = cv.width, h = cv.height, x0 = 20, x1 = w - 20, y0 = h - 30, y1 = 24;
+  g.clearRect(0, 0, w, h);
+  g.strokeStyle = "rgba(255,255,255,.35)"; g.lineWidth = 3; g.beginPath(); g.moveTo(x0, y1 - 10); g.lineTo(x0, y0); g.lineTo(x1, y0); g.stroke();
+  const upto = clamp((k - TRK0) / (TRK1 - TRK0), 0, 1) * TRACE.n;
+  for (const [arr, col] of [[TRACE.pel, "#FF6A3D"], [TRACE.tor, "#56D1FF"]]) {
+    g.strokeStyle = col; g.lineWidth = 8; g.lineJoin = "round"; g.lineCap = "round"; g.shadowColor = col; g.shadowBlur = 14; g.beginPath();
+    for (let i = 0; i <= Math.min(TRACE.n, upto); i++) { const x = lerp(x0, x1, i / TRACE.n), y = lerp(y0, y1, Math.max(0, arr[i])); i ? g.lineTo(x, y) : g.moveTo(x, y); }
+    g.stroke(); g.shadowBlur = 0;
+    const i = Math.floor(Math.min(TRACE.n, upto)), x = lerp(x0, x1, i / TRACE.n), y = lerp(y0, y1, Math.max(0, arr[i]));
+    g.fillStyle = col; g.beginPath(); g.arc(x, y, 11, 0, 7); g.fill();
+  }
+}
 const PINT = { batter: () => headTop(batter), hands: () => batPt(CUR.hm ?? 0.3), knob: () => batPt(-0.02), bottom: () => batPt(GL.position.y - 0.14), top: () => batPt(GRt.position.y + 0.14),
   sweet: () => batPt(SWEET), end: () => batPt(BAT_LEN), lenmid: () => { BAT.updateMatrixWorld(true); return BAT.localToWorld(v3(0, (BAT_LEN + GL.position.y) / 2 + 0.3, -0.42)); },
   ball: () => BB.position.clone(), pitcher: () => headTop(pitcher), plate: () => v3(0, 0, -0.7), mark: () => MARK.position.clone().add(v3(0, 0.42, 0)), zone: () => v3(0, ZY1 + 0.35, PLATE_F), chase: () => v3(0, ZY1 + CYP + 0.35, PLATE_F), ump: () => headTop(ump),
@@ -1469,6 +1637,7 @@ function pin(id, p, rect) {
   el.style.left = `${clamp(x0 + (q.x + 1) / 2 * w, x0 + half, x0 + w - half).toFixed(1)}px`; el.style.top = `${clamp(y0 + (1 - q.y) / 2 * h, y0 + 40, y0 + h - 20).toFixed(1)}px`;
 }
 function view(c, s, aspect) { cam.up.set(...(s.up ?? [0, 1, 0])); frame(cam, c[0], c[1], c[2], aspect); setBokeh(s.bokeh ?? 0); closeLights(!!s.close, c[1]); }
+let KTR = null;
 function renderAt(v) {
   const { s, t, u } = shotAt(v);
   const panes = s.panes ?? [{ rect: [0, 0, W, H] }];
@@ -1488,6 +1657,8 @@ function renderAt(v) {
     renderer.render(sh.room ? ROOM : scene, cam);
     for (const [id, key, pi] of CC.pins) if ((pi ?? 0) === i) pin(id, (PINH[key] ?? PINT[key])(), [x, y, w, h]);
   });
+  drawTrace(KTR ?? KNOW); KTR = null;
+  if ($("sup")) { const el = $("supk"); if (el) el.style.left = `${((1 - SUP) * 100).toFixed(1)}%`; }
   if ($("spd")) {                                                 // the speed label follows the shot's own clock: frozen, slowed, or neither
     const p0 = { ...s, ...(s.panes?.[0] ?? {}) }, vs = p0.vs, ts = p0.ts; let r = 1;
     for (let i = 1; i < vs.length; i++) if (v <= vs[i] || i === vs.length - 1) { r = (ts[i] - ts[i - 1]) / Math.max(1e-6, vs[i] - vs[i - 1]); break; }

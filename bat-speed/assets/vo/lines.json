@@ -1,0 +1,829 @@
+[
+ {
+  "i": 0,
+  "id": "h1",
+  "text": "Bat speed isn\u2019t created by the arms alone.",
+  "spoken": "Bat speed isn't created by the arms alone.",
+  "dur": 1.984,
+  "words": [
+   {
+    "w": "Bat",
+    "start": 0.048,
+    "end": 0.198
+   },
+   {
+    "w": "speed",
+    "start": 0.248,
+    "end": 0.498
+   },
+   {
+    "w": "isn't",
+    "start": 0.548,
+    "end": 0.673
+   },
+   {
+    "w": "created",
+    "start": 0.698,
+    "end": 0.948
+   },
+   {
+    "w": "by",
+    "start": 0.973,
+    "end": 1.098
+   },
+   {
+    "w": "the",
+    "start": 1.123,
+    "end": 1.173
+   },
+   {
+    "w": "arms",
+    "start": 1.273,
+    "end": 1.398
+   },
+   {
+    "w": "alone.",
+    "start": 1.423,
+    "end": 1.984
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "h2",
+  "text": "It\u2019s the result of how the entire body works together.",
+  "spoken": "It's the result of how the entire body works together.",
+  "dur": 2.048,
+  "words": [
+   {
+    "w": "It's",
+    "start": 0.048,
+    "end": 0.123
+   },
+   {
+    "w": "the",
+    "start": 0.148,
+    "end": 0.198
+   },
+   {
+    "w": "result",
+    "start": 0.223,
+    "end": 0.548
+   },
+   {
+    "w": "of",
+    "start": 0.573,
+    "end": 0.623
+   },
+   {
+    "w": "how",
+    "start": 0.648,
+    "end": 0.773
+   },
+   {
+    "w": "the",
+    "start": 0.798,
+    "end": 0.848
+   },
+   {
+    "w": "entire",
+    "start": 0.898,
+    "end": 1.223
+   },
+   {
+    "w": "body",
+    "start": 1.273,
+    "end": 1.498
+   },
+   {
+    "w": "works",
+    "start": 1.548,
+    "end": 1.698
+   },
+   {
+    "w": "together.",
+    "start": 1.723,
+    "end": 2.048
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "g1",
+  "text": "It starts with how the hitter interacts with the ground.",
+  "spoken": "It starts with how the hitter interacts with the ground.",
+  "dur": 2.176,
+  "words": [
+   {
+    "w": "It",
+    "start": 0.048,
+    "end": 0.098
+   },
+   {
+    "w": "starts",
+    "start": 0.148,
+    "end": 0.373
+   },
+   {
+    "w": "with",
+    "start": 0.398,
+    "end": 0.498
+   },
+   {
+    "w": "how",
+    "start": 0.548,
+    "end": 0.648
+   },
+   {
+    "w": "the",
+    "start": 0.673,
+    "end": 0.723
+   },
+   {
+    "w": "hitter",
+    "start": 0.773,
+    "end": 0.948
+   },
+   {
+    "w": "interacts",
+    "start": 1.023,
+    "end": 1.373
+   },
+   {
+    "w": "with",
+    "start": 1.398,
+    "end": 1.473
+   },
+   {
+    "w": "the",
+    "start": 1.473,
+    "end": 1.523
+   },
+   {
+    "w": "ground.",
+    "start": 1.573,
+    "end": 2.176
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "g2",
+  "text": "Ground reaction forces help support and generate the movements that contribute to the swing.",
+  "spoken": "Ground reaction forces help support and generate the movements that contribute to the swing.",
+  "dur": 3.904,
+  "words": [
+   {
+    "w": "Ground",
+    "start": 0.048,
+    "end": 0.248
+   },
+   {
+    "w": "reaction",
+    "start": 0.273,
+    "end": 0.648
+   },
+   {
+    "w": "forces",
+    "start": 0.723,
+    "end": 1.173
+   },
+   {
+    "w": "help",
+    "start": 1.223,
+    "end": 1.348
+   },
+   {
+    "w": "support",
+    "start": 1.398,
+    "end": 1.873
+   },
+   {
+    "w": "and",
+    "start": 1.923,
+    "end": 1.998
+   },
+   {
+    "w": "generate",
+    "start": 2.048,
+    "end": 2.348
+   },
+   {
+    "w": "the",
+    "start": 2.373,
+    "end": 2.423
+   },
+   {
+    "w": "movements",
+    "start": 2.473,
+    "end": 2.773
+   },
+   {
+    "w": "that",
+    "start": 2.798,
+    "end": 2.873
+   },
+   {
+    "w": "contribute",
+    "start": 2.898,
+    "end": 3.298
+   },
+   {
+    "w": "to",
+    "start": 3.323,
+    "end": 3.373
+   },
+   {
+    "w": "the",
+    "start": 3.398,
+    "end": 3.448
+   },
+   {
+    "w": "swing.",
+    "start": 3.523,
+    "end": 3.904
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "p1",
+  "text": "As the swing develops, the pelvis and torso rotate in a coordinated sequence.",
+  "spoken": "As the swing develops, the pelvis and torso rotate in a coordinated sequence.",
+  "dur": 3.669,
+  "words": [
+   {
+    "w": "As",
+    "start": 0.073,
+    "end": 0.148
+   },
+   {
+    "w": "the",
+    "start": 0.173,
+    "end": 0.223
+   },
+   {
+    "w": "swing",
+    "start": 0.298,
+    "end": 0.498
+   },
+   {
+    "w": "develops,",
+    "start": 0.523,
+    "end": 1.098
+   },
+   {
+    "w": "the",
+    "start": 1.198,
+    "end": 1.248
+   },
+   {
+    "w": "pelvis",
+    "start": 1.298,
+    "end": 1.573
+   },
+   {
+    "w": "and",
+    "start": 1.598,
+    "end": 1.673
+   },
+   {
+    "w": "torso",
+    "start": 1.723,
+    "end": 2.073
+   },
+   {
+    "w": "rotate",
+    "start": 2.123,
+    "end": 2.498
+   },
+   {
+    "w": "in",
+    "start": 2.523,
+    "end": 2.623
+   },
+   {
+    "w": "a",
+    "start": 2.623,
+    "end": 2.623
+   },
+   {
+    "w": "coordinated",
+    "start": 2.673,
+    "end": 3.173
+   },
+   {
+    "w": "sequence.",
+    "start": 3.223,
+    "end": 3.669
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "p2",
+  "text": "Their timing and rotational acceleration help create the conditions for the upper body to accelerate the bat.",
+  "spoken": "Their timing and rotational acceleration help create the conditions for the upper body to accelerate the bat.",
+  "dur": 4.715,
+  "words": [
+   {
+    "w": "Their",
+    "start": 0.048,
+    "end": 0.123
+   },
+   {
+    "w": "timing",
+    "start": 0.173,
+    "end": 0.548
+   },
+   {
+    "w": "and",
+    "start": 0.598,
+    "end": 0.673
+   },
+   {
+    "w": "rotational",
+    "start": 0.723,
+    "end": 1.148
+   },
+   {
+    "w": "acceleration",
+    "start": 1.173,
+    "end": 1.948
+   },
+   {
+    "w": "help",
+    "start": 2.023,
+    "end": 2.173
+   },
+   {
+    "w": "create",
+    "start": 2.223,
+    "end": 2.423
+   },
+   {
+    "w": "the",
+    "start": 2.448,
+    "end": 2.498
+   },
+   {
+    "w": "conditions",
+    "start": 2.523,
+    "end": 2.898
+   },
+   {
+    "w": "for",
+    "start": 2.948,
+    "end": 3.048
+   },
+   {
+    "w": "the",
+    "start": 3.048,
+    "end": 3.148
+   },
+   {
+    "w": "upper",
+    "start": 3.223,
+    "end": 3.323
+   },
+   {
+    "w": "body",
+    "start": 3.373,
+    "end": 3.773
+   },
+   {
+    "w": "to",
+    "start": 3.823,
+    "end": 3.873
+   },
+   {
+    "w": "accelerate",
+    "start": 3.898,
+    "end": 4.323
+   },
+   {
+    "w": "the",
+    "start": 4.348,
+    "end": 4.398
+   },
+   {
+    "w": "bat.",
+    "start": 4.448,
+    "end": 4.715
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "a1",
+  "text": "But the lower body doesn\u2019t create bat speed by itself.",
+  "spoken": "But the lower body doesn't create bat speed by itself.",
+  "dur": 2.325,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.023,
+    "end": 0.123
+   },
+   {
+    "w": "the",
+    "start": 0.148,
+    "end": 0.198
+   },
+   {
+    "w": "lower",
+    "start": 0.248,
+    "end": 0.398
+   },
+   {
+    "w": "body",
+    "start": 0.423,
+    "end": 0.648
+   },
+   {
+    "w": "doesn't",
+    "start": 0.698,
+    "end": 0.873
+   },
+   {
+    "w": "create",
+    "start": 0.898,
+    "end": 1.098
+   },
+   {
+    "w": "bat",
+    "start": 1.148,
+    "end": 1.298
+   },
+   {
+    "w": "speed",
+    "start": 1.348,
+    "end": 1.573
+   },
+   {
+    "w": "by",
+    "start": 1.598,
+    "end": 1.723
+   },
+   {
+    "w": "itself.",
+    "start": 1.748,
+    "end": 2.325
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "a2",
+  "text": "The arms and hands play a major role in accelerating the barrel and controlling its path through the hitting zone.",
+  "spoken": "The arms and hands play a major role in accelerating the barrel and controlling its path through the hitting zone.",
+  "dur": 4.736,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.044,
+    "end": 0.119
+   },
+   {
+    "w": "arms",
+    "start": 0.269,
+    "end": 0.469
+   },
+   {
+    "w": "and",
+    "start": 0.494,
+    "end": 0.569
+   },
+   {
+    "w": "hands",
+    "start": 0.619,
+    "end": 0.869
+   },
+   {
+    "w": "play",
+    "start": 0.919,
+    "end": 1.094
+   },
+   {
+    "w": "a",
+    "start": 1.094,
+    "end": 1.094
+   },
+   {
+    "w": "major",
+    "start": 1.144,
+    "end": 1.369
+   },
+   {
+    "w": "role",
+    "start": 1.419,
+    "end": 1.669
+   },
+   {
+    "w": "in",
+    "start": 1.694,
+    "end": 1.744
+   },
+   {
+    "w": "accelerating",
+    "start": 1.769,
+    "end": 2.244
+   },
+   {
+    "w": "the",
+    "start": 2.269,
+    "end": 2.319
+   },
+   {
+    "w": "barrel",
+    "start": 2.369,
+    "end": 2.919
+   },
+   {
+    "w": "and",
+    "start": 2.994,
+    "end": 3.069
+   },
+   {
+    "w": "controlling",
+    "start": 3.094,
+    "end": 3.494
+   },
+   {
+    "w": "its",
+    "start": 3.519,
+    "end": 3.594
+   },
+   {
+    "w": "path",
+    "start": 3.644,
+    "end": 3.944
+   },
+   {
+    "w": "through",
+    "start": 3.994,
+    "end": 4.094
+   },
+   {
+    "w": "the",
+    "start": 4.119,
+    "end": 4.169
+   },
+   {
+    "w": "hitting",
+    "start": 4.194,
+    "end": 4.369
+   },
+   {
+    "w": "zone.",
+    "start": 4.419,
+    "end": 4.736
+   }
+  ]
+ },
+ {
+  "i": 8,
+  "id": "w1",
+  "text": "Bat speed comes from the coordination of all these movements.",
+  "spoken": "Bat speed comes from the coordination of all these movements.",
+  "dur": 2.645,
+  "words": [
+   {
+    "w": "Bat",
+    "start": 0.048,
+    "end": 0.173
+   },
+   {
+    "w": "speed",
+    "start": 0.223,
+    "end": 0.448
+   },
+   {
+    "w": "comes",
+    "start": 0.498,
+    "end": 0.673
+   },
+   {
+    "w": "from",
+    "start": 0.698,
+    "end": 0.798
+   },
+   {
+    "w": "the",
+    "start": 0.798,
+    "end": 0.848
+   },
+   {
+    "w": "coordination",
+    "start": 0.898,
+    "end": 1.648
+   },
+   {
+    "w": "of",
+    "start": 1.723,
+    "end": 1.798
+   },
+   {
+    "w": "all",
+    "start": 1.923,
+    "end": 2.023
+   },
+   {
+    "w": "these",
+    "start": 2.048,
+    "end": 2.198
+   },
+   {
+    "w": "movements.",
+    "start": 2.248,
+    "end": 2.645
+   }
+  ]
+ },
+ {
+  "i": 9,
+  "id": "w2",
+  "text": "It\u2019s not one muscle, one body part, or one coaching cue.",
+  "spoken": "It's not one muscle, one body part, or one coaching cue.",
+  "dur": 2.624,
+  "words": [
+   {
+    "w": "It's",
+    "start": 0.069,
+    "end": 0.144
+   },
+   {
+    "w": "not",
+    "start": 0.169,
+    "end": 0.294
+   },
+   {
+    "w": "one",
+    "start": 0.319,
+    "end": 0.419
+   },
+   {
+    "w": "muscle,",
+    "start": 0.444,
+    "end": 0.719
+   },
+   {
+    "w": "one",
+    "start": 0.819,
+    "end": 0.944
+   },
+   {
+    "w": "body",
+    "start": 0.969,
+    "end": 1.169
+   },
+   {
+    "w": "part,",
+    "start": 1.194,
+    "end": 1.444
+   },
+   {
+    "w": "or",
+    "start": 1.494,
+    "end": 1.569
+   },
+   {
+    "w": "one",
+    "start": 1.619,
+    "end": 1.769
+   },
+   {
+    "w": "coaching",
+    "start": 1.819,
+    "end": 2.094
+   },
+   {
+    "w": "cue.",
+    "start": 2.144,
+    "end": 2.624
+   }
+  ]
+ },
+ {
+  "i": 10,
+  "id": "w3",
+  "text": "It\u2019s the entire movement working together.",
+  "spoken": "It's the entire movement working together.",
+  "dur": 1.685,
+  "words": [
+   {
+    "w": "It's",
+    "start": 0.048,
+    "end": 0.123
+   },
+   {
+    "w": "the",
+    "start": 0.148,
+    "end": 0.198
+   },
+   {
+    "w": "entire",
+    "start": 0.248,
+    "end": 0.598
+   },
+   {
+    "w": "movement",
+    "start": 0.648,
+    "end": 0.898
+   },
+   {
+    "w": "working",
+    "start": 0.948,
+    "end": 1.148
+   },
+   {
+    "w": "together.",
+    "start": 1.173,
+    "end": 1.685
+   }
+  ]
+ },
+ {
+  "i": 11,
+  "id": "e1",
+  "text": "And this is just the beginning.",
+  "spoken": "And this is just the beginning.",
+  "dur": 1.408,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.094,
+    "end": 0.169
+   },
+   {
+    "w": "this",
+    "start": 0.194,
+    "end": 0.444
+   },
+   {
+    "w": "is",
+    "start": 0.494,
+    "end": 0.594
+   },
+   {
+    "w": "just",
+    "start": 0.644,
+    "end": 0.794
+   },
+   {
+    "w": "the",
+    "start": 0.819,
+    "end": 0.869
+   },
+   {
+    "w": "beginning.",
+    "start": 0.894,
+    "end": 1.408
+   }
+  ]
+ },
+ {
+  "i": 12,
+  "id": "e2",
+  "text": "Follow along for our baseball biomechanics series.",
+  "spoken": "Follow along for our baseball biomechanics series.",
+  "dur": 2.347,
+  "words": [
+   {
+    "w": "Follow",
+    "start": 0.094,
+    "end": 0.369
+   },
+   {
+    "w": "along",
+    "start": 0.419,
+    "end": 0.644
+   },
+   {
+    "w": "for",
+    "start": 0.669,
+    "end": 0.769
+   },
+   {
+    "w": "our",
+    "start": 0.819,
+    "end": 0.894
+   },
+   {
+    "w": "baseball",
+    "start": 0.919,
+    "end": 1.244
+   },
+   {
+    "w": "biomechanics",
+    "start": 1.294,
+    "end": 1.819
+   },
+   {
+    "w": "series.",
+    "start": 1.869,
+    "end": 2.347
+   }
+  ]
+ }
+]

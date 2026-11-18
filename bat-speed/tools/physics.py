@@ -1,4 +1,4 @@
-"""The pitch and batted balls for "A-Rod vs. Teacherman" (the fastball both hitters swing at, and their line drives).
+"""The pitch and batted ball for "What actually creates bat speed?" (a 95 mph fastball, and a home run to left-center).
 
     python3 tools/physics.py        # writes assets/play.json (read by build.py and assets/field.js)
 
@@ -88,8 +88,7 @@ PITCHES = {   # mph, rpm, spin efficiency, lift direction, target (x, y) at the 
     "ch2": (84, 1750, 0.85, (-0.72, 0.69, 0), (0.45, 1.8), PLATE_FRONT - 1.0),    # the payoff: another changeup, low
 }
 HITS = {   # pitch, exit mph, launch angle, spray angle, seconds of flight to keep
-    "ld": ("fb", 102, 13, -6, 2.6),            # hitter A (the knob cue): a line drive up the middle
-    "ld2": ("fb", 103, 15, -22, 2.6),          # hitter B (the rear-hip load): a line drive into the left-center gap
+    "hr": ("fb", 107, 27, -14, 5.6),           # driven deep to left-center, over the fence
 }
 if __name__ == "__main__":
     out = {"pitches": {}, "hits": {}, "release": RELEASE.tolist(), "plate_front": PLATE_FRONT,

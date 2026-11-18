@@ -1,7 +1,7 @@
 ---
 workflow: faceless-explainer
 flow: automation
-storyboard: yes
+storyboard: yes  # plan approved; sketch pass skipped at the user's request (built in one go)
 message: "Bat speed comes from the whole body working together, not the arms or hips alone."
 destination: instagram-reels-tiktok
 aspect: "9:16"
