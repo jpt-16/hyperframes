@@ -194,7 +194,7 @@ chip("c3", D1 + 0.05, D2 - 0.02, '<span class="yt">85 mph</span> slider', 1460)
 # 4 ninety days
 calendar("cal4", D4, V4 + 0.25, 60, 90, "90 days", dim=False)
 badge("b4", V4 + 0.25, E4, "Day 90 · first game back")
-chip("c4", E1 + 0.55, E3 - 0.02, '<span class="yt">98 mph</span>', 1460, "big")
+chip("c4", E1 + 0.55, E2 - 0.02, '<span class="yt">98 mph</span>', 1460, "big")
 pinl("p4", E2 + 0.4, E3 - 0.02, "Just behind it", "ball", "yl sm")
 # 5 back to work
 badge("b5", E4 + 0.05, F3, "Back in the cage")
