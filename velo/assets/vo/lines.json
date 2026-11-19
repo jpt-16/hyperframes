@@ -1,0 +1,760 @@
+[
+ {
+  "i": 0,
+  "id": "h1",
+  "text": "How does a human being throw a baseball over 100 miles per hour?",
+  "spoken": "How does a human being throw a baseball over one hundred miles per hour?",
+  "dur": 4.011,
+  "words": [
+   {
+    "w": "How",
+    "start": 0.123,
+    "end": 0.248
+   },
+   {
+    "w": "does",
+    "start": 0.273,
+    "end": 0.423
+   },
+   {
+    "w": "a",
+    "start": 0.423,
+    "end": 0.423
+   },
+   {
+    "w": "human",
+    "start": 0.498,
+    "end": 0.823
+   },
+   {
+    "w": "being",
+    "start": 0.873,
+    "end": 1.073
+   },
+   {
+    "w": "throw",
+    "start": 1.148,
+    "end": 1.448
+   },
+   {
+    "w": "a",
+    "start": 1.448,
+    "end": 1.448
+   },
+   {
+    "w": "baseball",
+    "start": 1.498,
+    "end": 2.198
+   },
+   {
+    "w": "over",
+    "start": 2.273,
+    "end": 2.448
+   },
+   {
+    "w": "one",
+    "start": 2.498,
+    "end": 2.623
+   },
+   {
+    "w": "hundred",
+    "start": 2.673,
+    "end": 2.973
+   },
+   {
+    "w": "miles",
+    "start": 3.023,
+    "end": 3.398
+   },
+   {
+    "w": "per",
+    "start": 3.448,
+    "end": 3.573
+   },
+   {
+    "w": "hour?",
+    "start": 3.698,
+    "end": 4.011
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "d1",
+  "text": "It doesn\u2019t happen from the arm alone.",
+  "spoken": "It doesn't happen from the arm alone.",
+  "dur": 1.92,
+  "words": [
+   {
+    "w": "It",
+    "start": 0.059,
+    "end": 0.134
+   },
+   {
+    "w": "doesn't",
+    "start": 0.184,
+    "end": 0.434
+   },
+   {
+    "w": "happen",
+    "start": 0.484,
+    "end": 0.809
+   },
+   {
+    "w": "from",
+    "start": 0.859,
+    "end": 1.009
+   },
+   {
+    "w": "the",
+    "start": 1.009,
+    "end": 1.109
+   },
+   {
+    "w": "arm",
+    "start": 1.259,
+    "end": 1.434
+   },
+   {
+    "w": "alone.",
+    "start": 1.484,
+    "end": 1.92
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "d2",
+  "text": "A pitcher\u2019s delivery involves the entire body, starting with how they interact with the ground.",
+  "spoken": "A pitcher's delivery involves the entire body, starting with how they interact with the ground.",
+  "dur": 5.632,
+  "words": [
+   {
+    "w": "A",
+    "start": 0.055,
+    "end": 0.105
+   },
+   {
+    "w": "pitcher's",
+    "start": 0.18,
+    "end": 0.605
+   },
+   {
+    "w": "delivery",
+    "start": 0.655,
+    "end": 1.28
+   },
+   {
+    "w": "involves",
+    "start": 1.355,
+    "end": 1.855
+   },
+   {
+    "w": "the",
+    "start": 1.88,
+    "end": 1.98
+   },
+   {
+    "w": "entire",
+    "start": 2.03,
+    "end": 2.48
+   },
+   {
+    "w": "body,",
+    "start": 2.53,
+    "end": 3.13
+   },
+   {
+    "w": "starting",
+    "start": 3.305,
+    "end": 3.755
+   },
+   {
+    "w": "with",
+    "start": 3.78,
+    "end": 3.88
+   },
+   {
+    "w": "how",
+    "start": 3.93,
+    "end": 4.105
+   },
+   {
+    "w": "they",
+    "start": 4.155,
+    "end": 4.28
+   },
+   {
+    "w": "interact",
+    "start": 4.355,
+    "end": 4.88
+   },
+   {
+    "w": "with",
+    "start": 4.905,
+    "end": 5.03
+   },
+   {
+    "w": "the",
+    "start": 5.03,
+    "end": 5.08
+   },
+   {
+    "w": "ground.",
+    "start": 5.13,
+    "end": 5.632
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "r1",
+  "text": "As the delivery progresses, the pelvis and torso rotate in a coordinated sequence.",
+  "spoken": "As the delivery progresses, the pelvis and torso rotate in a coordinated sequence.",
+  "dur": 5.163,
+  "words": [
+   {
+    "w": "As",
+    "start": 0.105,
+    "end": 0.23
+   },
+   {
+    "w": "the",
+    "start": 0.255,
+    "end": 0.305
+   },
+   {
+    "w": "delivery",
+    "start": 0.355,
+    "end": 0.83
+   },
+   {
+    "w": "progresses,",
+    "start": 0.88,
+    "end": 1.755
+   },
+   {
+    "w": "the",
+    "start": 1.88,
+    "end": 1.93
+   },
+   {
+    "w": "pelvis",
+    "start": 1.98,
+    "end": 2.355
+   },
+   {
+    "w": "and",
+    "start": 2.405,
+    "end": 2.48
+   },
+   {
+    "w": "torso",
+    "start": 2.555,
+    "end": 3.03
+   },
+   {
+    "w": "rotate",
+    "start": 3.105,
+    "end": 3.605
+   },
+   {
+    "w": "in",
+    "start": 3.655,
+    "end": 3.78
+   },
+   {
+    "w": "a",
+    "start": 3.78,
+    "end": 3.78
+   },
+   {
+    "w": "coordinated",
+    "start": 3.855,
+    "end": 4.555
+   },
+   {
+    "w": "sequence.",
+    "start": 4.63,
+    "end": 5.163
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "r2",
+  "text": "The timing of these movements plays an important role in how the body generates and transfers energy.",
+  "spoken": "The timing of these movements plays an important role in how the body generates and transfers energy.",
+  "dur": 5.547,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.055,
+    "end": 0.105
+   },
+   {
+    "w": "timing",
+    "start": 0.18,
+    "end": 0.53
+   },
+   {
+    "w": "of",
+    "start": 0.555,
+    "end": 0.605
+   },
+   {
+    "w": "these",
+    "start": 0.655,
+    "end": 0.88
+   },
+   {
+    "w": "movements",
+    "start": 0.93,
+    "end": 1.33
+   },
+   {
+    "w": "plays",
+    "start": 1.38,
+    "end": 1.705
+   },
+   {
+    "w": "an",
+    "start": 1.705,
+    "end": 1.73
+   },
+   {
+    "w": "important",
+    "start": 1.78,
+    "end": 2.28
+   },
+   {
+    "w": "role",
+    "start": 2.33,
+    "end": 2.705
+   },
+   {
+    "w": "in",
+    "start": 2.755,
+    "end": 2.805
+   },
+   {
+    "w": "how",
+    "start": 2.855,
+    "end": 3.03
+   },
+   {
+    "w": "the",
+    "start": 3.055,
+    "end": 3.105
+   },
+   {
+    "w": "body",
+    "start": 3.155,
+    "end": 3.43
+   },
+   {
+    "w": "generates",
+    "start": 3.505,
+    "end": 4.28
+   },
+   {
+    "w": "and",
+    "start": 4.33,
+    "end": 4.405
+   },
+   {
+    "w": "transfers",
+    "start": 4.455,
+    "end": 4.98
+   },
+   {
+    "w": "energy.",
+    "start": 5.105,
+    "end": 5.547
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "a1",
+  "text": "Then comes the explosive arm action.",
+  "spoken": "Then comes the explosive arm action.",
+  "dur": 2.283,
+  "words": [
+   {
+    "w": "Then",
+    "start": 0.08,
+    "end": 0.255
+   },
+   {
+    "w": "comes",
+    "start": 0.305,
+    "end": 0.53
+   },
+   {
+    "w": "the",
+    "start": 0.555,
+    "end": 0.63
+   },
+   {
+    "w": "explosive",
+    "start": 0.68,
+    "end": 1.255
+   },
+   {
+    "w": "arm",
+    "start": 1.405,
+    "end": 1.605
+   },
+   {
+    "w": "action.",
+    "start": 1.73,
+    "end": 2.283
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "a2",
+  "text": "The shoulder rotates internally, the elbow extends, and the hand accelerates toward release.",
+  "spoken": "The shoulder rotates internally, the elbow extends, and the hand accelerates toward release.",
+  "dur": 5.589,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.055,
+    "end": 0.13
+   },
+   {
+    "w": "shoulder",
+    "start": 0.205,
+    "end": 0.53
+   },
+   {
+    "w": "rotates",
+    "start": 0.58,
+    "end": 1.055
+   },
+   {
+    "w": "internally,",
+    "start": 1.105,
+    "end": 1.905
+   },
+   {
+    "w": "the",
+    "start": 2.03,
+    "end": 2.13
+   },
+   {
+    "w": "elbow",
+    "start": 2.255,
+    "end": 2.53
+   },
+   {
+    "w": "extends,",
+    "start": 2.58,
+    "end": 3.38
+   },
+   {
+    "w": "and",
+    "start": 3.505,
+    "end": 3.58
+   },
+   {
+    "w": "the",
+    "start": 3.605,
+    "end": 3.655
+   },
+   {
+    "w": "hand",
+    "start": 3.705,
+    "end": 3.955
+   },
+   {
+    "w": "accelerates",
+    "start": 4.005,
+    "end": 4.68
+   },
+   {
+    "w": "toward",
+    "start": 4.73,
+    "end": 5.005
+   },
+   {
+    "w": "release.",
+    "start": 5.055,
+    "end": 5.589
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "a3",
+  "text": "These movements happen incredibly quickly.",
+  "spoken": "These movements happen incredibly quickly.",
+  "dur": 2.283,
+  "words": [
+   {
+    "w": "These",
+    "start": 0.059,
+    "end": 0.284
+   },
+   {
+    "w": "movements",
+    "start": 0.334,
+    "end": 0.684
+   },
+   {
+    "w": "happen",
+    "start": 0.734,
+    "end": 1.084
+   },
+   {
+    "w": "incredibly",
+    "start": 1.159,
+    "end": 1.734
+   },
+   {
+    "w": "quickly.",
+    "start": 1.809,
+    "end": 2.283
+   }
+  ]
+ },
+ {
+  "i": 8,
+  "id": "l1",
+  "text": "At release, all of these movements have contributed to producing an incredibly fast-moving baseball.",
+  "spoken": "At release, all of these movements have contributed to producing an incredibly fast-moving baseball.",
+  "dur": 5.568,
+  "words": [
+   {
+    "w": "At",
+    "start": 0.084,
+    "end": 0.159
+   },
+   {
+    "w": "release,",
+    "start": 0.209,
+    "end": 0.834
+   },
+   {
+    "w": "all",
+    "start": 1.009,
+    "end": 1.134
+   },
+   {
+    "w": "of",
+    "start": 1.159,
+    "end": 1.209
+   },
+   {
+    "w": "these",
+    "start": 1.259,
+    "end": 1.484
+   },
+   {
+    "w": "movements",
+    "start": 1.534,
+    "end": 1.884
+   },
+   {
+    "w": "have",
+    "start": 1.909,
+    "end": 2.034
+   },
+   {
+    "w": "contributed",
+    "start": 2.084,
+    "end": 2.634
+   },
+   {
+    "w": "to",
+    "start": 2.684,
+    "end": 2.734
+   },
+   {
+    "w": "producing",
+    "start": 2.784,
+    "end": 3.409
+   },
+   {
+    "w": "an",
+    "start": 3.409,
+    "end": 3.459
+   },
+   {
+    "w": "incredibly",
+    "start": 3.534,
+    "end": 4.159
+   },
+   {
+    "w": "fast-moving",
+    "start": 4.259,
+    "end": 4.984
+   },
+   {
+    "w": "baseball.",
+    "start": 5.034,
+    "end": 5.568
+   }
+  ]
+ },
+ {
+  "i": 9,
+  "id": "l2",
+  "text": "And the entire delivery happens in a fraction of a second.",
+  "spoken": "And the entire delivery happens in a fraction of a second.",
+  "dur": 3.264,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.123,
+    "end": 0.198
+   },
+   {
+    "w": "the",
+    "start": 0.223,
+    "end": 0.273
+   },
+   {
+    "w": "entire",
+    "start": 0.323,
+    "end": 0.798
+   },
+   {
+    "w": "delivery",
+    "start": 0.848,
+    "end": 1.423
+   },
+   {
+    "w": "happens",
+    "start": 1.498,
+    "end": 1.948
+   },
+   {
+    "w": "in",
+    "start": 1.998,
+    "end": 2.098
+   },
+   {
+    "w": "a",
+    "start": 2.098,
+    "end": 2.098
+   },
+   {
+    "w": "fraction",
+    "start": 2.173,
+    "end": 2.623
+   },
+   {
+    "w": "of",
+    "start": 2.623,
+    "end": 2.723
+   },
+   {
+    "w": "a",
+    "start": 2.723,
+    "end": 2.723
+   },
+   {
+    "w": "second.",
+    "start": 2.798,
+    "end": 3.264
+   }
+  ]
+ },
+ {
+  "i": 10,
+  "id": "e1",
+  "text": "And that\u2019s the biomechanics behind an elite fastball.",
+  "spoken": "And that's the biomechanics behind an elite fastball.",
+  "dur": 3.029,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.123,
+    "end": 0.198
+   },
+   {
+    "w": "that's",
+    "start": 0.223,
+    "end": 0.423
+   },
+   {
+    "w": "the",
+    "start": 0.448,
+    "end": 0.498
+   },
+   {
+    "w": "biomechanics",
+    "start": 0.548,
+    "end": 1.473
+   },
+   {
+    "w": "behind",
+    "start": 1.523,
+    "end": 1.923
+   },
+   {
+    "w": "an",
+    "start": 1.923,
+    "end": 1.948
+   },
+   {
+    "w": "elite",
+    "start": 1.998,
+    "end": 2.323
+   },
+   {
+    "w": "fastball.",
+    "start": 2.398,
+    "end": 3.029
+   }
+  ]
+ },
+ {
+  "i": 11,
+  "id": "e2",
+  "text": "Follow along for our baseball biomechanics series.",
+  "spoken": "Follow along for our baseball biomechanics series.",
+  "dur": 3.051,
+  "words": [
+   {
+    "w": "Follow",
+    "start": 0.101,
+    "end": 0.451
+   },
+   {
+    "w": "along",
+    "start": 0.526,
+    "end": 0.876
+   },
+   {
+    "w": "for",
+    "start": 0.926,
+    "end": 1.026
+   },
+   {
+    "w": "our",
+    "start": 1.076,
+    "end": 1.151
+   },
+   {
+    "w": "baseball",
+    "start": 1.201,
+    "end": 1.676
+   },
+   {
+    "w": "biomechanics",
+    "start": 1.726,
+    "end": 2.551
+   },
+   {
+    "w": "series.",
+    "start": 2.601,
+    "end": 3.051
+   }
+  ]
+ }
+]
