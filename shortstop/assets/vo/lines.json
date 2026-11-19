@@ -1,0 +1,876 @@
+[
+ {
+  "i": 0,
+  "id": "h1",
+  "text": "Shortstop might be the hardest position to play on a baseball field.",
+  "spoken": "Shortstop might be the hardest position to play on a baseball field.",
+  "dur": 3.499,
+  "words": [
+   {
+    "w": "Shortstop",
+    "start": 0.098,
+    "end": 0.673
+   },
+   {
+    "w": "might",
+    "start": 0.723,
+    "end": 0.873
+   },
+   {
+    "w": "be",
+    "start": 0.923,
+    "end": 0.998
+   },
+   {
+    "w": "the",
+    "start": 1.023,
+    "end": 1.098
+   },
+   {
+    "w": "hardest",
+    "start": 1.173,
+    "end": 1.548
+   },
+   {
+    "w": "position",
+    "start": 1.598,
+    "end": 1.998
+   },
+   {
+    "w": "to",
+    "start": 2.048,
+    "end": 2.098
+   },
+   {
+    "w": "play",
+    "start": 2.148,
+    "end": 2.373
+   },
+   {
+    "w": "on",
+    "start": 2.423,
+    "end": 2.523
+   },
+   {
+    "w": "a",
+    "start": 2.523,
+    "end": 2.523
+   },
+   {
+    "w": "baseball",
+    "start": 2.573,
+    "end": 3.023
+   },
+   {
+    "w": "field.",
+    "start": 3.098,
+    "end": 3.499
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "h2",
+  "text": "And it\u2019s not just because you need to have good hands.",
+  "spoken": "And it's not just because you need to have good hands.",
+  "dur": 2.645,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.098,
+    "end": 0.173
+   },
+   {
+    "w": "it's",
+    "start": 0.198,
+    "end": 0.323
+   },
+   {
+    "w": "not",
+    "start": 0.373,
+    "end": 0.573
+   },
+   {
+    "w": "just",
+    "start": 0.623,
+    "end": 0.873
+   },
+   {
+    "w": "because",
+    "start": 0.923,
+    "end": 1.323
+   },
+   {
+    "w": "you",
+    "start": 1.373,
+    "end": 1.448
+   },
+   {
+    "w": "need",
+    "start": 1.498,
+    "end": 1.648
+   },
+   {
+    "w": "to",
+    "start": 1.673,
+    "end": 1.723
+   },
+   {
+    "w": "have",
+    "start": 1.773,
+    "end": 1.948
+   },
+   {
+    "w": "good",
+    "start": 1.998,
+    "end": 2.148
+   },
+   {
+    "w": "hands.",
+    "start": 2.198,
+    "end": 2.645
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "g1",
+  "text": "First, shortstops have to cover an enormous amount of ground.",
+  "spoken": "First, shortstops have to cover an enormous amount of ground.",
+  "dur": 3.349,
+  "words": [
+   {
+    "w": "First,",
+    "start": 0.098,
+    "end": 0.423
+   },
+   {
+    "w": "shortstops",
+    "start": 0.498,
+    "end": 0.998
+   },
+   {
+    "w": "have",
+    "start": 1.023,
+    "end": 1.148
+   },
+   {
+    "w": "to",
+    "start": 1.173,
+    "end": 1.223
+   },
+   {
+    "w": "cover",
+    "start": 1.273,
+    "end": 1.773
+   },
+   {
+    "w": "an",
+    "start": 1.773,
+    "end": 1.823
+   },
+   {
+    "w": "enormous",
+    "start": 1.873,
+    "end": 2.323
+   },
+   {
+    "w": "amount",
+    "start": 2.373,
+    "end": 2.623
+   },
+   {
+    "w": "of",
+    "start": 2.648,
+    "end": 2.698
+   },
+   {
+    "w": "ground.",
+    "start": 2.748,
+    "end": 3.349
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "g2",
+  "text": "They\u2019re responsible for balls hit up the middle, deep in the hole, and everything in between.",
+  "spoken": "They're responsible for balls hit up the middle, deep in the hole, and everything in between.",
+  "dur": 4.757,
+  "words": [
+   {
+    "w": "They're",
+    "start": 0.03,
+    "end": 0.23
+   },
+   {
+    "w": "responsible",
+    "start": 0.28,
+    "end": 0.855
+   },
+   {
+    "w": "for",
+    "start": 0.905,
+    "end": 1.03
+   },
+   {
+    "w": "balls",
+    "start": 1.08,
+    "end": 1.43
+   },
+   {
+    "w": "hit",
+    "start": 1.48,
+    "end": 1.58
+   },
+   {
+    "w": "up",
+    "start": 1.63,
+    "end": 1.73
+   },
+   {
+    "w": "the",
+    "start": 1.755,
+    "end": 1.805
+   },
+   {
+    "w": "middle,",
+    "start": 1.855,
+    "end": 2.255
+   },
+   {
+    "w": "deep",
+    "start": 2.405,
+    "end": 2.63
+   },
+   {
+    "w": "in",
+    "start": 2.655,
+    "end": 2.755
+   },
+   {
+    "w": "the",
+    "start": 2.755,
+    "end": 2.83
+   },
+   {
+    "w": "hole,",
+    "start": 2.88,
+    "end": 3.38
+   },
+   {
+    "w": "and",
+    "start": 3.48,
+    "end": 3.555
+   },
+   {
+    "w": "everything",
+    "start": 3.68,
+    "end": 4.08
+   },
+   {
+    "w": "in",
+    "start": 4.13,
+    "end": 4.23
+   },
+   {
+    "w": "between.",
+    "start": 4.255,
+    "end": 4.757
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "o1",
+  "text": "Then there\u2019s the hops.",
+  "spoken": "Then there's the hops.",
+  "dur": 1.195,
+  "words": [
+   {
+    "w": "Then",
+    "start": 0.073,
+    "end": 0.273
+   },
+   {
+    "w": "there's",
+    "start": 0.298,
+    "end": 0.498
+   },
+   {
+    "w": "the",
+    "start": 0.523,
+    "end": 0.573
+   },
+   {
+    "w": "hops.",
+    "start": 0.623,
+    "end": 1.195
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "o2",
+  "text": "A shortstop has to react to hard ground balls, bad hops, and sharply hit balls with almost no time to adjust.",
+  "spoken": "A shortstop has to react to hard ground balls, bad hops, and sharply hit balls with almost no time to adjust.",
+  "dur": 6.357,
+  "words": [
+   {
+    "w": "A",
+    "start": 0.098,
+    "end": 0.148
+   },
+   {
+    "w": "shortstop",
+    "start": 0.223,
+    "end": 0.748
+   },
+   {
+    "w": "has",
+    "start": 0.773,
+    "end": 0.898
+   },
+   {
+    "w": "to",
+    "start": 0.948,
+    "end": 0.998
+   },
+   {
+    "w": "react",
+    "start": 1.048,
+    "end": 1.373
+   },
+   {
+    "w": "to",
+    "start": 1.398,
+    "end": 1.448
+   },
+   {
+    "w": "hard",
+    "start": 1.498,
+    "end": 1.723
+   },
+   {
+    "w": "ground",
+    "start": 1.773,
+    "end": 2.023
+   },
+   {
+    "w": "balls,",
+    "start": 2.073,
+    "end": 2.598
+   },
+   {
+    "w": "bad",
+    "start": 2.723,
+    "end": 2.948
+   },
+   {
+    "w": "hops,",
+    "start": 2.998,
+    "end": 3.523
+   },
+   {
+    "w": "and",
+    "start": 3.648,
+    "end": 3.723
+   },
+   {
+    "w": "sharply",
+    "start": 3.798,
+    "end": 4.148
+   },
+   {
+    "w": "hit",
+    "start": 4.198,
+    "end": 4.373
+   },
+   {
+    "w": "balls",
+    "start": 4.423,
+    "end": 4.723
+   },
+   {
+    "w": "with",
+    "start": 4.748,
+    "end": 4.823
+   },
+   {
+    "w": "almost",
+    "start": 4.873,
+    "end": 5.173
+   },
+   {
+    "w": "no",
+    "start": 5.223,
+    "end": 5.398
+   },
+   {
+    "w": "time",
+    "start": 5.448,
+    "end": 5.698
+   },
+   {
+    "w": "to",
+    "start": 5.748,
+    "end": 5.798
+   },
+   {
+    "w": "adjust.",
+    "start": 5.848,
+    "end": 6.357
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "t1",
+  "text": "But fielding the ball is only half the job.",
+  "spoken": "But fielding the ball is only half the job.",
+  "dur": 2.197,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.026,
+    "end": 0.126
+   },
+   {
+    "w": "fielding",
+    "start": 0.201,
+    "end": 0.526
+   },
+   {
+    "w": "the",
+    "start": 0.551,
+    "end": 0.601
+   },
+   {
+    "w": "ball",
+    "start": 0.651,
+    "end": 1.001
+   },
+   {
+    "w": "is",
+    "start": 1.051,
+    "end": 1.126
+   },
+   {
+    "w": "only",
+    "start": 1.201,
+    "end": 1.401
+   },
+   {
+    "w": "half",
+    "start": 1.451,
+    "end": 1.676
+   },
+   {
+    "w": "the",
+    "start": 1.701,
+    "end": 1.751
+   },
+   {
+    "w": "job.",
+    "start": 1.801,
+    "end": 2.197
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "t2",
+  "text": "Shortstops often have to throw across their body, make off-balance throws, or release the ball while moving away from first base.",
+  "spoken": "Shortstops often have to throw across their body, make off-balance throws, or release the ball while moving away from first base.",
+  "dur": 7.125,
+  "words": [
+   {
+    "w": "Shortstops",
+    "start": 0.098,
+    "end": 0.648
+   },
+   {
+    "w": "often",
+    "start": 0.798,
+    "end": 0.948
+   },
+   {
+    "w": "have",
+    "start": 0.998,
+    "end": 1.148
+   },
+   {
+    "w": "to",
+    "start": 1.173,
+    "end": 1.248
+   },
+   {
+    "w": "throw",
+    "start": 1.323,
+    "end": 1.548
+   },
+   {
+    "w": "across",
+    "start": 1.598,
+    "end": 1.898
+   },
+   {
+    "w": "their",
+    "start": 1.948,
+    "end": 2.073
+   },
+   {
+    "w": "body,",
+    "start": 2.123,
+    "end": 2.648
+   },
+   {
+    "w": "make",
+    "start": 2.773,
+    "end": 2.948
+   },
+   {
+    "w": "off-balance",
+    "start": 3.098,
+    "end": 3.598
+   },
+   {
+    "w": "throws,",
+    "start": 3.648,
+    "end": 4.323
+   },
+   {
+    "w": "or",
+    "start": 4.448,
+    "end": 4.598
+   },
+   {
+    "w": "release",
+    "start": 4.648,
+    "end": 4.948
+   },
+   {
+    "w": "the",
+    "start": 4.998,
+    "end": 5.048
+   },
+   {
+    "w": "ball",
+    "start": 5.098,
+    "end": 5.398
+   },
+   {
+    "w": "while",
+    "start": 5.448,
+    "end": 5.573
+   },
+   {
+    "w": "moving",
+    "start": 5.623,
+    "end": 5.898
+   },
+   {
+    "w": "away",
+    "start": 5.948,
+    "end": 6.198
+   },
+   {
+    "w": "from",
+    "start": 6.248,
+    "end": 6.373
+   },
+   {
+    "w": "first",
+    "start": 6.423,
+    "end": 6.673
+   },
+   {
+    "w": "base.",
+    "start": 6.723,
+    "end": 7.125
+   }
+  ]
+ },
+ {
+  "i": 8,
+  "id": "m1",
+  "text": "And on top of all that, they have to communicate with the second baseman, cover bases, and make split-second decisions depending on the situation.",
+  "spoken": "And on top of all that, they have to communicate with the second baseman, cover bases, and make split-second decisions depending on the situation.",
+  "dur": 7.68,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.055,
+    "end": 0.13
+   },
+   {
+    "w": "on",
+    "start": 0.205,
+    "end": 0.255
+   },
+   {
+    "w": "top",
+    "start": 0.305,
+    "end": 0.505
+   },
+   {
+    "w": "of",
+    "start": 0.53,
+    "end": 0.58
+   },
+   {
+    "w": "all",
+    "start": 0.655,
+    "end": 0.78
+   },
+   {
+    "w": "that,",
+    "start": 0.83,
+    "end": 1.255
+   },
+   {
+    "w": "they",
+    "start": 1.355,
+    "end": 1.43
+   },
+   {
+    "w": "have",
+    "start": 1.48,
+    "end": 1.63
+   },
+   {
+    "w": "to",
+    "start": 1.68,
+    "end": 1.73
+   },
+   {
+    "w": "communicate",
+    "start": 1.78,
+    "end": 2.38
+   },
+   {
+    "w": "with",
+    "start": 2.405,
+    "end": 2.53
+   },
+   {
+    "w": "the",
+    "start": 2.53,
+    "end": 2.605
+   },
+   {
+    "w": "second",
+    "start": 2.68,
+    "end": 2.98
+   },
+   {
+    "w": "baseman,",
+    "start": 3.03,
+    "end": 3.63
+   },
+   {
+    "w": "cover",
+    "start": 3.755,
+    "end": 4.005
+   },
+   {
+    "w": "bases,",
+    "start": 4.055,
+    "end": 4.755
+   },
+   {
+    "w": "and",
+    "start": 4.855,
+    "end": 4.93
+   },
+   {
+    "w": "make",
+    "start": 4.955,
+    "end": 5.13
+   },
+   {
+    "w": "split-second",
+    "start": 5.18,
+    "end": 5.73
+   },
+   {
+    "w": "decisions",
+    "start": 5.78,
+    "end": 6.255
+   },
+   {
+    "w": "depending",
+    "start": 6.305,
+    "end": 6.73
+   },
+   {
+    "w": "on",
+    "start": 6.78,
+    "end": 6.88
+   },
+   {
+    "w": "the",
+    "start": 6.88,
+    "end": 6.93
+   },
+   {
+    "w": "situation.",
+    "start": 6.98,
+    "end": 7.68
+   }
+  ]
+ },
+ {
+  "i": 9,
+  "id": "p1",
+  "text": "So the next time you see a shortstop make a routine-looking ground-ball play, remember\u2026",
+  "spoken": "So the next time you see a shortstop make a routine looking ground ball play, remember.",
+  "dur": 4.757,
+  "words": [
+   {
+    "w": "So",
+    "start": 0.073,
+    "end": 0.173
+   },
+   {
+    "w": "the",
+    "start": 0.198,
+    "end": 0.248
+   },
+   {
+    "w": "next",
+    "start": 0.298,
+    "end": 0.523
+   },
+   {
+    "w": "time",
+    "start": 0.573,
+    "end": 0.798
+   },
+   {
+    "w": "you",
+    "start": 0.848,
+    "end": 0.923
+   },
+   {
+    "w": "see",
+    "start": 0.973,
+    "end": 1.123
+   },
+   {
+    "w": "a",
+    "start": 1.123,
+    "end": 1.123
+   },
+   {
+    "w": "shortstop",
+    "start": 1.198,
+    "end": 1.923
+   },
+   {
+    "w": "make",
+    "start": 1.973,
+    "end": 2.198
+   },
+   {
+    "w": "a",
+    "start": 2.198,
+    "end": 2.198
+   },
+   {
+    "w": "routine",
+    "start": 2.248,
+    "end": 2.698
+   },
+   {
+    "w": "looking",
+    "start": 2.748,
+    "end": 2.998
+   },
+   {
+    "w": "ground",
+    "start": 3.048,
+    "end": 3.373
+   },
+   {
+    "w": "ball",
+    "start": 3.423,
+    "end": 3.623
+   },
+   {
+    "w": "play,",
+    "start": 3.673,
+    "end": 4.048
+   },
+   {
+    "w": "remember.",
+    "start": 4.173,
+    "end": 4.757
+   }
+  ]
+ },
+ {
+  "i": 10,
+  "id": "p2",
+  "text": "There\u2019s a lot more going on than just catching the ball.",
+  "spoken": "There's a lot more going on than just catching the ball.",
+  "dur": 2.56,
+  "words": [
+   {
+    "w": "There's",
+    "start": 0.051,
+    "end": 0.251
+   },
+   {
+    "w": "a",
+    "start": 0.251,
+    "end": 0.251
+   },
+   {
+    "w": "lot",
+    "start": 0.301,
+    "end": 0.501
+   },
+   {
+    "w": "more",
+    "start": 0.551,
+    "end": 0.701
+   },
+   {
+    "w": "going",
+    "start": 0.751,
+    "end": 1.026
+   },
+   {
+    "w": "on",
+    "start": 1.176,
+    "end": 1.376
+   },
+   {
+    "w": "than",
+    "start": 1.426,
+    "end": 1.501
+   },
+   {
+    "w": "just",
+    "start": 1.526,
+    "end": 1.676
+   },
+   {
+    "w": "catching",
+    "start": 1.726,
+    "end": 2.051
+   },
+   {
+    "w": "the",
+    "start": 2.076,
+    "end": 2.126
+   },
+   {
+    "w": "ball.",
+    "start": 2.176,
+    "end": 2.56
+   }
+  ]
+ }
+]
