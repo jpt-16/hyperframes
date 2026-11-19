@@ -2031,7 +2031,7 @@ function setCover(s, v, t) {
 const followTgt = (who) => who === "ball" ? BB.position.clone() : wpos(FP[who] ? FP[who].pelvis : SSP.pelvis);
 CAMS.follow2 = (u, t, s) => { const g = followTgt(s.who); return [g.clone().add(A(s.off)), g.clone().add(A(s.lo ?? [0, 0, 0])), lerp(s.f0 ?? 40, s.f1 ?? s.f0 ?? 40, easeIO(u))]; };
 CAMS.chase = (u, t, s) => { const id = s.play, th = throwOf(id), tr = PLAN[id].tr, k = clamp(t - tr, 0, th.T), b = throwPos(th, k), d = th.p1.clone().sub(th.p0).normalize();
-  const cpos = b.clone().addScaledVector(d, -(s.back ?? 7)).add(v3(0, s.up ?? 2.2, 0)).add(hz(d).cross(v3(0, 1, 0)).normalize().multiplyScalar(s.side ?? 2.5));
+  const cpos = b.clone().addScaledVector(d, -(s.back ?? 7)).add(v3(0, s.rise ?? 2.2, 0)).add(hz(d).cross(v3(0, 1, 0)).normalize().multiplyScalar(s.side ?? 2.5));
   return [cpos, b.clone().addScaledVector(d, 6), s.f0 ?? 44]; };
 Object.assign(PINH, { ss: () => headTop(SSP), b2: () => headTop(B2P), b1: () => headTop(B1P), bag2: () => BAG2.clone().add(v3(0, 3.5, 0)), sball: () => BB.position.clone().add(v3(0, 1.2, 0)) });
 

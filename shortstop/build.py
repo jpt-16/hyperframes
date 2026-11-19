@@ -81,7 +81,7 @@ shot(O2, V4, "follow2", [O2, V4 - 0.7, V4], [th - 0.75, th + 0.03, th + 0.3], pl
 T2 = S["t2"]
 shot(V4, T2 + 0.6, "world", [V4, T2 + 0.6], [th - 0.2, TR["hole"] + 0.05], play="hole", streak=1, **HOLEBK)
 T3 = W("t2", "off-balance") - 0.15
-shot(T2 + 0.6, T3 - 0.55, "chase", [T2 + 0.6, T3 - 0.55], [TR["hole"] + 0.05, TR["hole"] + 0.85], play="hole", streak=1, back=8, up=2.4, side=3.0, f0=44)
+shot(T2 + 0.6, T3 - 0.55, "chase", [T2 + 0.6, T3 - 0.55], [TR["hole"] + 0.05, TR["hole"] + 0.85], play="hole", streak=1, back=8, rise=2.4, side=3.0, f0=44)
 shot(T3 - 0.55, T3, "world", [T3 - 0.55, T3], [TR["hole"] + 0.85, TR["hole"] + 1.2], play="hole", streak=1, **CATCH1)
 t2 = HT["hole2"]; tr2 = TR["hole2"]
 shot(T3, V5, "follow2", [T3, T3 + 1.2, V5 - 1.0, V5], [t2 - 0.5, t2 + 0.05, tr2 + 0.05, tr2 + 0.6], play="hole2", streak=1, **JUMPCU)
