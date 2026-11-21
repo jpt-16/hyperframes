@@ -1,0 +1,695 @@
+{
+ "duration": 53.11,
+ "lines": [
+  {
+   "i": 0,
+   "id": "h1",
+   "text": "How can a smaller hitter hit a baseball harder than someone twice his size?",
+   "spoken": "How can a smaller hitter hit a baseball harder than someone twice his size?",
+   "t0": 0.2,
+   "t1": 4.233,
+   "words": [
+    {
+     "w": "How",
+     "t0": 0.242,
+     "t1": 0.417
+    },
+    {
+     "w": "can",
+     "t0": 0.467,
+     "t1": 0.592
+    },
+    {
+     "w": "a",
+     "t0": 0.592,
+     "t1": 0.592
+    },
+    {
+     "w": "smaller",
+     "t0": 0.667,
+     "t1": 1.017
+    },
+    {
+     "w": "hitter",
+     "t0": 1.067,
+     "t1": 1.342
+    },
+    {
+     "w": "hit",
+     "t0": 1.392,
+     "t1": 1.542
+    },
+    {
+     "w": "a",
+     "t0": 1.542,
+     "t1": 1.542
+    },
+    {
+     "w": "baseball",
+     "t0": 1.592,
+     "t1": 2.042
+    },
+    {
+     "w": "harder",
+     "t0": 2.092,
+     "t1": 2.667
+    },
+    {
+     "w": "than",
+     "t0": 2.717,
+     "t1": 2.842
+    },
+    {
+     "w": "someone",
+     "t0": 2.917,
+     "t1": 3.242
+    },
+    {
+     "w": "twice",
+     "t0": 3.292,
+     "t1": 3.567
+    },
+    {
+     "w": "his",
+     "t0": 3.592,
+     "t1": 3.692
+    },
+    {
+     "w": "size?",
+     "t0": 3.767,
+     "t1": 4.24
+    }
+   ]
+  },
+  {
+   "i": 1,
+   "id": "s1",
+   "text": "You might think hitting the ball harder is all about having bigger muscles.",
+   "spoken": "You might think hitting the ball harder is all about having bigger muscles.",
+   "t0": 5.0,
+   "t1": 8.739,
+   "words": [
+    {
+     "w": "You",
+     "t0": 5.026,
+     "t1": 5.101
+    },
+    {
+     "w": "might",
+     "t0": 5.151,
+     "t1": 5.376
+    },
+    {
+     "w": "think",
+     "t0": 5.426,
+     "t1": 5.576
+    },
+    {
+     "w": "hitting",
+     "t0": 5.626,
+     "t1": 5.826
+    },
+    {
+     "w": "the",
+     "t0": 5.851,
+     "t1": 5.901
+    },
+    {
+     "w": "ball",
+     "t0": 5.951,
+     "t1": 6.226
+    },
+    {
+     "w": "harder",
+     "t0": 6.276,
+     "t1": 6.851
+    },
+    {
+     "w": "is",
+     "t0": 6.926,
+     "t1": 7.051
+    },
+    {
+     "w": "all",
+     "t0": 7.176,
+     "t1": 7.326
+    },
+    {
+     "w": "about",
+     "t0": 7.351,
+     "t1": 7.551
+    },
+    {
+     "w": "having",
+     "t0": 7.601,
+     "t1": 7.876
+    },
+    {
+     "w": "bigger",
+     "t0": 7.951,
+     "t1": 8.201
+    },
+    {
+     "w": "muscles.",
+     "t0": 8.251,
+     "t1": 8.747
+    }
+   ]
+  },
+  {
+   "i": 2,
+   "id": "s2",
+   "text": "But raw strength is only one piece of the equation.",
+   "spoken": "But raw strength is only one piece of the equation.",
+   "t0": 9.089,
+   "t1": 11.943,
+   "words": [
+    {
+     "w": "But",
+     "t0": 9.113,
+     "t1": 9.213
+    },
+    {
+     "w": "raw",
+     "t0": 9.263,
+     "t1": 9.488
+    },
+    {
+     "w": "strength",
+     "t0": 9.563,
+     "t1": 10.088
+    },
+    {
+     "w": "is",
+     "t0": 10.163,
+     "t1": 10.263
+    },
+    {
+     "w": "only",
+     "t0": 10.363,
+     "t1": 10.588
+    },
+    {
+     "w": "one",
+     "t0": 10.663,
+     "t1": 10.863
+    },
+    {
+     "w": "piece",
+     "t0": 10.913,
+     "t1": 11.138
+    },
+    {
+     "w": "of",
+     "t0": 11.163,
+     "t1": 11.238
+    },
+    {
+     "w": "the",
+     "t0": 11.238,
+     "t1": 11.338
+    },
+    {
+     "w": "equation.",
+     "t0": 11.388,
+     "t1": 12.006
+    }
+   ]
+  },
+  {
+   "i": 3,
+   "id": "p1",
+   "text": "The real secret is how efficiently a hitter transfers energy from the ground, through their legs and hips, into their upper body and eventually the bat.",
+   "spoken": "The real secret is how efficiently a hitter transfers energy from the ground, through their legs and hips, into their upper body and eventually the bat.",
+   "t0": 13.0,
+   "t1": 21.431,
+   "words": [
+    {
+     "w": "The",
+     "t0": 13.038,
+     "t1": 13.113
+    },
+    {
+     "w": "real",
+     "t0": 13.188,
+     "t1": 13.463
+    },
+    {
+     "w": "secret",
+     "t0": 13.538,
+     "t1": 13.913
+    },
+    {
+     "w": "is",
+     "t0": 13.963,
+     "t1": 14.038
+    },
+    {
+     "w": "how",
+     "t0": 14.088,
+     "t1": 14.263
+    },
+    {
+     "w": "efficiently",
+     "t0": 14.313,
+     "t1": 15.013
+    },
+    {
+     "w": "a",
+     "t0": 15.013,
+     "t1": 15.013
+    },
+    {
+     "w": "hitter",
+     "t0": 15.063,
+     "t1": 15.313
+    },
+    {
+     "w": "transfers",
+     "t0": 15.363,
+     "t1": 15.888
+    },
+    {
+     "w": "energy",
+     "t0": 16.013,
+     "t1": 16.288
+    },
+    {
+     "w": "from",
+     "t0": 16.338,
+     "t1": 16.488
+    },
+    {
+     "w": "the",
+     "t0": 16.488,
+     "t1": 16.538
+    },
+    {
+     "w": "ground,",
+     "t0": 16.588,
+     "t1": 17.263
+    },
+    {
+     "w": "through",
+     "t0": 17.413,
+     "t1": 17.613
+    },
+    {
+     "w": "their",
+     "t0": 17.663,
+     "t1": 17.813
+    },
+    {
+     "w": "legs",
+     "t0": 17.888,
+     "t1": 18.263
+    },
+    {
+     "w": "and",
+     "t0": 18.313,
+     "t1": 18.388
+    },
+    {
+     "w": "hips,",
+     "t0": 18.463,
+     "t1": 19.013
+    },
+    {
+     "w": "into",
+     "t0": 19.163,
+     "t1": 19.338
+    },
+    {
+     "w": "their",
+     "t0": 19.388,
+     "t1": 19.513
+    },
+    {
+     "w": "upper",
+     "t0": 19.613,
+     "t1": 19.763
+    },
+    {
+     "w": "body",
+     "t0": 19.813,
+     "t1": 20.288
+    },
+    {
+     "w": "and",
+     "t0": 20.363,
+     "t1": 20.438
+    },
+    {
+     "w": "eventually",
+     "t0": 20.488,
+     "t1": 21.038
+    },
+    {
+     "w": "the",
+     "t0": 21.088,
+     "t1": 21.138
+    },
+    {
+     "w": "bat.",
+     "t0": 21.188,
+     "t1": 21.474
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "id": "q1",
+   "text": "Great hitters coordinate these movements in sequence.",
+   "spoken": "Great hitters coordinate these movements in sequence.",
+   "t0": 23.0,
+   "t1": 25.667,
+   "words": [
+    {
+     "w": "Great",
+     "t0": 23.038,
+     "t1": 23.313
+    },
+    {
+     "w": "hitters",
+     "t0": 23.363,
+     "t1": 23.738
+    },
+    {
+     "w": "coordinate",
+     "t0": 23.813,
+     "t1": 24.263
+    },
+    {
+     "w": "these",
+     "t0": 24.313,
+     "t1": 24.513
+    },
+    {
+     "w": "movements",
+     "t0": 24.563,
+     "t1": 24.938
+    },
+    {
+     "w": "in",
+     "t0": 24.988,
+     "t1": 25.088
+    },
+    {
+     "w": "sequence.",
+     "t0": 25.163,
+     "t1": 25.692
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "id": "q2",
+   "text": "Their hips begin rotating, their torso follows, and the bat accelerates through the hitting zone.",
+   "spoken": "Their hips begin rotating, their torso follows, and the bat accelerates through the hitting zone.",
+   "t0": 26.017,
+   "t1": 31.396,
+   "words": [
+    {
+     "w": "Their",
+     "t0": 26.04,
+     "t1": 26.19
+    },
+    {
+     "w": "hips",
+     "t0": 26.24,
+     "t1": 26.465
+    },
+    {
+     "w": "begin",
+     "t0": 26.515,
+     "t1": 26.815
+    },
+    {
+     "w": "rotating,",
+     "t0": 26.865,
+     "t1": 27.69
+    },
+    {
+     "w": "their",
+     "t0": 27.815,
+     "t1": 27.965
+    },
+    {
+     "w": "torso",
+     "t0": 28.015,
+     "t1": 28.44
+    },
+    {
+     "w": "follows,",
+     "t0": 28.515,
+     "t1": 29.24
+    },
+    {
+     "w": "and",
+     "t0": 29.365,
+     "t1": 29.44
+    },
+    {
+     "w": "the",
+     "t0": 29.465,
+     "t1": 29.515
+    },
+    {
+     "w": "bat",
+     "t0": 29.565,
+     "t1": 29.765
+    },
+    {
+     "w": "accelerates",
+     "t0": 29.815,
+     "t1": 30.49
+    },
+    {
+     "w": "through",
+     "t0": 30.54,
+     "t1": 30.665
+    },
+    {
+     "w": "the",
+     "t0": 30.69,
+     "t1": 30.74
+    },
+    {
+     "w": "hitting",
+     "t0": 30.79,
+     "t1": 31.015
+    },
+    {
+     "w": "zone.",
+     "t0": 31.065,
+     "t1": 31.45
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "id": "r1",
+   "text": "That\u2019s why two hitters with similar strength can produce completely different results.",
+   "spoken": "That's why two hitters with similar strength can produce completely different results.",
+   "t0": 35.0,
+   "t1": 39.311,
+   "words": [
+    {
+     "w": "That's",
+     "t0": 35.03,
+     "t1": 35.23
+    },
+    {
+     "w": "why",
+     "t0": 35.28,
+     "t1": 35.48
+    },
+    {
+     "w": "two",
+     "t0": 35.555,
+     "t1": 35.73
+    },
+    {
+     "w": "hitters",
+     "t0": 35.78,
+     "t1": 36.08
+    },
+    {
+     "w": "with",
+     "t0": 36.13,
+     "t1": 36.255
+    },
+    {
+     "w": "similar",
+     "t0": 36.33,
+     "t1": 36.63
+    },
+    {
+     "w": "strength",
+     "t0": 36.68,
+     "t1": 37.305
+    },
+    {
+     "w": "can",
+     "t0": 37.38,
+     "t1": 37.48
+    },
+    {
+     "w": "produce",
+     "t0": 37.53,
+     "t1": 37.83
+    },
+    {
+     "w": "completely",
+     "t0": 37.88,
+     "t1": 38.43
+    },
+    {
+     "w": "different",
+     "t0": 38.48,
+     "t1": 38.73
+    },
+    {
+     "w": "results.",
+     "t0": 38.78,
+     "t1": 39.331
+    }
+   ]
+  },
+  {
+   "i": 7,
+   "id": "r2",
+   "text": "It\u2019s not just how strong you are.",
+   "spoken": "It's not just how strong you are.",
+   "t0": 39.711,
+   "t1": 41.361,
+   "words": [
+    {
+     "w": "It's",
+     "t0": 39.757,
+     "t1": 39.907
+    },
+    {
+     "w": "not",
+     "t0": 39.957,
+     "t1": 40.107
+    },
+    {
+     "w": "just",
+     "t0": 40.132,
+     "t1": 40.282
+    },
+    {
+     "w": "how",
+     "t0": 40.307,
+     "t1": 40.457
+    },
+    {
+     "w": "strong",
+     "t0": 40.532,
+     "t1": 40.907
+    },
+    {
+     "w": "you",
+     "t0": 40.957,
+     "t1": 41.082
+    },
+    {
+     "w": "are.",
+     "t0": 41.157,
+     "t1": 41.601
+    }
+   ]
+  },
+  {
+   "i": 8,
+   "id": "r3",
+   "text": "It\u2019s how well you use that strength.",
+   "spoken": "It's how well you use that strength.",
+   "t0": 41.661,
+   "t1": 43.335,
+   "words": [
+    {
+     "w": "It's",
+     "t0": 41.707,
+     "t1": 41.832
+    },
+    {
+     "w": "how",
+     "t0": 41.882,
+     "t1": 42.057
+    },
+    {
+     "w": "well",
+     "t0": 42.107,
+     "t1": 42.282
+    },
+    {
+     "w": "you",
+     "t0": 42.332,
+     "t1": 42.407
+    },
+    {
+     "w": "use",
+     "t0": 42.457,
+     "t1": 42.632
+    },
+    {
+     "w": "that",
+     "t0": 42.682,
+     "t1": 42.832
+    },
+    {
+     "w": "strength.",
+     "t0": 42.882,
+     "t1": 43.38
+    }
+   ]
+  },
+  {
+   "i": 9,
+   "id": "e1",
+   "text": "So what matters more: strength or mechanics?",
+   "spoken": "So what matters more: strength or mechanics?",
+   "t0": 49.0,
+   "t1": 51.513,
+   "words": [
+    {
+     "w": "So",
+     "t0": 49.067,
+     "t1": 49.167
+    },
+    {
+     "w": "what",
+     "t0": 49.217,
+     "t1": 49.367
+    },
+    {
+     "w": "matters",
+     "t0": 49.417,
+     "t1": 49.742
+    },
+    {
+     "w": "more:",
+     "t0": 49.792,
+     "t1": 50.167
+    },
+    {
+     "w": "strength",
+     "t0": 50.317,
+     "t1": 50.692
+    },
+    {
+     "w": "or",
+     "t0": 50.742,
+     "t1": 50.817
+    },
+    {
+     "w": "mechanics?",
+     "t0": 50.867,
+     "t1": 51.529
+    }
+   ]
+  }
+ ]
+}
