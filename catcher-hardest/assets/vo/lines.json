@@ -1,0 +1,906 @@
+[
+ {
+  "i": 0,
+  "id": "h1",
+  "text": "Everyone talks about how difficult it is to play shortstop.",
+  "spoken": "Everyone talks about how difficult it is to play shortstop.",
+  "dur": 3.072,
+  "words": [
+   {
+    "w": "Everyone",
+    "start": 0.101,
+    "end": 0.501
+   },
+   {
+    "w": "talks",
+    "start": 0.551,
+    "end": 0.826
+   },
+   {
+    "w": "about",
+    "start": 0.851,
+    "end": 1.126
+   },
+   {
+    "w": "how",
+    "start": 1.201,
+    "end": 1.376
+   },
+   {
+    "w": "difficult",
+    "start": 1.451,
+    "end": 1.826
+   },
+   {
+    "w": "it",
+    "start": 1.851,
+    "end": 1.901
+   },
+   {
+    "w": "is",
+    "start": 1.951,
+    "end": 2.051
+   },
+   {
+    "w": "to",
+    "start": 2.101,
+    "end": 2.151
+   },
+   {
+    "w": "play",
+    "start": 2.201,
+    "end": 2.426
+   },
+   {
+    "w": "shortstop.",
+    "start": 2.501,
+    "end": 3.072
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "h2",
+  "text": "But what if the hardest position in baseball is actually catcher?",
+  "spoken": "But what if the hardest position in baseball is actually catcher?",
+  "dur": 3.2,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.026,
+    "end": 0.126
+   },
+   {
+    "w": "what",
+    "start": 0.176,
+    "end": 0.276
+   },
+   {
+    "w": "if",
+    "start": 0.326,
+    "end": 0.426
+   },
+   {
+    "w": "the",
+    "start": 0.451,
+    "end": 0.501
+   },
+   {
+    "w": "hardest",
+    "start": 0.576,
+    "end": 0.926
+   },
+   {
+    "w": "position",
+    "start": 0.976,
+    "end": 1.326
+   },
+   {
+    "w": "in",
+    "start": 1.351,
+    "end": 1.426
+   },
+   {
+    "w": "baseball",
+    "start": 1.476,
+    "end": 2.051
+   },
+   {
+    "w": "is",
+    "start": 2.126,
+    "end": 2.226
+   },
+   {
+    "w": "actually",
+    "start": 2.351,
+    "end": 2.676
+   },
+   {
+    "w": "catcher?",
+    "start": 2.726,
+    "end": 3.2
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "h3",
+  "text": "Think about it.",
+  "spoken": "Think about it.",
+  "dur": 0.96,
+  "words": [
+   {
+    "w": "Think",
+    "start": 0.115,
+    "end": 0.29
+   },
+   {
+    "w": "about",
+    "start": 0.315,
+    "end": 0.59
+   },
+   {
+    "w": "it.",
+    "start": 0.64,
+    "end": 0.96
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "r1",
+  "text": "Every single pitch, the catcher has to receive a ball traveling at incredible speeds, sometimes with movement that makes it difficult to handle cleanly.",
+  "spoken": "Every single pitch, the catcher has to receive a ball traveling at incredible speeds, sometimes with movement that makes it difficult to handle cleanly.",
+  "dur": 8.064,
+  "words": [
+   {
+    "w": "Every",
+    "start": 0.08,
+    "end": 0.28
+   },
+   {
+    "w": "single",
+    "start": 0.355,
+    "end": 0.605
+   },
+   {
+    "w": "pitch,",
+    "start": 0.655,
+    "end": 1.13
+   },
+   {
+    "w": "the",
+    "start": 1.255,
+    "end": 1.305
+   },
+   {
+    "w": "catcher",
+    "start": 1.355,
+    "end": 1.68
+   },
+   {
+    "w": "has",
+    "start": 1.73,
+    "end": 1.88
+   },
+   {
+    "w": "to",
+    "start": 1.93,
+    "end": 2.005
+   },
+   {
+    "w": "receive",
+    "start": 2.055,
+    "end": 2.455
+   },
+   {
+    "w": "a",
+    "start": 2.455,
+    "end": 2.455
+   },
+   {
+    "w": "ball",
+    "start": 2.53,
+    "end": 2.805
+   },
+   {
+    "w": "traveling",
+    "start": 2.855,
+    "end": 3.305
+   },
+   {
+    "w": "at",
+    "start": 3.38,
+    "end": 3.48
+   },
+   {
+    "w": "incredible",
+    "start": 3.53,
+    "end": 4.055
+   },
+   {
+    "w": "speeds,",
+    "start": 4.105,
+    "end": 4.83
+   },
+   {
+    "w": "sometimes",
+    "start": 4.98,
+    "end": 5.53
+   },
+   {
+    "w": "with",
+    "start": 5.58,
+    "end": 5.705
+   },
+   {
+    "w": "movement",
+    "start": 5.78,
+    "end": 6.155
+   },
+   {
+    "w": "that",
+    "start": 6.205,
+    "end": 6.305
+   },
+   {
+    "w": "makes",
+    "start": 6.355,
+    "end": 6.555
+   },
+   {
+    "w": "it",
+    "start": 6.58,
+    "end": 6.63
+   },
+   {
+    "w": "difficult",
+    "start": 6.68,
+    "end": 7.055
+   },
+   {
+    "w": "to",
+    "start": 7.105,
+    "end": 7.18
+   },
+   {
+    "w": "handle",
+    "start": 7.23,
+    "end": 7.555
+   },
+   {
+    "w": "cleanly.",
+    "start": 7.605,
+    "end": 8.064
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "b1",
+  "text": "If a pitch bounces in the dirt, they have to block it and keep the ball from getting past them.",
+  "spoken": "If a pitch bounces in the dirt, they have to block it and keep the ball from getting past them.",
+  "dur": 4.437,
+  "words": [
+   {
+    "w": "If",
+    "start": 0.076,
+    "end": 0.226
+   },
+   {
+    "w": "a",
+    "start": 0.226,
+    "end": 0.226
+   },
+   {
+    "w": "pitch",
+    "start": 0.276,
+    "end": 0.526
+   },
+   {
+    "w": "bounces",
+    "start": 0.601,
+    "end": 1.001
+   },
+   {
+    "w": "in",
+    "start": 1.051,
+    "end": 1.151
+   },
+   {
+    "w": "the",
+    "start": 1.151,
+    "end": 1.201
+   },
+   {
+    "w": "dirt,",
+    "start": 1.251,
+    "end": 1.676
+   },
+   {
+    "w": "they",
+    "start": 1.776,
+    "end": 1.851
+   },
+   {
+    "w": "have",
+    "start": 1.901,
+    "end": 2.051
+   },
+   {
+    "w": "to",
+    "start": 2.076,
+    "end": 2.151
+   },
+   {
+    "w": "block",
+    "start": 2.201,
+    "end": 2.526
+   },
+   {
+    "w": "it",
+    "start": 2.576,
+    "end": 2.726
+   },
+   {
+    "w": "and",
+    "start": 2.776,
+    "end": 2.851
+   },
+   {
+    "w": "keep",
+    "start": 2.901,
+    "end": 3.051
+   },
+   {
+    "w": "the",
+    "start": 3.076,
+    "end": 3.126
+   },
+   {
+    "w": "ball",
+    "start": 3.176,
+    "end": 3.451
+   },
+   {
+    "w": "from",
+    "start": 3.501,
+    "end": 3.601
+   },
+   {
+    "w": "getting",
+    "start": 3.651,
+    "end": 3.851
+   },
+   {
+    "w": "past",
+    "start": 3.901,
+    "end": 4.176
+   },
+   {
+    "w": "them.",
+    "start": 4.226,
+    "end": 4.437
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "t1",
+  "text": "If a runner tries to steal, they have to get out of their stance, transfer the ball, and make an accurate throw to second base in seconds.",
+  "spoken": "If a runner tries to steal, they have to get out of their stance, transfer the ball, and make an accurate throw to second base in seconds.",
+  "dur": 6.827,
+  "words": [
+   {
+    "w": "If",
+    "start": 0.076,
+    "end": 0.226
+   },
+   {
+    "w": "a",
+    "start": 0.226,
+    "end": 0.226
+   },
+   {
+    "w": "runner",
+    "start": 0.301,
+    "end": 0.501
+   },
+   {
+    "w": "tries",
+    "start": 0.551,
+    "end": 0.826
+   },
+   {
+    "w": "to",
+    "start": 0.876,
+    "end": 0.951
+   },
+   {
+    "w": "steal,",
+    "start": 1.001,
+    "end": 1.551
+   },
+   {
+    "w": "they",
+    "start": 1.651,
+    "end": 1.726
+   },
+   {
+    "w": "have",
+    "start": 1.776,
+    "end": 1.926
+   },
+   {
+    "w": "to",
+    "start": 1.951,
+    "end": 2.001
+   },
+   {
+    "w": "get",
+    "start": 2.051,
+    "end": 2.151
+   },
+   {
+    "w": "out",
+    "start": 2.201,
+    "end": 2.301
+   },
+   {
+    "w": "of",
+    "start": 2.301,
+    "end": 2.326
+   },
+   {
+    "w": "their",
+    "start": 2.351,
+    "end": 2.476
+   },
+   {
+    "w": "stance,",
+    "start": 2.526,
+    "end": 3.101
+   },
+   {
+    "w": "transfer",
+    "start": 3.251,
+    "end": 3.676
+   },
+   {
+    "w": "the",
+    "start": 3.701,
+    "end": 3.751
+   },
+   {
+    "w": "ball,",
+    "start": 3.801,
+    "end": 4.226
+   },
+   {
+    "w": "and",
+    "start": 4.276,
+    "end": 4.351
+   },
+   {
+    "w": "make",
+    "start": 4.376,
+    "end": 4.576
+   },
+   {
+    "w": "an",
+    "start": 4.576,
+    "end": 4.626
+   },
+   {
+    "w": "accurate",
+    "start": 4.751,
+    "end": 5.051
+   },
+   {
+    "w": "throw",
+    "start": 5.126,
+    "end": 5.426
+   },
+   {
+    "w": "to",
+    "start": 5.476,
+    "end": 5.551
+   },
+   {
+    "w": "second",
+    "start": 5.601,
+    "end": 5.876
+   },
+   {
+    "w": "base",
+    "start": 5.926,
+    "end": 6.151
+   },
+   {
+    "w": "in",
+    "start": 6.201,
+    "end": 6.301
+   },
+   {
+    "w": "seconds.",
+    "start": 6.376,
+    "end": 6.827
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "m1",
+  "text": "But there\u2019s another part people forget.",
+  "spoken": "But there's another part people forget.",
+  "dur": 1.728,
+  "words": [
+   {
+    "w": "But",
+    "start": 0.026,
+    "end": 0.126
+   },
+   {
+    "w": "there's",
+    "start": 0.151,
+    "end": 0.326
+   },
+   {
+    "w": "another",
+    "start": 0.376,
+    "end": 0.676
+   },
+   {
+    "w": "part",
+    "start": 0.726,
+    "end": 0.926
+   },
+   {
+    "w": "people",
+    "start": 0.976,
+    "end": 1.301
+   },
+   {
+    "w": "forget.",
+    "start": 1.351,
+    "end": 1.728
+   }
+  ]
+ },
+ {
+  "i": 7,
+  "id": "m2",
+  "text": "The catcher is also responsible for communicating with the pitcher, helping manage the defense, and making constant decisions about what\u2019s happening on the field.",
+  "spoken": "The catcher is also responsible for communicating with the pitcher, helping manage the defense, and making constant decisions about what's happening on the field.",
+  "dur": 8.32,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.051,
+    "end": 0.101
+   },
+   {
+    "w": "catcher",
+    "start": 0.151,
+    "end": 0.526
+   },
+   {
+    "w": "is",
+    "start": 0.576,
+    "end": 0.676
+   },
+   {
+    "w": "also",
+    "start": 0.801,
+    "end": 1.051
+   },
+   {
+    "w": "responsible",
+    "start": 1.101,
+    "end": 1.726
+   },
+   {
+    "w": "for",
+    "start": 1.776,
+    "end": 1.876
+   },
+   {
+    "w": "communicating",
+    "start": 1.926,
+    "end": 2.601
+   },
+   {
+    "w": "with",
+    "start": 2.626,
+    "end": 2.751
+   },
+   {
+    "w": "the",
+    "start": 2.751,
+    "end": 2.801
+   },
+   {
+    "w": "pitcher,",
+    "start": 2.851,
+    "end": 3.476
+   },
+   {
+    "w": "helping",
+    "start": 3.626,
+    "end": 3.951
+   },
+   {
+    "w": "manage",
+    "start": 4.001,
+    "end": 4.376
+   },
+   {
+    "w": "the",
+    "start": 4.426,
+    "end": 4.476
+   },
+   {
+    "w": "defense,",
+    "start": 4.526,
+    "end": 5.176
+   },
+   {
+    "w": "and",
+    "start": 5.301,
+    "end": 5.376
+   },
+   {
+    "w": "making",
+    "start": 5.426,
+    "end": 5.701
+   },
+   {
+    "w": "constant",
+    "start": 5.776,
+    "end": 6.151
+   },
+   {
+    "w": "decisions",
+    "start": 6.201,
+    "end": 6.676
+   },
+   {
+    "w": "about",
+    "start": 6.726,
+    "end": 6.951
+   },
+   {
+    "w": "what's",
+    "start": 7.001,
+    "end": 7.201
+   },
+   {
+    "w": "happening",
+    "start": 7.251,
+    "end": 7.651
+   },
+   {
+    "w": "on",
+    "start": 7.701,
+    "end": 7.801
+   },
+   {
+    "w": "the",
+    "start": 7.801,
+    "end": 7.851
+   },
+   {
+    "w": "field.",
+    "start": 7.926,
+    "end": 8.32
+   }
+  ]
+ },
+ {
+  "i": 8,
+  "id": "m3",
+  "text": "And they have to do all of this while wearing heavy protective equipment and staying focused for the entire game.",
+  "spoken": "And they have to do all of this while wearing heavy protective equipment and staying focused for the entire game.",
+  "dur": 5.717,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.055,
+    "end": 0.13
+   },
+   {
+    "w": "they",
+    "start": 0.155,
+    "end": 0.23
+   },
+   {
+    "w": "have",
+    "start": 0.28,
+    "end": 0.43
+   },
+   {
+    "w": "to",
+    "start": 0.48,
+    "end": 0.53
+   },
+   {
+    "w": "do",
+    "start": 0.58,
+    "end": 0.755
+   },
+   {
+    "w": "all",
+    "start": 0.88,
+    "end": 1.005
+   },
+   {
+    "w": "of",
+    "start": 1.03,
+    "end": 1.08
+   },
+   {
+    "w": "this",
+    "start": 1.13,
+    "end": 1.505
+   },
+   {
+    "w": "while",
+    "start": 1.555,
+    "end": 1.755
+   },
+   {
+    "w": "wearing",
+    "start": 1.83,
+    "end": 2.105
+   },
+   {
+    "w": "heavy",
+    "start": 2.155,
+    "end": 2.38
+   },
+   {
+    "w": "protective",
+    "start": 2.43,
+    "end": 2.88
+   },
+   {
+    "w": "equipment",
+    "start": 2.905,
+    "end": 3.555
+   },
+   {
+    "w": "and",
+    "start": 3.63,
+    "end": 3.705
+   },
+   {
+    "w": "staying",
+    "start": 3.755,
+    "end": 4.08
+   },
+   {
+    "w": "focused",
+    "start": 4.155,
+    "end": 4.63
+   },
+   {
+    "w": "for",
+    "start": 4.68,
+    "end": 4.78
+   },
+   {
+    "w": "the",
+    "start": 4.78,
+    "end": 4.88
+   },
+   {
+    "w": "entire",
+    "start": 4.93,
+    "end": 5.305
+   },
+   {
+    "w": "game.",
+    "start": 5.355,
+    "end": 5.717
+   }
+  ]
+ },
+ {
+  "i": 9,
+  "id": "d1",
+  "text": "So, is catcher actually the hardest position in baseball?",
+  "spoken": "So, is catcher actually the hardest position in baseball?",
+  "dur": 3.029,
+  "words": [
+   {
+    "w": "So,",
+    "start": 0.098,
+    "end": 0.323
+   },
+   {
+    "w": "is",
+    "start": 0.373,
+    "end": 0.473
+   },
+   {
+    "w": "catcher",
+    "start": 0.523,
+    "end": 0.898
+   },
+   {
+    "w": "actually",
+    "start": 1.023,
+    "end": 1.373
+   },
+   {
+    "w": "the",
+    "start": 1.398,
+    "end": 1.448
+   },
+   {
+    "w": "hardest",
+    "start": 1.498,
+    "end": 1.848
+   },
+   {
+    "w": "position",
+    "start": 1.898,
+    "end": 2.248
+   },
+   {
+    "w": "in",
+    "start": 2.273,
+    "end": 2.323
+   },
+   {
+    "w": "baseball?",
+    "start": 2.373,
+    "end": 3.029
+   }
+  ]
+ },
+ {
+  "i": 10,
+  "id": "d2",
+  "text": "Or does another position deserve that title?",
+  "spoken": "Or does another position deserve that title?",
+  "dur": 2.283,
+  "words": [
+   {
+    "w": "Or",
+    "start": 0.119,
+    "end": 0.219
+   },
+   {
+    "w": "does",
+    "start": 0.244,
+    "end": 0.369
+   },
+   {
+    "w": "another",
+    "start": 0.394,
+    "end": 0.669
+   },
+   {
+    "w": "position",
+    "start": 0.719,
+    "end": 1.144
+   },
+   {
+    "w": "deserve",
+    "start": 1.194,
+    "end": 1.519
+   },
+   {
+    "w": "that",
+    "start": 1.569,
+    "end": 1.694
+   },
+   {
+    "w": "title?",
+    "start": 1.744,
+    "end": 2.283
+   }
+  ]
+ }
+]
