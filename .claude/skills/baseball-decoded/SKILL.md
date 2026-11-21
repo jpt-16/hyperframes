@@ -10,14 +10,19 @@ The series is 3D baseball explainers for serious players and fans: a vertical
 players, a narrated voiceover, word-by-word captions and a logo end card. Every episode is
 its own folder at the repo root (`bat-speed/`, `velo/`, `shortstop/`, `hitting-debate/`, …).
 The newest episode is the template: start from it, don't rebuild from scratch.
+Episodes so far, and what each one adds to `field.js` (reuse these before writing new rigs):
+`bat-speed` (hitter swing, lab stage, x-ray, force plates, traces), `velo` (pitcher delivery,
+speed gauge, shoulder arcs), `shortstop` (fielders, ground balls, throws, coverage),
+`catcher-hardest` (receive, block, steal with a runner and tag, signs, talk with the infield).
 
 ## 0. Standing choices (keep unless the user changes them)
 
 - **Style:** geometric figures, no faces. The user chose to keep this on `bat-speed`
   and it has stayed for every episode since.
-- **Build in one go.** The user asked for no sketch pass ("just do it all at once").
-  Still show the plan in text first (the scene table) and wait for a yes. Offer sketches
-  only if the user asks for a storyboard.
+- **Build in one go.** The user asked for no sketch pass ("just do it all at once") and has
+  since sent complete scripts with scene direction and no questions. Post the plan as text
+  (the scene table), then keep building without waiting for a yes. Offer sketches only if the
+  user asks for a storyboard, and only stop to ask when something blocks the work.
 - **No paid generators** (no Higgsfield, no AI video). The voice is local Kokoro.
 - **Accuracy rules** (from the user, every episode):
   - no invented numbers, percentages, forces or measured claims; label force arrows and
@@ -39,7 +44,8 @@ style, which is fixed above. Record each answer in the brief.
 
 ## 2. Brief and plan
 
-Make the episode folder with `BRIEF.md` (YAML frontmatter: `workflow`, `flow`,
+If the script's own timings don't fit a natural read (they usually don't), keep the script
+and the length target and say how the scene starts moved. Make the episode folder with `BRIEF.md` (YAML frontmatter: `workflow`, `flow`,
 `storyboard`, `message`, `destination`, `aspect`, `resolution`, `length`, `audience`,
 `vo_mode`; then Intent, Assets, Customizations, Notes) and `STORYBOARD.md` (the
 scene-by-scene table: time, beat, on screen, why). Show the plan, get a yes, then build.
@@ -47,7 +53,7 @@ scene-by-scene table: time, beat, on screen, why). Show the plan, get a yes, the
 ## 3. Scaffold from the newest episode
 
 ```bash
-NEW=<new-folder>; SRC=shortstop   # the newest episode
+NEW=<new-folder>; SRC=catcher-hardest   # the newest episode
 mkdir -p $NEW/assets/vo $NEW/tools
 cp -r $SRC/assets/fonts $SRC/assets/sfx $SRC/assets/vendor $NEW/assets/
 cp $SRC/assets/field.js $NEW/assets/
@@ -152,6 +158,12 @@ minutes. Check first:
 - **Numbers:** `node scripts/probe.js <dir> <port> '<js expr>'` runs an expression in the
   page and returns JSON. Use it for world positions (the hand at release, the feet on the
   plates, the ball's hop height) and for the hand speed through a key.
+- **Cameras:** `node scripts/camtest.js <dir> <port> <out dir> '{"t":..,"s":{"c":{...}}}' '[[[cx,cy,cz],[lx,ly,lz],fov,close],...]'`
+  renders one scene from several candidate cameras at once. Use it to choose each camera
+  before it goes into `build.py`. It also prints the catcher's hand and pelvis positions.
+- **Check every camera for things in the way.** The batter (at x ≈ −3.2), the umpire (z ≈ 6) and
+  the catcher's own back block most cameras behind and beside the plate. Hide the umpire with the
+  shot option `noump=1`, aim from the front or from above, and compare a few angles with `camtest`.
 - **Fix, then re-check** the frames that changed. Don't render until the stills pass.
 
 ## 9. Render (4 workers, resumable)
@@ -206,6 +218,15 @@ The phone copy should be about 10–12 MB at 1080×1920. Check the frames from t
 
 ## Gotchas (learned the hard way)
 
+- **Shot boundaries:** every shot must end exactly where the next begins. Ending one shot at
+  `V3 - 0.02` and starting the next at `V3` trips the build's assertion. Use the same value for both.
+- **Values read back from a rig** (a throw's release point, the steal's timing, where a block
+  makes contact): measure them with `probe.js` and store them in `tools/*.json`
+  (`release.json`, `plan.json`) for the physics and `build.py` to read. Don't guess them.
+- **Don't pipe `physics.py` into `head`.** It stops the script before `play.json` is written.
+- **Camera presets:** a preset used with `"world"` needs `c0`/`c1`/`l`; one used with `"track"`
+  needs `look`. Don't reuse a preset across both kinds.
+- **A plan that waits for approval** isn't wanted here; see §0.
 - **Duplicate top-level names in `field.js`.** `FORE`, `BACK` and `CHARGE` collided with
   series constants and broke every render. Rename new constants with a prefix, and check
   for duplicates before building:
