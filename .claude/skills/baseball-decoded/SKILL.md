@@ -13,7 +13,9 @@ The newest episode is the template: start from it, don't rebuild from scratch.
 Episodes so far, and what each one adds to `field.js` (reuse these before writing new rigs):
 `bat-speed` (hitter swing, lab stage, x-ray, force plates, traces), `velo` (pitcher delivery,
 speed gauge, shoulder arcs), `shortstop` (fielders, ground balls, throws, coverage),
-`catcher-hardest` (receive, block, steal with a runner and tag, signs, talk with the infield).
+`catcher-hardest` (receive, block, steal with a runner and tag, signs, talk with the infield),
+`power` (two hitter builds on one rig, left/right split-screen panes, a gym with a back squat,
+the ball squashing against the bat, a camera that trails the batted ball).
 
 ## 0. Standing choices (keep unless the user changes them)
 
@@ -48,12 +50,12 @@ If the script's own timings don't fit a natural read (they usually don't), keep 
 and the length target and say how the scene starts moved. Make the episode folder with `BRIEF.md` (YAML frontmatter: `workflow`, `flow`,
 `storyboard`, `message`, `destination`, `aspect`, `resolution`, `length`, `audience`,
 `vo_mode`; then Intent, Assets, Customizations, Notes) and `STORYBOARD.md` (the
-scene-by-scene table: time, beat, on screen, why). Show the plan, get a yes, then build.
+scene-by-scene table: time, beat, on screen, why). Post the plan as text, then build (see §0).
 
 ## 3. Scaffold from the newest episode
 
 ```bash
-NEW=<new-folder>; SRC=catcher-hardest   # the newest episode
+NEW=<new-folder>; SRC=power   # the newest episode
 mkdir -p $NEW/assets/vo $NEW/tools
 cp -r $SRC/assets/fonts $SRC/assets/sfx $SRC/assets/vendor $NEW/assets/
 cp $SRC/assets/field.js $NEW/assets/
@@ -229,6 +231,14 @@ The phone copy should be about 10–12 MB at 1080×1920. Check the frames from t
 - **Camera presets:** a preset used with `"world"` needs `c0`/`c1`/`l`; one used with `"track"`
   needs `look`. Don't reuse a preset across both kinds.
 - **A plan that waits for approval** isn't wanted here; see §0.
+- **Split-screen layouts:** half-width panes (540×1920) make each figure about a quarter of the
+  frame height, so use them for comparisons and fill the dark space above with the title. Use
+  `camtest` with a pane width as the fifth camera value to frame them. Top/bottom halves
+  (1080×960) give much larger figures if left/right isn't required.
+- **Rig scale:** a hitter scaled with `BUILD` needs `SCB` (the IK works in the rig's own units).
+  Anything that poses the batter with its own IK must reset `SCB = 1` afterwards.
+- **A ball that is a tiny dot** (batted-ball chase shots): raise the glow with the shot option
+  `bgs`, and aim the camera at the ball with `lift`, so it isn't hidden under the caption band.
 - **Duplicate top-level names in `field.js`.** `FORE`, `BACK` and `CHARGE` collided with
   series constants and broke every render. Rename new constants with a prefix, and check
   for duplicates before building:
