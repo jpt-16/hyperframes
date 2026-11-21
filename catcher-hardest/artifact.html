@@ -1,0 +1,97 @@
+<title>Catcher: The Hardest Position?</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Inter:wght@400;500;600&display=swap">
+<style>
+  /* Layout: one column, the vertical film first, the save action right under it, the cut list after. */
+  :root {
+    --bg: #eef1ec; --surface: #ffffff; --fg: #10161d; --muted: #586270; --line: #d6dcd4;
+    --accent: #c4471f; --accent-fg: #ffffff; --chip: #e3e9e0;
+    --display: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+    --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg: #0b1016; --surface: #121a23; --fg: #eef2f6; --muted: #9aa6b4; --line: #223040;
+    --accent: #ff6a3d; --accent-fg: #0b1016; --chip: #172230; color-scheme: dark } }
+  :root[data-theme="dark"] {
+    --bg: #0b1016; --surface: #121a23; --fg: #eef2f6; --muted: #9aa6b4; --line: #223040;
+    --accent: #ff6a3d; --accent-fg: #0b1016; --chip: #172230; color-scheme: dark }
+  body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 15px; line-height: 1.5; }
+  .wrap { max-width: 560px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px; display: grid; gap: 18px; }
+  header { display: grid; gap: 4px; }
+  .series { font: 600 12px/1 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  h1 { margin: 0; font: 800 clamp(34px, 9vw, 46px)/.95 var(--display); text-transform: uppercase; letter-spacing: .01em; text-wrap: balance; }
+  .film { position: relative; width: 100%; max-width: 100%; aspect-ratio: 9 / 16; max-height: 78vh; margin: 0 auto; background: #000; border-radius: 14px; overflow: hidden; }
+  .film video { width: 100%; height: 100%; display: block; object-fit: contain; background: #000; }
+  .actions { display: grid; gap: 8px; }
+  button.save { appearance: none; border: 0; border-radius: 12px; padding: 15px 18px; background: var(--accent); color: var(--accent-fg); font: 800 22px/1 var(--display); letter-spacing: .04em; text-transform: uppercase; cursor: pointer; }
+  button.save:focus-visible { outline: 3px solid var(--fg); outline-offset: 3px; }
+  button.save[disabled] { opacity: .55; cursor: default; }
+  .status { min-height: 1.5em; margin: 0; color: var(--muted); font-size: 13px; text-align: center; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 0; padding: 0; list-style: none; }
+  .meta li { padding: 4px 10px; border-radius: 999px; background: var(--chip); color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+  section { display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 16px; }
+  h2 { margin: 0; font: 700 20px/1 var(--display); text-transform: uppercase; letter-spacing: .04em; }
+  ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+  ol li { display: grid; grid-template-columns: 52px 1fr; gap: 10px; align-items: baseline; }
+  ol .t { font: 600 13px/1.4 var(--body); color: var(--accent); font-variant-numeric: tabular-nums; }
+  ol .d { min-width: 0; color: var(--fg); }
+  ol .d b { font-weight: 600; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="series">Baseball Decoded</div>
+    <h1>Catcher: the hardest position?</h1>
+  </header>
+
+  <div class="film">
+    <video id="film" controls playsinline preload="metadata" src="/_blob/593443be943d9c35269c04147bf3072b"></video>
+  </div>
+
+  <div class="actions">
+    <button class="save" id="save" type="button">Save video to phone</button>
+    <p class="status" id="status" role="status"></p>
+    <ul class="meta">
+      <li>0:53</li><li>1080 × 1920</li><li>9:16 vertical</li><li>MP4 · 11.2 MB</li>
+    </ul>
+  </div>
+
+  <section>
+    <h2>What's in the cut</h2>
+    <ol>
+      <li><span class="t">0:00</span><span class="d"><b>The hook.</b> The shortstop's dive, then the catcher crouched behind the plate and a fast pitch coming at the lens.</span></li>
+      <li><span class="t">0:08</span><span class="d"><b>Receiving.</b> A fastball into the mitt, then a breaking ball across the zone with the mitt adjusting.</span></li>
+      <li><span class="t">0:17</span><span class="d"><b>Blocking.</b> A curveball in the dirt: he drops onto his knees and the ball drops in front of him.</span></li>
+      <li><span class="t">0:22</span><span class="d"><b>Throwing out a runner.</b> The runner takes off, the catch, up, transfer and throw, a slow replay of the exchange, and the tag at second.</span></li>
+      <li><span class="t">0:29</span><span class="d"><b>The mental side.</b> The sign and the pitcher's nod, the defense shifting to his signals, the runner on first, the gear.</span></li>
+      <li><span class="t">0:46</span><span class="d"><b>The debate.</b> A fast montage and the pull back to the whole field.</span></li>
+    </ol>
+  </section>
+</div>
+
+<script>
+  const btn = document.getElementById("save"), status = document.getElementById("status"), film = document.getElementById("film");
+  const FILE = "catcher-hardest-position.mp4";
+  btn.hidden = true;
+  (async () => {
+    const downloads = window.claude ? await window.claude.use("downloads") : null;
+    if (!downloads) { status.textContent = "Saving isn't available in this view. Open the artifact in claude.ai to save the video."; return; }
+    btn.hidden = false;
+    btn.addEventListener("click", async () => {
+      btn.disabled = true; status.textContent = "Preparing the file…";
+      try {
+        const res = await fetch(film.currentSrc || film.src);
+        if (!res.ok) throw { code: "fetch_failed" };
+        const data = await res.arrayBuffer();
+        status.textContent = "Confirm the save on your screen.";
+        await downloads.save({ filename: FILE, data });
+        status.textContent = "Saved.";
+      } catch (e) {
+        const code = e && e.code;
+        status.textContent = code === "declined" ? "Save cancelled." : code === "rate_limited" ? "A save prompt is already open. Try again in a moment."
+          : code === "fetch_failed" ? "Couldn't load the video file. Reload the page and try again." : "Saving isn't available here. Open the artifact in claude.ai to save the video.";
+      } finally { btn.disabled = false; }
+    });
+  })();
+</script>

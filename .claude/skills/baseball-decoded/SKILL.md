@@ -194,8 +194,10 @@ The phone copy should be about 10–12 MB at 1080×1920. Check the frames from t
 
 - **Page:** a single HTML file with the video player and a **Save video to phone** button.
   The button uses the `downloads` capability, and the video is an uploaded asset.
-  See `scratchpad/shortstop/shortstop-hardest-position.html` for the working version
-  (commit it into the episode folder when the episode is final).
+  Copy `catcher-hardest/artifact.html` and change the title, heading, file name, duration, size and
+  scene list. Its video `src` is a placeholder (`__VIDEO_URL__`) until the asset is uploaded; the
+  committed copy keeps the last published `/_blob/<id>` URL, so replace that with the new one.
+  Commit the page into the episode folder when the episode is final.
 - **Publish:** `Artifact` with `capabilities: {"assets": {}, "downloads": true}`, an icon
   and a one-sentence description. Upload the MP4 with `Artifact` `asset: true`, then
   replace the `src` placeholder with the returned `/_blob/<id>` URL using an `edits`
