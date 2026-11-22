@@ -15,7 +15,9 @@ Episodes so far, and what each one adds to `field.js` (reuse these before writin
 speed gauge, shoulder arcs), `shortstop` (fielders, ground balls, throws, coverage),
 `catcher-hardest` (receive, block, steal with a runner and tag, signs, talk with the infield),
 `power` (two hitter builds on one rig, left/right split-screen panes, a gym with a back squat,
-the ball squashing against the bat, a camera that trails the batted ball).
+the ball squashing against the bat, a camera that trails the batted ball),
+`copy-swing` (five swing styles on one rig, a balance marker, a film room with three screens, stacked
+split screens; style parameters are in `STY`, `BODY`, `HANDS_K`, `BAT_K`).
 
 ## 0. Standing choices (keep unless the user changes them)
 
@@ -55,7 +57,7 @@ scene-by-scene table: time, beat, on screen, why). Post the plan as text, then b
 ## 3. Scaffold from the newest episode
 
 ```bash
-NEW=<new-folder>; SRC=power   # the newest episode
+NEW=<new-folder>; SRC=copy-swing   # the newest episode
 mkdir -p $NEW/assets/vo $NEW/tools
 cp -r $SRC/assets/fonts $SRC/assets/sfx $SRC/assets/vendor $NEW/assets/
 cp $SRC/assets/field.js $NEW/assets/
@@ -196,7 +198,7 @@ The phone copy should be about 10–12 MB at 1080×1920. Check the frames from t
 
 - **Page:** a single HTML file with the video player and a **Save video to phone** button.
   The button uses the `downloads` capability, and the video is an uploaded asset.
-  Copy `power/artifact.html` and change the title, heading, file name, duration, size and
+  Copy `copy-swing/artifact.html` and change the title, heading, file name, duration, size and
   scene list. Its video `src` is a placeholder (`__VIDEO_URL__`) until the asset is uploaded; the
   committed copy keeps the last published `/_blob/<id>` URL, so replace that with the new one.
   Commit the page into the episode folder when the episode is final.
@@ -239,6 +241,9 @@ The phone copy should be about 10–12 MB at 1080×1920. Check the frames from t
   Anything that poses the batter with its own IK must reset `SCB = 1` afterwards.
 - **A ball that is a tiny dot** (batted-ball chase shots): raise the glow with the shot option
   `bgs`, and aim the camera at the ball with `lift`, so it isn't hidden under the caption band.
+- **Three screens side by side don't fit a vertical frame.** Stack them in a column. Order of
+  definitions matters too: a table used by a section above its declaration (`GHOST_C`) fails at load
+  with "before initialization"; put new entries in the original declaration.
 - **Duplicate top-level names in `field.js`.** `FORE`, `BACK` and `CHARGE` collided with
   series constants and broke every render. Rename new constants with a prefix, and check
   for duplicates before building:
