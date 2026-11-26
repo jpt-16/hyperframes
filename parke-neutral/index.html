@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family:"Archivo"; font-weight:100 900; font-stretch:62% 125%; font-display:block; src:url("assets/fonts/archivo-latin-wdth-normal.woff2") format("woff2"); }
+      @font-face { font-family:"Instrument Serif"; font-style:italic; font-weight:400; font-display:block; src:url("assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2"); }
+      @font-face { font-family:"Instrument Serif"; font-style:normal; font-weight:400; font-display:block; src:url("assets/fonts/instrument-serif-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family:"Graduate"; font-weight:400; font-display:block; src:url("assets/fonts/graduate-latin-400-normal.woff2") format("woff2"); }
+
+      :root { --sky:#D8D4CB; --sky2:#A8A398; --skyink:#6A655B; --navy:#1D1D1C; --cream:#F4F2EE; --mute:rgba(29,29,28,.55); }
+      * { margin:0; padding:0; box-sizing:border-box; }
+      html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
+      #root { position:relative; width:1080px; height:1920px; overflow:hidden; background:#000;
+              font-family:"Archivo", sans-serif; color:var(--navy); -webkit-font-smoothing:antialiased; }
+
+      #vwrap { position:absolute; inset:0; transform-origin:50% 46%; }
+      #a-roll { position:absolute; inset:0; width:1080px; height:1920px; object-fit:cover; }
+
+      /* ---- scenes: flat colour, wiped up over the footage ---- */
+      .scene { position:absolute; inset:0; overflow:hidden; clip-path:inset(100% 0 0 0); }
+      .pad { position:absolute; inset:0; }
+      .cream { background:var(--cream); } .sky { background:var(--sky); } .navy { background:var(--navy); color:var(--cream); }
+      .abs { position:absolute; }
+
+      .kick { position:absolute; font-weight:700; font-stretch:112%; font-size:30px; letter-spacing:.16em; text-transform:uppercase; color:var(--mute); white-space:nowrap; }
+      .navy .kick { color:rgba(244,242,238,.6); }
+      .h { position:absolute; font-weight:800; font-stretch:106%; letter-spacing:-.03em; line-height:.95; white-space:nowrap; }
+      .it { font-family:"Instrument Serif", serif; font-style:italic; font-weight:400; font-stretch:100%; letter-spacing:-.012em; font-size:1.12em; }
+      .ln { display:block; overflow:hidden; padding:.06em 0 .1em; margin:-.06em 0 -.1em; }
+      .ln > span { display:block; }
+      .c { position:relative; opacity:0; }
+      .cr { position:absolute; right:-.045em; top:.1em; bottom:.06em; width:.075em; background:currentColor; opacity:0; }
+      .card { position:absolute; background:var(--cream); border-radius:34px; }
+      .num { font-variant-numeric:tabular-nums; }
+      .pill { position:absolute; border-radius:999px; background:var(--navy); color:var(--cream); font-weight:800; font-stretch:110%; letter-spacing:.06em; text-transform:uppercase; white-space:nowrap; }
+      img { display:block; }
+      .ph { position:absolute; filter:drop-shadow(0 34px 38px rgba(29,29,28,.20)); }
+      .frame { position:absolute; background:#fff; padding:14px; box-shadow:0 30px 60px rgba(29,29,28,.22); }
+      .frame img { width:100%; height:100%; object-fit:cover; }
+
+      /* ---- captions ---- */
+      #caps { position:absolute; left:0; top:1488px; width:1080px; height:230px; z-index:90; pointer-events:none; }
+      .cap { position:absolute; left:50%; top:0; display:flex; align-items:baseline; gap:.3em; white-space:nowrap;
+             background:var(--navy); color:var(--cream); padding:20px 36px 24px; border-radius:30px; opacity:0;
+             font-weight:800; font-stretch:104%; font-size:62px; letter-spacing:-.018em; line-height:1.05; }
+      .cap .w { opacity:.5; }
+      .cap .w.em { font-family:"Instrument Serif", serif; font-style:italic; font-weight:400; font-stretch:100%; font-size:1.2em; letter-spacing:-.005em; color:var(--sky); line-height:.9; }
+      #caps.inv .cap { background:var(--cream); color:var(--navy); }
+      #caps.inv .cap .w.em { color:var(--skyink); }
+
+      /* ---- overlay chips on the face segments ---- */
+      .chip { position:absolute; z-index:60; border-radius:20px; padding:16px 28px 18px; background:var(--navy); color:var(--cream);
+              font-weight:800; font-stretch:110%; font-size:34px; letter-spacing:.07em; text-transform:uppercase; white-space:nowrap; opacity:0; }
+      .chip.sky { background:var(--sky); color:var(--navy); }
+      .chip.cream { background:var(--cream); color:var(--navy); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="91.87" data-width="1080" data-height="1920">
+
+      <div id="vwrap">
+        <video id="a-roll" class="clip" src="base.mp4" playsinline data-has-audio="true" data-start="0" data-duration="91.87" data-track-index="0"></video>
+      </div>
+
+      <!-- ========== 1 · hook (typed) ========== -->
+      <section id="g1" class="scene sky clip" data-start="0.0" data-duration="2.56" data-track-index="2" style="z-index:21"><div class="pad">
+        <div class="kick" style="left:90px; top:520px; opacity:0" id="g1k">A business lesson</div>
+        <div class="h" id="g1t" style="left:90px; top:610px; font-size:176px; font-stretch:100%; line-height:.92; white-space:normal; width:900px">is parke a <span id="g1s" style="position:relative; display:inline-block"><span id="g1bar" style="position:absolute; left:-.1em; right:-.06em; top:.1em; bottom:.0em; background:var(--navy); transform-origin:0 50%; transform:scaleX(0); z-index:0"></span><span style="position:relative; z-index:1" id="g1sc">scam?</span></span></div>
+      </div></section>
+
+      <!-- ========== 2 · the product ========== -->
+      <section id="g2" class="scene cream clip" data-start="5.85" data-duration="5.61" data-track-index="3" style="z-index:22"><div class="pad">
+        <div class="kick" id="g2k" style="left:90px; top:170px; opacity:0">What they're selling</div>
+        <div class="abs" id="g2d" style="left:110px; top:330px; width:860px; height:860px; border-radius:50%; background:var(--sky)"></div>
+        <img class="ph" id="g2s" src="assets/img/blue_cut.png" style="left:150px; top:420px; width:780px" />
+        <div class="h" id="g2q" style="left:90px; top:1196px; font-size:104px"><span class="ln"><span id="g2q1">Where does it</span></span><span class="ln"><span id="g2q2" class="it" style="font-size:1.18em">come from?</span></span></div>
+      </div></section>
+
+      <!-- ========== 3 · same product, your brand, lower price ========== -->
+      <section id="g3" class="scene sky clip" data-start="12.31" data-duration="6.63" data-track-index="4" style="z-index:23"><div class="pad">
+        <img class="ph" id="g3s" src="assets/img/blue_cut.png" style="left:270px; top:170px; width:540px" />
+        <div id="g3tag" class="pill" style="left:50%; top:712px; transform:translateX(-50%); width:520px; height:96px; background:var(--cream); color:var(--navy); perspective:600px">
+          <div id="g3t1" class="abs" style="inset:0; display:flex; align-items:center; justify-content:center; font-weight:800; font-stretch:112%; letter-spacing:.14em; font-size:40px">PARKE</div>
+          <div id="g3t2" class="abs" style="inset:0; display:flex; align-items:center; justify-content:center; font-size:36px; opacity:0">Your brand</div>
+        </div>
+        <div class="h" style="left:90px; top:850px; font-size:110px; line-height:1.04">
+          <span class="ln"><span id="g3a">Same <span class="it">product.</span></span></span>
+          <span class="ln"><span id="g3b">Your <span class="it">brand.</span></span></span>
+          <span class="ln"><span id="g3c"><span class="it">Lower</span> price.</span></span>
+        </div>
+      </div></section>
+
+      <!-- ========== 4a · founder ========== -->
+      <section id="g4a" class="scene cream clip" data-start="20.45" data-duration="2.99" data-track-index="5" style="z-index:24"><div class="pad">
+        <div class="kick" id="g4k" style="left:90px; top:170px; opacity:0">Founded by</div>
+        <div class="frame" id="g4f1" style="left:80px; top:290px; width:350px; height:622px; transform:rotate(-3deg)"><img src="assets/img/forbes_x.jpg" /></div>
+        <div class="frame" id="g4f2" style="left:480px; top:410px; width:520px; height:520px; transform:rotate(2.2deg)"><img src="assets/img/portrait_x.jpg" /></div>
+        <div class="h" id="g4n" style="left:90px; top:1050px; font-size:112px">Chelsea Kramer</div>
+        <div class="kick" id="g4r" style="left:94px; top:1196px; opacity:0">Founder · Parke</div>
+      </div></section>
+
+      <!-- ========== 4b · the sweatshirts ========== -->
+      <section id="g4b" class="scene sky clip" data-start="22.19" data-duration="6.35" data-track-index="6" style="z-index:25"><div class="pad">
+        <div class="kick" id="g4bk" style="left:70px; top:150px; opacity:0">Oversized</div>
+        <div class="frame" id="g4g" style="left:70px; top:215px; width:620px; height:820px; padding:0; border-radius:24px; overflow:hidden"><img src="assets/img/grey_x.jpg" style="object-position:50% 52%" /></div>
+        <img class="ph" id="g4s" src="assets/img/blue_cut.png" style="left:400px; top:760px; width:620px" />
+        <div id="g4box" class="abs" style="left:553px; top:937px; width:360px; height:128px; border:4px solid var(--navy); border-radius:14px; opacity:0"></div>
+        <div class="pill" id="g4nm" style="left:553px; top:882px; padding:10px 22px; font-size:26px; opacity:0">The name</div>
+      </div></section>
+
+      <!-- ========== 5 · middle name ========== -->
+      <section id="g5" class="scene navy clip" data-start="28.99" data-duration="3.23" data-track-index="7" style="z-index:26"><div class="pad">
+        <div class="h" id="g5t" style="left:90px; top:400px; font-size:168px; line-height:1.02">
+          <div id="g5a">Chelsea</div>
+          <div id="g5b" style="font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; font-stretch:100%; letter-spacing:-.01em; color:var(--sky); font-size:1.3em; line-height:1.0; position:relative; display:inline-block">Parke<span id="g5u" class="abs" style="left:0; right:0; bottom:-6px; height:8px; background:var(--sky); transform-origin:0 50%; transform:scaleX(0)"></span></div>
+          <div id="g5c">Kramer</div>
+        </div>
+        <div class="kick" id="g5k" style="left:94px; top:1010px; opacity:0; font-size:34px">Parke · her middle name</div>
+      </div></section>
+
+      <!-- ========== 6 · vintage → $16M ========== -->
+      <section id="g6" class="scene cream clip" data-start="30.97" data-duration="9.34" data-track-index="8" style="z-index:27"><div class="pad">
+        <div class="h" style="left:90px; top:180px; font-size:100px; line-height:1">
+          <span class="ln"><span id="g6a"><span class="it">Vintage</span> clothing</span></span>
+          <span class="ln"><span id="g6b">business</span></span>
+        </div>
+        <svg class="abs" id="g6arrow" style="left:100px; top:470px" width="60" height="130" viewBox="0 0 60 130" fill="none" stroke="#1D1D1C" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path id="g6ap" d="M30 4 V118"/><path id="g6ah" d="M8 96 L30 120 L52 96"/></svg>
+        <div id="g6br" class="abs" style="left:90px; top:610px; font-family:'Instrument Serif',serif; font-style:italic; font-size:150px; line-height:1; letter-spacing:-.01em">Parke</div>
+        <div class="abs" id="g6p" style="left:60px; top:790px; width:960px; height:560px; border-radius:40px; background:var(--sky)">
+          <div class="kick" id="g6pk" style="left:50px; top:44px; opacity:0; color:var(--navy)">Reported revenue</div>
+          <div class="h num" id="g6n" style="left:0; width:960px; text-align:center; top:150px; font-size:262px; font-stretch:112%; letter-spacing:-.045em; line-height:1">$0</div>
+          <div class="pill" id="g6y" style="left:50%; top:446px; transform:translateX(-50%); padding:16px 40px 18px; font-size:44px; opacity:0">2024</div>
+        </div>
+      </div></section>
+
+      <!-- ========== 7 · the controversy ========== -->
+      <section id="g7" class="scene sky clip" data-start="42.74" data-duration="7.67" data-track-index="9" style="z-index:28"><div class="pad">
+        <div class="kick" id="g7k" style="left:90px; top:170px; opacity:0; color:var(--navy)">The controversy</div>
+        <div class="card" id="g7c1" style="left:70px; top:260px; width:940px; height:480px">
+          <svg class="abs" style="left:60px; top:66px" width="160" height="160" viewBox="0 0 24 24" fill="none" stroke="#1D1D1C" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l6 3V10l6 3V5h3l3 2v14z"/><path d="M3 21h18"/><path d="M8 17h2M13 17h2"/></svg>
+          <div class="kick" style="left:60px; top:300px; color:var(--sky2); font-size:34px">01</div>
+          <div class="h" style="left:260px; top:96px; font-size:94px; line-height:1"><span class="ln"><span id="g7a1">Where is it</span></span><span class="ln"><span id="g7a2" class="it">manufactured?</span></span></div>
+        </div>
+        <div class="card" id="g7c2" style="left:70px; top:800px; width:940px; height:480px">
+          <svg class="abs" style="left:60px; top:66px" width="160" height="160" viewBox="0 0 24 24" fill="none" stroke="#1D1D1C" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.3"/></svg>
+          <div class="kick" style="left:60px; top:300px; color:var(--sky2); font-size:34px">02</div>
+          <div class="h" style="left:260px; top:96px; font-size:94px; line-height:1"><span class="ln"><span id="g7b1">Wholesale,</span></span><span class="ln"><span id="g7b2" class="it">for less?</span></span></div>
+        </div>
+      </div></section>
+
+      <!-- ========== 8 · who's right → opportunity ========== -->
+      <section id="g8" class="scene navy clip" data-start="54.49" data-duration="6.33" data-track-index="10" style="z-index:29"><div class="pad">
+        <div id="g8x">
+          <div class="kick" id="g8k" style="left:90px; top:480px; opacity:0">Regardless of</div>
+          <div class="h" style="left:90px; top:560px; font-size:178px; line-height:1"><span class="ln"><span id="g8a">who's</span></span><span class="ln"><span id="g8b" class="it" style="color:var(--sky)">right,</span></span></div>
+        </div>
+        <div id="g8y">
+          <div class="kick" id="g8k2" style="left:90px; top:420px; opacity:0">A real</div>
+          <div class="h" style="left:90px; top:500px; font-size:176px; line-height:1"><span class="ln"><span id="g8c">business</span></span><span class="ln"><span id="g8d" class="it" style="color:var(--sky)">opportunity</span></span></div>
+          <div class="abs" id="g8u" style="left:94px; top:900px; width:760px; height:8px; background:var(--sky); transform-origin:0 50%; transform:scaleX(0)"></div>
+          <div class="kick" id="g8k3" style="left:94px; top:944px; opacity:0">for anyone</div>
+        </div>
+      </div></section>
+
+      <!-- ========== 9 · $125 vs $50 ========== -->
+      <section id="g9" class="scene sky clip" data-start="59.57" data-duration="8.37" data-track-index="11" style="z-index:30"><div class="pad">
+        <div class="card" id="g9c1" style="left:50px; top:200px; width:470px; height:860px">
+          <div class="abs" style="left:0; width:470px; top:46px; text-align:center; font-weight:800; font-stretch:112%; font-size:36px; letter-spacing:.14em">Parke</div>
+          <img class="abs" src="assets/img/blue_cut.png" style="left:55px; top:170px; width:360px" />
+          <div class="h num" id="g9n1" style="left:0; width:470px; text-align:center; top:590px; font-size:150px; font-stretch:104%; line-height:1">$0</div>
+        </div>
+        <div class="card" id="g9c2" style="left:560px; top:200px; width:470px; height:860px">
+          <div class="abs" style="left:0; width:470px; top:58px; text-align:center; font-weight:800; font-stretch:112%; font-size:36px; letter-spacing:.14em; text-transform:uppercase">Your brand</div>
+          <img class="abs" src="assets/img/blue_cut.png" style="left:55px; top:170px; width:360px" />
+          <div class="h num" id="g9n2" style="left:0; width:470px; text-align:center; top:590px; font-size:150px; font-stretch:104%; line-height:1">$0</div>
+        </div>
+        <div class="pill" id="g9pc" style="left:50%; top:1120px; transform:translateX(-50%); padding:20px 54px 24px; font-size:56px; opacity:0">60% less</div>
+        <div class="h it" id="g9cq" style="left:0; width:1080px; text-align:center; top:1250px; font-size:92px; opacity:0">Comparable quality.</div>
+      </div></section>
+
+      <!-- ========== 10 · demand already exists ========== -->
+      <section id="g10" class="scene cream clip" data-start="66.69" data-duration="5.49" data-track-index="12" style="z-index:31"><div class="pad">
+        <div class="kick" id="g10k" style="left:90px; top:200px; opacity:0">The market</div>
+        <div class="h" style="left:90px; top:310px; font-size:200px; font-stretch:106%; line-height:1"><span class="ln"><span id="g10a">Demand</span></span></div>
+        <svg class="abs" id="g10ck" style="left:830px; top:150px" width="150" height="150" viewBox="0 0 220 220" fill="none"><circle id="g10cc" cx="110" cy="110" r="100" fill="#D8D4CB"/><path id="g10cp" d="M62 114 L96 148 L160 78" stroke="#1D1D1C" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="h it" style="left:90px; top:620px; font-size:150px; line-height:1"><span class="ln"><span id="g10b">already exists.</span></span></div>
+        <div class="kick" id="g10k2" style="left:90px; top:960px; opacity:0">Nobody has to be convinced</div>
+        <div class="h" id="g10c" style="left:90px; top:1030px; font-size:72px; line-height:1.08; font-weight:700; font-stretch:100%; letter-spacing:-.02em; color:var(--mute); opacity:0">they need <span style="position:relative">a sweatshirt<span id="g10s" class="abs" style="left:-6px; right:-6px; top:54%; height:7px; background:var(--navy); transform-origin:0 50%; transform:scaleX(0)"></span></span></div>
+      </div></section>
+
+      <!-- ========== 11 · every industry ========== -->
+      <section id="g11" class="scene sky clip" data-start="74.29" data-duration="4.29" data-track-index="13" style="z-index:32"><div class="pad">
+        <div class="kick" id="g11k" style="left:90px; top:390px; opacity:0; color:var(--navy)">This applies to</div>
+        <div class="abs" id="g11p" style="left:60px; top:470px; width:960px; height:230px; border-radius:36px; background:var(--navy); overflow:hidden">
+          <div id="g11r" class="abs" style="left:0; top:0; width:960px"></div>
+        </div>
+        <div class="h" style="left:90px; top:820px; font-size:190px; line-height:1"><span class="ln"><span id="g11a">Not just</span></span><span class="ln"><span id="g11b" class="it" style="font-size:1.24em">clothing.</span></span></div>
+      </div></section>
+
+      <!-- ========== 12 · the playbook ========== -->
+      <section id="g12" class="scene navy clip" data-start="80.53" data-duration="7.01" data-track-index="14" style="z-index:33"><div class="pad">
+        <div class="abs" id="g12r1" style="left:90px; top:210px; width:900px; height:360px; border-top:2px solid rgba(244,242,238,.22)">
+          <div class="h num" style="left:0; top:38px; font-size:210px; color:var(--sky); font-stretch:110%">1</div>
+          <div class="h" style="left:210px; top:62px; font-size:84px; line-height:1.02"><span class="ln"><span class="g12l">Find what</span></span><span class="ln"><span class="g12l it">already works.</span></span></div>
+        </div>
+        <div class="abs" id="g12r2" style="left:90px; top:620px; width:900px; height:360px; border-top:2px solid rgba(244,242,238,.22)">
+          <div class="h num" style="left:0; top:38px; font-size:210px; color:var(--sky); font-stretch:110%">2</div>
+          <div class="h" style="left:210px; top:62px; font-size:84px; line-height:1.02"><span class="ln"><span class="g12l">Make it better,</span></span><span class="ln"><span class="g12l it">more affordable.</span></span></div>
+        </div>
+        <div class="abs" id="g12r3" style="left:90px; top:1030px; width:900px; height:360px; border-top:2px solid rgba(244,242,238,.22)">
+          <div class="h num" style="left:0; top:38px; font-size:210px; color:var(--sky); font-stretch:110%">3</div>
+          <div class="h" style="left:210px; top:62px; font-size:84px; line-height:1.02"><span class="ln"><span class="g12l">Build a business</span></span><span class="ln"><span class="g12l it">around it.</span></span></div>
+        </div>
+      </div></section>
+
+      <!-- ========== chips on the face segments ========== -->
+      <div id="tov" class="clip" data-start="49.53" data-duration="5.41" data-track-index="15" style="position:absolute; inset:0; z-index:60; pointer-events:none">
+        <div class="chip" id="ch1" style="left:70px; top:170px">White-labeling?</div>
+        <div class="chip sky" id="ch2" style="left:70px; top:262px">Denied</div>
+        <div class="chip cream" id="ch3" style="left:70px; top:354px">Custom design</div>
+        <div class="chip cream" id="ch4" style="left:70px; top:446px">Multiple revisions</div>
+      </div>
+      <div id="tov2" class="clip" data-start="79.92" data-duration="1.06" data-track-index="16" style="position:absolute; inset:0; z-index:60; pointer-events:none">
+        <div class="chip" id="ch5" style="left:70px; top:170px">Inventing something <span style="position:relative">new<span id="ch5s" style="position:absolute; left:-4px; right:-4px; top:50%; height:5px; background:var(--sky); transform-origin:0 50%; transform:scaleX(0)"></span></span></div>
+      </div>
+
+      <div id="caps" class="clip" data-start="0" data-duration="91.87" data-track-index="20">
+        <div class="cap" id="c0"><span class="w" id="w0_0">Is</span><span class="w" id="w0_1">Parke</span><span class="w" id="w0_2">clothing</span><span class="w" id="w0_3">brand</span></div>
+        <div class="cap" id="c1"><span class="w" id="w1_0">a</span><span class="w em" id="w1_1">scam?</span></div>
+        <div class="cap" id="c2"><span class="w" id="w2_0">Parke</span><span class="w" id="w2_1">might</span><span class="w" id="w2_2">be</span><span class="w" id="w2_3">one</span></div>
+        <div class="cap" id="c3"><span class="w" id="w3_0">of</span><span class="w" id="w3_1">the</span><span class="w" id="w3_2">biggest</span><span class="w" id="w3_3">clothing</span></div>
+        <div class="cap" id="c4"><span class="w" id="w4_0">brand</span><span class="w em" id="w4_1">scams</span><span class="w" id="w4_2">I&#x27;ve</span><span class="w" id="w4_3">seen</span></div>
+        <div class="cap" id="c5"><span class="w" id="w5_0">and</span><span class="w" id="w5_1">there&#x27;s</span><span class="w" id="w5_2">a</span><span class="w" id="w5_3">business</span></div>
+        <div class="cap" id="c6"><span class="w em" id="w6_0">lesson</span><span class="w" id="w6_1">behind</span><span class="w" id="w6_2">it,</span></div>
+        <div class="cap" id="c7"><span class="w" id="w7_0">because</span><span class="w" id="w7_1">when</span><span class="w" id="w7_2">you</span><span class="w" id="w7_3">look</span></div>
+        <div class="cap" id="c8"><span class="w" id="w8_0">at</span><span class="w" id="w8_1">what</span><span class="w" id="w8_2">they&#x27;re</span><span class="w" id="w8_3">selling</span></div>
+        <div class="cap" id="c9"><span class="w" id="w9_0">and</span><span class="w" id="w9_1">the</span><span class="w em" id="w9_2">controversy</span><span class="w" id="w9_3">surrounding</span></div>
+        <div class="cap" id="c10"><span class="w" id="w10_0">where</span><span class="w" id="w10_1">these</span><span class="w" id="w10_2">products</span><span class="w" id="w10_3">come</span></div>
+        <div class="cap" id="c11"><span class="w" id="w11_0">from,</span><span class="w" id="w11_1">it</span><span class="w" id="w11_2">raises</span><span class="w" id="w11_3">a</span></div>
+        <div class="cap" id="c12"><span class="w" id="w12_0">pretty</span><span class="w" id="w12_1">interesting</span><span class="w em" id="w12_2">question.</span></div>
+        <div class="cap" id="c13"><span class="w" id="w13_0">Why</span><span class="w" id="w13_1">can&#x27;t</span><span class="w" id="w13_2">someone</span><span class="w" id="w13_3">else</span></div>
+        <div class="cap" id="c14"><span class="w" id="w14_0">make</span><span class="w" id="w14_1">a</span><span class="w em" id="w14_2">comparable</span><span class="w" id="w14_3">product,</span></div>
+        <div class="cap" id="c15"><span class="w" id="w15_0">put</span><span class="w" id="w15_1">their</span><span class="w" id="w15_2">own</span><span class="w" id="w15_3">brand</span></div>
+        <div class="cap" id="c16"><span class="w" id="w16_0">on</span><span class="w" id="w16_1">it</span><span class="w" id="w16_2">and</span><span class="w" id="w16_3">sell</span></div>
+        <div class="cap" id="c17"><span class="w" id="w17_0">it</span><span class="w" id="w17_1">for</span><span class="w" id="w17_2">significantly</span><span class="w em" id="w17_3">less?</span></div>
+        <div class="cap" id="c18"><span class="w" id="w18_0">Let</span><span class="w" id="w18_1">me</span><span class="w" id="w18_2">explain.</span></div>
+        <div class="cap" id="c19"><span class="w" id="w19_0">Parke</span><span class="w" id="w19_1">is</span><span class="w" id="w19_2">a</span><span class="w" id="w19_3">clothing</span></div>
+        <div class="cap" id="c20"><span class="w" id="w20_0">brand</span><span class="w" id="w20_1">founded</span><span class="w" id="w20_2">by</span><span class="w" id="w20_3">Chelsea</span></div>
+        <div class="cap" id="c21"><span class="w" id="w21_0">Kramer.</span><span class="w" id="w21_1">It</span><span class="w" id="w21_2">became</span><span class="w" id="w21_3">incredibly</span></div>
+        <div class="cap" id="c22"><span class="w" id="w22_0">popular</span><span class="w" id="w22_1">for</span><span class="w" id="w22_2">its</span><span class="w" id="w22_3">oversized</span></div>
+        <div class="cap" id="c23"><span class="w em" id="w23_0">sweatshirts,</span><span class="w" id="w23_1">which</span><span class="w" id="w23_2">feature</span></div>
+        <div class="cap" id="c24"><span class="w" id="w24_0">the</span><span class="w" id="w24_1">Parke</span><span class="w" id="w24_2">name</span><span class="w" id="w24_3">across</span></div>
+        <div class="cap" id="c25"><span class="w" id="w25_0">the</span><span class="w" id="w25_1">front.</span></div>
+        <div class="cap" id="c26"><span class="w" id="w26_0">And</span><span class="w" id="w26_1">here&#x27;s</span><span class="w" id="w26_2">the</span><span class="w" id="w26_3">interesting</span></div>
+        <div class="cap" id="c27"><span class="w" id="w27_0">part.</span><span class="w" id="w27_1">Parke</span><span class="w" id="w27_2">is</span><span class="w" id="w27_3">actually</span></div>
+        <div class="cap" id="c28"><span class="w" id="w28_0">her</span><span class="w em" id="w28_1">middle</span><span class="w" id="w28_2">name.</span></div>
+        <div class="cap" id="c29"><span class="w" id="w29_0">It</span><span class="w" id="w29_1">started</span><span class="w" id="w29_2">as</span><span class="w" id="w29_3">a</span></div>
+        <div class="cap" id="c30"><span class="w" id="w30_0">vintage</span><span class="w" id="w30_1">clothing</span><span class="w" id="w30_2">business</span></div>
+        <div class="cap" id="c31"><span class="w" id="w31_0">that</span><span class="w" id="w31_1">eventually</span><span class="w" id="w31_2">turned</span><span class="w" id="w31_3">into</span></div>
+        <div class="cap" id="c32"><span class="w" id="w32_0">a</span><span class="w" id="w32_1">brand</span><span class="w" id="w32_2">that</span><span class="w" id="w32_3">reportedly</span></div>
+        <div class="cap" id="c33"><span class="w" id="w33_0">generated</span><span class="w" id="w33_1">a</span><span class="w" id="w33_2">whopping</span><span class="w em" id="w33_3">$16</span></div>
+        <div class="cap" id="c34"><span class="w em" id="w34_0">million</span><span class="w" id="w34_1">in</span><span class="w" id="w34_2">revenue</span><span class="w" id="w34_3">in</span></div>
+        <div class="cap" id="c35"><span class="w em" id="w35_0">2024</span><span class="w" id="w35_1">but</span><span class="w" id="w35_2">the</span><span class="w em" id="w35_3">controversy</span></div>
+        <div class="cap" id="c36"><span class="w" id="w36_0">started</span><span class="w" id="w36_1">when</span><span class="w" id="w36_2">people</span><span class="w" id="w36_3">began</span></div>
+        <div class="cap" id="c37"><span class="w" id="w37_0">questioning</span><span class="w" id="w37_1">where</span><span class="w" id="w37_2">the</span><span class="w" id="w37_3">clothing</span></div>
+        <div class="cap" id="c38"><span class="w" id="w38_0">was</span><span class="w" id="w38_1">actually</span><span class="w" id="w38_2">being</span><span class="w" id="w38_3">manufactured</span></div>
+        <div class="cap" id="c39"><span class="w" id="w39_0">and</span><span class="w" id="w39_1">whether</span><span class="w" id="w39_2">similar</span><span class="w" id="w39_3">products</span></div>
+        <div class="cap" id="c40"><span class="w" id="w40_0">could</span><span class="w" id="w40_1">be</span><span class="w" id="w40_2">purchased</span><span class="w" id="w40_3">from</span></div>
+        <div class="cap" id="c41"><span class="w em" id="w41_0">wholesale</span><span class="w" id="w41_1">manufacturers</span></div>
+        <div class="cap" id="c42"><span class="w" id="w42_0">for</span><span class="w" id="w42_1">significantly</span><span class="w em" id="w42_2">less.</span></div>
+        <div class="cap" id="c43"><span class="w" id="w43_0">She&#x27;s</span><span class="w em" id="w43_1">denied</span><span class="w em" id="w43_2">white</span><span class="w em" id="w43_3">labeling</span></div>
+        <div class="cap" id="c44"><span class="w" id="w44_0">accusations</span><span class="w" id="w44_1">and</span><span class="w" id="w44_2">says</span><span class="w" id="w44_3">the</span></div>
+        <div class="cap" id="c45"><span class="w" id="w45_0">products</span><span class="w" id="w45_1">go</span><span class="w" id="w45_2">through</span><span class="w" id="w45_3">custom</span></div>
+        <div class="cap" id="c46"><span class="w" id="w46_0">design</span><span class="w" id="w46_1">and</span><span class="w" id="w46_2">multiple</span><span class="w" id="w46_3">revisions,</span></div>
+        <div class="cap" id="c47"><span class="w" id="w47_0">But</span><span class="w" id="w47_1">regardless</span><span class="w" id="w47_2">of</span><span class="w" id="w47_3">who&#x27;s</span></div>
+        <div class="cap" id="c48"><span class="w" id="w48_0">right,</span><span class="w" id="w48_1">this</span><span class="w" id="w48_2">brings</span><span class="w" id="w48_3">up</span></div>
+        <div class="cap" id="c49"><span class="w" id="w49_0">a</span><span class="w" id="w49_1">really</span><span class="w" id="w49_2">interesting</span><span class="w" id="w49_3">business</span></div>
+        <div class="cap" id="c50"><span class="w em" id="w50_0">opportunity</span><span class="w" id="w50_1">for</span><span class="w" id="w50_2">anyone.</span></div>
+        <div class="cap" id="c51"><span class="w" id="w51_0">Imagine</span><span class="w" id="w51_1">someone</span><span class="w" id="w51_2">spending</span></div>
+        <div class="cap" id="c52"><span class="w em" id="w52_0">$125</span><span class="w" id="w52_1">bucks</span><span class="w" id="w52_2">on</span><span class="w" id="w52_3">a</span></div>
+        <div class="cap" id="c53"><span class="w" id="w53_0">sweatshirt</span><span class="w" id="w53_1">when</span><span class="w" id="w53_2">another</span></div>
+        <div class="cap" id="c54"><span class="w" id="w54_0">company</span><span class="w" id="w54_1">could</span><span class="w" id="w54_2">potentially</span></div>
+        <div class="cap" id="c55"><span class="w" id="w55_0">offer</span><span class="w em" id="w55_1">comparable</span><span class="w" id="w55_2">quality</span></div>
+        <div class="cap" id="c56"><span class="w" id="w56_0">for</span><span class="w em" id="w56_1">$50</span><span class="w" id="w56_2">bucks.</span></div>
+        <div class="cap" id="c57"><span class="w" id="w57_0">Entering</span><span class="w" id="w57_1">a</span><span class="w" id="w57_2">market</span><span class="w" id="w57_3">where</span></div>
+        <div class="cap" id="c58"><span class="w em" id="w58_0">demand</span><span class="w em" id="w58_1">already</span><span class="w em" id="w58_2">exists,</span></div>
+        <div class="cap" id="c59"><span class="w" id="w59_0">you</span><span class="w" id="w59_1">don&#x27;t</span><span class="w" id="w59_2">have</span><span class="w" id="w59_3">to</span></div>
+        <div class="cap" id="c60"><span class="w" id="w60_0">convince</span><span class="w" id="w60_1">people</span><span class="w" id="w60_2">you</span><span class="w" id="w60_3">need</span></div>
+        <div class="cap" id="c61"><span class="w" id="w61_0">a</span><span class="w" id="w61_1">sweatshirt,</span></div>
+        <div class="cap" id="c62"><span class="w" id="w62_0">you</span><span class="w" id="w62_1">just</span><span class="w" id="w62_2">need</span><span class="w" id="w62_3">to</span></div>
+        <div class="cap" id="c63"><span class="w" id="w63_0">convince</span><span class="w" id="w63_1">them</span><span class="w" id="w63_2">that</span><span class="w" id="w63_3">your</span></div>
+        <div class="cap" id="c64"><span class="w" id="w64_0">alternative</span><span class="w" id="w64_1">is</span><span class="w" id="w64_2">worth</span><span class="w" id="w64_3">buying.</span></div>
+        <div class="cap" id="c65"><span class="w" id="w65_0">This</span><span class="w" id="w65_1">applies</span><span class="w" id="w65_2">to</span><span class="w" id="w65_3">practically</span></div>
+        <div class="cap" id="c66"><span class="w" id="w66_0">every</span><span class="w" id="w66_1">industry</span><span class="w" id="w66_2">too,</span></div>
+        <div class="cap" id="c67"><span class="w" id="w67_0">it&#x27;s</span><span class="w" id="w67_1">not</span><span class="w" id="w67_2">just</span><span class="w" id="w67_3">clothing.</span></div>
+        <div class="cap" id="c68"><span class="w" id="w68_0">Sometimes</span><span class="w" id="w68_1">the</span><span class="w" id="w68_2">biggest</span><span class="w" id="w68_3">business</span></div>
+        <div class="cap" id="c69"><span class="w em" id="w69_0">opportunity</span><span class="w" id="w69_1">isn&#x27;t</span><span class="w" id="w69_2">inventing</span></div>
+        <div class="cap" id="c70"><span class="w" id="w70_0">something</span><span class="w em" id="w70_1">new,</span></div>
+        <div class="cap" id="c71"><span class="w" id="w71_0">it&#x27;s</span><span class="w" id="w71_1">finding</span><span class="w" id="w71_2">something</span><span class="w" id="w71_3">that</span></div>
+        <div class="cap" id="c72"><span class="w em" id="w72_0">already</span><span class="w" id="w72_1">works,</span></div>
+        <div class="cap" id="c73"><span class="w" id="w73_0">figuring</span><span class="w" id="w73_1">out</span><span class="w" id="w73_2">how</span><span class="w" id="w73_3">to</span></div>
+        <div class="cap" id="c74"><span class="w" id="w74_0">make</span><span class="w" id="w74_1">it</span><span class="w em" id="w74_2">better</span><span class="w" id="w74_3">and</span></div>
+        <div class="cap" id="c75"><span class="w" id="w75_0">more</span><span class="w em" id="w75_1">affordable</span><span class="w" id="w75_2">and</span><span class="w" id="w75_3">building</span></div>
+        <div class="cap" id="c76"><span class="w" id="w76_0">a</span><span class="w" id="w76_1">business</span><span class="w" id="w76_2">around</span><span class="w" id="w76_3">it.</span></div>
+        <div class="cap" id="c77"><span class="w" id="w77_0">Because</span><span class="w" id="w77_1">you&#x27;re</span><span class="w" id="w77_2">not</span><span class="w" id="w77_3">creating</span></div>
+        <div class="cap" id="c78"><span class="w em" id="w78_0">demand</span><span class="w" id="w78_1">for</span><span class="w" id="w78_2">a</span><span class="w em" id="w78_3">new</span></div>
+        <div class="cap" id="c79"><span class="w" id="w79_0">product,</span><span class="w" id="w79_1">you&#x27;re</span><span class="w" id="w79_2">competing</span></div>
+        <div class="cap" id="c80"><span class="w" id="w80_0">for</span><span class="w em" id="w80_1">demand</span><span class="w" id="w80_2">that</span></div>
+        <div class="cap" id="c81"><span class="w em" id="w81_0">already</span><span class="w em" id="w81_1">exists.</span></div>
+      </div>
+
+      <audio id="k10" src="assets/sfx/keys.wav" data-start="0.12" data-duration="1.0" data-media-start="0.12" data-track-index="10" data-volume="0.8"></audio>
+      <audio id="k11" src="assets/sfx/keys.wav" data-start="1.07" data-duration="0.46" data-media-start="0.12" data-track-index="11" data-volume="0.8"></audio>
+      <audio id="c-hl" src="assets/sfx/click.mp3" data-start="1.52" data-duration="0.3" data-media-start="0.0" data-track-index="12" data-volume="0.5"></audio>
+      <audio id="p-g2" src="assets/sfx/popup.wav" data-start="6.3" data-duration="0.22" data-media-start="0.0" data-track-index="13" data-volume="0.55"></audio>
+      <audio id="b-g2a" src="assets/sfx/bubble.wav" data-start="8.32" data-duration="0.18" data-media-start="0.0" data-track-index="14" data-volume="0.5"></audio>
+      <audio id="r-g3" src="assets/sfx/riser-s.wav" data-start="12.51" data-duration="0.45" data-media-start="0.0" data-track-index="15" data-volume="0.7"></audio>
+      <audio id="b-g30" src="assets/sfx/bubble.wav" data-start="13.91" data-duration="0.18" data-media-start="0.0" data-track-index="16" data-volume="0.5"></audio>
+      <audio id="b-g31" src="assets/sfx/bubble.wav" data-start="15.32" data-duration="0.18" data-media-start="0.0" data-track-index="17" data-volume="0.5"></audio>
+      <audio id="b-g32" src="assets/sfx/bubble.wav" data-start="16.94" data-duration="0.18" data-media-start="0.0" data-track-index="18" data-volume="0.5"></audio>
+      <audio id="c-flip" src="assets/sfx/click.mp3" data-start="15.57" data-duration="0.3" data-media-start="0.0" data-track-index="19" data-volume="0.45"></audio>
+      <audio id="r-g4" src="assets/sfx/riser-s.wav" data-start="20.65" data-duration="0.45" data-media-start="0.0" data-track-index="20" data-volume="0.7"></audio>
+      <audio id="k40" src="assets/sfx/keys.wav" data-start="21.32" data-duration="1.0" data-media-start="0.12" data-track-index="21" data-volume="0.75"></audio>
+      <audio id="p-g4b" src="assets/sfx/popup.wav" data-start="22.64" data-duration="0.22" data-media-start="0.0" data-track-index="22" data-volume="0.55"></audio>
+      <audio id="b-g4b" src="assets/sfx/bubble.wav" data-start="26.74" data-duration="0.18" data-media-start="0.0" data-track-index="23" data-volume="0.5"></audio>
+      <audio id="k50" src="assets/sfx/keys.wav" data-start="29.54" data-duration="0.95" data-media-start="0.12" data-track-index="24" data-volume="0.75"></audio>
+      <audio id="b-g5" src="assets/sfx/bubble-in.wav" data-start="30.76" data-duration="0.18" data-media-start="0.0" data-track-index="25" data-volume="0.5"></audio>
+      <audio id="r-g6" src="assets/sfx/riser-m.wav" data-start="30.92" data-duration="0.75" data-media-start="0.0" data-track-index="26" data-volume="0.7"></audio>
+      <audio id="b-g6a" src="assets/sfx/bubble.wav" data-start="34.84" data-duration="0.18" data-media-start="0.0" data-track-index="27" data-volume="0.5"></audio>
+      <audio id="r-g6b" src="assets/sfx/riser-m.wav" data-start="36.49" data-duration="0.75" data-media-start="0.0" data-track-index="28" data-volume="0.75"></audio>
+      <audio id="l-g6" src="assets/sfx/land.wav" data-start="38.19" data-duration="0.8" data-media-start="0.0" data-track-index="29" data-volume="0.5"></audio>
+      <audio id="p-g7" src="assets/sfx/popup.wav" data-start="43.19" data-duration="0.22" data-media-start="0.0" data-track-index="30" data-volume="0.55"></audio>
+      <audio id="b-g7a" src="assets/sfx/bubble.wav" data-start="44.33" data-duration="0.18" data-media-start="0.0" data-track-index="31" data-volume="0.5"></audio>
+      <audio id="b-g7b" src="assets/sfx/bubble.wav" data-start="47.26" data-duration="0.18" data-media-start="0.0" data-track-index="32" data-volume="0.5"></audio>
+      <audio id="k60" src="assets/sfx/keys.wav" data-start="49.68" data-duration="0.85" data-media-start="0.12" data-track-index="33" data-volume="0.7"></audio>
+      <audio id="c-denied" src="assets/sfx/click.mp3" data-start="50.68" data-duration="0.3" data-media-start="0.0" data-track-index="34" data-volume="0.55"></audio>
+      <audio id="b-chip1" src="assets/sfx/bubble.wav" data-start="52.85" data-duration="0.18" data-media-start="0.0" data-track-index="35" data-volume="0.5"></audio>
+      <audio id="b-chip2" src="assets/sfx/bubble.wav" data-start="53.73" data-duration="0.18" data-media-start="0.0" data-track-index="36" data-volume="0.5"></audio>
+      <audio id="r-g8" src="assets/sfx/riser-m.wav" data-start="54.44" data-duration="0.75" data-media-start="0.0" data-track-index="37" data-volume="0.7"></audio>
+      <audio id="b-g8" src="assets/sfx/bubble.wav" data-start="57.68" data-duration="0.18" data-media-start="0.0" data-track-index="38" data-volume="0.5"></audio>
+      <audio id="p-g9" src="assets/sfx/popup.wav" data-start="60.02" data-duration="0.22" data-media-start="0.0" data-track-index="39" data-volume="0.55"></audio>
+      <audio id="c-p125" src="assets/sfx/click.mp3" data-start="61.77" data-duration="0.3" data-media-start="0.0" data-track-index="40" data-volume="0.5"></audio>
+      <audio id="b-g9" src="assets/sfx/bubble.wav" data-start="64.86" data-duration="0.18" data-media-start="0.0" data-track-index="41" data-volume="0.5"></audio>
+      <audio id="c-p50" src="assets/sfx/click.mp3" data-start="66.32" data-duration="0.3" data-media-start="0.0" data-track-index="42" data-volume="0.5"></audio>
+      <audio id="b-g9b" src="assets/sfx/bubble.wav" data-start="66.82" data-duration="0.18" data-media-start="0.0" data-track-index="43" data-volume="0.5"></audio>
+      <audio id="p-g10" src="assets/sfx/popup.wav" data-start="67.14" data-duration="0.22" data-media-start="0.0" data-track-index="44" data-volume="0.55"></audio>
+      <audio id="b-g10" src="assets/sfx/bubble.wav" data-start="68.14" data-duration="0.18" data-media-start="0.0" data-track-index="45" data-volume="0.5"></audio>
+      <audio id="c-strike" src="assets/sfx/click.mp3" data-start="71.11" data-duration="0.3" data-media-start="0.0" data-track-index="46" data-volume="0.5"></audio>
+      <audio id="p-g11" src="assets/sfx/popup.wav" data-start="74.74" data-duration="0.22" data-media-start="0.0" data-track-index="47" data-volume="0.55"></audio>
+      <audio id="b-g11" src="assets/sfx/bubble.wav" data-start="77.06" data-duration="0.18" data-media-start="0.0" data-track-index="48" data-volume="0.5"></audio>
+      <audio id="r-g12" src="assets/sfx/riser-s.wav" data-start="80.73" data-duration="0.45" data-media-start="0.0" data-track-index="49" data-volume="0.7"></audio>
+      <audio id="b-g120" src="assets/sfx/bubble.wav" data-start="81.23" data-duration="0.18" data-media-start="0.0" data-track-index="50" data-volume="0.5"></audio>
+      <audio id="b-g121" src="assets/sfx/bubble.wav" data-start="82.89" data-duration="0.18" data-media-start="0.0" data-track-index="51" data-volume="0.5"></audio>
+      <audio id="b-g122" src="assets/sfx/bubble.wav" data-start="85.11" data-duration="0.18" data-media-start="0.0" data-track-index="52" data-volume="0.5"></audio>
+      <audio id="c-inv" src="assets/sfx/click.mp3" data-start="80.92" data-duration="0.3" data-media-start="0.0" data-track-index="53" data-volume="0.5"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const T = {"g1_out": 1.96, "g2_in": 6.3, "selling": 7.52, "controv": 8.32, "products": 10.08, "g2_out": 10.86, "g3_in": 12.76, "someone": 13.36, "comparable": 14.16, "ownbrand": 15.52, "less": 17.04, "g3_out": 18.34, "g4a_in": 20.9, "chelsea": 21.32, "g4b_in": 22.64, "overs": 24.92, "name": 26.84, "g4_out": 27.94, "g5_in": 29.44, "middle": 30.76, "g6_in": 31.42, "vintage": 32.6, "brand": 34.84, "whopping": 36.68, "m16": 37.24, "y2024": 38.84, "g6_out": 39.71, "g7_in": 43.19, "manuf": 44.53, "wholesale": 47.41, "g7_out": 49.81, "denied": 50.13, "custom": 52.85, "revis": 53.73, "g8_in": 54.94, "right": 55.94, "opp": 57.78, "anyone": 58.9, "g9_in": 60.02, "p125": 61.42, "compq": 64.86, "p50": 66.22, "g10_in": 67.14, "demand": 68.14, "convince": 70.14, "sweat": 71.21, "g10_out": 71.58, "g11_in": 74.74, "notjust": 77.26, "g11_out": 77.98, "invent": 80.22, "g12_in": 80.98, "better": 82.94, "build": 85.26, "g12_out": 86.94}, SC = [["g1", 0.0, 1.96, true], ["g2", 6.3, 10.86, true], ["g3", 12.76, 18.34, true], ["g4a", 20.9, 22.64, false], ["g4b", 22.64, 27.94, true], ["g5", 29.44, 31.42, false], ["g6", 31.42, 39.71, true], ["g7", 43.19, 49.81, true], ["g8", 54.94, 60.02, false], ["g9", 60.02, 67.14, false], ["g10", 67.14, 71.58, true], ["g11", 74.74, 77.98, true], ["g12", 80.98, 86.94, true]], NAVY = ["g12", "g5", "g8"], VZ = [[0, 2.0, 1.0, 1.05], [1.96, 6.3, 1.03, 1.08], [10.86, 12.76, 1.1, 1.03], [18.34, 20.9, 1.02, 1.07], [27.94, 29.44, 1.08, 1.03], [39.71, 43.19, 1.03, 1.08], [49.81, 54.94, 1.1, 1.02], [71.58, 74.74, 1.02, 1.09], [77.98, 80.98, 1.08, 1.02], [86.94, 91.87, 1.03, 1.07]], CAPS = [[0.16,1.2,0,[0.16, 0.4, 0.64, 0.88]],[1.2,2.0,1,[1.2, 1.36]],[2.0,2.72,2,[2.0, 2.4, 2.56, 2.64]],[2.72,3.68,3,[2.72, 2.88, 2.96, 3.28]],[3.68,4.72,4,[3.68, 4.0, 4.32, 4.48]],[4.72,5.44,5,[4.72, 4.8, 4.96, 5.12]],[5.44,6.4,6,[5.44, 5.76, 6.0]],[6.4,7.04,7,[6.4, 6.64, 6.8, 6.88]],[7.04,8.0,8,[7.04, 7.12, 7.28, 7.52]],[8.0,9.68,9,[8.0, 8.16, 8.32, 9.04]],[9.68,10.64,10,[9.68, 9.92, 10.08, 10.56]],[10.64,11.6,11,[10.64, 10.96, 11.12, 11.44]],[11.6,12.88,12,[11.6, 11.84, 12.24]],[12.88,13.84,13,[12.88, 13.04, 13.36, 13.6]],[13.84,15.36,14,[13.84, 14.08, 14.16, 14.8]],[15.36,16.08,15,[15.36, 15.52, 15.68, 15.84]],[16.08,16.72,16,[16.08, 16.24, 16.4, 16.56]],[16.72,18.44,17,[16.72, 16.88, 17.04, 17.68]],[18.44,19.56,18,[18.44, 18.6, 18.76]],[19.56,20.6,19,[19.56, 20.04, 20.2, 20.36]],[20.6,21.88,20,[20.6, 21.0, 21.24, 21.32]],[21.88,24.28,21,[21.88, 22.76, 22.92, 23.56]],[24.28,25.48,22,[24.28, 24.6, 24.76, 24.92]],[25.48,26.76,23,[25.48, 26.2, 26.36]],[26.76,27.56,24,[26.76, 26.947, 27.133, 27.32]],[27.56,28.04,25,[27.56, 27.64]],[28.04,28.84,26,[28.04, 28.2, 28.44, 28.52]],[28.84,30.52,27,[28.84, 29.56, 30.04, 30.28]],[30.52,31.56,28,[30.52, 30.76, 31.08]],[31.56,32.6,29,[31.56, 31.88, 32.28, 32.44]],[32.6,33.96,30,[32.6, 33.16, 33.56]],[33.96,35.4,31,[33.96, 34.2, 34.84, 35.24]],[35.4,36.28,32,[35.4, 35.48, 35.64, 35.8]],[36.28,37.76,33,[36.28, 36.6, 36.68, 37.24]],[37.76,38.84,34,[37.76, 38.28, 38.36, 38.68]],[38.84,40.77,35,[38.84, 39.81, 39.97, 40.13]],[40.77,42.13,36,[40.77, 41.09, 41.25, 41.49]],[42.13,43.89,37,[42.13, 42.85, 43.197, 43.543]],[43.89,45.17,38,[43.89, 44.05, 44.29, 44.53]],[45.17,46.53,39,[45.17, 45.33, 45.57, 45.97]],[46.53,47.41,40,[46.53, 46.77, 46.85, 47.25]],[47.41,48.53,41,[47.41, 47.89]],[48.53,49.89,42,[48.53, 48.69, 49.41]],[49.89,51.17,43,[49.89, 50.13, 50.45, 50.69]],[51.17,52.05,44,[51.17, 51.65, 51.81, 51.97]],[52.05,53.25,45,[52.05, 52.45, 52.61, 52.85]],[53.25,55.06,46,[53.25, 53.57, 53.73, 54.13]],[55.06,56.18,47,[55.06, 55.38, 55.78, 55.94]],[56.18,57.06,48,[56.18, 56.5, 56.66, 56.9]],[57.06,58.26,49,[57.06, 57.14, 57.38, 57.78]],[58.26,60.14,50,[58.26, 58.9, 59.14]],[60.14,61.42,51,[60.14, 60.7, 61.1]],[61.42,62.62,52,[61.42, 62.14, 62.46, 62.54]],[62.62,63.58,53,[62.62, 63.18, 63.34]],[63.58,64.54,54,[63.58, 63.9, 64.14]],[64.54,65.9,55,[64.54, 64.86, 65.42]],[65.9,67.26,56,[65.9, 66.22, 66.54]],[67.26,68.14,57,[67.26, 67.58, 67.66, 67.98]],[68.14,69.58,58,[68.14, 68.54, 68.86]],[69.58,70.14,59,[69.58, 69.66, 69.9, 69.98]],[70.14,71.02,60,[70.14, 70.46, 70.78, 70.86]],[71.02,71.66,61,[71.02, 71.1]],[71.66,72.14,62,[71.66, 71.82, 71.9, 72.06]],[72.14,73.02,63,[72.14, 72.46, 72.62, 72.78]],[73.02,74.86,64,[73.02, 73.66, 73.82, 74.14]],[74.86,75.9,65,[74.86, 75.02, 75.34, 75.5]],[75.9,76.86,66,[75.9, 76.14, 76.62]],[76.86,78.06,67,[76.86, 77.1, 77.26, 77.5]],[78.06,79.42,68,[78.06, 78.54, 78.7, 79.1]],[79.42,80.62,69,[79.42, 79.9, 80.22]],[80.62,81.1,70,[80.62, 80.86]],[81.1,82.06,71,[81.1, 81.34, 81.58, 81.82]],[82.06,82.94,72,[82.06, 82.38]],[82.94,83.58,73,[82.94, 83.26, 83.42, 83.5]],[83.58,84.3,74,[83.58, 83.74, 83.9, 84.14]],[84.3,85.58,75,[84.3, 84.46, 85.1, 85.26]],[85.58,87.02,76,[85.58, 85.66, 86.06, 86.3]],[87.02,88.3,77,[87.02, 87.34, 87.66, 87.82]],[88.3,89.1,78,[88.3, 88.62, 88.78, 88.94]],[89.1,90.38,79,[89.1, 89.58, 89.9]],[90.38,91.1,80,[90.38, 90.54, 90.86]],[91.1,91.87,81,[91.1, 91.34]]];
+      const $ = s => document.querySelector(s);
+
+      /* ---------- helpers ---------- */
+      function splitChars(el) {
+        const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), nodes = [];
+        while (w.nextNode()) nodes.push(w.currentNode);
+        nodes.forEach(n => {
+          const f = document.createDocumentFragment();
+          for (const ch of n.nodeValue) {
+            if (ch === " ") { f.appendChild(document.createTextNode(" ")); continue; }
+            const s = document.createElement("span"); s.className = "c"; s.textContent = ch;
+            const cr = document.createElement("i"); cr.className = "cr"; s.appendChild(cr); f.appendChild(s);
+          }
+          n.parentNode.replaceChild(f, n);
+        });
+        return [...el.querySelectorAll(".c")];
+      }
+      function typeIn(chars, t, cps) {
+        chars.forEach((c, i) => {
+          const cr = c.querySelector(".cr"), a = t + i / cps;
+          tl.set(c, { opacity: 1 }, a); tl.set(cr, { opacity: 1 }, a); tl.set(cr, { opacity: 0 }, a + 1 / cps);
+        });
+        return t + chars.length / cps;
+      }
+      const lineIn = (sel, t, d = 0.62) => tl.fromTo(sel, { yPercent: 108 }, { yPercent: 0, duration: d, ease: "power4.out" }, t);
+      const rise = (sel, t, d = 0.55, y = 40) => tl.fromTo(sel, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+      const pop = (sel, t, d = 0.45) => tl.fromTo(sel, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: d, ease: "back.out(1.5)" }, t);
+      const fade = (sel, t, d = 0.3) => tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: d, ease: "power2.out" }, t);
+      const grow = (sel, t, d = 0.6) => tl.fromTo(sel, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power3.inOut" }, t);
+
+      /* ---------- scene wipes: each one rises over the last; exits wipe away upward ---------- */
+      SC.forEach(([id, a, b, exits]) => {
+        const sel = "#" + id;
+        tl.fromTo(sel, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: id === "g1" ? 0.01 : 0.5, ease: "power3.inOut" }, Math.max(0, a - 0.32));
+        tl.fromTo(sel + " .pad", { y: id === "g1" ? 0 : 110 }, { y: 0, duration: 0.7, ease: "power3.out" }, Math.max(0, a - 0.32));
+        if (exits) tl.to(sel, { clipPath: "inset(0% 0% 100% 0%)", duration: 0.46, ease: "power3.inOut" }, b - 0.12);
+      });
+
+      /* ---------- caption inversion on navy scenes ---------- */
+      SC.forEach(([id, a, b]) => {
+        if (NAVY.includes(id)) { tl.set("#caps", { className: "inv" }, a + 0.2); tl.set("#caps", { className: "" }, b + 0.2); }
+      });
+
+      /* ---------- talking-head pushes ---------- */
+      VZ.forEach(([a, b, s0, s1]) => tl.fromTo("#vwrap", { scale: s0 }, { scale: s1, duration: b - a, ease: "none" }, a));
+
+      /* ---------- 1 hook: typed ---------- */
+      {
+        const el = $("#g1t");
+        // type "is parke a " then the word "scam?" (kept as its own block so the swipe can sit behind it)
+        const chars = splitChars(el);
+        const n = chars.length, cps = 12.4, t0 = 0.12;
+        const end = typeIn(chars, t0, cps);
+        fade("#g1k", 1.5, 0.4);
+        tl.fromTo("#g1bar", { scaleX: 0 }, { scaleX: 1, duration: 0.34, ease: "power3.inOut" }, 1.5);
+        tl.to("#g1sc .c", { color: "#F4F2EE", duration: 0.2, ease: "none" }, 1.55);
+      }
+
+      /* ---------- 2 product ---------- */
+      fade("#g2k", T.selling - 0.1, 0.35);
+      tl.fromTo("#g2d", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.7, ease: "power3.out" }, T.g2_in + 0.1);
+      tl.fromTo("#g2s", { y: 140, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power4.out" }, T.g2_in + 0.2);
+      lineIn("#g2q1", T.controv - 0.05); lineIn("#g2q2", T.products - 0.25);
+
+      /* ---------- 3 same product / your brand / lower price ---------- */
+      tl.fromTo("#g3s", { y: 120, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power4.out" }, T.g3_in + 0.15);
+      tl.fromTo("#g3tag", { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.5)" }, T.someone);
+      lineIn("#g3a", T.comparable - 0.3); lineIn("#g3b", T.ownbrand - 0.25); lineIn("#g3c", T.less - 0.15);
+      tl.to("#g3t1", { opacity: 0, rotationX: -90, duration: 0.18, ease: "power2.in" }, T.ownbrand);
+      tl.fromTo("#g3t2", { opacity: 0, rotationX: 90 }, { opacity: 1, rotationX: 0, duration: 0.3, ease: "power3.out" }, T.ownbrand + 0.16);
+
+      /* ---------- 4a founder ---------- */
+      fade("#g4k", T.g4a_in + 0.2, 0.35);
+      tl.fromTo("#g4f1", { y: 300, opacity: 0, rotation: -9 }, { y: 0, opacity: 1, rotation: -3, duration: 0.8, ease: "power4.out" }, T.g4a_in + 0.1);
+      tl.fromTo("#g4f2", { y: 340, opacity: 0, rotation: 8 }, { y: 0, opacity: 1, rotation: 2.2, duration: 0.8, ease: "power4.out" }, T.g4a_in + 0.22);
+      { const ch = splitChars($("#g4n")); typeIn(ch, T.chelsea, 15); }
+      fade("#g4r", T.chelsea + 0.95, 0.4);
+
+      /* ---------- 4b sweatshirts ---------- */
+      fade("#g4bk", T.overs - 0.1, 0.35);
+      tl.fromTo("#g4g", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power4.out" }, T.g4b_in + 0.1);
+      tl.fromTo("#g4s", { y: 200, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power4.out" }, T.overs + 0.25);
+      tl.fromTo("#g4box", { opacity: 0, scale: 1.12 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power3.out" }, T.name - 0.2);
+      fade("#g4nm", T.name - 0.1, 0.3);
+
+      /* ---------- 5 middle name ---------- */
+      {
+        const a = splitChars($("#g5a")), b = splitChars($("#g5b")), c = splitChars($("#g5c"));
+        let t = T.g5_in + 0.1; t = typeIn(a, t, 22); t = typeIn(b, t + 0.03, 22); t = typeIn(c, t + 0.03, 22);
+        grow("#g5u", T.middle - 0.05, 0.55); fade("#g5k", T.middle + 0.1, 0.4);
+      }
+
+      /* ---------- 6 vintage -> $16M ---------- */
+      lineIn("#g6a", T.g6_in + 0.05); lineIn("#g6b", T.g6_in + 0.18);
+      tl.fromTo("#g6ap", { strokeDasharray: 130, strokeDashoffset: 130 }, { strokeDashoffset: 0, duration: 0.4, ease: "power2.inOut" }, T.brand - 0.2);
+      tl.fromTo("#g6ah", { strokeDasharray: 80, strokeDashoffset: 80 }, { strokeDashoffset: 0, duration: 0.25, ease: "power2.out" }, T.brand + 0.15);
+      tl.fromTo("#g6br", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, T.brand + 0.2);
+      tl.fromTo("#g6p", { opacity: 0, y: 120 }, { opacity: 1, y: 0, duration: 0.7, ease: "power4.out" }, T.whopping - 0.1);
+      fade("#g6pk", T.whopping + 0.25, 0.4);
+      {
+        const num = $("#g6n"), o = { v: 0 };
+        tl.fromTo(o, { v: 0 }, { v: 16, duration: 1.0, ease: "expo.out", onUpdate: () => { num.textContent = "$" + Math.round(o.v) + "M"; } }, T.m16 + 0.12);
+        tl.fromTo("#g6n", { scale: 0.94 }, { scale: 1, duration: 0.5, ease: "back.out(2)" }, T.m16 + 1.0);
+      }
+      pop("#g6y", T.y2024 - 0.05);
+
+      /* ---------- 7 controversy ---------- */
+      fade("#g7k", T.g7_in + 0.1, 0.35);
+      rise("#g7c1", T.manuf - 0.5, 0.6, 80); lineIn("#g7a1", T.manuf - 0.2); lineIn("#g7a2", T.manuf + 0.02);
+      rise("#g7c2", T.wholesale - 0.45, 0.6, 80); lineIn("#g7b1", T.wholesale - 0.15); lineIn("#g7b2", T.wholesale + 0.4);
+
+      /* ---------- chips over his face (denial) ---------- */
+      {
+        const el = $("#ch1"); const ch = splitChars(el);
+        tl.set("#ch1", { opacity: 1 }, T.denied - 0.5);
+        typeIn(ch, T.denied - 0.45, 24);
+        tl.fromTo("#ch2", { opacity: 0, scale: 0.7, transformOrigin: "0 50%" }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.2)" }, T.denied + 0.55);
+        tl.fromTo("#ch3", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, T.custom);
+        tl.fromTo("#ch4", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, T.revis);
+        tl.to("#tov", { opacity: 0, duration: 0.25 }, T.g8_in - 0.3);
+        tl.fromTo("#ch5", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, T.invent - 0.2);
+        tl.fromTo("#ch5s", { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power3.inOut" }, T.invent + 0.7);
+      }
+
+      /* ---------- 8 who's right -> opportunity ---------- */
+      fade("#g8k", T.g8_in + 0.1, 0.4); lineIn("#g8a", T.right - 0.05); lineIn("#g8b", T.right + 0.2);
+      tl.to("#g8x", { y: -140, opacity: 0, duration: 0.4, ease: "power3.in" }, T.opp - 0.45);
+      tl.fromTo("#g8y", { y: 140, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power4.out" }, T.opp - 0.2);
+      fade("#g8k2", T.opp - 0.1, 0.35); lineIn("#g8c", T.opp - 0.05); lineIn("#g8d", T.opp + 0.2);
+      grow("#g8u", T.opp + 0.55, 0.7); fade("#g8k3", T.anyone, 0.4);
+
+      /* ---------- 9 $125 vs $50 ---------- */
+      rise("#g9c1", T.g9_in + 0.1, 0.65, 120);
+      {
+        const a = $("#g9n1"), b = $("#g9n2"), o1 = { v: 0 }, o2 = { v: 0 };
+        tl.fromTo(o1, { v: 0 }, { v: 125, duration: 0.9, ease: "power3.out", onUpdate: () => { a.textContent = "$" + Math.round(o1.v); } }, T.p125 + 0.2);
+        rise("#g9c2", T.compq - 0.3, 0.65, 120);
+        tl.fromTo(o2, { v: 0 }, { v: 50, duration: 0.7, ease: "power3.out", onUpdate: () => { b.textContent = "$" + Math.round(o2.v); } }, T.p50 + 0.05);
+      }
+      fade("#g9cq", T.compq, 0.5);
+      tl.fromTo("#g9pc", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, T.p50 + 0.65);
+
+      /* ---------- 10 demand ---------- */
+      fade("#g10k", T.g10_in + 0.1, 0.35); lineIn("#g10a", T.demand - 0.1, 0.7); lineIn("#g10b", T.demand + 0.25, 0.7);
+      tl.fromTo("#g10cc", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.45, ease: "back.out(1.8)" }, T.demand + 0.55);
+      tl.fromTo("#g10cp", { strokeDasharray: 140, strokeDashoffset: 140 }, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, T.demand + 0.8);
+      fade("#g10k2", T.convince - 0.15, 0.4); fade("#g10c", T.convince, 0.4);
+      tl.fromTo("#g10s", { scaleX: 0 }, { scaleX: 1, duration: 0.35, ease: "power3.inOut" }, T.sweat - 0.1);
+
+      /* ---------- 11 every industry ---------- */
+      {
+        const W = ["Clothing", "Coffee", "Skincare", "Furniture", "Candles", "Snacks", "Fitness", "Anything"];
+        const reel = $("#g11r");
+        W.forEach(w => { const d = document.createElement("div"); d.textContent = w; d.className = "h";
+          d.style.cssText = "position:relative; height:230px; line-height:230px; padding-left:56px; font-size:150px; color:#F4F2EE; font-stretch:106%"; reel.appendChild(d); });
+        const start = T.g11_in + 0.2, step = (T.notjust - 0.1 - start) / (W.length - 1);
+        W.forEach((w, i) => { if (i) tl.to("#g11r", { y: -230 * i, duration: Math.min(0.2, step * 0.8), ease: "power2.inOut" }, start + step * (i - 1) + step * 0.2); });
+      }
+      fade("#g11k", T.g11_in + 0.1, 0.35); tl.fromTo("#g11p", { opacity: 0, y: 70 }, { opacity: 1, y: 0, duration: 0.55, ease: "power4.out" }, T.g11_in + 0.1);
+      lineIn("#g11a", T.notjust - 0.25); lineIn("#g11b", T.notjust - 0.05, 0.7);
+
+      /* ---------- 12 playbook ---------- */
+      [["#g12r1", T.g12_in + 0.15], ["#g12r2", T.better - 0.1], ["#g12r3", T.build - 0.2]].forEach(([s, t]) => {
+        tl.fromTo(s, { opacity: 0, y: 70 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, t);
+        tl.fromTo(s + " .g12l", { yPercent: 108 }, { yPercent: 0, duration: 0.6, ease: "power4.out", stagger: 0.09 }, t + 0.08);
+      });
+
+      /* ---------- captions ---------- */
+      CAPS.forEach(([t0, t1, k, ws]) => {
+        const s = "#c" + k;
+        tl.fromTo(s, { opacity: 0, y: 14, xPercent: -50 }, { opacity: 1, y: 0, xPercent: -50, duration: 0.14, ease: "power2.out" }, t0);
+        ws.forEach((wt, q) => tl.set(`#w${k}_${q}`, { opacity: 1 }, wt));
+        tl.set(s, { opacity: 0 }, t1);
+      });
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
