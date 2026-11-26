@@ -84,6 +84,7 @@
       <!-- ========== 3 · same product, your brand, lower price ========== -->
       <section id="g3" class="scene sky clip" data-start="10.994" data-duration="6.083" data-track-index="4" style="z-index:23"><div class="pad">
         <img class="ph" id="g3s" src="assets/img/blue_cut.png" style="left:270px; top:170px; width:540px" />
+        <div class="frame" id="g3d" style="left:220px; top:160px; width:640px; height:509px; padding:0; border-radius:22px; overflow:hidden; opacity:0"><img src="assets/img/tiktok_dk.jpg" style="object-fit:fill" /></div>
         <div id="g3tag" class="pill" style="left:50%; top:712px; transform:translateX(-50%); width:520px; height:96px; background:var(--cream); color:var(--navy); perspective:600px">
           <div id="g3t1" class="abs" style="inset:0; display:flex; align-items:center; justify-content:center; font-family:'Graduate',serif; font-weight:400; letter-spacing:.08em; font-size:50px">PARKE</div>
           <div id="g3t2" class="abs" style="inset:0; display:flex; align-items:center; justify-content:center; font-size:36px; opacity:0">Your brand</div>
@@ -442,6 +443,8 @@
       /* ---------- 3 same product / your brand / lower price ---------- */
       tl.fromTo("#g3s", { y: 120, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power4.out" }, T.g3_in + 0.15);
       tl.fromTo("#g3tag", { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.5)" }, T.someone);
+      tl.to("#g3s", { y: -140, opacity: 0, duration: 0.4, ease: "power3.in" }, T.comparable - 0.45);
+      tl.fromTo("#g3d", { y: 280, opacity: 0, rotation: 3 }, { y: 0, opacity: 1, rotation: -1, duration: 0.75, ease: "power4.out" }, T.comparable - 0.2);
       lineIn("#g3a", T.comparable - 0.3); lineIn("#g3b", T.ownbrand - 0.25); lineIn("#g3c", T.less - 0.15);
       tl.to("#g3t1", { opacity: 0, rotationX: -90, duration: 0.18, ease: "power2.in" }, T.ownbrand);
       tl.fromTo("#g3t2", { opacity: 0, rotationX: 90 }, { opacity: 1, rotationX: 0, duration: 0.3, ease: "power3.out" }, T.ownbrand + 0.16);
