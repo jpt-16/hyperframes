@@ -1,0 +1,650 @@
+{
+ "duration": 39.36,
+ "lines": [
+  {
+   "i": 0,
+   "id": "h1",
+   "text": "People think third base is an easy position. Until they realize how little time you have to react.",
+   "spoken": "People think third base is an easy position. Until they realize how little time you have to react.",
+   "t0": 0.2,
+   "t1": 5.413,
+   "words": [
+    {
+     "w": "People",
+     "t0": 0.228,
+     "t1": 0.553
+    },
+    {
+     "w": "think",
+     "t0": 0.603,
+     "t1": 0.778
+    },
+    {
+     "w": "third",
+     "t0": 0.853,
+     "t1": 1.078
+    },
+    {
+     "w": "base",
+     "t0": 1.128,
+     "t1": 1.378
+    },
+    {
+     "w": "is",
+     "t0": 1.428,
+     "t1": 1.603
+    },
+    {
+     "w": "an",
+     "t0": 1.603,
+     "t1": 1.728
+    },
+    {
+     "w": "easy",
+     "t0": 1.878,
+     "t1": 2.078
+    },
+    {
+     "w": "position.",
+     "t0": 2.128,
+     "t1": 2.828
+    },
+    {
+     "w": "Until",
+     "t0": 2.953,
+     "t1": 3.128
+    },
+    {
+     "w": "they",
+     "t0": 3.153,
+     "t1": 3.253
+    },
+    {
+     "w": "realize",
+     "t0": 3.303,
+     "t1": 3.728
+    },
+    {
+     "w": "how",
+     "t0": 3.778,
+     "t1": 3.953
+    },
+    {
+     "w": "little",
+     "t0": 4.003,
+     "t1": 4.178
+    },
+    {
+     "w": "time",
+     "t0": 4.228,
+     "t1": 4.503
+    },
+    {
+     "w": "you",
+     "t0": 4.553,
+     "t1": 4.628
+    },
+    {
+     "w": "have",
+     "t0": 4.678,
+     "t1": 4.828
+    },
+    {
+     "w": "to",
+     "t0": 4.878,
+     "t1": 4.928
+    },
+    {
+     "w": "react.",
+     "t0": 4.978,
+     "t1": 5.428
+    }
+   ]
+  },
+  {
+   "i": 1,
+   "id": "n1",
+   "text": "Number one: reaction time. Third basemen stand close to the hitter, so a hard-hit ball can reach them incredibly quickly.",
+   "spoken": "Number one: reaction time. Third basemen stand close to the hitter, so a hard-hit ball can reach them incredibly quickly.",
+   "t0": 5.513,
+   "t1": 12.026,
+   "words": [
+    {
+     "w": "Number",
+     "t0": 5.556,
+     "t1": 5.781
+    },
+    {
+     "w": "one:",
+     "t0": 5.831,
+     "t1": 6.231
+    },
+    {
+     "w": "reaction",
+     "t0": 6.356,
+     "t1": 6.756
+    },
+    {
+     "w": "time.",
+     "t0": 6.806,
+     "t1": 7.406
+    },
+    {
+     "w": "Third",
+     "t0": 7.556,
+     "t1": 7.756
+    },
+    {
+     "w": "basemen",
+     "t0": 7.806,
+     "t1": 8.181
+    },
+    {
+     "w": "stand",
+     "t0": 8.231,
+     "t1": 8.506
+    },
+    {
+     "w": "close",
+     "t0": 8.556,
+     "t1": 8.806
+    },
+    {
+     "w": "to",
+     "t0": 8.856,
+     "t1": 8.906
+    },
+    {
+     "w": "the",
+     "t0": 8.931,
+     "t1": 8.981
+    },
+    {
+     "w": "hitter,",
+     "t0": 9.031,
+     "t1": 9.381
+    },
+    {
+     "w": "so",
+     "t0": 9.481,
+     "t1": 9.656
+    },
+    {
+     "w": "a",
+     "t0": 9.656,
+     "t1": 9.656
+    },
+    {
+     "w": "hard-hit",
+     "t0": 9.731,
+     "t1": 10.156
+    },
+    {
+     "w": "ball",
+     "t0": 10.206,
+     "t1": 10.456
+    },
+    {
+     "w": "can",
+     "t0": 10.506,
+     "t1": 10.581
+    },
+    {
+     "w": "reach",
+     "t0": 10.631,
+     "t1": 10.856
+    },
+    {
+     "w": "them",
+     "t0": 10.906,
+     "t1": 11.031
+    },
+    {
+     "w": "incredibly",
+     "t0": 11.081,
+     "t1": 11.606
+    },
+    {
+     "w": "quickly.",
+     "t0": 11.656,
+     "t1": 12.05
+    }
+   ]
+  },
+  {
+   "i": 2,
+   "id": "n2",
+   "text": "Number two: the hot corner. They\u2019re constantly dealing with hard ground balls, sharp line drives, and unpredictable hops.",
+   "spoken": "Number two: the hot corner. They're constantly dealing with hard ground balls, sharp line drives, and unpredictable hops.",
+   "t0": 12.126,
+   "t1": 18.628,
+   "words": [
+    {
+     "w": "Number",
+     "t0": 12.156,
+     "t1": 12.381
+    },
+    {
+     "w": "two:",
+     "t0": 12.456,
+     "t1": 12.781
+    },
+    {
+     "w": "the",
+     "t0": 12.856,
+     "t1": 12.906
+    },
+    {
+     "w": "hot",
+     "t0": 12.956,
+     "t1": 13.156
+    },
+    {
+     "w": "corner.",
+     "t0": 13.206,
+     "t1": 13.831
+    },
+    {
+     "w": "They're",
+     "t0": 13.981,
+     "t1": 14.131
+    },
+    {
+     "w": "constantly",
+     "t0": 14.181,
+     "t1": 14.656
+    },
+    {
+     "w": "dealing",
+     "t0": 14.706,
+     "t1": 14.981
+    },
+    {
+     "w": "with",
+     "t0": 15.006,
+     "t1": 15.081
+    },
+    {
+     "w": "hard",
+     "t0": 15.131,
+     "t1": 15.406
+    },
+    {
+     "w": "ground",
+     "t0": 15.456,
+     "t1": 15.706
+    },
+    {
+     "w": "balls,",
+     "t0": 15.756,
+     "t1": 16.206
+    },
+    {
+     "w": "sharp",
+     "t0": 16.331,
+     "t1": 16.606
+    },
+    {
+     "w": "line",
+     "t0": 16.656,
+     "t1": 16.906
+    },
+    {
+     "w": "drives,",
+     "t0": 16.956,
+     "t1": 17.381
+    },
+    {
+     "w": "and",
+     "t0": 17.431,
+     "t1": 17.506
+    },
+    {
+     "w": "unpredictable",
+     "t0": 17.581,
+     "t1": 18.181
+    },
+    {
+     "w": "hops.",
+     "t0": 18.231,
+     "t1": 18.654
+    }
+   ]
+  },
+  {
+   "i": 3,
+   "id": "n3",
+   "text": "Number three: bunts. A third baseman has to recognize the play immediately, charge the ball, field it cleanly, and make a throw.",
+   "spoken": "Number three: bunts. A third baseman has to recognize the play immediately, charge the ball, field it cleanly, and make a throw.",
+   "t0": 18.728,
+   "t1": 25.684,
+   "words": [
+    {
+     "w": "Number",
+     "t0": 18.759,
+     "t1": 18.984
+    },
+    {
+     "w": "three:",
+     "t0": 19.059,
+     "t1": 19.434
+    },
+    {
+     "w": "bunts.",
+     "t0": 19.559,
+     "t1": 20.409
+    },
+    {
+     "w": "A",
+     "t0": 20.409,
+     "t1": 20.409
+    },
+    {
+     "w": "third",
+     "t0": 20.484,
+     "t1": 20.709
+    },
+    {
+     "w": "baseman",
+     "t0": 20.759,
+     "t1": 21.109
+    },
+    {
+     "w": "has",
+     "t0": 21.134,
+     "t1": 21.259
+    },
+    {
+     "w": "to",
+     "t0": 21.309,
+     "t1": 21.384
+    },
+    {
+     "w": "recognize",
+     "t0": 21.434,
+     "t1": 21.984
+    },
+    {
+     "w": "the",
+     "t0": 22.009,
+     "t1": 22.059
+    },
+    {
+     "w": "play",
+     "t0": 22.109,
+     "t1": 22.334
+    },
+    {
+     "w": "immediately,",
+     "t0": 22.384,
+     "t1": 23.084
+    },
+    {
+     "w": "charge",
+     "t0": 23.209,
+     "t1": 23.559
+    },
+    {
+     "w": "the",
+     "t0": 23.609,
+     "t1": 23.659
+    },
+    {
+     "w": "ball,",
+     "t0": 23.709,
+     "t1": 24.009
+    },
+    {
+     "w": "field",
+     "t0": 24.109,
+     "t1": 24.334
+    },
+    {
+     "w": "it",
+     "t0": 24.359,
+     "t1": 24.409
+    },
+    {
+     "w": "cleanly,",
+     "t0": 24.459,
+     "t1": 24.859
+    },
+    {
+     "w": "and",
+     "t0": 24.909,
+     "t1": 24.984
+    },
+    {
+     "w": "make",
+     "t0": 25.034,
+     "t1": 25.259
+    },
+    {
+     "w": "a",
+     "t0": 25.259,
+     "t1": 25.259
+    },
+    {
+     "w": "throw.",
+     "t0": 25.334,
+     "t1": 25.705
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "id": "n4",
+   "text": "And number four: the throw. After making a difficult play, they still have to make a strong, accurate throw across the diamond.",
+   "spoken": "And number four: the throw. After making a difficult play, they still have to make a strong, accurate throw across the diamond.",
+   "t0": 25.784,
+   "t1": 32.484,
+   "words": [
+    {
+     "w": "And",
+     "t0": 25.824,
+     "t1": 25.899
+    },
+    {
+     "w": "number",
+     "t0": 25.924,
+     "t1": 26.149
+    },
+    {
+     "w": "four:",
+     "t0": 26.224,
+     "t1": 26.699
+    },
+    {
+     "w": "the",
+     "t0": 26.824,
+     "t1": 26.899
+    },
+    {
+     "w": "throw.",
+     "t0": 26.974,
+     "t1": 27.649
+    },
+    {
+     "w": "After",
+     "t0": 27.874,
+     "t1": 28.074
+    },
+    {
+     "w": "making",
+     "t0": 28.124,
+     "t1": 28.424
+    },
+    {
+     "w": "a",
+     "t0": 28.424,
+     "t1": 28.424
+    },
+    {
+     "w": "difficult",
+     "t0": 28.474,
+     "t1": 28.824
+    },
+    {
+     "w": "play,",
+     "t0": 28.874,
+     "t1": 29.174
+    },
+    {
+     "w": "they",
+     "t0": 29.224,
+     "t1": 29.299
+    },
+    {
+     "w": "still",
+     "t0": 29.349,
+     "t1": 29.574
+    },
+    {
+     "w": "have",
+     "t0": 29.624,
+     "t1": 29.774
+    },
+    {
+     "w": "to",
+     "t0": 29.799,
+     "t1": 29.849
+    },
+    {
+     "w": "make",
+     "t0": 29.874,
+     "t1": 30.074
+    },
+    {
+     "w": "a",
+     "t0": 30.074,
+     "t1": 30.074
+    },
+    {
+     "w": "strong,",
+     "t0": 30.149,
+     "t1": 30.624
+    },
+    {
+     "w": "accurate",
+     "t0": 30.799,
+     "t1": 31.149
+    },
+    {
+     "w": "throw",
+     "t0": 31.224,
+     "t1": 31.524
+    },
+    {
+     "w": "across",
+     "t0": 31.574,
+     "t1": 31.849
+    },
+    {
+     "w": "the",
+     "t0": 31.899,
+     "t1": 31.949
+    },
+    {
+     "w": "diamond.",
+     "t0": 31.999,
+     "t1": 32.489
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "id": "e1",
+   "text": "Third base isn\u2019t just about stopping hard-hit balls.",
+   "spoken": "Third base isn't just about stopping hard-hit balls.",
+   "t0": 32.634,
+   "t1": 35.283,
+   "words": [
+    {
+     "w": "Third",
+     "t0": 32.692,
+     "t1": 32.942
+    },
+    {
+     "w": "base",
+     "t0": 32.992,
+     "t1": 33.292
+    },
+    {
+     "w": "isn't",
+     "t0": 33.367,
+     "t1": 33.517
+    },
+    {
+     "w": "just",
+     "t0": 33.542,
+     "t1": 33.717
+    },
+    {
+     "w": "about",
+     "t0": 33.742,
+     "t1": 33.917
+    },
+    {
+     "w": "stopping",
+     "t0": 33.967,
+     "t1": 34.342
+    },
+    {
+     "w": "hard-hit",
+     "t0": 34.392,
+     "t1": 34.817
+    },
+    {
+     "w": "balls.",
+     "t0": 34.867,
+     "t1": 35.456
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "id": "e2",
+   "text": "It\u2019s about making difficult plays look routine.",
+   "spoken": "It's about making difficult plays look routine.",
+   "t0": 35.383,
+   "t1": 37.662,
+   "words": [
+    {
+     "w": "It's",
+     "t0": 35.415,
+     "t1": 35.515
+    },
+    {
+     "w": "about",
+     "t0": 35.54,
+     "t1": 35.74
+    },
+    {
+     "w": "making",
+     "t0": 35.79,
+     "t1": 36.14
+    },
+    {
+     "w": "difficult",
+     "t0": 36.215,
+     "t1": 36.54
+    },
+    {
+     "w": "plays",
+     "t0": 36.59,
+     "t1": 36.915
+    },
+    {
+     "w": "look",
+     "t0": 36.965,
+     "t1": 37.115
+    },
+    {
+     "w": "routine.",
+     "t0": 37.165,
+     "t1": 37.689
+    }
+   ]
+  }
+ ]
+}
