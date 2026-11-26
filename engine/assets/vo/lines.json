@@ -1,0 +1,680 @@
+[
+ {
+  "i": 0,
+  "id": "h1",
+  "text": "Second base looks easy\u2026 until you see everything these players have to do.",
+  "spoken": "Second base looks easy, until you see everything these players have to do.",
+  "dur": 2.944,
+  "words": [
+   {
+    "w": "Second",
+    "start": 0.09,
+    "end": 0.265
+   },
+   {
+    "w": "base",
+    "start": 0.29,
+    "end": 0.465
+   },
+   {
+    "w": "looks",
+    "start": 0.49,
+    "end": 0.64
+   },
+   {
+    "w": "easy,",
+    "start": 0.74,
+    "end": 1.165
+   },
+   {
+    "w": "until",
+    "start": 1.29,
+    "end": 1.465
+   },
+   {
+    "w": "you",
+    "start": 1.49,
+    "end": 1.565
+   },
+   {
+    "w": "see",
+    "start": 1.615,
+    "end": 1.715
+   },
+   {
+    "w": "everything",
+    "start": 1.79,
+    "end": 2.015
+   },
+   {
+    "w": "these",
+    "start": 2.04,
+    "end": 2.14
+   },
+   {
+    "w": "players",
+    "start": 2.19,
+    "end": 2.415
+   },
+   {
+    "w": "have",
+    "start": 2.44,
+    "end": 2.54
+   },
+   {
+    "w": "to",
+    "start": 2.565,
+    "end": 2.615
+   },
+   {
+    "w": "do.",
+    "start": 2.665,
+    "end": 2.944
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "p1",
+  "text": "Number one: turning double plays. They have to catch the ball, position their feet, avoid the incoming runner, and get the throw off almost instantly.",
+  "spoken": "Number one: turning double plays. They have to catch the ball, position their feet, avoid the incoming runner, and get the throw off almost instantly.",
+  "dur": 6.165,
+  "words": [
+   {
+    "w": "Number",
+    "start": 0.048,
+    "end": 0.198
+   },
+   {
+    "w": "one:",
+    "start": 0.248,
+    "end": 0.523
+   },
+   {
+    "w": "turning",
+    "start": 0.623,
+    "end": 0.798
+   },
+   {
+    "w": "double",
+    "start": 0.823,
+    "end": 0.973
+   },
+   {
+    "w": "plays.",
+    "start": 1.023,
+    "end": 1.623
+   },
+   {
+    "w": "They",
+    "start": 1.723,
+    "end": 1.798
+   },
+   {
+    "w": "have",
+    "start": 1.823,
+    "end": 1.923
+   },
+   {
+    "w": "to",
+    "start": 1.948,
+    "end": 1.998
+   },
+   {
+    "w": "catch",
+    "start": 2.048,
+    "end": 2.198
+   },
+   {
+    "w": "the",
+    "start": 2.223,
+    "end": 2.273
+   },
+   {
+    "w": "ball,",
+    "start": 2.323,
+    "end": 2.623
+   },
+   {
+    "w": "position",
+    "start": 2.698,
+    "end": 2.973
+   },
+   {
+    "w": "their",
+    "start": 2.998,
+    "end": 3.073
+   },
+   {
+    "w": "feet,",
+    "start": 3.148,
+    "end": 3.498
+   },
+   {
+    "w": "avoid",
+    "start": 3.598,
+    "end": 3.873
+   },
+   {
+    "w": "the",
+    "start": 3.898,
+    "end": 3.948
+   },
+   {
+    "w": "incoming",
+    "start": 4.023,
+    "end": 4.298
+   },
+   {
+    "w": "runner,",
+    "start": 4.348,
+    "end": 4.623
+   },
+   {
+    "w": "and",
+    "start": 4.673,
+    "end": 4.748
+   },
+   {
+    "w": "get",
+    "start": 4.773,
+    "end": 4.848
+   },
+   {
+    "w": "the",
+    "start": 4.873,
+    "end": 4.923
+   },
+   {
+    "w": "throw",
+    "start": 4.998,
+    "end": 5.198
+   },
+   {
+    "w": "off",
+    "start": 5.273,
+    "end": 5.373
+   },
+   {
+    "w": "almost",
+    "start": 5.423,
+    "end": 5.673
+   },
+   {
+    "w": "instantly.",
+    "start": 5.748,
+    "end": 6.165
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "p2",
+  "text": "Number two: range. Second basemen have to cover ground up the middle, react quickly, and turn balls that look like hits into outs.",
+  "spoken": "Number two: range. Second basemen have to cover ground up the middle, react quickly, and turn balls that look like hits into outs.",
+  "dur": 5.973,
+  "words": [
+   {
+    "w": "Number",
+    "start": 0.048,
+    "end": 0.223
+   },
+   {
+    "w": "two:",
+    "start": 0.298,
+    "end": 0.648
+   },
+   {
+    "w": "range.",
+    "start": 0.773,
+    "end": 1.448
+   },
+   {
+    "w": "Second",
+    "start": 1.623,
+    "end": 1.798
+   },
+   {
+    "w": "basemen",
+    "start": 1.823,
+    "end": 2.098
+   },
+   {
+    "w": "have",
+    "start": 2.123,
+    "end": 2.223
+   },
+   {
+    "w": "to",
+    "start": 2.248,
+    "end": 2.298
+   },
+   {
+    "w": "cover",
+    "start": 2.348,
+    "end": 2.498
+   },
+   {
+    "w": "ground",
+    "start": 2.548,
+    "end": 2.748
+   },
+   {
+    "w": "up",
+    "start": 2.798,
+    "end": 2.848
+   },
+   {
+    "w": "the",
+    "start": 2.873,
+    "end": 2.923
+   },
+   {
+    "w": "middle,",
+    "start": 2.948,
+    "end": 3.223
+   },
+   {
+    "w": "react",
+    "start": 3.323,
+    "end": 3.573
+   },
+   {
+    "w": "quickly,",
+    "start": 3.623,
+    "end": 4.023
+   },
+   {
+    "w": "and",
+    "start": 4.123,
+    "end": 4.198
+   },
+   {
+    "w": "turn",
+    "start": 4.248,
+    "end": 4.473
+   },
+   {
+    "w": "balls",
+    "start": 4.523,
+    "end": 4.798
+   },
+   {
+    "w": "that",
+    "start": 4.823,
+    "end": 4.898
+   },
+   {
+    "w": "look",
+    "start": 4.923,
+    "end": 5.023
+   },
+   {
+    "w": "like",
+    "start": 5.048,
+    "end": 5.173
+   },
+   {
+    "w": "hits",
+    "start": 5.223,
+    "end": 5.398
+   },
+   {
+    "w": "into",
+    "start": 5.448,
+    "end": 5.548
+   },
+   {
+    "w": "outs.",
+    "start": 5.648,
+    "end": 5.973
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "p3",
+  "text": "Number three: communication. They\u2019re constantly working with the shortstop to decide who\u2019s covering second, who\u2019s taking the ball, and where the next throw goes.",
+  "spoken": "Number three: communication. They're constantly working with the shortstop to decide who's covering second, who's taking the ball, and where the next throw goes.",
+  "dur": 6.613,
+  "words": [
+   {
+    "w": "Number",
+    "start": 0.048,
+    "end": 0.223
+   },
+   {
+    "w": "three:",
+    "start": 0.298,
+    "end": 0.673
+   },
+   {
+    "w": "communication.",
+    "start": 0.748,
+    "end": 1.598
+   },
+   {
+    "w": "They're",
+    "start": 1.723,
+    "end": 1.823
+   },
+   {
+    "w": "constantly",
+    "start": 1.873,
+    "end": 2.248
+   },
+   {
+    "w": "working",
+    "start": 2.298,
+    "end": 2.498
+   },
+   {
+    "w": "with",
+    "start": 2.523,
+    "end": 2.598
+   },
+   {
+    "w": "the",
+    "start": 2.598,
+    "end": 2.648
+   },
+   {
+    "w": "shortstop",
+    "start": 2.723,
+    "end": 3.123
+   },
+   {
+    "w": "to",
+    "start": 3.148,
+    "end": 3.198
+   },
+   {
+    "w": "decide",
+    "start": 3.223,
+    "end": 3.573
+   },
+   {
+    "w": "who's",
+    "start": 3.598,
+    "end": 3.723
+   },
+   {
+    "w": "covering",
+    "start": 3.773,
+    "end": 3.973
+   },
+   {
+    "w": "second,",
+    "start": 4.048,
+    "end": 4.423
+   },
+   {
+    "w": "who's",
+    "start": 4.498,
+    "end": 4.623
+   },
+   {
+    "w": "taking",
+    "start": 4.673,
+    "end": 4.873
+   },
+   {
+    "w": "the",
+    "start": 4.898,
+    "end": 4.948
+   },
+   {
+    "w": "ball,",
+    "start": 4.998,
+    "end": 5.423
+   },
+   {
+    "w": "and",
+    "start": 5.473,
+    "end": 5.548
+   },
+   {
+    "w": "where",
+    "start": 5.573,
+    "end": 5.673
+   },
+   {
+    "w": "the",
+    "start": 5.698,
+    "end": 5.748
+   },
+   {
+    "w": "next",
+    "start": 5.773,
+    "end": 5.923
+   },
+   {
+    "w": "throw",
+    "start": 5.973,
+    "end": 6.148
+   },
+   {
+    "w": "goes.",
+    "start": 6.198,
+    "end": 6.613
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "p4",
+  "text": "And number four: the throws. They constantly have to throw accurately from awkward angles, while moving, or right after making a difficult play.",
+  "spoken": "And number four: the throws. They constantly have to throw accurately from awkward angles, while moving, or right after making a difficult play.",
+  "dur": 6.037,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.048,
+    "end": 0.123
+   },
+   {
+    "w": "number",
+    "start": 0.148,
+    "end": 0.298
+   },
+   {
+    "w": "four:",
+    "start": 0.373,
+    "end": 0.748
+   },
+   {
+    "w": "the",
+    "start": 0.823,
+    "end": 0.873
+   },
+   {
+    "w": "throws.",
+    "start": 0.948,
+    "end": 1.623
+   },
+   {
+    "w": "They",
+    "start": 1.748,
+    "end": 1.823
+   },
+   {
+    "w": "constantly",
+    "start": 1.873,
+    "end": 2.198
+   },
+   {
+    "w": "have",
+    "start": 2.223,
+    "end": 2.323
+   },
+   {
+    "w": "to",
+    "start": 2.348,
+    "end": 2.398
+   },
+   {
+    "w": "throw",
+    "start": 2.473,
+    "end": 2.648
+   },
+   {
+    "w": "accurately",
+    "start": 2.773,
+    "end": 3.048
+   },
+   {
+    "w": "from",
+    "start": 3.073,
+    "end": 3.198
+   },
+   {
+    "w": "awkward",
+    "start": 3.298,
+    "end": 3.473
+   },
+   {
+    "w": "angles,",
+    "start": 3.598,
+    "end": 3.873
+   },
+   {
+    "w": "while",
+    "start": 3.923,
+    "end": 4.048
+   },
+   {
+    "w": "moving,",
+    "start": 4.098,
+    "end": 4.573
+   },
+   {
+    "w": "or",
+    "start": 4.673,
+    "end": 4.798
+   },
+   {
+    "w": "right",
+    "start": 4.873,
+    "end": 5.023
+   },
+   {
+    "w": "after",
+    "start": 5.073,
+    "end": 5.173
+   },
+   {
+    "w": "making",
+    "start": 5.198,
+    "end": 5.448
+   },
+   {
+    "w": "a",
+    "start": 5.448,
+    "end": 5.448
+   },
+   {
+    "w": "difficult",
+    "start": 5.473,
+    "end": 5.698
+   },
+   {
+    "w": "play.",
+    "start": 5.748,
+    "end": 6.037
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "e1",
+  "text": "Second base isn\u2019t just about fielding ground balls.",
+  "spoken": "Second base isn't just about fielding ground balls.",
+  "dur": 2.389,
+  "words": [
+   {
+    "w": "Second",
+    "start": 0.09,
+    "end": 0.29
+   },
+   {
+    "w": "base",
+    "start": 0.315,
+    "end": 0.665
+   },
+   {
+    "w": "isn't",
+    "start": 0.74,
+    "end": 0.865
+   },
+   {
+    "w": "just",
+    "start": 0.89,
+    "end": 1.04
+   },
+   {
+    "w": "about",
+    "start": 1.065,
+    "end": 1.215
+   },
+   {
+    "w": "fielding",
+    "start": 1.265,
+    "end": 1.49
+   },
+   {
+    "w": "ground",
+    "start": 1.54,
+    "end": 1.79
+   },
+   {
+    "w": "balls.",
+    "start": 1.84,
+    "end": 2.389
+   }
+  ]
+ },
+ {
+  "i": 6,
+  "id": "e2",
+  "text": "It\u2019s about making the entire infield work.",
+  "spoken": "It's about making the entire infield work.",
+  "dur": 1.771,
+  "words": [
+   {
+    "w": "It's",
+    "start": 0.023,
+    "end": 0.098
+   },
+   {
+    "w": "about",
+    "start": 0.123,
+    "end": 0.273
+   },
+   {
+    "w": "making",
+    "start": 0.298,
+    "end": 0.498
+   },
+   {
+    "w": "the",
+    "start": 0.523,
+    "end": 0.573
+   },
+   {
+    "w": "entire",
+    "start": 0.598,
+    "end": 0.973
+   },
+   {
+    "w": "infield",
+    "start": 0.998,
+    "end": 1.323
+   },
+   {
+    "w": "work.",
+    "start": 1.373,
+    "end": 1.771
+   }
+  ]
+ }
+]
