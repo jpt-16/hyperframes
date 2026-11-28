@@ -1,0 +1,636 @@
+[
+ {
+  "i": 0,
+  "id": "h1",
+  "text": "Sometimes, the worst thing a baseball player can do is get an out.",
+  "spoken": "Sometimes, the worst thing a baseball player can do is get an out.",
+  "dur": 3.285,
+  "words": [
+   {
+    "w": "Sometimes,",
+    "start": 0.094,
+    "end": 0.719
+   },
+   {
+    "w": "the",
+    "start": 0.769,
+    "end": 0.819
+   },
+   {
+    "w": "worst",
+    "start": 0.869,
+    "end": 1.119
+   },
+   {
+    "w": "thing",
+    "start": 1.169,
+    "end": 1.319
+   },
+   {
+    "w": "a",
+    "start": 1.319,
+    "end": 1.319
+   },
+   {
+    "w": "baseball",
+    "start": 1.369,
+    "end": 1.744
+   },
+   {
+    "w": "player",
+    "start": 1.794,
+    "end": 2.044
+   },
+   {
+    "w": "can",
+    "start": 2.094,
+    "end": 2.244
+   },
+   {
+    "w": "do",
+    "start": 2.294,
+    "end": 2.619
+   },
+   {
+    "w": "is",
+    "start": 2.694,
+    "end": 2.794
+   },
+   {
+    "w": "get",
+    "start": 2.844,
+    "end": 2.994
+   },
+   {
+    "w": "an",
+    "start": 2.994,
+    "end": 3.019
+   },
+   {
+    "w": "out.",
+    "start": 3.144,
+    "end": 3.285
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "id": "p1",
+  "text": "With a runner on first, sometimes getting the lead runner at second is more valuable than taking the easy out at first.",
+  "spoken": "With a runner on first, sometimes getting the lead runner at second is more valuable than taking the easy out at first.",
+  "dur": 5.995,
+  "words": [
+   {
+    "w": "With",
+    "start": 0.051,
+    "end": 0.226
+   },
+   {
+    "w": "a",
+    "start": 0.226,
+    "end": 0.226
+   },
+   {
+    "w": "runner",
+    "start": 0.276,
+    "end": 0.501
+   },
+   {
+    "w": "on",
+    "start": 0.576,
+    "end": 0.676
+   },
+   {
+    "w": "first,",
+    "start": 0.751,
+    "end": 1.251
+   },
+   {
+    "w": "sometimes",
+    "start": 1.401,
+    "end": 1.876
+   },
+   {
+    "w": "getting",
+    "start": 1.926,
+    "end": 2.126
+   },
+   {
+    "w": "the",
+    "start": 2.151,
+    "end": 2.201
+   },
+   {
+    "w": "lead",
+    "start": 2.251,
+    "end": 2.476
+   },
+   {
+    "w": "runner",
+    "start": 2.526,
+    "end": 2.751
+   },
+   {
+    "w": "at",
+    "start": 2.801,
+    "end": 2.876
+   },
+   {
+    "w": "second",
+    "start": 2.951,
+    "end": 3.451
+   },
+   {
+    "w": "is",
+    "start": 3.526,
+    "end": 3.626
+   },
+   {
+    "w": "more",
+    "start": 3.676,
+    "end": 3.851
+   },
+   {
+    "w": "valuable",
+    "start": 3.901,
+    "end": 4.401
+   },
+   {
+    "w": "than",
+    "start": 4.426,
+    "end": 4.526
+   },
+   {
+    "w": "taking",
+    "start": 4.576,
+    "end": 4.876
+   },
+   {
+    "w": "the",
+    "start": 4.901,
+    "end": 4.976
+   },
+   {
+    "w": "easy",
+    "start": 5.101,
+    "end": 5.301
+   },
+   {
+    "w": "out",
+    "start": 5.401,
+    "end": 5.501
+   },
+   {
+    "w": "at",
+    "start": 5.526,
+    "end": 5.576
+   },
+   {
+    "w": "first.",
+    "start": 5.626,
+    "end": 5.995
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "id": "p2",
+  "text": "With runners on first and second, a ground ball could give you two outs. But only if the defense executes the double play.",
+  "spoken": "With runners on first and second, a ground ball could give you two outs. But only if the defense executes the double play.",
+  "dur": 6.315,
+  "words": [
+   {
+    "w": "With",
+    "start": 0.051,
+    "end": 0.201
+   },
+   {
+    "w": "runners",
+    "start": 0.251,
+    "end": 0.551
+   },
+   {
+    "w": "on",
+    "start": 0.651,
+    "end": 0.751
+   },
+   {
+    "w": "first",
+    "start": 0.851,
+    "end": 1.101
+   },
+   {
+    "w": "and",
+    "start": 1.126,
+    "end": 1.201
+   },
+   {
+    "w": "second,",
+    "start": 1.276,
+    "end": 1.951
+   },
+   {
+    "w": "a",
+    "start": 1.951,
+    "end": 1.951
+   },
+   {
+    "w": "ground",
+    "start": 2.001,
+    "end": 2.326
+   },
+   {
+    "w": "ball",
+    "start": 2.376,
+    "end": 2.626
+   },
+   {
+    "w": "could",
+    "start": 2.676,
+    "end": 2.751
+   },
+   {
+    "w": "give",
+    "start": 2.801,
+    "end": 2.901
+   },
+   {
+    "w": "you",
+    "start": 2.926,
+    "end": 3.001
+   },
+   {
+    "w": "two",
+    "start": 3.051,
+    "end": 3.226
+   },
+   {
+    "w": "outs.",
+    "start": 3.351,
+    "end": 3.851
+   },
+   {
+    "w": "But",
+    "start": 3.951,
+    "end": 4.051
+   },
+   {
+    "w": "only",
+    "start": 4.151,
+    "end": 4.401
+   },
+   {
+    "w": "if",
+    "start": 4.451,
+    "end": 4.551
+   },
+   {
+    "w": "the",
+    "start": 4.576,
+    "end": 4.626
+   },
+   {
+    "w": "defense",
+    "start": 4.676,
+    "end": 5.051
+   },
+   {
+    "w": "executes",
+    "start": 5.151,
+    "end": 5.601
+   },
+   {
+    "w": "the",
+    "start": 5.626,
+    "end": 5.676
+   },
+   {
+    "w": "double",
+    "start": 5.726,
+    "end": 5.951
+   },
+   {
+    "w": "play.",
+    "start": 6.001,
+    "end": 6.315
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "id": "p3",
+  "text": "And sometimes, the smartest play is not forcing a throw. If the runner is too far along, keeping the ball can prevent a bigger mistake.",
+  "spoken": "And sometimes, the smartest play is not forcing a throw. If the runner is too far along, keeping the ball can prevent a bigger mistake.",
+  "dur": 7.232,
+  "words": [
+   {
+    "w": "And",
+    "start": 0.051,
+    "end": 0.126
+   },
+   {
+    "w": "sometimes,",
+    "start": 0.176,
+    "end": 0.851
+   },
+   {
+    "w": "the",
+    "start": 0.926,
+    "end": 0.976
+   },
+   {
+    "w": "smartest",
+    "start": 1.051,
+    "end": 1.501
+   },
+   {
+    "w": "play",
+    "start": 1.551,
+    "end": 1.776
+   },
+   {
+    "w": "is",
+    "start": 1.826,
+    "end": 1.901
+   },
+   {
+    "w": "not",
+    "start": 1.951,
+    "end": 2.176
+   },
+   {
+    "w": "forcing",
+    "start": 2.226,
+    "end": 2.576
+   },
+   {
+    "w": "a",
+    "start": 2.576,
+    "end": 2.576
+   },
+   {
+    "w": "throw.",
+    "start": 2.651,
+    "end": 3.301
+   },
+   {
+    "w": "If",
+    "start": 3.451,
+    "end": 3.526
+   },
+   {
+    "w": "the",
+    "start": 3.551,
+    "end": 3.626
+   },
+   {
+    "w": "runner",
+    "start": 3.676,
+    "end": 3.951
+   },
+   {
+    "w": "is",
+    "start": 4.001,
+    "end": 4.101
+   },
+   {
+    "w": "too",
+    "start": 4.151,
+    "end": 4.326
+   },
+   {
+    "w": "far",
+    "start": 4.376,
+    "end": 4.551
+   },
+   {
+    "w": "along,",
+    "start": 4.601,
+    "end": 5.101
+   },
+   {
+    "w": "keeping",
+    "start": 5.226,
+    "end": 5.476
+   },
+   {
+    "w": "the",
+    "start": 5.501,
+    "end": 5.551
+   },
+   {
+    "w": "ball",
+    "start": 5.601,
+    "end": 5.876
+   },
+   {
+    "w": "can",
+    "start": 5.926,
+    "end": 6.026
+   },
+   {
+    "w": "prevent",
+    "start": 6.076,
+    "end": 6.426
+   },
+   {
+    "w": "a",
+    "start": 6.426,
+    "end": 6.426
+   },
+   {
+    "w": "bigger",
+    "start": 6.476,
+    "end": 6.701
+   },
+   {
+    "w": "mistake.",
+    "start": 6.751,
+    "end": 7.232
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "id": "p4",
+  "text": "The best defenders aren\u2019t just reacting to the ball. They\u2019re reading the runners, the outs, and where the next play should happen.",
+  "spoken": "The best defenders aren't just reacting to the ball. They're reading the runners, the outs, and where the next play should happen.",
+  "dur": 5.973,
+  "words": [
+   {
+    "w": "The",
+    "start": 0.051,
+    "end": 0.101
+   },
+   {
+    "w": "best",
+    "start": 0.151,
+    "end": 0.376
+   },
+   {
+    "w": "defenders",
+    "start": 0.426,
+    "end": 0.951
+   },
+   {
+    "w": "aren't",
+    "start": 1.051,
+    "end": 1.176
+   },
+   {
+    "w": "just",
+    "start": 1.201,
+    "end": 1.351
+   },
+   {
+    "w": "reacting",
+    "start": 1.401,
+    "end": 1.826
+   },
+   {
+    "w": "to",
+    "start": 1.876,
+    "end": 1.926
+   },
+   {
+    "w": "the",
+    "start": 1.951,
+    "end": 2.001
+   },
+   {
+    "w": "ball.",
+    "start": 2.051,
+    "end": 2.676
+   },
+   {
+    "w": "They're",
+    "start": 2.801,
+    "end": 2.951
+   },
+   {
+    "w": "reading",
+    "start": 3.001,
+    "end": 3.251
+   },
+   {
+    "w": "the",
+    "start": 3.276,
+    "end": 3.351
+   },
+   {
+    "w": "runners,",
+    "start": 3.401,
+    "end": 3.801
+   },
+   {
+    "w": "the",
+    "start": 3.851,
+    "end": 3.951
+   },
+   {
+    "w": "outs,",
+    "start": 4.076,
+    "end": 4.476
+   },
+   {
+    "w": "and",
+    "start": 4.576,
+    "end": 4.651
+   },
+   {
+    "w": "where",
+    "start": 4.676,
+    "end": 4.776
+   },
+   {
+    "w": "the",
+    "start": 4.801,
+    "end": 4.851
+   },
+   {
+    "w": "next",
+    "start": 4.901,
+    "end": 5.126
+   },
+   {
+    "w": "play",
+    "start": 5.176,
+    "end": 5.401
+   },
+   {
+    "w": "should",
+    "start": 5.451,
+    "end": 5.551
+   },
+   {
+    "w": "happen.",
+    "start": 5.601,
+    "end": 5.973
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "id": "e1",
+  "text": "Getting an out is good. Getting the right out is better.",
+  "spoken": "Getting an out is good. Getting the right out is better.",
+  "dur": 2.624,
+  "words": [
+   {
+    "w": "Getting",
+    "start": 0.03,
+    "end": 0.355
+   },
+   {
+    "w": "an",
+    "start": 0.355,
+    "end": 0.405
+   },
+   {
+    "w": "out",
+    "start": 0.53,
+    "end": 0.655
+   },
+   {
+    "w": "is",
+    "start": 0.705,
+    "end": 0.805
+   },
+   {
+    "w": "good.",
+    "start": 0.855,
+    "end": 1.255
+   },
+   {
+    "w": "Getting",
+    "start": 1.405,
+    "end": 1.605
+   },
+   {
+    "w": "the",
+    "start": 1.63,
+    "end": 1.68
+   },
+   {
+    "w": "right",
+    "start": 1.73,
+    "end": 1.905
+   },
+   {
+    "w": "out",
+    "start": 2.005,
+    "end": 2.105
+   },
+   {
+    "w": "is",
+    "start": 2.13,
+    "end": 2.23
+   },
+   {
+    "w": "better.",
+    "start": 2.28,
+    "end": 2.624
+   }
+  ]
+ }
+]

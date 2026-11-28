@@ -1,0 +1,645 @@
+{
+ "duration": 33.21,
+ "lines": [
+  {
+   "i": 0,
+   "id": "h1",
+   "text": "Sometimes, the worst thing a baseball player can do is get an out.",
+   "spoken": "Sometimes, the worst thing a baseball player can do is get an out.",
+   "t0": 0.2,
+   "t1": 3.431,
+   "words": [
+    {
+     "w": "Sometimes,",
+     "t0": 0.275,
+     "t1": 0.9
+    },
+    {
+     "w": "the",
+     "t0": 0.95,
+     "t1": 1.0
+    },
+    {
+     "w": "worst",
+     "t0": 1.05,
+     "t1": 1.3
+    },
+    {
+     "w": "thing",
+     "t0": 1.35,
+     "t1": 1.5
+    },
+    {
+     "w": "a",
+     "t0": 1.5,
+     "t1": 1.5
+    },
+    {
+     "w": "baseball",
+     "t0": 1.55,
+     "t1": 1.925
+    },
+    {
+     "w": "player",
+     "t0": 1.975,
+     "t1": 2.225
+    },
+    {
+     "w": "can",
+     "t0": 2.275,
+     "t1": 2.425
+    },
+    {
+     "w": "do",
+     "t0": 2.475,
+     "t1": 2.8
+    },
+    {
+     "w": "is",
+     "t0": 2.875,
+     "t1": 2.975
+    },
+    {
+     "w": "get",
+     "t0": 3.025,
+     "t1": 3.175
+    },
+    {
+     "w": "an",
+     "t0": 3.175,
+     "t1": 3.2
+    },
+    {
+     "w": "out.",
+     "t0": 3.325,
+     "t1": 3.466
+    }
+   ]
+  },
+  {
+   "i": 1,
+   "id": "p1",
+   "text": "With a runner on first, sometimes getting the lead runner at second is more valuable than taking the easy out at first.",
+   "spoken": "With a runner on first, sometimes getting the lead runner at second is more valuable than taking the easy out at first.",
+   "t0": 3.481,
+   "t1": 9.446,
+   "words": [
+    {
+     "w": "With",
+     "t0": 3.502,
+     "t1": 3.677
+    },
+    {
+     "w": "a",
+     "t0": 3.677,
+     "t1": 3.677
+    },
+    {
+     "w": "runner",
+     "t0": 3.727,
+     "t1": 3.952
+    },
+    {
+     "w": "on",
+     "t0": 4.027,
+     "t1": 4.127
+    },
+    {
+     "w": "first,",
+     "t0": 4.202,
+     "t1": 4.702
+    },
+    {
+     "w": "sometimes",
+     "t0": 4.852,
+     "t1": 5.327
+    },
+    {
+     "w": "getting",
+     "t0": 5.377,
+     "t1": 5.577
+    },
+    {
+     "w": "the",
+     "t0": 5.602,
+     "t1": 5.652
+    },
+    {
+     "w": "lead",
+     "t0": 5.702,
+     "t1": 5.927
+    },
+    {
+     "w": "runner",
+     "t0": 5.977,
+     "t1": 6.202
+    },
+    {
+     "w": "at",
+     "t0": 6.252,
+     "t1": 6.327
+    },
+    {
+     "w": "second",
+     "t0": 6.402,
+     "t1": 6.902
+    },
+    {
+     "w": "is",
+     "t0": 6.977,
+     "t1": 7.077
+    },
+    {
+     "w": "more",
+     "t0": 7.127,
+     "t1": 7.302
+    },
+    {
+     "w": "valuable",
+     "t0": 7.352,
+     "t1": 7.852
+    },
+    {
+     "w": "than",
+     "t0": 7.877,
+     "t1": 7.977
+    },
+    {
+     "w": "taking",
+     "t0": 8.027,
+     "t1": 8.327
+    },
+    {
+     "w": "the",
+     "t0": 8.352,
+     "t1": 8.427
+    },
+    {
+     "w": "easy",
+     "t0": 8.552,
+     "t1": 8.752
+    },
+    {
+     "w": "out",
+     "t0": 8.852,
+     "t1": 8.952
+    },
+    {
+     "w": "at",
+     "t0": 8.977,
+     "t1": 9.027
+    },
+    {
+     "w": "first.",
+     "t0": 9.077,
+     "t1": 9.446
+    }
+   ]
+  },
+  {
+   "i": 2,
+   "id": "p2",
+   "text": "With runners on first and second, a ground ball could give you two outs. But only if the defense executes the double play.",
+   "spoken": "With runners on first and second, a ground ball could give you two outs. But only if the defense executes the double play.",
+   "t0": 9.526,
+   "t1": 15.78,
+   "words": [
+    {
+     "w": "With",
+     "t0": 9.551,
+     "t1": 9.701
+    },
+    {
+     "w": "runners",
+     "t0": 9.751,
+     "t1": 10.051
+    },
+    {
+     "w": "on",
+     "t0": 10.151,
+     "t1": 10.251
+    },
+    {
+     "w": "first",
+     "t0": 10.351,
+     "t1": 10.601
+    },
+    {
+     "w": "and",
+     "t0": 10.626,
+     "t1": 10.701
+    },
+    {
+     "w": "second,",
+     "t0": 10.776,
+     "t1": 11.451
+    },
+    {
+     "w": "a",
+     "t0": 11.451,
+     "t1": 11.451
+    },
+    {
+     "w": "ground",
+     "t0": 11.501,
+     "t1": 11.826
+    },
+    {
+     "w": "ball",
+     "t0": 11.876,
+     "t1": 12.126
+    },
+    {
+     "w": "could",
+     "t0": 12.176,
+     "t1": 12.251
+    },
+    {
+     "w": "give",
+     "t0": 12.301,
+     "t1": 12.401
+    },
+    {
+     "w": "you",
+     "t0": 12.426,
+     "t1": 12.501
+    },
+    {
+     "w": "two",
+     "t0": 12.551,
+     "t1": 12.726
+    },
+    {
+     "w": "outs.",
+     "t0": 12.851,
+     "t1": 13.351
+    },
+    {
+     "w": "But",
+     "t0": 13.451,
+     "t1": 13.551
+    },
+    {
+     "w": "only",
+     "t0": 13.651,
+     "t1": 13.901
+    },
+    {
+     "w": "if",
+     "t0": 13.951,
+     "t1": 14.051
+    },
+    {
+     "w": "the",
+     "t0": 14.076,
+     "t1": 14.126
+    },
+    {
+     "w": "defense",
+     "t0": 14.176,
+     "t1": 14.551
+    },
+    {
+     "w": "executes",
+     "t0": 14.651,
+     "t1": 15.101
+    },
+    {
+     "w": "the",
+     "t0": 15.126,
+     "t1": 15.176
+    },
+    {
+     "w": "double",
+     "t0": 15.226,
+     "t1": 15.451
+    },
+    {
+     "w": "play.",
+     "t0": 15.501,
+     "t1": 15.815
+    }
+   ]
+  },
+  {
+   "i": 3,
+   "id": "p3",
+   "text": "And sometimes, the smartest play is not forcing a throw. If the runner is too far along, keeping the ball can prevent a bigger mistake.",
+   "spoken": "And sometimes, the smartest play is not forcing a throw. If the runner is too far along, keeping the ball can prevent a bigger mistake.",
+   "t0": 15.86,
+   "t1": 23.057,
+   "words": [
+    {
+     "w": "And",
+     "t0": 15.892,
+     "t1": 15.967
+    },
+    {
+     "w": "sometimes,",
+     "t0": 16.017,
+     "t1": 16.692
+    },
+    {
+     "w": "the",
+     "t0": 16.767,
+     "t1": 16.817
+    },
+    {
+     "w": "smartest",
+     "t0": 16.892,
+     "t1": 17.342
+    },
+    {
+     "w": "play",
+     "t0": 17.392,
+     "t1": 17.617
+    },
+    {
+     "w": "is",
+     "t0": 17.667,
+     "t1": 17.742
+    },
+    {
+     "w": "not",
+     "t0": 17.792,
+     "t1": 18.017
+    },
+    {
+     "w": "forcing",
+     "t0": 18.067,
+     "t1": 18.417
+    },
+    {
+     "w": "a",
+     "t0": 18.417,
+     "t1": 18.417
+    },
+    {
+     "w": "throw.",
+     "t0": 18.492,
+     "t1": 19.142
+    },
+    {
+     "w": "If",
+     "t0": 19.292,
+     "t1": 19.367
+    },
+    {
+     "w": "the",
+     "t0": 19.392,
+     "t1": 19.467
+    },
+    {
+     "w": "runner",
+     "t0": 19.517,
+     "t1": 19.792
+    },
+    {
+     "w": "is",
+     "t0": 19.842,
+     "t1": 19.942
+    },
+    {
+     "w": "too",
+     "t0": 19.992,
+     "t1": 20.167
+    },
+    {
+     "w": "far",
+     "t0": 20.217,
+     "t1": 20.392
+    },
+    {
+     "w": "along,",
+     "t0": 20.442,
+     "t1": 20.942
+    },
+    {
+     "w": "keeping",
+     "t0": 21.067,
+     "t1": 21.317
+    },
+    {
+     "w": "the",
+     "t0": 21.342,
+     "t1": 21.392
+    },
+    {
+     "w": "ball",
+     "t0": 21.442,
+     "t1": 21.717
+    },
+    {
+     "w": "can",
+     "t0": 21.767,
+     "t1": 21.867
+    },
+    {
+     "w": "prevent",
+     "t0": 21.917,
+     "t1": 22.267
+    },
+    {
+     "w": "a",
+     "t0": 22.267,
+     "t1": 22.267
+    },
+    {
+     "w": "bigger",
+     "t0": 22.317,
+     "t1": 22.542
+    },
+    {
+     "w": "mistake.",
+     "t0": 22.592,
+     "t1": 23.073
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "id": "p4",
+   "text": "The best defenders aren\u2019t just reacting to the ball. They\u2019re reading the runners, the outs, and where the next play should happen.",
+   "spoken": "The best defenders aren't just reacting to the ball. They're reading the runners, the outs, and where the next play should happen.",
+   "t0": 23.137,
+   "t1": 29.031,
+   "words": [
+    {
+     "w": "The",
+     "t0": 23.178,
+     "t1": 23.228
+    },
+    {
+     "w": "best",
+     "t0": 23.278,
+     "t1": 23.503
+    },
+    {
+     "w": "defenders",
+     "t0": 23.553,
+     "t1": 24.078
+    },
+    {
+     "w": "aren't",
+     "t0": 24.178,
+     "t1": 24.303
+    },
+    {
+     "w": "just",
+     "t0": 24.328,
+     "t1": 24.478
+    },
+    {
+     "w": "reacting",
+     "t0": 24.528,
+     "t1": 24.953
+    },
+    {
+     "w": "to",
+     "t0": 25.003,
+     "t1": 25.053
+    },
+    {
+     "w": "the",
+     "t0": 25.078,
+     "t1": 25.128
+    },
+    {
+     "w": "ball.",
+     "t0": 25.178,
+     "t1": 25.803
+    },
+    {
+     "w": "They're",
+     "t0": 25.928,
+     "t1": 26.078
+    },
+    {
+     "w": "reading",
+     "t0": 26.128,
+     "t1": 26.378
+    },
+    {
+     "w": "the",
+     "t0": 26.403,
+     "t1": 26.478
+    },
+    {
+     "w": "runners,",
+     "t0": 26.528,
+     "t1": 26.928
+    },
+    {
+     "w": "the",
+     "t0": 26.978,
+     "t1": 27.078
+    },
+    {
+     "w": "outs,",
+     "t0": 27.203,
+     "t1": 27.603
+    },
+    {
+     "w": "and",
+     "t0": 27.703,
+     "t1": 27.778
+    },
+    {
+     "w": "where",
+     "t0": 27.803,
+     "t1": 27.903
+    },
+    {
+     "w": "the",
+     "t0": 27.928,
+     "t1": 27.978
+    },
+    {
+     "w": "next",
+     "t0": 28.028,
+     "t1": 28.253
+    },
+    {
+     "w": "play",
+     "t0": 28.303,
+     "t1": 28.528
+    },
+    {
+     "w": "should",
+     "t0": 28.578,
+     "t1": 28.678
+    },
+    {
+     "w": "happen.",
+     "t0": 28.728,
+     "t1": 29.1
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "id": "e1",
+   "text": "Getting an out is good. Getting the right out is better.",
+   "spoken": "Getting an out is good. Getting the right out is better.",
+   "t0": 29.131,
+   "t1": 31.711,
+   "words": [
+    {
+     "w": "Getting",
+     "t0": 29.158,
+     "t1": 29.483
+    },
+    {
+     "w": "an",
+     "t0": 29.483,
+     "t1": 29.533
+    },
+    {
+     "w": "out",
+     "t0": 29.658,
+     "t1": 29.783
+    },
+    {
+     "w": "is",
+     "t0": 29.833,
+     "t1": 29.933
+    },
+    {
+     "w": "good.",
+     "t0": 29.983,
+     "t1": 30.383
+    },
+    {
+     "w": "Getting",
+     "t0": 30.533,
+     "t1": 30.733
+    },
+    {
+     "w": "the",
+     "t0": 30.758,
+     "t1": 30.808
+    },
+    {
+     "w": "right",
+     "t0": 30.858,
+     "t1": 31.033
+    },
+    {
+     "w": "out",
+     "t0": 31.133,
+     "t1": 31.233
+    },
+    {
+     "w": "is",
+     "t0": 31.258,
+     "t1": 31.358
+    },
+    {
+     "w": "better.",
+     "t0": 31.408,
+     "t1": 31.752
+    }
+   ]
+  }
+ ]
+}
